@@ -1,0 +1,23 @@
+**/*.md
+**/*.svg
+# **/*.html
+**/test.ts
+src/index.html
+
+.stylelintrc
+.prettierrc
+
+_nginx/
+_screenshot/
+node_modules/
+coverage/
+dist/
+package.json
+src/app/routes/gen/
+src/templates/
+schematics/**/files/
+packages/theme/system/mixins/_freak.less
+packages/theme/system/mixins/_functions.less
+theme-default.less
+theme-dark.less
+theme-compact.less

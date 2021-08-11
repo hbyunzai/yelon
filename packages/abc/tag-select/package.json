@@ -1,0 +1,13 @@
+{
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "tagSelect",
+      "entryFile": "public_api.ts",
+      "umdModuleIds": {
+        "ng-zorro-antd/icon": "ng-zorro-antd/icon",
+        "@yelon/theme": "yelon.theme",
+        "@yelon/util": "yelon.util"
+      }
+    }
+  }
+}

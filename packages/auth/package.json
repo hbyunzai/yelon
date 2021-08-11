@@ -1,0 +1,9 @@
+{
+  "name": "@yelon/auth",
+  "version": "0.0.0-PLACEHOLDER",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@yelon/util": "PEER-0.0.0-PLACEHOLDER"
+  }
+}

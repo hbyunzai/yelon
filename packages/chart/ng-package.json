@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@yelon/chart",
+  "deleteDestPath": true,
+  "lib": {
+    "flatModuleFile": "chart",
+    "entryFile": "public_api.ts",
+    "umdModuleIds": {
+      "ng-zorro-antd": "ng-zorro-antd",
+      "@yelon/theme": "yelon.theme",
+      "@yelon/util": "yelon.util",
+      "@antv/g2": "G2"
+    }
+  },
+  "allowedNonPeerDependencies": ["@yelon/theme", "@yelon/util", "@antv/g2", "@antv/data-set", "echarts"]
+}

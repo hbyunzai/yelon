@@ -1,0 +1,19 @@
+@{footer-toolbar-prefix} {
+  &__left {
+    margin-left: @yunzai-default-aside-wd;
+  }
+}
+
+@{yunzai-default-prefix}__collapsed {
+  @{footer-toolbar-prefix} {
+    &__left {
+      margin-left: @yunzai-default-aside-collapsed-wd;
+    }
+  }
+}
+
+@{footer-toolbar-prefix}__body {
+  @{yunzai-default-prefix}__content {
+    margin-bottom: @layout-gutter + @footer-toolbar-height;
+  }
+}

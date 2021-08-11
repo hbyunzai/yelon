@@ -1,0 +1,57 @@
+{
+  "schematics": {
+    "ng-add": {
+      "factory": "./ng-add",
+      "description": "Create an Yunzai workspace.",
+      "schema": "./ng-add/schema.json",
+      "aliases": [
+        "yunzai-shell"
+      ]
+    },
+    "application": {
+      "factory": "./application",
+      "schema": "./application/schema.json",
+      "description": "Create an Yunzai application."
+    },
+    "plugin": {
+      "factory": "./plugin",
+      "schema": "./plugin/schema.json",
+      "description": "Enable or disable ng-yunzai plugin."
+    },
+    "module": {
+      "factory": "./module",
+      "schema": "./module/schema.json",
+      "description": "Create a ng yunzai module."
+    },
+    "empty": {
+      "factory": "./empty",
+      "schema": "./empty/schema.json",
+      "description": "Create a ng yunzai empty page."
+    },
+    "list": {
+      "factory": "./list",
+      "schema": "./list/schema.json",
+      "description": "Create a ng yunzai list page."
+    },
+    "view": {
+      "factory": "./view",
+      "schema": "./view/schema.json",
+      "description": "Create a ng yunzai view page."
+    },
+    "edit": {
+      "factory": "./edit",
+      "schema": "./edit/schema.json",
+      "description": "Create a ng yunzai edit page."
+    },
+    "curd": {
+      "factory": "./curd",
+      "schema": "./curd/schema.json",
+      "description": "Create a ng yunzai curd pages (includes: list, edit, view pages)."
+    },
+    "tpl": {
+      "factory": "./tpl",
+      "schema": "./tpl/schema.json",
+      "description": "Create a ng yunzai custom template pages."
+    }
+  }
+}

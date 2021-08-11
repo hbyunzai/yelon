@@ -1,0 +1,18 @@
+<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+  <textarea
+    nz-input
+    [attr.id]="id"
+    [disabled]="disabled"
+    [attr.disabled]="disabled"
+    [nzSize]="ui.size!"
+    [ngModel]="value"
+    (ngModelChange)="change($event)"
+    [attr.maxLength]="schema.maxLength || null"
+    [attr.placeholder]="ui.placeholder"
+    [nzAutosize]="autosize"
+    [nzBorderless]="ui.borderless"
+    (focus)="focus($event)"
+    (blur)="blur($event)"
+  >
+  </textarea>
+</sf-item-wrap>

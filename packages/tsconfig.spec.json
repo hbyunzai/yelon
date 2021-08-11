@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./",
+    "target": "es5",
+    "outDir": "../out-tsc/spec",
+    "types": ["jasmine", "node"],
+    "paths": {
+      "@yelon/*": ["./*"]
+    },
+    "esModuleInterop": true,
+    "noImplicitThis": false
+  },
+  "files": ["test.ts", "polyfills.ts"],
+  "include": ["**/*.spec.ts", "**/*.d.ts"]
+}

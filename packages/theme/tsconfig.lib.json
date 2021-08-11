@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.lib.prod.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@yelon/theme/*": ["../../dist/@yelon/theme/*"],
+      "@yelon/*": ["../../dist/@yelon/*"]
+    }
+  }
+}

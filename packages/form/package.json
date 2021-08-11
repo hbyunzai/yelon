@@ -1,0 +1,13 @@
+{
+  "name": "@yelon/form",
+  "version": "0.0.0-PLACEHOLDER",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "@LIB-PLACEHOLDER",
+    "ajv-formats": "@LIB-PLACEHOLDER",
+    "@yelon/theme": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/acl": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/util": "PEER-0.0.0-PLACEHOLDER"
+  }
+}

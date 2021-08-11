@@ -1,0 +1,16 @@
+{
+  "name": "@yelon/abc",
+  "version": "0.0.0-PLACEHOLDER",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "isutf8": "@LIB-PLACEHOLDER",
+    "file-saver": "@LIB-PLACEHOLDER",
+    "jszip": "@LIB-PLACEHOLDER",
+    "xlsx": "@LIB-PLACEHOLDER",
+    "ngx-countdown": "@LIB-PLACEHOLDER",
+    "@yelon/theme": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/util": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/acl": "PEER-0.0.0-PLACEHOLDER"
+  }
+}

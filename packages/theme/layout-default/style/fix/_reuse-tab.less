@@ -1,0 +1,46 @@
+@{reuse-tab-prefix} {
+  margin: 0 -@yunzai-default-content-padding 0 -@yunzai-default-content-padding;
+}
+
+@{yunzai-default-prefix}__fixed {
+  @{reuse-tab-prefix} {
+    position: fixed;
+    top: @yunzai-default-header-hg;
+    right: @yunzai-default-content-padding;
+    left: @yunzai-default-aside-wd + @yunzai-default-content-padding;
+    z-index: @zindex-fixed + 1;
+  }
+}
+
+@{yunzai-default-prefix}__collapsed {
+  @{reuse-tab-prefix} {
+    left: @yunzai-default-aside-collapsed-wd + @yunzai-default-content-padding;
+  }
+}
+
+@{yunzai-default-prefix}__hide-aside {
+  @{reuse-tab-prefix} {
+    left: @yunzai-default-content-padding;
+  }
+}
+
+@media (min-width: @mobile-min) {
+  @{yunzai-default-prefix}__fixed {
+    @{reuse-tab-prefix} {
+      + router-outlet {
+        display: block;
+        height: @reuse-tab-height;
+      }
+    }
+  }
+}
+
+@media (max-width: @mobile-max) {
+  @{yunzai-default-prefix}__fixed {
+    @{reuse-tab-prefix} {
+      position: unset;
+      width: initial;
+      margin-top: @reuse-tab-height;
+    }
+  }
+}

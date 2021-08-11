@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@yelon/theme",
+  "deleteDestPath": true,
+  "lib": {
+    "flatModuleFile": "theme",
+    "entryFile": "public_api.ts",
+    "umdModuleIds": {
+      "@angular/cdk/overlay": "ng.cdk.overlay",
+      "@angular/cdk/portal": "ng.cdk.portal",
+      "ng-zorro-antd/drawer": "ng-zorro-antd/drawer",
+      "ng-zorro-antd/modal": "ng-zorro-antd/modal",
+      "ng-zorro-antd/icon": "ng-zorro-antd/icon",
+      "ng-zorro-antd/i18n": "ng-zorro-antd/i18n",
+      "date-fns": "DateFns",
+      "@yelon/acl": "yelon.acl",
+      "@yelon/util/browser": "yelon.util.browser",
+      "@yelon/util/config": "yelon.util.config",
+      "@yelon/util/date-time": "yelon.util.date-time",
+      "@yelon/util/other": "yelon.util.other"
+    }
+  },
+  "allowedNonPeerDependencies": ["date-fns", "ng-zorro-antd", "@yelon/acl", "@yelon/util", "@ant-design/icons-angular"]
+}

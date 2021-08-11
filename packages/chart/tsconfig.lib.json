@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.lib.prod.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@yelon/chart/*": ["../../dist/@yelon/chart/*"],
+      "@yelon/*": ["../../dist/@yelon/*"]
+    }
+  },
+  "files": ["public_api.ts", "../typings.d.ts"]
+}

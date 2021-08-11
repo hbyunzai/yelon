@@ -1,0 +1,13 @@
+{
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "xlsx",
+      "entryFile": "public_api.ts",
+      "umdModuleIds": {
+        "isutf8": "isUtf8",
+        "file-saver": "saveAs",
+        "@yelon/util": "yelon.util"
+      }
+    }
+  }
+}

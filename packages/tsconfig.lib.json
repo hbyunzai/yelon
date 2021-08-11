@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "alwaysStrict": true,
+    "declaration": true,
+    "inlineSources": true,
+    "stripInternal": true
+  },
+  "files": ["index.ts", "typings.d.ts"],
+  "exclude": ["*.spec.ts"],
+  "angularCompilerOptions": {
+    "strictInputAccessModifiers": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true,
+    "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
+    "strictInjectionParameters": true
+  }
+}

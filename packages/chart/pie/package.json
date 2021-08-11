@@ -1,0 +1,13 @@
+{
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "pie",
+      "entryFile": "public_api.ts",
+      "umdModuleIds": {
+        "ng-zorro-antd/core/outlet": "ng-zorro-antd/core/outlet",
+        "ng-zorro-antd/divider": "ng-zorro-antd/divider",
+        "@yelon/util": "yelon.util"
+      }
+    }
+  }
+}

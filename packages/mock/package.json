@@ -1,0 +1,11 @@
+{
+  "name": "@yelon/mock",
+  "version": "0.0.0-PLACEHOLDER",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mockjs": "@LIB-PLACEHOLDER",
+    "@types/mockjs": "@LIB-PLACEHOLDER",
+    "@yelon/util": "PEER-0.0.0-PLACEHOLDER"
+  }
+}

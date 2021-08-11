@@ -1,0 +1,32 @@
+---
+type: Form
+title: range-picker
+subtitle: Data Range
+cols: 1
+module: import { DatePickerModule } from '@yelon/abc/date-picker';
+---
+
+Based on the `nz-range-picker` further optimization, better service to start and end dates.
+
+## API
+
+### [extend]
+
+It needs to be used with [nz-range-picker](https://ng.ant.design/components/date-picker/zh#nz-range-picker), for example:
+
+```html
+<nz-range-picker [(ngModel)]="i.start" extend [(ngModelEnd)]="i.end"></nz-range-picker>
+```
+
+| Property | Description | Type | Default | Global Config |
+|----------|-------------|------|---------|---------------|
+| `[(ngModelEnd)]` | End date, start and end values at the same time | `Date` | - |  |
+| `[shortcut]` | Set shortcuts | `boolean | DateRangePickerShortcut` | `false` | ✅ |
+
+#### DateRangePickerShortcut
+
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| `[enabled]` | Whether to enable | `boolean` | `false` |
+| `[closed]` | Whether to close the panel after clicking | `boolean` | `true` |
+| `[enabled]` | Shortcut list | `DateRangePickerShortcutItem[]` | `今天,昨天,近3天,近7天,本周,本月,全年` |

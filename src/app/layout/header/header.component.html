@@ -1,0 +1,96 @@
+<ng-template #menu>
+  <ul nz-menu [nzMode]="isMobile ? 'inline' : 'horizontal'" class="menu-site" id="nav">
+    <li nz-menu-item routerLink="/docs/getting-started/{{ i18n.zone }}" [matchRouter]="regexs.docs">
+      {{ 'app.header.menu.docs' | i18n }}
+    </li>
+    <li nz-menu-item routerLink="/components/sv/{{ i18n.zone }}" [matchRouter]="regexs.components">
+      {{ 'app.header.menu.components' | i18n }}
+    </li>
+    <li *ngIf="isMobile" nz-menu-group [nzTitle]="'app.header.menu.yelon' | i18n">
+      <ul>
+        <li
+          *ngFor="let i of yelonLibs"
+          nz-menu-item
+          routerLink="/{{ i.name }}/{{ i.default || 'getting-started' }}/{{ i18n.zone }}"
+        >
+          {{ 'app.header.menu.' + i.name | i18n }}
+        </li>
+      </ul>
+    </li>
+    <li *ngIf="!isMobile" nz-menu-item [matchRouter]="regexs.yelon">
+      <div nz-dropdown nzPlacement="bottomRight" [nzDropdownMenu]="yelonMenu">
+        {{ 'app.header.menu.yelon' | i18n }}
+        <i nz-icon nzType="down"></i>
+      </div>
+      <nz-dropdown-menu #yelonMenu="nzDropdownMenu">
+        <ul nz-menu>
+          <li
+            *ngFor="let i of yelonLibs"
+            nz-menu-item
+            routerLink="/{{ i.name }}/{{ i.default || 'getting-started' }}/{{ i18n.zone }}"
+          >
+            {{ 'app.header.menu.' + i.name | i18n }}
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+    </li>
+    <ng-container *ngIf="isMobile">
+      <a nz-menu-item href="https://github.com/hbyunzai/ng-yunzai" target="_blank">Github</a>
+      <li nz-menu-item (click)="langChange(i18n.zone === 'zh' ? 'en' : 'zh')">
+        {{ 'app.header.lang' | i18n }}
+      </li>
+    </ng-container>
+  </ul>
+</ng-template>
+<i
+  *ngIf="isMobile"
+  nz-icon
+  nzType="menu"
+  nz-popover
+  nzTooltipOverlayClassName="popover-menu"
+  nzPopoverPlacement="bottomRight"
+  [nzPopoverContent]="menu"
+  nzPopoverTrigger="click"
+  [(nzPopoverVisible)]="menuVisible"
+  [nzPopoverTitle]="undefined"
+  class="nav-phone-icon"
+></i>
+<div nz-row style="flex-flow: nowrap; height: 64px">
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="5" nzXXl="4">
+    <h1>
+      <a
+        routerLink="/{{ i18n.zone }}"
+        nz-tooltip
+        nzTooltipTitle="{{ 'app.footer.qqgroup' | i18n }}: 316911865"
+        (click)="onCopy('316911865')"
+        id="logo"
+      >
+        <img src="./assets/img/logo-color.svg" style="max-height: 32px" />
+        NG-YUNZAI
+      </a>
+    </h1>
+  </div>
+  <div nz-col nz-col nzXs="0" nzSm="0" nzMd="0" nzLg="0" nzXl="19" nzXXl="20" class="menu-row">
+    <header-search></header-search>
+    <ng-container *ngIf="!isMobile">
+      <ng-template [ngTemplateOutlet]="menu"></ng-template>
+      <nz-select nzSize="small" class="version" [ngModel]="currentVersion" (ngModelChange)="toVersion($event)">
+        <nz-option *ngFor="let version of oldVersionList" [nzLabel]="version" [nzValue]="version"></nz-option>
+        <nz-option [nzLabel]="currentVersion" [nzValue]="currentVersion"></nz-option>
+      </nz-select>
+      <button
+        nz-button
+        nzGhost
+        nzSize="small"
+        (click)="langChange(i18n.zone === 'zh' ? 'en' : 'zh')"
+        class="header-button header-lang-button"
+      >
+        {{ 'app.header.lang' | i18n }}
+      </button>
+      <button nz-button nzGhost nzSize="small" class="header-button header-direction-button" (click)="rtl.toggle()">
+        {{ rtl.nextDir | uppercase }}
+      </button>
+      <github-button type="stargazers" size="default" namespace="hbyunzai" repo="ng-yunzai"></github-button>
+    </ng-container>
+  </div>
+</div>

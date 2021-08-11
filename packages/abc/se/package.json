@@ -1,0 +1,15 @@
+{
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "edit",
+      "entryFile": "public_api.ts",
+      "umdModuleIds": {
+        "ng-zorro-antd/core/outlet": "ng-zorro-antd/core/outlet",
+        "ng-zorro-antd/tooltip": "ng-zorro-antd/tooltip",
+        "ng-zorro-antd/icon": "ng-zorro-antd/icon",
+        "@yelon/theme": "yelon.theme",
+        "@yelon/util": "yelon.util"
+      }
+    }
+  }
+}

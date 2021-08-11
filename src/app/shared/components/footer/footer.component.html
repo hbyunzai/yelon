@@ -1,0 +1,85 @@
+<div class="footer__wrap">
+  <div nz-row>
+    <div nz-col nzXs="24" nzSm="24" nzLg="6">
+      <div class="footer__center">
+        <h2>NG-YUNZAI</h2>
+        <div><a href="https://github.com/hbyunzai/ng-yunzai" target="_blank">Github</a></div>
+        <div><a href="https://github.com/hbyunzai/yelon" target="_blank">@yelon</a></div>
+        <div><a href="https://github.com/ng-alain/ng-zorro-vscode" target="_blank">ng-zorro-vscode</a></div>
+      </div>
+    </div>
+    <div nz-col nzXs="24" nzSm="24" nzLg="6">
+      <div class="footer__center">
+        <h2>{{ 'app.footer.resources' | i18n }}</h2>
+        <div>
+          <a href="https://www.angular.cn/" target="_blank">Angular</a>
+          <span> - </span>
+          {{ 'app.footer.angular' | i18n }}
+        </div>
+        <div>
+          <a href="https://ng.ant.design" target="_blank">ng-zorro-antd</a>
+          <span> - </span>
+          {{ 'app.footer.antd' | i18n }}
+        </div>
+        <div>
+          <a href="https://cli.angular.io/" target="_blank">CLI</a>
+          <span> - </span>
+          {{ 'app.footer.cli' | i18n }}
+        </div>
+        <div>
+          <a href="https://antv.alipay.com/" target="_blank">AntV</a>
+          <span> - </span>
+          {{ 'app.footer.antv' | i18n }}
+        </div>
+      </div>
+    </div>
+    <div nz-col nzXs="24" nzSm="24" nzLg="6">
+      <div class="footer__center">
+        <h2>{{ 'app.footer.community' | i18n }}</h2>
+        <div>
+          <a routerLink="/docs/changelog/{{ i18n.zone }}">{{ 'app.footer.change-log' | i18n }}</a>
+        </div>
+        <div>
+          <a routerLink="/docs/faq/{{ i18n.zone }}">{{ 'app.footer.faq' | i18n }}</a>
+        </div>
+        <div>
+          <a href="https://github.com/hbyunzai/ng-yunzai/issues" target="_blank">{{ 'app.footer.issues' | i18n }}</a>
+        </div>
+        <div>
+          <a href="https://ng-yunzai.com/issue-helper/index.html#{{ i18n.zone }}" target="_blank">{{
+            'app.footer.issue-help' | i18n
+          }}</a>
+        </div>
+      </div>
+    </div>
+    <div nz-col nzXs="24" nzSm="24" nzLg="6">
+      <div class="footer__center">
+        <h2>{{ 'app.footer.thanks' | i18n }}</h2>
+        <div
+          ><a href="https://github.com/cipchk">{{ 'app.footer.thanks.user' | i18n }}</a></div
+        >
+        <div><a href="https://ng-alain.com/">NG-ALAIN</a></div>
+        <div><a href="https://github.com/ng-alain/delon">@delon</a></div>
+
+        Copyright &copy; 2021 <a href="https://github.com/cipchk" target="_blank">&copy;河北云在</a>
+        <p class="mt-sm">
+          <a href="https://beian.miit.gov.cn/" target="_blank" class="text-grey">冀ICP备16001917号 </a>
+        </p>
+        <div class="mt-lg">
+          <div
+            class="theme-color"
+            nz-popover
+            [nzPopoverContent]="colorTpl"
+            nzPopoverTrigger="click"
+            nzPopoverOverlayClassName="theme-color-content"
+          >
+            <div class="theme-color-value" [ngStyle]="{ background: color }"></div>
+          </div>
+          <ng-template #colorTpl>
+            <color-sketch [color]="color" (onChangeComplete)="changeColor($event)"></color-sketch>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

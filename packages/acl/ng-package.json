@@ -1,0 +1,10 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@yelon/acl",
+  "deleteDestPath": true,
+  "lib": {
+    "flatModuleFile": "acl",
+    "entryFile": "index.ts"
+  },
+  "allowedNonPeerDependencies": ["@yelon/util"]
+}

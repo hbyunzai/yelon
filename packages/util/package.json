@@ -1,0 +1,9 @@
+{
+  "name": "@yelon/util",
+  "version": "0.0.0-PLACEHOLDER",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "extend": "@LIB-PLACEHOLDER"
+  }
+}

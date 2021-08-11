@@ -1,0 +1,14 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@yelon/util",
+  "deleteDestPath": true,
+  "lib": {
+    "entryFile": "index.ts",
+    "umdModuleIds": {
+      "date-fns": "DateFns",
+      "ng-zorro-antd/core": "ng-zorro-antd/core",
+      "extend": "Extend"
+    }
+  },
+  "allowedNonPeerDependencies": ["date-fns", "extend", "@ant-design/icons-angular"]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@yelon/mock",
+  "deleteDestPath": true,
+  "lib": {
+    "flatModuleFile": "mock",
+    "entryFile": "public_api.ts",
+    "umdModuleIds": {
+      "@yelon/util": "yelon.util"
+    }
+  },
+  "allowedNonPeerDependencies": ["mockjs", "@yelon/util"]
+}

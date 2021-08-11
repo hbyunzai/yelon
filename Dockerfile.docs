@@ -1,0 +1,17 @@
+FROM node:lts as dist
+LABEL authors="devcui"
+LABEL email="devcui@outlook.com"
+WORKDIR /dist
+RUN git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/yelon.git . \
+    && sed -i 's/\/yelon\//\//g' /dist/index.html \
+    && sed -i 's/\/yelon\//\//g' /dist/404.html
+COPY _nginx _nginx
+
+FROM nginx:stable-alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=dist /dist /usr/share/nginx/html
+COPY --from=dist /dist/_nginx/default.conf /etc/nginx/conf.d/
+
+CMD ["nginx", "-g", "daemon off;"]
+
+

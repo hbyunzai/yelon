@@ -1,0 +1,11 @@
+{
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "autoFocus",
+      "entryFile": "index.ts",
+      "umdModuleIds": {
+        "@yelon/util": "yelon.util"
+      }
+    }
+  }
+}

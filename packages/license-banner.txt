@@ -1,0 +1,5 @@
+/**
+ * @license ng-yunzai(devcui@outlook.com) v0.0.0-PLACEHOLDER
+ * (c) 2020 devcui https://github.com/hbyunzai/yelon/
+ * License: MIT
+ */
