@@ -1,4 +1,5 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
+
 set -u -e -o pipefail
 
 packages=(

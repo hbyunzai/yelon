@@ -27,7 +27,7 @@
     "test": "ng test --no-progress --browsers=ChromeHeadlessCI --code-coverage --no-watch",
     "test:cli": "bash scripts/ci/build-schematics.sh -t -clone",
     "test:integration": "bash scripts/ci/build-schematics.sh -b -t -clone -integration",
-    "build": "bash scripts/ci/build.sh",
+    "build": "bash scripts/ci/build.sh -packages -schematics -less -scaffold",
     "build_artifacts": "bash scripts/ci/build-artifacts.sh",
     "analyze": "npm run ng-high-memory build -- --source-map",
     "analyze:view": "source-map-explorer src/dist/browser/*.js",
