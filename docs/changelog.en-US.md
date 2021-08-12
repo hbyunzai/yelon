@@ -14,6 +14,20 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 
 ---
 
+## [12.0.1](https://github.com/hbyunzai/yelon/compare/12.0.0...12.0.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* **docs:** fix docs link ([aaf17e2](https://github.com/hbyunzai/yelon/commit/aaf17e23b9cb2921b18e9277504ae83f31ab0e11))
+
+
+### Features
+
+* **ci:github:action:** add gitee action ([3c9a15c](https://github.com/hbyunzai/yelon/commit/3c9a15c0ee63fd45bf3ef4be212d083dfc69382b))
+* **ci:github:action:** add github action ([7c8d473](https://github.com/hbyunzai/yelon/commit/7c8d473cecbf56d75014461193762543e66ebd25))
+
+
 # 12.0.0 (2021-08-11)
 
 
