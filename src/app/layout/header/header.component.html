@@ -57,10 +57,15 @@
 ></i>
 <div nz-row style="flex-flow: nowrap; height: 64px">
   <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="5" nzXXl="4">
-    <h1>
-      <img src="./assets/img/logo-color.svg" style="max-height: 32px" />
+    <a
+      routerLink="/{{ i18n.zone }}"
+      nz-tooltip
+      nzTooltipTitle=""
+      id="logo"
+    >
+      <img src="./assets/img/logo-color.svg" style="max-height: 32px"/>
       NG-YUNZAI
-    </h1>
+    </a>
   </div>
   <div nz-col nz-col nzXs="0" nzSm="0" nzMd="0" nzLg="0" nzXl="19" nzXXl="20" class="menu-row">
     <header-search></header-search>
