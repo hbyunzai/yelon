@@ -8,7 +8,7 @@ import { IStore } from './interface';
  *
  * ```ts
  * // global-config.module.ts
- * { provide: YA_STORE_TOKEN, useClass: CookieStorageStore }
+ * { provide: YA_STORE_TOKEN, useClass: CookieStorageStore, deps: [CookieService] }
  * ```
  */
 export class CookieStorageStore implements IStore {

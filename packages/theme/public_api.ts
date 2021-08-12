@@ -20,3 +20,4 @@ export * from './src/pipes/safe/url.pipe';
 export * from './src/config';
 export * from './src/theme.module';
 export { VERSION } from './src/version';
+export * from './src/router/optional-preloader';
