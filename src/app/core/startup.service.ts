@@ -47,12 +47,12 @@ export class StartupService {
       hjsv: 6
     };
     Promise.all([
-      this.lazy.loadScript(`https://www.googletagmanager.com/gtag/js?id=UA-120202005-1`),
+      this.lazy.loadScript(`https://www.googletagmanager.com/gtag/js?id=GTM-PH2TJFJ`),
       this.lazy.loadScript(`https://static.hotjar.com/c/hotjar-${win._hjSettings.hjid}.js?sv=${win._hjSettings.hjsv}`)
     ]).then(() => {
       const dataLayer: NzSafeAny[] = win.dataLayer || [];
       dataLayer.push(['js', new Date()]);
-      dataLayer.push(['config', 'UA-120202005-1']);
+      dataLayer.push(['config', 'GTM-PH2TJFJ']);
     });
   }
 }
