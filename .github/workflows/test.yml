@@ -7,13 +7,11 @@ jobs:
     if: "!startsWith(github.event.commits[0].message, 'release')"
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@master
       - name: install
         run: npm install
+
       - name: test
-        run: |
-          npm run test
+        run: npm run test
 
   testAndPublish:
     if: "startsWith(github.event.commits[0].message, 'release')"
@@ -21,17 +19,18 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@master
+
       - name: install
         run: npm install
+
       - name: test
         run: |
           npm run test
-          cat ./coverage/lcov.info | ./node_modules/.bin/codecov -t ${{DELON_CODE_COV_TOKEN}}
+          cat ./coverage/lcov.info | ./node_modules/.bin/codecov -t ${{ secrets.DELON_CODE_COV_TOKEN }}
+
       - name: publish
-          uses: codecov/codecov-action@v2
-          with:
-            token: ${{ secrets.DELON_CODE_COV_TOKEN }}
-            directory: coverage
-            files: coverage/cobertura-coverage.xml
-
-
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.DELON_CODE_COV_TOKEN }}
+          directory: coverage
+          files: coverage/cobertura-coverage.xml
