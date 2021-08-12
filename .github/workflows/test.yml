@@ -1,4 +1,4 @@
-name: test
+name: Test
 
 on: push
 
@@ -7,6 +7,11 @@ jobs:
     if: "!startsWith(github.event.commits[0].message, 'release')"
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
+
       - name: install
         run: npm install
 
