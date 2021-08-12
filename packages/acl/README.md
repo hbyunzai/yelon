@@ -4,7 +4,7 @@ A simple role-based access control.
 
 ## Links
 
-+ [Document](https://ng-yunzai.com/acl) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/acl) - [国内镜像](https://ng-yunzai.gitee.io/yelon/acl))
++ [Document](https://ng.yunzainfo.com/acl) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/acl) - [国内镜像](https://ng-yunzai.gitee.io/yelon/acl))
 + [@yelon Source](https://github.com/hbyunzai/yelon)
 + [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 

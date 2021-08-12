@@ -30,7 +30,7 @@ export class DemoComponent {
   links: GlobalFooterLink[] = [
     {
       title: '帮助',
-      href: 'https://ng-yunzai.com/',
+      href: 'https://ng.yunzainfo.com/',
       blankTarget: true,
     },
     {

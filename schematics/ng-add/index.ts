@@ -68,7 +68,7 @@ export default function (options: NgAddOptions): Rule {
   return (tree: Tree) => {
     if (isUseCNPM()) {
       throw new Error(
-        `Sorry, Don't use cnpm to install dependencies, pls refer to: https://ng-yunzai.com/docs/faq#Installation`
+        `Sorry, Don't use cnpm to install dependencies, pls refer to: https://ng.yunzainfo.com/docs/faq#Installation`
       );
     }
 
@@ -95,7 +95,7 @@ export default function (options: NgAddOptions): Rule {
 export function finished(context: SchematicContext): void {
   context.logger.info('');
   context.logger.info(
-    `  ✓  Congratulations, NG-YUNZAI scaffold generation complete. NG-YUNZAI documentation site: https://ng-yunzai.com`
+    `  ✓  Congratulations, NG-YUNZAI scaffold generation complete. NG-YUNZAI documentation site: https://ng.yunzainfo.com`
   );
   context.logger.info('');
 }

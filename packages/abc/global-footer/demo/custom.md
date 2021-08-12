@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
   template: `
     <div style="height: 280px;"></div>
     <global-footer>
-      <global-footer-item href="https://ng-yunzai.com/" blankTarget>帮助</global-footer-item>
+      <global-footer-item href="https://ng.yunzainfo.com/" blankTarget>帮助</global-footer-item>
       <global-footer-item href="https://github.com/ng-yunzai" blankTarget>
         <i nz-icon nzType="github"></i>
       </global-footer-item>

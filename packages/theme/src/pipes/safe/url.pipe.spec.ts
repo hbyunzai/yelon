@@ -18,7 +18,7 @@ describe('Pipe: url', () => {
 
   [
     { value: '', result: `` },
-    { value: 'https://ng-yunzai.com', result: `https://ng-yunzai.com` }
+    { value: 'https://ng.yunzainfo.com', result: `https://ng.yunzainfo.com` }
   ].forEach((item: { value: string; result: string }) => {
     it(`${item.value.toString()} muse be ${item.result}`, () => {
       fixture.componentInstance.value = item.value;

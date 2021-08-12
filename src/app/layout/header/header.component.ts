@@ -87,7 +87,7 @@ export class HeaderComponent implements AfterViewInit {
 
   toVersion(version: string): void {
     if (version !== this.currentVersion) {
-      this.getWin().location.href = `https://ng-yunzai.com/version/${version}/`;
+      this.getWin().location.href = `https://ng.yunzainfo.com/version/${version}/`;
     }
   }
 

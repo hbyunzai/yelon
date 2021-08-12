@@ -194,27 +194,27 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Get form element property based on [path](https://ng-yunzai.com/form/qa#path)
+   * Get form element property based on [path](https://ng.yunzainfo.com/form/qa#path)
    *
-   * 根据[路径](https://ng-yunzai.com/form/qa#path)获取表单元素属性
+   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素属性
    */
   getProperty(path: string): FormProperty | null {
     return this.rootProperty!.searchProperty(path);
   }
 
   /**
-   * Get element value based on [path](https://ng-yunzai.com/form/qa#path)
+   * Get element value based on [path](https://ng.yunzainfo.com/form/qa#path)
    *
-   * 根据[路径](https://ng-yunzai.com/form/qa#path)获取表单元素值
+   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素值
    */
   getValue(path: string): NzSafeAny {
     return this.getProperty(path)!.value;
   }
 
   /**
-   * Set form element new value based on [path](https://ng-yunzai.com/form/qa#path)
+   * Set form element new value based on [path](https://ng.yunzainfo.com/form/qa#path)
    *
-   * 根据[路径](https://ng-yunzai.com/form/qa#path)设置某个表单元素属性值
+   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素属性值
    */
   setValue(path: string, value: NzSafeAny): this {
     const item = this.getProperty(path);

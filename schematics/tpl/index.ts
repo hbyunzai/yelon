@@ -6,7 +6,7 @@ import * as path from 'path';
 import { buildYunzai } from '../utils';
 import { Schema } from './schema';
 
-const REFER = `, please refer to: https://ng-yunzai.com/cli/generate#Customtemplatepage`;
+const REFER = `, please refer to: https://ng.yunzainfo.com/cli/generate#Customtemplatepage`;
 
 function genFiles(options: Schema): void {
   options._tplDir = path.join(process.cwd(), './_cli-tpl');

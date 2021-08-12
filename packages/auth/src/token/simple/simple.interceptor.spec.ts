@@ -122,7 +122,7 @@ describe('auth: simple.interceptor', () => {
         },
         genModel('123')
       );
-      http.get('https://ng-yunzai.com/test', { responseType: 'text' }).subscribe(() => {
+      http.get('https://ng.yunzainfo.com/test', { responseType: 'text' }).subscribe(() => {
         done();
       });
       const req = httpBed.expectOne(() => true) as TestRequest;

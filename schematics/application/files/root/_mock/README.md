@@ -1,1 +1,1 @@
-[Document](https://ng-yunzai.com/mock)
+[Document](https://ng.yunzainfo.com/mock)

@@ -107,7 +107,7 @@ import { Component } from '@angular/core';
   `,
 })
 export class DemoComponent {
-  value = 'https://ng-yunzai.com/';
+  value = 'https://ng.yunzainfo.com/';
   background = '#ffffff';
   backgroundAlpha = 1.0;
   foreground = '#000000';

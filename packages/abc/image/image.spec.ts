@@ -71,7 +71,7 @@ describe('abc: _src', () => {
   });
 
   it('should be ingore https', () => {
-    context.src = `https://ng-yunzai.com/1.png`;
+    context.src = `https://ng.yunzainfo.com/1.png`;
     fixture.detectChanges();
     expect(getEl().src).toContain(`//ng-yunzai.com/1.png`);
   });

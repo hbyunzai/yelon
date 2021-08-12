@@ -13,7 +13,7 @@ NG-YUNZAI 技术栈基于 Typescript、Angular、图表G2 和 NG-ZORRO，在开�
   - [TypeScript中文文档](https://www.tslang.cn/)，虽然 TypeScript 跟 Java、C# 语法很像，这是语法基础需要认真阅读
   - [Angular中文文档](https://angular.cn/docs)，建议一定要花时间阅读文档部分，透过它基本上就可以学会 Angular；同时，也是 Angular API 接口文档
   - [NG-ZORRO中文文档](https://ng.ant.design/docs/introduce/zh)，NG-ZORRO 作为 NG-YUNZAI 的基础组件库，当你不懂某个组件时，它就是最好的文档，包含组件用法及API说明
-  - [NG-YUNZAI中文文档](https://ng-yunzai.com/)，包含所有 `@yelon/*` 类型的用法及API说明
+  - [NG-YUNZAI中文文档](https://ng.yunzainfo.com/)，包含所有 `@yelon/*` 类型的用法及API说明
   - [G2图表中文文档](https://g2.antv.vision/zh)，如果需要图表开发，则这份文档是必备
 - 辅助类
   - [Ant Design 指引文章](https://ant.design/docs/spec/introduce-cn)，学习 Ant Design 的设计理念，非常值得阅读的部分

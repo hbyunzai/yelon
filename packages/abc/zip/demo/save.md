@@ -37,7 +37,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class DemoComponent {
   instance: JSZip | null = null;
   data: { path: string; url: string }[] = [
-    { path: 'demo.docx', url: 'https://ng-yunzai.com/assets/demo.docx' },
+    { path: 'demo.docx', url: 'https://ng.yunzainfo.com/assets/demo.docx' },
     { path: 'img/zorro.svg', url: 'https://ng.ant.design/assets/img/zorro.svg' },
     { path: '小程序标志.zip', url: 'https://wximg.gtimg.com/shake_tv/mina/standard_logo.zip' },
   ];

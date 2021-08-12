@@ -107,7 +107,7 @@ class TestComponent {
   @ViewChild('comp', { static: true })
   comp: QRComponent;
 
-  value = 'https://ng-yunzai.com/';
+  value = 'https://ng.yunzainfo.com/';
   background = 'white';
   backgroundAlpha = 1.0;
   foreground = 'black';

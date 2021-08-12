@@ -43,7 +43,7 @@ export class StartupService {
         (win.hj.q = win.hj.q || []).push(arguments);
       };
     win._hjSettings = {
-      hjid: 920546,
+      hjid: 2549939,
       hjsv: 6
     };
     Promise.all([

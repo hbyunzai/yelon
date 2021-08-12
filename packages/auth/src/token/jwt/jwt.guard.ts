@@ -16,7 +16,7 @@ import { YA_SERVICE_TOKEN, ITokenService } from '../interface';
 import { JWTTokenModel } from './jwt.model';
 
 /**
- * JWT 路由守卫, [ACL Document](https://ng-yunzai.com/auth/guard).
+ * JWT 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
  *
  * ```ts
  * data: {

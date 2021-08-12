@@ -30,7 +30,7 @@ export interface AuthReferrer {
 
 export interface ITokenService {
   /**
-   * 授权失败后跳转路由路径（支持外部链接地址），通过设置[全局配置](https://ng-yunzai.com/docs/global-config)来改变
+   * 授权失败后跳转路由路径（支持外部链接地址），通过设置[全局配置](https://ng.yunzainfo.com/docs/global-config)来改变
    */
   readonly login_url: string | undefined;
 

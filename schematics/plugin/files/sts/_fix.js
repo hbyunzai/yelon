@@ -61,7 +61,7 @@ function genSTSOptions(options) {
 async function genSFBySTS(options) {
   const sfRes = await sts.generator(
     cog.swaggerUrl,
-    // https://ng-yunzai.com/cli/generate/en#Custom-Data
+    // https://ng.yunzainfo.com/cli/generate/en#Custom-Data
     { ...genSTSOptions(options), type: 'sf' },
     cog.sf
   );
@@ -71,7 +71,7 @@ async function genSFBySTS(options) {
 async function genSTBySTS(options) {
   const sfRes = await sts.generator(
     cog.swaggerUrl,
-    // https://ng-yunzai.com/cli/generate/en#Custom-Data
+    // https://ng.yunzainfo.com/cli/generate/en#Custom-Data
     { ...genSTSOptions(options), type: 'st' },
     cog.st
   );
