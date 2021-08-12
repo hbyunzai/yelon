@@ -16,7 +16,7 @@ import { YA_SERVICE_TOKEN, ITokenService } from '../interface';
 import { SimpleTokenModel } from './simple.model';
 
 /**
- * Simple 路由守卫, [ACL Document](https://ng-yunzai.com/auth/guard).
+ * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
  *
  * ```ts
  * data: {

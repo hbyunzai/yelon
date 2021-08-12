@@ -10,7 +10,7 @@ import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { Menu, MenuIcon, MenuInner } from './interface';
 
 /**
- * 菜单服务，[在线文档](https://ng-yunzai.com/theme/menu)
+ * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
  */
 @Injectable({ providedIn: 'root' })
 export class MenuService implements OnDestroy {

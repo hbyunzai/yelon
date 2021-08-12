@@ -9,7 +9,7 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { Observable } from 'rxjs';
 
 // #region default language
-// Reference: https://ng-yunzai.com/docs/i18n
+// Reference: https://ng.yunzainfo.com/docs/i18n
 import { default as ngLang } from '@angular/common/locales/zh';
 import { YELON_LOCALE, zh_CN as yelonLang } from '@yelon/theme';
 import { zhCN as dateLang } from 'date-fns/locale';

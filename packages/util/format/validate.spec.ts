@@ -41,7 +41,7 @@ export const TEST_DATA = {
   ],
   url: [
     { k: 'http://ng-yunzai.com', v: true },
-    { k: 'https://ng-yunzai.com', v: true },
+    { k: 'https://ng.yunzainfo.com', v: true },
     { k: '//ng-yunzai.com', v: false },
     { k: 'ng-yunzai.com', v: false },
     { k: '中国.com', v: false }

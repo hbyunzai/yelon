@@ -140,7 +140,7 @@ describe('abc: global-footer', () => {
       TestComponent,
       `
     <global-footer>
-      <global-footer-item href="https://ng-yunzai.com/" blankTarget>
+      <global-footer-item href="https://ng.yunzainfo.com/" blankTarget>
         <i class="icon-github"></i>
         <i class="icon-github"></i>
       </global-footer-item>

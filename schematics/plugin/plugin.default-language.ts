@@ -30,7 +30,7 @@ export function pluginDefaultLanguage(options: PluginOptions): Rule {
     }
     const targetLang = getLangConfig(options.defaultLanguage);
     if (targetLang == null) {
-      console.warn(`Target language not supported, refer to https://ng-yunzai.com/cli/plugin#defaultLanguage`);
+      console.warn(`Target language not supported, refer to https://ng.yunzainfo.com/cli/plugin#defaultLanguage`);
       return;
     }
     console.log(`Changes default languare [${oldLang}] to [${options.defaultLanguage}]`);

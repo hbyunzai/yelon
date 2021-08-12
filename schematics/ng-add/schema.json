@@ -6,7 +6,7 @@
   "properties": {
     "defaultLanguage": {
       "type": "string",
-      "description": "Specify default language [https://ng-yunzai.com/docs/i18n].",
+      "description": "Specify default language [https://ng.yunzainfo.com/docs/i18n].",
       "default": "zh",
       "x-prompt": {
         "message": "Which default language would you like to use?",

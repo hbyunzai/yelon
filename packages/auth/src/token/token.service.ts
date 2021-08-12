@@ -15,7 +15,7 @@ export function YA_SERVICE_TOKEN_FACTORY(): ITokenService {
 }
 
 /**
- * 维护Token信息服务，[在线文档](https://ng-yunzai.com/auth)
+ * 维护Token信息服务，[在线文档](https://ng.yunzainfo.com/auth)
  */
 @Injectable()
 export class TokenService implements ITokenService, OnDestroy {

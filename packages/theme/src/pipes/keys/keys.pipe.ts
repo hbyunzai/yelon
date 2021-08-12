@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /**
- * [Document](https://ng-yunzai.com/theme/keys)
+ * [Document](https://ng.yunzainfo.com/theme/keys)
  */
 @Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {

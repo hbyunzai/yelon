@@ -6,7 +6,7 @@ type: Third Widgets
 
 Markdown Editor
 
-> Note: third party widget is not registered by default, see details from [Customize Widgets](https://ng-yunzai.com/form/customize/en).
+> Note: third party widget is not registered by default, see details from [Customize Widgets](https://ng.yunzainfo.com/form/customize/en).
 
 ## How to Use
 

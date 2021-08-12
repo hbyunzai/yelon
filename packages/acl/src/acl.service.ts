@@ -7,7 +7,7 @@ import { ACL_DEFAULT_CONFIG } from './acl.config';
 import { ACLCanType, ACLType } from './acl.type';
 
 /**
- * ACL 控制服务，[在线文档](https://ng-yunzai.com/acl)
+ * ACL 控制服务，[在线文档](https://ng.yunzainfo.com/acl)
  *
  * 务必在根目录注册 `YelonACLModule.forRoot()` 才能使用服务
  */

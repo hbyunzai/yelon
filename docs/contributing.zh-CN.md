@@ -18,7 +18,7 @@ type: Other
 
 我们使用 [GitHub Issues](https://github.com/hbyunzai/ng-yunzai/issues) 来做 bug 追踪。如果你想要你发现的 bug 被快速解决，最好的办法就是按照 issues 呈现的模板认真填写每一项；并且能使用这个 [模板](https://stackblitz.com/edit/ng-yunzai-setup) 来提供重现。
 
-在你报告一个 bug 之前，请先确保已经搜索过已有的 issue 和阅读了 [文档站](https://ng-yunzai.com/)。
+在你报告一个 bug 之前，请先确保已经搜索过已有的 issue 和阅读了 [文档站](https://ng.yunzainfo.com/)。
 
 ## 新增功能
 

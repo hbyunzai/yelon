@@ -6,7 +6,7 @@ type: Third Widgets
 
 Tinymce富文本。
 
-> 注：第三方小部件默认并未注册，细节见[定制小部件](https://ng-yunzai.com/form/customize)。
+> 注：第三方小部件默认并未注册，细节见[定制小部件](https://ng.yunzainfo.com/form/customize)。
 
 ## 源代码
 

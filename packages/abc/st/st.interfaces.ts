@@ -242,7 +242,7 @@ export interface STColumn<T extends STData = any> {
    * - `number` 数字且居右(若 `className` 存在则优先)
    * - `currency` 货币且居右(若 `className` 存在则优先)
    * - `date` 日期格式且居中(若 `className` 存在则优先)，使用 `dateFormat` 自定义格式
-   * - `yn` 将`boolean`类型徽章化 [document](https://ng-yunzai.com/docs/data-render#yn)
+   * - `yn` 将`boolean`类型徽章化 [document](https://ng.yunzainfo.com/docs/data-render#yn)
    * - `widget` 使用自定义小部件动态创建
    */
   type?:
@@ -307,9 +307,9 @@ export interface STColumn<T extends STData = any> {
    */
   format?: (item: T, col: STColumn, index: number) => string;
   /**
-   * Safe rendering type, default: `safeHtml`, Support [global config](https://ng-yunzai.com/docs/global-config)
+   * Safe rendering type, default: `safeHtml`, Support [global config](https://ng.yunzainfo.com/docs/global-config)
    *
-   * 安全渲染方式，默认：`safeHtml`，支持[全局配置](https://ng-yunzai.com/docs/global-config/zh)
+   * 安全渲染方式，默认：`safeHtml`，支持[全局配置](https://ng.yunzainfo.com/docs/global-config/zh)
    */
   safeType?: STColumnSafeType;
   /**
@@ -337,7 +337,7 @@ export interface STColumn<T extends STData = any> {
    */
   dateFormat?: string;
   /**
-   * Currency format option, `type=currency` is valid, pls refer of [CurrencyService.commas](https://ng-yunzai.com/util/format/#commas).
+   * Currency format option, `type=currency` is valid, pls refer of [CurrencyService.commas](https://ng.yunzainfo.com/util/format/#commas).
    *
    * 货币格式选项，`type=currency` 有效。
    */
@@ -351,7 +351,7 @@ export interface STColumn<T extends STData = any> {
    */
   exported?: boolean;
   /**
-   * 权限，等同 [ACLCanType](https://ng-yunzai.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
   /** 当不存在数据时以默认值替代 */
@@ -574,7 +574,7 @@ export interface STColumnFilterMenu {
    */
   checked?: boolean;
   /**
-   * 权限，等同 [ACLCanType](https://ng-yunzai.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
 
@@ -596,7 +596,7 @@ export interface STColumnSelection<T extends STData = any> {
 
 export interface STcolumnCurrency {
   /**
-   * See [CurrencyService.commas](https://ng-yunzai.com/util/format/en#format)
+   * See [CurrencyService.commas](https://ng.yunzainfo.com/util/format/en#format)
    */
   format?: CurrencyFormatOptions;
 }
@@ -692,7 +692,7 @@ export interface STColumnButton<T extends STData = any> {
    */
   children?: Array<STColumnButton<T>>;
   /**
-   * 权限，等同 [ACLCanType](https://ng-yunzai.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
   /**

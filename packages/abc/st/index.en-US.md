@@ -282,8 +282,8 @@ class TestComponent {
 | `[statistical]` | Statistics | `STStatisticalType,STStatistical` | - |
 | `[resizable]` | Resize header, **Multiple headers not supported** | `STResizable, boolean` | - | - |
 | `[children]` | Group columns | `STColumn[]` | - |
-| `[safeType]` | Safe rendering type, Support [global config](https://ng-yunzai.com/docs/global-config) | `text,html,safeHtml` | `safeHtml` |
-| `[customRequest]` | Override the default request behavior, you can customize your own request implementation, for example: Graphql, Support [global config](https://ng-yunzai.com/docs/global-config) | `(options: STCustomRequestOptions) => Observable<any>` | - |
+| `[safeType]` | Safe rendering type, Support [global config](https://ng.yunzainfo.com/docs/global-config) | `text,html,safeHtml` | `safeHtml` |
+| `[customRequest]` | Override the default request behavior, you can customize your own request implementation, for example: Graphql, Support [global config](https://ng.yunzainfo.com/docs/global-config) | `(options: STCustomRequestOptions) => Observable<any>` | - |
 
 ### STColumnTitle
 
@@ -403,7 +403,7 @@ class TestComponent {
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
 | `[type]` | Currency rendering type | `commas, mega` | `commas` |
-| `[format]` | See [CurrencyService.format](https://ng-yunzai.com/util/format/en#format) | `CurrencyFormatOptions` | - |
+| `[format]` | See [CurrencyService.format](https://ng.yunzainfo.com/util/format/en#format) | `CurrencyFormatOptions` | - |
 
 ### STColumnBadge
 

@@ -3,7 +3,7 @@ import { YelonMockModule } from '@yelon/mock';
 import { YunzaiThemeModule } from '@yelon/theme';
 import { YunzaiConfig, YUNZAI_CONFIG, YunzaiConfigService } from '@yelon/util/config';
 
-// Please refer to: https://ng-yunzai.com/docs/global-config
+// Please refer to: https://ng.yunzainfo.com/docs/global-config
 // #region NG-YUNZAI Config
 
 import { YelonACLModule } from '@yelon/acl';

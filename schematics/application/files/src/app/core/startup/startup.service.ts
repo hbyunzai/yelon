@@ -50,11 +50,11 @@ export class StartupService {
           this.settingService.setApp(appData.app);
           // User information: including name, avatar, email address
           this.settingService.setUser(appData.user);
-          // ACL: Set the permissions to full, https://ng-yunzai.com/acl/getting-started
+          // ACL: Set the permissions to full, https://ng.yunzainfo.com/acl/getting-started
           this.aclService.setFull(true);
-          // Menu data, https://ng-yunzai.com/theme/menu
+          // Menu data, https://ng.yunzainfo.com/theme/menu
           this.menuService.add(appData.menu);
-          // Can be set page suffix title, https://ng-yunzai.com/theme/title
+          // Can be set page suffix title, https://ng.yunzainfo.com/theme/title
           this.titleService.suffix = appData.app.name;
         })
       );
@@ -71,11 +71,11 @@ export class StartupService {
           this.settingService.setApp(res.app);
           // User information: including name, avatar, email address
           this.settingService.setUser(res.user);
-          // ACL: Set the permissions to full, https://ng-yunzai.com/acl/getting-started
+          // ACL: Set the permissions to full, https://ng.yunzainfo.com/acl/getting-started
           this.aclService.setFull(true);
-          // Menu data, https://ng-yunzai.com/theme/menu
+          // Menu data, https://ng.yunzainfo.com/theme/menu
           this.menuService.add(res.menu);
-          // Can be set page suffix title, https://ng-yunzai.com/theme/title
+          // Can be set page suffix title, https://ng.yunzainfo.com/theme/title
           this.titleService.suffix = res.app.name;
         })
       );
@@ -115,9 +115,9 @@ export class StartupService {
     this.settingService.setApp(app);
     // User information: including name, avatar, email address
     this.settingService.setUser(user);
-    // ACL: Set the permissions to full, https://ng-yunzai.com/acl/getting-started
+    // ACL: Set the permissions to full, https://ng.yunzainfo.com/acl/getting-started
     this.aclService.setFull(true);
-    // Menu data, https://ng-yunzai.com/theme/menu
+    // Menu data, https://ng.yunzainfo.com/theme/menu
     this.menuService.add([
       {
         text: 'Main',
@@ -131,7 +131,7 @@ export class StartupService {
         ]
       }
     ]);
-    // Can be set page suffix title, https://ng-yunzai.com/theme/title
+    // Can be set page suffix title, https://ng.yunzainfo.com/theme/title
     this.titleService.suffix = app.name;
 
     return of();

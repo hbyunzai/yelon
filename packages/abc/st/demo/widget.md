@@ -46,7 +46,7 @@ export class DemoComponent {
   changeImg(): void {
     this.st.setRow(
       0,
-      { picture: { thumbnail: 'https://ng-yunzai.com/assets/img/logo-color.svg' } },
+      { picture: { thumbnail: 'https://ng.yunzainfo.com/assets/img/logo-color.svg' } },
       { refreshSchema: true, emitReload: false },
     );
   }

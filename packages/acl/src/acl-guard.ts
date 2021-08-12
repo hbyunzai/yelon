@@ -16,7 +16,7 @@ import { ACLService } from './acl.service';
 import { ACLCanType } from './acl.type';
 
 /**
- * Routing guard prevent unauthorized users visit the page, [ACL Document](https://ng-yunzai.com/acl).
+ * Routing guard prevent unauthorized users visit the page, [ACL Document](https://ng.yunzainfo.com/acl).
  *
  * ```ts
  * data: {
