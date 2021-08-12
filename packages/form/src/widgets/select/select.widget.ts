@@ -4,6 +4,8 @@ import { catchError, debounceTime, distinctUntilChanged, switchMap, takeUntil } 
 
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+import { ArrayService } from '@yelon/util/array';
+
 import { SFValue } from '../../interface';
 import { SFSchemaEnum } from '../../schema';
 import { getData, toBool } from '../../utils';
@@ -99,7 +101,7 @@ export class SelectWidget extends ControlUIWidget<SFSelectWidgetSchema> implemen
 
   private getOrgData(values: SFValue): SFSchemaEnum | SFSchemaEnum[] {
     if (!Array.isArray(values)) {
-      return this.data.find(w => w.value === values)!;
+      return this.injector.get(ArrayService).findTree(this.data, item => item.value === values)!;
     }
     return values.map(value => {
       let item: SFSchemaEnum | null = null;

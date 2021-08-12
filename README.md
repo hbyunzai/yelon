@@ -12,7 +12,8 @@ Yelon
 
   Yelon is a set of essential modules for [ng-yunzai](https://github.com/hbyunzai/ng-yunzai).
 
-[![Build Status](https://dev.azure.com/devcui/yelon/_apis/build/status/hbyunzai.yelon?branchName=master)](https://dev.azure.com/devcui/yelon/_build/latest?definitionId=4&branchName=master)
+[![GithubIo](https://img.shields.io/github/workflow/status/hbyunzai/yelon/Deploy?label=github.io&style=flat-square
+)](https://ng.yunzainfo.com)
 [![Codecov](https://img.shields.io/codecov/c/github/hbyunzai/yelon?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon)
 [![Dependency Status](https://david-dm.org/hbyunzai/yelon/status.svg?style=flat-square)](https://david-dm.org/hbyunzai/yelon)
 [![GitHub Release Date](https://img.shields.io/github/release-date/hbyunzai/yelon.svg?style=flat-square)](https://github.com/hbyunzai/yelon/releases)
