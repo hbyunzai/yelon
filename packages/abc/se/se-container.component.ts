@@ -72,7 +72,7 @@ export class SEContainerComponent {
 
   @Input() size: 'default' | 'compact';
   @Input() @InputBoolean() firstVisual: boolean;
-  @Input() @InputBoolean() ingoreDirty: boolean;
+  @Input() @InputBoolean() ignoreDirty: boolean;
   @Input() @InputBoolean() line = false;
   @Input()
   set errors(val: SEErrorRefresh[]) {
@@ -95,7 +95,7 @@ export class SEContainerComponent {
       col: 2,
       labelWidth: 150,
       firstVisual: false,
-      ingoreDirty: false
+      ignoreDirty: false
     });
   }
 

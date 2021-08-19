@@ -90,7 +90,7 @@ describe('abc: edit', () => {
           page.expect(ANT_FORM_HAS_ERROR_CLS, 0);
         }));
       });
-      describe('#ingoreDirty', () => {
+      describe('#ignoreDirty', () => {
         let changes: EventEmitter<string>;
         beforeEach(() => {
           ({ fixture, dl, context } = createTestContext(TestComponent));
@@ -104,14 +104,14 @@ describe('abc: edit', () => {
           spyOnProperty(ngModel, 'dirty').and.returnValue(false);
         });
         it('with true', fakeAsync(() => {
-          context.parent_ingoreDirty = true;
+          context.parent_ignoreDirty = true;
           fixture.detectChanges();
           changes.emit('INVALID');
           fixture.detectChanges();
           page.expect(ANT_FORM_HAS_ERROR_CLS, 1);
         }));
         it('with false', fakeAsync(() => {
-          context.parent_ingoreDirty = false;
+          context.parent_ignoreDirty = false;
           fixture.detectChanges();
           changes.emit('INVALID');
           fixture.detectChanges();
@@ -535,7 +535,7 @@ describe('abc: edit', () => {
       [col]="parent_col"
       [title]="parent_title"
       [firstVisual]="parent_firstVisual"
-      [ingoreDirty]="parent_ingoreDirty"
+      [ignoreDirty]="parent_ignoreDirty"
       [line]="parent_line"
       [size]="parent_size"
       [nzLayout]="parent_layout"
@@ -577,7 +577,7 @@ class TestComponent {
   parent_layout: 'horizontal' | 'vertical' | 'inline' = 'horizontal';
   parent_size: 'default' | 'compact' = 'default';
   parent_firstVisual = true;
-  parent_ingoreDirty = false;
+  parent_ignoreDirty = false;
   parent_line = false;
   parent_noColon = false;
   parent_title = 'title';
