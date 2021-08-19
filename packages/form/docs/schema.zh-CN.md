@@ -283,7 +283,7 @@ UI Schema 结构由通用性和小部件API两部分组成，以下是通用性�
 | `[liveValidate]` | 是否实时校验 | `boolean` | `true` |
 | `[firstVisual]` | 是否立即呈现错误视觉 | `boolean` | `false` |
 | `[onlyVisual]` | 是否只展示错误视觉不显示错误文本 | `boolean` | `false` |
-| `[ingoreKeywords]` | 忽略某些数据类型校验 | `string[]` |  |
+| `[ignoreKeywords]` | 忽略某些数据类型校验 | `string[]` |  |
 | `[errors]` | 自定义错误信息文本 | `{ [ key: string ]: string | ((obj: ErrorData) => string) }` | - |
 | `[showRequired]` | 是否展示必填项标识 `*` | `boolean` | - |
 | `[validator]` | 自定义校验 | `(value: any, formProperty: FormProperty, form: PropertyGroup) => ErrorData[]` | - |

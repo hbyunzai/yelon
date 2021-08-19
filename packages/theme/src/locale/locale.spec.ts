@@ -19,7 +19,7 @@ describe('theme: locale', () => {
       locale = new YelonLocaleService(null);
       expect(locale.locale.abbr).toBe(zhCN.abbr);
     });
-    it('should be ingore change when new and old are the same', () => {
+    it('should be ignore change when new and old are the same', () => {
       expect(locale.locale.abbr).toBe(zhCN.abbr);
       locale.setLocale(zhCN);
       expect(locale.locale.abbr).toBe(zhCN.abbr);

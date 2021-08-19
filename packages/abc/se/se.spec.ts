@@ -164,7 +164,7 @@ describe('abc: edit', () => {
               fixture.detectChanges();
               expect(page.getEl('.ant-form-item-label').style.width).toBe(`${context.parent_labelWidth}px`);
             });
-            it('should be ingore width when layout not horizontal', () => {
+            it('should be ignore width when layout not horizontal', () => {
               context.parent_layout = 'inline';
               context.parent_labelWidth = 20;
               context.label = 'aa';
@@ -379,7 +379,7 @@ describe('abc: edit', () => {
       fixture2.detectChanges();
       page.expect(ANT_FORM_HAS_ERROR_CLS);
     });
-    describe('should be ingore error visual when is disabled', () => {
+    describe('should be ignore error visual when is disabled', () => {
       it('in ngModel', () => {
         genModule();
         context.disabled = true;
@@ -459,7 +459,7 @@ describe('abc: edit', () => {
       `);
       expect(page.getEl('label').getAttribute('for')).toBe(id);
     });
-    it(`should be ingored auto id when not found invalid ngModel`, () => {
+    it(`should be ignored auto id when not found invalid ngModel`, () => {
       genModule(`
       <form nz-form se-container>
         <se label="a">
@@ -469,7 +469,7 @@ describe('abc: edit', () => {
       `);
       expect(page.getEl('#expected').id).toBe('expected');
     });
-    it(`should be ingored set id when control has id value`, () => {
+    it(`should be ignored set id when control has id value`, () => {
       const id = 'aaaa';
       genModule(`
       <form nz-form se-container>
@@ -480,7 +480,7 @@ describe('abc: edit', () => {
       `);
       expect(page.getEl('label').getAttribute('for')).toBe(id);
     });
-    it(`should be ingored set id when control invalid controlAccessor`, () => {
+    it(`should be ignored set id when control invalid controlAccessor`, () => {
       genModule(`
       <form nz-form se-container>
         <se label="a">

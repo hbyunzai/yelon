@@ -73,9 +73,9 @@ export interface ErrorSchema {
   onlyVisual?: boolean;
   /**
    * 是否忽略某些数据类型校验 `ERRORSDEFAULT`
-   * - 值始终包含 `YelonSchemaFormConfig.ingoreKeywords`
+   * - 值始终包含 `YelonSchemaFormConfig.ignoreKeywords`
    */
-  ingoreKeywords?: string[];
+  ignoreKeywords?: string[];
 
   /**
    * 是否强制在标签上显示 `*` 来表示必填，一般在当使用自定义校验 `validator` 可能需要必填项处理

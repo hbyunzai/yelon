@@ -192,7 +192,7 @@ describe('theme: http.decorator', () => {
       expect(res.toString()).toBe('ids=1&ids=2&ids=3');
     });
 
-    it('should be ingore url & base url', () => {
+    it('should be ignore url & base url', () => {
       const srvEmpty = new MockEmptyService(injector as any);
       srvEmpty.GET();
 
@@ -231,7 +231,7 @@ describe('theme: http.decorator', () => {
       expect(request.calls.mostRecent().args[1]).toContain(`:id/10/:id`);
     });
 
-    it('should be ingore replace param when is invalid value', () => {
+    it('should be ignore replace param when is invalid value', () => {
       srv.escapePath(undefined);
 
       expect(request).toHaveBeenCalled();

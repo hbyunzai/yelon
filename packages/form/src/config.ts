@@ -21,7 +21,7 @@ export const SF_DEFAULT_CONFIG: YunzaiSFConfig = {
     color: { widget: 'string', type: 'color' },
     '': { widget: 'string' }
   },
-  ingoreKeywords: ['type', 'enum'],
+  ignoreKeywords: ['type', 'enum'],
   liveValidate: true,
   autocomplete: null,
   firstVisual: false,

@@ -256,7 +256,7 @@ describe('Service: Menu', () => {
         expect(srv.getItem('a')!.text).toBe('b');
         expect(srv.getItem('a')!.badge).toBe(10);
       });
-      it('should be ingore update when not found key', () => {
+      it('should be ignore update when not found key', () => {
         const newMenus = [{ text: 'a', key: 'a' }];
         srv.add(newMenus);
         srv.setItem('invalid-key', { text: 'b' });

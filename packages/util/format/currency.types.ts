@@ -23,7 +23,7 @@ export interface CurrencyFormatOptions extends CurrencyStartingUnitOptions {
   /**
    * 是否忽略精度 `.0` 或 `.00` 结尾的字符，默认：`true`
    */
-  ingoreZeroPrecision?: boolean;
+  ignoreZeroPrecision?: boolean;
 
   /**
    * Use anguar `currency` pipe parse when is set, pls refer to [document](https://angular.io/api/common/CurrencyPipe)

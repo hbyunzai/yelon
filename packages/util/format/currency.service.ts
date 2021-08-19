@@ -28,7 +28,7 @@ export class CurrencyService {
       startingUnit: 'yuan',
       megaUnit: { Q: '京', T: '兆', B: '亿', M: '万', K: '千' },
       precision: 2,
-      ingoreZeroPrecision: true
+      ignoreZeroPrecision: true
     })!;
   }
 
@@ -45,7 +45,7 @@ export class CurrencyService {
     options = {
       startingUnit: this.c.startingUnit,
       precision: this.c.precision,
-      ingoreZeroPrecision: this.c.ingoreZeroPrecision,
+      ignoreZeroPrecision: this.c.ignoreZeroPrecision,
       ngCurrency: this.c.ngCurrency,
       ...options
     };
@@ -69,9 +69,9 @@ export class CurrencyService {
     const res = formatNumber(
       truthValue,
       this.locale,
-      `.${options.ingoreZeroPrecision ? 1 : options.precision}-${options.precision}`
+      `.${options.ignoreZeroPrecision ? 1 : options.precision}-${options.precision}`
     );
-    return options.ingoreZeroPrecision ? res.replace(/(?:\.[0]+)$/g, '') : res;
+    return options.ignoreZeroPrecision ? res.replace(/(?:\.[0]+)$/g, '') : res;
   }
 
   /**

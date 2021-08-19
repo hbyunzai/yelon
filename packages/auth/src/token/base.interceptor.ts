@@ -44,24 +44,24 @@ export abstract class BaseInterceptor implements HttpInterceptor {
       }
     }
 
-    const ingoreKey = options.allow_anonymous_key!;
-    let ingored = false;
+    const ignoreKey = options.allow_anonymous_key!;
+    let ignored = false;
     let params = req.params;
     let url = req.url;
-    if (req.params.has(ingoreKey)) {
-      params = req.params.delete(ingoreKey);
-      ingored = true;
+    if (req.params.has(ignoreKey)) {
+      params = req.params.delete(ignoreKey);
+      ignored = true;
     }
     const urlArr = req.url.split('?');
     if (urlArr.length > 1) {
       const queryStringParams = new HttpParams({ fromString: urlArr[1] });
-      if (queryStringParams.has(ingoreKey)) {
-        const queryString = queryStringParams.delete(ingoreKey).toString();
+      if (queryStringParams.has(ignoreKey)) {
+        const queryString = queryStringParams.delete(ignoreKey).toString();
         url = queryString.length > 0 ? `${urlArr[0]}?${queryString}` : urlArr[0];
-        ingored = true;
+        ignored = true;
       }
     }
-    if (ingored) {
+    if (ignored) {
       return next.handle(req.clone({ params, url }));
     }
 

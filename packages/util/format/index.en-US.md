@@ -6,7 +6,7 @@ type: Tools
 
 ## CurrencyService
 
-> You can override to set the `startingUnit`, `megaUnit`, `precision`, `ingoreZeroPrecision` through [Global Configuration](/docs/global-config).
+> You can override to set the `startingUnit`, `megaUnit`, `precision`, `ignoreZeroPrecision` through [Global Configuration](/docs/global-config).
 
 ### format
 

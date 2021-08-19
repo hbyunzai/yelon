@@ -194,7 +194,7 @@ describe('abc: table: data-souce', () => {
           done();
         });
       });
-      it('should be null, muse be ingore sort processing', done => {
+      it('should be null, muse be ignore sort processing', done => {
         options.columns[0]._sort = {
           enabled: true,
           compare: null,
@@ -973,7 +973,7 @@ describe('abc: table: data-souce', () => {
           done();
         });
       });
-      it('should be ingore currency', done => {
+      it('should be ignore currency', done => {
         options.columns = [{ title: '', index: 'a', statistical: { type: 'sum', currency: false } }] as _STColumn[];
         options.data = [{ a: 1 }, { a: 2 }, { a: 0.1 }];
 

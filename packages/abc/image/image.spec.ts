@@ -64,13 +64,13 @@ describe('abc: _src', () => {
     expect(imgEl.src).toContain(context.error);
   });
 
-  it('should be ingore http', () => {
+  it('should be ignore http', () => {
     context.src = `http://ng-yunzai.com/1.png`;
     fixture.detectChanges();
     expect(getEl().src).toContain(`//ng-yunzai.com/1.png`);
   });
 
-  it('should be ingore https', () => {
+  it('should be ignore https', () => {
     context.src = `https://ng.yunzainfo.com/1.png`;
     fixture.detectChanges();
     expect(getEl().src).toContain(`//ng.yunzainfo.com/1.png`);
@@ -134,7 +134,7 @@ describe('abc: _src', () => {
       expect(el != null).toBe(true);
       expect(el.src.endsWith(SRC)).toBe(true);
     }));
-    it('should be ingore click when previewSrc is null', fakeAsync(() => {
+    it('should be ignore click when previewSrc is null', fakeAsync(() => {
       context.previewSrc = null;
       fixture.detectChanges();
       getEl().click();

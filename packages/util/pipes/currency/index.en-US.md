@@ -5,7 +5,7 @@ type: Pipes
 module: import { CurrencyPipeModule } from '@yelon/util/pipes/currency';
 ---
 
-> You can override to set the `startingUnit`, `megaUnit`, `precision`, `ingoreZeroPrecision` through [Global Configuration](/docs/global-config).
+> You can override to set the `startingUnit`, `megaUnit`, `precision`, `ignoreZeroPrecision` through [Global Configuration](/docs/global-config).
 
 ## price
 

@@ -38,7 +38,7 @@ let context: TestFormComponent;
 export function builder(options?: {
   detectChanges?: boolean;
   template?: string;
-  ingoreAntd?: boolean;
+  ignoreAntd?: boolean;
   imports?: NzSafeAny[];
 }): {
   fixture: ComponentFixture<TestFormComponent>;

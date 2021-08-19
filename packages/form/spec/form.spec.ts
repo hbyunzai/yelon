@@ -144,7 +144,7 @@ describe('form: component', () => {
         expect(console.warn).toHaveBeenCalled();
       });
 
-      it('should be ingore required when element is hidden', () => {
+      it('should be ignore required when element is hidden', () => {
         const s: SFSchema = {
           properties: {
             name: {
@@ -158,7 +158,7 @@ describe('form: component', () => {
         expect(context.comp._schema.required!.indexOf('name') === -1).toBe(true);
       });
 
-      it('should be ingore trigger formChange event when call refreshSchema method', () => {
+      it('should be ignore trigger formChange event when call refreshSchema method', () => {
         expect(context.formChange).not.toHaveBeenCalled();
         page.newSchema({ properties: { name: { type: 'string' } } });
         expect(context.formChange).not.toHaveBeenCalled();

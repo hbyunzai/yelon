@@ -17,7 +17,7 @@ import { SFSchema } from './schema';
 export abstract class SchemaValidatorFactory {
   abstract createValidatorFn(
     schema: SFSchema,
-    extraOptions: { ingoreKeywords: string[]; debug: boolean }
+    extraOptions: { ignoreKeywords: string[]; debug: boolean }
   ): (value: SFValue) => ErrorData[];
 }
 
@@ -52,11 +52,11 @@ export class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
 
   createValidatorFn(
     schema: SFSchema,
-    extraOptions: { ingoreKeywords: string[]; debug: boolean }
+    extraOptions: { ignoreKeywords: string[]; debug: boolean }
   ): (value: SFValue) => ErrorData[] {
-    const ingoreKeywords: string[] = [
-      ...(this.options.ingoreKeywords as string[]),
-      ...((extraOptions.ingoreKeywords as string[]) || [])
+    const ignoreKeywords: string[] = [
+      ...(this.options.ignoreKeywords as string[]),
+      ...((extraOptions.ignoreKeywords as string[]) || [])
     ];
 
     return (value: SFValue): ErrorData[] => {
@@ -70,8 +70,8 @@ export class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
         }
       }
       let errors = this.ajv.errors;
-      if (this.options && ingoreKeywords && errors) {
-        errors = errors.filter(w => ingoreKeywords.indexOf(w.keyword) === -1);
+      if (this.options && ignoreKeywords && errors) {
+        errors = errors.filter(w => ignoreKeywords.indexOf(w.keyword) === -1);
       }
       return errors as ErrorData[];
     };

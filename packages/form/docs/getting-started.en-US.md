@@ -55,7 +55,7 @@ Please refer to [Global Configuration](/docs/global-config), the members are as 
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
 | `[ajv]` | [ajv](https://github.com/ajv-validator/ajv/blob/master/docs/api.md#options) options | `Ajv.Options` | - |
-| `[ingoreKeywords]` | Whether to ignore data type validator ([all types](https://github.com/hbyunzai/yelon/blob/master/packages/form/src/errors.ts#L4)) | `string[]` | `[ 'type', 'enum' ]` |
+| `[ignoreKeywords]` | Whether to ignore data type validator ([all types](https://github.com/hbyunzai/yelon/blob/master/packages/form/src/errors.ts#L4)) | `string[]` | `[ 'type', 'enum' ]` |
 | `[liveValidate]` | Whether to live validate | `boolean` | `true` |
 | `[autocomplete]` | autocomplete value of this form | `on,off` | `null` |
 | `[firstVisual]` | Whether to show visual error immediately | `boolean` | `false` |

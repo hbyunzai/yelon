@@ -103,7 +103,7 @@ describe('abc: utils', () => {
       expect(original.b).toBe(undefined);
       expect(original.c).toBe(undefined);
     });
-    it('should be ingored null or undefined in objects arguments', () => {
+    it('should be ignored null or undefined in objects arguments', () => {
       original = {};
 
       deepMerge(original, null, undefined);

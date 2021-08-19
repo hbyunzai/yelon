@@ -291,7 +291,7 @@ describe('theme: layout-default-nav', () => {
           page.showSubMenu();
           expect(page.getEl('.sidebar-nav__floating-container .sidebar-nav__item', true) != null).toBe(true);
         });
-        it('should be ingore children title trigger event', () => {
+        it('should be ignore children title trigger event', () => {
           spyOn(context, 'select');
           expect(context.select).not.toHaveBeenCalled();
           const mockMenu = deepCopy(MOCKMENUS) as Nav[];
@@ -527,7 +527,7 @@ describe('theme: layout-default-nav', () => {
       fixture.detectChanges();
       page.checkCount('.sidebar-nav__selected', 0);
     }));
-    it('should be ingore _open when enabled openStrictly', fakeAsync(() => {
+    it('should be ignore _open when enabled openStrictly', fakeAsync(() => {
       context.openStrictly = true;
       fixture.detectChanges();
       menuSrv.add(deepCopy(MOCKOPENSTRICTLY));

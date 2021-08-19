@@ -25,8 +25,8 @@ describe('util: FormatCurrencyService', () => {
     it('should be return empty when is NaN', () => {
       expect(srv.format(undefined!)).toBe('');
     });
-    it('#ingoreZeroPrecision', () => {
-      expect(srv.format(100, { startingUnit: 'cent', ingoreZeroPrecision: false })).toBe('1.00');
+    it('#ignoreZeroPrecision', () => {
+      expect(srv.format(100, { startingUnit: 'cent', ignoreZeroPrecision: false })).toBe('1.00');
     });
     describe('[USE ANGULAR]', () => {
       it('should be working', () => {

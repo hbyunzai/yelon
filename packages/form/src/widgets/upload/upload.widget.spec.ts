@@ -34,7 +34,7 @@ describe('form: widget: upload', () => {
     return dl.query(By.directive(NzUploadComponent)).injector.get<NzUploadComponent>(NzUploadComponent);
   }
 
-  it('should be ingore update value when status is not success', () => {
+  it('should be ignore update value when status is not success', () => {
     page.newSchema({
       properties: { a: { type: 'string', ui: { widget } } }
     });

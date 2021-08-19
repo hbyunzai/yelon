@@ -140,7 +140,7 @@ describe('theme: DrawerHelper', () => {
         expect((els[0] as HTMLElement).style.height).toBe(`100px`);
       });
     });
-    it('should be ingore drawer-sm when nzWidth has set', () => {
+    it('should be ignore drawer-sm when nzWidth has set', () => {
       drawer
         .static(
           '',

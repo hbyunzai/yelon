@@ -56,7 +56,7 @@ describe('NgYunzaiSchematic: plugin: icon', () => {
     const path = `/projects/foo/src/style-icons-auto.ts`;
     expect(tree.exists(path)).toBe(true);
     const content = tree.readContent(path);
-    // ingore custom icons
+    // ignore custom icons
     expect(content).not.toContain(`NzFilterOutline`);
     expect(content).not.toContain(`StepBackwardFill`);
     // white icons

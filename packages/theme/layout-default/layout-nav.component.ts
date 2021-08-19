@@ -94,7 +94,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
       return false;
     }
     const id = +linkNode.dataset!.id!;
-    // Should be ingore children title trigger event
+    // Should be ignore children title trigger event
     if (isNaN(id)) {
       return false;
     }

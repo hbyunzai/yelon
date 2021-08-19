@@ -283,7 +283,7 @@ Is visible with conditions, for example:
 | `[liveValidate]` | If realtime validation | `boolean` | `true` |
 | `[firstVisual]` | If show visual error immediately | `boolean` | `false` |
 | `[onlyVisual]` | If only show visiual error not error text | `boolean` | `false` |
-| `[ingoreKeywords]` | Ignore validation for some data types | `string[]` |  |
+| `[ignoreKeywords]` | Ignore validation for some data types | `string[]` |  |
 | `[errors]` | Customized error text | `{ [ key: string ]: string | ((obj: ErrorData) => string) }` | - |
 | `[showRequired]` | Whether to display the required logo * | `boolean` | - |
 | `[validator]` | Customized validator | `(value: any, formProperty: FormProperty, form: PropertyGroup) => ErrorData[]` | - |

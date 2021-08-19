@@ -42,7 +42,7 @@ Also, automatically processed all Angular built-in validation, such as `required
 | `[col]` | specify the maximum number of columns to display, the final columns number is determined by col setting combined with [Responsive Rules](/theme/responsive) | `'1','2','3','4','5','6'` | - | ✅ |
 | `[labelWidth]` | label text of width, unit is `px` | `number` | `150` | ✅ |
 | `[nzLayout]` | type of layout when `inline` forced size is `compact` | `'horizontal','vertical','inline'` | `'horizontal'` | ✅ |
-| `[size]` | size of edit, forced ingores `error`, `extra` | `'default','compact'` | `'default'` | ✅ |
+| `[size]` | size of edit, forced ignores `error`, `extra` | `'default','compact'` | `'default'` | ✅ |
 | `[firstVisual]` | Immediately show validation error message | `boolean` | `false` | ✅ |
 | `[ignoreDirty]` | Whether to ignore the `dirty` check | `boolean` | `false` | ✅ |
 | `[line]` | whether separation line style | `boolean` | `false` | - |

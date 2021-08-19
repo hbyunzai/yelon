@@ -55,7 +55,7 @@ export class AppModule { }
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|
 | `[ajv]` | [ajv](https://github.com/ajv-validator/ajv/blob/master/docs/api.md#options) 参数 | `Ajv.Options` | - |
-| `[ingoreKeywords]` | 是否忽略某些数据类型校验（[所有类型](https://github.com/hbyunzai/yelon/blob/master/packages/form/src/errors.ts#L4)） | `string[]` | `[ 'type', 'enum' ]` |
+| `[ignoreKeywords]` | 是否忽略某些数据类型校验（[所有类型](https://github.com/hbyunzai/yelon/blob/master/packages/form/src/errors.ts#L4)） | `string[]` | `[ 'type', 'enum' ]` |
 | `[liveValidate]` | 是否实时校验 | `boolean` | `true` |
 | `[autocomplete]` | 指定表单 `autocomplete` 值 | `on,off` | `null` |
 | `[firstVisual]` | 是否立即呈现错误视觉 | `boolean` | `false` |

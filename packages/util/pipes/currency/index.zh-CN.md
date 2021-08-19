@@ -5,7 +5,7 @@ type: Pipes
 module: import { CurrencyPipeModule } from '@yelon/util/pipes/currency';
 ---
 
-> 可以通过[全局配置](/docs/global-config)覆盖 `startingUnit`、`megaUnit`、`precision`、`ingoreZeroPrecision` 等参数。
+> 可以通过[全局配置](/docs/global-config)覆盖 `startingUnit`、`megaUnit`、`precision`、`ignoreZeroPrecision` 等参数。
 
 ## price
 

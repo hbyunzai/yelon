@@ -23,7 +23,7 @@ Use `' '`space to separate the request method and URL, the request method can be
 ```ts
 export const USERS = {
   'GET /users': null,
-  // GET: can be ingored
+  // GET: can be ignored
   '/users/1': null,
   // POST
   'POST /users/1': null,
@@ -77,7 +77,7 @@ import { MockStatusError } from '@yelon/mock';
 export const USERS = {
   // Support object or array values
   'GET /users': { users: [1, 2], total: 2 },
-  // GET: can be ingored
+  // GET: can be ignored
   '/users/1': { users: [1, 2], total: 2 },
   // POST
   'POST /users/1': { uid: 1 },

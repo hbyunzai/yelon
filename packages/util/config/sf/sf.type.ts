@@ -22,7 +22,7 @@ export interface YunzaiSFConfig {
    * - `type` 限定 Schema 中 `type` 类型
    * - `enum` 限定应当是预设定的枚举值之一
    */
-  ingoreKeywords?: string[];
+  ignoreKeywords?: string[];
   /**
    * [ajv](https://github.com/ajv-validator/ajv/blob/master/docs/api.md#options) 参数
    */
