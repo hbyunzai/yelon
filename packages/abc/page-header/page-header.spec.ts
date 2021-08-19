@@ -238,7 +238,7 @@ describe('abc: page-header', () => {
       let i18n: YunzaiI18NService;
       beforeEach(() => {
         TestBed.overrideProvider(YUNZAI_I18N_TOKEN, {
-          useFactory: () => new MockI18NServiceFake()
+          useFactory: () => new MockI18NServiceFake({ merge: () => {} } as NzSafeAny)
         });
         ({ fixture, dl, context } = createTestContext(TestI18nComponent));
         i18n = TestBed.inject(YUNZAI_I18N_TOKEN);

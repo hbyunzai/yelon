@@ -44,8 +44,11 @@ function propDecoratorFactory<T, D>(
   return propDecorator;
 }
 
-export function toBoolean(value: unknown, allowUndefined: boolean | null = false): boolean | undefined {
-  return allowUndefined && typeof value === 'undefined' ? undefined : value != null && `${value}` !== 'false';
+export function toBoolean(
+  value: unknown,
+  defaultValue: boolean | null | undefined = false
+): boolean | null | undefined {
+  return value == null ? defaultValue : `${value}` !== 'false';
 }
 
 /**
@@ -57,7 +60,7 @@ export function toBoolean(value: unknown, allowUndefined: boolean | null = false
  * ```
  */
 export function InputBoolean(defaultValue: boolean | null = false): NzSafeAny {
-  return propDecoratorFactory('InputNumber', toBoolean, defaultValue);
+  return propDecoratorFactory('InputBoolean', toBoolean, defaultValue);
 }
 
 export function toNumber(value: unknown): number;

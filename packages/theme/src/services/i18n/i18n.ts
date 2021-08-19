@@ -1,10 +1,10 @@
-import { Injectable, InjectionToken } from '@angular/core';
+import { inject, Injectable, InjectionToken } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { _HttpClient } from '../http/http.client';
+import { YunzaiConfigService, YunzaiThemeI18nConfig } from '@yelon/util/config';
 
 export interface YunzaiI18NService {
   [key: string]: NzSafeAny;
@@ -57,11 +57,12 @@ export interface YunzaiI18NService {
 
 export const YUNZAI_I18N_TOKEN = new InjectionToken<YunzaiI18NService>('yunzaiI18nToken', {
   providedIn: 'root',
-  factory: () => new YunzaiI18NServiceFake()
+  factory: () => new YunzaiI18NServiceFake(inject(YunzaiConfigService))
 });
 
 @Injectable()
 export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
+  private cog: YunzaiThemeI18nConfig;
   protected _change$ = new BehaviorSubject<string | null>(null);
   protected _currentLang: string = '';
   protected _defaultLang: string = '';
@@ -79,6 +80,12 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
     return this._data;
   }
 
+  constructor(cogSrv: YunzaiConfigService) {
+    this.cog = cogSrv.merge('themeI18n', {
+      interpolation: ['{{', '}}']
+    })!;
+  }
+
   abstract use(lang: string, data?: Record<string, string>): void;
 
   abstract getLangs(): NzSafeAny[];
@@ -88,7 +95,14 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
     if (!content) return path;
 
     if (params) {
-      Object.keys(params).forEach(key => (content = content.replace(new RegExp(`{{${key}}}`, 'g'), `${params[key]}`)));
+      const interpolation = this.cog.interpolation!!;
+      Object.keys(params).forEach(
+        key =>
+          (content = content.replace(
+            new RegExp(`${interpolation[0]}\s?${key}\s?${interpolation[1]}`, 'g'),
+            `${params[key]}`
+          ))
+      );
     }
     return content;
   }
