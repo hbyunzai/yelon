@@ -65,9 +65,9 @@ describe('abc: _src', () => {
   });
 
   it('should be ignore http', () => {
-    context.src = `http://ng-yunzai.com/1.png`;
+    context.src = `http://ng.yunzainfo.com/1.png`;
     fixture.detectChanges();
-    expect(getEl().src).toContain(`//ng-yunzai.com/1.png`);
+    expect(getEl().src).toContain(`//ng.yunzainfo.com/1.png`);
   });
 
   it('should be ignore https', () => {

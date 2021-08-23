@@ -52,15 +52,15 @@ npm run analyze:view
 
 对于发布来讲，只需要将最终生成的静态文件，也就是通常情况下 `dist` 文件夹的静态文件发布到你的 cdn 或者静态服务器即可，需要注意的是其中的 `index.html` 通常会是你后台服务的入口页面，在确定了 js 和 css 的静态之后可能需要改变页面的引入路径。
 
-默认的静态资源引用路径直接指向 `dist` 文件夹发布所处应用的目录下，例如你将 `dist` 发布至 `ng-yunzai.com` 站点的根目录里则请求的网址是 `//ng-yunzai.com/***.js`、`//ng-yunzai.com/***.css`，若 `dist` 发布至某站点下某个目录如 `v2` 文件夹下，则请求的网址是 `//ng-yunzai.com/v2/***.js`、`//ng-yunzai.com/v2/***.css`。
+默认的静态资源引用路径直接指向 `dist` 文件夹发布所处应用的目录下，例如你将 `dist` 发布至 `ng.yunzainfo.com` 站点的根目录里则请求的网址是 `//ng.yunzainfo.com/***.js`、`//ng.yunzainfo.com/***.css`，若 `dist` 发布至某站点下某个目录如 `v2` 文件夹下，则请求的网址是 `//ng.yunzainfo.com/v2/***.js`、`//ng.yunzainfo.com/v2/***.css`。
 
 如果你的静态资源是部署到其他域名（例如独立的 cdn 地址），你可以透过 `-d` 参数指定一个 cdn 地址。
 
 ```bash
-ng build -d=//cdn.ng-yunzai.com/
+ng build -d=//cdn.ng.yunzainfo.com/
 ```
 
-这样生成的 `index.html` 内 `*.js`、`*.css` 会自动加上 `//cdn.ng-yunzai.com/*.js`。
+这样生成的 `index.html` 内 `*.js`、`*.css` 会自动加上 `//cdn.ng.yunzainfo.com/*.js`。
 
 ### 路由策略
 

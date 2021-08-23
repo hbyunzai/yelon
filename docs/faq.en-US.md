@@ -95,7 +95,7 @@ Finally, redefine the new path in `src/styles/theme.less`:
 
 For missing language imports, refer to [app.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/app.module.ts#L6-L25).
 
-### How to deploy ng-yunzai.com documentation site in local
+### How to deploy ng.yunzainfo.com documentation site in local
 
 We provided an online snapshot:
 
@@ -103,4 +103,4 @@ We provided an online snapshot:
 git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/yelon.git docs
 ```
 
-You can simply create a Docker container to quickly deploy the same documentation site as ng-yunzai.com.
+You can simply create a Docker container to quickly deploy the same documentation site as ng.yunzainfo.com.

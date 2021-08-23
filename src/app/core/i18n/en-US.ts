@@ -1,6 +1,6 @@
 export const ENUS = {
   slogan: 'A front-end solution based on Antd',
-  'app.header.search': 'Search in ng-yunzai.com',
+  'app.header.search': 'Search in ng.yunzainfo.com',
   'app.home.preview': 'Preview',
   'app.home.start': 'Get started',
   'app.home.slogan': 'Out-of-box UI solution for enterprise applications, let developers focus on business.',

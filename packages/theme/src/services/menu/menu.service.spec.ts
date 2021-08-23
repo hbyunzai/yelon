@@ -39,7 +39,7 @@ describe('Service: Menu', () => {
       badgeDot: true,
       badgeStatus: 'success'
     },
-    { text: 'text', externalLink: '//ng-yunzai.com' },
+    { text: 'text', externalLink: '//ng.yunzainfo.com' },
     { text: 'text', link: '/demo2', i18n: 'text' },
     { text: 'sub', children: [] }
   ];
@@ -340,7 +340,7 @@ describe('Service: Menu', () => {
           {
             text: 'dashboard',
             link: '/dashboard',
-            icon: `http://ng-yunzai.com/1.jpg`
+            icon: `http://ng.yunzainfo.com/1.jpg`
           }
         ]);
         const icon: NzSafeAny = srv.menus[0].icon;

@@ -30,12 +30,12 @@ const MOCKMENUS = [
           { text: 'v3' },
           {
             text: 'externalLink-blank',
-            externalLink: '//ng-yunzai.com/blank',
+            externalLink: '//ng.yunzainfo.com/blank',
             target: '_blank'
           },
           {
             text: 'externalLink-top',
-            externalLink: '//ng-yunzai.com/top',
+            externalLink: '//ng.yunzainfo.com/top',
             target: '_top'
           }
         ]
@@ -155,7 +155,7 @@ describe('theme: layout-default-nav', () => {
           const win = TestBed.inject(WINDOW);
           const itemEl = page.getEl<HTMLElement>('.sidebar-nav__item [data-id="7"]');
           itemEl!.click();
-          expect(win.location.href).toBe(`//ng-yunzai.com/top`);
+          expect(win.location.href).toBe(`//ng.yunzainfo.com/top`);
         });
       });
 

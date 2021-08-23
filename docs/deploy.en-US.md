@@ -52,15 +52,15 @@ npm run analyze:view
 
 When you are ready to deploy (release) your the app, you need only to publish the generated build artifacts - that is, the files in the `dist` folder - to your cdn or static server. Note that the `index.html` is usually the entry page for your app and handles all missing file requests. You may need to change the import path of the page after determining the static of js and css.
 
-The default static resource reference path directly points to the directory where the `dist` folder is published. For example, if you post `dist` to the root directory of the `ng-yunzai.com` site, the requested URL is `//ng-yunzai.com/***.js`, `//ng-yunzai.com/***.css`, if `dist` is posted to a directory under a certain directory, such as `v2`, request The URL is `//ng-yunzai.com/v2/***.js`, `//ng-yunzai.com/v2/***.css`.
+The default static resource reference path directly points to the directory where the `dist` folder is published. For example, if you post `dist` to the root directory of the `ng.yunzainfo.com` site, the requested URL is `//ng.yunzainfo.com/***.js`, `//ng.yunzainfo.com/***.css`, if `dist` is posted to a directory under a certain directory, such as `v2`, request The URL is `//ng.yunzainfo.com/v2/***.js`, `//ng.yunzainfo.com/v2/***.css`.
 
 If your static resource is deployed to another domain name (such as a separate CDN address), you can specify a CDN address with the `--deployUrl` parameter.
 
 ```bash
-ng build -deployUrl=//cdn.ng-yunzai.com/
+ng build -deployUrl=//cdn.ng.yunzainfo.com/
 ```
 
-The generated `index.html` with its `*.js`, `*.css` files will automatically refer to `//cdn.ng-yunzai.com/*.js`, `//cdn.ng-yunzai.com/*css`, respectively.
+The generated `index.html` with its `*.js`, `*.css` files will automatically refer to `//cdn.ng.yunzainfo.com/*.js`, `//cdn.ng.yunzainfo.com/*css`, respectively.
 
 ### Routing strategy
 

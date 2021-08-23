@@ -55,7 +55,7 @@ After cloning `ng-yunzai` or `yelon`, run `yarn` to fetch its dependencies. Then
 
 ### yelon
 
-1. `npm run site` runs ng-yunzai.com website locally
+1. `npm run site` runs ng.yunzainfo.com website locally
 2. `npm run lint` checks the code style
 3. `npm run test` runs the complete test suite
 5. `npm run release` build packages relases
