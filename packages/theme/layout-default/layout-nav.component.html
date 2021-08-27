@@ -1,6 +1,17 @@
 <ng-template #icon let-i>
   <ng-container *ngIf="i" [ngSwitch]="i.type">
     <i
+      *ngSwitchCase="'class'"
+      class="sidebar-nav__item-icon"
+      nz-icon
+      [nzType]="i.value"
+      [nzTheme]="i.theme"
+      [nzSpin]="i.spin"
+      [nzTwotoneColor]="i.twoToneColor"
+      [nzIconfont]="i.iconfont"
+      [nzRotate]="i.rotate"
+    ></i>
+    <i
       *ngSwitchCase="'icon'"
       class="sidebar-nav__item-icon"
       nz-icon
