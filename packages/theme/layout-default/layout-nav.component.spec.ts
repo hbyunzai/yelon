@@ -247,12 +247,12 @@ describe('theme: layout-default-nav', () => {
         });
         it('when is class string', () => {
           updateIcon('demo-class');
-          page.checkCount('.demo-class', 1);
+          page.checkCount('.demo-class', 0);
         });
       });
       it('with className', () => {
         updateIcon({ type: 'class', value: 'demo-class' });
-        page.checkCount('.demo-class', 1);
+        page.checkCount('.demo-class', 0);
       });
       it('with img', () => {
         updateIcon({ type: 'img', value: '1.jpg' });
