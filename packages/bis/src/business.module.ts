@@ -4,6 +4,8 @@ import { NoticeIconModule } from '@yelon/abc/notice-icon';
 import { ReuseTabModule } from '@yelon/abc/reuse-tab';
 import { YunzaiThemeModule } from '@yelon/theme';
 import { LayoutDefaultModule } from '@yelon/theme/layout-default';
+import { SettingDrawerModule } from '@yelon/theme/setting-drawer';
+import { ThemeBtnModule, YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
 
 import { SharedModule } from './shared.module';
 import {
@@ -30,6 +32,12 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [SharedModule, YunzaiThemeModule, NoticeIconModule, ReuseTabModule, LayoutDefaultModule],
+  providers: [
+    {
+      provide: YUNZAI_THEME_BTN_KEYS,
+      useValue: 'site-theme'
+    }
+  ],
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS]
 })
