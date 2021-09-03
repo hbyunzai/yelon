@@ -59,6 +59,7 @@ function main() {
     '@yelon/mock',
     '@yelon/form',
     '@yelon/util',
+    '@yelon/bis'
   ].forEach(libName => {
     const command = `npm deprecate ${libName}@"${result}" "Please use latest"`;
     log.info(`正在执行：${command}`);

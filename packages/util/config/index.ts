@@ -8,6 +8,7 @@ export * from './util/currency.type';
 export * from './theme/index';
 export * from './mock/mock.type';
 export * from './sf/sf.type';
+export * from './bis/bis.type';
 
 export * from './config.types';
 export * from './config.service';

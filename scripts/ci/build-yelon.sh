@@ -13,6 +13,7 @@ packages=(
   chart
   mock
   form
+  bis
 )
 
 addBanners() {
@@ -37,5 +38,5 @@ buildYelon() {
     cp ${p_project}/LICENSE ${p_packages_dist}/${package_name}/LICENSE
   done
   updateVersionReferences ${p_packages_dist}
-  copyYelonSchemas 
+  copyYelonSchemas
 }

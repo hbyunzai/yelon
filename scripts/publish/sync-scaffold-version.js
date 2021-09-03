@@ -25,7 +25,7 @@ const json = fs.readJSONSync(packagePath);
 if (name === 'ng-yunzai') {
   json.version = nextVersion;
 }
-['abc', 'acl', 'auth', 'chart', 'cache', 'mock', 'form', 'theme', 'util'].forEach(v => {
+['abc', 'acl', 'auth', 'chart', 'cache', 'mock', 'form', 'theme', 'util','bis'].forEach(v => {
   json.dependencies[`@yelon/${v}`] = `^${nextVersion}`;
 });
 json.devDependencies[`@yelon/testing`] = `^${nextVersion}`;
