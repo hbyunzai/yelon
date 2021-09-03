@@ -28,7 +28,7 @@ export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile: boolean;
   // start from 12.x
-  oldVersionList = ["12.0.2","12.0.3"];
+  oldVersionList = ["12.0.4"];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string }> = [
     { name: 'theme' },
