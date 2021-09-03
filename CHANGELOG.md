@@ -1,3 +1,23 @@
+## [12.0.5](https://github.com/hbyunzai/yelon/compare/12.0.4...12.0.5) (2021-09-03)
+
+
+### Bug Fixes
+
+* **package:bis:** fix interceptor export ([10103bc](https://github.com/hbyunzai/yelon/commit/10103bc8912cec115b4a1eabbcefe8cbda162f17))
+* **package:bis:** fix module,remove that unused ([d3e2939](https://github.com/hbyunzai/yelon/commit/d3e2939d4f807a341905437a04eeada901bd887c))
+* **package:bis:** fix package name ([93d17a4](https://github.com/hbyunzai/yelon/commit/93d17a439ffb2448901852c356dda0d560c4cf52))
+* **package:bis:** fix theme button key ([4ec60e6](https://github.com/hbyunzai/yelon/commit/4ec60e69cd2ef7b756e2ae20132946b61fc4e860))
+* **package:** fix version list ([26709f6](https://github.com/hbyunzai/yelon/commit/26709f61c1d0826d3693bccd0f151918e2127f37))
+* **theme:** fix icon ([238804a](https://github.com/hbyunzai/yelon/commit/238804a5cd4612b64caf80941c94dbbb8a381243))
+* **theme:** fix test ([236e303](https://github.com/hbyunzai/yelon/commit/236e3032eeacaee5602fdc6a72990fb207e9b8ad))
+
+
+### Features
+
+* **bit:** add bit module package ([932a30b](https://github.com/hbyunzai/yelon/commit/932a30bcb4bd3c0b4fb276693b8399f7df4c412e))
+
+
+
 ## [12.0.4](https://github.com/hbyunzai/yelon/compare/12.0.3...12.0.4) (2021-08-23)
 
 
