@@ -12,12 +12,11 @@ import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, filter, mergeMap, switchMap, take } from 'rxjs/operators';
 
-import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/bis/../util';
-
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
+import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
 
 import { mergeConfig } from '../bis.config';
