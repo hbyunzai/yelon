@@ -40,4 +40,4 @@ const COMPONENTS = [
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS]
 })
-export class BusinessModule {}
+export class YunzaiBusinessModule {}
