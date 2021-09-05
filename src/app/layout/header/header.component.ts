@@ -3,12 +3,13 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, I
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
-import { YUNZAI_I18N_TOKEN, RTLService } from '@yelon/theme';
-import { copy } from '@yelon/util/browser';
+import { I18NService, MobileService } from '@core';
+
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import { I18NService, MobileService } from '@core';
+import { YUNZAI_I18N_TOKEN, RTLService } from '@yelon/theme';
+import { copy } from '@yelon/util/browser';
 
 import { MetaSearchGroupItem } from '../../interfaces';
 import { LayoutComponent } from '../layout.component';
@@ -28,7 +29,7 @@ export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile: boolean;
   // start from 12.x
-  oldVersionList = ["12.0.4"];
+  oldVersionList = ['12.0.4'];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string }> = [
     { name: 'theme' },
