@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,6 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { NoticeIconSelect, NoticeItem } from '@yelon/abc/notice-icon';
 import { _HttpClient } from '@yelon/theme';
+import { WINDOW } from '@yelon/util';
 import { log } from '@yelon/util/other';
 
 @Component({
@@ -42,7 +43,7 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
       title: '待办',
       list: [],
       emptyText: '你已完成所有待办',
-      emptyImage: './assets/tmp/img/flag.svg',
+      emptyImage: './assets/tmp/img/todo.svg',
       clearText: '重新加载'
     },
     {
@@ -59,6 +60,7 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
   subs: Subscription[] = [];
 
   constructor(
+    private injector: Injector,
     private msg: NzMessageService,
     private nzI18n: NzI18nService,
     private cdr: ChangeDetectorRef,
@@ -170,7 +172,7 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
   }
 
   select(res: NoticeIconSelect): void {
-    window.open(res.item.url);
+    this.injector.get(WINDOW).open(res.item.url);
     this.loadData();
   }
 

@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Injector, OnInit } from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
 import { CacheService } from '@yelon/cache';
-import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
+import { WINDOW, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
 
 import { mergeConfig } from '../../../bis.config';
 
@@ -46,6 +46,7 @@ export class YzHeaderUserComponent implements OnInit {
   private config: YunzaiBusinessConfig;
 
   constructor(
+    private injector: Injector,
     private msg: NzMessageService,
     @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
     // @ts-ignore
@@ -72,12 +73,12 @@ export class YzHeaderUserComponent implements OnInit {
   logout(): void {
     localStorage.clear();
     this.tokenService.clear();
-    window.location.href = `${this.config.baseUrl}/cas/app/logout`;
+    this.injector.get(WINDOW).location.href = `${this.config.baseUrl}/cas/app/logout`;
   }
 
   to(href: string): void {
     if (href) {
-      window.open(href);
+      this.injector.get(WINDOW).open(href);
     } else {
       this.msg.error('该菜单没有配置链接!');
     }

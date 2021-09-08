@@ -9,6 +9,7 @@ import {
   HttpResponseBase
 } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, filter, mergeMap, switchMap, take } from 'rxjs/operators';
 
@@ -16,6 +17,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
+import { WINDOW } from '@yelon/util';
 import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
 
@@ -63,6 +65,10 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     return mergeConfig(this.injector.get(YunzaiConfigService));
   }
 
+  private goTo(url: string): void {
+    setTimeout(() => this.injector.get(Router).navigateByUrl(url));
+  }
+
   constructor(private injector: Injector) {
     if (this.config.refreshTokenType === 'auth-refresh') {
       console.error("can't use auth-refresh, please change yz.default.interceptor to default.interceptor!");
@@ -85,7 +91,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     this.notification.error(`未登录或登录状态已过期，5秒后将跳转到登录页面。`, ``);
     setTimeout(() => {
       localStorage.clear();
-      window.location.reload();
+      this.injector.get(WINDOW).location.reload();
     }, 5000);
   }
 
@@ -102,7 +108,8 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     const model = this.tokenSrv.get();
     const form = new FormData();
     form.set('refresh_token', model?.refreshToken);
-    return this.http.post(`/auth/user/token/refresh/token?_allow_anonymous=true`, form);
+    log('yz.default.interceptor: use the refresh token to request a new token', model?.refreshToken);
+    return this.http.post(`/auth/user/token/refresh?_allow_anonymous=true`, form);
   }
 
   private tryRefreshToken(ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandler): Observable<any> {
@@ -128,11 +135,19 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     // 处理Token
     return this.refreshTokenRequest().pipe(
       switchMap(res => {
+        log('yz.default.interceptor: refresh token accessed -> ', res);
+        // 重新保存新 token
+        const { access_token, expires_in, refresh_token, scope, token_type } = res;
+        this.tokenSrv.set({
+          token: access_token,
+          expired: expires_in,
+          refreshToken: refresh_token,
+          tokenType: token_type,
+          scope
+        });
         // 通知后续请求继续执行
         this.refreshToking = false;
         this.refreshToken$.next(res);
-        // 重新保存新 token
-        this.tokenSrv.set(res);
         // 重新发起请求
         return next.handle(this.reAttachToken(req));
       }),
@@ -167,6 +182,8 @@ export class YzDefaultInterceptor implements HttpInterceptor {
       case 403:
       case 404:
       case 500:
+        this.goTo(`/exception/${ev.status}`);
+        break;
       default:
         if (ev instanceof HttpErrorResponse) {
           console.warn(

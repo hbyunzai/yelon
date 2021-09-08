@@ -10,10 +10,6 @@ import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
   template: `
     <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="contentTpl">
       <layout-default-header-item direction="left">
-        <a layout-default-header-item-trigger>&nbsp; 应用与服务 &nbsp;</a>
-      </layout-default-header-item>
-
-      <layout-default-header-item direction="left">
         <yz-header-application></yz-header-application>
       </layout-default-header-item>
 
@@ -89,8 +85,8 @@ export class YzLayoutBasicComponent implements OnInit {
   ngOnInit(): void {
     const current: NzSafeAny = this.cacheService.get('_yz_current', { mode: 'none' });
     const project: NzSafeAny = this.cacheService.get('_yz_project_info', { mode: 'none' });
-    this.text = current.text ? current.text : '应用';
-    this.intro = current.intro ? current.intro : '描述';
+    this.text = current.text ? current.text : '应用名称';
+    this.intro = current.intro ? current.intro : '应用描述';
     this.icon = current.icon ? current.icon : `./assets/tmp/img/avatar.jpg`;
     this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : `./assets/logo-full.svg`;
     this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : `./assets/logo.svg`;

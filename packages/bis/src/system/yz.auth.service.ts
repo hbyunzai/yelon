@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import { Injectable, Injector } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, mergeAll, mergeMap } from 'rxjs/operators';
@@ -8,7 +7,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ITokenModel, ITokenService, mergeConfig as mergeAuthConfig, YA_SERVICE_TOKEN } from '@yelon/auth';
 import { CacheService } from '@yelon/cache';
 import { _HttpClient } from '@yelon/theme';
-import { YunzaiAuthConfig, YunzaiBusinessConfig } from '@yelon/util';
+import { WINDOW, YunzaiAuthConfig, YunzaiBusinessConfig } from '@yelon/util';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
 
@@ -71,16 +70,23 @@ export class YzAuthService {
 
   fetchTokenByCas(): Observable<ITokenModel> {
     log('yz.auth.service: ', 'fetchTokenByCas');
-    const uri = encodeURIComponent(this.injector.get(DOCUMENT).location.href);
+    const uri = encodeURIComponent(this.injector.get(WINDOW).location.href);
     return this.httpClient
       .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
       .pipe(
         map((response: NzSafeAny) => {
           switch (response.errcode) {
             case 2000:
-              return response.data as ITokenModel;
+              const { access_token, expires_in, refresh_token, scope, token_type } = response.data;
+              return {
+                token: access_token,
+                expired: expires_in,
+                refreshToken: refresh_token,
+                tokenType: token_type,
+                scope
+              } as ITokenModel;
             case 2001:
-              this.injector.get(DOCUMENT).location.href = response.msg;
+              this.injector.get(WINDOW).location.href = response.msg;
               throw Error("Cookie Error: Can't find Cas Cookie,So jump to login!");
             default:
               if (response.data) {

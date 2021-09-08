@@ -5,6 +5,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -49,5 +50,6 @@ export const SHARED_ZORRO_MODULES = [
   NzToolTipModule,
   NzIconModule,
   NzCheckboxModule,
-  NzSpinModule
+  NzSpinModule,
+  NzDividerModule
 ];
