@@ -37,6 +37,7 @@ export const ZHCN = {
   'app.header.menu.util': '@yelon/util-工具集',
   'app.header.menu.form': '@yelon/form-动态表单',
   'app.header.menu.theme': '@yelon/theme-主题系统',
+  'app.header.menu.bis': '@yelon/bis-云在业务',
   'app.header.menu.form.validator': '在线校验器',
   'app.header.menu.cli': 'Cli',
   'app.header.menu.tool': '工具',
