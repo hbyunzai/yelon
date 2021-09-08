@@ -29,7 +29,7 @@ export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile: boolean;
   // start from 12.x
-  oldVersionList = ['12.0.4'];
+  oldVersionList = ['12.0.5'];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string }> = [
     { name: 'theme' },
@@ -40,7 +40,8 @@ export class HeaderComponent implements AfterViewInit {
     { name: 'chart' },
     { name: 'mock' },
     { name: 'util' },
-    { name: 'cli' }
+    { name: 'cli' },
+    { name: 'bis' }
   ];
   menuVisible = false;
   showGitee = false;
@@ -48,7 +49,7 @@ export class HeaderComponent implements AfterViewInit {
     docs: { regex: /^\/docs/ },
     components: { regex: /^\/components/ },
     cli: { regex: /^\/cli/ },
-    yelon: { regex: /^\/(theme|auth|acl|form|cache|chart|mock|util)/ }
+    yelon: { regex: /^\/(theme|auth|acl|form|cache|chart|mock|util|bis)/ }
   };
 
   private getWin(): Window {
