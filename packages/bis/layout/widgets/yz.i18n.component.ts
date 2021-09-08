@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core
 import { YUNZAI_I18N_TOKEN, SettingsService } from '@yelon/theme';
 import { BooleanInput, InputBoolean } from '@yelon/util/decorator';
 
-import { YzI18NService } from '../../yz.i18n.service';
+import { YzI18NService } from '../yz.i18n.service';
 
 @Component({
   selector: 'yz-header-i18n',

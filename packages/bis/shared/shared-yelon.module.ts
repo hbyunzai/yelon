@@ -4,4 +4,4 @@ import { SEModule } from '@yelon/abc/se';
 import { STModule } from '@yelon/abc/st';
 import { SVModule } from '@yelon/abc/sv';
 
-export const SHARED_YELON_MODULES = [PageHeaderModule, STModule, SEModule, SVModule, ResultModule];
+export const YZ_SHARED_YELON_MODULES = [PageHeaderModule, STModule, SEModule, SVModule, ResultModule];

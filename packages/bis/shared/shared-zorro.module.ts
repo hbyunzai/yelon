@@ -25,7 +25,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
-export const SHARED_ZORRO_MODULES = [
+export const YZ_SHARED_ZORRO_MODULES = [
   NzAutocompleteModule,
   NzBadgeModule,
   NzMessageModule,

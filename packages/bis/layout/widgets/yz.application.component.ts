@@ -5,7 +5,7 @@ import { CacheService } from '@yelon/cache';
 import { _HttpClient } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
 
-import { YzI18NService } from '../../yz.i18n.service';
+import { YzI18NService } from '../yz.i18n.service';
 
 export enum TOPIC {
   FULL,
@@ -71,7 +71,7 @@ export interface HeaderTopic {
     <!--      button end-->
 
     <!--      header start-->
-    <div class="yz-application" nz-row *ngIf="active" (mouseleave)="diffChange(false)">
+    <div class="yz-application" nz-row *ngIf="active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
         <div class="yz-application-text" (click)="full()">全部应用</div>
         <div class="yz-application-text" (click)="own()">我的应用</div>
@@ -104,7 +104,6 @@ export interface HeaderTopic {
     </div>
     <!--      header end-->
   `,
-  styleUrls: ['yz.application.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YzHeaderApplicationComponent implements OnInit, OnDestroy {

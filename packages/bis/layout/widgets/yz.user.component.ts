@@ -3,10 +3,9 @@ import { ChangeDetectionStrategy, Component, Inject, Injector, OnInit } from '@a
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
+import { mergeConfig } from '@yelon/bis/shared';
 import { CacheService } from '@yelon/cache';
 import { WINDOW, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
-
-import { mergeConfig } from '../../../bis.config';
 
 export interface UserLink {
   icon: string;

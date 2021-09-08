@@ -16,12 +16,11 @@ import { catchError, filter, mergeMap, switchMap, take } from 'rxjs/operators';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
+import { mergeConfig } from '@yelon/bis/shared';
 import { YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
 import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
-
-import { mergeConfig } from '../bis.config';
 
 const CODEMESSAGE: { [key: number]: string } = {
   200: '服务器成功返回请求的数据。',
