@@ -13,6 +13,23 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [12.0.6](https://github.com/hbyunzai/yelon/compare/12.0.5...12.0.6) (2021-09-08)
+
+
+### Bug Fixes
+
+* **all:** fix version scripts ([5a003eb](https://github.com/hbyunzai/yelon/commit/5a003eb2c8a92f895cae618ec1d4b95d23e6c504))
+* **schematics:** fix @yelon/bis package version ([1ce3108](https://github.com/hbyunzai/yelon/commit/1ce3108ad44345bffb3c25102e53113a950a7845))
+
+
+### Features
+
+* **all:** up ng-yunzai-plugin-theme version ([3d832be](https://github.com/hbyunzai/yelon/commit/3d832bef6689a0c9f640099f2f77ffd0719dba1d))
+* **bis:** add business module and add some theme less ([cc6383e](https://github.com/hbyunzai/yelon/commit/cc6383e381d9fd682218e7ecd935c307c77cb6b5))
+* **i18n:** add app.header.menu.bis ([dc972b3](https://github.com/hbyunzai/yelon/commit/dc972b3f8349be97c67bc4960ca0addfce943032))
+
+
+
 ## [12.0.5](https://github.com/hbyunzai/yelon/compare/12.0.4...12.0.5) (2021-09-03)
 
 
