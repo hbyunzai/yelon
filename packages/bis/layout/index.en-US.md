@@ -1,9 +1,7 @@
 ---
-type: SHAR
-title: se
-subtitle: Edit
-cols: 1
-order: 3
-module: import { SEModule } from '@yelon/abc/se';
+type: Documents
+title: layout with header
+order: 2
 ---
 
+layout

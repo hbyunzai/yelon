@@ -25,6 +25,7 @@ import { SGModule } from '@yelon/abc/sg';
 import { STModule } from '@yelon/abc/st';
 import { SVModule } from '@yelon/abc/sv';
 import { TagSelectModule } from '@yelon/abc/tag-select';
+import { YunzaiLayoutModule } from '@yelon/bis/layout';
 import { G2BarModule } from '@yelon/chart/bar';
 import { G2CardModule } from '@yelon/chart/card';
 import { ChartEChartsModule } from '@yelon/chart/chart-echarts';
@@ -46,6 +47,7 @@ import { ThemeBtnModule } from '@yelon/theme/theme-btn';
 import { CurrencyPipeModule, FilterPipeModule, FormatPipeModule } from '@yelon/util/pipes';
 
 export const SHARED_YELON_MODULES = [
+  YunzaiLayoutModule,
   AvatarListModule,
   CountDownModule,
   DatePickerModule,

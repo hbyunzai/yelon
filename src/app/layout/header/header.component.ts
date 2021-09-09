@@ -40,8 +40,8 @@ export class HeaderComponent implements AfterViewInit {
     { name: 'chart' },
     { name: 'mock' },
     { name: 'util' },
-    { name: 'cli' },
-    { name: 'bis' }
+    { name: 'bis' },
+    { name: 'cli' }
   ];
   menuVisible = false;
   showGitee = false;

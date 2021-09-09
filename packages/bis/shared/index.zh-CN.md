@@ -1,9 +1,7 @@
 ---
-type: CURD
-title: se
-subtitle: 编辑
-cols: 1
+type: Documents
+title: 工具模块
 order: 3
-module: import { SEModule } from '@yelon/abc/se';
 ---
 
+utils

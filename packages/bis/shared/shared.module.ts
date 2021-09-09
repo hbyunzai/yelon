@@ -1,13 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Type } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
-
-import { YelonACLModule } from '@yelon/acl';
-import { YelonFormModule } from '@yelon/form';
 
 import { YZ_SHARED_YELON_MODULES } from './shared-yelon.module';
 import { YZ_SHARED_ZORRO_MODULES } from './shared-zorro.module';
@@ -16,36 +7,8 @@ const COMPONENTS: Array<Type<void>> = [];
 const DIRECTIVES: Array<Type<void>> = [];
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    YelonACLModule,
-    YelonFormModule,
-    ...YZ_SHARED_YELON_MODULES,
-    ...YZ_SHARED_ZORRO_MODULES,
-    ...THIRDMODULES
-  ],
+  imports: [...YZ_SHARED_YELON_MODULES, ...YZ_SHARED_ZORRO_MODULES, ...THIRDMODULES],
   declarations: [...COMPONENTS, ...DIRECTIVES],
-  exports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    YelonACLModule,
-    YelonFormModule,
-    ...YZ_SHARED_YELON_MODULES,
-    ...YZ_SHARED_ZORRO_MODULES,
-    ...THIRDMODULES,
-    ...COMPONENTS,
-    ...DIRECTIVES
-  ]
+  exports: [...YZ_SHARED_YELON_MODULES, ...YZ_SHARED_ZORRO_MODULES, ...THIRDMODULES, ...COMPONENTS, ...DIRECTIVES]
 })
 export class YzSharedModule {}

@@ -420,7 +420,7 @@ module.exports = {
           name: 'validator',
           route: '/form-pages/validator',
           i18n: false,
-          meta: { 'zh-CN': { type: 'Examples', title: '在线校验器' } },
+          meta: {'zh-CN': {type: 'Examples', title: '在线校验器'}},
         },
       ],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
@@ -530,6 +530,50 @@ module.exports = {
           hasSubDir: false,
         },
       ],
+    },
+    {
+      name: 'bis',
+      github: 'https://github.com/hbyunzai/yelon',
+      dist: './src/app/routes/gen/bis',
+      types: [
+        {
+          'zh-CN': '文档',
+          'en-US': 'Documents'
+        }
+      ],
+      module: '@yelon/bis',
+      defaultRoute: 'getting-started',
+      extraRouteMeta: [],
+      metaIncludeAttributes: ['name', 'types', 'github', 'module'],
+      template: {
+        meta: './src/templates/meta.ts',
+        module: './src/templates/module.ts',
+      },
+      dir: [
+        {
+          src: ['./packages/bis/docs'],
+          template: {
+            content: './src/templates/content.ts',
+          },
+          hasSubDir: false,
+        },
+        {
+          src: ['./packages/bis/layout'],
+          template: {
+            content: './src/templates/content.ts',
+          },
+          reName: 'layout',
+          hasSubDir: false,
+        },
+        {
+          src: ['./packages/bis/shared'],
+          template: {
+            content: './src/templates/content.ts',
+          },
+          reName: 'shared',
+          hasSubDir: false,
+        }
+      ]
     },
     {
       name: 'theme',

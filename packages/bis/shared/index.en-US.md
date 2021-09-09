@@ -1,9 +1,7 @@
 ---
-type: SHAR
-title: se
-subtitle: Edit
-cols: 1
+type: Documents
+title: util modules
 order: 3
-module: import { SEModule } from '@yelon/abc/se';
 ---
 
+utils

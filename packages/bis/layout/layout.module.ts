@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
-import { NoticeIconModule } from '@yelon/abc/notice-icon';
-import { ReuseTabModule } from '@yelon/abc/reuse-tab';
 import { YzSharedModule } from '@yelon/bis/shared';
-import { YunzaiThemeModule } from '@yelon/theme';
-import { LayoutDefaultModule } from '@yelon/theme/layout-default';
 import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
 
 import {
@@ -29,7 +29,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [YzSharedModule, YunzaiThemeModule, NoticeIconModule, ReuseTabModule, LayoutDefaultModule],
+  imports: [HttpClientModule, CommonModule, FormsModule, RouterModule, ReactiveFormsModule, YzSharedModule],
   providers: [
     {
       provide: YUNZAI_THEME_BTN_KEYS,
