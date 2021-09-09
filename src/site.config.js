@@ -532,50 +532,6 @@ module.exports = {
       ],
     },
     {
-      name: 'bis',
-      github: 'https://github.com/hbyunzai/yelon',
-      dist: './src/app/routes/gen/bis',
-      types: [
-        {
-          'zh-CN': '文档',
-          'en-US': 'Documents'
-        }
-      ],
-      module: '@yelon/bis',
-      defaultRoute: 'getting-started',
-      extraRouteMeta: [],
-      metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
-      },
-      dir: [
-        {
-          src: ['./packages/bis/docs'],
-          template: {
-            content: './src/templates/content.ts',
-          },
-          hasSubDir: false,
-        },
-        {
-          src: ['./packages/bis/layout'],
-          template: {
-            content: './src/templates/content.ts',
-          },
-          reName: 'layout',
-          hasSubDir: false,
-        },
-        {
-          src: ['./packages/bis/shared'],
-          template: {
-            content: './src/templates/content.ts',
-          },
-          reName: 'shared',
-          hasSubDir: false,
-        }
-      ]
-    },
-    {
       name: 'theme',
       github: 'https://github.com/hbyunzai/yelon',
       dist: './src/app/routes/gen/theme',
@@ -653,5 +609,57 @@ module.exports = {
         },
       ],
     },
+    {
+      name: 'bis',
+      github: 'https://github.com/hbyunzai/yelon',
+      dist: './src/app/routes/gen/bis',
+      types: [
+        {
+          'zh-CN': '文档',
+          'en-US': 'Documents',
+        },
+        {
+          'zh-CN': '工具类',
+          'en-US': 'Tools',
+        },
+        {
+          'zh-CN': '管道',
+          'en-US': 'Pipes',
+        },
+      ],
+      module: '@yelon/bis',
+      defaultRoute: 'getting-started',
+      extraRouteMeta: [],
+      metaIncludeAttributes: ['name', 'types', 'github', 'module'],
+      template: {
+        meta: './src/templates/meta.ts',
+        module: './src/templates/module.ts',
+      },
+      dir: [
+        {
+          src: ['./packages/bis/docs'],
+          template: {
+            content: './src/templates/content.ts',
+          },
+          hasSubDir: false,
+        },
+        {
+          src: ['./packages/bis/layout'],
+          template: {
+            content: './src/templates/content.ts',
+          },
+          reName: 'layout',
+          hasSubDir: false,
+        },
+        {
+          src: ['./packages/bis/shared'],
+          template: {
+            content: './src/templates/content.ts',
+          },
+          reName: 'shared',
+          hasSubDir: false,
+        }
+      ]
+    }
   ],
 };
