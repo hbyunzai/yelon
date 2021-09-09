@@ -43,9 +43,9 @@ export class HeaderSearchComponent implements AfterViewInit {
       const curHost = location.hostname;
       const isLocal = curHost.includes('localhost');
       docsearch({
-        // appId: '2WSH9IUML3',
-        apiKey: 'bbfcbbc490a225459cff351de58c201e',
-        indexName: 'yelon',
+        appId: 'M5FWUU1G0X',
+        apiKey: '2fa1e6f2c7ef5b6e15c62df3354bbb0f',
+        indexName: 'doc',
         inputSelector: '#search-box input',
         algoliaOptions: {
           hitsPerPage: 5,
