@@ -82,7 +82,7 @@ describe('auth: token.service', () => {
     service.change().subscribe(res => {
       if (!res) return;
       expect(res).not.toBeNull();
-      expect(res.token).toBe(VALUE.token);
+      expect(service.get()?.token).toBe(VALUE.token);
       done();
     });
     service.set(VALUE);
