@@ -4,9 +4,9 @@ title: Getting Started
 type: Documents
 ---
 
-`ng-yunzai` provides a basic self-running front-end architecture. In order not to destroy this runnable state, we provide a non-intrusive third-party module configuration method to complete the `cloud in` own business
+`ng-yunzai` provides a basic self-running front-end architecture. In order not to destroy this runnable state, we provide a non-intrusive third-party module configuration method to complete the `Yunzai` own business
 
-In order to achieve the `cloud-in mode`, you can manually configure `[generated project](/docs/getting-started) through the following document
+In order to achieve the `Yunzai mode`, you can manually configure `[generated project](/docs/getting-started) through the following document
 
 ## Business involved
 
