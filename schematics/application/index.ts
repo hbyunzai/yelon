@@ -1,4 +1,3 @@
-import { Spinner } from '@angular-devkit/build-angular/src/utils/spinner';
 import { JsonObject, strings } from '@angular-devkit/core';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import {
@@ -15,7 +14,6 @@ import {
   Tree,
   url
 } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
 import { getLangData } from '../core/lang.config';
@@ -43,7 +41,6 @@ import { addESLintRule, UpgradeMainVersions } from '../utils/versions';
 import { Schema as ApplicationOptions } from './schema';
 
 let project: ProjectDefinition;
-const spinner = new Spinner();
 
 /** Remove files to be overwrite */
 function removeOrginalFiles(): Rule {
@@ -224,12 +221,12 @@ function addStyle(): Rule {
     addHeadStyle(
       tree,
       project,
-      `  <style type='text/css'>.preloader{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;background:#49a9ee;z-index:9999;transition:opacity .65s}.preloader-hidden-add{opacity:1;display:block}.preloader-hidden-add-active{opacity:0}.preloader-hidden{display:none}.cs-loader{position:absolute;top:0;left:0;height:100%;width:100%}.cs-loader-inner{transform:translateY(-50%);top:50%;position:absolute;width:100%;color:#fff;text-align:center}.cs-loader-inner label{font-size:20px;opacity:0;display:inline-block}@keyframes lol{0%{opacity:0;transform:translateX(-300px)}33%{opacity:1;transform:translateX(0)}66%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(300px)}}.cs-loader-inner label:nth-child(6){animation:lol 3s infinite ease-in-out}.cs-loader-inner label:nth-child(5){animation:lol 3s .1s infinite ease-in-out}.cs-loader-inner label:nth-child(4){animation:lol 3s .2s infinite ease-in-out}.cs-loader-inner label:nth-child(3){animation:lol 3s .3s infinite ease-in-out}.cs-loader-inner label:nth-child(2){animation:lol 3s .4s infinite ease-in-out}.cs-loader-inner label:nth-child(1){animation:lol 3s .5s infinite ease-in-out}</style>`
+      `  <style type="text/css">.preloader{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;background:#49a9ee;z-index:9999;transition:opacity .65s}.preloader-hidden-add{opacity:1;display:block}.preloader-hidden-add-active{opacity:0}.preloader-hidden{display:none}.cs-loader{position:absolute;top:0;left:0;height:100%;width:100%}.cs-loader-inner{transform:translateY(-50%);top:50%;position:absolute;width:100%;color:#fff;text-align:center}.cs-loader-inner label{font-size:20px;opacity:0;display:inline-block}@keyframes lol{0%{opacity:0;transform:translateX(-300px)}33%{opacity:1;transform:translateX(0)}66%{opacity:1;transform:translateX(0)}100%{opacity:0;transform:translateX(300px)}}.cs-loader-inner label:nth-child(6){animation:lol 3s infinite ease-in-out}.cs-loader-inner label:nth-child(5){animation:lol 3s .1s infinite ease-in-out}.cs-loader-inner label:nth-child(4){animation:lol 3s .2s infinite ease-in-out}.cs-loader-inner label:nth-child(3){animation:lol 3s .3s infinite ease-in-out}.cs-loader-inner label:nth-child(2){animation:lol 3s .4s infinite ease-in-out}.cs-loader-inner label:nth-child(1){animation:lol 3s .5s infinite ease-in-out}</style>`
     );
     addHtmlToBody(
       tree,
       project,
-      `  <div class='preloader'><div class='cs-loader'><div class='cs-loader-inner'><label>	●</label><label>	●</label><label>	●</label><label>	●</label><label>	●</label><label>	●</label></div></div></div>\n`
+      `  <div class="preloader"><div class="cs-loader"><div class="cs-loader-inner"><label>	●</label><label>	●</label><label>	●</label><label>	●</label><label>	●</label><label>	●</label></div></div></div>\n`
     );
     // // add styles
     // [`${project.sourceRoot}/styles/index.less`, `${project.sourceRoot}/styles/theme.less`].forEach(p => {
@@ -275,12 +272,12 @@ function addFilesToRoot(options: ApplicationOptions): Rule {
 }
 
 function fixLang(options: ApplicationOptions): Rule {
-  return (tree: Tree) => {
+  return (tree: Tree, context: SchematicContext) => {
     if (options.i18n) return;
     const langs = getLangData(options.defaultLanguage!);
     if (!langs) return;
 
-    spinner.text = `Translating template into ${options.defaultLanguage} language, please wait...`;
+    context.logger.info(`Translating template into ${options.defaultLanguage} language, please wait...`);
 
     tree.visit(p => {
       if (~p.indexOf(`/node_modules/`)) return;
@@ -321,9 +318,9 @@ function fixLangInHtml(tree: Tree, p: string, langs: {}): void {
     return langs[key] || key;
   });
   // removed `header-i18n`
-  if (~html.indexOf(`<header-i18n [showLang]='false' class='langs'></header-i18n>`)) {
+  if (~html.indexOf(`<header-i18n [showLang]="false" class="langs"></header-i18n>`)) {
     ++matchCount;
-    html = html.replace(`<header-i18n [showLang]='false' class='langs'></header-i18n>`, ``);
+    html = html.replace(`<header-i18n [showLang]="false" class="langs"></header-i18n>`, ``);
   }
   if (matchCount > 0) {
     tree.overwrite(p, html);
@@ -343,39 +340,31 @@ function fixVsCode(): Rule {
   };
 }
 
-function install(): Rule {
-  return (_host: Tree, context: SchematicContext) => {
-    context.addTask(new NodePackageInstallTask());
-  };
-}
-
-function finished(): Rule {
-  return () => {
-    spinner.succeed(`Congratulations, NG-YUNZAI scaffold generation complete.`);
-  };
-}
-
 export default function (options: ApplicationOptions): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     project = (await getProject(tree, options.project)).project;
-    spinner.start(`Generating NG-YUNZAI scaffold...`);
+    context.logger.info(`Generating NG-YUNZAI scaffold...`);
     return chain([
+      // @yelon/* dependencies
       addDependenciesToPackageJson(options),
+      // Configuring CommonJS dependencies
+      // https://angular.io/guide/build#configuring-commonjs-dependencies
       addAllowedCommonJsDependencies([]),
+      // ci
       addRunScriptToPackageJson(),
       addPathsToTsConfig(),
+      // code style
       addCodeStylesToPackageJson(),
       addSchematics(options),
       addESLintRule(context, false),
+      // files
       removeOrginalFiles(),
       addFilesToRoot(options),
       forceLess(),
       addStyle(),
       fixLang(options),
-      // fixVsCode(),
-      fixAngularJson(options),
-      install(),
-      finished()
+      fixVsCode(),
+      fixAngularJson(options)
     ]);
   };
 }
