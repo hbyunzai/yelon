@@ -618,14 +618,6 @@ module.exports = {
           'zh-CN': '文档',
           'en-US': 'Documents',
         },
-        {
-          'zh-CN': '工具类',
-          'en-US': 'Tools',
-        },
-        {
-          'zh-CN': '管道',
-          'en-US': 'Pipes',
-        },
       ],
       module: '@yelon/bis',
       defaultRoute: 'getting-started',
@@ -644,20 +636,12 @@ module.exports = {
           hasSubDir: false,
         },
         {
-          src: ['./packages/bis/layout'],
+          src: ['./packages/bis'],
           template: {
             content: './src/templates/content.ts',
           },
-          reName: 'layout',
-          hasSubDir: false,
-        },
-        {
-          src: ['./packages/bis/shared'],
-          template: {
-            content: './src/templates/content.ts',
-          },
-          reName: 'shared',
-          hasSubDir: false,
+          ignores: ['docs'],
+          hasSubDir: true,
         }
       ]
     }

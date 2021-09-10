@@ -6,6 +6,7 @@ import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { Meta, MetaList, MetaSearchGroup, MetaSearchGroupItem } from '../interfaces';
 import { META as ACLMeta } from '../routes/gen/acl/meta';
 import { META as AuthMeta } from '../routes/gen/auth/meta';
+import { META as BisMeta } from '../routes/gen/bis/meta';
 import { META as CacheMeta } from '../routes/gen/cache/meta';
 import { META as ChartMeta } from '../routes/gen/chart/meta';
 import { META as CliMeta } from '../routes/gen/cli/meta';
@@ -28,7 +29,8 @@ const FULLMETAS = [
   UtilMeta,
   FormMeta,
   CliMeta,
-  ThemeMeta
+  ThemeMeta,
+  BisMeta
 ] as Meta[];
 
 @Injectable({ providedIn: 'root' })
