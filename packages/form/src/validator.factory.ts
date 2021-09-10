@@ -1,6 +1,6 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
 
-import Ajv, { Options as AjvOptions } from 'ajv';
+import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -32,7 +32,7 @@ export class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
       return;
     }
     this.options = mergeConfig(cogSrv);
-    const customOptions: AjvOptions = this.options.ajv || {};
+    const customOptions = this.options.ajv || {};
     this.ngZone.runOutsideAngular(() => {
       this.ajv = new Ajv({
         allErrors: true,
