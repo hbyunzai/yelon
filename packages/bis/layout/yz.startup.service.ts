@@ -19,6 +19,7 @@ export function mapYzSideToYelonMenu(menus: Menu[]) {
     menu.badgeDot = menu.badge_dot || null;
     menu.badgeStatus = menu.badge_status || null;
     menu.shortcutRoot = menu.shortcut_root || null;
+    menu.reuse = true;
     if (menu.children) {
       mapYzSideToYelonMenu(menu.children);
     }
@@ -97,7 +98,7 @@ export class YzStartupService {
     const ms = deepCopy(user.menu).filter((m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode) as Menu[];
     mapYzSideToYelonMenu(ms);
     const currentMenu = ms.pop()!;
-    this.menuService.add(currentMenu.children!);
+    this.menuService.add([currentMenu]);
 
     // logo app
     this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
