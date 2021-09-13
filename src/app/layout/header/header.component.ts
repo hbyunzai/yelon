@@ -29,7 +29,7 @@ export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile: boolean;
   // start from 12.x
-  oldVersionList = ['12.0.5'];
+  oldVersionList = ['12.0.6'];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string }> = [
     { name: 'theme' },
