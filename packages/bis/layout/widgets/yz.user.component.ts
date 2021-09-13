@@ -72,7 +72,7 @@ export class YzHeaderUserComponent implements OnInit {
   logout(): void {
     localStorage.clear();
     this.tokenService.clear();
-    this.injector.get(WINDOW).location.href = `${this.config.baseUrl}/cas/app/logout`;
+    this.injector.get(WINDOW).location.href = `${this.config.baseUrl}/cas-proxy/app/logout`;
   }
 
   to(href: string): void {

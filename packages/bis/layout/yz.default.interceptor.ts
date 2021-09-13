@@ -90,7 +90,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     this.notification.error(`未登录或登录状态已过期，5秒后将跳转到登录页面。`, ``);
     setTimeout(() => {
       localStorage.clear();
-      this.injector.get(WINDOW).location.reload();
+      this.injector.get(WINDOW).location.href = `${this.config.baseUrl}/cas-proxy/app/logout`;
     }, 5000);
   }
 
