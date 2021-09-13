@@ -1,3 +1,23 @@
+## [12.0.7](https://github.com/hbyunzai/yelon/compare/12.0.6...12.0.7) (2021-09-13)
+
+
+### Bug Fixes
+
+* **abc:reuse-tab:** fix adding new tab should be after the current ([e4fd2de](https://github.com/hbyunzai/yelon/commit/e4fd2de36e9fea01c04c26deb602aa773962c38e))
+* **abc:st:** fix `#NULL!` value when empty value and `type` is `date` ([ab31036](https://github.com/hbyunzai/yelon/commit/ab31036b177eda8f4255a8a07820cbdef4b4f9e4))
+* **abc:st:** fix between sorts space of resizable handle ([f020f0d](https://github.com/hbyunzai/yelon/commit/f020f0d3ed49dfd26e2c5b5361b9ee456ef46684))
+* **auth:** fix ensure `change` event and `get()` have consistent results ([5f52d97](https://github.com/hbyunzai/yelon/commit/5f52d97332d0777bd9f8574ce02abd1a6a8a012d))
+* **bis:auth:** fix yunzai auth logout and 401 error ([86b440a](https://github.com/hbyunzai/yelon/commit/86b440a2af3b89018bc0f92efe42b8c7dc2b9710))
+* **bis:** fix bis theme less imported ([a3e07fd](https://github.com/hbyunzai/yelon/commit/a3e07fd1bb5541817c44ac562b175de30f9c1ec7))
+* **cli:tpl:** fix incorrect arguments index of schema.json ([d4efdfb](https://github.com/hbyunzai/yelon/commit/d4efdfbe340602593ae16b80cf6920724c2c2355))
+* **cli:tpl:** fix lose `tplName` property of `schema.json` ([6dd4ad6](https://github.com/hbyunzai/yelon/commit/6dd4ad6d7a454b3c040b9925541d1d33312a92c5))
+* **doc:** fix version list ([bfb8b43](https://github.com/hbyunzai/yelon/commit/bfb8b43ba502b6f84ebc2809844ba0513309ac5d))
+* **form:** add `widget` index sign ([2243985](https://github.com/hbyunzai/yelon/commit/22439855f20d509054f49a253de239bbd095e135))
+* **search:** fix algolia ([692b8e4](https://github.com/hbyunzai/yelon/commit/692b8e43907c8ed9a13681c4164d0b840ab90933))
+* **util:format:** fix invalid mobile number starting with 198 ([216922f](https://github.com/hbyunzai/yelon/commit/216922f99c999c6a88f5df10b5d17f82de584aeb))
+
+
+
 ## [12.0.6](https://github.com/hbyunzai/yelon/compare/12.0.5...12.0.6) (2021-09-08)
 
 
