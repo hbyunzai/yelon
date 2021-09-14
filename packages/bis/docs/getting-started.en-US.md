@@ -17,4 +17,3 @@ The current business involves
 2. [Yunzai Authority Control](/bis/acl)
 3. [Yunzai Interceptor](/bis/interceotpr)
 4. [Yunzai Layout](/bis/layout)
-5. [Yunzai Sharing](/bis/shared)

@@ -19,4 +19,3 @@ type: Documents
 2. [云在权限控制](/bis/acl)
 3. [云在拦截器](/bis/interceotpr)
 4. [云在布局](/bis/layout)
-5. [云在共享](/bis/shared)
