@@ -206,7 +206,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = this.config.baseUrl + url;
     }
-    if (url.includes('.json')) {
+    if (url.includes('.json') && url.includes('assets')) {
       url = req.url;
     }
     // 加入语言头

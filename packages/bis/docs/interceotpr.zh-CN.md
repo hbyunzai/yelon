@@ -32,24 +32,31 @@ class HttpAuthInterceptorHandler implements HttpHandler {
   }
 }
 
+// 抽象class，继承抽象类必须实现其抽象function
 @Injectable()
 export abstract class BaseInterceptor implements HttpInterceptor {
   constructor(@Optional() protected injector: Injector) {}
 
   protected model: ITokenModel;
 
+  // 是否认证过了
   abstract isAuth(options: YunzaiAuthConfig): boolean;
 
+  // 设置请求
   abstract setReq(req: HttpRequest<NzSafeAny>, options: YunzaiAuthConfig): HttpRequest<NzSafeAny>;
 
   intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
+    // 获取全局的auth配置  
     const options = mergeConfig(this.injector.get(YunzaiConfigService));
+    // 忽略列表,不需要混入Token就可以请求的
     if (Array.isArray(options.ignores)) {
       for (const item of options.ignores) {
         if (item.test(req.url)) return next.handle(req);
       }
     }
 
+    // 除了忽略列表,还提供了请求路径加入allow_anonymous_key参数的方式
+    // url中含有allow_anonymous_key的,不需要混入Token
     const ignoreKey = options.allow_anonymous_key!;
     let ignored = false;
     let params = req.params;
@@ -70,12 +77,14 @@ export abstract class BaseInterceptor implements HttpInterceptor {
     if (ignored) {
       return next.handle(req.clone({ params, url }));
     }
-
+    // 剩下的请求就为常规请求，需要做认证，添加Token
     if (this.isAuth(options)) {
+      // 通过认证，进入子class 使用其提供的setReq function 设置请求
       req = this.setReq(req, options);
     } else {
+      // 没有通过认证的,跳入login,是否跳页面在ToLogin内部含有判断
       ToLogin(options, this.injector);
-      // Interrupt Http request, so need to generate a new Observable
+      // 如果没有跳那么构建一个error response
       const err$ = new Observable((observer: Observer<HttpEvent<NzSafeAny>>) => {
         const res = new HttpErrorResponse({
           url: req.url,
@@ -85,16 +94,21 @@ export abstract class BaseInterceptor implements HttpInterceptor {
         });
         observer.error(res);
       });
+      // 是否过一下其他的拦截器
       if (options.executeOtherInterceptors) {
+        // 注入拦截器集合
         const interceptors = this.injector.get(HTTP_INTERCEPTORS, []);
+        // 找到本拦截器位置，然后提取没有调过的拦截器集合
         const lastInterceptors = interceptors.slice(interceptors.indexOf(this) + 1);
         if (lastInterceptors.length > 0) {
+          // 后向前调用拦截器
           const chain = lastInterceptors.reduceRight(
             (_next, _interceptor) => new HttpAuthInterceptorHandler(_next, _interceptor),
             {
               handle: (_: HttpRequest<NzSafeAny>) => err$
             }
           );
+          //  
           return chain.handle(req);
         }
       }
@@ -109,14 +123,19 @@ export abstract class BaseInterceptor implements HttpInterceptor {
 
 ## SimpleInterceptor
 
+`SimpleInterceptor`继承自`BaseInterceptor`实现了`setReq`,`isAuth`两个函数,是一个常规的`Token`处理拦截器,主要功能是混入`token`
+
 ```ts
 @Injectable()
 export class SimpleInterceptor extends BaseInterceptor {
+    
+  // 判断是否存在Token来确定是否通过认证了
   isAuth(_options: YunzaiAuthConfig): boolean {
     this.model = this.injector.get(YA_SERVICE_TOKEN).get() as SimpleTokenModel;
     return CheckSimple(this.model as SimpleTokenModel);
   }
 
+  // 通过global的配置确定token混入到header/body/url三种地方,以及key是什么,value模版是什么
   setReq(req: HttpRequest<NzSafeAny>, options: YunzaiAuthConfig): HttpRequest<NzSafeAny> {
     const { token_send_template, token_send_key } = options;
     const token = token_send_template!.replace(/\$\{([\w]+)\}/g, (_: string, g) => this.model[g]);
@@ -201,6 +220,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     }
   }
 
+  // 错误提示
   private checkStatus(ev: HttpResponseBase): void {
     if ((ev.status >= 200 && ev.status < 300) || ev.status === 401) {
       return;
@@ -213,14 +233,18 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     this.notification.error(`请求错误 ${ev.status}: ${ev.url}`, errortext);
   }
 
+  // 重新登录
   private ToLogin() {
     this.notification.error(`未登录或登录状态已过期，5秒后将跳转到登录页面。`, ``);
     setTimeout(() => {
+      // 清空缓存
       localStorage.clear();
+      // CAS注销
       this.injector.get(WINDOW).location.href = `${this.config.baseUrl}/cas-proxy/app/logout`;
     }, 5000);
   }
 
+  // 重新在请求头里加入Token
   private reAttachToken(req: HttpRequest<any>): HttpRequest<any> {
     const token = this.tokenSrv.get()?.token;
     return req.clone({
@@ -285,6 +309,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     );
   }
 
+  // 设置语言头
   private getAdditionalHeaders(headers?: HttpHeaders): { [name: string]: string } {
     const res: { [name: string]: string } = {};
     const lang = this.injector.get(YUNZAI_I18N_TOKEN).currentLang;
@@ -294,13 +319,16 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     return res;
   }
 
+  // 对不同的返回值结果进行处理
   private handleData(ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     this.checkStatus(ev);
     switch (ev.status) {
       case 200:
         return of(ev);
       case 401:
+        // 401表示token无效
         if (this.config.refreshTokenEnabled && this.config.refreshTokenType === 're-request') {
+          // 尝试使用refreshToken来刷新一个Token
           return this.tryRefreshToken(ev, req, next);
         }
         this.ToLogin();
@@ -333,6 +361,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = this.config.baseUrl + url;
     }
+    // 假如请求 assets中的json，那么路径需要更换一下
     if (url.includes('.json')) {
       url = req.url;
     }
