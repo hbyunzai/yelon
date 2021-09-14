@@ -1,6 +1,6 @@
 ---
 order: 3
-title: Yunzai certification
+title: Yunzai Certification
 type: Documents
 ---
 
@@ -28,11 +28,11 @@ const APPINIT_PROVIDES = [
 ];
 ```
 
--1. After creating the project through scaffolding, there are the following lines in `app.modules.ts`
--2. You can understand `APPINIT_PROVIDES` as the flag of the project `initialization life cycle`.
--3. When this logo is used, the passed `Factory` will be called.
--4. `StartupServiceFactory` depends on the service of `StartupService`, so use `deps:[StartupService]` to introduce the dependency.
--5.`StartupServiceFactory` calls the `load` function in `Service` to enter the project initialization process.
+- 1.After creating the project through scaffolding, there are the following lines in `app.modules.ts`
+- 2.You can understand `APPINIT_PROVIDES` as the flag of the project `initialization life cycle`.
+- 3.When this logo is used, the passed `Factory` will be called.
+- 4.`StartupServiceFactory` depends on the service of `StartupService`, so use `deps:[StartupService]` to introduce the dependency.
+- 5.`StartupServiceFactory` calls the `load` function in `Service` to enter the project initialization process.
 
 
 ```ts
@@ -106,8 +106,8 @@ The initialization of the yunzai is located in `@yelon/bis`, and provides a set 
 })
 export class AppModule {}
 ```
--1. Delete the original initial configuration `APPINIT_PROVIDES`
--2. Directly reference the initial configuration of `YZ_APPINIT_PROVIDES` in `@yelon/bis` (the last parameter in the code array below)
+- 1.Delete the original initial configuration `APPINIT_PROVIDES`
+- 2.Directly reference the initial configuration of `YZ_APPINIT_PROVIDES` in `@yelon/bis` (the last parameter in the code array below)
 
 ## i18n initialization
 

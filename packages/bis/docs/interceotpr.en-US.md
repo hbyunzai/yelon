@@ -1,12 +1,12 @@
 ---
 order: 4 
-title: Yunzai interceptor
+title: Yunzai Interceptor
 type: Documents
 ---
 
--1. After initialization, you need to use an interceptor to implement the function of mixing `token` into
+- 1. After initialization, you need to use an interceptor to implement the function of mixing `token` into
 each `request header`
--2. The interceptor realizes unified handling of request errors -3. After using `YzStartupService`, you must pair
+- 2. The interceptor realizes unified handling of request errors -3. After using `YzStartupService`, you must pair
 with `YzDefaultInterceptor`
 
 ## How to use

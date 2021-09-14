@@ -4,12 +4,6 @@ title: Yunzai Configuration
 type: Documents
 ---
 
----
-order: 2
-title: Cloud is configuring
-type: Documents
----
-
 ## How to configure
 
 Usually, in order to distinguish between `local` and `production` modes, we put all the configuration into `environment.ts` and `environment.prod.ts`, so that when packaging, use the `--prod` parameter to decide which set of configuration files to use
