@@ -13,6 +13,16 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [12.0.8](https://github.com/hbyunzai/yelon/compare/12.0.7...12.0.8) (2021-09-14)
+
+
+### Bug Fixes
+
+* **bis:** fix i18n service ([e975603](https://github.com/hbyunzai/yelon/commit/e975603aa2c4bc7dfccd3c805331b9a38fbb789b))
+* **doc:** fix menu and routes tab ([22e6d58](https://github.com/hbyunzai/yelon/commit/22e6d58571c4f217e558829abc2182925403abe7))
+* **schematics:** add imgs into shell ([39e9056](https://github.com/hbyunzai/yelon/commit/39e90561ea63e453e1ac9bbfb3f70757721cf9e3))
+
+
 ## [12.0.7](https://github.com/hbyunzai/yelon/compare/12.0.6...12.0.7) (2021-09-13)
 
 
