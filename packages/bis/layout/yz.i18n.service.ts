@@ -1,3 +1,4 @@
+// 请参考：https://ng.yunzainfo.com/docs/i18n
 import { Platform } from '@angular/cdk/platform';
 import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
@@ -73,8 +74,7 @@ export class YzI18NService extends YunzaiI18nBaseService {
     private nzI18nService: NzI18nService,
     private yelonLocaleService: YelonLocaleService,
     private platform: Platform,
-    // @ts-ignore
-    private cogSrv: YunzaiConfigService
+    cogSrv: YunzaiConfigService
   ) {
     super(cogSrv);
 
@@ -91,11 +91,13 @@ export class YzI18NService extends YunzaiI18nBaseService {
     if (this.settings.layout.lang) {
       return this.settings.layout.lang;
     }
-    return (navigator.languages ? navigator.languages[0] : null) || navigator.language;
+    let res = (navigator.languages ? navigator.languages[0] : null) || navigator.language;
+    const arr = res.split('-');
+    return arr.length <= 1 ? res : `${arr[0]}-${arr[1].toUpperCase()}`;
   }
 
   loadLangData(lang: string): Observable<NzSafeAny> {
-    return this.http.get(`./assets/tmp/i18n/${lang}.json`);
+    return this.http.get(`assets/tmp/i18n/${lang}.json`);
   }
 
   use(lang: string, data: Record<string, string>): void {
