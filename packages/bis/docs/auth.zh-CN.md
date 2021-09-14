@@ -276,15 +276,14 @@ export class YzStartupService {
     // 设置权限点数
     const abilities: string[] = [];
     generateAbility([currentMenu], abilities, '');
-    this.aclService.add({
-      role:
-        user?.roles
-          .map((role: NzSafeAny) => {
-            return role.roleValue;
-          })
-          .filter((a: NzSafeAny) => !!a) || [],
-      ability: abilities
-    });
+    this.aclService.attachRole(
+      user?.roles
+        .map((role: NzSafeAny) => {
+          return role.roleValue;
+        })
+        .filter((a: NzSafeAny) => !!a) || []
+    );
+    this.aclService.attachAbility(abilities); 
 
     // 将当前系统信息设置到缓存中
     this.cacheService.set('_yz_current', {

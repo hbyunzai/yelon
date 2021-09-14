@@ -14,6 +14,7 @@ The current business involves
 
 0. [Yunzai Configuration](/bis/config)
 1. [Yunzai Authentication](/bis/auth)
-2. [Yunzai Interceptor](/bis/interceotpr)
-3. [Yunzai Layout](/bis/layout)
-4. [Yunzai Sharing](/bis/shared)
+2. [Yunzai Authority Control](/bis/acl)
+3. [Yunzai Interceptor](/bis/interceotpr)
+4. [Yunzai Layout](/bis/layout)
+5. [Yunzai Sharing](/bis/shared)

@@ -275,16 +275,15 @@ export class YzStartupService {
 
     // Set authority points
     const abilities: string[] = [];
-    generateAbility([currentMenu], abilities,'');
-    this.aclService.add({
-      role:
-        user?.roles
-          .map((role: NzSafeAny) => {
-            return role.roleValue;
-          })
-          .filter((a: NzSafeAny) => !!a) || [],
-      ability: abilities
-    });
+    generateAbility([currentMenu], abilities, '');
+    this.aclService.attachRole(
+      user?.roles
+        .map((role: NzSafeAny) => {
+          return role.roleValue;
+        })
+        .filter((a: NzSafeAny) => !!a) || []
+    );
+    this.aclService.attachAbility(abilities); 
 
     // Set the current system information to the cache
     this.cacheService.set('_yz_current', {

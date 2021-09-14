@@ -115,15 +115,14 @@ export class YzStartupService {
     // acl
     const abilities: string[] = [];
     generateAbility([currentMenu], abilities, '');
-    this.aclService.add({
-      role:
-        user?.roles
-          .map((role: NzSafeAny) => {
-            return role.roleValue;
-          })
-          .filter((a: NzSafeAny) => !!a) || [],
-      ability: abilities
-    });
+    this.aclService.attachRole(
+      user?.roles
+        .map((role: NzSafeAny) => {
+          return role.roleValue;
+        })
+        .filter((a: NzSafeAny) => !!a) || []
+    );
+    this.aclService.attachAbility(abilities);
 
     // cache current
     this.cacheService.set('_yz_current', {
