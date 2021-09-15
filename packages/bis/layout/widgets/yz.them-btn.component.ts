@@ -61,7 +61,16 @@ export class YzHeaderThemBtnComponent implements OnInit, OnDestroy {
   @Input() types: YzThemeBtnType[] = [
     { key: 'default', text: 'Default Theme', color: '#2163ff' },
     { key: 'compact', text: 'Compact Theme', color: '#2163ff' },
-    { key: 'dark', text: 'Dark Theme', color: '#020202' }
+    { key: 'dark', text: 'Dark Theme', color: '#020202' },
+    { key: 'dust', text: 'Dust Theme', color: '#F5222D' },
+    { key: 'volcano', text: 'Volcano Theme', color: '#FA541C' },
+    { key: 'sunset', text: 'Sunset Theme', color: '#FAAD14' },
+    { key: 'cyan', text: 'Cyan Theme', color: '#13C2C2' },
+    { key: 'green', text: 'Green Theme', color: '#52C41A' },
+    { key: 'daybreak', text: 'Daybreak Theme', color: '#1890ff' },
+    { key: 'geekblue', text: 'Geekblue Theme', color: '#2F54EB' },
+    { key: 'purple', text: 'Purple Theme', color: '#722ED1' },
+    { key: 'black', text: 'Black Theme', color: '#001529' }
   ];
   @Input() devTips = `When the dark.css file can't be found, you need to run it once: npm run theme`;
   @Input() deployUrl = '';
