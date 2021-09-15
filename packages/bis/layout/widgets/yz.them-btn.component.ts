@@ -70,14 +70,14 @@ export interface YzThemeBtnType extends ThemeBtnType {
 export class YzHeaderThemBtnComponent implements OnInit, OnDestroy {
   private theme = 'default';
   @Input() types: YzThemeBtnType[] = [
-    { key: 'default', text: 'them.default', color: '#2163ff' },
+    { key: 'default', text: 'theme.default', color: '#2163ff' },
     { key: 'compact', text: 'theme.compact', color: '#2163ff' },
     { key: 'dark', text: 'theme.dark', color: '#020202' },
     { key: 'yuhong', text: 'theme.yuhong', color: '#C04851' },
     { key: 'danjuhuang', text: 'theme.danjuhuang', color: '#FBA414' },
-    { key: 'xinghuang', text: 'theme.xinghuang', color: '#57C3C2' },
-    { key: 'shilv', text: 'theme.shilv', color: '#1BA784' },
-    { key: 'zhulv', text: 'theme.zhulv', color: '#52C41A' },
+    { key: 'xinghuang', text: 'theme.xinghuang', color: '#F28E16' },
+    { key: 'shilv', text: 'theme.shilv', color: '#57C3C2' },
+    { key: 'zhulv', text: 'theme.zhulv', color: '#1BA784' },
     { key: 'youlan', text: 'theme.youlan', color: '#1781B5' },
     { key: 'dianqing', text: 'theme.dianqing', color: '#1661AB' },
     { key: 'shangengzi', text: 'theme.shangengzi', color: '#61649F' },
