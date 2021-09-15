@@ -70,18 +70,18 @@ export interface YzThemeBtnType extends ThemeBtnType {
 export class YzHeaderThemBtnComponent implements OnInit, OnDestroy {
   private theme = 'default';
   @Input() types: YzThemeBtnType[] = [
-    { key: 'default', text: 'Default Theme', color: '#2163ff' },
-    { key: 'compact', text: 'Compact Theme', color: '#2163ff' },
-    { key: 'dark', text: 'Dark Theme', color: '#020202' },
-    { key: 'dust', text: 'Dust Theme', color: '#F5222D' },
-    { key: 'volcano', text: 'Volcano Theme', color: '#FA541C' },
-    { key: 'sunset', text: 'Sunset Theme', color: '#FAAD14' },
-    { key: 'cyan', text: 'Cyan Theme', color: '#13C2C2' },
-    { key: 'green', text: 'Green Theme', color: '#52C41A' },
-    { key: 'daybreak', text: 'Daybreak Theme', color: '#1890ff' },
-    { key: 'geekblue', text: 'Geekblue Theme', color: '#2F54EB' },
-    { key: 'purple', text: 'Purple Theme', color: '#722ED1' },
-    { key: 'black', text: 'Black Theme', color: '#001529' }
+    { key: 'default', text: 'them.default', color: '#2163ff' },
+    { key: 'compact', text: 'theme.compact', color: '#2163ff' },
+    { key: 'dark', text: 'theme.dark', color: '#020202' },
+    { key: 'yuhong', text: 'theme.yuhong', color: '#C04851' },
+    { key: 'danjuhuang', text: 'theme.danjuhuang', color: '#FBA414' },
+    { key: 'xinghuang', text: 'theme.xinghuang', color: '#57C3C2' },
+    { key: 'shilv', text: 'theme.shilv', color: '#1BA784' },
+    { key: 'zhulv', text: 'theme.zhulv', color: '#52C41A' },
+    { key: 'youlan', text: 'theme.youlan', color: '#1781B5' },
+    { key: 'dianqing', text: 'theme.dianqing', color: '#1661AB' },
+    { key: 'shangengzi', text: 'theme.shangengzi', color: '#61649F' },
+    { key: 'shuiniuhui', text: 'theme.shuiniuhui', color: '#2F2F35' }
   ];
   @Input() devTips = `When the dark.css file can't be found, you need to run it once: npm run theme`;
   @Input() deployUrl = '';
