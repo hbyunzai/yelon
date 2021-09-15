@@ -106,7 +106,7 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
           viewMessage.list = response.data.list.map((m: NzSafeAny) => {
             return {
               ...m,
-              avatar: './assets/tmp/img/message.png',
+              avatar: m?.imgUrl || './assets/tmp/img/message.png',
               title: m.systemName,
               description: m.content,
               extra: formatMessageStatus(m.status).extra,
@@ -143,7 +143,7 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
           viewTodo.list = response.data.list.map((t: NzSafeAny) => {
             return {
               ...t,
-              avatar: './assets/tmp/img/todo.png',
+              avatar: t?.imgUrl || './assets/tmp/img/todo.png',
               title: t.systemName,
               description: t.content,
               datetime: formatDistanceToNow(new Date(t.date), { locale: this.nzI18n.getDateLocale() }),

@@ -45,6 +45,8 @@ copyFiles() {
         "${1}src/assets/tmp/img/message.svg|${2}application/files/src/assets/tmp/img/"
         "${1}src/assets/tmp/img/notice.svg|${2}application/files/src/assets/tmp/img/"
         "${1}src/assets/tmp/img/todo.svg|${2}application/files/src/assets/tmp/img/"
+        "${1}src/assets/tmp/img/message.png|${2}application/files/src/assets/tmp/img/"
+        "${1}src/assets/tmp/img/todo.png|${2}application/files/src/assets/tmp/img/"
         "${1}src/assets/tmp/i18n/*|${2}application/files/src/assets/tmp/i18n/"
         "${1}src/assets/tmp/app-data.json|${2}application/files/src/assets/tmp/"
         # core
