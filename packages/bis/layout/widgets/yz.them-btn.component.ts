@@ -44,14 +44,25 @@ export interface YzThemeBtnType extends ThemeBtnType {
       </svg>
     </div>
     <nz-dropdown-menu #iconMenu="nzDropdownMenu">
-      <div nz-menu class="wd-xl animated jello">
-        <div nz-row [nzJustify]="'space-between'" [nzAlign]="'middle'" class="app-icons">
-          <div nz-col [nzSpan]="6" *ngFor="let theme of types" (click)="onThemeChange(theme.key)">
-            <i nz-icon nzType="bg-colors" class="text-white" [style]="{ backgroundColor: theme.color }"></i>
-            <span [ngStyle]="{ color: theme.color }">{{ theme.key }}</span>
-          </div>
-        </div>
-      </div>
+      <ul nz-menu>
+        <li
+          nz-menu-item
+          *ngFor="let theme of types"
+          (click)="onThemeChange(theme.key)"
+          [style]="{ color: theme.color }"
+        >
+          <i nz-icon nzType="bg-colors"></i>
+          {{ theme.text | i18n }}
+        </li>
+      </ul>
+      <!--      <div nz-menu class="wd-xl animated jello">-->
+      <!--        <div nz-row [nzJustify]="'space-between'" [nzAlign]="'middle'" class="app-icons">-->
+      <!--          <div nz-col [nzSpan]="4" *ngFor="let theme of types" (click)="onThemeChange(theme.key)">-->
+      <!--            <i nz-icon nzType="bg-colors" class="text-white" [style]="{ backgroundColor: theme.color }"></i>-->
+      <!--            <span [ngStyle]="{ color: theme.color }">{{ theme.text | i18n }}</span>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
     </nz-dropdown-menu>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
