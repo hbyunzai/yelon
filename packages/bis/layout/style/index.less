@@ -38,13 +38,14 @@
   background: @yz-application-topic-text-hover-bgColor;
 }
 
-.yz-application-container{
+.yz-application-container {
   height: @yz-application-height;
   overflow: auto;
 }
 
 .yz-application-list {
   padding: @yz-application-list-padding;
+
   ul {
     width: @yz-application-list-ul-width;
     padding: @yz-application-list-ul-padding;
@@ -110,12 +111,18 @@
   }
 
   p {
-    color: @yz-application-list-item-p-color;
     line-height: @yz-application-list-item-p-line-height;
   }
 
   li:hover {
-    color:@yz-application-list-item-li-hover-color;
+    p {
+      color: @yz-application-list-item-li-hover-color;
+    }
+
+    h4 {
+      color: @yz-application-list-item-li-hover-color;
+    }
+
     background: @yz-application-list-item-li-hover-bgColor;
   }
 }
