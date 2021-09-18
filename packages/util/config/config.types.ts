@@ -25,6 +25,7 @@ import { YunzaiCacheConfig } from './cache/cache.type';
 import { YunzaiChartConfig } from './chart/chart.type';
 import { YunzaiMockConfig } from './mock/mock.type';
 import { YunzaiSFConfig } from './sf/sf.type';
+import { YunzaiStompConfig } from './stomp/stomp.type';
 import { YunzaiThemeHttpClientConfig } from './theme/http.type';
 import { YunzaiThemeI18nConfig } from './theme/i18n.type';
 import { YunzaiThemeResponsiveConfig } from './theme/responsive.type';
@@ -33,6 +34,7 @@ import { YunzaiUtilCurrencyConfig } from './util/currency.type';
 
 export interface YunzaiConfig {
   bis?: YunzaiBusinessConfig;
+  stomp?: YunzaiStompConfig;
   dataRange?: YunzaiDateRangePickerConfig;
   errorCollect?: YunzaiErrorCollectConfig;
   image?: YunzaiImageConfig;

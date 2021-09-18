@@ -5,3 +5,6 @@ export * from './yz.basic.component';
 export * from './yz.default.interceptor';
 export * from './yz.i18n.service';
 export * from './yz.startup.service';
+export * from './bis.config';
+export * from './stomp.config';
+export * from './yz.stomp.service';

@@ -5,12 +5,13 @@ import { map, mergeAll, mergeMap } from 'rxjs/operators';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ITokenModel, ITokenService, mergeConfig as mergeAuthConfig, YA_SERVICE_TOKEN } from '@yelon/auth';
-import { mergeConfig as mergeBisConfig } from '@yelon/bis/shared';
 import { CacheService } from '@yelon/cache';
 import { _HttpClient } from '@yelon/theme';
 import { WINDOW, YunzaiAuthConfig, YunzaiBusinessConfig } from '@yelon/util';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
+
+import { mergeBisConfig } from './bis.config';
 
 @Injectable({ providedIn: 'root' })
 export class YzAuthService {

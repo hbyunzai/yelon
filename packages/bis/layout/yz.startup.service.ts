@@ -6,11 +6,12 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { ACLService } from '@yelon/acl';
-import { BUSINESS_DEFAULT_CONFIG, mergeConfig, ICONS } from '@yelon/bis/shared';
+import { ICONS } from '@yelon/bis/shared';
 import { CacheService } from '@yelon/cache';
 import { Menu, MenuService, SettingsService, TitleService, User, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { deepCopy, log, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
 
+import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from './bis.config';
 import { YzAuthService } from './yz.auth.service';
 import { YzI18NService } from './yz.i18n.service';
 
@@ -61,7 +62,7 @@ export class YzStartupService {
     private cacheService: CacheService,
     private configService: YunzaiConfigService
   ) {
-    this.bis = mergeConfig(this.configService);
+    this.bis = mergeBisConfig(this.configService);
     iconSrv.addIcon(...ICONS);
   }
 

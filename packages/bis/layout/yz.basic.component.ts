@@ -5,6 +5,8 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { CacheService } from '@yelon/cache';
 import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
 
+import { YzStompService } from './yz.stomp.service';
+
 @Component({
   selector: 'yz-layout-basic',
   template: `
@@ -80,7 +82,7 @@ export class YzLayoutBasicComponent implements OnInit {
   text: string = '';
   icon: string = '';
 
-  constructor(private cacheService: CacheService) {}
+  constructor(private cacheService: CacheService, private yzStompService: YzStompService) {}
 
   ngOnInit(): void {
     const current: NzSafeAny = this.cacheService.get('_yz_current', { mode: 'none' });
@@ -90,5 +92,6 @@ export class YzLayoutBasicComponent implements OnInit {
     this.icon = current.icon ? current.icon : `./assets/tmp/img/avatar.jpg`;
     this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : `./assets/logo-full.svg`;
     this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : `./assets/logo.svg`;
+    this.yzStompService.listen();
   }
 }

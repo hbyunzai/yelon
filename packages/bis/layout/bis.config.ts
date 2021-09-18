@@ -8,6 +8,6 @@ export const BUSINESS_DEFAULT_CONFIG: YunzaiBusinessConfig = {
   refreshTokenType: 're-request'
 };
 
-export function mergeConfig(srv: YunzaiConfigService): YunzaiBusinessConfig {
+export function mergeBisConfig(srv: YunzaiConfigService): YunzaiBusinessConfig {
   return srv.merge('bis', BUSINESS_DEFAULT_CONFIG)!;
 }
