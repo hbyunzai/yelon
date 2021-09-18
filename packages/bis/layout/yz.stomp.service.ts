@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, isDevMode } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { RxStomp } from '@stomp/rx-stomp';
@@ -55,9 +55,14 @@ export class YzStompService {
     }
     if (!this.rxStomp) {
       this.rxStomp = new RxStomp();
+      if (isDevMode()) {
+        log('yz.stomp.service: is dev mode');
+        log('yz.stomp.service: ', `config is ${this.config}`);
+        this.rxStomp.configure(this.config);
+        return;
+      }
       const { location } = this.injector.get(DOCUMENT);
       const { protocol, host } = location;
-      console.log(this);
       log('yz.stomp.service: ', `protocol is ${protocol},host is ${host}`);
       if (protocol.includes('http') && !protocol.includes('https')) {
         this.config.brokerURL = `ws://${host}${this.config.brokerURL}`;
