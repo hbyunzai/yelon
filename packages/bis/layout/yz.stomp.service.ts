@@ -1,8 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, Injector } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { RxStomp } from '@stomp/rx-stomp';
+import { IRxStompPublishParams } from '@stomp/rx-stomp/esm6/i-rx-stomp-publish-params';
+import { IMessage, StompHeaders } from '@stomp/stompjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -98,5 +100,13 @@ export class YzStompService {
   unListen(): void {
     this.subs.forEach(s => s.unsubscribe());
     this.rxStomp.deactivate().then();
+  }
+
+  publish(parameters: IRxStompPublishParams): void {
+    this.rxStomp.publish(parameters);
+  }
+
+  watch(destination: string, headers?: StompHeaders): Observable<IMessage> {
+    return this.rxStomp.watch(destination, headers);
   }
 }
