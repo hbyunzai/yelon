@@ -8,7 +8,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { CacheService } from '@yelon/cache';
-import { WINDOW, YunzaiBusinessConfig, YunzaiConfigService, YunzaiStompConfig } from '@yelon/util';
+import { log, WINDOW, YunzaiBusinessConfig, YunzaiConfigService, YunzaiStompConfig } from '@yelon/util';
 
 import { mergeBisConfig } from './bis.config';
 import { mergeStompConfig } from './stomp.config';
@@ -30,11 +30,11 @@ export interface UserStompMessage extends StompMessage {
 
 @Injectable({ providedIn: 'root' })
 export class YzStompService {
-  private readonly config: YunzaiStompConfig;
-  private readonly bisConfig: YunzaiBusinessConfig;
-  private readonly rxStomp: RxStomp;
-  private readonly user: NzSafeAny;
-  private subs: Subscription[];
+  config: YunzaiStompConfig;
+  bisConfig: YunzaiBusinessConfig;
+  rxStomp: RxStomp;
+  user: NzSafeAny;
+  subs: Subscription[] = [];
 
   constructor(
     private csr: YunzaiConfigService,
@@ -53,19 +53,17 @@ export class YzStompService {
     }
     if (!this.rxStomp) {
       this.rxStomp = new RxStomp();
-    }
-  }
-
-  init(): void {
-    if (this.config) {
       const { location } = this.injector.get(DOCUMENT);
       const { protocol, host } = location;
-      if (protocol === 'https') {
+      console.log(this);
+      log('yz.stomp.service: ', `protocol is ${protocol},host is ${host}`);
+      if (protocol.includes('https')) {
         this.config.brokerURL = `wss://${host}${this.config.brokerURL}`;
       }
-      if (protocol === 'http') {
+      if (protocol.includes('http')) {
         this.config.brokerURL = `ws://${host}${this.config.brokerURL}`;
       }
+      log('yz.stomp.service: ', `config is ${this.config}`);
       this.rxStomp.configure(this.config);
     }
   }

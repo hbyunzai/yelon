@@ -92,7 +92,6 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
     this.icon = current.icon ? current.icon : `./assets/tmp/img/avatar.jpg`;
     this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : `./assets/logo-full.svg`;
     this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : `./assets/logo.svg`;
-    this.yzStompService.init();
     this.yzStompService.listen();
   }
 
