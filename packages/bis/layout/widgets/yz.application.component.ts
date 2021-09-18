@@ -44,7 +44,7 @@ export interface HeaderTopic {
           <input
             type="text"
             nz-input
-            [placeholder]="'请输入要搜索的应用名称!'"
+            placeholder="{{ 'application.search' | i18n }}"
             [(ngModel)]="searchValue"
             (ngModelChange)="onSearch()"
           />
