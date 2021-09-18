@@ -13,6 +13,39 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+
+## [12.0.9](https://github.com/hbyunzai/yelon/compare/12.0.8...12.0.9) (2021-09-18)
+
+
+### Bug Fixes
+
+* **bis:stomp:** fix stomp prefix ([4ea9caf](https://github.com/hbyunzai/yelon/commit/4ea9caf782a2e49ea3fc3166d82ff8a4a39d0241))
+* **bis:** fic screen png ([cf0366d](https://github.com/hbyunzai/yelon/commit/cf0366d87feabf2c6f52b27573bd095c28f0d887))
+* **bis:** fix auto config ([9a88856](https://github.com/hbyunzai/yelon/commit/9a8885606a77d60ac61833e8d2daac5ca3b47257))
+* **bis:** fix bis icon ([e1214ab](https://github.com/hbyunzai/yelon/commit/e1214ab7c834c7b34f6dfd906ff7e29f1d51f909))
+* **bis:** fix check function that was http or https ([674d65b](https://github.com/hbyunzai/yelon/commit/674d65beff48e116102740ada186eba2374034bd))
+* **bis:** fix i18n and doc ([18d5ede](https://github.com/hbyunzai/yelon/commit/18d5ede5ee3ee51a399f5a7f5cb491af0574a305))
+* **bis:** fix stomp in the dev mode ([38e950f](https://github.com/hbyunzai/yelon/commit/38e950f837b8036b6cd5b0090ef4e145942206e7))
+* **header:** fix version list ([090e3e7](https://github.com/hbyunzai/yelon/commit/090e3e7eed98ff4ccfbb1f2783a0da99d7d21f5b))
+* **i18n:** fix application i18n ([7401046](https://github.com/hbyunzai/yelon/commit/7401046b02896c4b63bda2f528783d891fda58d0))
+* **theme:** add china theme ([cc53fa8](https://github.com/hbyunzai/yelon/commit/cc53fa83f4427c4480cc4468689d74ee380145a6))
+* **theme:** change theme menu to dropdown list ([e153bbe](https://github.com/hbyunzai/yelon/commit/e153bbeef82c0dd34e4a56470b257cbf9fb3a152))
+* **theme:** fix dark theme ([974897f](https://github.com/hbyunzai/yelon/commit/974897f58bf97d39956a737fa50e8fa9eaad0d0a))
+* **theme:** fix dark theme ([a819694](https://github.com/hbyunzai/yelon/commit/a819694db9dd4d8dd6530d0a30e999c596f50bc9))
+* **theme:** fix dark theme ([74f98f7](https://github.com/hbyunzai/yelon/commit/74f98f7801bdbe08cadefef20c87fb3ff5028618))
+* **theme:** fix theme color ([9358e42](https://github.com/hbyunzai/yelon/commit/9358e4283ffa95063002fffcbeaf1afeec7ffb0e))
+* **theme:** fix theme i18n key ([c643718](https://github.com/hbyunzai/yelon/commit/c643718d1751e0b1f6b697e714656ce19a506f12))
+* **theme:** remove some props ([95e1dbe](https://github.com/hbyunzai/yelon/commit/95e1dbea157ddee3f3cfbafd34df2f1df5de1c86))
+
+
+### Features
+
+* **bis:stomp:** add publish and watch interface ([e481207](https://github.com/hbyunzai/yelon/commit/e4812072976f0dc51ef842dd6d0a2d6f79e8d67b))
+* **bis:** add stomp plugin ([3ce3895](https://github.com/hbyunzai/yelon/commit/3ce3895f8bc85b8581651f67350ac2799b379d8e))
+* **schematic:** add stomp plugin ([58bee1a](https://github.com/hbyunzai/yelon/commit/58bee1ae5b48593153838d53cf9715dfbb273e99))
+* **theme:** add more theme ([ab5317c](https://github.com/hbyunzai/yelon/commit/ab5317c60cdb1115b679a4cc9cf9cd615d58054c))
+
+
 ## [12.0.8](https://github.com/hbyunzai/yelon/compare/12.0.7...12.0.8) (2021-09-14)
 
 
