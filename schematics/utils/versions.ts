@@ -38,7 +38,8 @@ export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void
       `ng-yunzai-plugin-theme@DEP-0.0.0-PLACEHOLDER`,
       `source-map-explorer@DEP-0.0.0-PLACEHOLDER`,
       `@angular/language-service@DEP-0.0.0-PLACEHOLDER`,
-      `@yelon/testing@${version}`
+      `@yelon/testing@${version}`,
+      `@stomp/rx-stomp@DEP-0.0.0-PLACEHOLDER`
     ],
     'devDependencies'
   );

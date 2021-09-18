@@ -7,6 +7,7 @@ DEPENDENCIES=$(node -p "
   const vs = require('./package.json').dependencies;
   const dvs = require('./package.json').devDependencies;
   [
+    '@stomp/rx-stomp',
     'extend',
     'isutf8',
     'file-saver',
