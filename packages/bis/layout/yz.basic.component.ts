@@ -60,7 +60,7 @@ import { YzStompService } from './yz.stomp.service';
         </div>
         <nz-dropdown-menu #userMenu="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item routerLink="/">回到首页</li>
+            <li nz-menu-item routerLink="/">{{ 'menu.backtohome' | i18n }}</li>
           </ul>
         </nz-dropdown-menu>
       </ng-template>

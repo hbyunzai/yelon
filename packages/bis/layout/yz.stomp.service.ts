@@ -59,11 +59,11 @@ export class YzStompService {
       const { protocol, host } = location;
       console.log(this);
       log('yz.stomp.service: ', `protocol is ${protocol},host is ${host}`);
+      if (protocol.includes('http') && !protocol.includes('https')) {
+        this.config.brokerURL = `ws://${host}${this.config.brokerURL}`;
+      }
       if (protocol.includes('https')) {
         this.config.brokerURL = `wss://${host}${this.config.brokerURL}`;
-      }
-      if (protocol.includes('http')) {
-        this.config.brokerURL = `ws://${host}${this.config.brokerURL}`;
       }
       log('yz.stomp.service: ', `config is ${this.config}`);
       this.rxStomp.configure(this.config);
