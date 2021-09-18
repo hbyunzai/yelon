@@ -67,14 +67,14 @@ export interface HeaderTopic {
     <!--      template end-->
 
     <!--      button start-->
-    <div class="yunzai-default__nav-item" (click)="diffChange()"> 应用与服务</div>
+    <div class="yunzai-default__nav-item" (click)="diffChange()"> {{ 'application.button' | i18n }}</div>
     <!--      button end-->
 
     <!--      header start-->
     <div class="yz-application" nz-row *ngIf="active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div class="yz-application-text" (click)="full()">全部应用</div>
-        <div class="yz-application-text" (click)="own()">我的应用</div>
+        <div class="yz-application-text" (click)="full()">{{ 'application.all' | i18n }}</div>
+        <div class="yz-application-text" (click)="own()">{{ 'application.mine' | i18n }}</div>
         <div class="yz-application-text" *ngFor="let d of topicData" (click)="every(d)">
           {{ d.name }}
         </div>
