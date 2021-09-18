@@ -1,4 +1,6 @@
+import { DOCUMENT } from '@angular/common';
 import { Injectable, Injector } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { RxStomp } from '@stomp/rx-stomp';
 
@@ -32,6 +34,7 @@ export class YzStompService {
   private readonly bisConfig: YunzaiBusinessConfig;
   private readonly rxStomp: RxStomp;
   private readonly user: NzSafeAny;
+  private subs: Subscription[];
 
   constructor(
     private csr: YunzaiConfigService,
@@ -43,7 +46,7 @@ export class YzStompService {
       this.user = this.cache.get('_yz_user', { mode: 'none' });
     }
     if (!this.config) {
-      this.config = mergeStompConfig(this.csr, this.injector);
+      this.config = mergeStompConfig(this.csr);
     }
     if (!this.bisConfig) {
       this.bisConfig = mergeBisConfig(csr);
@@ -53,14 +56,31 @@ export class YzStompService {
     }
   }
 
+  init(): void {
+    if (this.config) {
+      const { location } = this.injector.get(DOCUMENT);
+      const { protocol, host } = location;
+      if (protocol === 'https') {
+        this.config.brokerURL = `wss://${host}${this.config.brokerURL}`;
+      }
+      if (protocol === 'http') {
+        this.config.brokerURL = `ws://${host}${this.config.brokerURL}`;
+      }
+      this.rxStomp.configure(this.config);
+    }
+  }
+
   listen(): void {
-    this.rxStomp.configure(this.config);
-    this.rxStomp.watch(`/topic/layout_${this.user.username}`).subscribe(message => {
-      this.createNotification(JSON.parse(message.body));
-    });
-    this.rxStomp.watch(`/topic/layout_xx_${this.user.username}`).subscribe((message: any) => {
-      this.logoutNotification(JSON.parse(message.body));
-    });
+    this.subs.push(
+      this.rxStomp.watch(`/topic/layout_${this.user.username}`).subscribe(message => {
+        this.createNotification(JSON.parse(message.body));
+      })
+    );
+    this.subs.push(
+      this.rxStomp.watch(`/topic/layout_xx_${this.user.username}`).subscribe((message: any) => {
+        this.logoutNotification(JSON.parse(message.body));
+      })
+    );
     this.rxStomp.activate();
   }
 
@@ -75,5 +95,10 @@ export class YzStompService {
       localStorage.clear();
       this.injector.get(WINDOW).location.href = `${this.bisConfig.baseUrl}/cas-proxy/app/logout`;
     }, 5000);
+  }
+
+  unListen(): void {
+    this.subs.forEach(s => s.unsubscribe());
+    this.rxStomp.deactivate().then();
   }
 }

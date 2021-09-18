@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -72,7 +72,7 @@ import { YzStompService } from './yz.stomp.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YzLayoutBasicComponent implements OnInit {
+export class YzLayoutBasicComponent implements OnInit, OnDestroy {
   options: LayoutDefaultOptions = {
     logoExpanded: `./assets/logo-full.svg`,
     logoCollapsed: `./assets/logo.svg`
@@ -92,6 +92,11 @@ export class YzLayoutBasicComponent implements OnInit {
     this.icon = current.icon ? current.icon : `./assets/tmp/img/avatar.jpg`;
     this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : `./assets/logo-full.svg`;
     this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : `./assets/logo.svg`;
+    this.yzStompService.init();
     this.yzStompService.listen();
+  }
+
+  ngOnDestroy(): void {
+    this.yzStompService.unListen();
   }
 }
