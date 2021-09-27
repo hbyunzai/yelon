@@ -45,3 +45,4 @@ export * from './custom/schema';
 export * from './custom/sf-template.directive';
 
 export * from './nz-widget.registry';
+export * from './nzwrap-widget.registry';
