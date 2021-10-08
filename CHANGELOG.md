@@ -1,3 +1,21 @@
+## [12.0.10](https://github.com/hbyunzai/yelon/compare/12.0.9...12.0.10) (2021-10-03)
+
+
+### Bug Fixes
+
+* **form:** fix `ui` value cross pollute ([74ce482](https://github.com/hbyunzai/yelon/commit/74ce48281759f7c528736ab7f7b10e83da15f07b))
+* **form:** remove `nzwrap-widget.registry.ts` ([417d192](https://github.com/hbyunzai/yelon/commit/417d192f05344e70f8d410056bc069ae2a893f21))
+
+
+### Features
+
+* **abc:xlsx:** add support csv file ([#1354](https://github.com/hbyunzai/yelon/issues/1354)) ([75129b8](https://github.com/hbyunzai/yelon/commit/75129b8d38b33e915a97e97ae331a92cfcc5e122))
+* **chart:echarts:** add `on` property ([0a3d099](https://github.com/hbyunzai/yelon/commit/0a3d099ea075dec719d46404700036b54494bfe2))
+* **form:** add nzwrap-widget.registry.ts ([eff625f](https://github.com/hbyunzai/yelon/commit/eff625fd8ae0029948e4fc8686dca6ab9401bafc))
+* **util:format:** add token mode in format mask ([c393e68](https://github.com/hbyunzai/yelon/commit/c393e683e254b1864adc203fc8ad5e5a635f87ab))
+
+
+
 ## [12.0.9](https://github.com/hbyunzai/yelon/compare/12.0.8...12.0.9) (2021-09-18)
 
 

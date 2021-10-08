@@ -10,7 +10,7 @@ import { LazyService } from '@yelon/util/other';
 
 import { ChartEChartsComponent } from './echarts.component';
 import { ChartEChartsModule } from './echarts.module';
-import { ChartEChartsEvent, ChartEChartsOption } from './echarts.types';
+import { ChartEChartsOn, ChartEChartsEvent, ChartEChartsOption } from './echarts.types';
 
 // let isClassECharts = false;
 class MockLazyService {
@@ -19,7 +19,9 @@ class MockLazyService {
       init: () => {
         return {
           setOption: jasmine.createSpy('setOption'),
-          dispose: jasmine.createSpy('dispose')
+          dispose: jasmine.createSpy('dispose'),
+          on: jasmine.createSpy('on'),
+          off: jasmine.createSpy('off')
         };
       }
     };
@@ -93,6 +95,7 @@ describe('chart: chart-echarts', () => {
       [option]="option"
       [theme]="theme"
       [initOpt]="initOpt"
+      [on]="on"
       (events)="handleEvents($event)"
     ></chart-echarts>
   `
@@ -104,5 +107,16 @@ class TestComponent {
   theme?: string | Record<string, unknown> | null = null;
   option: ChartEChartsOption = {};
   initOpt: NzSafeAny;
+  on: ChartEChartsOn[] = [
+    {
+      eventName: 'click',
+      handler: console.log
+    },
+    {
+      eventName: 'click',
+      query: 'series',
+      handler: console.log
+    }
+  ];
   handleEvents(_: ChartEChartsEvent): void {}
 }

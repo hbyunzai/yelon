@@ -5,8 +5,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable, of, throwError } from 'rxjs';
 
-import * as fs from 'file-saver';
-
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { LazyService } from '@yelon/util/other';
@@ -65,7 +63,7 @@ describe('abc: xlsx', () => {
           }
         };
       },
-      write: () => {}
+      writeFile: jasmine.createSpy('writeFile')
     };
     (window as NzSafeAny).cptable = {
       utils: {
@@ -135,20 +133,35 @@ describe('abc: xlsx', () => {
         }
       );
     });
+
+    it(`should be can't load xlsx when file is error`, (done: () => void) => {
+      genModule();
+      // eslint-disable-next-line prettier/prettier
+      spyOn(FileReader.prototype, 'readAsArrayBuffer').and.callFake(function (this: NzSafeAny) {
+        this.onerror();
+      });
+      srv.import(null as NzSafeAny).then(
+        () => {
+          expect(false).toBe(true);
+          done();
+        },
+        () => {
+          expect(true).toBe(true);
+          done();
+        }
+      );
+    });
   });
 
   describe('[#export]', () => {
-    beforeEach(() => {
-      spyOn(fs, 'saveAs');
-      genModule();
-    });
+    beforeEach(() => genModule());
     it('should be export xlsx via array', (done: () => void) => {
       srv
         .export({
           sheets: [{ data: null, name: 'asdf.xlsx' }, { data: null }]
         } as XlsxExportOptions)
         .then(() => {
-          expect(fs.saveAs).toHaveBeenCalled();
+          expect((window as NzSafeAny).XLSX.writeFile).toHaveBeenCalled();
           done();
         });
     });
@@ -160,7 +173,7 @@ describe('abc: xlsx', () => {
           }
         } as XlsxExportOptions)
         .then(() => {
-          expect(fs.saveAs).toHaveBeenCalled();
+          expect((window as NzSafeAny).XLSX.writeFile).toHaveBeenCalled();
           done();
         });
     });
@@ -194,6 +207,17 @@ describe('abc: xlsx', () => {
         })
         .catch(() => {
           expect(true).toBe(true);
+          done();
+        });
+    });
+    it('should be export csv', (done: () => void) => {
+      srv
+        .export({
+          sheets: [{ data: null, name: 'asdf.csv' }, { data: null }],
+          format: 'csv'
+        } as XlsxExportOptions)
+        .then(() => {
+          expect((window as NzSafeAny).XLSX.writeFile).toHaveBeenCalled();
           done();
         });
     });

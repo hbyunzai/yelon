@@ -21,7 +21,13 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NumberInput, ZoneOutside } from '@yelon/util/decorator';
 
 import { ChartEChartsService } from './echarts.service';
-import { ChartECharts, ChartEChartsEvent, ChartEChartsEventType, ChartEChartsOption } from './echarts.types';
+import {
+  ChartECharts,
+  ChartEChartsEvent,
+  ChartEChartsEventType,
+  ChartEChartsOn,
+  ChartEChartsOption
+} from './echarts.types';
 
 @Component({
   selector: 'chart-echarts, [chart-echarts]',
@@ -86,6 +92,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
       this.setOption(value, true);
     }
   }
+  @Input() on: ChartEChartsOn[] = [];
   @Output() readonly events = new EventEmitter<ChartEChartsEvent>();
 
   get chart(): ChartECharts | null {
@@ -125,9 +132,21 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
 
   install(): this {
     this.destroy();
-    this._chart = (window as NzSafeAny).echarts.init(this.node.nativeElement, this._theme, this._initOpt);
+    const chart = (this._chart = (window as NzSafeAny).echarts.init(
+      this.node.nativeElement,
+      this._theme,
+      this._initOpt
+    )) as ChartECharts;
     this.emit('init');
     this.setOption(this._option!);
+    // on
+    this.on.forEach(item => {
+      if (item.query != null) {
+        chart.on(item.eventName, item.query, event => item.handler({ event, chart }));
+      } else {
+        chart.on(item.eventName, event => item.handler({ event, chart }));
+      }
+    });
     return this;
   }
 
@@ -167,6 +186,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.on.forEach(item => this._chart?.off(item.eventName));
     this.destroy$.next();
     this.destroy$.complete();
     this.destroy();
