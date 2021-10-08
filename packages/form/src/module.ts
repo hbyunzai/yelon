@@ -92,7 +92,6 @@ import { TimeWidget } from './widgets/time/time.widget';
 import { TransferWidget } from './widgets/transfer/transfer.widget';
 import { TreeSelectWidget } from './widgets/tree-select/tree-select.widget';
 import { UploadWidget } from './widgets/upload/upload.widget';
-import { NzWrapWidgetRegistry } from './widgets/nzwrap-widget.registry';
 
 const WIDGETS = [
   ObjectWidget,
@@ -137,7 +136,7 @@ export class YelonFormModule {
           useClass: AjvSchemaValidatorFactory,
           deps: [YunzaiConfigService, NgZone]
         },
-        { provide: WidgetRegistry, useClass: NzWrapWidgetRegistry }
+        { provide: WidgetRegistry, useClass: WidgetRegistry }
       ]
     };
   }
