@@ -30,12 +30,12 @@ const MOCKMENUS = [
           { text: 'v3' },
           {
             text: 'externalLink-blank',
-            externalLink: '//ng.yunzainfo.com/blank',
+            externalLink: '//ng-alain.com/blank',
             target: '_blank'
           },
           {
             text: 'externalLink-top',
-            externalLink: '//ng.yunzainfo.com/top',
+            externalLink: '//ng-alain.com/top',
             target: '_top'
           }
         ]
@@ -155,7 +155,7 @@ describe('theme: layout-default-nav', () => {
           const win = TestBed.inject(WINDOW);
           const itemEl = page.getEl<HTMLElement>('.sidebar-nav__item [data-id="7"]');
           itemEl!.click();
-          expect(win.location.href).toBe(`//ng.yunzainfo.com/top`);
+          expect(win.location.href).toBe(`//ng-alain.com/top`);
         });
       });
 
@@ -242,21 +242,25 @@ describe('theme: layout-default-nav', () => {
           expect(el.classList).toContain('anticon-edit');
         });
         it('when is string and http prefix', () => {
-          updateIcon('http://ng-yunzai/1.jpg');
+          updateIcon('http://ng-alain/1.jpg');
           page.checkCount('.sidebar-nav__item-img', 1);
         });
         it('when is class string', () => {
           updateIcon('demo-class');
-          page.checkCount('.demo-class', 0);
+          page.checkCount('.demo-class', 1);
         });
       });
       it('with className', () => {
         updateIcon({ type: 'class', value: 'demo-class' });
-        page.checkCount('.demo-class', 0);
+        page.checkCount('.demo-class', 1);
       });
       it('with img', () => {
         updateIcon({ type: 'img', value: '1.jpg' });
         page.checkCount('.sidebar-nav__item-img', 1);
+      });
+      it('with svg', () => {
+        updateIcon({ type: 'svg', value: '<svg></svg>' });
+        page.checkCount('.sidebar-nav__item-svg', 1);
       });
     });
 
@@ -291,7 +295,7 @@ describe('theme: layout-default-nav', () => {
           page.showSubMenu();
           expect(page.getEl('.sidebar-nav__floating-container .sidebar-nav__item', true) != null).toBe(true);
         });
-        it('should be ignore children title trigger event', () => {
+        it('should be ingore children title trigger event', () => {
           spyOn(context, 'select');
           expect(context.select).not.toHaveBeenCalled();
           const mockMenu = deepCopy(MOCKMENUS) as Nav[];
@@ -527,7 +531,7 @@ describe('theme: layout-default-nav', () => {
       fixture.detectChanges();
       page.checkCount('.sidebar-nav__selected', 0);
     }));
-    it('should be ignore _open when enabled openStrictly', fakeAsync(() => {
+    it('should be ingore _open when enabled openStrictly', fakeAsync(() => {
       context.openStrictly = true;
       fixture.detectChanges();
       menuSrv.add(deepCopy(MOCKOPENSTRICTLY));

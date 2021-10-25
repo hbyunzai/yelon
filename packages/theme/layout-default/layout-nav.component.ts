@@ -22,7 +22,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { Menu, MenuInner, MenuService, SettingsService } from '@yelon/theme';
+import { Menu, MenuIcon, MenuInner, MenuService, SettingsService } from '@yelon/theme';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput, ZoneOutside } from '@yelon/util/decorator';
 import { WINDOW } from '@yelon/util/token';
 
@@ -94,7 +94,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
       return false;
     }
     const id = +linkNode.dataset!.id!;
-    // Should be ignore children title trigger event
+    // Should be ingore children title trigger event
     if (isNaN(id)) {
       return false;
     }
@@ -114,7 +114,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   private clearFloating(): void {
     if (!this.floatingEl) return;
     this.floatingEl.removeEventListener('click', this.floatingClickHandle.bind(this));
-    // fix ie: https://github.com/hbyunzai/yelon/issues/52
+    // fix ie: https://github.com/ng-alain/delon/issues/52
     if (this.floatingEl.hasOwnProperty('remove')) {
       this.floatingEl.remove();
     } else if (this.floatingEl.parentNode) {
@@ -267,6 +267,10 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
         }
         if (this.openStrictly) {
           i._open = i.open != null ? i.open : false;
+        }
+        const icon = i.icon as MenuIcon;
+        if (icon && icon.type === 'svg' && typeof icon.value === 'string') {
+          icon.value = this.sanitizer.bypassSecurityTrustHtml(icon.value!!);
         }
       });
       this.list = menuSrv.menus.filter((w: Nav) => w._hidden !== true);
