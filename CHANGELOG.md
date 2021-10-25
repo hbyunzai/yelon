@@ -1,3 +1,19 @@
+## [12.0.11](https://github.com/hbyunzai/yelon/compare/12.0.10...12.0.11) (2021-10-25)
+
+
+### Bug Fixes
+
+* **abc:st:** fix `iif` of group columns ([664afbd](https://github.com/hbyunzai/yelon/commit/664afbdc8b62f7e37650c4a59e9ba35cfbd9d5eb))
+* **sf:** remote `nz-wrap-widget.registry.ts` ([3108483](https://github.com/hbyunzai/yelon/commit/310848392cdd4ca0dd5f69d16e848339542f73e2))
+
+
+### Features
+
+* adding Italian locale ([c85c33d](https://github.com/hbyunzai/yelon/commit/c85c33de2a998806ce516adbc282d04bde0ecbc7))
+* **theme:menu:** support `svg` type ([53d7a1e](https://github.com/hbyunzai/yelon/commit/53d7a1ed5b837940b932afad6e40e944c2b6ba8b))
+
+
+
 ## [12.0.10](https://github.com/hbyunzai/yelon/compare/12.0.9...12.0.10) (2021-10-03)
 
 
