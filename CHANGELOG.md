@@ -1,3 +1,14 @@
+## [12.0.12](https://github.com/hbyunzai/yelon/compare/12.0.11...12.0.12) (2021-11-01)
+
+
+### Features
+
+* **acl:** support function of guard ([#1365](https://github.com/hbyunzai/yelon/issues/1365)) ([9fb013d](https://github.com/hbyunzai/yelon/commit/9fb013de59e13ac9e024e9d53059791ab35a3b23))
+* **bis:default:** add flag to control page jump ([871cf0c](https://github.com/hbyunzai/yelon/commit/871cf0ca788e76f4cc2e302d17ed5c99e8002158))
+* **form:widget:text:** add html property ([97c6547](https://github.com/hbyunzai/yelon/commit/97c6547de9635094b6daa83406c2edc6f6d9609e))
+
+
+
 ## [12.0.11](https://github.com/hbyunzai/yelon/compare/12.0.10...12.0.11) (2021-10-25)
 
 
