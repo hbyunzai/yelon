@@ -18,3 +18,4 @@ Text in form.
 | Property        | Description               | Type     | Default |
 | --------------- | ------------------------- | -------- | ------- |
 | `[defaultText]` | Default text of this item | `string` | `-`     |
+| `[html]` | Whether to support HTML | `boolean` | `true` |
