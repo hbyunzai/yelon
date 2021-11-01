@@ -46,6 +46,7 @@ const CODEMESSAGE: { [key: number]: string } = {
  */
 @Injectable()
 export class YzDefaultInterceptor implements HttpInterceptor {
+  private jump = false;
   private refreshToking = false;
   private refreshToken$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
@@ -182,7 +183,9 @@ export class YzDefaultInterceptor implements HttpInterceptor {
       case 403:
       case 404:
       case 500:
-        this.goTo(`/exception/${ev.status}`);
+        if (this.jump) {
+          this.goTo(`/exception/${ev.status}`);
+        }
         break;
       default:
         if (ev instanceof HttpErrorResponse) {
