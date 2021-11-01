@@ -57,7 +57,7 @@ export class YzStompService {
       this.rxStomp = new RxStomp();
       if (isDevMode()) {
         log('yz.stomp.service: is dev mode');
-        log('yz.stomp.service: ', `config is ${this.config}`);
+        log('yz.stomp.service: ', `config is ${JSON.stringify(this.config)}`);
         this.rxStomp.configure(this.config);
         return;
       }
