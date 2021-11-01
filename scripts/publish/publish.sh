@@ -48,9 +48,9 @@ publishToNext() {
 
 syncTaobao() {
     for package in $(ls ${p_packages_dist}); do
-        curl -X PUT https://npm.taobao.org/sync/@yelon/${package}?sync_upstream=true
+        curl -X PUT https://npmmirror.com/sync/@yelon/${package}?sync_upstream=true
     done
-    curl -X PUT https://npm.taobao.org/sync/ng-yunzai?sync_upstream=true
+    curl -X PUT https://npmmirror.com/sync/ng-yunzai?sync_upstream=true
 }
 
 clone
