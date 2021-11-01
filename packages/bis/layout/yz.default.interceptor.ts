@@ -80,6 +80,16 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     if ((ev.status >= 200 && ev.status < 300) || ev.status === 401) {
       return;
     }
+
+    if (ev instanceof HttpErrorResponse && (ev.error.message || ev.error.errorMessage)) {
+      if (ev.error.errorMessage) {
+        this.notification.error(`发生了一些错误 `, ev.error.errorMessage);
+      } else {
+        this.notification.error(`发生了一些错误 `, ev.error.message);
+      }
+      return;
+    }
+
     if (ev instanceof HttpResponse && ev.body.errorMessage) {
       this.notification.error(`发生了一些错误 `, ev.body.errorMessage);
       return;
