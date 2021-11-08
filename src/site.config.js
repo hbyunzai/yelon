@@ -598,6 +598,13 @@ module.exports = {
           hasSubDir: false,
         },
         {
+          src: ['./packages/theme/src/router'],
+          template: {
+            content: './src/templates/content.ts',
+          },
+          hasSubDir: false,
+        },
+        {
           src: ['./packages/theme/src/pipes'],
           template: {
             content: './src/templates/content.ts',
