@@ -16,7 +16,7 @@ copyFiles() {
         "${1}.prettierrc.js|${2}application/files/root/.prettierrc.js"
         "${1}.stylelintrc|${2}application/files/root/.stylelintrc"
         "${1}.nvmrc|${2}application/files/root"
-        "${1}proxy.conf.json|${2}application/files/root"
+        "${1}proxy.conf.js|${2}application/files/root"
         "${1}.husky|${2}application/files/root/.husky"
         # ng-yunzai.json
         "${1}ng-yunzai.json|${2}application/files/root/"

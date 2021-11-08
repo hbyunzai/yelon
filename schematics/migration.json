@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "migration-v12": {
+      "version": "12",
+      "description": "Updates NG-Yunzai to v12",
+      "factory": "./ng-update/index#updateToV12"
+    },
+    "ng-post-update": {
+      "description": "Performs cleanup after ng-update.",
+      "factory": "./ng-update/index#postUpdate",
+      "private": true
+    }
+  }
+}
