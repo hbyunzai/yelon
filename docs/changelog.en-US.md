@@ -13,6 +13,27 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [12.0.13](https://github.com/hbyunzai/yelon/compare/12.0.12...12.0.13) (2021-11-08)
+
+
+### Bug Fixes
+
+* **abc:reuse-tab:** fix disabled refresh when non-active tab ([#1373](https://github.com/hbyunzai/yelon/issues/1373)) ([3189b6f](https://github.com/hbyunzai/yelon/commit/3189b6fbc0fd8f2b9388743a5b6427d3dae1ac74))
+* **bis:layout:interceptor:** fix interceptor alert error message ([3db1e8a](https://github.com/hbyunzai/yelon/commit/3db1e8aca6f87760296231b9d8f2c73606d078b0))
+* **layout:** fix package prefix name ([eff2c5f](https://github.com/hbyunzai/yelon/commit/eff2c5f05e79d2d1ed2a01b0932789adf2e5745f))
+* **theme:layout-default:** fix can't render badge ([#1377](https://github.com/hbyunzai/yelon/issues/1377)) ([c8dec76](https://github.com/hbyunzai/yelon/commit/c8dec76e1f9a7087f71ff0b2eb3417dbf15eeb9d))
+* **theme:layout-default:** fix can't render badge ([#1377](https://github.com/hbyunzai/yelon/issues/1377)) ([eb94d59](https://github.com/hbyunzai/yelon/commit/eb94d59f3ab2e1463ce148282ee67aa9f8da3e31))
+* use `proxy.conf.js` instead of `proxy.conf.json` ([#1375](https://github.com/hbyunzai/yelon/issues/1375)) ([8a8ce82](https://github.com/hbyunzai/yelon/commit/8a8ce82e3d6f579398bad3aa08625afcb577cc8f))
+
+
+### Features
+
+* **form:widget:number:** add `change` event ([#1370](https://github.com/hbyunzai/yelon/issues/1370)) ([8d5e1cd](https://github.com/hbyunzai/yelon/commit/8d5e1cd4bbeb7ab32827e71575bddd844a623374))
+* **theme:default:** add `customError` property ([#1376](https://github.com/hbyunzai/yelon/issues/1376)) ([c74874e](https://github.com/hbyunzai/yelon/commit/c74874ec5ded8851e77149c5572645c21e5df141))
+
+
+
+
 ## [12.0.12](https://github.com/hbyunzai/yelon/compare/12.0.11...12.0.12) (2021-11-01)
 
 
