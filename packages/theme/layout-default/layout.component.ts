@@ -17,7 +17,8 @@ import {
   NavigationError,
   RouteConfigLoadEnd,
   RouteConfigLoadStart,
-  Router
+  Router,
+  Event
 } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -35,16 +36,16 @@ import { LayoutDefaultOptions } from './types';
   selector: 'layout-default',
   exportAs: 'layoutDefault',
   template: `
-    <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
+    <div class="alain-default__progress-bar" *ngIf="isFetching"></div>
     <layout-default-header></layout-default-header>
-    <div *ngIf="!options.hideAside" class="yunzai-default__aside">
-      <div class="yunzai-default__aside-inner">
+    <div *ngIf="!options.hideAside" class="alain-default__aside">
+      <div class="alain-default__aside-inner">
         <ng-container *ngTemplateOutlet="asideUser"></ng-container>
         <ng-container *ngTemplateOutlet="nav"></ng-container>
         <layout-default-nav *ngIf="!nav" class="d-block py-lg"></layout-default-nav>
       </div>
     </div>
-    <section class="yunzai-default__content">
+    <section class="alain-default__content">
       <ng-container *ngTemplateOutlet="content"></ng-container>
       <ng-content></ng-content>
     </section>
@@ -58,48 +59,52 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   @Input() asideUser: TemplateRef<void>;
   @Input() nav: TemplateRef<void>;
   @Input() content: TemplateRef<void>;
+  @Input() customError?: string | null;
 
   private destroy$ = new Subject<void>();
   isFetching = false;
 
   constructor(
     router: Router,
-    msgSrv: NzMessageService,
+    private msgSrv: NzMessageService,
     private settings: SettingsService,
     private el: ElementRef,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private doc: NzSafeAny
   ) {
-    router.events.pipe(takeUntil(this.destroy$)).subscribe(evt => {
-      if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
-        this.isFetching = true;
+    router.events.pipe(takeUntil(this.destroy$)).subscribe(ev => this.processEv(ev));
+  }
+
+  processEv(ev: Event): void {
+    if (!this.isFetching && ev instanceof RouteConfigLoadStart) {
+      this.isFetching = true;
+    }
+    if (ev instanceof NavigationError || ev instanceof NavigationCancel) {
+      this.isFetching = false;
+      const err = this.customError === null ? null : this.customError ?? `Could not load ${ev.url} route`;
+      if (err && ev instanceof NavigationError) {
+        this.msgSrv.error(err, { nzDuration: 1000 * 3 });
       }
-      if (evt instanceof NavigationError || evt instanceof NavigationCancel) {
+      return;
+    }
+    if (!(ev instanceof NavigationEnd || ev instanceof RouteConfigLoadEnd)) {
+      return;
+    }
+    if (this.isFetching) {
+      setTimeout(() => {
         this.isFetching = false;
-        if (evt instanceof NavigationError) {
-          msgSrv.error(`Could not load ${evt.url} route`, { nzDuration: 1000 * 3 });
-        }
-        return;
-      }
-      if (!(evt instanceof NavigationEnd || evt instanceof RouteConfigLoadEnd)) {
-        return;
-      }
-      if (this.isFetching) {
-        setTimeout(() => {
-          this.isFetching = false;
-        }, 100);
-      }
-    });
+      }, 100);
+    }
   }
 
   private setClass(): void {
     const { el, doc, renderer, settings } = this;
     const layout = settings.layout;
     updateHostClass(el.nativeElement, renderer, {
-      ['yunzai-default']: true,
-      [`yunzai-default__fixed`]: layout.fixed,
-      [`yunzai-default__collapsed`]: layout.collapsed,
-      [`yunzai-default__hide-aside`]: this.options.hideAside
+      ['alain-default']: true,
+      [`alain-default__fixed`]: layout.fixed,
+      [`alain-default__collapsed`]: layout.collapsed,
+      [`alain-default__hide-aside`]: this.options.hideAside
     });
 
     doc.body.classList[layout.colorWeak ? 'add' : 'remove']('color-weak');
