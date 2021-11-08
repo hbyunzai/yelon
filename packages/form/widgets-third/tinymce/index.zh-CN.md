@@ -30,7 +30,7 @@ export const SCHEMA_THIRDS_COMPONENTS = [TinymceWidget];
   declarations: SCHEMA_THIRDS_COMPONENTS,
   imports: [
     SharedModule,
-    DelonFormModule.forRoot(),
+    YelonFormModule.forRoot(),
     NgxTinymceModule.forRoot({
       baseURL: './assets/tinymce/',
       config: {

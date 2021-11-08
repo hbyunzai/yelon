@@ -28,7 +28,7 @@ export const SCHEMA_THIRDS_COMPONENTS = [UeditorWidget];
   declarations: SCHEMA_THIRDS_COMPONENTS,
   imports: [
     SharedModule,
-    DelonFormModule.forRoot(),
+    YelonFormModule.forRoot(),
     UEditorModule.forRoot({
       js: [`./assets/ueditor/ueditor.config.js`, `./assets/ueditor/ueditor.all.min.js`],
       // 默认前端配置项

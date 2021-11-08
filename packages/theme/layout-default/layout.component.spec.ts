@@ -55,7 +55,7 @@ describe('theme: layout-default', () => {
     let collapsed = false;
     spyOnProperty(srv, 'layout').and.returnValue({ collapsed });
     fixture.detectChanges();
-    const el = page.getEl('.alain-default__nav-item--collapse');
+    const el = page.getEl('.yunzai-default__nav-item--collapse');
     expect(el.querySelector('.anticon-menu-fold') != null).toBe(true);
     collapsed = true;
     el.click();
@@ -74,21 +74,21 @@ describe('theme: layout-default', () => {
     it('#logoLink', () => {
       context.options = { logoLink: '/home' };
       fixture.detectChanges();
-      const el = page.getEl<HTMLLinkElement>('.alain-default__header-logo-link');
+      const el = page.getEl<HTMLLinkElement>('.yunzai-default__header-logo-link');
       expect(el.href.endsWith('/home')).toBe(true);
     });
 
     it('#logoFixWidth', () => {
       context.options = { logoFixWidth: 100 };
       fixture.detectChanges();
-      const el = page.getEl('.alain-default__header-logo');
+      const el = page.getEl('.yunzai-default__header-logo');
       expect(el.style.width).toBe(`100px`);
     });
 
     it('#hideAside', () => {
       context.options = { hideAside: true };
       fixture.detectChanges();
-      page.expectEl(`.alain-default__hide-aside`).expectEl(`.alain-default__nav-item--collapse`, false);
+      page.expectEl(`.yunzai-default__hide-aside`).expectEl(`.yunzai-default__nav-item--collapse`, false);
     });
   });
 
@@ -98,7 +98,7 @@ describe('theme: layout-default', () => {
       let collapsed = false;
       spyOnProperty(srv, 'layout').and.returnValue({ collapsed, direction: 'rtl' });
       fixture.detectChanges();
-      const el = page.getEl('.alain-default__nav-item--collapse');
+      const el = page.getEl('.yunzai-default__nav-item--collapse');
       expect(el.querySelector('.anticon-menu-unfold') != null).toBe(true);
       collapsed = true;
       el.click();

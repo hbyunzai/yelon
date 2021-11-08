@@ -36,16 +36,16 @@ import { LayoutDefaultOptions } from './types';
   selector: 'layout-default',
   exportAs: 'layoutDefault',
   template: `
-    <div class="alain-default__progress-bar" *ngIf="isFetching"></div>
+    <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
     <layout-default-header></layout-default-header>
-    <div *ngIf="!options.hideAside" class="alain-default__aside">
-      <div class="alain-default__aside-inner">
+    <div *ngIf="!options.hideAside" class="yunzai-default__aside">
+      <div class="yunzai-default__aside-inner">
         <ng-container *ngTemplateOutlet="asideUser"></ng-container>
         <ng-container *ngTemplateOutlet="nav"></ng-container>
         <layout-default-nav *ngIf="!nav" class="d-block py-lg"></layout-default-nav>
       </div>
     </div>
-    <section class="alain-default__content">
+    <section class="yunzai-default__content">
       <ng-container *ngTemplateOutlet="content"></ng-container>
       <ng-content></ng-content>
     </section>
@@ -101,10 +101,10 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
     const { el, doc, renderer, settings } = this;
     const layout = settings.layout;
     updateHostClass(el.nativeElement, renderer, {
-      ['alain-default']: true,
-      [`alain-default__fixed`]: layout.fixed,
-      [`alain-default__collapsed`]: layout.collapsed,
-      [`alain-default__hide-aside`]: this.options.hideAside
+      ['yunzai-default']: true,
+      [`yunzai-default__fixed`]: layout.fixed,
+      [`yunzai-default__collapsed`]: layout.collapsed,
+      [`yunzai-default__hide-aside`]: this.options.hideAside
     });
 
     doc.body.classList[layout.colorWeak ? 'add' : 'remove']('color-weak');

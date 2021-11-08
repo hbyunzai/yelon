@@ -28,7 +28,7 @@ export const SCHEMA_THIRDS_COMPONENTS = [MarkdownWidget];
   declarations: SCHEMA_THIRDS_COMPONENTS,
   imports: [
     SharedModule,
-    DelonFormModule.forRoot(),
+    YelonFormModule.forRoot(),
     SimplemdeModule.forRoot({ style: 'default' }),
   ],
   exports: SCHEMA_THIRDS_COMPONENTS
