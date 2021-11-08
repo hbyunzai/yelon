@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -73,13 +74,17 @@ class MockACLService {
 
 class MockWindow {
   location = new MockLocation();
+
   open(): void {}
 }
+
 class MockLocation {
   private url: string;
+
   get href(): string {
     return this.url;
   }
+
   set href(url: string) {
     this.url = url;
   }
@@ -97,7 +102,13 @@ describe('theme: layout-default-nav', () => {
 
   function createModule(): void {
     TestBed.configureTestingModule({
-      imports: [RouterModule.forRoot([]), YunzaiThemeModule, HttpClientTestingModule, LayoutDefaultModule],
+      imports: [
+        NoopAnimationsModule,
+        RouterModule.forRoot([]),
+        YunzaiThemeModule,
+        HttpClientTestingModule,
+        LayoutDefaultModule
+      ],
       declarations: [TestComponent],
       providers: [
         { provide: ACLService, useClass: MockACLService },
@@ -235,6 +246,7 @@ describe('theme: layout-default-nav', () => {
 
         fixture.detectChanges();
       }
+
       describe('with icon', () => {
         it('when is string and includes [anticon-]', () => {
           updateIcon('anticon-edit');
@@ -291,7 +303,7 @@ describe('theme: layout-default-nav', () => {
           mockMenu[0].children![0].badge = 1;
           menuSrv.add(mockMenu);
           fixture.detectChanges();
-          expect(page.getEl('.badge') != null).toBe(true);
+          expect(page.getEl('.ant-badge') != null).toBe(true);
           page.showSubMenu();
           expect(page.getEl('.sidebar-nav__floating-container .sidebar-nav__item', true) != null).toBe(true);
         });
@@ -551,14 +563,17 @@ describe('theme: layout-default-nav', () => {
         : null;
       return el ? (el as T) : null;
     }
+
     checkText(cls: string, value: NzSafeAny): void {
       const el = this.getEl<HTMLElement>(cls);
       expect(el ? el.innerText.trim() : '').toBe(value);
     }
+
     checkCount(cls: string, count: number = 1): this {
       expect(dl.queryAll(By.css(cls)).length).toBe(count);
       return this;
     }
+
     /** 期望显示子菜单，默认：`true` */
     showSubMenu(resultExpectShow: boolean = true): void {
       let conEl = this.getEl<HTMLElement>(floatingShowCls, true);
@@ -573,6 +588,7 @@ describe('theme: layout-default-nav', () => {
         expect(conEl).toBeNull();
       }
     }
+
     /** 期望隐藏子菜单，默认：`true` */
     hideSubMenu(resultExpectHide: boolean = true): void {
       const containerEl = this.getEl<HTMLElement>(floatingShowCls, true);
@@ -605,6 +621,7 @@ class TestComponent {
   autoCloseUnderPad = false;
   recursivePath = false;
   openStrictly = false;
+
   select(): void {}
 }
 
