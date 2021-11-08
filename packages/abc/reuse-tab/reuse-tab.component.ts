@@ -66,7 +66,7 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
   static ngAcceptInputType_disabled: BooleanInput;
 
   @ViewChild('tabset') private tabset: NzTabSetComponent;
-  private unsubscribe$ = new Subject<void>();
+  private destroy$ = new Subject<void>();
   private updatePos$ = new Subject<void>();
   private _keepingScrollContainer: Element;
   list: ReuseItem[] = [];
@@ -254,7 +254,7 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
 
-    this.updatePos$.pipe(takeUntil(this.unsubscribe$), debounceTime(50)).subscribe(() => {
+    this.updatePos$.pipe(takeUntil(this.destroy$), debounceTime(50)).subscribe(() => {
       const url = this.srv.getUrl(this.route.snapshot);
       const ls = this.list.filter(w => w.url === url || !this.srv.isExclude(w.url));
       if (ls.length === 0) {
@@ -268,13 +268,13 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
       ls.forEach((i, idx) => (i.active = pos === idx));
       this.pos = pos;
       // TODO: 目前无法知道为什么 `pos` 无法通过 `nzSelectedIndex` 生效，因此强制使用组件实例的方式来修改，这种方式是安全的
-      // https://github.com/hbyunzai/ng-yunzai/issues/1736
+      // https://github.com/ng-alain/ng-alain/issues/1736
       this.tabset.nzSelectedIndex = pos;
       this.list = ls;
       this.cdr.detectChanges();
     });
 
-    this.srv.change.pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
+    this.srv.change.pipe(takeUntil(this.destroy$)).subscribe(res => {
       switch (res?.active) {
         case 'title':
           this.updateTitle(res);
@@ -292,7 +292,7 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
     this.i18nSrv.change
       .pipe(
         filter(() => this.srv.inited),
-        takeUntil(this.unsubscribe$),
+        takeUntil(this.destroy$),
         debounceTime(100)
       )
       .subscribe(() => this.genList({ active: 'title' }));
@@ -320,7 +320,7 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    const { unsubscribe$ } = this;
+    const { destroy$: unsubscribe$ } = this;
     unsubscribe$.next();
     unsubscribe$.complete();
   }
