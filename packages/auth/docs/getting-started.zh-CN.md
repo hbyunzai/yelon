@@ -83,3 +83,9 @@ export class AppModule { }
 | `[refreshOffset]` | `number` | `6000` | 偏移值（单位：ms），建议根据 `refreshTime` 倍数来设置 | ✅ |
 
 > 可以通过[全局配置](/docs/global-config)覆盖它们。
+
+## FAQ
+
+### 解决同域下多个NG-YUNZAI项目Token污染问题
+
+可以在每个项目里通过[全局配置](/docs/global-config)修改 `store_key` 用于区分。

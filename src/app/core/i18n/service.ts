@@ -1,21 +1,22 @@
-import {Platform} from '@angular/cdk/platform';
-import {Injectable} from '@angular/core';
+import { Platform } from '@angular/cdk/platform';
+import { Injectable } from '@angular/core';
 
-import {YunzaiI18nBaseService, YelonLocaleService, en_US as yelonEnUS, zh_CN as yelonZhCn} from '@yelon/theme';
-import type {NzSafeAny} from 'ng-zorro-antd/core/types';
-import {en_US, NzI18nService, zh_CN} from 'ng-zorro-antd/i18n';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 
-import {ENUS} from './en-US';
-import {ZHCN} from './zh-CN';
-import {YunzaiConfigService} from "@yelon/util";
+import { YunzaiI18nBaseService, YelonLocaleService, en_US as yelonEnUS, zh_CN as yelonZhCn } from '@yelon/theme';
+import { YunzaiConfigService } from '@yelon/util/config';
+
+import { ENUS } from './en-US';
+import { ZHCN } from './zh-CN';
 
 export type LangType = 'en-US' | 'zh-CN';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class I18NService extends YunzaiI18nBaseService {
   private _langs = [
-    {code: 'en-US', text: 'English'},
-    {code: 'zh-CN', text: '中文'}
+    { code: 'en-US', text: 'English' },
+    { code: 'zh-CN', text: '中文' }
   ];
 
   constructor(
@@ -34,6 +35,8 @@ export class I18NService extends YunzaiI18nBaseService {
     if (!this.platform.isBrowser) {
       return undefined;
     }
+    if (localStorage.lang) return localStorage.lang;
+
     const winNav: NzSafeAny = window.navigator;
     if (typeof window === 'undefined' || typeof winNav === 'undefined') {
       return undefined;
@@ -54,6 +57,9 @@ export class I18NService extends YunzaiI18nBaseService {
   }
 
   use(lang: LangType, _?: Record<string, string>, emit?: boolean): void {
+    if (this.platform.isBrowser) {
+      localStorage.lang = lang;
+    }
     this._currentLang = lang as string;
     this._data = lang === 'en-US' ? ENUS : ZHCN;
     this.zorroI18n.setLocale(lang === 'en-US' ? en_US : zh_CN);

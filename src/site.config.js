@@ -549,6 +549,10 @@ module.exports = {
           'en-US': 'Service',
         },
         {
+          'zh-CN': '路由',
+          'en-US': 'Router',
+        },
+        {
           'zh-CN': '管道',
           'en-US': 'Pipe',
         },
