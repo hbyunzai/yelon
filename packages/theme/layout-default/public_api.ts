@@ -4,4 +4,5 @@ export * from './layout-header.component';
 export * from './layout-header-item.component';
 export * from './layout-header-item-trigger.directive';
 export * from './layout-nav.component';
+export * from './layout.service';
 export * from './types';

@@ -30,6 +30,7 @@ import { SettingsService } from '@yelon/theme';
 import { updateHostClass } from '@yelon/util/browser';
 
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
+import { LayoutService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
 
 @Component({
@@ -37,15 +38,20 @@ import { LayoutDefaultOptions } from './types';
   exportAs: 'layoutDefault',
   template: `
     <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
-    <layout-default-header></layout-default-header>
-    <div *ngIf="!options.hideAside" class="yunzai-default__aside">
-      <div class="yunzai-default__aside-inner">
-        <ng-container *ngTemplateOutlet="asideUser"></ng-container>
-        <ng-container *ngTemplateOutlet="nav"></ng-container>
-        <layout-default-nav *ngIf="!nav" class="d-block py-lg"></layout-default-nav>
+    <layout-default-header *ngIf="showHeader"></layout-default-header>
+    <ng-container *ngIf="showSidebar">
+      <div *ngIf="!options.hideAside" class="yunzai-default__aside">
+        <div class="yunzai-default__aside-inner">
+          <ng-container *ngTemplateOutlet="asideUser"></ng-container>
+          <ng-container *ngTemplateOutlet="nav"></ng-container>
+          <layout-default-nav *ngIf="!nav" class="d-block py-lg"></layout-default-nav>
+        </div>
       </div>
-    </div>
-    <section class="yunzai-default__content">
+    </ng-container>
+    <section
+      class="yunzai-default__content"
+      [ngStyle]="{ 'margin-top': !showHeader ? '0px' : '', 'margin-left': !showSidebar ? '0px' : '' }"
+    >
       <ng-container *ngTemplateOutlet="content"></ng-container>
       <ng-content></ng-content>
     </section>
@@ -54,6 +60,9 @@ import { LayoutDefaultOptions } from './types';
 export class LayoutDefaultComponent implements OnInit, OnDestroy {
   @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
   headerItems!: QueryList<LayoutDefaultHeaderItemComponent>;
+
+  showHeader: boolean = true;
+  showSidebar: boolean = true;
 
   @Input() options: LayoutDefaultOptions;
   @Input() asideUser: TemplateRef<void>;
@@ -66,6 +75,7 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
 
   constructor(
     router: Router,
+    private layoutService: LayoutService,
     private msgSrv: NzMessageService,
     private settings: SettingsService,
     private el: ElementRef,
@@ -121,6 +131,12 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
     const { settings, destroy$ } = this;
     settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
     this.setClass();
+    this.layoutService.header.subscribe(h => {
+      this.showHeader = h;
+    });
+    this.layoutService.sidebar.subscribe(s => {
+      this.showSidebar = s;
+    });
   }
 
   ngOnDestroy(): void {
