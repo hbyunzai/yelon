@@ -8,3 +8,5 @@ export * from './yz.startup.service';
 export * from './bis.config';
 export * from './stomp.config';
 export * from './yz.stomp.service';
+export * from './act.guard';
+export * from './path-to-regexp.service';
