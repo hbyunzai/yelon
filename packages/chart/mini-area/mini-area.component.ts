@@ -10,7 +10,6 @@ import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/uti
 export interface G2MiniAreaData {
   x: NzSafeAny;
   y: NzSafeAny;
-  color?: string | null;
   [key: string]: NzSafeAny;
 }
 
@@ -104,10 +103,7 @@ export class G2MiniAreaComponent extends G2BaseComponent {
     chart
       .area()
       .position('x*y')
-      .color('x*y', (x, y) => {
-        const colorItem = this.data.find(w => w.x === x && w.y === y);
-        return colorItem && colorItem.color ? colorItem.color : color;
-      })
+      .color(color)
       .tooltip('x*y', (x, y) => ({ name: x, value: y + yTooltipSuffix }))
       .shape('smooth');
 

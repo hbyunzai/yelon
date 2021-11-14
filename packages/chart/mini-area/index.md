@@ -1,3 +1,13 @@
+<!--
+ * @Author: cui <devcui@outlook.com>
+ * @Editor: microsoft vscode
+ * @Date: 2021-11-07 10:02:21
+ * @LastEditTime: 2021-11-14 12:59:18
+ * @LastEditors: cui <devcui@outlook.com>
+ * @Description: empty description 
+ * @FilePath: \yelon\packages\chart\mini-area\index.md
+ * MIT License Copyright (c) 2017-present 卡色<cipchk@qq.com>
+-->
 ---
 title: g2-mini-area
 subtitle: 迷你区域图
@@ -36,4 +46,3 @@ module: import { G2MiniAreaModule } from '@yelon/chart/mini-area';
 |----|----|----|-----|
 | `[x]` | x轴 | `any` | - |
 | `[y]` | y轴 | `any` | - |
-| `[color]` | 轴颜色 | `string` | - |
