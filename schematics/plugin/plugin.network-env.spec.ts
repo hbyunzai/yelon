@@ -1,3 +1,14 @@
+/*
+ * @Author: cui <devcui@outlook.com>
+ * @Editor: microsoft vscode
+ * @Date: 2021-11-07 10:02:22
+ * @LastEditTime: 2021-11-14 12:30:52
+ * @LastEditors: cui <devcui@outlook.com>
+ * @Description: empty description
+ * @FilePath: \yelon\schematics\plugin\plugin.network-env.spec.ts
+ * MIT License Copyright (c) 2017-present 卡色<cipchk@qq.com>
+ */
+
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 
 import { createYunzaiApp } from '../utils/testing';
@@ -14,7 +25,7 @@ describe('NgYunzaiSchematic: plugin: networkEnv', () => {
     describe('when add', () => {
       it(`should add .npmrc`, () => {
         expect(tree.exists(npmrc)).toBe(true);
-        expect(tree.readContent(npmrc)).toContain(`registry=https://registry.npm.taobao.org`);
+        expect(tree.readContent(npmrc)).toContain(`registry=https://registry.npmmirror.com`);
       });
     });
 
@@ -39,7 +50,7 @@ describe('NgYunzaiSchematic: plugin: networkEnv', () => {
     describe('when add', () => {
       it(`should add .yarnrc`, () => {
         expect(tree.exists(yarnrc)).toBe(true);
-        expect(tree.readContent(yarnrc)).toContain(`registry "https://registry.npm.taobao.org"`);
+        expect(tree.readContent(yarnrc)).toContain(`registry "https://registry.npmmirror.com"`);
       });
     });
 

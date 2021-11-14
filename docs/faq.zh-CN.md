@@ -44,8 +44,8 @@ NG-ZORRO 及 @yelon/* 组件默认在 OnPush 模式下工作，mutate 对象或�
 **yarn**
 
 ```bash
-yarn config set registry https://registry.npm.taobao.org
-yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass
+yarn config set registry https://registry.npmmirror.com
+yarn config set sass_binary_site https://npmmirror.com/mirrors/node-sass
 # 恢复
 yarn config delete registry
 yarn config delete sass_binary_site
@@ -54,8 +54,8 @@ yarn config delete sass_binary_site
 **npm**
 
 ```bash
-npm config set registry https://registry.npm.taobao.org
-npm config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass
+npm config set registry https://registry.npmmirror.com
+npm config set sass_binary_site https://npmmirror.com/mirrors/node-sass
 # 恢复
 npm config delete registry
 npm config delete sass_binary_site
