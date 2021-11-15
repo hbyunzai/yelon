@@ -13,6 +13,20 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## [12.0.14](https://github.com/hbyunzai/yelon/compare/12.0.13...12.0.14) (2021-11-15)
+
+
+### Bug Fixes
+
+* **chart:mini-area:** remove color in data ([#1379](https://github.com/hbyunzai/yelon/issues/1379))) ([954c707](https://github.com/hbyunzai/yelon/commit/954c707cde549d60e1a87ccf43f2a1d776993ba4))
+
+
+### Features
+
+* **bis:layout:** add act guard ([9c8e4aa](https://github.com/hbyunzai/yelon/commit/9c8e4aa21159220af825579c90847526b894fa38))
+* **theme:i18n:** add flatData in i18n ([22053f4](https://github.com/hbyunzai/yelon/commit/22053f44a576ffd5bc5457ec24d63f31e623f140))
+* **theme:layout:** add layout service ([08ffd9b](https://github.com/hbyunzai/yelon/commit/08ffd9bcb6c0008c523475f48819a74c956b5866))
+
 ## [12.0.13](https://github.com/hbyunzai/yelon/compare/12.0.12...12.0.13) (2021-11-08)
 
 
