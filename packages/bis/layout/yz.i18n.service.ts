@@ -100,10 +100,10 @@ export class YzI18NService extends YunzaiI18nBaseService {
     return this.http.get(`assets/tmp/i18n/${lang}.json`);
   }
 
-  use(lang: string, data: Record<string, string>): void {
+  use(lang: string, data: Record<string, unknown>): void {
     if (this._currentLang === lang) return;
 
-    this._data = data;
+    this._data = this.flatData(data, []);
 
     const item = LANGS[lang];
     registerLocaleData(item.ng);
