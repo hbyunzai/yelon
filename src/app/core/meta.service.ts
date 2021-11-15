@@ -48,12 +48,14 @@ export class MetaService {
     for (const g of FULLMETAS) {
       for (const item of g.list!) {
         const curTitle = item.meta![i18n.defaultLang].title;
-        item._t =
-          typeof curTitle !== 'string'
-            ? Object.values(curTitle!)
-                .map(v => v)
-                .join('-')
-            : curTitle;
+        if (curTitle) {
+          item._t =
+            typeof curTitle !== 'string'
+              ? Object.values(curTitle!)
+                  .map(v => v)
+                  .join('-')
+              : curTitle;
+        }
       }
     }
   }
