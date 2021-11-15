@@ -1,0 +1,127 @@
+<nz-row [nzGutter]="16">
+  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="8" [nzXl]="6" [nzXXl]="6">
+    <nz-tabset nzCentered>
+      <nz-tab nzTitle="部门" (nzSelect)="onTabsetDept()">
+        <div sg-container="2">
+          <sg col="1" class="nz-tabset-sg">
+            <nz-input-group class="nz-tabset-input" [nzSuffix]="searchInputTpl">
+              <input
+                nz-input
+                [(ngModel)]="nzTabsetSearch"
+                (ngModelChange)="onTabsetSearchChange('dept', $event)"
+                type="text"
+                placeholder="请输入部门名称"
+              />
+            </nz-input-group>
+          </sg>
+          <sg col="1">
+            <nz-spin [nzSpinning]="nzTabsetLoading">
+              <nz-tree
+                class="nz-tabset-content"
+                (nzClick)="onDeptClick($event)"
+                [nzBlockNode]="true"
+                [nzShowLine]="true"
+                [nzHideUnMatched]="true"
+                [nzVirtualHeight]="nzDeptTreeVirtualHeight"
+                [nzData]="nzDepts"
+              ></nz-tree>
+            </nz-spin>
+          </sg>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="角色" (nzSelect)="onTabsetRole()">
+        <div sg-container="2">
+          <sg col="1" class="nz-tabset-sg">
+            <nz-input-group class="nz-tabset-input" [nzSuffix]="searchInputTpl">
+              <input
+                nz-input
+                [(ngModel)]="nzTabsetSearch"
+                (ngModelChange)="onTabsetSearchChange('role', $event)"
+                type="text"
+                placeholder="请输入角色名称"
+              />
+            </nz-input-group>
+          </sg>
+          <sg col="1">
+            <nz-spin [nzSpinning]="nzTabsetLoading">
+              <nz-tree
+                class="nz-tabset-content"
+                (nzClick)="onRoleClick($event)"
+                [nzBlockNode]="true"
+                [nzShowLine]="true"
+                [nzHideUnMatched]="true"
+                [nzVirtualHeight]="nzRoleTreeVirtualHeight"
+                [nzData]="nzRoles"
+              ></nz-tree>
+            </nz-spin>
+          </sg>
+        </div>
+      </nz-tab>
+      <nz-tab nzTitle="好友" (nzSelect)="onTabsetFriendGroup()">
+        <div sg-container="2">
+          <sg col="1" class="nz-tabset-sg">
+            <nz-input-group class="nz-tabset-input" [nzSuffix]="searchInputTpl">
+              <input
+                nz-input
+                [(ngModel)]="nzTabsetSearch"
+                (ngModelChange)="onTabsetSearchChange('friendGroup', $event)"
+                type="text"
+                placeholder="请输入好友名称"
+              />
+            </nz-input-group>
+          </sg>
+          <sg col="1">
+            <nz-spin [nzSpinning]="nzTabsetLoading">
+              <nz-list class="nz-tabset-content" nzItemLayout="horizontal" [nzSplit]="false" nzSize="small">
+                <nz-list-item
+                  class="nz-tabset-content-item"
+                  *ngFor="let group of nzFriendGroups"
+                  (click)="onFriendGroupClick(group)"
+                >
+                  <nz-list-item-meta>
+                    <nz-list-item-meta-title>
+                      {{ group.name }}
+                    </nz-list-item-meta-title>
+                  </nz-list-item-meta>
+                </nz-list-item>
+              </nz-list>
+            </nz-spin>
+          </sg>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+  </nz-col>
+
+  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="16" [nzXl]="13" [nzXXl]="13">
+    <st #st responsiveHideHeaderFooter></st>
+  </nz-col>
+
+  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="5" [nzXXl]="5">
+    <nz-spin [nzSpinning]="nzContactLoading">
+      <nz-list nzItemLayout="horizontal" [nzSplit]="false" nzSize="small">
+        <nz-list-item
+          class="nz-tabset-content-item"
+          *ngFor="let contact of nzContacts"
+          (click)="onContactRemove(contact)"
+        >
+          <nz-list-item-meta>
+            <nz-list-item-meta-title>
+              {{ contact.realName }}
+            </nz-list-item-meta-title>
+          </nz-list-item-meta>
+        </nz-list-item>
+      </nz-list>
+    </nz-spin>
+  </nz-col>
+</nz-row>
+
+<nz-row *ngIf="button">
+  <nz-col [nzSpan]="4" [nzOffset]="20">
+    <button nz-button nzType="primary" (click)="confirm()">确定</button>
+  </nz-col>
+</nz-row>
+
+<ng-template #searchInputTpl>
+  <i nz-icon nzType="close" nzTheme="outline" *ngIf="nzTabsetSearch" (click)="onTabsetSearchClean()"></i>
+  <i nz-icon nzType="search" nzTheme="outline" *ngIf="!nzTabsetSearch"></i>
+</ng-template>
