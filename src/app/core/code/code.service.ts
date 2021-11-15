@@ -43,9 +43,9 @@ export class CodeService {
     includeCli: boolean;
   }): Record<string, string | Record<string, string>> {
     const ngCoreVersion = pkg.dependencies['@angular/core'];
+    const mainVersion = ngCoreVersion.substring(1).split('.').shift();
     const res = packageJSON as Record<string, NzSafeAny>;
     [
-      `@angular/cdk`,
       'ng-zorro-antd',
       'date-fns',
       '@yelon/theme',
@@ -83,6 +83,7 @@ export class CodeService {
     });
     // fix @angular/cdk
     res.dependencies['@angular/core'] = ngCoreVersion;
+    res.dependencies['@angular/cdk'] = mainVersion;
     res.dependencies['core-js'] = `~3.8.3`;
     if (!includeCli) res;
 
