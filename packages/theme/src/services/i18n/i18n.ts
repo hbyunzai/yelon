@@ -6,6 +6,8 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YunzaiConfigService, YunzaiThemeI18nConfig } from '@yelon/util/config';
 
+import { _HttpClient } from '../http/http.client';
+
 export interface YunzaiI18NService {
   [key: string]: NzSafeAny;
 
@@ -37,7 +39,7 @@ export interface YunzaiI18NService {
    *
    * @param emit 是否触发 `change`，默认：true ; Should be removed, please use `change` event instead.
    */
-  use(lang: string, data?: Record<string, string>): void;
+  use(lang: string, data?: Record<string, unknown>): void;
 
   /**
    * Return to the current language list
@@ -86,7 +88,39 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
     })!;
   }
 
-  abstract use(lang: string, data?: Record<string, string>): void;
+  /**
+   * Flattened data source
+   *
+   * @example
+   * {
+   *   "name": "Name",
+   *   "sys": {
+   *     "": "System",
+   *     "title": "Title"
+   *   }
+   * }
+   * =>
+   * {
+   *   "name": "Name",
+   *   "sys": "System",
+   *   "sys.title": "Title"
+   * }
+   */
+  flatData(data: Record<string, unknown>, parentKey: string[]): Record<string, string> {
+    const res: Record<string, string> = {};
+    for (const key of Object.keys(data)) {
+      const value = data[key];
+      if (typeof value === 'object') {
+        const child = this.flatData(value as Record<string, unknown>, parentKey.concat(key));
+        Object.keys(child).forEach(childKey => (res[childKey] = child[childKey]));
+      } else {
+        res[(key ? parentKey.concat(key) : parentKey).join('.')] = `${value}`;
+      }
+    }
+    return res;
+  }
+
+  abstract use(lang: string, data?: Record<string, unknown>): void;
 
   abstract getLangs(): NzSafeAny[];
 
@@ -110,8 +144,8 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
 
 @Injectable({ providedIn: 'root' })
 export class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
-  use(lang: string, data: Record<string, string>): void {
-    this._data = data;
+  use(lang: string, data: Record<string, unknown>): void {
+    this._data = this.flatData(data, []);
     this._currentLang = lang;
     this._change$.next(lang);
   }
