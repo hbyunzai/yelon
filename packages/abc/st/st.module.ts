@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
@@ -19,7 +21,9 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { LetModule } from '@yelon/abc/let';
 import { YelonACLModule } from '@yelon/acl';
 
+import { STFilterComponent } from './st-filter.component';
 import { STRowDirective } from './st-row.directive';
+import { STTdComponent } from './st-td.component';
 import { STWidgetHostDirective } from './st-widget-host.directive';
 import { STComponent } from './st.component';
 
@@ -43,9 +47,11 @@ const COMPONENTS = [STComponent, STRowDirective, STWidgetHostDirective];
     NzTagModule,
     NzInputModule,
     NzToolTipModule,
-    NzResizableModule
+    NzResizableModule,
+    NzInputNumberModule,
+    NzDatePickerModule
   ],
-  declarations: COMPONENTS,
+  declarations: [...COMPONENTS, STFilterComponent, STTdComponent],
   exports: COMPONENTS
 })
 export class STModule {}
