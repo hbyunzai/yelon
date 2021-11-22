@@ -10,5 +10,5 @@ export * from './stomp.config';
 export * from './yz.stomp.service';
 export * from './act.guard';
 export * from './path-to-regexp.service';
-export * from './contact/contact.component';
-export * from './contact/contact.service';
+// export * from './contact/contact.component';
+// export * from './contact/contact.service';

@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { YzSharedModule } from '@yelon/bis/shared';
 import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
 
-import { ContactComponent } from './contact/contact.component';
+// import { ContactComponent } from './contact/contact.component';
 import {
   YzHeaderApplicationComponent,
   YzHeaderNotifyComponent,
@@ -19,7 +19,7 @@ import {
 } from './widgets';
 import { YzLayoutBasicComponent } from './yz.basic.component';
 const COMPONENTS = [
-  ContactComponent,
+  // ContactComponent,
   YzLayoutBasicComponent,
   YzHeaderApplicationComponent,
   YzHeaderNotifyComponent,

@@ -28,7 +28,6 @@ export class StartupService {
     private titleService: TitleService,
     @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
     private httpClient: HttpClient,
-    private injector: Injector,
     private router: Router
   ) {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);

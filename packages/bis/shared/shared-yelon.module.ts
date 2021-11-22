@@ -22,7 +22,7 @@ import { ResultModule } from '@yelon/abc/result';
 import { ReuseTabModule } from '@yelon/abc/reuse-tab';
 import { SEModule } from '@yelon/abc/se';
 import { SGModule } from '@yelon/abc/sg';
-import { STModule } from '@yelon/abc/st';
+// import { STModule } from '@yelon/abc/st';
 import { SVModule } from '@yelon/abc/sv';
 import { TagSelectModule } from '@yelon/abc/tag-select';
 import { YelonACLModule } from '@yelon/acl';
@@ -61,7 +61,7 @@ export const YZ_SHARED_YELON_MODULES = [
   DatePickerModule,
   DownFileModule,
   EllipsisModule,
-  STModule,
+  // STModule,
   SVModule,
   SEModule,
   SGModule,
