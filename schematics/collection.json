@@ -52,6 +52,11 @@
       "factory": "./tpl",
       "schema": "./tpl/schema.json",
       "description": "Create a ng yunzai custom template pages."
+    },
+    "sta": {
+      "factory": "./sta",
+      "schema": "./sta/schema.json",
+      "description": "Generate api via swagger scheme."
     }
   }
 }
