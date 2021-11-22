@@ -1,3 +1,4 @@
+import { ObserversModule } from '@angular/cdk/observers';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -11,7 +12,7 @@ import { ExceptionComponent } from './exception.component';
 const COMPONENTS = [ExceptionComponent];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, YelonLocaleModule, NzButtonModule],
+  imports: [CommonModule, ObserversModule, RouterModule, YelonLocaleModule, NzButtonModule],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })
