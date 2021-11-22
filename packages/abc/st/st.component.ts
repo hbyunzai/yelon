@@ -23,15 +23,14 @@ import {
 import { from, isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
-import { NzResizeEvent } from 'ng-zorro-antd/resizable';
-import { NzTableComponent } from 'ng-zorro-antd/table';
-
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN, DatePipe, YelonLocaleService, LocaleData, YNPipe } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSTConfig } from '@yelon/util/config';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput, toBoolean } from '@yelon/util/decorator';
 import { deepCopy, deepMergeKey } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
+import { NzResizeEvent } from 'ng-zorro-antd/resizable';
+import { NzTableComponent } from 'ng-zorro-antd/table';
 
 import { STColumnSource } from './st-column-source';
 import { STDataSource, STDataSourceOptions, STDataSourceResult } from './st-data-source';
@@ -387,7 +386,7 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
       this._statistical = result.statistical as STStatisticalResults;
       this.changeEmit('loaded', result.list);
       // Should be re-render in next tike when using virtual scroll
-      // https://github.com/ng-alain/ng-alain/issues/1836
+      // https://github.com/hbyunzai/ng-yunzai/issues/1836
       if (this.cdkVirtualScrollViewport) {
         Promise.resolve().then(() => this.cdkVirtualScrollViewport.checkViewportSize());
       }
@@ -698,7 +697,7 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   // #endregion
 
-  _handleTd(ev: _STTdNotify) {
+  _handleTd(ev: _STTdNotify): void {
     switch (ev.type) {
       case 'checkbox':
         this._refCheck()._checkNotify();

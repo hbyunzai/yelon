@@ -10,10 +10,9 @@ import {
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { DrawerHelper, ModalHelper } from '@yelon/theme';
 import { deepMergeKey } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STComponent } from '.';
 import { STColumnButton, STData } from './st.interfaces';
@@ -163,7 +162,7 @@ export class STTdComponent {
     private drawerHelper: DrawerHelper
   ) {}
 
-  private report(type: _STTdNotifyType) {
+  private report(type: _STTdNotifyType): void {
     this.n.emit({ type, item: this.i, col: this.c });
   }
 

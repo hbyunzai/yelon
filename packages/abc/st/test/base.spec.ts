@@ -8,14 +8,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 
+import { dispatchDropDown } from '@yelon/testing';
+import { YUNZAI_I18N_TOKEN, YelonLocaleModule, _HttpClient } from '@yelon/theme';
+import { deepCopy, deepGet } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPaginationComponent } from 'ng-zorro-antd/pagination';
-
-import { dispatchDropDown } from '@yelon/testing';
-import { YUNZAI_I18N_TOKEN, YelonLocaleModule, _HttpClient } from '@yelon/theme';
-import { deepCopy, deepGet } from '@yelon/util/other';
 
 import { YunzaiI18NService, YunzaiI18NServiceFake } from '../../../theme/src/services/i18n/i18n';
 import { STComponent } from '../st.component';
@@ -40,7 +39,7 @@ import { STWidgetRegistry } from './../st-widget';
 export const MOCKDATE = new Date();
 export const MOCKIMG = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==`;
 
-const r = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
+const r = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1) + min);
 export function genData(count: number): NzSafeAny[] {
   return Array(count)
     .fill({})

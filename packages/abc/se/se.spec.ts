@@ -12,10 +12,9 @@ import {
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NzRadioModule } from 'ng-zorro-antd/radio';
-
 import { createTestContext } from '@yelon/testing';
 import { REP_MAX } from '@yelon/theme';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 import { SEContainerComponent } from './se-container.component';
 import { SEComponent } from './se.component';
@@ -31,7 +30,7 @@ describe('abc: edit', () => {
   let context: TestComponent;
   let page: PageObject;
 
-  const moduleAction = () => {
+  const moduleAction = (): void => {
     TestBed.configureTestingModule({
       imports: [SEModule, FormsModule, NzRadioModule, NoopAnimationsModule],
       declarations: [TestComponent]

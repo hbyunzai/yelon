@@ -3,11 +3,10 @@ import { Injectable, NgZone } from '@angular/core';
 
 import { saveAs } from 'file-saver';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfigService, YunzaiZipConfig } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyResult, LazyService } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ZipSaveOptions } from './zip.types';
 
@@ -41,7 +40,7 @@ export class ZipService {
   @ZoneOutside()
   read(fileOrUrl: File | string, options?: NzSafeAny): Promise<NzSafeAny> {
     return new Promise<NzSafeAny>((resolve, reject) => {
-      const resolveCallback = (data: NzSafeAny) => {
+      const resolveCallback = (data: NzSafeAny): void => {
         this.ngZone.run(() => resolve(data));
       };
       this.init().then(() => {

@@ -2,9 +2,8 @@ import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { share } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { ACLService } from '@yelon/acl';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { Menu, MenuIcon, MenuInner } from './interface';
@@ -33,7 +32,7 @@ export class MenuService implements OnDestroy {
   }
 
   visit(data: Menu[], callback: (item: Menu, parentMenum: Menu | null, depth?: number) => void): void {
-    const inFn = (list: Menu[], parentMenu: Menu | null, depth: number) => {
+    const inFn = (list: Menu[], parentMenu: Menu | null, depth: number): void => {
       for (const item of list) {
         callback(item, parentMenu, depth);
         if (item.children && item.children.length > 0) {

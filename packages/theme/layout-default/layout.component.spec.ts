@@ -4,10 +4,9 @@ import { By } from '@angular/platform-browser';
 import { NavigationCancel, NavigationError, RouteConfigLoadEnd, RouteConfigLoadStart } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { createTestContext } from '@yelon/testing';
 import { NzIconTestModule } from 'ng-zorro-antd/icon/testing';
 import { NzMessageService } from 'ng-zorro-antd/message';
-
-import { createTestContext } from '@yelon/testing';
 
 import { SettingsService } from '../src/services/settings/settings.service';
 import { YunzaiThemeModule } from '../src/theme.module';
@@ -109,25 +108,25 @@ describe('theme: layout-default', () => {
 
   describe('lazy load', () => {
     let msgSrv: NzMessageService;
-    function lazyTick() {
+    function lazyTick(): void {
       tick(101);
     }
-    function lazyStart() {
+    function lazyStart(): void {
       context.comp.processEv(new RouteConfigLoadStart({}));
       lazyTick();
     }
 
-    function lazyError() {
+    function lazyError(): void {
       context.comp.processEv(new NavigationError(0, '/', {}));
       lazyTick();
     }
 
-    function lazyCancel(reason: string = 'cancel') {
+    function lazyCancel(reason: string = 'cancel'): void {
       context.comp.processEv(new NavigationCancel(0, '/', reason));
       lazyTick();
     }
 
-    function lazyEnd() {
+    function lazyEnd(): void {
       context.comp.processEv(new RouteConfigLoadEnd({}));
       lazyTick();
     }

@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { of } from 'rxjs';
 
+import { deepGet } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
-
-import { deepGet } from '@yelon/util/other';
 
 import { SFValue } from '../../interface';
 import { getData, toBool } from '../../utils';
@@ -117,12 +116,12 @@ export class UploadWidget extends ControlUIWidget<SFUploadWidgetSchema> implemen
     this.setValue(this.pureValue(fileList));
   }
 
-  handleRemove = () => {
+  handleRemove = (): boolean => {
     this._setValue(this.fileList);
     return true;
   };
 
-  handlePreview = (file: NzUploadFile) => {
+  handlePreview = (file: NzUploadFile): void => {
     if (this.ui.preview) {
       this.ui.preview(file);
       return;

@@ -1,11 +1,10 @@
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzI18nService } from 'ng-zorro-antd/i18n';
-
 import { toBoolean } from '@yelon/util/decorator';
 import { deepCopy } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzI18nService } from 'ng-zorro-antd/i18n';
 
 import { SF_SEQ } from './const';
 import { SFSchema, SFSchemaDefinition, SFSchemaEnum } from './schema';
@@ -60,7 +59,7 @@ export function retrieveSchema(schema: SFSchema, definitions: SFSchemaDefinition
 }
 
 export function resolveIfSchema(_schema: SFSchema, _ui: SFUISchemaItemRun): void {
-  const fn = (schema: SFSchema, ui: SFUISchemaItemRun) => {
+  const fn = (schema: SFSchema, ui: SFUISchemaItemRun): void => {
     resolveIf(schema, ui);
 
     Object.keys(schema.properties!).forEach(key => {
@@ -118,12 +117,12 @@ function detectKey(keys: string[], detectKeys: string[]): void {
 
 export function orderProperties(properties: string[], order: string[]): string[] {
   if (!Array.isArray(order)) return properties;
-  const arrayToHash = (arr: NzSafeAny) =>
+  const arrayToHash = (arr: NzSafeAny): NzSafeAny =>
     arr.reduce((prev: NzSafeAny, curr: NzSafeAny) => {
       prev[curr] = true;
       return prev;
     }, {});
-  const errorPropList = (arr: NzSafeAny) => `property [${arr.join(`', '`)}]`;
+  const errorPropList = (arr: NzSafeAny): string => `property [${arr.join(`', '`)}]`;
 
   const propertyHash = arrayToHash(properties);
   const orderHash = arrayToHash(order);

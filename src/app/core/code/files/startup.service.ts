@@ -1,4 +1,4 @@
-export default (options: { ajvVersion: string }) => `import { Injectable } from '@angular/core';
+export default (options: { ajvVersion: string }): string => `import { Injectable } from '@angular/core';
 import { LazyService } from '@yelon/util/other';
 
 @Injectable()

@@ -5,8 +5,6 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { of, Subject, throwError } from 'rxjs';
 
-import { NzPaginationComponent } from 'ng-zorro-antd/pagination';
-
 import {
   DatePipe,
   YelonLocaleService,
@@ -17,6 +15,7 @@ import {
   YunzaiI18NService
 } from '@yelon/theme';
 import { deepCopy } from '@yelon/util/other';
+import { NzPaginationComponent } from 'ng-zorro-antd/pagination';
 
 import { STDataSource } from '../st-data-source';
 import { STExport } from '../st-export';
@@ -55,7 +54,7 @@ describe('abc: st', () => {
 
   afterEach(() => comp.ngOnDestroy());
 
-  function refAssign() {
+  function refAssign(): void {
     fixture = page.fixture;
     context = page.context;
     dl = page.dl;

@@ -3,11 +3,10 @@ import { Injectable, NgZone } from '@angular/core';
 
 import isUtf8 from 'isutf8';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfigService, YunzaiXlsxConfig } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyResult, LazyService } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { XlsxExportOptions, XlsxExportResult, XlsxExportSheet } from './xlsx.types';
 
@@ -63,7 +62,7 @@ export class XlsxService {
    */
   import(fileOrUrl: File | string): Promise<{ [key: string]: NzSafeAny[][] }> {
     return new Promise<{ [key: string]: NzSafeAny[][] }>((resolve, reject) => {
-      const r = (data: NzSafeAny) => this.ngZone.run(() => resolve(this.read(data)));
+      const r = (data: NzSafeAny): void => this.ngZone.run(() => resolve(this.read(data)));
       this.init()
         .then(() => {
           // from url

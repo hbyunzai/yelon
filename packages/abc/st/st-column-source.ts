@@ -1,12 +1,11 @@
 import { Host, Inject, Injectable, Optional, TemplateRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, warn } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STRowSource } from './st-row.directive';
 import { STWidgetRegistry } from './st-widget';
@@ -139,7 +138,7 @@ export class STColumnSource {
   }
 
   private fixedCoerce(list: _STColumn[]): void {
-    const countReduce = (a: number, b: _STColumn) => a + +b.width!.toString().replace('px', '');
+    const countReduce = (a: number, b: _STColumn): number => a + +b.width!.toString().replace('px', '');
     // left width
     list
       .filter(w => w.fixed && w.fixed === 'left' && w.width)

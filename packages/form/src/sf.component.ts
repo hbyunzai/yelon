@@ -20,13 +20,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { merge, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN, YelonLocaleService, LocaleData } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { BooleanInput, InputBoolean } from '@yelon/util/decorator';
 import { deepCopy } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { mergeConfig } from './config';
 import { ErrorData } from './errors';
@@ -289,7 +288,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
       uiSchema: SFUISchemaItemRun,
       parentUiSchema: SFUISchemaItemRun,
       uiRes: SFUISchemaItemRun
-    ) => {
+    ): void => {
       if (!Array.isArray(schema.required)) schema.required = [];
 
       Object.keys(schema.properties!).forEach(key => {
@@ -534,7 +533,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.platform.isBrowser) {
       return false;
     }
-    const fn = (property: FormProperty) => {
+    const fn = (property: FormProperty): void => {
       property._runValidation();
       if (!(property instanceof PropertyGroup) || !property.properties) return;
       if (Array.isArray(property.properties)) {

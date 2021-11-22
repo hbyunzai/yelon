@@ -1,10 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfigService, YunzaiLodopConfig } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { Lodop, LodopPrintResult, LodopResult } from './lodop.types';
 
@@ -90,7 +89,7 @@ export class LodopService implements OnDestroy {
 
     const url = `${this.cog.url}?name=${this.cog.name}`;
     let checkMaxCount = this.cog.checkMaxCount as number;
-    const onResolve = (status: NzSafeAny, error?: NzSafeAny) => {
+    const onResolve = (status: NzSafeAny, error?: NzSafeAny): void => {
       this._init.next({
         ok: status === 'ok',
         status,
@@ -98,7 +97,7 @@ export class LodopService implements OnDestroy {
         lodop: this._lodop!
       });
     };
-    const checkStatus = () => {
+    const checkStatus = (): void => {
       --checkMaxCount;
       if (this._lodop!.webskt && this._lodop!.webskt.readyState === 1) {
         onResolve('ok');
