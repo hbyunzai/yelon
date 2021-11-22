@@ -11,6 +11,20 @@ type: Documents
 
 ng-yunzai 在此基础上增加了很多很酷的骚操作。
 
+默认情况下所有的代码统一存放于 `app/routes` 下面，可通过 `ng-yunzai.json` 指向其他目录，例如：
+
+```json
+{
+  "$schema": "./node_modules/ng-yunzai/schema.json",
+  "projects": {
+    // 表示 ng-yunzai 项目都存放于 `app/pages` 下
+    "ng-yunzai": {
+      "routesRoot": "app/pages"
+    }
+  }
+}
+```
+
 ## 命令格式
 
 ```bash

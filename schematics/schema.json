@@ -12,6 +12,15 @@
     },
     "colorLess": {
       "$ref": "#/definitions/colorLess"
+    },
+    "projects": {
+      "type": "object",
+      "patternProperties": {
+        "^(?:@[a-zA-Z0-9_-]+/)?[a-zA-Z0-9_-]+$": {
+          "$ref": "#/definitions/project"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "definitions": {

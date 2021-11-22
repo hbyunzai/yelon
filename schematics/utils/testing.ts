@@ -64,8 +64,15 @@ export async function createYunzaiApp(ngAddOptions?: NgAddSchema): Promise<AppRe
   return { runner: yunzaiRunner, tree };
 }
 
-export async function createYunzaiAndModuleApp(name: string = 'trade', ngAddOptions?: object): Promise<AppResult> {
+export async function createYunzaiAndModuleApp(
+  name: string = 'trade',
+  ngAddOptions?: object,
+  yunzaiData?: unknown
+): Promise<AppResult> {
   const res = await createYunzaiApp(ngAddOptions);
+  if (yunzaiData != null) {
+    res.tree.create('ng-yunzai.json', JSON.stringify(yunzaiData));
+  }
   res.tree = await res.runner
     .runSchematicAsync('module', { name, project: APPNAME, routing: true }, res.tree)
     .toPromise();
