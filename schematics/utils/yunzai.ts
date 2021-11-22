@@ -20,10 +20,9 @@ import { InsertChange } from '@schematics/angular/utility/change';
 import { buildRelativePath, findModuleFromOptions, ModuleOptions } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
-import * as ts from 'typescript';
-
 import * as fs from 'fs';
 import * as path from 'path';
+import * as ts from 'typescript';
 
 import { getSourceFile } from './ast';
 import { getProject, NgYunzaiProjectDefinition } from './workspace';
@@ -41,6 +40,7 @@ export interface CommonSchema extends ComponentSchema {
   routerModulePath?: string;
   selector?: string;
   withoutPrefix?: boolean;
+  withoutModulePrefixInComponentName?: boolean;
   skipTests?: boolean;
   flat?: boolean;
   modal?: boolean;
@@ -69,7 +69,7 @@ function buildSelector(schema: CommonSchema, projectPrefix: string): string {
 }
 
 function buildComponentName(schema: CommonSchema, _projectPrefix: string): string {
-  const ret: string[] = [schema.module!];
+  const ret: string[] = schema.withoutModulePrefixInComponentName === true ? [] : [schema.module!];
   if (schema.target && schema.target.length > 0) {
     ret.push(...schema.target.split('/'));
   }

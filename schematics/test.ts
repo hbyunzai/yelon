@@ -14,7 +14,7 @@ const Jasmine = require('jasmine');
 const runner = new Jasmine({ projectBaseDir });
 
 // const files = `schematics/**/*.spec.ts`;
-const files = `schematics/sta/client.spec.ts`;
+const files = `schematics/utils/yunzai.spec.ts`;
 
 const tests = glob.sync(files).map(p => relative(projectBaseDir, p));
 
