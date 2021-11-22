@@ -349,7 +349,7 @@ export class PageObject<T extends TestComponent> {
       el = (this.dl.nativeElement as HTMLElement).querySelector(`.ant-table-thead th:nth-child(${col})`) as HTMLElement;
     }
     if (!el) {
-      expect(false).toBe(true, `not found col: ${col}, row: ${row} element`);
+      expect(false).withContext(`not found col: ${col}, row: ${row} element`).toBe(true);
       return this;
     }
 
@@ -363,7 +363,7 @@ export class PageObject<T extends TestComponent> {
   }
   clickContentMenu(idx: number): this {
     const el = document.querySelector(`.st__contextmenu li:nth-child(${idx})`);
-    expect(el).not.toBeNull(`the index: ${idx} is invalid element of content menu container`);
+    expect(el).withContext(`the index: ${idx} is invalid element of content menu container`).not.toBeNull();
     const fn = this.context.comp.contextmenuList[idx - 1].fn;
     expect(fn).not.toHaveBeenCalled();
     (el as HTMLElement).click();

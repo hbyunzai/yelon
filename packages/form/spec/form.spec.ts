@@ -5,13 +5,12 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzIconService } from 'ng-zorro-antd/icon';
-
 import { ACLService, YelonACLModule } from '@yelon/acl';
 import { createTestContext } from '@yelon/testing';
 import { YunzaiI18NService, YunzaiThemeModule, YUNZAI_I18N_TOKEN, YelonLocaleService, en_US } from '@yelon/theme';
 import { deepCopy } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { FormPropertyFactory } from '../src/model/form.property.factory';
 import { YelonFormModule } from '../src/module';
@@ -534,7 +533,7 @@ describe('form: component', () => {
       });
       it('#setValue, shoule be throw error when invlaid path', () => {
         expect(() => {
-          context.comp.setValue('/invalid-path', name);
+          context.comp.setValue('/invalid-path', 'name');
         }).toThrow();
       });
     });

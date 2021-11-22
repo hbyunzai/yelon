@@ -6,10 +6,9 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiThemeHttpClientConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { _HttpClient } from './http.client';
 
@@ -86,7 +85,7 @@ describe('theme: http.client', () => {
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
@@ -98,12 +97,12 @@ describe('theme: http.client', () => {
         for (const key in p) {
           let v = p[key] as any;
           if (v instanceof Date) v = v.valueOf();
-          expect(ret.request.params.get(key)).toBe(v, `param "${key}" muse be "${v}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${v}"`).toBe(v);
         }
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
-      it('should be ignore process when params is HttpParams', fakeAsync(() => {
+      it('should be ingore process when params is HttpParams', fakeAsync(() => {
         http.get(URL, new HttpParams({ fromObject: { a: 'aa' } })).subscribe(_ => (res = _));
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
@@ -126,7 +125,7 @@ describe('theme: http.client', () => {
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(typeof res).toBe('string');
         expect(res).toBe(OK);
@@ -137,7 +136,7 @@ describe('theme: http.client', () => {
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res.status).toBe(200);
         expect(res.body).toBe(OK);
@@ -229,7 +228,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
@@ -240,7 +239,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(typeof res).toBe('string');
         expect(res).toBe(OK);
@@ -281,7 +280,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res.status).toBe(200);
         expect(res.body).toBe(OK);
@@ -301,7 +300,7 @@ describe('theme: http.client', () => {
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
@@ -311,7 +310,7 @@ describe('theme: http.client', () => {
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(typeof res).toBe('string');
         expect(res).toBe(OK);
@@ -322,7 +321,7 @@ describe('theme: http.client', () => {
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res.status).toBe(200);
         expect(res.body).toBe(OK);
@@ -412,7 +411,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
@@ -423,7 +422,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(typeof res).toBe('string');
         expect(res).toBe(OK);
@@ -456,7 +455,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res.status).toBe(200);
         expect(res.body).toBe(OK);
@@ -486,7 +485,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
@@ -497,7 +496,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(typeof res).toBe('string');
         expect(res).toBe(OK);
@@ -530,7 +529,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res.status).toBe(200);
         expect(res.body).toBe(OK);
@@ -560,7 +559,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
@@ -571,7 +570,7 @@ describe('theme: http.client', () => {
         const ret = backend.expectOne(() => true) as TestRequest;
         expect(ret.request.body).toBe(BODY);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(typeof res).toBe('string');
         expect(res).toBe(OK);
@@ -613,7 +612,7 @@ describe('theme: http.client', () => {
         expect(ret.request.body).toBe(BODY);
         expect(ret.request.headers.get('content-type')).toBe(`application/x-www-form-urlencoded`);
         for (const key in PARAMS)
-          expect(ret.request.params.get(key)).toBe(PARAMS[key], `param "${key}" muse be "${PARAMS[key]}"`);
+          expect(ret.request.params.get(key)).withContext(`param "${key}" muse be "${PARAMS[key]}"`).toBe(PARAMS[key]);
         ret.flush(OK);
         expect(res.status).toBe(200);
         expect(res.body).toBe(OK);
@@ -681,7 +680,7 @@ describe('theme: http.client', () => {
       const ret = backend.expectOne(() => true) as TestRequest;
       expect(ret.request.urlWithParams.length).toBeGreaterThan(URL.length + 15);
     }));
-    it('should be ignore null values', fakeAsync(() => {
+    it('should be ingore null values', fakeAsync(() => {
       createModule({ nullValueHandling: 'ignore' });
       http.get(URL, { a: 1, b: null, c: undefined }).subscribe();
       tick();

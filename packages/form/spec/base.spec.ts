@@ -4,11 +4,10 @@ import { ComponentFixture, discardPeriodicTasks, TestBed, tick } from '@angular/
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { cleanCdkOverlayHtml, dispatchFakeEvent, typeInElement } from '@yelon/testing';
 import { YunzaiThemeModule } from '@yelon/theme';
 import { deepCopy, deepGet } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { SF_SEQ } from '../src/const';
 import { SFButton } from '../src/interface';
@@ -310,7 +309,7 @@ export class SFPage {
   typeEvent(eventName: string | Event, cls: string = 'input'): this {
     const node = document.querySelector(cls) as HTMLInputElement;
     if (node == null) {
-      expect(true).toBe(false, `won't found '${cls}' class element`);
+      expect(true).withContext(`won't found '${cls}' class element`).toBe(false);
       return this;
     }
     dispatchFakeEvent(node, eventName);

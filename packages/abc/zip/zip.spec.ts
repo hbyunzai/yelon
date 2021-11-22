@@ -4,9 +4,8 @@ import { Observable, of, throwError } from 'rxjs';
 
 import * as fs from 'file-saver';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { LazyService } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ZipModule } from './zip.module';
 import { ZipService } from './zip.service';
@@ -171,6 +170,7 @@ describe('abc: zip', () => {
       spyOn(fs, 'saveAs');
       srv.save(zip, { filename: '123.zip' }).then(
         () => {
+          // eslint-disable-next-line deprecation/deprecation
           expect(fs.saveAs).toHaveBeenCalled();
           expect(true).toBe(true);
           done();
@@ -191,6 +191,7 @@ describe('abc: zip', () => {
         .then(
           () => {
             expect(count).toBe(1);
+            // eslint-disable-next-line deprecation/deprecation
             expect(fs.saveAs).toHaveBeenCalled();
             done();
           },
@@ -209,6 +210,7 @@ describe('abc: zip', () => {
           done();
         },
         () => {
+          // eslint-disable-next-line deprecation/deprecation
           expect(fs.saveAs).not.toHaveBeenCalled();
           expect(true).toBe(true);
           done();
