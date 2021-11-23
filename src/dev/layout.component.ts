@@ -56,7 +56,7 @@ const ICONS = [
   template: `
     <layout-default [options]="options" [asideUser]="asideUserTpl">
       <layout-default-header-item direction="left">
-        <a class="yunzai-default__nav-item" href="//github.com/ng-yunzai/ng-yunzai" target="_blank">
+        <a class="yunzai-default__nav-item" href="//github.com/hbyunzai/ng-yunzai" target="_blank">
           <i nz-icon nzType="github"></i>
         </a>
       </layout-default-header-item>
@@ -64,7 +64,7 @@ const ICONS = [
         <a class="yunzai-default__nav-item" (click)="rtl.toggle()">{{ rtl.nextDir | uppercase }}</a>
       </layout-default-header-item>
       <layout-default-header-item direction="right">
-        <a class="yunzai-default__nav-item" href="//github.com/ng-yunzai/ng-yunzai" target="_blank"> githbu </a>
+        <a class="yunzai-default__nav-item" href="//github.com/hbyunzai/ng-yunzai" target="_blank"> githbu </a>
       </layout-default-header-item>
       <ng-template #asideUserTpl>
         <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="yunzai-default__aside-user">

@@ -1,4 +1,4 @@
-# @yelon/auth [![Build Status](https://dev.azure.com/ng-yunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/ng-yunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/auth.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/auth)
+# @yelon/auth [![Build Status](https://dev.azure.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/auth.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/auth)
 
 Simple user authentication, support Json Web Token & Simple Token.
 
@@ -10,7 +10,7 @@ Simple user authentication, support Json Web Token & Simple Token.
 
 ## Architecture
 
-![Architecture](https://raw.githubusercontent.com/ng-yunzai/yelon/master/_screenshot/architecture.png)
+![Architecture](https://raw.githubusercontent.com/hbyunzai/yelon/master/_screenshot/architecture.png)
 
 ## Troubleshooting
 
