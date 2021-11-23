@@ -9,9 +9,6 @@ import { Observable } from 'rxjs';
 
 import { enUS as dfEn, zhCN as dfZhCn, zhTW as dfZhTw } from 'date-fns/locale';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { en_US as zorroEnUS, NzI18nService, zh_CN as zorroZhCN, zh_TW as zorroZhTW } from 'ng-zorro-antd/i18n';
-
 import {
   YelonLocaleService,
   en_US as yelonEnUS,
@@ -22,6 +19,8 @@ import {
   YunzaiI18nBaseService
 } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { en_US as zorroEnUS, NzI18nService, zh_CN as zorroZhCN, zh_TW as zorroZhTW } from 'ng-zorro-antd/i18n';
 
 interface LangConfigData {
   abbr: string;
@@ -77,11 +76,8 @@ export class YzI18NService extends YunzaiI18nBaseService {
     cogSrv: YunzaiConfigService
   ) {
     super(cogSrv);
-
     const defaultLang = this.getDefaultLang();
-    if (this._langs.findIndex(w => w.code === defaultLang)) {
-      this._defaultLang = defaultLang;
-    }
+    this._defaultLang = this._langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
   }
 
   private getDefaultLang(): string {
