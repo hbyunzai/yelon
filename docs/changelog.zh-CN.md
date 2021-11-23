@@ -13,6 +13,28 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+
+## [12.0.15](https://github.com/hbyunzai/yelon/compare/12.0.14...12.0.15) (2021-11-23)
+
+
+### Bug Fixes
+
+* **abc:exception:** fix observe content ([6aa284c](https://github.com/hbyunzai/yelon/commit/6aa284c9e8547477f56447189c3c3814ff5c78bd))
+* **abc:sv:** fix vertical align of detail ([5b1050d](https://github.com/hbyunzai/yelon/commit/5b1050d70ce9bbd3531285b262f061144ffcf5c4))
+* **bis:** fix i18n use default language ([8f992c5](https://github.com/hbyunzai/yelon/commit/8f992c56223aa12f648604a71b996aa56415bbef))
+* **startup:** fix injector and remove st module ([0812bb2](https://github.com/hbyunzai/yelon/commit/0812bb24a43acdf6e1489c238b1f15d31923a952))
+* **yelon:** remove package-lock.json ([681cde7](https://github.com/hbyunzai/yelon/commit/681cde70264a8b9a1f360bf553f365761c100d09))
+
+
+### Features
+
+* **abc:st:** add filterChange type of change event ([3410e97](https://github.com/hbyunzai/yelon/commit/3410e97e65666893ea0dbd7f0d3e92fc1b21b545))
+* **abc:st:** remove rowClickTime property ([b05f432](https://github.com/hbyunzai/yelon/commit/b05f432c8c78a883dfbc46d04987f34614c52a6d))
+* **cli:** add ([db75243](https://github.com/hbyunzai/yelon/commit/db752431e1fa5d3ab60bcb8aa4be22dfa9374fe4))
+* **cli:** add withoutModulePrefixInComponentName ([10fb99a](https://github.com/hbyunzai/yelon/commit/10fb99a3cd86822693f3a5449d11bd78c500a41c))
+* **cli:** support specify routesRoot via ng-yunzai.json ([32ee360](https://github.com/hbyunzai/yelon/commit/32ee3604b79a1baef9498194076a12d061ce1879))
+
+
 ## [12.0.14](https://github.com/hbyunzai/yelon/compare/12.0.13...12.0.14) (2021-11-15)
 
 
