@@ -21,11 +21,11 @@ Examples:
 
 ```bash
 # Generate a trade module
-ng g ng-yunzai:trade
+ng g ng-yunzai:module trade
 # Generate a TradeListComponent List component under the trade module
 ng g ng-yunzai:list list -m=trade
 # Generate a ListComponent List component under the trade module
-ng g ng-yunzai:list list -m=trade -withoutModulePrefixInComponentName=true
+ng g ng-yunzai:list list -m=trade --withoutModulePrefixInComponentName=true
 # Generate a TradeEditComponent Edit component under the trade module
 ng g ng-yunzai:edit edit -m=trade
 ```
@@ -34,11 +34,12 @@ ng g ng-yunzai:edit edit -m=trade
 
 | Option | Description |
 | ---- | --- |
-| `-m` | Allows specification of the declaring module. |
-| `-target` | Specifies relative path, could be set like `bus/list` |
-| `-modal` | Specifies using modal mode |
-| `-withoutPrefix` | Without prefix to selectors |
-| `-withoutModulePrefixInComponentName` | Without prefix to component name |
+| `-m` or `--module` | Allows specification of the declaring module. |
+| `-t` or `--target` | Specifies relative path, could be set like `bus/list` |
+| `--modal` | Specifies using modal mode |
+| `--withoutPrefix` | Without prefix to selectors |
+| `--withoutModulePrefixInComponentName` | Without prefix to component name |
+
 
 ## Module
 
