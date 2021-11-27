@@ -1,3 +1,13 @@
+/*
+ * @Author: cui <devcui@outlook.com>
+ * @Editor: microsoft vscode
+ * @Date: 2021-11-27 11:30:50
+ * @LastEditTime: 2021-11-27 14:38:46
+ * @LastEditors: cui <devcui@outlook.com>
+ * @Description: empty description
+ * @FilePath: \yelon\packages\bis\layout\layout.module.ts
+ * LICENSE HERE
+ */
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -7,7 +17,7 @@ import { RouterModule } from '@angular/router';
 import { YzSharedModule } from '@yelon/bis/shared';
 import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
 
-// import { ContactComponent } from './contact/contact.component';
+import { ContactComponent } from './contact/contact.component';
 import {
   YzHeaderApplicationComponent,
   YzHeaderNotifyComponent,
@@ -19,7 +29,7 @@ import {
 } from './widgets';
 import { YzLayoutBasicComponent } from './yz.basic.component';
 const COMPONENTS = [
-  // ContactComponent,
+  ContactComponent,
   YzLayoutBasicComponent,
   YzHeaderApplicationComponent,
   YzHeaderNotifyComponent,
