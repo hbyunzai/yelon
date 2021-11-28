@@ -1,3 +1,18 @@
+## [12.0.17](https://github.com/hbyunzai/yelon/compare/12.0.16...12.0.17) (2021-11-28)
+
+
+### Bug Fixes
+
+* **abc:st:** fix can't render when data changed ([12bc7f6](https://github.com/hbyunzai/yelon/commit/12bc7f6cbe9f57796d91fb3f244c4c697e89b0b0))
+* **bis:contact:** fix contact component exporter ([bec8d87](https://github.com/hbyunzai/yelon/commit/bec8d873ef5a6fa0a8849cc2875627347dc00746))
+
+
+### Performance Improvements
+
+* **cli:** update the  flag to the draft-07 standard ([6606a56](https://github.com/hbyunzai/yelon/commit/6606a560289feee9d7ca7c8d25178dc1ec04175b))
+
+
+
 ## [12.0.16](https://github.com/hbyunzai/yelon/compare/12.0.14...12.0.16) (2021-11-23)
 
 
