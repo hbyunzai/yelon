@@ -40,7 +40,6 @@ ng g ng-yunzai:edit edit -m=trade
 | `--withoutPrefix` | Without prefix to selectors |
 | `--withoutModulePrefixInComponentName` | Without prefix to component name |
 
-
 ## Module
 
 Generate a `trade` module:
