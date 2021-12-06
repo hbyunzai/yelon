@@ -1,17 +1,26 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Injector,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { formatDistanceToNow } from 'date-fns';
 
+import { NoticeIconSelect, NoticeItem } from '@yelon/abc/notice-icon';
+import { YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
+import { WINDOW } from '@yelon/util';
+import { log } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import { NoticeIconSelect, NoticeItem } from '@yelon/abc/notice-icon';
-import { _HttpClient } from '@yelon/theme';
-import { WINDOW } from '@yelon/util';
-import { log } from '@yelon/util/other';
+import { YzI18NService } from '../yz.i18n.service';
 
 @Component({
   selector: 'yz-header-notify',
@@ -32,27 +41,27 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
   data: NoticeItem[] = [
     {
       key: 'msg',
-      title: '消息',
+      title: this.y18n.fanyi('notify.message'),
       list: [],
-      emptyText: '您已读完所有消息',
+      emptyText: this.y18n.fanyi('notify.message.emptyText'),
       emptyImage: './assets/tmp/img/message.svg',
-      clearText: '清空消息'
+      clearText: this.y18n.fanyi('notify.message.clearText')
     },
     {
       key: 'todo',
-      title: '待办',
+      title: this.y18n.fanyi('notify.todo'),
       list: [],
-      emptyText: '你已完成所有待办',
+      emptyText: this.y18n.fanyi('notify.todo.emptyText'),
       emptyImage: './assets/tmp/img/todo.svg',
-      clearText: '重新加载'
+      clearText: this.y18n.fanyi('notify.todo.clearText')
     },
     {
       key: 'notice',
-      title: '通知',
+      title: this.y18n.fanyi('notify.notice'),
       list: [],
-      emptyText: '你已查看所有通知',
+      emptyText: this.y18n.fanyi('notify.notice.emptyText'),
       emptyImage: './assets/tmp/img/notice.svg',
-      clearText: '重新加载'
+      clearText: this.y18n.fanyi('notify.notice.clearText')
     }
   ];
   loading = false;
@@ -62,6 +71,7 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
   constructor(
     private injector: Injector,
     private msg: NzMessageService,
+    @Inject(YUNZAI_I18N_TOKEN) private y18n: YzI18NService,
     private nzI18n: NzI18nService,
     private cdr: ChangeDetectorRef,
     private httpClient: _HttpClient
@@ -87,11 +97,11 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
     const formatMessageStatus = (status: string): NzSafeAny => {
       switch (status) {
         case '0':
-          return { extra: '未读', color: 'red' };
+          return { extra: this.y18n.fanyi('notify.unread'), color: 'red' };
         case '1':
-          return { extra: '已读', color: 'green' };
+          return { extra: this.y18n.fanyi('notify.readed'), color: 'green' };
         default:
-          return { extra: '无状态', color: 'primary' };
+          return { extra: this.y18n.fanyi('notify.nostatus'), color: 'primary' };
       }
     };
     return this.httpClient
@@ -124,11 +134,11 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
     const formatTodoStatus = (status: string): NzSafeAny => {
       switch (status) {
         case '0':
-          return { extra: '未开始', color: 'red' };
+          return { extra: this.y18n.fanyi('notify.unstart'), color: 'red' };
         case '1':
-          return { extra: '已开始', color: 'green' };
+          return { extra: this.y18n.fanyi('notify.started'), color: 'green' };
         default:
-          return { extra: '无状态', color: 'primary' };
+          return { extra: this.y18n.fanyi('notify.nostatus'), color: 'primary' };
       }
     };
     return this.httpClient
@@ -161,7 +171,7 @@ export class YzHeaderNotifyComponent implements OnInit, OnDestroy {
     if (t.key == 'msg' || t.key == 'notice') {
       this.subs.push(
         this.httpClient.post(`/message-center-3/my-msg-and-todo/msg-clear`, {}).subscribe(_ => {
-          this.msg.success(`清空了 ${type}`);
+          this.msg.success(`${this.y18n.fanyi('notify.clear')} ${type}`);
           this.loadData();
         })
       );
