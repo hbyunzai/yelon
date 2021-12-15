@@ -45,6 +45,7 @@
     "ssr:build": "npm run site:build && npm run ng-high-memory run site:server:production",
     "ssr:prerender": "npm run site:build && npm run ng-high-memory run site:prerender"
   },
+
   "dependencies": {
     "@angular/animations": "~12.2.0",
     "@angular/cdk": "~12.2.0",
