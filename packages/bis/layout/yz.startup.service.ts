@@ -2,20 +2,19 @@ import { APP_INITIALIZER, Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzIconService } from 'ng-zorro-antd/icon';
-
 import { ACLService } from '@yelon/acl';
 import { ICONS } from '@yelon/bis/shared';
 import { CacheService } from '@yelon/cache';
 import { Menu, MenuService, SettingsService, TitleService, User, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { deepCopy, log, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from './bis.config';
 import { YzAuthService } from './yz.auth.service';
 import { YzI18NService } from './yz.i18n.service';
 
-export function mapYzSideToYelonMenu(menus: Menu[]) {
+export function mapYzSideToYelonMenu(menus: Menu[]): void {
   menus.forEach(menu => {
     menu.badgeDot = menu.badge_dot || null;
     menu.badgeStatus = menu.badge_status || null;
@@ -98,7 +97,7 @@ export class YzStartupService {
     // menu
     const ms = deepCopy(user.menu).filter((m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode) as Menu[];
     mapYzSideToYelonMenu(ms);
-    const currentMenu = ms.pop()!;
+    const currentMenu = ms.pop() || [];
     this.menuService.add([currentMenu]);
 
     // logo app
@@ -110,8 +109,8 @@ export class YzStartupService {
     });
 
     // title
-    this.titleService.default = currentMenu.text || 'default application name';
-    this.titleService.setTitle(currentMenu.text || 'no title');
+    this.titleService.default = currentMenu && currentMenu.text ? currentMenu.text : 'default application name';
+    this.titleService.setTitle(currentMenu && currentMenu.text ? currentMenu.text : 'no title');
 
     // acl
     const abilities: string[] = [];
