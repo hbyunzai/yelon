@@ -13,6 +13,14 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [12.0.18](https://github.com/hbyunzai/yelon/compare/12.0.16...12.0.18) (2021-12-15)
+
+
+### Bug Fixes
+
+* **auth:** add undefined system code handle ([4a068d7](https://github.com/hbyunzai/yelon/commit/4a068d7ecfdc6b5f2fccecd5e14896cb382c373c))
+* **bis:notify:** fix words to fanyi ([dccc97f](https://github.com/hbyunzai/yelon/commit/dccc97f9ecc48b505d54ec5b785902d641f20b9c))
+
 ## [12.0.17](https://github.com/hbyunzai/yelon/compare/12.0.16...12.0.17) (2021-11-28)
 
 
