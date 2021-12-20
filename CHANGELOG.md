@@ -1,3 +1,13 @@
+## [12.0.19](https://github.com/hbyunzai/yelon/compare/12.0.16...12.0.19) (2021-12-20)
+
+
+### Bug Fixes
+
+* **abc:lodop:** update lodop.types.ts ([41bcc9b](https://github.com/hbyunzai/yelon/commit/41bcc9bf97f7b70c50f12f975fdb5c2685204e51))
+* **form:autocomplete:** fix can't be set default value ([a501617](https://github.com/hbyunzai/yelon/commit/a501617907a430327b8f7cf09ae230cafc92d1f3))
+* **layout:** add resize window function ([6aef8b5](https://github.com/hbyunzai/yelon/commit/6aef8b5b5498decfeb1afee646e0346e0f0b2b2f))
+
+
 ## [12.0.18](https://github.com/hbyunzai/yelon/compare/12.0.16...12.0.18) (2021-12-15)
 
 
