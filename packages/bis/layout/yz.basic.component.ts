@@ -68,7 +68,9 @@ import { YzStompService } from './yz.stomp.service';
         <reuse-tab #reuseTab></reuse-tab>
         <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
       </ng-template>
-      <ng-template #noneTpl> </ng-template>
+      <ng-template #noneTpl>
+        <router-outlet></router-outlet>
+      </ng-template>
     </layout-default>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

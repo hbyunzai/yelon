@@ -58,6 +58,16 @@ export class AppComponent {
 }
 ```
 
+## Resize
+
+Recalculate the CSS attribute of length, width and height, which is used when changing the JS attribute triggers change detection, but the CSS is not recalculated
+
+```ts
+
+resizeWindow();
+
+```
+
 ## assert
 
 Assert whether the expression and throw an error into console in dev mode.

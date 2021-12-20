@@ -58,6 +58,14 @@ export class AppComponent {
 }
 ```
 
+## Resize
+
+重新计算长宽高等css属性，用于改变js属性触发了变更检测但css没有被重新计算的情况
+
+```ts
+resizeWindow();
+```
+
 ## assert
 
 断言表达式是否符合预期，并在开发模式下会在控制台抛出一个错误。
