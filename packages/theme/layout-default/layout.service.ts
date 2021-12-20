@@ -7,21 +7,30 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 export class LayoutService {
   header: BehaviorSubject<NzSafeAny> = new BehaviorSubject(true);
   sidebar: BehaviorSubject<NzSafeAny> = new BehaviorSubject(true);
+  reuseTab: BehaviorSubject<NzSafeAny> = new BehaviorSubject(true);
 
   constructor() {}
 
-  hideSidebar() {
+  hideSidebar(): void {
     this.sidebar.next(false);
   }
-  hideHeader() {
+  hideHeader(): void {
     this.header.next(false);
   }
 
-  showSidebar() {
+  showSidebar(): void {
     this.sidebar.next(true);
   }
 
-  showHeader() {
+  showHeader(): void {
     this.header.next(true);
+  }
+
+  showReuseTab(): void {
+    this.reuseTab.next(true);
+  }
+
+  hideReuseTab(): void {
+    this.reuseTab.next(false);
   }
 }

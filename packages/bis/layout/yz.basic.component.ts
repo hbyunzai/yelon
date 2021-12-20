@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { CacheService } from '@yelon/cache';
-import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
+import { LayoutDefaultOptions, LayoutService } from '@yelon/theme/layout-default';
+import { getUrlParam } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YzStompService } from './yz.stomp.service';
 
 @Component({
   selector: 'yz-layout-basic',
   template: `
-    <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="contentTpl">
+    <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="showReuseTab ? contentTpl : noneTpl">
       <layout-default-header-item direction="left">
         <yz-header-application></yz-header-application>
       </layout-default-header-item>
@@ -68,6 +68,7 @@ import { YzStompService } from './yz.stomp.service';
         <reuse-tab #reuseTab></reuse-tab>
         <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
       </ng-template>
+      <ng-template #noneTpl> </ng-template>
     </layout-default>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -81,8 +82,13 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
   intro: string = '';
   text: string = '';
   icon: string = '';
+  showReuseTab: boolean = true;
 
-  constructor(private cacheService: CacheService, private yzStompService: YzStompService) {}
+  constructor(
+    private cacheService: CacheService,
+    private yzStompService: YzStompService,
+    private layoutService: LayoutService
+  ) {}
 
   ngOnInit(): void {
     const current: NzSafeAny = this.cacheService.get('_yz_current', { mode: 'none' });
@@ -93,6 +99,17 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
     this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : `./assets/logo-full.svg`;
     this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : `./assets/logo.svg`;
     this.yzStompService.listen();
+
+    this.layoutService.reuseTab.asObservable().subscribe(show => {
+      this.showReuseTab = show;
+      if (getUrlParam(window.location.href, 'showResuseTab') !== null) {
+        if (getUrlParam(window.location.href, 'showResuseTab') === 'true') {
+          this.showReuseTab = true;
+        } else {
+          this.showReuseTab = false;
+        }
+      }
+    });
   }
 
   ngOnDestroy(): void {
