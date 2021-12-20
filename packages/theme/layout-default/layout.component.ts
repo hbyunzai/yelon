@@ -42,7 +42,7 @@ import { LayoutDefaultOptions } from './types';
       <div
         class="yunzai-default__aside"
         *ngIf="!options.hideAside"
-        [ngStyle]="!showHeader ? { 'margin-top': '0px' } : ''"
+        [ngStyle]="!showHeader ? { 'margin-top': '0px' } : {}"
       >
         <div class="yunzai-default__aside-inner">
           <ng-container *ngTemplateOutlet="asideUser"></ng-container>
