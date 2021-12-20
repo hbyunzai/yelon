@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { resizeWindow } from '@yelon/util/other';
+import { getUrlParam, resizeWindow } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Injectable({ providedIn: 'root' })
@@ -10,7 +10,29 @@ export class LayoutService {
   sidebar: BehaviorSubject<NzSafeAny> = new BehaviorSubject(true);
   reuseTab: BehaviorSubject<NzSafeAny> = new BehaviorSubject(true);
 
-  constructor() {}
+  constructor() {
+    if (getUrlParam(window.location.href, 'showResuseTab') !== null) {
+      if (getUrlParam(window.location.href, 'showResuseTab') === 'true') {
+        this.showReuseTab();
+      } else {
+        this.hideReuseTab();
+      }
+    }
+    if (getUrlParam(window.location.href, 'showHeader') !== null) {
+      if (getUrlParam(window.location.href, 'showHeader') === 'true') {
+        this.showHeader();
+      } else {
+        this.hideHeader();
+      }
+    }
+    if (getUrlParam(window.location.href, 'showSider') !== null) {
+      if (getUrlParam(window.location.href, 'showSider') === 'true') {
+        this.showSidebar();
+      } else {
+        this.hideSidebar();
+      }
+    }
+  }
 
   hideSidebar(): void {
     this.sidebar.next(false);

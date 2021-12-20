@@ -23,11 +23,10 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzMessageService } from 'ng-zorro-antd/message';
-
 import { SettingsService } from '@yelon/theme';
 import { updateHostClass } from '@yelon/util/browser';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutService } from './layout.service';
@@ -40,7 +39,11 @@ import { LayoutDefaultOptions } from './types';
     <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
     <layout-default-header *ngIf="showHeader"></layout-default-header>
     <ng-container *ngIf="showSidebar">
-      <div *ngIf="!options.hideAside" class="yunzai-default__aside">
+      <div
+        class="yunzai-default__aside"
+        *ngIf="!options.hideAside"
+        [ngStyle]="!showHeader ? { 'margin-top': '0px' } : ''"
+      >
         <div class="yunzai-default__aside-inner">
           <ng-container *ngTemplateOutlet="asideUser"></ng-container>
           <ng-container *ngTemplateOutlet="nav"></ng-container>
@@ -131,12 +134,8 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
     const { settings, destroy$ } = this;
     settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
     this.setClass();
-    this.layoutService.header.subscribe(h => {
-      this.showHeader = h;
-    });
-    this.layoutService.sidebar.subscribe(s => {
-      this.showSidebar = s;
-    });
+    this.layoutService.header.subscribe(h => (this.showHeader = h));
+    this.layoutService.sidebar.subscribe(s => (this.showSidebar = s));
   }
 
   ngOnDestroy(): void {

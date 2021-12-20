@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 
 import { CacheService } from '@yelon/cache';
 import { LayoutDefaultOptions, LayoutService } from '@yelon/theme/layout-default';
-import { getUrlParam } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YzStompService } from './yz.stomp.service';
@@ -65,7 +64,7 @@ import { YzStompService } from './yz.stomp.service';
         </nz-dropdown-menu>
       </ng-template>
       <ng-template #contentTpl>
-        <reuse-tab #reuseTab></reuse-tab>
+        <reuse-tab #reuseTab [ngStyle]="reuseStyleSheet"></reuse-tab>
         <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
       </ng-template>
       <ng-template #noneTpl>
@@ -84,7 +83,27 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
   intro: string = '';
   text: string = '';
   icon: string = '';
+
   showReuseTab: boolean = true;
+  showHeader: boolean = true;
+  showSider: boolean = true;
+
+  get reuseStyleSheet(): NzSafeAny {
+    let cascadingStyleSheet = {};
+    if (!this.showHeader) {
+      cascadingStyleSheet = {
+        ...cascadingStyleSheet,
+        top: 0
+      };
+    }
+    if (!this.showSider) {
+      cascadingStyleSheet = {
+        ...cascadingStyleSheet,
+        left: '24px'
+      };
+    }
+    return cascadingStyleSheet;
+  }
 
   constructor(
     private cacheService: CacheService,
@@ -101,17 +120,9 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
     this.options.logoExpanded = project.maxLogoUrl ? project.maxLogoUrl : `./assets/logo-full.svg`;
     this.options.logoCollapsed = project.miniLogoUrl ? project.miniLogoUrl : `./assets/logo.svg`;
     this.yzStompService.listen();
-
-    this.layoutService.reuseTab.asObservable().subscribe(show => {
-      this.showReuseTab = show;
-      if (getUrlParam(window.location.href, 'showResuseTab') !== null) {
-        if (getUrlParam(window.location.href, 'showResuseTab') === 'true') {
-          this.showReuseTab = true;
-        } else {
-          this.showReuseTab = false;
-        }
-      }
-    });
+    this.layoutService.reuseTab.asObservable().subscribe(show => (this.showReuseTab = show));
+    this.layoutService.header.asObservable().subscribe(show => (this.showHeader = show));
+    this.layoutService.sidebar.asObservable().subscribe(show => (this.showSider = show));
   }
 
   ngOnDestroy(): void {
