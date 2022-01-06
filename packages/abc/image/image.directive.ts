@@ -10,7 +10,7 @@ import { YunzaiConfigService } from '@yelon/util/config';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
 
 /**
- * @deprecated Will be removed in 13.0.0, Pls used [nz-image](https://ng.ant.design/components/image/en) instead, for examples:
+ * @deprecated Will be removed in 14.0.0, Pls used [nz-image](https://ng.ant.design/components/image/en) instead, for examples:
  */
 @Directive({
   selector: '[_src]',
