@@ -38,15 +38,15 @@ import { InputNumber } from '@yelon/util/decorator';
   encapsulation: ViewEncapsulation.None
 })
 export class ErrorCollectComponent implements OnInit, OnDestroy {
-  private formEl: HTMLFormElement | null;
+  private formEl: HTMLFormElement | null = null;
   private destroy$ = new Subject<void>();
 
   _hiden = true;
   count = 0;
   dir: Direction = 'ltr';
 
-  @Input() @InputNumber() freq: number;
-  @Input() @InputNumber() offsetTop: number;
+  @Input() @InputNumber() freq!: number;
+  @Input() @InputNumber() offsetTop!: number;
 
   constructor(
     private el: ElementRef,

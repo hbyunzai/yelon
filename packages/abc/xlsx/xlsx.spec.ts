@@ -22,7 +22,7 @@ class MockLazyService {
 let isErrorRequest = false;
 class MockHttpClient {
   request(): Observable<null> {
-    return isErrorRequest ? throwError(null) : of(null);
+    return isErrorRequest ? throwError(() => null) : of(null);
   }
 }
 

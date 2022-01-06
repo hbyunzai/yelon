@@ -89,7 +89,7 @@ describe('abc: edit', () => {
           page.expect(ANT_FORM_HAS_ERROR_CLS, 0);
         }));
       });
-      describe('#ignoreDirty', () => {
+      describe('#ingoreDirty', () => {
         let changes: EventEmitter<string>;
         beforeEach(() => {
           ({ fixture, dl, context } = createTestContext(TestComponent));
@@ -103,14 +103,14 @@ describe('abc: edit', () => {
           spyOnProperty(ngModel, 'dirty').and.returnValue(false);
         });
         it('with true', fakeAsync(() => {
-          context.parent_ignoreDirty = true;
+          context.parent_ingoreDirty = true;
           fixture.detectChanges();
           changes.emit('INVALID');
           fixture.detectChanges();
           page.expect(ANT_FORM_HAS_ERROR_CLS, 1);
         }));
         it('with false', fakeAsync(() => {
-          context.parent_ignoreDirty = false;
+          context.parent_ingoreDirty = false;
           fixture.detectChanges();
           changes.emit('INVALID');
           fixture.detectChanges();
@@ -163,7 +163,7 @@ describe('abc: edit', () => {
               fixture.detectChanges();
               expect(page.getEl('.ant-form-item-label').style.width).toBe(`${context.parent_labelWidth}px`);
             });
-            it('should be ignore width when layout not horizontal', () => {
+            it('should be ingore width when layout not horizontal', () => {
               context.parent_layout = 'inline';
               context.parent_labelWidth = 20;
               context.label = 'aa';
@@ -227,10 +227,15 @@ describe('abc: edit', () => {
               context.parent_noColon = true;
               context.noColon = undefined;
               context.label = 'aa';
-              debugger;
               fixture.detectChanges();
               expect(page.getEls('.se__no-colon').length).toBe(1);
             });
+          });
+          it('#hideLabel', () => {
+            context.hideLabel = true;
+            fixture.detectChanges();
+            expect(page.getEls('.se__hide-label').length).toBe(1);
+            expect(page.getEls('.se__nolabel').length).toBe(1);
           });
         });
         describe('#item', () => {
@@ -378,7 +383,7 @@ describe('abc: edit', () => {
       fixture2.detectChanges();
       page.expect(ANT_FORM_HAS_ERROR_CLS);
     });
-    describe('should be ignore error visual when is disabled', () => {
+    describe('should be ingore error visual when is disabled', () => {
       it('in ngModel', () => {
         genModule();
         context.disabled = true;
@@ -458,7 +463,7 @@ describe('abc: edit', () => {
       `);
       expect(page.getEl('label').getAttribute('for')).toBe(id);
     });
-    it(`should be ignored auto id when not found invalid ngModel`, () => {
+    it(`should be ingored auto id when not found invalid ngModel`, () => {
       genModule(`
       <form nz-form se-container>
         <se label="a">
@@ -468,7 +473,7 @@ describe('abc: edit', () => {
       `);
       expect(page.getEl('#expected').id).toBe('expected');
     });
-    it(`should be ignored set id when control has id value`, () => {
+    it(`should be ingored set id when control has id value`, () => {
       const id = 'aaaa';
       genModule(`
       <form nz-form se-container>
@@ -479,7 +484,7 @@ describe('abc: edit', () => {
       `);
       expect(page.getEl('label').getAttribute('for')).toBe(id);
     });
-    it(`should be ignored set id when control invalid controlAccessor`, () => {
+    it(`should be ingored set id when control invalid controlAccessor`, () => {
       genModule(`
       <form nz-form se-container>
         <se label="a">
@@ -534,7 +539,7 @@ describe('abc: edit', () => {
       [col]="parent_col"
       [title]="parent_title"
       [firstVisual]="parent_firstVisual"
-      [ignoreDirty]="parent_ignoreDirty"
+      [ingoreDirty]="parent_ingoreDirty"
       [line]="parent_line"
       [size]="parent_size"
       [nzLayout]="parent_layout"
@@ -557,6 +562,7 @@ describe('abc: edit', () => {
         [line]="line"
         [labelWidth]="labelWidth"
         [noColon]="noColon"
+        [hideLabel]="hideLabel"
       >
         <input type="text" [(ngModel)]="val" name="val" required [disabled]="disabled" />
       </se>
@@ -565,34 +571,35 @@ describe('abc: edit', () => {
 })
 class TestComponent {
   @ViewChild('seComp', { static: true })
-  seComp: SEContainerComponent;
+  seComp!: SEContainerComponent;
   @ViewChild('viewComp', { static: true })
-  viewComp: SEComponent;
+  viewComp!: SEComponent;
 
   parent_gutter: string | number | null = 32;
-  parent_colInCon: number | null;
+  parent_colInCon?: number | null;
   parent_col: number | null = 3;
   parent_labelWidth: number | null = null;
   parent_layout: 'horizontal' | 'vertical' | 'inline' = 'horizontal';
   parent_size: 'default' | 'compact' = 'default';
   parent_firstVisual = true;
-  parent_ignoreDirty = false;
+  parent_ingoreDirty = false;
   parent_line = false;
   parent_noColon = false;
   parent_title = 'title';
   parent_errors: SEErrorRefresh[] = [];
 
-  optional: string;
-  optionalHelp: string;
+  optional?: string;
+  optionalHelp?: string;
   error: string | TemplateRef<void> | { [key: string]: string | TemplateRef<void> } = 'required';
-  extra: string;
-  label: string;
-  required: boolean | null;
-  line: boolean | null;
-  col: number | null;
+  extra?: string;
+  label?: string;
+  required?: boolean | null;
+  line?: boolean | null;
+  col?: number | null;
   controlClass = '';
   labelWidth: number | null = null;
   noColon?: boolean | null = undefined;
+  hideLabel: boolean = false;
 
   val = '';
   showModel = true;

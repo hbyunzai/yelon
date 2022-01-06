@@ -87,18 +87,18 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
   private _renders = new Map<string, TemplateRef<void>>();
-  private _item: Record<string, unknown>;
+  private _item!: Record<string, unknown>;
   private _valid = true;
-  private _defUi: SFUISchemaItem;
+  private _defUi!: SFUISchemaItem;
   readonly options: YunzaiSFConfig;
 
   _inited = false;
   locale: LocaleData = {};
   rootProperty: FormProperty | null = null;
-  _formData: Record<string, unknown>;
-  _btn: SFButton;
-  _schema: SFSchema;
-  _ui: SFUISchema;
+  _formData!: Record<string, unknown>;
+  _btn!: SFButton;
+  _schema!: SFSchema;
+  _ui!: SFUISchema;
   get btnGrid(): NzSafeAny {
     return this._btn.render!.grid;
   }
@@ -108,11 +108,11 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   /** 表单布局，等同 `nzLayout`，默认：horizontal */
   @Input() layout: SFLayout = 'horizontal';
   /** JSON Schema */
-  @Input() schema: SFSchema;
+  @Input() schema!: SFSchema;
   /** UI Schema */
-  @Input() ui: SFUISchema;
+  @Input() ui!: SFUISchema;
   /** 表单默认值 */
-  @Input() formData: Record<string, NzSafeAny>;
+  @Input() formData?: Record<string, NzSafeAny>;
   /**
    * 按钮
    * - 值为 `null` 或 `undefined` 表示手动添加按钮，但保留容器
@@ -159,7 +159,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   get mode(): SFMode {
     return this._mode;
   }
-  private _mode: SFMode;
+  private _mode!: SFMode;
   /**
    * Whether to load status，when `true` reset button is disabled status, submit button is loading status
    */
@@ -193,27 +193,27 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Get form element property based on [path](https://ng.yunzainfo.com/form/qa#path)
+   * Get form element property based on [path](https://ng-alain.com/form/qa#path)
    *
-   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素属性
+   * 根据[路径](https://ng-alain.com/form/qa#path)获取表单元素属性
    */
   getProperty(path: string): FormProperty | null {
     return this.rootProperty!.searchProperty(path);
   }
 
   /**
-   * Get element value based on [path](https://ng.yunzainfo.com/form/qa#path)
+   * Get element value based on [path](https://ng-alain.com/form/qa#path)
    *
-   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素值
+   * 根据[路径](https://ng-alain.com/form/qa#path)获取表单元素值
    */
   getValue(path: string): NzSafeAny {
     return this.getProperty(path)!.value;
   }
 
   /**
-   * Set form element new value based on [path](https://ng.yunzainfo.com/form/qa#path)
+   * Set form element new value based on [path](https://ng-alain.com/form/qa#path)
    *
-   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素属性值
+   * 根据[路径](https://ng-alain.com/form/qa#path)设置某个表单元素属性值
    */
   setValue(path: string, value: NzSafeAny): this {
     const item = this.getProperty(path);
@@ -594,7 +594,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     this.coverProperty();
     this.coverButtonProperty();
 
-    this.rootProperty = this.formPropertyFactory.createProperty(this._schema, this._ui, this.formData);
+    this.rootProperty = this.formPropertyFactory.createProperty(this._schema, this._ui, this.formData!);
     this.attachCustomRender();
     this.cdr.detectChanges();
     this.reset();

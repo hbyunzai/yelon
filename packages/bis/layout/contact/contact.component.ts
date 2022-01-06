@@ -47,7 +47,7 @@ export class ContactComponent implements OnInit, OnDestroy, AfterViewInit {
   @Optional() @Input() nzDeptClass: boolean = true;
   @Optional() @Input() nzDeptClassHistory: boolean = true;
   @Optional() @Input() nzDeptGrade: boolean = false;
-  @Optional() @Input() nzDeptGradeID: string;
+  @Optional() @Input() nzDeptGradeID: string | null =null;
 
   /**
    * 角色树
@@ -65,7 +65,7 @@ export class ContactComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * table组件，帮助文档: https://ng.yunzainfo.com/components/st/zh?#API
    */
-  @ViewChild('st', { static: false }) st: STComponent;
+  @ViewChild('st', { static: false }) st!: STComponent;
 
   /**
    * 联系人

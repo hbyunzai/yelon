@@ -6,7 +6,7 @@ import { LazyService } from '@yelon/util/other';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
-  private _cog: YunzaiMediaConfig;
+  private _cog!: YunzaiMediaConfig;
   private loading = false;
   private loaded = false;
   private notify$ = new Subject<void>();

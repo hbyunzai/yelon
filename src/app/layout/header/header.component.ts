@@ -27,7 +27,7 @@ const pkg = require('../../../../package.json');
 })
 export class HeaderComponent implements AfterViewInit {
   private inited = false;
-  isMobile: boolean;
+  isMobile!: boolean;
   // start from 12.x
   oldVersionList = ['12.0.12'];
   currentVersion = pkg.version;

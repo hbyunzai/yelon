@@ -30,7 +30,7 @@ class HttpAuthInterceptorHandler implements HttpHandler {
 export abstract class BaseInterceptor implements HttpInterceptor {
   constructor(@Optional() protected injector: Injector) {}
 
-  protected model: ITokenModel;
+  protected model!: ITokenModel;
 
   abstract isAuth(options: YunzaiAuthConfig): boolean;
 

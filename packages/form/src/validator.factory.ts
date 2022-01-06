@@ -23,8 +23,8 @@ export abstract class SchemaValidatorFactory {
 
 @Injectable()
 export class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
-  protected ajv: Ajv;
-  protected options: YunzaiSFConfig;
+  protected ajv!: Ajv;
+  protected options!: YunzaiSFConfig;
 
   constructor(@Inject(YunzaiConfigService) cogSrv: YunzaiConfigService, private ngZone: NgZone) {
     super();

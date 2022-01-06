@@ -67,10 +67,10 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   showHeader: boolean = true;
   showSidebar: boolean = true;
 
-  @Input() options: LayoutDefaultOptions;
-  @Input() asideUser: TemplateRef<void>;
-  @Input() nav: TemplateRef<void>;
-  @Input() content: TemplateRef<void>;
+  @Input() options!: LayoutDefaultOptions;
+  @Input() asideUser: TemplateRef<void> | null = null;
+  @Input() nav: TemplateRef<void> | null = null;
+  @Input() content: TemplateRef<void> | null = null;
   @Input() customError?: string | null;
 
   private destroy$ = new Subject<void>();
@@ -117,7 +117,7 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
       ['yunzai-default']: true,
       [`yunzai-default__fixed`]: layout.fixed,
       [`yunzai-default__collapsed`]: layout.collapsed,
-      [`yunzai-default__hide-aside`]: this.options.hideAside
+      [`yunzai-default__hide-aside`]: this.options!.hideAside
     });
 
     doc.body.classList[layout.colorWeak ? 'add' : 'remove']('color-weak');

@@ -122,7 +122,7 @@ describe('abc: date-picker: nz-range-picker[extend]', () => {
   `
 })
 class TestComponent {
-  @ViewChild('comp', { static: true }) comp: RangePickerDirective;
+  @ViewChild('comp', { static: true }) comp!: RangePickerDirective;
   i: { start?: Date; end?: Date } = {};
   shortcut: boolean | YunzaiDateRangePickerShortcut | null = false;
 }

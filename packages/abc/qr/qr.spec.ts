@@ -105,7 +105,7 @@ describe('abc: qr', () => {
 })
 class TestComponent {
   @ViewChild('comp', { static: true })
-  comp: QRComponent;
+  comp!: QRComponent;
 
   value = 'https://ng.yunzainfo.com/';
   background = 'white';

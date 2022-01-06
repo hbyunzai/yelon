@@ -53,7 +53,7 @@ export interface PageRes<T> {
   providedIn: 'root'
 })
 export class ContactService {
-  constructor(private http: _HttpClient, private cache: CacheService) {}
+  constructor(private http: _HttpClient, private cache: CacheService) { }
 
   // TIPS: How to write an override function in typescript
   /**
@@ -89,7 +89,7 @@ export class ContactService {
    * @param gradeID 系部ID
    * @returns 可观察部门树
    */
-  dept(clas: boolean, his: boolean, grade: boolean, gradeID: string): Observable<NzTreeNodeOptions[]>;
+  dept(clas: boolean, his: boolean, grade: boolean, gradeID: string | null): Observable<NzTreeNodeOptions[]>;
   /**
    * 部门树查询
    *
@@ -99,7 +99,7 @@ export class ContactService {
    * @param gradeID 系部ID
    * @returns 可观察部门树
    */
-  dept(clas?: boolean, his?: boolean, grade?: boolean, gradeID?: string): Observable<NzTreeNodeOptions[]> {
+  dept(clas?: boolean, his?: boolean, grade?: boolean, gradeID?: string | null): Observable<NzTreeNodeOptions[]> {
     let baseUrl = `/auth/baseDepartMent/tree?debug=false`;
 
     if (clas) {

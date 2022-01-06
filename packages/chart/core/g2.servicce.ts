@@ -6,7 +6,7 @@ import { LazyService } from '@yelon/util/other';
 
 @Injectable({ providedIn: 'root' })
 export class G2Service implements OnDestroy {
-  private _cog: YunzaiChartConfig;
+  private _cog!: YunzaiChartConfig;
   private loading = false;
   private loaded = false;
   private notify$ = new Subject<void>();

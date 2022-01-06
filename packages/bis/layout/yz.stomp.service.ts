@@ -32,9 +32,9 @@ export interface UserStompMessage extends StompMessage {
 
 @Injectable({ providedIn: 'root' })
 export class YzStompService {
-  config: YunzaiStompConfig;
-  bisConfig: YunzaiBusinessConfig;
-  rxStomp: RxStomp;
+  config: YunzaiStompConfig | null = null;
+  bisConfig: YunzaiBusinessConfig | null = null;
+  rxStomp: RxStomp | null = null;
   user: NzSafeAny;
   subs: Subscription[] = [];
 
@@ -77,16 +77,16 @@ export class YzStompService {
 
   listen(): void {
     this.subs.push(
-      this.rxStomp.watch(`/topic/layout_${this.user.username}`).subscribe(message => {
+      this.rxStomp!.watch(`/topic/layout_${this.user.username}`).subscribe(message => {
         this.createNotification(JSON.parse(message.body));
       })
     );
     this.subs.push(
-      this.rxStomp.watch(`/topic/layout_xx_${this.user.username}`).subscribe((message: any) => {
+      this.rxStomp!.watch(`/topic/layout_xx_${this.user.username}`).subscribe((message: any) => {
         this.logoutNotification(JSON.parse(message.body));
       })
     );
-    this.rxStomp.activate();
+    this.rxStomp!.activate();
   }
 
   createNotification(message: StompMessage): void {
@@ -98,20 +98,20 @@ export class YzStompService {
     setTimeout(() => {
       this.cache.clear();
       localStorage.clear();
-      this.injector.get(WINDOW).location.href = `${this.bisConfig.baseUrl}/cas-proxy/app/logout`;
+      this.injector.get(WINDOW).location.href = `${this.bisConfig!.baseUrl}/cas-proxy/app/logout`;
     }, 5000);
   }
 
   unListen(): void {
     this.subs.forEach(s => s.unsubscribe());
-    this.rxStomp.deactivate().then();
+    this.rxStomp!.deactivate().then();
   }
 
   publish(parameters: IRxStompPublishParams): void {
-    this.rxStomp.publish(parameters);
+    this.rxStomp!.publish(parameters);
   }
 
   watch(destination: string, headers?: StompHeaders): Observable<IMessage> {
-    return this.rxStomp.watch(destination, headers);
+    return this.rxStomp!.watch(destination, headers);
   }
 }
