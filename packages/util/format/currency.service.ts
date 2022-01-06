@@ -1,9 +1,8 @@
 import { CurrencyPipe, formatNumber } from '@angular/common';
 import { DEFAULT_CURRENCY_CODE, Inject, Injectable, LOCALE_ID } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfigService, YunzaiUtilCurrencyConfig } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import {
   CurrencyCNYOptions,
@@ -213,7 +212,7 @@ export class CurrencyService {
         const j = integerCount - i - 1;
         const isZero = i > 1 && n !== 0 && integer[i - 1] === '0';
         const cnZero = isZero ? '零' : '';
-        const isEmpptyUnit = (n === 0 && j % 4 !== 0) || integer.substring(i - 3, 4) === '0000';
+        const isEmpptyUnit = (n === 0 && j % 4 !== 0) || integer.substring(i - 3, i - 3 + 4) === '0000';
         const descMark = cnDesc;
         let cnNum = unit.num[n];
 
