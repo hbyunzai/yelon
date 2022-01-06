@@ -23,7 +23,7 @@ import { AppService, CodeService, I18NService } from '@core';
 export class CodeBoxComponent implements OnDestroy {
   private _item: any;
   private _orgItem: any;
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   copied = false;
   theme = 'default';
 

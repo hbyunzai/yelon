@@ -4,31 +4,7 @@
   "deleteDestPath": true,
   "lib": {
     "flatModuleFile": "bis",
-    "entryFile": "public_api.ts",
-    "umdModuleIds": {
-      "@angular/cdk/overlay": "ng.cdk.overlay",
-      "@angular/cdk/portal": "ng.cdk.portal",
-      "ng-zorro-antd": "ng-zorro-antd",
-      "ng-zorro-antd/drawer": "ng-zorro-antd/drawer",
-      "ng-zorro-antd/modal": "ng-zorro-antd/modal",
-      "ng-zorro-antd/icon": "ng-zorro-antd/icon",
-      "ng-zorro-antd/i18n": "ng-zorro-antd/i18n",
-      "date-fns": "DateFns",
-      "@yelon/acl": "yelon.acl",
-      "@yelon/cache": "yelon.cache",
-      "@yelon/abc": "yelon.abc",
-      "@yelon/auth": "yelon.auth",
-      "@yelon/chart": "yelon.chart",
-      "@yelon/form": "yelon.form",
-      "@yelon/mock": "yelon.mock",
-      "@yelon/testing": "yelon.testing",
-      "@yelon/util": "yelon.util",
-      "@yelon/theme":"yelon.theme",
-      "@yelon/util/browser": "yelon.util.browser",
-      "@yelon/util/config": "yelon.util.config",
-      "@yelon/util/date-time": "yelon.util.date-time",
-      "@yelon/util/other": "yelon.util.other"
-    }
+    "entryFile": "public_api.ts"
   },
   "allowedNonPeerDependencies": [
     "date-fns",

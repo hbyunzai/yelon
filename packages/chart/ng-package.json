@@ -4,13 +4,7 @@
   "deleteDestPath": true,
   "lib": {
     "flatModuleFile": "chart",
-    "entryFile": "public_api.ts",
-    "umdModuleIds": {
-      "ng-zorro-antd": "ng-zorro-antd",
-      "@yelon/theme": "yelon.theme",
-      "@yelon/util": "yelon.util",
-      "@antv/g2": "G2"
-    }
+    "entryFile": "public_api.ts"
   },
   "allowedNonPeerDependencies": ["@yelon/theme", "@yelon/util", "@antv/g2", "@antv/data-set", "echarts"]
 }

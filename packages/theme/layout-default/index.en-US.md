@@ -13,7 +13,7 @@ The default layout all parameters are prefixed with `@yunzai-default-`.
 Import in `src/styles.less`:
 
 ```less
-@import '~@yelon/theme/layout-default/style/index';
+@import '@yelon/theme/layout-default/style/index';
 ```
 
 ### 2. Using `layout-default` component

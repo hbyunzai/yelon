@@ -22,11 +22,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { debounceTime, filter, takeUntil } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzTabSetComponent } from 'ng-zorro-antd/tabs';
-
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzTabSetComponent } from 'ng-zorro-antd/tabs';
 
 import { ReuseTabContextService } from './reuse-tab-context.service';
 import {
@@ -67,7 +66,6 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild('tabset') private tabset: NzTabSetComponent;
   private destroy$ = new Subject<void>();
-  private updatePos$ = new Subject<void>();
   private _keepingScrollContainer: Element;
   list: ReuseItem[] = [];
   item: ReuseItem;
@@ -143,6 +141,7 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
           last: false
         } as ReuseItem)
     );
+    // debugger;
 
     const url = this.curUrl;
     let addCurrent = ls.findIndex(w => w.url === url) === -1;
@@ -170,7 +169,7 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
     }
     this.list = ls;
     this.cdr.detectChanges();
-    this.updatePos$.next();
+    this.updatePos();
   }
 
   private updateTitle(res: ReuseTabNotify): void {
@@ -247,32 +246,32 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
     this.srv.componentRef = { instance };
   }
 
+  private updatePos(): void {
+    const url = this.srv.getUrl(this.route.snapshot);
+    const ls = this.list.filter(w => w.url === url || !this.srv.isExclude(w.url));
+    if (ls.length === 0) {
+      return;
+    }
+
+    const last = ls[ls.length - 1];
+    const item = ls.find(w => w.url === url);
+    last.last = true;
+    const pos = item == null ? last.index : item.index;
+    ls.forEach((i, idx) => (i.active = pos === idx));
+    this.pos = pos;
+    // TODO: 目前无法知道为什么 `pos` 无法通过 `nzSelectedIndex` 生效，因此强制使用组件实例的方式来修改，这种方式是安全的
+    // https://github.com/ng-alain/ng-alain/issues/1736
+    this.tabset.nzSelectedIndex = pos;
+    this.list = ls;
+    this.cdr.detectChanges();
+  }
+
   // #endregion
 
   ngOnInit(): void {
     if (!this.platform.isBrowser) {
       return;
     }
-
-    this.updatePos$.pipe(takeUntil(this.destroy$), debounceTime(50)).subscribe(() => {
-      const url = this.srv.getUrl(this.route.snapshot);
-      const ls = this.list.filter(w => w.url === url || !this.srv.isExclude(w.url));
-      if (ls.length === 0) {
-        return;
-      }
-
-      const last = ls[ls.length - 1];
-      const item = ls.find(w => w.url === url);
-      last.last = true;
-      const pos = item == null ? last.index : item.index;
-      ls.forEach((i, idx) => (i.active = pos === idx));
-      this.pos = pos;
-      // TODO: 目前无法知道为什么 `pos` 无法通过 `nzSelectedIndex` 生效，因此强制使用组件实例的方式来修改，这种方式是安全的
-      // https://github.com/hbyunzai/ng-yunzai
-      this.tabset.nzSelectedIndex = pos;
-      this.list = ls;
-      this.cdr.detectChanges();
-    });
 
     this.srv.change.pipe(takeUntil(this.destroy$)).subscribe(res => {
       switch (res?.active) {
@@ -281,7 +280,7 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
           return;
         case 'override':
           if (res?.list?.length === this.list.length) {
-            this.updatePos$.next();
+            this.updatePos();
             return;
           }
           break;

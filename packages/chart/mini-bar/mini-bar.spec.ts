@@ -11,7 +11,6 @@ import { G2MiniBarModule } from './mini-bar.module';
 describe('chart: mini-bar', () => {
   let page: PageG2<TestComponent>;
   describe('', () => {
-    afterEach(() => page.context.comp.ngOnDestroy());
 
     describe('', () => {
       beforeEach(fakeAsync(() => {

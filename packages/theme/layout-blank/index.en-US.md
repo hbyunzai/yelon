@@ -11,7 +11,7 @@ Used for any top and side areas, typically for highly customizable pages such as
 Import in `src/styles.less`:
 
 ```less
-@import '~@yelon/theme/layout-blank/style/index';
+@import '@yelon/theme/layout-blank/style/index';
 ```
 
 ## Parameters

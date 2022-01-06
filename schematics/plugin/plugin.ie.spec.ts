@@ -2,7 +2,7 @@ import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/te
 
 import { APPNAME, createYunzaiApp } from '../utils/testing';
 
-describe('NgYunzaiSchematic: plugin: ie', () => {
+xdescribe('NgYunzaiSchematic: plugin: ie', () => {
   let runner: SchematicTestRunner;
   let tree: UnitTestTree;
 

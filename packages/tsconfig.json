@@ -1,3 +1,5 @@
+// Configuration for IDEs only.
+
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {

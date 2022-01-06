@@ -6,6 +6,7 @@
     "paths": {
       "@yelon/util/*": ["../../dist/@yelon/util/*"],
       "@yelon/*": ["../../dist/@yelon/*"]
-    }
+    },
+    "types": ["../dev-mode-types"]
   }
 }

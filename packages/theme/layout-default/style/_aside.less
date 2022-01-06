@@ -30,8 +30,8 @@
     -ms-scroll-rails: none;
     -ms-content-zoom-limit-min: 100%;
     -ms-content-zoom-limit-max: 500%;
-    -ms-scroll-snap-type: proximity;
-    -ms-scroll-snap-points-x: snaplist(100%, 200%, 300%, 400%, 500%);
+    scroll-snap-type: proximity;
+    scroll-snap-points-x: snaplist(100%, 200%, 300%, 400%, 500%);
     // Firefox
     scrollbar-width: none;
     // Chrome
@@ -40,7 +40,7 @@
       height: @yunzai-default-aside-scrollbar-width;
     }
     &::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 @yunzai-default-aside-scrollbar-width @yunzai-default-aside-scrollbar-track-color;
+      box-shadow: inset 0 0 @yunzai-default-aside-scrollbar-width @yunzai-default-aside-scrollbar-track-color;
     }
     &::-webkit-scrollbar-thumb {
       background-color: @yunzai-default-aside-scrollbar-thumb-color;

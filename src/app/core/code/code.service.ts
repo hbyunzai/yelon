@@ -95,7 +95,7 @@ export class CodeService {
   }
 
   private get genStartupService(): string {
-    return startupServiceTS({ ajvVersion: pkg.dependencies.ajv.substr(1) });
+    return startupServiceTS({ ajvVersion: pkg.dependencies.ajv.substring(1) });
   }
 
   private get genMock(): { [key: string]: string } {

@@ -12,7 +12,7 @@ title: 组件样式
 
 ```less
 // 导入 Less 变量参数
-@import '~@yelon/theme/index';
+@import '@yelon/theme/index';
 
 :host {
   // 组件宿主样式
@@ -45,20 +45,20 @@ title: 组件样式
 
 ## 主题
 
-NG-YUNZAI 至从 `9.3.x` 开始内置暗黑与紧凑两种主题，对于全局只需要修改 [styles.less](https://github.com/hbyunzai/ng-yunzai/blob/master/src/styles.less) 一个参数，例如切换为暗黑主题：
+NG-YUNZAI 至从 `9.3.x` 开始内置暗黑与紧凑两种主题，对于全局只需要修改 [styles.less](https://github.com/ng-yunzai/ng-yunzai/blob/master/src/styles.less) 一个参数，例如切换为暗黑主题：
 
 ```diff
-- // @import '~@yelon/theme/theme-dark.less';
-+ @import '~@yelon/theme/theme-dark.less';
+- // @import '@yelon/theme/theme-dark.less';
++ @import '@yelon/theme/theme-dark.less';
 ```
 
-> 若是紧凑，只需要换成 `@import '~@yelon/theme/theme-compact.less';`。
+> 若是紧凑，只需要换成 `@import '@yelon/theme/theme-compact.less';`。
 
 同时，对于组件样式的引入也全部替换成：
 
 ```diff
-- @import '~@yelon/theme/index';
-+ @import '~@yelon/theme/theme-dark';
+- @import '@yelon/theme/index';
++ @import '@yelon/theme/theme-dark';
 ```
 
 ## 动态主题
@@ -67,7 +67,7 @@ NG-YUNZAI 至从 `9.3.x` 开始内置暗黑与紧凑两种主题，对于全局�
 
 ```less
 // 导入 Less 变量参数
-@import '~@yelon/theme/index';
+@import '@yelon/theme/index';
 
 :host {
   // 组件宿主样式

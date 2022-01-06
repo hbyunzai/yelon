@@ -17,8 +17,6 @@ describe('chart: single-bar', () => {
       page.genComp(TestComponent);
     });
 
-    afterEach(() => page.context.comp.ngOnDestroy());
-
     it('should be working', fakeAsync(() => {
       page.dcFirst().isDataCount('geometries', 1);
     }));

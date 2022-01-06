@@ -156,9 +156,9 @@ function getNgValue(attr: Attribute): string[] | null {
   // type="{{value ? 'icon' : 'icon' }}"
   // type="align-{{value ? 'icon' : 'icon' }}"
   if (!attr.name.startsWith('[')) {
-    const prefix = templatVarIndex > 0 ? str.substr(0, templatVarIndex) : '';
+    const prefix = templatVarIndex > 0 ? str.substring(0, templatVarIndex) : '';
     if (templatVarIndex !== -1) {
-      return fixValue(str.substr(templatVarIndex), prefix);
+      return fixValue(str.substring(templatVarIndex), prefix);
     }
     return [str];
   }
@@ -310,7 +310,7 @@ export function pluginIcon(options: PluginOptions): Rule {
     const icons = getIcons(options, tree);
     genIconFile(options, tree, icons);
     console.log(`\n\n`);
-    console.log(`生成成功，如果是首次运行，需要手动引用，参考：https://ng.yunzainfo.com/theme/icon/zh`);
+    console.log(`生成成功，如果是首次运行，需要手动引用，参考: https://ng.yunzainfo.com/theme/icon/zh`);
     console.log(
       `Finished, if it's first run, you need manually reference it, refer to: https://ng.yunzainfo.com/theme/icon/en`
     );

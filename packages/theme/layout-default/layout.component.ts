@@ -37,7 +37,7 @@ import { LayoutDefaultOptions } from './types';
   exportAs: 'layoutDefault',
   template: `
     <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
-    <layout-default-header *ngIf="showHeader"></layout-default-header>
+    <layout-default-header *ngIf="showHeader" [options]="options" [items]="headerItems"></layout-default-header>
     <ng-container *ngIf="showSidebar">
       <div
         class="yunzai-default__aside"

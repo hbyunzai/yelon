@@ -102,7 +102,7 @@ describe('theme: http.client', () => {
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
-      it('should be ingore process when params is HttpParams', fakeAsync(() => {
+      it('should be ignore process when params is HttpParams', fakeAsync(() => {
         http.get(URL, new HttpParams({ fromObject: { a: 'aa' } })).subscribe(_ => (res = _));
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
@@ -680,7 +680,7 @@ describe('theme: http.client', () => {
       const ret = backend.expectOne(() => true) as TestRequest;
       expect(ret.request.urlWithParams.length).toBeGreaterThan(URL.length + 15);
     }));
-    it('should be ingore null values', fakeAsync(() => {
+    it('should be ignore null values', fakeAsync(() => {
       createModule({ nullValueHandling: 'ignore' });
       http.get(URL, { a: 1, b: null, c: undefined }).subscribe();
       tick();

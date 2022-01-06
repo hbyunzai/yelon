@@ -31,7 +31,7 @@ In the style file `src/styles/theme.less`, change `default` to `dark` or `compac
 // - `default` Default Theme
 // - `dark` 🌑 Dark Theme (supported in 9+)
 // - `compact` 📦 Compact Theme (supported in 9+)
-@import '~@yelon/theme/theme-default.less';
+@import '@yelon/theme/theme-default.less';
 
 // ==========The following is the custom theme variable area==========
 // @primary-color: #f50;
@@ -148,18 +148,18 @@ export class DashboardAnalysisComponent {}
 
 ```less
 // analysis.component.less
-@import '~@yelon/theme/index';
+@import '@yelon/theme/index';
 :host ::ng-deep { 
   color: @text-color;
 }
 ```
 
-Because the styles defined in the component run independently under Angular, it is impossible to switch to the dark theme as a whole according to the introduction of `@import '~@yelon/theme/theme-compact.less';`, if you want the same in the component To use the dark series, you must:
+Because the styles defined in the component run independently under Angular, it is impossible to switch to the dark theme as a whole according to the introduction of `@import '@yelon/theme/theme-compact.less';`, if you want the same in the component To use the dark series, you must:
 
 ```diff
 // analysis.component.less
-- @import '~@yelon/theme/index';
-+ @import '~@yelon/theme/theme-dark';
+- @import '@yelon/theme/index';
++ @import '@yelon/theme/theme-dark';
 ```
 
 Or, redefine for a component theme:

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DecimalPipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
-import { of, throwError } from 'rxjs';
+import { firstValueFrom, of, throwError } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -225,15 +225,13 @@ describe('abc: table: data-souce', () => {
       });
       it(`should be clean filtered`, done => {
         const expectCount = (options.data as STData[]).filter(w => w.name.includes(`1`)).length;
-        srv
-          .process(options)
-          .toPromise()
+        firstValueFrom(srv.process(options))
           .then(res => {
             expect(res.list.length).toBe(expectCount);
           })
           .then(() => {
             options.columns[0].filter!.menus![0].checked = false;
-            return srv.process(options).toPromise();
+            return firstValueFrom(srv.process(options));
           })
           .then(res => {
             expect(res.list.length).toBe(DEFAULT.ps);

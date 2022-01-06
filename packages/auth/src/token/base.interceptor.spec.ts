@@ -16,9 +16,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiAuthConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YelonAuthModule } from '../auth.module';
 import { AuthReferrer, YA_SERVICE_TOKEN, ITokenModel, ITokenService } from './interface';
@@ -59,11 +58,7 @@ class MockTokenService implements ITokenService {
 let otherRes = new HttpResponse();
 class OtherInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
-    return next.handle(req.clone()).pipe(
-      catchError(() => {
-        return throwError(otherRes);
-      })
-    );
+    return next.handle(req.clone()).pipe(catchError(() => throwError(() => otherRes)));
   }
 }
 
@@ -74,6 +69,9 @@ describe('auth: base.interceptor', () => {
   const MockDoc = {
     location: {
       href: ''
+    },
+    querySelectorAll(): NzSafeAny {
+      return {};
     }
   };
 
@@ -142,7 +140,7 @@ describe('auth: base.interceptor', () => {
         it(`(full url)`, done => {
           genModule({}, genModel(SimpleTokenModel, null));
           http
-            .get('https://ng.yunzainfo.com/api/user', {
+            .get('https://ng-alain.com/api/user', {
               responseType: 'text',
               params: { _allow_anonymous: '' }
             })
@@ -164,10 +162,10 @@ describe('auth: base.interceptor', () => {
         it(`(full url)`, done => {
           genModule({}, genModel(SimpleTokenModel, null));
           http
-            .get('https://ng.yunzainfo.com/api/user?a=1&_allow_anonymous=1&other=a&cn=中文', { responseType: 'text' })
+            .get('https://ng-alain.com/api/user?a=1&_allow_anonymous=1&other=a&cn=中文', { responseType: 'text' })
             .subscribe(done);
           const ret = httpBed.expectOne(() => true);
-          expect(ret.request.url).toBe(`https://ng.yunzainfo.com/api/user?a=1&other=a&cn=%E4%B8%AD%E6%96%87`);
+          expect(ret.request.url).toBe(`https://ng-alain.com/api/user?a=1&other=a&cn=%E4%B8%AD%E6%96%87`);
           expect(ret.request.headers.get('Authorization')).toBeNull();
           ret.flush('ok!');
         });
@@ -179,69 +177,69 @@ describe('auth: base.interceptor', () => {
     describe('should be navigate to login', () => {
       it('with navigate', done => {
         genModule({}, genModel(SimpleTokenModel, null));
-        http.get('/test', { responseType: 'text' }).subscribe(
-          () => {
+        http.get('/test', { responseType: 'text' }).subscribe({
+          next: () => {
             expect(false).toBe(true);
             done();
           },
-          (err: NzSafeAny) => {
+          error: (err: NzSafeAny) => {
             expect(err.status).toBe(401);
             setTimeout(() => {
               expect(TestBed.inject<Router>(Router).navigate).toHaveBeenCalled();
               done();
             }, 20);
           }
-        );
+        });
       });
       it('with location', done => {
-        const login_url = 'https://ng.yunzainfo.com/login';
+        const login_url = 'https://ng-alain.com/login';
         genModule({ login_url }, genModel(SimpleTokenModel, null));
-        http.get('/test', { responseType: 'text' }).subscribe(
-          () => {
+        http.get('/test', { responseType: 'text' }).subscribe({
+          next: () => {
             expect(false).toBe(true);
             done();
           },
-          (err: NzSafeAny) => {
+          error: (err: NzSafeAny) => {
             expect(err.status).toBe(401);
             setTimeout(() => {
               expect(TestBed.inject(DOCUMENT).location.href).toBe(login_url);
               done();
             }, 20);
           }
-        );
+        });
       });
     });
 
     it('should be not navigate to login when token_invalid_redirect: false', done => {
       genModule({ token_invalid_redirect: false }, genModel(SimpleTokenModel, null));
-      http.get('/test', { responseType: 'text' }).subscribe(
-        () => {
+      http.get('/test', { responseType: 'text' }).subscribe({
+        next: () => {
           expect(false).toBe(true);
           done();
         },
-        (err: NzSafeAny) => {
+        error: (err: NzSafeAny) => {
           expect(err.status).toBe(401);
           done();
         }
-      );
+      });
     });
   });
 
   describe('[referrer]', () => {
     it('should be always router url', done => {
       genModule({ executeOtherInterceptors: false }, genModel(SimpleTokenModel, null));
-      http.get('/to-test', { responseType: 'text' }).subscribe(
-        () => {
+      http.get('/to-test', { responseType: 'text' }).subscribe({
+        next: () => {
           expect(false).toBe(true);
           done();
         },
-        () => {
+        error: () => {
           const tokenSrv = TestBed.inject(YA_SERVICE_TOKEN) as MockTokenService;
           expect(tokenSrv.referrer).not.toBeNull();
           expect(tokenSrv.referrer.url).toBe('/');
           done();
         }
-      );
+      });
     });
   });
 
@@ -255,16 +253,16 @@ describe('auth: base.interceptor', () => {
     it('shoul working', done => {
       otherRes = new HttpResponse({ body: { a: 1 } });
       const url = '/to-test?a=1';
-      http.get(url, { responseType: 'text' }).subscribe(
-        () => {
+      http.get(url, { responseType: 'text' }).subscribe({
+        next: () => {
           expect(false).toBe(true);
           done();
         },
-        err => {
+        error: err => {
           expect(err.body.a).toBe(1);
           done();
         }
-      );
+      });
     });
   });
 });

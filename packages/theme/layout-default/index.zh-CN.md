@@ -13,7 +13,7 @@ title: 默认布局
 在 `src/styles.less` 引入：
 
 ```less
-@import '~@yelon/theme/layout-default/style/index';
+@import '@yelon/theme/layout-default/style/index';
 ```
 
 ### 2、使用 `layout-default` 组件
