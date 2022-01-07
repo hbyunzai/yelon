@@ -5,6 +5,7 @@ import { chain, Rule, SchematicContext } from '@angular-devkit/schematics';
 import { ruleUpgradeData } from './upgrade-data';
 import { SrcToNzImageRule } from './upgrade-rules/checks/_src-to-nz-image-rule';
 import { v12Rule } from './upgrade-rules/v12';
+import { v13Rule } from './upgrade-rules/v13';
 
 const migrations: NullableDevkitMigration[] = [SrcToNzImageRule];
 
@@ -12,6 +13,10 @@ const migrations: NullableDevkitMigration[] = [SrcToNzImageRule];
 export function updateToV12(schema: any): Rule {
   const rule = v12Rule(schema);
   return chain([rule, createMigrationSchematicRule(TargetVersion.V12, migrations, ruleUpgradeData, postUpdate)]);
+}
+
+export function updateToV13(): Rule {
+  return chain([v13Rule(), createMigrationSchematicRule(TargetVersion.V13, migrations, ruleUpgradeData, postUpdate)]);
 }
 
 /** Post-update schematic to be called when update is finished. */

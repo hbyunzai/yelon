@@ -18,6 +18,7 @@ import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
 import { getLangData } from '../core/lang.config';
 import {
+  addStylePreprocessorOptionsToAllProject,
   addAllowedCommonJsDependencies,
   addAssetsToTarget,
   addHeadStyle,
@@ -86,6 +87,7 @@ function fixAngularJson(options: ApplicationOptions): Rule {
         initial.maximumError = '3mb';
       }
     }
+    addStylePreprocessorOptionsToAllProject(workspace);
   });
 }
 

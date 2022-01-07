@@ -3,8 +3,13 @@
   "schematics": {
     "migration-v12": {
       "version": "12",
-      "description": "Updates NG-Yunzai to v12",
+      "description": "Updates NG-YUNZAI to v12",
       "factory": "./ng-update/index#updateToV12"
+    },
+    "migration-v13": {
+      "version": "13",
+      "description": "Updates NG-YUNZAI to v13",
+      "factory": "./ng-update/index#updateToV13"
     },
     "ng-post-update": {
       "description": "Performs cleanup after ng-update.",
