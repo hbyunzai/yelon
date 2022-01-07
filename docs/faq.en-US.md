@@ -26,13 +26,39 @@ Common mistakes under Angular, the use of Reactive Forms requires the introducti
 
 The NG-ZORRO and @yelon/* components work in OnPush mode by default. Mutate objects or arrays do not trigger Angular's change detection. Use the immutable method.
 
+### How to use @yelon daily build version
+
+NG-YUNZAI provides a [yelon-builds](https://github.com/hbyunzai/yelon-builds.git) repository as a daily build version. It's not the final stable version, but contains the latest fixed BUG, To use the latest features, you can create `yelon.sh` in the root directory:
+
+```bash
+#!/usr/bin/env bash
+set -e
+echo "Download latest @yelon version"
+rm -rf yelon-builds
+git clone --depth 1 https://github.com/hbyunzai/yelon-builds.git
+rm -rf node_modules/@yelon
+rm -rf node_modules/ng-yunzai
+rsync -am yelon-builds/ node_modules/
+NG_YUNZAI_VERSION=$(node -p "require('./node_modules/ng-yunzai/package.json').version")
+rm -rf yelon-builds
+echo "Using ng-yunzai version: ${NG_YUNZAI_VERSION}"
+```
+
+When you need to use the daily build version of @yelon, you only need to run:
+
+```bash
+bash yelon.sh
+```
+
+> If in Windows environment, please use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) to execute Bash scripts.
+
 ## Installation
 
 ### Why can't I find the ng-zorro-antd/src/*.less style?
 
 Two situations:
 
-- Using `cnpm` to install dependencies, you will not be able to find style files. This is because `cnpm` is in the form of a soft link path, which causes the `ng-zorro-antd` folder name to change, so it is recommended to use the `npm` install dependency package instead.
+- Using `cnpm` to install dependencies, you will not be able to find style files. This is because `cnpm` is in the form of a soft link path, which causes the `ng-zorro-antd` folder name to change, so it is recommended to use the `yarn` install dependency package instead.
 - The `ng-zorro-antd` version is too old to cause some components to fail to load into the appropriate style
 
 ### How to use Taobao source correctly?
@@ -41,8 +67,6 @@ The simplest is to use the [networkEnv](/cli/plugin#networkEnv) plugin.
 
 Or manually repair:
 
-**yarn**
-
 ```bash
 yarn config set registry https://registry.npmmirror.com
 yarn config set sass_binary_site https://npmmirror.com/mirrors/node-sass
@@ -50,32 +74,6 @@ yarn config set sass_binary_site https://npmmirror.com/mirrors/node-sass
 yarn config delete registry
 yarn config delete sass_binary_site
 ```
-
-**npm**
-
-```bash
-npm config set registry https://registry.npmmirror.com
-npm config set sass_binary_site https://npmmirror.com/mirrors/node-sass
-# restore
-npm config delete registry
-npm config delete sass_binary_site
-```
-
-Angular Cli use `npm` to install dependencies by default, if you want change to `yarn`, you can set Angular Cli to use `yarn` globally by default:
-
-```bash
-ng config -g cli.packageManager yarn
-```
-
-### No such file or directory
-
-This question is difficult to explain, npm has a long building [#17444](https://github.com/npm/npm/issues/17444#issuecomment-393761515), and finally gives a reluctant answer:
-
-1. Make sure to install the latest npm version: `npm i -g npm`
-2. Remove `node_modules` and `package-lock.json`
-3. `npm i`
-
-Finally, repeat the above steps if you still can't!
 
 ## Configuration
 
@@ -95,7 +93,7 @@ Finally, redefine the new path in `src/styles/theme.less`:
 
 For missing language imports, refer to [app.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/app.module.ts#L6-L25).
 
-### How to deploy ng.yunzainfo.com documentation site in local
+### How to deploy ng-yunzai.com documentation site in local
 
 We provided an online snapshot:
 
@@ -103,4 +101,4 @@ We provided an online snapshot:
 git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/yelon.git docs
 ```
 
-You can simply create a Docker container to quickly deploy the same documentation site as ng.yunzainfo.com.
+You can simply create a Docker container to quickly deploy the same documentation site as ng-yunzai.com.
