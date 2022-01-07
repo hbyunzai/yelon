@@ -44,19 +44,6 @@ ng g ng-yunzai:plugin codeStyle
 ng g ng-yunzai:plugin codeStyle -t=remove
 ```
 
-### ie
-
-IE browser can only be used under ES5. For more details, please refer to [Support IE11](/docs/ie11).
-
-```bash
-# add
-ng g ng-yunzai:plugin ie
-# remove
-ng g ng-yunzai:plugin ie -t=remove
-```
-
-After installation, you can use `npm run ie: start` to enter IE11 development environment.
-
 ### docker
 
 Support for Docker deployment.

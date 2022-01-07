@@ -45,20 +45,6 @@ ng g ng-yunzai:plugin codeStyle
 # remove
 ng g ng-yunzai:plugin codeStyle -t=remove
 ```
-
-### ie
-
-IE 浏览器只能在 ES5 下使用，有关更多细节请参考[支持IE11](/docs/ie11)。
-
-```bash
-# add
-ng g ng-yunzai:plugin ie
-# remove
-ng g ng-yunzai:plugin ie -t=remove
-```
-
-安装后可使用 `npm run ie:start` 进入IE11的开发环境。
-
 ### docker
 
 支持 Docker 部署。
