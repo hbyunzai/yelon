@@ -10,7 +10,16 @@
     "stylelint-declaration-block-no-ignored-properties"
   ],
   "rules": {
-    "function-name-case": ["lower", { "ignoreFunctions": ["/colorPalette/"] }],
+    "property-no-vendor-prefix": null,
+    "rule-empty-line-before": null,
+    "function-name-case": [
+      "lower",
+      {
+        "ignoreFunctions": [
+          "/colorPalette/"
+        ]
+      }
+    ],
     "no-descending-specificity": null,
     "no-invalid-position-at-import-rule": null,
     "declaration-empty-line-before": null,

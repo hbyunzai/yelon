@@ -3,9 +3,8 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { createTestContext } from '@yelon/testing';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YunzaiConfigService, LazyService } from '../../util';
 import { QRComponent } from './qr.component';
@@ -38,7 +37,6 @@ describe('abc: qr', () => {
   }
 
   afterEach(() => {
-    if (context.comp && context.comp.ngOnDestroy) context.comp.ngOnDestroy();
     delete win.QRious;
   });
 

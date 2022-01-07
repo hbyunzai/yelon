@@ -1,6 +1,5 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { warn } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export interface ZoneOptions {
   ngZoneName?: string;
@@ -15,7 +14,9 @@ function makeFn(type: 'runOutsideAngular' | 'run', options?: ZoneOptions): Decor
       const that = this as NzSafeAny;
       const ngZone = that[options?.ngZoneName || 'ngZone'];
       if (!ngZone) {
-        warn(`ZoneOutside: Decorator should have 'ngZone' property with 'NgZone' class.`);
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+          warn(`ZoneOutside: Decorator should have 'ngZone' property with 'NgZone' class.`);
+        }
         return source.call(this, ...data);
       }
       let res: NzSafeAny;

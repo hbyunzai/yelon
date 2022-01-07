@@ -7,12 +7,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { ACLService } from '@yelon/acl';
 import { YunzaiThemeModule, MenuIcon, MenuService, SettingsService } from '@yelon/theme';
 import { deepCopy } from '@yelon/util/other';
 import { WINDOW } from '@yelon/util/token';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { LayoutDefaultNavComponent, Nav } from './layout-nav.component';
 import { LayoutDefaultModule } from './layout.module';
@@ -131,8 +130,6 @@ describe('theme: layout-default-nav', () => {
     if (needMockNavigateByUrl) spyOn(router, 'navigateByUrl');
     if (callback) callback();
   }
-
-  afterEach(() => context.comp.ngOnDestroy());
 
   describe('', () => {
     beforeEach(() => createModule());

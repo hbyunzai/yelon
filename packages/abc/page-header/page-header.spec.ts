@@ -5,9 +5,6 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { NzAffixComponent } from 'ng-zorro-antd/affix';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { createTestContext } from '@yelon/testing';
 import {
   YunzaiI18NService,
@@ -18,6 +15,8 @@ import {
   SettingsService,
   TitleService
 } from '@yelon/theme';
+import { NzAffixComponent } from 'ng-zorro-antd/affix';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ReuseTabService } from '../reuse-tab/reuse-tab.service';
 import { PageHeaderComponent } from './page-header.component';
@@ -72,8 +71,6 @@ describe('abc: page-header', () => {
     const el = dl.query(By.css(cls)).nativeElement as HTMLElement;
     expect(el.textContent!.trim()).toBe(value);
   }
-
-  afterEach(() => context.comp.ngOnDestroy());
 
   describe('', () => {
     beforeEach(() => {

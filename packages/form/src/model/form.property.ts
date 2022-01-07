@@ -1,9 +1,8 @@
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiSFConfig } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { SF_SEQ } from '../const';
 import { ErrorData } from '../errors';
@@ -338,7 +337,9 @@ export abstract class FormProperty {
             const and = combineLatest([valueCheck, visibilityCheck]).pipe(map(results => results[0] && results[1]));
             propertiesBinding.push(and);
           } else {
-            console.warn(`Can't find property ${dependencyPath} for visibility check of ${this.path}`);
+            if (typeof ngDevMode === 'undefined' || ngDevMode) {
+              console.warn(`Can't find property ${dependencyPath} for visibility check of ${this.path}`);
+            }
           }
         }
       }

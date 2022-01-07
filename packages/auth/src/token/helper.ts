@@ -1,8 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { YunzaiAuthConfig } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YA_SERVICE_TOKEN, ITokenService } from './interface';
 import { JWTTokenModel } from './jwt/jwt.model';
@@ -16,7 +17,9 @@ export function CheckJwt(model: JWTTokenModel, offset: number): boolean {
   try {
     return model != null && !!model.token && !model.isExpired(offset);
   } catch (err: NzSafeAny) {
-    console.warn(`${err.message}, jump to login_url`);
+    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+      console.warn(`${err.message}, jump to login_url`);
+    }
     return false;
   }
 }

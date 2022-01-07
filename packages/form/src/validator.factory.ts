@@ -3,10 +3,9 @@ import { Inject, Injectable, NgZone } from '@angular/core';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { REGEX } from '@yelon/util/format';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { mergeConfig } from './config';
 import { ErrorData } from './errors';
@@ -63,10 +62,12 @@ export class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
       try {
         this.ngZone.runOutsideAngular(() => this.ajv.validate(schema, value));
       } catch (e) {
-        // swallow errors thrown in ajv due to invalid schemas, these
-        // still get displayed
-        if (extraOptions.debug) {
-          console.warn(e);
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+          // swallow errors thrown in ajv due to invalid schemas, these
+          // still get displayed
+          if (extraOptions.debug) {
+            console.warn(e);
+          }
         }
       }
       let errors = this.ajv.errors;

@@ -1,6 +1,5 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { warn } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export type BooleanInput = boolean | string | undefined | null;
 export type NumberInput = number | string | undefined | null;
@@ -17,8 +16,10 @@ function propDecoratorFactory<T, D>(
   ): NzSafeAny {
     const privatePropName = `$$__${propName}`;
 
-    if (Object.prototype.hasOwnProperty.call(target, privatePropName)) {
-      warn(`The prop "${privatePropName}" is already exist, it will be overrided by ${name} decorator.`);
+    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+      if (Object.prototype.hasOwnProperty.call(target, privatePropName)) {
+        warn(`The prop "${privatePropName}" is already exist, it will be overrided by ${name} decorator.`);
+      }
     }
 
     Object.defineProperty(target, privatePropName, {
