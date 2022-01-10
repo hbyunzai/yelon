@@ -19,7 +19,7 @@ jobs:
       - name: build
         run: |
           yarn run site:gen
-          node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build --base-href /yelon/
+          node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build --base-href /
           yarn run site:helper
           yarn run site:minify
           cp ./src/dist/browser/index.html ./src/dist/browser/404.html
