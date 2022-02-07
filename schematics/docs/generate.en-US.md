@@ -24,6 +24,8 @@ Examples:
 ng g ng-yunzai:module trade
 # Generate a TradeListComponent List component under the trade module
 ng g ng-yunzai:list list -m=trade
+# Generate a TradeListComponent List component and TradeService class under the trade module
+ng g ng-yunzai:list list -m=trade --service=root
 # Generate a ListComponent List component under the trade module
 ng g ng-yunzai:list list -m=trade --withoutModulePrefixInComponentName=true
 # Generate a TradeEditComponent Edit component under the trade module

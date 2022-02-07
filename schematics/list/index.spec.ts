@@ -1,5 +1,4 @@
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
-
 import * as fs from 'fs';
 
 import { createYunzaiAndModuleApp } from '../utils/testing';
@@ -51,5 +50,11 @@ describe('Schematic: list', () => {
     } catch (e) {
       expect(e.message).toContain(`already exists`);
     }
+  });
+  it('shuold be include service', async () => {
+    tree = await runner.runSchematicAsync('list', { name: 'list', module: 'trade', service: 'none' }, tree).toPromise();
+    const servicePath = '/projects/foo/src/app/routes/trade/list/list.service.ts';
+    expect(tree.readContent(servicePath)).toContain(`@Injectable()`);
+    expect(tree.readContent(modulePath)).toContain(`TradeService`);
   });
 });

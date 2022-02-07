@@ -39,13 +39,21 @@
     },
     "viewEncapsulation": {
       "description": "Specifies the view encapsulation strategy.",
-      "enum": ["Emulated", "Native", "None", "ShadowDom"],
+      "enum": [
+        "Emulated",
+        "Native",
+        "None",
+        "ShadowDom"
+      ],
       "type": "string",
       "alias": "v"
     },
     "changeDetection": {
       "description": "Specifies the change detection strategy.",
-      "enum": ["Default", "OnPush"],
+      "enum": [
+        "Default",
+        "OnPush"
+      ],
       "type": "string",
       "default": "Default",
       "alias": "c"
@@ -68,7 +76,13 @@
       "description": "The file extension or preprocessor to use for style files.",
       "type": "string",
       "default": "css",
-      "enum": ["css", "scss", "sass", "less", "styl"],
+      "enum": [
+        "css",
+        "scss",
+        "sass",
+        "less",
+        "styl"
+      ],
       "x-user-analytics": 5
     },
     "type": {
@@ -132,7 +146,39 @@
       "type": "string",
       "description": "指定目标路径，支持 `bus/list` 写法 (Specifies relative path, could be set like `bus/list`.)",
       "alias": "t"
+    },
+    "service": {
+      "type": "string",
+      "description": "The service file to use in the new component.",
+      "default": "ignore",
+      "enum": [
+        "ignore",
+        "none",
+        "root"
+      ],
+      "x-prompt": {
+        "message": "Which service injectors would you like to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "ignore",
+            "label": "Ignore generation of Service files"
+          },
+          {
+            "value": "root",
+            "label": "Use \"@Injectable({ providedIn: 'root' })\""
+          },
+          {
+            "value": "none",
+            "label": "Use \"@Injectable()\" (Should be automatically register to the nearest module)"
+          }
+        ]
+      },
+      "x-user-analytics": 20
     }
   },
-  "required": ["name", "module"]
+  "required": [
+    "name",
+    "module"
+  ]
 }

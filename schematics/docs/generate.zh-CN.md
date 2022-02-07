@@ -38,6 +38,8 @@ ng g ng-yunzai:[command name] [name] [options]
 ng g ng-yunzai:module trade
 # trade 模块下生成一个 TradeListComponent List组件
 ng g ng-yunzai:list list -m=trade
+# trade 模块下生成一个 TradeEditComponent List组件 及 TradeService 服务类
+ng g ng-yunzai:list list -m=trade --service=root
 # trade 模块下生成一个 ListComponent List组件
 ng g ng-yunzai:list list -m=trade --withoutModulePrefixInComponentName=true
 # trade 模块下生成一个 TradeEditComponent Edit组件
