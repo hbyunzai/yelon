@@ -15,7 +15,6 @@ Yelon
 [![GithubIo](https://img.shields.io/github/workflow/status/hbyunzai/yelon/Deploy?label=github.io&style=flat-square
 )](https://ng.yunzainfo.com)
 [![Codecov](https://img.shields.io/codecov/c/github/hbyunzai/yelon?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon)
-[![Dependency Status](https://david-dm.org/hbyunzai/yelon/status.svg?style=flat-square)](https://david-dm.org/hbyunzai/yelon)
 [![GitHub Release Date](https://img.shields.io/github/release-date/hbyunzai/yelon.svg?style=flat-square)](https://github.com/hbyunzai/yelon/releases)
 [![NPM version](https://img.shields.io/npm/v/ng-yunzai?style=flat-square)](https://www.npmjs.com/package/ng-yunzai)
 [![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
