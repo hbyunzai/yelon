@@ -1,4 +1,4 @@
-import { MockStatusError, MockRequest } from '@delon/mock';
+import { MockStatusError, MockRequest } from '@yelon/mock';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 // import * as Mock from 'mockjs';
 
