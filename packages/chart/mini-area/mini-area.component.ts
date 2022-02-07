@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEn
 
 import type { Chart, Event } from '@antv/g2';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { G2BaseComponent, genMiniTooltipOptions } from '@yelon/chart/core';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export interface G2MiniAreaData {
   x: NzSafeAny;
@@ -115,7 +114,7 @@ export class G2MiniAreaComponent extends G2BaseComponent {
       const records = this._chart.getSnapRecords({ x: ev.x, y: ev.y });
       this.ngZone.run(() => this.clickItem.emit({ item: records[0]._origin, ev }));
     });
-
+    this.ready.next(chart);
     this.changeData();
     chart.render();
   }

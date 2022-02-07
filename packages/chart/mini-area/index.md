@@ -39,6 +39,8 @@ module: import { G2MiniAreaModule } from '@yelon/chart/mini-area';
 | `[data]` | 数据 | `G2MiniAreaData[]` | - |
 | `[theme]` | 定制图表主题 | `string | LooseObject` | - |
 | `(clickItem)` | 点击项回调 | `EventEmitter<G2MiniAreaClickItem>` | - |
+| `(ready)` | 当G2完成初始化后调用 | `EventEmitter<Chart>` | - |
+
 
 ### G2MiniAreaData
 

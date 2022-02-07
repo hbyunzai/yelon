@@ -10,10 +10,9 @@ import {
 
 import type { Chart, Event } from '@antv/g2';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { G2BaseComponent } from '@yelon/chart/core';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export interface G2RadarData {
   name: string;
@@ -120,7 +119,7 @@ export class G2RadarComponent extends G2BaseComponent {
     chart.on(`point:click`, (ev: Event) => {
       this.ngZone.run(() => this.clickItem.emit({ item: ev.data?.data, ev }));
     });
-
+    this.ready.next(chart);
     this.changeData();
 
     chart.render();

@@ -179,7 +179,7 @@ export class G2PieComponent extends G2BaseComponent {
     chart.on(`interval:click`, (ev: Event) => {
       this.ngZone.run(() => this.clickItem.emit({ item: ev.data?.data, ev }));
     });
-
+    this.ready.next(chart);
     this.changeData();
     chart.render();
   }

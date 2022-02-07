@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 
 import type { Chart } from '@antv/g2';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { G2BaseComponent } from '@yelon/chart/core';
 import { InputNumber, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'g2-gauge',
@@ -101,7 +100,7 @@ export class G2GaugeComponent extends G2BaseComponent {
       grid: null
     });
     chart.point().position('value*1').shape('pointer');
-
+    this.ready.next(chart);
     this.changeData();
 
     chart.render();

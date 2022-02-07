@@ -12,10 +12,9 @@ import { debounceTime, filter, takeUntil } from 'rxjs/operators';
 
 import type { Chart, Event } from '@antv/g2';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { G2BaseComponent, G2InteractionType } from '@yelon/chart/core';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 const TITLE_HEIGHT = 41;
 
@@ -113,7 +112,7 @@ export class G2BarComponent extends G2BaseComponent {
     chart.on(`interval:click`, (ev: Event) => {
       this.ngZone.run(() => this.clickItem.emit({ item: ev.data?.data, ev }));
     });
-
+    this.ready.next(chart);
     this.changeData();
     chart.render();
     this.installResizeEvent();
