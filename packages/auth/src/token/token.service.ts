@@ -2,9 +2,8 @@ import { inject, Inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subject, Subscription } from 'rxjs';
 import { filter, map, share } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { mergeConfig } from '../auth.config';
 import { YA_STORE_TOKEN, IStore } from '../store/interface';
@@ -53,6 +52,7 @@ export class TokenService implements ITokenService, OnDestroy {
   }
 
   get(type?: NzSafeAny): NzSafeAny;
+  get<T extends ITokenModel>(type?: new () => T): T;
   get<T extends ITokenModel>(type?: new () => T): T {
     const data = this.store.get(this._options.store_key!);
     return type ? (Object.assign(new type(), data) as T) : (data as T);
