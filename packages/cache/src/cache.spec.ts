@@ -5,9 +5,8 @@ import { TestBed } from '@angular/core/testing';
 import { firstValueFrom, Observable, of } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiCacheConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YelonCacheModule } from './cache.module';
 import { CacheService } from './cache.service';
@@ -110,6 +109,24 @@ describe('cache: service', () => {
         expect(srv.getNone(KEY)).toBe(1);
         srv.set(KEY, 2);
         expect(srv.getNone(KEY)).toBe(2);
+      });
+      it('should be can not notify when emitNotify is false', () => {
+        let result = true;
+        srv
+          .notify(KEY)
+          .pipe(filter(v => v != null))
+          .subscribe(() => (result = false));
+        srv.set(KEY, 1, { emitNotify: false });
+        expect(result).toBe(true);
+      });
+      it('should be notify when emitNotify is true', () => {
+        let result = true;
+        srv
+          .notify(KEY)
+          .pipe(filter(v => v != null))
+          .subscribe(() => (result = false));
+        srv.set(KEY, 1, { emitNotify: true });
+        expect(result).toBe(false);
       });
     });
 

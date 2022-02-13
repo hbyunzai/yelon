@@ -5,9 +5,8 @@ import { map, tap } from 'rxjs/operators';
 
 import { addSeconds } from 'date-fns';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiCacheConfig, YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { CacheNotifyResult, CacheNotifyType, ICache, ICacheStore } from './interface';
 import { DC_STORE_STORAGE_TOKEN } from './local-storage-cache.service';
@@ -88,25 +87,33 @@ export class CacheService implements OnDestroy {
    * - `set('data/1', this.http.get('data/1')).subscribe()`
    * - `set('data/1', this.http.get('data/1'), { expire: 10 }).subscribe()`
    */
-  set<T>(key: string, data: Observable<T>, options?: { type?: 's'; expire?: number }): Observable<T>;
+  set<T>(
+    key: string,
+    data: Observable<T>,
+    options?: { type?: 's'; expire?: number; emitNotify?: boolean }
+  ): Observable<T>;
   /**
    * Persistent cached `Observable` object, for example:
    * - `set('data/1', this.http.get('data/1')).subscribe()`
    * - `set('data/1', this.http.get('data/1'), { expire: 10 }).subscribe()`
    */
-  set(key: string, data: Observable<NzSafeAny>, options?: { type?: 's'; expire?: number }): Observable<NzSafeAny>;
+  set(
+    key: string,
+    data: Observable<NzSafeAny>,
+    options?: { type?: 's'; expire?: number; emitNotify?: boolean }
+  ): Observable<NzSafeAny>;
   /**
    * Persistent cached simple object, for example:
    * - `set('data/1', 1)`
    * - `set('data/1', 1, { expire: 10 })`
    */
-  set(key: string, data: unknown, options?: { type?: 's'; expire?: number }): void;
+  set(key: string, data: unknown, options?: { type?: 's'; expire?: number; emitNotify?: boolean }): void;
   /**
    * Persistent cached simple object and specify storage type, for example caching in memory:
    * - `set('data/1', 1, { type: 'm' })`
    * - `set('data/1', 1, { type: 'm', expire: 10 })`
    */
-  set(key: string, data: unknown, options: { type: 'm' | 's'; expire?: number }): void;
+  set(key: string, data: unknown, options: { type: 'm' | 's'; expire?: number; emitNotify?: boolean }): void;
   /**
    * 缓存对象
    */
@@ -120,6 +127,10 @@ export class CacheService implements OnDestroy {
        * 过期时间，单位 `秒`
        */
       expire?: number;
+      /**
+       * 是否触发通知，默认：`true`
+       */
+      emitNotify?: boolean;
     } = {}
   ): NzSafeAny {
     let e = 0;
@@ -132,25 +143,28 @@ export class CacheService implements OnDestroy {
     if (options.expire) {
       e = addSeconds(new Date(), options.expire).valueOf();
     }
+    const emitNotify = options.emitNotify !== false;
     if (!(data instanceof Observable)) {
-      this.save(options.type!, key, { v: data, e });
+      this.save(options.type!, key, { v: data, e }, emitNotify);
       return;
     }
     return data.pipe(
       tap((v: NzSafeAny) => {
-        this.save(options.type!, key, { v, e });
+        this.save(options.type!, key, { v, e }, emitNotify);
       })
     );
   }
 
-  private save(type: 'm' | 's', key: string, value: ICache): void {
+  private save(type: 'm' | 's', key: string, value: ICache, emitNotify: boolean = true): void {
     if (type === 'm') {
       this.memory.set(key, value);
     } else {
       this.store.set(this.cog.prefix + key, value);
       this.pushMeta(key);
     }
-    this.runNotify(key, 'set');
+    if (emitNotify) {
+      this.runNotify(key, 'set');
+    }
   }
 
   // #endregion
@@ -164,6 +178,7 @@ export class CacheService implements OnDestroy {
       mode: 'promise';
       type?: 'm' | 's';
       expire?: number;
+      emitNotify?: boolean;
     }
   ): Observable<T>;
   /** 获取缓存数据，若 `key` 不存在则 `key` 作为HTTP请求缓存后返回 */
@@ -173,6 +188,7 @@ export class CacheService implements OnDestroy {
       mode: 'promise';
       type?: 'm' | 's';
       expire?: number;
+      emitNotify?: boolean;
     }
   ): Observable<NzSafeAny>;
   /** 获取缓存数据，若 `key` 不存在或已过期则返回 null */
@@ -182,6 +198,7 @@ export class CacheService implements OnDestroy {
       mode: 'none';
       type?: 'm' | 's';
       expire?: number;
+      emitNotify?: boolean;
     }
   ): NzSafeAny;
   get(
@@ -190,6 +207,7 @@ export class CacheService implements OnDestroy {
       mode?: 'promise' | 'none';
       type?: 'm' | 's';
       expire?: number;
+      emitNotify?: boolean;
     } = {}
   ): Observable<NzSafeAny> | NzSafeAny {
     const isPromise = options.mode !== 'none' && this.cog.mode === 'promise';
@@ -198,7 +216,13 @@ export class CacheService implements OnDestroy {
       if (isPromise) {
         return (this.cog.request ? this.cog.request(key) : this.http.get(key)).pipe(
           map((ret: NzSafeAny) => this.deepGet(ret, this.cog.reName as string[], null)),
-          tap(v => this.set(key, v, { type: options.type as NzSafeAny, expire: options.expire }))
+          tap(v =>
+            this.set(key, v, {
+              type: options.type as NzSafeAny,
+              expire: options.expire,
+              emitNotify: options.emitNotify
+            })
+          )
         );
       }
       return null;
@@ -217,19 +241,27 @@ export class CacheService implements OnDestroy {
   /**
    * 获取缓存，若不存在则设置持久化缓存 `Observable` 对象
    */
-  tryGet<T>(key: string, data: Observable<T>, options?: { type?: 's'; expire?: number }): Observable<T>;
+  tryGet<T>(
+    key: string,
+    data: Observable<T>,
+    options?: { type?: 's'; expire?: number; emitNotify?: boolean }
+  ): Observable<T>;
   /**
    * 获取缓存，若不存在则设置持久化缓存 `Observable` 对象
    */
-  tryGet(key: string, data: Observable<NzSafeAny>, options?: { type?: 's'; expire?: number }): Observable<NzSafeAny>;
+  tryGet(
+    key: string,
+    data: Observable<NzSafeAny>,
+    options?: { type?: 's'; expire?: number; emitNotify?: boolean }
+  ): Observable<NzSafeAny>;
   /**
    * 获取缓存，若不存在则设置持久化缓存基础对象
    */
-  tryGet(key: string, data: unknown, options?: { type?: 's'; expire?: number }): NzSafeAny;
+  tryGet(key: string, data: unknown, options?: { type?: 's'; expire?: number; emitNotify?: boolean }): NzSafeAny;
   /**
    * 获取缓存，若不存在则设置指定缓存类型进行缓存对象
    */
-  tryGet(key: string, data: unknown, options: { type: 'm' | 's'; expire?: number }): NzSafeAny;
+  tryGet(key: string, data: unknown, options: { type: 'm' | 's'; expire?: number; emitNotify?: boolean }): NzSafeAny;
 
   /**
    * 获取缓存，若不存在则设置缓存对象
@@ -244,6 +276,10 @@ export class CacheService implements OnDestroy {
        * 过期时间，单位 `秒`
        */
       expire?: number;
+      /**
+       * 是否触发通知，默认：`true`
+       */
+      emitNotify?: boolean;
     } = {}
   ): NzSafeAny {
     const ret = this.getNone(key);
