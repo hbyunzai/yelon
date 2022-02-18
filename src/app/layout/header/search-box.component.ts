@@ -38,6 +38,7 @@ export class HeaderSearchComponent implements AfterViewInit {
       return;
     }
 
+    // Admin panel: https://crawler.algolia.com/admin/
     const start = `https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min`;
     this.lazySrv.load([`${start}.js`, `${start}.css`]).then(() => {
       const curHost = location.hostname;
@@ -45,10 +46,11 @@ export class HeaderSearchComponent implements AfterViewInit {
       docsearch({
         appId: 'M5FWUU1G0X',
         apiKey: '2fa1e6f2c7ef5b6e15c62df3354bbb0f',
-        indexName: 'doc',
+        indexName: `ng-yunzai`,
         inputSelector: '#search-box input',
         algoliaOptions: {
           hitsPerPage: 5,
+          // queryLanguages: [this.i18n.zone]
           facetFilters: [`tags:${this.i18n.zone}`]
         },
         handleSelected: (_input: NzSafeAny, _event: NzSafeAny, suggestion: { url: string }) => {
