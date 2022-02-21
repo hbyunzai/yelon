@@ -93,7 +93,7 @@ yarn config delete sass_binary_site
 
 缺少语言导入，参考[app.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/app.module.ts#L6-L25)。
 
-### 如何本地部署ng-yunzai.com文档
+### 如何本地部署ng.yunzainfo.com文档
 
 我们提供一份在线快照：
 
@@ -101,4 +101,4 @@ yarn config delete sass_binary_site
 git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/yelon.git docs
 ```
 
-你可以简单的创建一个 Docker 容器来快速部署 ng-yunzai.com 相同的文档站点。
+你可以简单的创建一个 Docker 容器来快速部署 ng.yunzainfo.com 相同的文档站点。

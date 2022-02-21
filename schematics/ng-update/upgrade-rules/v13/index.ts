@@ -44,7 +44,7 @@ function removeIE(): Rule {
     const pkg = readPackage(tree);
     if (pkg.scripts && !pkg.scripts['ie:start']) return;
 
-    context.logger.warn(colors.yellow(`TIPS: Starting from NG-ALAIN 13 will no longer support IE`));
+    context.logger.warn(colors.yellow(`TIPS: Starting from NG-YUNZAI 13 will no longer support IE`));
   };
 }
 

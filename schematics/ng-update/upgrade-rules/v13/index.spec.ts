@@ -34,6 +34,6 @@ describe('Schematic: ng-update: v13Rule', () => {
   it(`should be tips not support ie`, async () => {
     tree.overwrite(`package.json`, JSON.stringify({ scripts: { 'ie:start': 'npm' } }));
     await runMigration();
-    expect(logs.join('')).toContain(`TIPS: Starting from NG-ALAIN 13 will no longer support IE`);
+    expect(logs.join('')).toContain(`TIPS: Starting from NG-YUNZAI 13 will no longer support IE`);
   });
 });

@@ -53,10 +53,10 @@ describe('Schematic: empty', () => {
     });
   });
 
-  describe('ng-alain.json', () => {
+  describe('ng-yunzai.json', () => {
     it('should be specify routesRoot', async () => {
-      const alainJson = { projects: { foo: { routesRoot: 'app/pages' } } };
-      ({ runner, tree } = await createYunzaiAndModuleApp('trade', null, alainJson));
+      const yunzaiJson = { projects: { foo: { routesRoot: 'app/pages' } } };
+      ({ runner, tree } = await createYunzaiAndModuleApp('trade', null, yunzaiJson));
       tree = await runner.runSchematicAsync('empty', { name: 'list', module: 'trade' }, tree).toPromise();
       expect(tree.exists('/projects/foo/src/app/pages/trade/trade.module.ts')).toBe(true);
     });
