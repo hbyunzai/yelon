@@ -14,6 +14,21 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 
 ---
 
+# [13.2.0](https://github.com/hbyunzai/yelon/compare/13.1.0...13.2.0) (2022-02-21)
+
+
+### Bug Fixes
+
+* **form:** fix schema polluted in array ([5a083fa](https://github.com/hbyunzai/yelon/commit/5a083fa2ce1917cc4444fa40d4d47aab956d1031))
+* **schema:** fix generate code ([81fc52e](https://github.com/hbyunzai/yelon/commit/81fc52ea561256f4b54f6f80a5028319493ed030))
+
+
+### Features
+
+* **abc:qr:** support function of `value` ([3266104](https://github.com/hbyunzai/yelon/commit/3266104fe22939dce6505b60166d2958ee209a3b))
+* **cache:** add property ([ba59935](https://github.com/hbyunzai/yelon/commit/ba5993521cd9c45350ca7f59e06792e5ec972cba))
+
+
 # [13.1.0](https://github.com/hbyunzai/yelon/compare/13.0.0...13.1.0) (2022-02-08)
 
 
