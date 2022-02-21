@@ -1,4 +1,5 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -15,10 +16,9 @@ import {
 import { interval, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfigService } from '@yelon/util/config';
 import { InputNumber } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'error-collect, [error-collect]',
@@ -53,7 +53,8 @@ export class ErrorCollectComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     @Inject(DOCUMENT) private doc: NzSafeAny,
     configSrv: YunzaiConfigService,
-    @Optional() private directionality: Directionality
+    @Optional() private directionality: Directionality,
+    private platform: Platform
   ) {
     configSrv.attach(this, 'errorCollect', { freq: 500, offsetTop: 65 + 64 + 8 * 2 });
   }
@@ -105,6 +106,8 @@ export class ErrorCollectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!this.platform.isBrowser) return;
+
     this.formEl = this.findParent(this.el.nativeElement, 'form');
     if (this.formEl === null) throw new Error('No found form element');
     this.install();

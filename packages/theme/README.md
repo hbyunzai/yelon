@@ -4,7 +4,7 @@ ng-yunzai theme system library.
 
 ## Links
 
-+ [Document](https://ng.yunzainfo.com/theme) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/theme) - [国内镜像](https://ng-yunzai.gitee.io/yelon/theme))
++ [Document](https://ng.yunzainfo.com/theme) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/theme))
 + [@yelon Source](https://github.com/hbyunzai/yelon)
 + [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 

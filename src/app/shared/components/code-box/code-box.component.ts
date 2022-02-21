@@ -29,7 +29,6 @@ export class CodeBoxComponent implements OnDestroy {
 
   @Input()
   set item(value: any) {
-    debugger;
     if (!this._orgItem) {
       this._orgItem = deepCopy(value);
     }
@@ -88,6 +87,7 @@ export class CodeBoxComponent implements OnDestroy {
       this.codeSrv.openOnStackBlitz(this.item.code);
     } else {
       this.msg.warning(`CodeSandbox does not support Angular 13, pls use StackBlitz!`);
+      // this.codeSrv.openOnCodeSandbox(this.item.code, includeCli);
     }
   }
 

@@ -6,7 +6,7 @@ import { ACLService } from '@yelon/acl';
 import { ICONS } from '@yelon/bis/shared';
 import { CacheService } from '@yelon/cache';
 import { Menu, MenuService, SettingsService, TitleService, User, YUNZAI_I18N_TOKEN } from '@yelon/theme';
-import { deepCopy, log, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
+import {deepCopy, log, WINDOW, YunzaiBusinessConfig, YunzaiConfigService} from '@yelon/util';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
@@ -54,6 +54,7 @@ export class YzStartupService {
     iconSrv: NzIconService,
     private menuService: MenuService,
     @Inject(YUNZAI_I18N_TOKEN) private i18n: YzI18NService,
+    @Inject(WINDOW) private win: NzSafeAny,
     private settingService: SettingsService,
     private aclService: ACLService,
     private titleService: TitleService,
@@ -81,9 +82,8 @@ export class YzStartupService {
         // preloader finish
         this.systemInit();
         log('startup.service: preloader finish');
-        const win = window as NzSafeAny;
-        if (win && win.appBootstrap) {
-          win.appBootstrap();
+        if (this.win && this.win.appBootstrap) {
+          this.win.appBootstrap();
         }
         return of(v);
       })

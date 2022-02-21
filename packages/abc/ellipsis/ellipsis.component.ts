@@ -15,9 +15,8 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'ellipsis',
@@ -56,6 +55,10 @@ export class EllipsisComponent implements AfterViewInit, OnChanges {
       (targetCount > 0 ? text.substring(0, targetCount) : '') +
       (targetCount > 0 && targetCount < text.length ? tail : '')
     );
+  }
+
+  private get win(): NzSafeAny {
+    return this.doc.defaultView || window;
   }
 
   constructor(
@@ -172,7 +175,7 @@ export class EllipsisComponent implements AfterViewInit, OnChanges {
       const { shadowOrgEl, shadowTextEl } = this;
       const orgNode = shadowOrgEl.nativeElement as HTMLElement;
       const lineText = orgNode.innerText || orgNode.textContent!;
-      const lineHeight = parseInt(getComputedStyle(this.getEl('.ellipsis')).lineHeight!, 10);
+      const lineHeight = parseInt(this.win.getComputedStyle(this.getEl('.ellipsis')).lineHeight!, 10);
       const targetHeight = lines! * lineHeight;
       this.getEl('.ellipsis__handle').style.height = `${targetHeight}px`;
 

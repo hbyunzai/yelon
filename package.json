@@ -33,10 +33,11 @@
     "analyze": "npm run ng-high-memory build -- --source-map",
     "analyze:view": "source-map-explorer src/dist/browser/*.js",
     "site:gen": "node scripts/site/main init && ng-yunzai-plugin-theme -t=themeCss && ng-yunzai-plugin-theme -t=colorLess",
-    "site:build": "npm run site:gen && npm run ng-high-memory build && npm run site:helper && npm run site:minify && npm run site:sitemap",
+    "site:build": "npm run site:gen && npm run ssr:prerender && npm run site:ngsw && npm run site:minify && npm run site:sitemap && npm run site:helper",
     "site:helper": "bash scripts/ci/helper.sh",
     "site:minify": "node scripts/build/minify.js",
     "site:sitemap": "node scripts/build/sitemap.js",
+    "site:ngsw": "node scripts/build/ngsw.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --pkg package.json",
     "pre-publish": "node scripts/publish/publish.js && node scripts/publish/publish-scaffold.js",
     "publish:next": "bash scripts/publish/publish.sh -next",
@@ -45,7 +46,7 @@
     "ssr": "npm run ng-high-memory run site:serve-ssr",
     "ssr:serve": "node src/dist/server/main.js",
     "ssr:build": "npm run site:build && npm run ng-high-memory run site:server:production",
-    "ssr:prerender": "npm run site:build && npm run ng-high-memory run site:prerender"
+    "ssr:prerender": "ng run site:prerender"
   },
   "engines": {
     "node": "^12.20.0 || ^14.15.0 || ^16.10.0",
@@ -109,7 +110,7 @@
     "jasmine-spec-reporter": "^6.0.0",
     "protractor": "~7.0.0",
     "ts-node": "~9.1.1",
-    "@angular/language-service": "~13.1.1",
+    "@angular/language-service": "~13.2.0",
     "@types/jasminewd2": "~2.0.10",
     "karma-junit-reporter": "^2.0.1",
     "karma-spec-reporter": "0.0.32",

@@ -4,7 +4,7 @@ Generate random data, intercept http requests.
 
 ## Links
 
-+ [Document](https://ng.yunzainfo.com/mock) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/mock) - [国内镜像](https://ng-yunzai.gitee.io/yelon/mock))
++ [Document](https://ng.yunzainfo.com/mock) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/mock))
 + [@yelon Source](https://github.com/hbyunzai/yelon)
 + [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 

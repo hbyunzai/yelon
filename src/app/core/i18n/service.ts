@@ -1,11 +1,10 @@
 import { Platform } from '@angular/cdk/platform';
 import { Injectable } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
-
 import { YunzaiI18nBaseService, YelonLocaleService, en_US as yelonEnUS, zh_CN as yelonZhCn } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 
 import { ENUS } from './en-US';
 import { ZHCN } from './zh-CN';

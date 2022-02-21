@@ -29,7 +29,7 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.json",
             "polyfills": "src/polyfills.ts",
-            "assets": ["src/assets", "src/manifest.webmanifest"],
+            "assets": ["src/assets", "src/manifest.json", "src/robots.txt"],
             "styles": [
               "node_modules/aos/dist/aos.css",
               "src/styles.less"
@@ -132,6 +132,7 @@
       }
     },
     "yelon": {
+      "sourceRoot": "packages",
       "root": "packages",
       "projectType": "library",
       "prefix": "",

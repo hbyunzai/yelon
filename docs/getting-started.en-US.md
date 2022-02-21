@@ -22,7 +22,7 @@ This document uses the following conventions:
 
 ## Preparation
 
-You will need [node](http://nodejs.org/) and [git](https://git-scm.com/). The project is based on [Typescript](https://www.tslang.com/), [Angular](https://angular.io/), [g2](http://g2.alipay.com/), [@delon](https://github.com/ng-yunzai/delon) and [ng-zorro-antd](https://ng.ant.design/). It would be helpful if you have pre-existing knowledge on those.
+You will need [node](http://nodejs.org/) and [git](https://git-scm.com/). The project is based on [Typescript](https://www.tslang.com/), [Angular](https://angular.io/), [g2](http://g2.alipay.com/), [@yelon](https://github.com/ng-yunzai/yelon) and [ng-zorro-antd](https://ng.ant.design/). It would be helpful if you have pre-existing knowledge on those.
 
 ## Installation
 
@@ -74,12 +74,12 @@ NG-YUNZAI is a standard Angular CLI project that includes common routes for admi
 │   │   │   ├── routes.module.ts                # Service routing module
 │   │   │   └── routes-routing.module.ts        # Service routes registration
 │   │   ├── shared                              # Shared module
-│   │   │   ├── shared-delon.module.ts          # @Yelon/* import of secondary shared modules
+│   │   │   ├── shared-yelon.module.ts          # @Yelon/* import of secondary shared modules
 │   │   │   ├── shared-zorro.module.ts          # NG-ZORRO import of secondary shared modules
 │   │   │   └── shared.module.ts                # Shared module file
 │   │   ├── app.component.ts                    # Root component
 │   │   └── app.module.ts                       # Root module
-│   │   └── global-config.module.ts             # @delon & ng-zorro global config
+│   │   └── global-config.module.ts             # @yelon & ng-zorro global config
 │   ├── assets                                  # Local static resource
 │   ├── environments                            # Environment variable configuration
 │   ├── styles                                  # Style directory

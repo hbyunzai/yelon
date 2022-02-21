@@ -4,14 +4,15 @@ import { Inject, Injectable } from '@angular/core';
 import sdk from '@stackblitz/sdk';
 import { getParameters } from 'codesandbox/lib/api/define';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { deepCopy } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import pkg from '../../../../package.json';
 import { AppService } from '../app.service';
 import angularJSON from './files/angular.json';
 import appModuleTS from './files/app.module';
+import yelonABCModuleTS from './files/yelon-abc.module';
+import yelonChartModuleTS from './files/yelon-chart.module';
 import environmentTS from './files/environment';
 import globalConfigTS from './files/global-config.module';
 import mainTS from './files/main';
@@ -22,8 +23,6 @@ import polyfillTS from './files/polyfill';
 import readme from './files/readme-cli';
 import startupServiceTS from './files/startup.service';
 import tsconfigJSON from './files/tsconfig.json';
-import yelonABCModuleTS from './files/yelon-abc.module';
-import yelonChartModuleTS from './files/yelon-chart.module';
 
 @Injectable({ providedIn: 'root' })
 export class CodeService {

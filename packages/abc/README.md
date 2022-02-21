@@ -4,7 +4,7 @@ Common business components of ng-yunzai.
 
 ## Links
 
-+ [Document](https://ng.yunzainfo.com/components) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/components) - [国内镜像](https://ng-yunzai.gitee.io/yelon/components))
++ [Document](https://ng.yunzainfo.com/components) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/components)
 + [@yelon Source](https://github.com/hbyunzai/yelon)
 + [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 

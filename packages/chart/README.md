@@ -4,7 +4,7 @@ Cache the dictionary, city data etc.
 
 ## Links
 
-+ [Document](https://ng.yunzainfo.com/chart) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/chart) - [国内镜像](https://ng-yunzai.gitee.io/yelon/chart))
++ [Document](https://ng.yunzainfo.com/chart) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/chart))
 + [@yelon Source](https://github.com/hbyunzai/yelon)
 + [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 

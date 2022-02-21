@@ -4,7 +4,7 @@ Angular form generation based on JSON-Schema.
 
 ## Links
 
-+ [Document](https://ng.yunzainfo.com/form) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/form) - [国内镜像](https://ng-yunzai.gitee.io/yelon/form))
++ [Document](https://ng.yunzainfo.com/form) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/form))
 + [@yelon Source](https://github.com/hbyunzai/yelon)
 + [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 

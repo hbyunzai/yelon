@@ -5,8 +5,8 @@
     "rootDir": "..",
     "baseUrl": ".",
     "paths": {
-      "@delon/util/*": ["./*"],
-      "@delon/*": ["../*"]
+      "@yelon/util/*": ["./*"],
+      "@yelon/*": ["../*"]
     }
   },
   "files": ["index.ts"],
