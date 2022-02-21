@@ -1,13 +1,4 @@
-/*
- * @Author: cui <devcui@outlook.com>
- * @Editor: microsoft vscode
- * @Date: 2021-11-07 10:02:22
- * @LastEditTime: 2021-11-14 12:30:52
- * @LastEditors: cui <devcui@outlook.com>
- * @Description: empty description
- * @FilePath: \yelon\schematics\plugin\plugin.network-env.spec.ts
- * MIT License Copyright (c) 2017-present 卡色<cipchk@qq.com>
- */
+
 
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 

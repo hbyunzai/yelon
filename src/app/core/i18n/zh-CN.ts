@@ -1,4 +1,6 @@
 export const ZHCN = {
+  "app.footer.thanks":"鸣谢",
+  "app.footer.thanks.user":"卡色",
   slogan: '一个基于 Antd 中后台前端解决方案',
   'app.header.search': '在 ng.yunzainfo.com 中搜索',
   'app.home.preview': '预览',

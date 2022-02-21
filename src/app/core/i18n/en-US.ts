@@ -1,4 +1,6 @@
 export const ENUS = {
+  "app.footer.thanks":"Thanks",
+  "app.footer.thanks.user":"cipchk",
   slogan: 'A front-end solution based on Antd',
   'app.header.search': 'Search in ng.yunzainfo.com',
   'app.home.preview': 'Preview',

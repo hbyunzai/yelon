@@ -1,13 +1,4 @@
-/*
- * @Author: cui <devcui@outlook.com>
- * @Editor: microsoft vscode
- * @Date: 2021-11-07 10:02:22
- * @LastEditTime: 2021-11-14 12:31:01
- * @LastEditors: cui <devcui@outlook.com>
- * @Description: empty description
- * @FilePath: \yelon\schematics\plugin\plugin.network-env.ts
- * MIT License Copyright (c) 2017-present 卡色<cipchk@qq.com>
- */
+
 
 import { Rule, SchematicsException, Tree } from '@angular-devkit/schematics';
 
