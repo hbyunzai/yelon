@@ -1,8 +1,8 @@
 ---
 order: 1
 title:
-  zh-CN: MP4基础样例
-  en-US: MP4 Basic Usage
+zh-CN: MP4基础样例
+en-US: MP4 Basic Usage
 ---
 
 ## zh-CN
@@ -20,11 +20,11 @@ import { Component } from '@angular/core';
   selector: 'app-demo',
   template: `
     <div class="mb-sm">
-      <button nz-button (click)="media.player.play()">Play</button>
-      <button nz-button (click)="media.player.pause()">Pause</button>
-      <button nz-button (click)="media.player.restart()">Restart</button>
+      <button nz-button (click)="media.player?.play()">Play</button>
+      <button nz-button (click)="media.player?.pause()">Pause</button>
+      <button nz-button (click)="media.player?.restart()">Restart</button>
     </div>
-    <media #media [source]="mp4" style="height: 200px"></media>
+    <media #media [source]="mp4"></media>
   `,
 })
 export class DemoComponent {

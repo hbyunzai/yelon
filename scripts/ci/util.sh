@@ -13,6 +13,7 @@ DEPENDENCIES=$(node -p "
     'file-saver',
     'jszip',
     'xlsx',
+    'plyr',
     'mockjs',
     '@types/mockjs',
     'ajv',

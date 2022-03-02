@@ -12,6 +12,7 @@
     "isutf8",
     "jszip",
     "xlsx",
+    "plyr",
     "ngx-countdown",
     "@yelon/theme",
     "@yelon/util",
