@@ -71,7 +71,7 @@ export class G2MiniAreaComponent extends G2BaseComponent {
       borderColor,
       borderWidth
     } = this;
-    const chart: Chart = (this._chart = new (window as NzSafeAny).G2.Chart({
+    const chart: Chart = (this._chart = new this.winG2.Chart({
       container: el.nativeElement,
       autoFit: fit,
       height,
@@ -114,7 +114,9 @@ export class G2MiniAreaComponent extends G2BaseComponent {
       const records = this._chart.getSnapRecords({ x: ev.x, y: ev.y });
       this.ngZone.run(() => this.clickItem.emit({ item: records[0]._origin, ev }));
     });
+
     this.ready.next(chart);
+
     this.changeData();
     chart.render();
   }

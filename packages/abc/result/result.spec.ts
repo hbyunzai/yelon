@@ -1,11 +1,11 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, DebugElement, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { createTestContext } from '@yelon/testing';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ResultComponent } from './result.component';
 import { ResultModule } from './result.module';
@@ -91,6 +91,14 @@ describe('abc: result', () => {
       fixture.detectChanges();
       isExists('#extraTpl');
     });
+  });
+
+  it('#rtl', () => {
+    isExists('.result-rtl', false);
+    const srv = TestBed.inject(Directionality);
+    srv.change.emit('rtl');
+    fixture.detectChanges();
+    isExists('.result-rtl', true);
   });
 });
 

@@ -4,10 +4,9 @@ import { debounceTime, filter } from 'rxjs/operators';
 
 import type { Chart, Event } from '@antv/g2';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { G2BaseComponent } from '@yelon/chart/core';
 import { InputNumber, NumberInput } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export interface G2TagCloudData {
   value?: number;
@@ -43,7 +42,8 @@ export class G2TagCloudComponent extends G2BaseComponent {
   // #endregion
 
   private initTagCloud(): void {
-    (window as NzSafeAny).G2.registerShape('point', 'cloud', {
+    const winG2 = this.winG2;
+    winG2.registerShape('point', 'cloud', {
       draw(cfg: NzSafeAny, container: NzSafeAny) {
         const data = cfg.data as NzSafeAny;
         const textShape = container.addShape({
@@ -62,7 +62,7 @@ export class G2TagCloudComponent extends G2BaseComponent {
           } as NzSafeAny
         });
         if (data.rotate) {
-          (window as NzSafeAny).G2.Util.rotate(textShape, (data.rotate * Math.PI) / 180);
+          winG2.Util.rotate(textShape, (data.rotate * Math.PI) / 180);
         }
         return textShape;
       }
@@ -80,7 +80,7 @@ export class G2TagCloudComponent extends G2BaseComponent {
       this.width = this.el.nativeElement.clientWidth;
     }
 
-    const chart: Chart = (this._chart = new (window as NzSafeAny).G2.Chart({
+    const chart: Chart = (this._chart = new this.winG2.Chart({
       container: el.nativeElement,
       autoFit: false,
       padding,
@@ -116,6 +116,8 @@ export class G2TagCloudComponent extends G2BaseComponent {
     chart.on('tag-cloud-text:click', (ev: Event) => {
       this.ngZone.run(() => this.clickItem.emit({ item: ev.data?.data, ev }));
     });
+
+    this.ready.next(chart);
 
     this.changeData();
     chart.render();

@@ -35,7 +35,7 @@ export class G2GaugeComponent extends G2BaseComponent {
 
   install(): void {
     // 自定义Shape 部分
-    (window as NzSafeAny).G2.registerShape('point', 'pointer', {
+    this.winG2.registerShape('point', 'pointer', {
       draw(cfg: NzSafeAny, container: NzSafeAny) {
         const group = container.addGroup({});
         // 获取极坐标系下画布中心点
@@ -68,7 +68,7 @@ export class G2GaugeComponent extends G2BaseComponent {
 
     const { el, height, padding, format, theme } = this;
 
-    const chart: Chart = (this._chart = new (window as NzSafeAny).G2.Chart({
+    const chart: Chart = (this._chart = new this.winG2.Chart({
       container: el.nativeElement,
       autoFit: true,
       height,
@@ -100,7 +100,9 @@ export class G2GaugeComponent extends G2BaseComponent {
       grid: null
     });
     chart.point().position('value*1').shape('pointer');
+
     this.ready.next(chart);
+
     this.changeData();
 
     chart.render();
@@ -140,7 +142,7 @@ export class G2GaugeComponent extends G2BaseComponent {
       content: title,
       style: {
         fontSize: 12,
-        fill: 'rgba(0, 0, 0, 0.43)',
+        fill: this.theme === 'dark' ? 'rgba(255, 255, 255, 0.43)' : 'rgba(0, 0, 0, 0.43)',
         textAlign: 'center'
       }
     });
@@ -149,7 +151,7 @@ export class G2GaugeComponent extends G2BaseComponent {
       content: `${val} %`,
       style: {
         fontSize: 20,
-        fill: 'rgba(0, 0, 0, 0.85)',
+        fill: this.theme === 'dark' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.85)',
         textAlign: 'center'
       },
       offsetY: 15

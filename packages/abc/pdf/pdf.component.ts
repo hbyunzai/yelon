@@ -20,11 +20,10 @@ import {
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, filter, takeUntil } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfigService } from '@yelon/util/config';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput, ZoneOutside } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { PDF_DEFULAT_CONFIG } from './pdf.config';
 import { PdfChangeEvent, PdfChangeEventType, PdfExternalLinkTarget, PdfTextLayerMode, PdfZoomScale } from './pdf.types';
@@ -59,7 +58,7 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
   static ngAcceptInputType_removePageBorders: BooleanInput;
 
   inited = false;
-  private unsubscribe$ = new Subject<void>();
+  private destroy$ = new Subject<void>();
   private lib: string = '';
   private _pdf: NzSafeAny;
   private loadingTask: NzSafeAny;
@@ -455,7 +454,7 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
       .pipe(
         debounceTime(100),
         filter(() => this.autoReSize && this._pdf),
-        takeUntil(this.unsubscribe$)
+        takeUntil(this.destroy$)
       )
       .subscribe(() => this.updateSize());
   }
@@ -467,9 +466,9 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    const { unsubscribe$ } = this;
-    unsubscribe$.next();
-    unsubscribe$.complete();
+    const { destroy$ } = this;
+    destroy$.next();
+    destroy$.complete();
 
     this.destroy();
   }

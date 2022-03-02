@@ -48,7 +48,7 @@ export class G2MiniBarComponent extends G2BaseComponent {
 
   install(): void {
     const { el, height, padding, yTooltipSuffix, tooltipType, theme, color, borderWidth } = this;
-    const chart: Chart = (this._chart = new (window as NzSafeAny).G2.Chart({
+    const chart: Chart = (this._chart = new this.winG2.Chart({
       container: el.nativeElement,
       autoFit: true,
       height,
@@ -79,7 +79,9 @@ export class G2MiniBarComponent extends G2BaseComponent {
     chart.on(`interval:click`, (ev: Event) => {
       this.ngZone.run(() => this.clickItem.emit({ item: ev.data?.data, ev }));
     });
+
     this.ready.next(chart);
+
     this.changeData();
     chart.render();
   }

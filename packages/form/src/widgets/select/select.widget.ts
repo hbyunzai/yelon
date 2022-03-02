@@ -2,9 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { ArrayService } from '@yelon/util/array';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { SFValue } from '../../interface';
 import { SFSchemaEnum } from '../../schema';
@@ -68,7 +67,7 @@ export class SelectWidget extends ControlUIWidget<SFSelectWidgetSchema> implemen
     if (onSearch) {
       this.search$
         .pipe(
-          takeUntil(this.sfItemComp!.unsubscribe$),
+          takeUntil(this.sfItemComp!.destroy$),
           distinctUntilChanged(),
           debounceTime(this.ui.searchDebounceTime || 300),
           switchMap(text => onSearch(text)),
