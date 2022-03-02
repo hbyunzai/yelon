@@ -35,7 +35,8 @@
     "inlineTemplate": {
       "description": "Specifies if the template will be in the ts file.",
       "type": "boolean",
-      "default": false
+      "default": false,
+      "x-user-analytics": 10
     },
     "viewEncapsulation": {
       "description": "Specifies the view encapsulation strategy.",
