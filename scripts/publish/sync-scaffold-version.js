@@ -11,7 +11,10 @@ const nextVersions = {
 };
 const name = (process.argv.length >= 2 ? process.argv[2] : '') || 'ng-yunzai';
 const packagePath = path.resolve(__dirname, `../../../${name}/package.json`);
-
+console.log(`Use packagePath: ` + packagePath);
+if (!fs.existsSync(packagePath)) {
+  throw Error(`所选的文件不存在, ${packagePath}`)
+}
 const json = fs.readJSONSync(packagePath);
 // Update third party
 ['dependencies', 'devDependencies'].forEach(type => {
