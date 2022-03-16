@@ -14,6 +14,19 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 
 ---
 
+## [13.2.1](https://github.com/hbyunzai/yelon/compare/13.2.0...13.2.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* **abc:media:** fix cannot redefine property error ([2d2ad18](https://github.com/hbyunzai/yelon/commit/2d2ad18c47a5ac643fce9df0a16aeef6bc0eb170))
+* **abc:pdf:** fix `container` must be absolutely positioned error ([4790217](https://github.com/hbyunzai/yelon/commit/479021727d3ef89d8b1696f8208621ba686f3aa3))
+* **chart:pie:** fix ECAIHBC error in block ([0d7a248](https://github.com/hbyunzai/yelon/commit/0d7a248810040b7cbdaa158560b36eda4a41f976))
+* **form:tree-select:** fix typo `checkfStrictly` ([3f6e45a](https://github.com/hbyunzai/yelon/commit/3f6e45a846cbdea09dfb1c221b3e2bf27d38c9d6))
+* **form:** fix buttons misalignment in `inline` layout ([f6a1f2f](https://github.com/hbyunzai/yelon/commit/f6a1f2fb0bb6b6492ec318e6c7b006314ccde2df))
+
+
+
 # [13.2.0](https://github.com/hbyunzai/yelon/compare/13.1.0...13.2.0) (2022-02-21)
 
 
