@@ -77,7 +77,7 @@ export class LayoutComponent implements OnDestroy {
     this.location.replaceState(path, (direction === RTL ? `?direction=${RTL}` : '') + fragment);
   }
 
-  themeChange(theme: string): void {
+  themeChange(theme: any): void {
     this.appSrv.setTheme(theme as SiteTheme);
   }
 
