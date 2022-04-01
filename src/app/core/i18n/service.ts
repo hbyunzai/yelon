@@ -59,10 +59,11 @@ export class I18NService extends YunzaiI18nBaseService {
     if (this.platform.isBrowser) {
       localStorage.lang = lang;
     }
-    this._currentLang = lang as string;
-    this._data = lang === 'en-US' ? ENUS : ZHCN;
-    this.zorroI18n.setLocale(lang === 'en-US' ? en_US : zh_CN);
-    this.yelonI18n.setLocale(lang === 'en-US' ? yelonEnUS : yelonZhCn);
+    this._currentLang = this.getFullLang(lang);
+    const isEn = this.getFullLang(lang) === 'en-US';
+    this._data = isEn ? ENUS : ZHCN;
+    this.zorroI18n.setLocale(isEn ? en_US : zh_CN);
+    this.yelonI18n.setLocale(isEn ? yelonEnUS : yelonZhCn);
     if (emit !== false) this._change$.next(lang);
   }
 

@@ -20,6 +20,9 @@ const yunzaiConfig: YunzaiConfig = {
   pdf: {},
   chart: {
     echartsExtensions: ['https://cdnjs.cloudflare.com/ajax/libs/echarts/5.1.0/theme/dark.min.js']
+  },
+  themeI18n: {
+    paramNameOfUrlGuard: 'lang'
   }
 };
 

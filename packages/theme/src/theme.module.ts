@@ -25,7 +25,7 @@ const PIPES = [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe];
 
 // #endregion
 
-// #region all yelon used icons
+// #region all delon used icons
 
 // - zorro: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/icon/icons.ts
 
@@ -38,7 +38,7 @@ const ICONS = [BellOutline, DeleteOutline, PlusOutline, InboxOutline];
 
 @NgModule({
   imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule],
-  declarations: [...PIPES],
+  declarations: PIPES,
   providers: [
     {
       provide: YUNZAI_SETTING_KEYS,
@@ -59,14 +59,14 @@ export class YunzaiThemeModule {
   static forRoot(): ModuleWithProviders<YunzaiThemeModule> {
     return {
       ngModule: YunzaiThemeModule,
-      providers: [...HELPERS]
+      providers: HELPERS
     };
   }
 
   static forChild(): ModuleWithProviders<YunzaiThemeModule> {
     return {
       ngModule: YunzaiThemeModule,
-      providers: [...HELPERS]
+      providers: HELPERS
     };
   }
 }

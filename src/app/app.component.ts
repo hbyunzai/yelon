@@ -1,15 +1,16 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, ElementRef, HostBinding, Inject, Renderer2 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {Component, ElementRef, HostBinding, Inject, Renderer2} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
 
-import { YUNZAI_I18N_TOKEN, TitleService, VERSION as VERSION_YUNZAI } from '@yelon/theme';
-import { VERSION as VERSION_ZORRO } from 'ng-zorro-antd/version';
+import {YUNZAI_I18N_TOKEN, TitleService, VERSION as VERSION_YUNZAI} from '@yelon/theme';
+import {VERSION as VERSION_ZORRO} from 'ng-zorro-antd/version';
 
-import { I18NService, LangType, MetaService, MobileService } from '@core';
+import {I18NService, MetaService, MobileService} from '@core';
 
 @Component({
   selector: 'app-root',
-  template: ` <router-outlet></router-outlet>`
+  template: `
+    <router-outlet></router-outlet>`
 })
 export class AppComponent {
   @HostBinding('class.mobile')
@@ -57,18 +58,11 @@ export class AppComponent {
         } else {
           newUrl = redirectArr.concat(urlLang).join('/');
         }
-        router.navigateByUrl(newUrl, { replaceUrl: true });
+        router.navigateByUrl(newUrl, {replaceUrl: true});
         return;
       }
 
       if (urlLang) {
-        const lang = i18n.getFullLang(urlLang);
-
-        // update i18n
-        if (i18n.currentLang !== lang) {
-          i18n.use(lang as LangType);
-          meta.clearMenu();
-        }
         meta.refMenu(url);
       }
 
@@ -79,5 +73,6 @@ export class AppComponent {
       const item = meta.getPathByUrl(url);
       title.setTitle(item ? item.title || item.subtitle : '');
     });
+    i18n.change.subscribe(_ => meta.clearMenu());
   }
 }

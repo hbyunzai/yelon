@@ -2,9 +2,8 @@ import { inject, Injectable, InjectionToken } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfigService, YunzaiThemeI18nConfig } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { _HttpClient } from '../http/http.client';
 
@@ -145,7 +144,7 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
 @Injectable({ providedIn: 'root' })
 export class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
   use(lang: string, data: Record<string, unknown>): void {
-    this._data = this.flatData(data, []);
+    this._data = this.flatData(data ?? {}, []);
     this._currentLang = lang;
     this._change$.next(lang);
   }
