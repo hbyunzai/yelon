@@ -1,10 +1,10 @@
 import { TemplateRef } from '@angular/core';
 
+import type { ACLCanType } from '@yelon/acl';
 import type { NgClassType, NgStyleInterface, NzSafeAny, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 
-import type { ACLCanType } from '@yelon/acl';
-
-import { ErrorSchema } from '../errors';
+import type { ErrorSchema } from '../errors';
+import type { SFValue } from '../interface';
 import type { FormProperty } from '../model/form.property';
 
 export type SFPlacement =
@@ -87,7 +87,7 @@ export type SFBuiltInWidgets =
 
 export interface SFRenderSchema {
   /**
-   * 指定采用什么小部件渲染，所有小部件名可[查阅文档](https://ng.yunzainfo.com/)
+   * 指定采用什么小部件渲染，所有小部件名可[查阅文档](https://ng-alain.com/)
    */
   widget?: SFBuiltInWidgets | (string & {});
   /**
@@ -170,6 +170,15 @@ export interface SFSchemaI18n {
   descriptionI18n?: string;
 }
 
+export interface SFVisibleIfReturn {
+  show?: boolean;
+  required?: boolean;
+}
+
+export interface SFVisibleIf {
+  [key: string]: NzSafeAny[] | ((value: SFValue, property: FormProperty) => boolean | SFVisibleIfReturn | null);
+}
+
 /** 指定如何渲染 `Schema` */
 export interface SFUISchemaItem extends SFRenderSchema, SFHorizontalLayoutSchema, ErrorSchema, SFSchemaI18n {
   [key: string]: NzSafeAny;
@@ -201,12 +210,12 @@ export interface SFUISchemaItem extends SFRenderSchema, SFHorizontalLayoutSchema
    * - `visibleIf: { shown: [ '$ANY$' ] }`：当 `shown` 包括任意值时
    * - `visibleIf: { shown: (value: any, property: FormProperty) => value > 0 }`：复杂表达式
    */
-  visibleIf?: { [key: string]: NzSafeAny[] | ((value: NzSafeAny, property: FormProperty) => boolean) };
+  visibleIf?: SFVisibleIf;
 
   /**
    * ACL 配置
    */
-  acl?: ACLCanType;
+  acl?: ACLCanType | null;
 }
 
 /**

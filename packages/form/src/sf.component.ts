@@ -26,10 +26,11 @@ import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { BooleanInput, InputBoolean } from '@yelon/util/decorator';
 import { deepCopy } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 
 import { mergeConfig } from './config';
 import type { ErrorData } from './errors';
-import { SFButton, SFLayout, SFValueChange } from './interface';
+import type { SFButton, SFLayout, SFMode, SFValueChange } from './interface';
 import { FormProperty, PropertyGroup } from './model/form.property';
 import { FormPropertyFactory } from './model/form.property.factory';
 import type { SFSchema } from './schema/index';
@@ -45,8 +46,6 @@ export function useFactory(
 ): FormPropertyFactory {
   return new FormPropertyFactory(schemaValidatorFactory, cogSrv);
 }
-
-export type SFMode = 'default' | 'search' | 'edit';
 
 @Component({
   selector: 'sf, [sf]',
@@ -193,27 +192,27 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Get form element property based on [path](https://ng.yunzainfo.com/form/qa#path)
+   * Get form element property based on [path](https://ng-alain.com/form/qa#path)
    *
-   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素属性
+   * 根据[路径](https://ng-alain.com/form/qa#path)获取表单元素属性
    */
   getProperty(path: string): FormProperty | null {
     return this.rootProperty!.searchProperty(path);
   }
 
   /**
-   * Get element value based on [path](https://ng.yunzainfo.com/form/qa#path)
+   * Get element value based on [path](https://ng-alain.com/form/qa#path)
    *
-   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素值
+   * 根据[路径](https://ng-alain.com/form/qa#path)获取表单元素值
    */
   getValue(path: string): NzSafeAny {
     return this.getProperty(path)!.value;
   }
 
   /**
-   * Set form element new value based on [path](https://ng.yunzainfo.com/form/qa#path)
+   * Set form element new value based on [path](https://ng-alain.com/form/qa#path)
    *
-   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素属性值
+   * 根据[路径](https://ng-alain.com/form/qa#path)设置某个表单元素属性值
    */
   setValue(path: string, value: NzSafeAny): this {
     const item = this.getProperty(path);
@@ -221,6 +220,23 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
       throw new Error(`Invalid path: ${path}`);
     }
     item.resetValue(value, false);
+    return this;
+  }
+
+  /**
+   * Update the feedback status of the widget
+   *
+   * 更新小部件的反馈状态
+   *
+   * ```ts
+   * // Validate status of the widget
+   * this.sf.updateFeedback('/name', 'validating');
+   * // Clean validate status of the widget
+   * this.sf.updateFeedback('/name');
+   * ```
+   */
+  updateFeedback(path: string, status: NzFormControlStatusType = null, icon?: string | null): this {
+    this.getProperty(path)?.updateFeedback(status, icon);
     return this;
   }
 
@@ -418,7 +434,6 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
       onlyVisual: this.options.onlyVisual,
       size: this.options.size,
       liveValidate: this.liveValidate,
-      firstVisual: this.firstVisual,
       ...this.options.ui,
       ...(_schema as NzSafeAny).ui,
       ...this.ui['*']
