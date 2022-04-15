@@ -21,12 +21,61 @@ import nzZorroAntdModuleTS from './files/ng-zorro-antd.module';
 import packageJSON from './files/package.json';
 import polyfillTS from './files/polyfill';
 import readme from './files/readme-cli';
+import sandboxConfigJSON from './files/sandbox.config.json';
 import startupServiceTS from './files/startup.service';
 import tsconfigJSON from './files/tsconfig.json';
 
 @Injectable({ providedIn: 'root' })
 export class CodeService {
   private document: Document;
+
+  // private get dependencies(): { [key: string]: string } {
+  //   const res: { [key: string]: string } = {};
+  //   [
+  //     '@angular/animations',
+  //     '@angular/compiler',
+  //     '@angular/common',
+  //     '@angular/core',
+  //     '@angular/forms',
+  //     '@angular/platform-browser',
+  //     '@angular/platform-browser-dynamic',
+  //     '@angular/router',
+  //     '@ant-design/icons-angular',
+  //     'core-js@3.8.3',
+  //     'rxjs',
+  //     'tslib',
+  //     'zone.js',
+  //     'date-fns',
+  //     `@angular/cdk@^${MAX_MAIN_VERSION}.x`,
+  //     'ng-zorro-antd',
+  //     '@yelon/theme',
+  //     '@yelon/abc',
+  //     '@yelon/chart',
+  //     '@yelon/acl',
+  //     '@yelon/auth',
+  //     '@yelon/cache',
+  //     '@yelon/mock',
+  //     '@yelon/form',
+  //     '@yelon/util',
+  //     'ajv',
+  //     'ajv-formats'
+  //   ].forEach(key => {
+  //     const includeVersion = key.lastIndexOf(`@`);
+  //     if (includeVersion > 1) {
+  //       res[key.substring(0, includeVersion)] = key.substring(includeVersion + 1);
+  //       return;
+  //     }
+  //     const version = key.startsWith('@yelon')
+  //       ? `~${pkg.version}`
+  //       : (
+  //           (pkg.dependencies || pkg.devDependencies) as {
+  //             [key: string]: string;
+  //           }
+  //         )[key];
+  //     res[key] = version || '*';
+  //   });
+  //   return res;
+  // }
 
   private get themePath(): string {
     return `node_modules/@yelon/theme/${this.appSrv.theme}.css`;
@@ -83,7 +132,9 @@ export class CodeService {
     ['@angular/cdk', '@ant-design/icons-angular', 'ngx-countdown'].forEach(type => {
       res.dependencies[type] = mainVersion;
     });
+    // res.dependencies['core-js'] = `~3.8.3`;
     if (!includeCli) res;
+    console.log(res);
 
     return res;
   }
@@ -125,11 +176,12 @@ export class CodeService {
     };
   }
 
-  openOnStackBlitz(appComponentCode: string): void {
+  openOnStackBlitz(title: string, appComponentCode: string): void {
     const res = this.parseCode(appComponentCode);
     const json = deepCopy(angularJSON);
     json.projects.demo.architect.build.options.styles.splice(0, 0, this.themePath);
     const packageJson = this.genPackage({ dependencies: [], devDependencies: [], includeCli: false });
+    packageJson.name = title;
     sdk.openProject(
       {
         title: 'NG-YUNZAI',
@@ -165,12 +217,13 @@ export class CodeService {
     );
   }
 
-  openOnCodeSandbox(appComponentCode: string, includeCli: boolean = false): void {
+  openOnCodeSandbox(title: string, appComponentCode: string, includeCli: boolean = false): void {
     const res = this.parseCode(appComponentCode);
     const mockObj = this.genMock;
     const json = deepCopy(angularJSON);
     json.projects.demo.architect.build.options.styles.splice(0, 0, this.themePath);
     const packageJson = this.genPackage({ dependencies: [], devDependencies: [], includeCli });
+    packageJson.name = title;
     const files: {
       [key: string]: {
         content: string;
@@ -252,16 +305,7 @@ export class CodeService {
         isBinary: false
       };
       files['sandbox.config.json'] = {
-        content: JSON.stringify(
-          {
-            template: 'node',
-            container: {
-              node: 14
-            }
-          },
-          null,
-          2
-        ),
+        content: `${JSON.stringify(sandboxConfigJSON, null, 2)}`,
         isBinary: false
       };
     }

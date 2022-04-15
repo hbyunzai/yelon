@@ -14,58 +14,31 @@
     <div class="code-box-description" [innerHTML]="item.summary"></div>
   </ng-container>
   <div class="code-box-actions">
-    <i
-      nz-tooltip
-      [nzTooltipTitle]="codeSandboxTpl"
-      (click)="openOnlineIDE('CodeSandbox')"
-      nz-icon
-      nzType="code-sandbox"
-      class="code-box-code-icon"
-    ></i>
+    <i nz-tooltip [nzTooltipTitle]="codeSandboxTpl" (click)="openOnlineIDE('CodeSandbox', true)" nz-icon
+      nzType="code-sandbox" class="code-box-code-icon"></i>
     <ng-template #codeSandboxTpl>
-      {{ 'app.demo.code-sandbox' | i18n }} (
-      <a (click)="openOnlineIDE('CodeSandbox', true)">{{ 'app.demo.code-sandbox-cli' | i18n }}</a>
-      )
+      {{ 'app.demo.code-sandbox' | i18n }}
+      <ng-container *ngIf="false">
+        (
+        <a (click)="openOnlineIDE('CodeSandbox', true)">{{ 'app.demo.code-sandbox-cli' | i18n }}</a>
+        )
+      </ng-container>
     </ng-template>
-    <i
-      nz-tooltip
-      [nzTooltipTitle]="'app.demo.stackblitz' | i18n"
-      (click)="openOnlineIDE()"
-      nz-icon
-      nzType="thunderbolt"
-      nzTheme="fill"
-      class="code-box-code-icon"
-    ></i>
-    <i
-      nz-tooltip
-      [nzTooltipTitle]="'app.demo.copy' | i18n"
-      (click)="onCopy(item.code)"
-      nz-icon
-      [nzType]="copied ? 'check' : 'snippets'"
-      class="code-box-code-icon"
-      [class.ant-tooltip-open]="copied"
-    ></i>
+    <i nz-tooltip [nzTooltipTitle]="'app.demo.stackblitz' | i18n" (click)="openOnlineIDE()" nz-icon nzType="thunderbolt"
+      nzTheme="fill" class="code-box-code-icon"></i>
+    <i nz-tooltip [nzTooltipTitle]="'app.demo.copy' | i18n" (click)="onCopy(item.code)" nz-icon
+      [nzType]="copied ? 'check' : 'snippets'" class="code-box-code-icon" [class.ant-tooltip-open]="copied"></i>
     <i nz-tooltip [nzTooltipTitle]="expand ? 'Hide Code' : 'Show Code'" class="code-expand-icon">
-      <img
-        alt="expand code"
-        [src]="
+      <img alt="expand code" [src]="
           theme === 'dark'
             ? 'https://gw.alipayobjects.com/zos/antfincdn/btT3qDZn1U/wSAkBuJFbdxsosKKpqyq.svg'
             : 'https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg'
-        "
-        [ngClass]="{ 'code-expand-icon-hide': expand, 'code-expand-icon-show': !expand }"
-        (click)="handle()"
-      />
-      <img
-        alt="expand code"
-        [src]="
+        " [ngClass]="{ 'code-expand-icon-hide': expand, 'code-expand-icon-show': !expand }" (click)="handle()" />
+      <img alt="expand code" [src]="
           theme === 'dark'
             ? 'https://gw.alipayobjects.com/zos/antfincdn/CjZPwcKUG3/OpROPHYqWmrMDBFMZtKF.svg'
             : 'https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg'
-        "
-        [ngClass]="{ 'code-expand-icon-show': expand, 'code-expand-icon-hide': !expand }"
-        (click)="handle()"
-      />
+        " [ngClass]="{ 'code-expand-icon-show': expand, 'code-expand-icon-hide': !expand }" (click)="handle()" />
     </i>
   </div>
 </section>

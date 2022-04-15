@@ -10,13 +10,25 @@
     "stylelint-declaration-block-no-ignored-properties"
   ],
   "rules": {
-    "property-no-vendor-prefix": null,
-    "rule-empty-line-before": null,
-    "function-name-case": [
-      "lower",
+    "function-name-case": ["lower", { "ignoreFunctions": ["/colorPalette/"] }],
+    "function-no-unknown": [
+      true,
       {
         "ignoreFunctions": [
-          "/colorPalette/"
+          "fade",
+          "tint",
+          "darken",
+          "ceil",
+          "fadein",
+          "floor",
+          "unit",
+          "shade",
+          "lighten",
+          "percentage",
+          "-",
+          "~`colorPalette",
+          "snaplist",
+          "fade-out"
         ]
       }
     ],

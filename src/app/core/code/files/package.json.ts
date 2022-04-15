@@ -1,5 +1,6 @@
 export default {
   name: 'ng-yunzai',
+  tags: ['NG-YUNZAI'],
   version: '0.0.0',
   scripts: {
     ng: 'ng',
