@@ -33,3 +33,5 @@ scripts/build/var.less
 /schematics/plugin/files/rtl
 node_modules
 .DS_Store
+
+/.husky/_
