@@ -81,6 +81,20 @@
         left: 0;
       }
     }
+    @media (max-width: @mobile-max) {
+      @{yunzai-default-prefix}__content {
+        transform: translate3d(-@yunzai-default-aside-wd, 0, 0);
+      }
+      @{yunzai-default-prefix}__collapsed {
+        @{yunzai-default-prefix}__aside {
+          transform: translate3d(100%, 0, 0);
+        }
+        @{yunzai-default-prefix}__content {
+          transform: translateZ(0);
+        }
+      }
+    }
   }
 }
+
 .layout-default-aside-rtl-mixin(@rtl-enabled);

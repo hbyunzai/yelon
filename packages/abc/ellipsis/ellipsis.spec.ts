@@ -98,13 +98,13 @@ describe('abc: ellipsis', () => {
           page.tick();
           expect((dl.nativeElement as HTMLElement).innerHTML).toContain('...');
         }));
-        // it('should be not innerText', fakeAsync(() => {
-        //   const el = page.getEl('.ellipsis__shadow');
-        //   spyOnProperty(el!, 'innerText').and.returnValue(null);
-        //   context.lines = 2;
-        //   page.tick();
-        //   expect((dl.nativeElement as HTMLElement).innerHTML).toContain('...');
-        // }));
+        it('should be not innerText', fakeAsync(() => {
+          const el = page.getEl('.ellipsis__shadow');
+          spyOnProperty(el!, 'innerText').and.returnValue(null as NzSafeAny);
+          context.lines = 2;
+          page.tick();
+          expect((dl.nativeElement as HTMLElement).innerHTML).toContain('...');
+        }));
         it('should be raw response when html offsetHeight is smallest', () => {
           const el = page.getEl('.ellipsis__shadow');
           spyOnProperty(el!, 'offsetHeight').and.returnValue(1);
