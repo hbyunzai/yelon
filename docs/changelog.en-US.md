@@ -14,6 +14,29 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 
 ---
 
+## [13.4.2](https://github.com/hbyunzai/yelon/compare/13.2.1...13.4.2) (2022-04-20)
+
+
+### Bug Fixes
+
+* **abc:tag-select:** fix style misagligment ([3963dfa](https://github.com/hbyunzai/yelon/commit/3963dfa16ef054e1d6f0d3838735f030468b1d60))
+* **chart:card:** fix support html of `total` property ([fa2c3b7](https://github.com/hbyunzai/yelon/commit/fa2c3b7c437026eb41fd0ace9f22e97068111213))
+* **cli:** fic can't use ng g ng-yunzai command ([5915c4a](https://github.com/hbyunzai/yelon/commit/5915c4a1c48dcdfa59fa08ff56bd4e8cd9fb7446))
+* **cli:** fix deprecated --synatx of lint-staged ([3258d45](https://github.com/hbyunzai/yelon/commit/3258d45a3df919deb19b223b8d89998cb327f268))
+* **sf:widget:radio:** fix SafeHtml ([591cb90](https://github.com/hbyunzai/yelon/commit/591cb902caf67428ba99a85c425bf76256c37073))
+* **theme:layout-default:** fix RTL will misaligment in medium screen ([25b567a](https://github.com/hbyunzai/yelon/commit/25b567a30c9225c2c0681846a7ec7916bef7c762))
+* **theme:** fix theme btn arg bug ([abe09d2](https://github.com/hbyunzai/yelon/commit/abe09d20b69500e1735380e0a50150def7d40de5))
+
+
+### Features
+
+* **abc:st:** add `addRow` method ([f8e522e](https://github.com/hbyunzai/yelon/commit/f8e522edcd8d205b49c387b7483e8ea1b094ed2b))
+* **form:** add feed back ([032f6f0](https://github.com/hbyunzai/yelon/commit/032f6f024ccd33a453afbb68fb4404db9eab9041))
+* **package:** add package-lock.json ([e391b9a](https://github.com/hbyunzai/yelon/commit/e391b9ae5d6b7dbc45e8cd4699008e1de8d988dc))
+* **theme:i18n:** add `AlainI18NGuard` guard ([24fc707](https://github.com/hbyunzai/yelon/commit/24fc70719135acb45afdea1bd3e4a5f9ce8cda71))
+* **theme:theme-btn:** add `themeChange` event ([24d384b](https://github.com/hbyunzai/yelon/commit/24d384baad3e28f4845a8305df770bcafb07243c))
+
+
 ## [13.2.1](https://github.com/hbyunzai/yelon/compare/13.2.0...13.2.1) (2022-03-16)
 
 
