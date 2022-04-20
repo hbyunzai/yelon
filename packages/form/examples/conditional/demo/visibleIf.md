@@ -50,7 +50,7 @@ export class DemoComponent implements OnInit, OnDestroy {
       },
       mobile: {
         type: 'string',
-        description: 'Try typing: ng-alain',
+        description: 'Try typing: ng-yunzai',
         ui: {
           changeDebounceTime: 100,
           change: q => {
@@ -138,8 +138,8 @@ export class DemoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const mockHttp = (q: string): Observable<string[]> =>
       of(
-        q === 'ng-alain'
-          ? new Array(5).fill(0).map((_, idx) => `NG-ALAIN部门${idx + 1}`)
+        q === 'ng-yunzai'
+          ? new Array(5).fill(0).map((_, idx) => `NG-YUNZAI部门${idx + 1}`)
           : new Array(3).fill(0).map((_, idx) => `部门${idx + 1}`)
       ).pipe(
         delay(500),

@@ -87,7 +87,7 @@ export type SFBuiltInWidgets =
 
 export interface SFRenderSchema {
   /**
-   * 指定采用什么小部件渲染，所有小部件名可[查阅文档](https://ng-alain.com/)
+   * 指定采用什么小部件渲染，所有小部件名可[查阅文档](https://ng.yunzainfo.com/)
    */
   widget?: SFBuiltInWidgets | (string & {});
   /**

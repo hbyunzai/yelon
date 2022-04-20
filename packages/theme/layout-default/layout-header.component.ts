@@ -11,9 +11,8 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { App, SettingsService } from '@yelon/theme';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultHeaderItemDirection, LayoutDefaultHeaderItemHidden, LayoutDefaultOptions } from './types';
@@ -33,10 +32,12 @@ interface LayoutDefaultHeaderItem {
       </li>
     </ng-template>
     <div class="yunzai-default__header-logo" [style.width.px]="options.logoFixWidth">
-      <a [routerLink]="options.logoLink" class="yunzai-default__header-logo-link">
-        <img class="yunzai-default__header-logo-expanded" [attr.src]="options.logoExpanded" [attr.alt]="app.name" />
-        <img class="yunzai-default__header-logo-collapsed" [attr.src]="options.logoCollapsed" [attr.alt]="app.name" />
-      </a>
+      <ng-container *ngIf="!options.logo; else options.logo!">
+        <a [routerLink]="options.logoLink" class="yunzai-default__header-logo-link">
+          <img class="yunzai-default__header-logo-expanded" [attr.src]="options.logoExpanded" [attr.alt]="app.name" />
+          <img class="yunzai-default__header-logo-collapsed" [attr.src]="options.logoCollapsed" [attr.alt]="app.name" />
+        </a>
+      </ng-container>
     </div>
     <div class="yunzai-default__nav-wrap">
       <ul class="yunzai-default__nav">
