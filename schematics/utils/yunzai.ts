@@ -116,7 +116,8 @@ function resolveSchema(
   const parsedPath = parseName(schema.path, schema.name!);
   schema.name = parsedPath.name;
   schema.path = parsedPath.path;
-  const fullPath = path.join(process.cwd(), schema.path, schema.name);
+  const rootPath = path.resolve(__dirname, '../../..');
+  const fullPath = path.join(rootPath, schema.path, schema.name);
   if (fs.existsSync(fullPath) && fs.readdirSync(fullPath).length > 0) {
     throw new SchematicsException(`The directory (${fullPath}) already exists`);
   }
