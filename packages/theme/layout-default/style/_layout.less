@@ -23,6 +23,7 @@ body {
   height: auto;
   min-height: 100%;
   overflow-x: hidden;
+
   &__unwrap {
     margin-right: -@yunzai-default-content-padding;
     margin-left: -@yunzai-default-content-padding;
@@ -31,8 +32,10 @@ body {
       margin-left: 0;
     }
   }
+
   &__content {
     margin: 0 @yunzai-default-content-padding @yunzai-default-content-padding @yunzai-default-content-padding;
+
     &-title {
       display: flex;
       align-items: center;
@@ -46,10 +49,12 @@ body {
       color: #929292;
       background-color: @yunzai-default-content-heading-bg;
       border-bottom: 1px solid @yunzai-default-content-heading-border;
+
       > h1 {
         margin-bottom: 0;
         font-weight: normal;
         font-size: 18px;
+
         > small {
           display: block;
           color: @muted-color;
@@ -63,6 +68,7 @@ body {
     }
     .router-ant();
   }
+
   &__hide-aside {
     @{yunzai-default-prefix}__content {
       margin-left: @yunzai-default-content-padding !important;
@@ -81,6 +87,7 @@ body {
       &__sidebar {
         width: @yunzai-default-aside-collapsed-wd;
       }
+
       &__content {
         margin-left: (@yunzai-default-aside-collapsed-wd + @yunzai-default-content-padding);
       }
