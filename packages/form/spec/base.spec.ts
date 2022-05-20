@@ -37,7 +37,7 @@ let context: TestFormComponent;
 export function builder(options?: {
   detectChanges?: boolean;
   template?: string;
-  ignoreAntd?: boolean;
+  ingoreAntd?: boolean;
   imports?: NzSafeAny[];
 }): {
   fixture: ComponentFixture<TestFormComponent>;
@@ -355,6 +355,7 @@ export class SFPage {
       [loading]="loading"
       [noColon]="noColon"
       [cleanValue]="cleanValue"
+      [delay]="delay"
       (formChange)="formChange($event)"
       (formValueChange)="formValueChange($event)"
       (formSubmit)="formSubmit($event)"
@@ -379,6 +380,7 @@ export class TestFormComponent {
   loading = false;
   noColon = false;
   cleanValue = false;
+  delay = false;
 
   formChange(): void {}
   formValueChange(): void {}

@@ -33,7 +33,8 @@ export const SF_DEFAULT_CONFIG: YunzaiSFConfig = {
   uiDateNumberFormat: 'T',
   uiTimeStringFormat: 'HH:mm:ss',
   uiTimeNumberFormat: 'T',
-  uiEmailSuffixes: ['qq.com', '163.com', 'gmail.com', '126.com', 'aliyun.com']
+  uiEmailSuffixes: ['qq.com', '163.com', 'gmail.com', '126.com', 'aliyun.com'],
+  delay: false
 };
 
 export function mergeConfig(srv: YunzaiConfigService): YunzaiSFConfig {
