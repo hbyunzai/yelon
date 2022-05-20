@@ -17,6 +17,7 @@ import { YelonFormModule } from '../src/module';
 import { SFSchema } from '../src/schema/index';
 import { WidgetRegistry } from '../src/widget.factory';
 import { SCHEMA, SFPage, TestFormComponent } from './base.spec';
+
 registerLocaleData(zh);
 
 describe('form: component', () => {
@@ -717,6 +718,25 @@ describe('form: component', () => {
           }
         };
         page.newSchema(s).checkError(`应当是 0.01 的整数倍`);
+      });
+
+      it('#setErrors', () => {
+        const s: SFSchema = {
+          properties: {
+            a: {
+              type: 'number',
+              title: '单价'
+            }
+          }
+        };
+        page.newSchema(s);
+        const aProp = context.comp.getProperty('/a');
+        aProp?.setErrors({ message: 'AA' });
+        page.checkError(`AA`);
+        aProp?.setErrors([{ message: 'BB' }]);
+        page.checkError(`BB`);
+        aProp?.setErrors();
+        page.checkError(``);
       });
     });
   });

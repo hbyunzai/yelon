@@ -46,11 +46,28 @@ export const ERRORSDEFAULT = {
 export interface ErrorData {
   [key: string]: NzSafeAny;
 
-  keyword: string;
+  /**
+   * When specifying `keyword`, you can use `sf` built-in some common types [ERRORSDEFAULT](https://github.com/ng-alain/delon/blob/master/packages/form/src/errors.ts#L4) , direct conversion. Or use the `message` parameter to specify an error message.
+   *
+   * 当指定 `keyword` 时，可以利用 `sf` 内置一些常见类型 [ERRORSDEFAULT](https://github.com/ng-alain/delon/blob/master/packages/form/src/errors.ts#L4)，直接转化。或者使用 `message` 参数来指定错误消息。
+   */
+  keyword?: string | null;
   dataPath?: string;
+  data?: unknown;
   schemaPath?: string;
-  params?: { [key: string]: NzSafeAny };
-  message?: string;
+  instancePath?: string;
+  /**
+   * Parameters required for template parsing
+   *
+   * 指定模板解析所需要的参数
+   */
+  params?: Record<string, NzSafeAny>;
+  /**
+   * Specify error message
+   *
+   * 指定错误消息
+   */
+  message?: string | ((err: ErrorData) => string);
 }
 
 export interface ErrorSchema {
@@ -70,9 +87,9 @@ export interface ErrorSchema {
   onlyVisual?: boolean;
   /**
    * 是否忽略某些数据类型校验 `ERRORSDEFAULT`
-   * - 值始终包含 `YelonSchemaFormConfig.ignoreKeywords`
+   * - 值始终包含 `DelonSchemaFormConfig.ingoreKeywords`
    */
-  ignoreKeywords?: string[];
+  ingoreKeywords?: string[];
 
   /**
    * 是否强制在标签上显示 `*` 来表示必填，一般在当使用自定义校验 `validator` 可能需要必填项处理
