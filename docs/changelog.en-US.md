@@ -13,6 +13,24 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+# [13.5.0](https://github.com/hbyunzai/yelon/compare/13.4.2...13.5.0) (2022-05-20)
+
+
+### Bug Fixes
+
+* **abc:st:** fix safe null check of menus ([5f2b779](https://github.com/hbyunzai/yelon/commit/5f2b779e89fe7eb965b97945cd515ed714d9fef1))
+* **form:** fix modify disabled & loading to cause refresh schema ([3454081](https://github.com/hbyunzai/yelon/commit/3454081b2dee8a6c5b5980d120823dab8e60b223))
+* **util:cookie:** fix wrong set value of `remove` ([83949e1](https://github.com/hbyunzai/yelon/commit/83949e10e30cfc6b76286533fb87801ab3472da1))
+
+
+### Features
+
+* **abc:st:** add `maxMultipleButton` of column ([9b8b194](https://github.com/hbyunzai/yelon/commit/9b8b194ce6c95caf2c1136df367669c5643659b9))
+* **form:** add `delay` property ([2e12033](https://github.com/hbyunzai/yelon/commit/2e12033797cb8837047efdbc1aceeb2d30f2a072))
+* **form:** export `setErrors` method ([308030f](https://github.com/hbyunzai/yelon/commit/308030fd901540f337c6a9275f53b867b7949f32))
+* **theme:http:** allow PATCH and DELETE to support request body ([3168121](https://github.com/hbyunzai/yelon/commit/3168121a16d94fc0d6d24fd0db33c22ed5d03e0c))
+
+
 
 ## [13.4.2](https://github.com/hbyunzai/yelon/compare/13.2.1...13.4.2) (2022-04-20)
 

@@ -27,7 +27,7 @@ const pkg = require('../../../../package.json');
 export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile!: boolean;
-  oldVersionList = [`12.x`, `11.x`];
+  oldVersionList = [];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string; selected?: boolean }> = [
     { name: 'theme' },
