@@ -30,15 +30,34 @@ ng g ng-yunzai:sta --name=<Swagger name> --url=<远程URL地址> --filePath=<本
 | `httpClientType` | `yelon` | HttpClient 请求方式，1. `yelon` 使用 `@yelon/theme` 的 `_HttpClient`，2. `angular` 使用 `HttpClient` |
 | `generateApiOptions` | - | swagger-typescript-api [options](https://github.com/acacode/swagger-typescript-api#-usage) |
 
+
 ## 常见问题
 
 ### 路径与Service的关联
 
 默认会将每个 `path` 第一个 `tags` 合并为一个 Service，请尽可能使用 `[a-zA-Z][-_a-zA-Z]+` 来描述 `tag`。
 
-### 服务内奇怪的方法名？
+### 不符合预期的名称
 
-默认情况下，会根据 `operationId` 项目来处理，否则会自动根据 `path` 与 `method` 组合。
+默认情况下，会根据 `operationId` 项目来处理，否则会自动根据 `path` 与 `method` 组合。为了保持与后端的统一项，建议开启 `operationId` 支持，以下是几种语言开启方法：
+
+**.NET CORE**
+
+```cs
+// Swashbuckle
+services.AddSwaggerGen(c =>
+{
+  c.CustomOperationIds(e =>
+  {
+    var name = e.ActionDescriptor.RouteValues["action"] ?? "";
+    return name[0].ToString().ToLower() + name.Substring(1);
+  });
+}
+```
+
+**JAVA**
+
+参考 [Configuring the output of operationId in a Swagger 2.0 spec](https://springfox.github.io/springfox/docs/snapshot/#configuring-the-output-of-operationid-in-a-swagger-2-0-spec).
 
 ### 全局Response
 
