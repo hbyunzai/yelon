@@ -383,7 +383,7 @@ describe('st: column-source', () => {
       });
       describe('#type', () => {
         describe('with keyword', () => {
-          it('should be ignore specify menus values', () => {
+          it('should be ingore specify menus values', () => {
             const res = srv.process([{ title: '', filter: { type: 'keyword' } }], options).columns[0].filter;
             expect(res!.menus!.length).toBe(1);
           });
@@ -453,7 +453,7 @@ describe('st: column-source', () => {
       describe('#iif', () => {
         it('should be running', () => {
           const res = srv.process([{ title: '', buttons: [{ text: '' }] }], options).columns[0].buttons![0];
-          expect(res.iif!(null!, null!, null!)).toBe(true);
+          expect(res.iif == null).toBe(true);
         });
         it('should be support condition', () => {
           const res = srv.process([{ title: '', buttons: [{ text: '', iif: () => false }] }], options).columns[0]
@@ -529,37 +529,6 @@ describe('st: column-source', () => {
           });
         });
       });
-      describe('#maxMultipleButton', () => {
-        it('with number', () => {
-          const res = srv.process(
-            [{ maxMultipleButton: 1, buttons: [{ text: 'btn1' }, { text: 'btn2' }, { text: 'btn3' }] }],
-            options
-          ).columns[0].buttons!;
-          expect(res.length).toBe(2);
-          expect(res[1].children?.length).toBe(2);
-        });
-        it('with object', () => {
-          const res = srv.process(
-            [
-              {
-                maxMultipleButton: { text: 'More', count: 2 },
-                buttons: [{ text: 'btn1' }, { text: 'btn2' }, { text: 'btn3' }]
-              }
-            ],
-            options
-          ).columns[0].buttons!;
-          expect(res.length).toBe(3);
-          expect(res[2].text).toBe('More');
-          expect(res[2].children?.length).toBe(1);
-        });
-        it('when the number is less than count', () => {
-          const res = srv.process(
-            [{ maxMultipleButton: 4, buttons: [{ text: 'btn1' }, { text: 'btn2' }, { text: 'btn3' }] }],
-            options
-          ).columns[0].buttons!;
-          expect(res.length).toBe(3);
-        });
-      });
     });
     describe('[render]', () => {
       beforeEach(() => {
@@ -627,7 +596,7 @@ describe('st: column-source', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [{ index: 'id' }] }], options);
         expect(res.headers.length).toBe(2);
       });
-      it('should be ignored grouping columns when children when is empty', () => {
+      it('should be ingored grouping columns when children when is empty', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [] }], options);
         expect(res.headers.length).toBe(1);
       });

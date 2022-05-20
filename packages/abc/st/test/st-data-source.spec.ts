@@ -3,14 +3,13 @@ import { DecimalPipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import { firstValueFrom, of, throwError } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { DatePipe, YNPipe } from '@yelon/theme';
 import { deepCopy } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STDataSource, STDataSourceOptions } from '../st-data-source';
 import { ST_DEFAULT_CONFIG } from '../st.config';
-import { STColumnFilterMenu, STData } from '../st.interfaces';
+import { STColumnButton, STColumnFilterMenu, STData } from '../st.interfaces';
 import { _STColumn } from '../st.types';
 
 const DEFAULT = {
@@ -86,6 +85,7 @@ describe('abc: table: data-souce', () => {
     http = new MockHttpClient();
     currencySrv = new MockCurrencyService();
     srv = new STDataSource(http as any, datePipe, ynPipe, decimalPipe, currencySrv as any, mockDomSanitizer as any);
+    srv.setCog(ST_DEFAULT_CONFIG);
   }
 
   describe('[local data]', () => {
@@ -194,7 +194,7 @@ describe('abc: table: data-souce', () => {
           done();
         });
       });
-      it('should be null, muse be ignore sort processing', done => {
+      it('should be null, muse be ingore sort processing', done => {
         options.columns[0]._sort = {
           enabled: true,
           compare: null,
@@ -423,17 +423,17 @@ describe('abc: table: data-souce', () => {
         });
       });
       it('should be catch response error', done => {
-        spyOn(http, 'request').and.callFake(() => throwError('aa'));
-        srv.process(options).subscribe(
-          () => {
+        spyOn(http, 'request').and.callFake(() => throwError(() => new Error('aa')));
+        srv.process(options).subscribe({
+          next: () => {
             expect(false).toBe(true);
             done();
           },
-          err => {
-            expect(err).toBe('aa');
+          error: (err: Error) => {
+            expect(err.message).toBe('aa');
             done();
           }
-        );
+        });
       });
       it('should be support array data', done => {
         spyOn(http, 'request').and.callFake(() => of(genData(DEFAULT.ps)));
@@ -890,6 +890,87 @@ describe('abc: table: data-souce', () => {
     });
   });
 
+  describe('[buttons]', () => {
+    beforeEach(() => genModule());
+
+    it('text with function', done => {
+      options.data = [{ id: 1 }];
+      options.columns = [
+        {
+          buttons: [{ text: (_, __) => `fn` }]
+        }
+      ] as _STColumn[];
+      srv.process(options).subscribe(res => {
+        const btns: STColumnButton[] = res.list[0]._values[0].buttons;
+        expect(btns.length).toBe(1);
+        expect(btns[0]._text).toBe('fn');
+        done();
+      });
+    });
+
+    it('text with null value', done => {
+      options.data = [{ id: 1 }];
+      options.columns = [
+        {
+          buttons: [{ text: undefined }]
+        }
+      ] as _STColumn[];
+      srv.process(options).subscribe(res => {
+        const btns: STColumnButton[] = res.list[0]._values[0].buttons;
+        expect(btns.length).toBe(1);
+        expect(btns[0]._text).toBe('');
+        done();
+      });
+    });
+
+    describe('#maxMultipleButton', () => {
+      it('with number', done => {
+        options.data = [{ id: 1 }];
+        options.columns = [
+          {
+            maxMultipleButton: 1,
+            buttons: [{ text: 'btn1' }, { text: 'btn2' }, { text: 'btn3' }]
+          }
+        ] as _STColumn[];
+        srv.process(options).subscribe(res => {
+          const btns: STColumnButton[] = res.list[0]._values[0].buttons;
+          expect(btns.length).toBe(2);
+          expect(btns[1].children?.length).toBe(2);
+          done();
+        });
+      });
+
+      it('with object', done => {
+        options.data = [{ id: 1 }];
+        options.columns = [
+          {
+            maxMultipleButton: { text: 'More', count: 2 },
+            buttons: [{ text: 'btn1' }, { text: 'btn2' }, { text: 'btn3' }]
+          }
+        ] as _STColumn[];
+        srv.process(options).subscribe(res => {
+          const btns: STColumnButton[] = res.list[0]._values[0].buttons;
+          expect(btns.length).toBe(3);
+          expect(btns[2]._text).toBe('More');
+          expect(btns[2].children?.length).toBe(1);
+          done();
+        });
+      });
+
+      it('when the number is less than count', done => {
+        options.data = [{ id: 1 }];
+        options.columns = [
+          { maxMultipleButton: 4, buttons: [{ text: 'btn1' }, { text: 'btn2' }, { text: 'btn3' }] }
+        ] as _STColumn[];
+        srv.process(options).subscribe(res => {
+          const btns: STColumnButton[] = res.list[0]._values[0].buttons;
+          expect(btns.length).toBe(3);
+          done();
+        });
+      });
+    });
+  });
+
   describe('[statistical]', () => {
     beforeEach(() => {
       genModule();
@@ -971,7 +1052,7 @@ describe('abc: table: data-souce', () => {
           done();
         });
       });
-      it('should be ignore currency', done => {
+      it('should be ingore currency', done => {
         options.columns = [{ title: '', index: 'a', statistical: { type: 'sum', currency: false } }] as _STColumn[];
         options.data = [{ a: 1 }, { a: 2 }, { a: 0.1 }];
 
