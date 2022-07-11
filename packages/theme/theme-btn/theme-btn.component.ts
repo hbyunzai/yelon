@@ -13,12 +13,10 @@ import {
   Optional,
   Renderer2
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { Subject, takeUntil } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export interface ThemeBtnType {
   key: string;

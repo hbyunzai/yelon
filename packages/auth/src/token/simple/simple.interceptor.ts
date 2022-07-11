@@ -1,9 +1,8 @@
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiAuthConfig } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { BaseInterceptor } from '../base.interceptor';
 import { CheckSimple } from '../helper';

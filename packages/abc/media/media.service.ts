@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { Observable, Subject, share } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiMediaConfig } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';

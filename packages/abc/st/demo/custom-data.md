@@ -16,7 +16,7 @@ title:
 ```ts
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay } from 'rxjs';
 
 import { STChange, STColumn, STData } from '@yelon/abc/st';
 import { dateTimePickerUtil } from '@yelon/util/date-time';

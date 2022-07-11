@@ -10,16 +10,14 @@ import {
 } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, filter, mergeMap, switchMap, take } from 'rxjs/operators';
-
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { BehaviorSubject, Observable, of, throwError, catchError, filter, mergeMap, switchMap, take } from 'rxjs';
 
 import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
 import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { mergeBisConfig } from './bis.config';
 

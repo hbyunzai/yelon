@@ -6,9 +6,8 @@ import { DefaultUrlSerializer, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiAuthConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YelonAuthModule } from '../../auth.module';
 import { YA_SERVICE_TOKEN, ITokenModel, ITokenService } from '../interface';

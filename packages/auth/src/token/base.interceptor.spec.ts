@@ -13,8 +13,7 @@ import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, throwError, catchError } from 'rxjs';
 
 import { YunzaiAuthConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';

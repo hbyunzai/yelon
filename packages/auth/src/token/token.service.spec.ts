@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiAuthConfig } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YA_SERVICE_TOKEN, ITokenModel, ITokenService } from './interface';
 import { JWTTokenModel } from './jwt/jwt.model';

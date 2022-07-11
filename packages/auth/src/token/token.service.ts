@@ -1,6 +1,5 @@
 import { inject, Inject, Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, interval, Observable, Subject, Subscription } from 'rxjs';
-import { filter, map, share } from 'rxjs/operators';
+import { BehaviorSubject, interval, Observable, Subject, Subscription, filter, map, share } from 'rxjs';
 
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';

@@ -14,8 +14,7 @@ import { Component, NgModule, Type } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs';
-import { mapTo } from 'rxjs/operators';
+import { Observable, mapTo } from 'rxjs';
 
 import * as Mock from 'mockjs';
 

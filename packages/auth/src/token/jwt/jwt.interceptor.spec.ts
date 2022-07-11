@@ -3,8 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@an
 import { Component, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { of, catchError } from 'rxjs';
 
 import { YunzaiAuthConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 

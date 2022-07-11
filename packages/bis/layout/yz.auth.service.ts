@@ -1,8 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { forkJoin, Observable, of } from 'rxjs';
-import { map, mergeAll, mergeMap } from 'rxjs/operators';
-
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { forkJoin, Observable, of, map, mergeAll, mergeMap } from 'rxjs';
 
 import { ITokenModel, ITokenService, mergeConfig as mergeAuthConfig, YA_SERVICE_TOKEN } from '@yelon/auth';
 import { CacheService } from '@yelon/cache';
@@ -10,6 +7,7 @@ import { _HttpClient } from '@yelon/theme';
 import { WINDOW, YunzaiAuthConfig, YunzaiBusinessConfig } from '@yelon/util';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { mergeBisConfig } from './bis.config';
 

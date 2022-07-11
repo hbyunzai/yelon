@@ -34,5 +34,4 @@ export class NumberInfoComponent {
   @Input() theme: 'light' | 'default' = 'light';
   /** 设置数字和描述直接的间距（像素） */
   @Input() @InputNumber() gap = 8;
-
 }

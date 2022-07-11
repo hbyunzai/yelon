@@ -1,12 +1,11 @@
 import { APP_INITIALIZER, Inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable, of, mergeMap } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
 import { ICONS } from '@yelon/bis/shared';
 import { CacheService } from '@yelon/cache';
 import { Menu, MenuService, SettingsService, TitleService, User, YUNZAI_I18N_TOKEN } from '@yelon/theme';
-import {deepCopy, log, WINDOW, YunzaiBusinessConfig, YunzaiConfigService} from '@yelon/util';
+import { deepCopy, log, WINDOW, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconService } from 'ng-zorro-antd/icon';
 

@@ -11,13 +11,11 @@ import {
   Inject,
   Optional
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { Subject, takeUntil } from 'rxjs';
 
 import { ThemeBtnType, YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
 import { YunzaiConfigService } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export interface YzThemeBtnType extends ThemeBtnType {
   color?: string;

@@ -10,8 +10,7 @@ import {
   TemplateRef,
   ViewEncapsulation
 } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { BehaviorSubject, Observable, filter } from 'rxjs';
 
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';

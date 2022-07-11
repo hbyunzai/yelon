@@ -12,10 +12,9 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { STComponent } from '@yelon/abc/st';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzTreeNodeOptions, NzFormatEmitEvent } from 'ng-zorro-antd/tree';
-
-import { STComponent } from '@yelon/abc/st';
 
 import { ContactService } from './contact.service';
 
@@ -47,7 +46,7 @@ export class ContactComponent implements OnInit, OnDestroy, AfterViewInit {
   @Optional() @Input() nzDeptClass: boolean = true;
   @Optional() @Input() nzDeptClassHistory: boolean = true;
   @Optional() @Input() nzDeptGrade: boolean = false;
-  @Optional() @Input() nzDeptGradeID: string | null =null;
+  @Optional() @Input() nzDeptGradeID: string | null = null;
 
   /**
    * 角色树

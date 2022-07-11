@@ -11,8 +11,7 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, takeUntil } from 'rxjs';
 
 import { YelonLocaleService, LocaleData } from '@yelon/theme';
 import { BooleanInput, InputBoolean } from '@yelon/util/decorator';

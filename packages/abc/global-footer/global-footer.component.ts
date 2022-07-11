@@ -13,12 +13,10 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { Subject, takeUntil } from 'rxjs';
 
 import { WINDOW } from '@yelon/util/token';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { GlobalFooterItemComponent } from './global-footer-item.component';
 import { GlobalFooterLink } from './global-footer.types';

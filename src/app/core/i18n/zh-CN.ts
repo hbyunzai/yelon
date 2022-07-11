@@ -1,6 +1,6 @@
 export const ZHCN = {
-  "app.footer.thanks":"鸣谢",
-  "app.footer.thanks.user":"卡色",
+  'app.footer.thanks': '鸣谢',
+  'app.footer.thanks.user': '卡色',
   slogan: '一个基于 Antd 中后台前端解决方案',
   'app.header.search': '在 ng.yunzainfo.com 中搜索',
   'app.home.preview': '预览',
@@ -38,7 +38,7 @@ export const ZHCN = {
   'app.header.menu.mock': 'Mock模拟数据',
   'app.header.menu.util': '工具集',
   'app.header.menu.form': '动态表单',
-  "app.header.menu.bis":"云在业务",
+  'app.header.menu.bis': '云在业务',
   'app.header.menu.theme': '主题系统',
   'app.header.menu.form.validator': '在线校验器',
   'app.header.menu.cli': 'Cli',

@@ -17,8 +17,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { merge, Observable, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { merge, Observable, Subject, filter, takeUntil } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN, YelonLocaleService, LocaleData } from '@yelon/theme';

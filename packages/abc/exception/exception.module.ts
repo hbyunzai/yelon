@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { NzButtonModule } from 'ng-zorro-antd/button';
-
 import { YelonLocaleModule } from '@yelon/theme';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import { ExceptionComponent } from './exception.component';
 

@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { YelonLocaleModule } from '@yelon/theme';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-
-import { YelonLocaleModule } from '@yelon/theme';
 
 import { ReuseTabContextMenuComponent } from './reuse-tab-context-menu.component';
 import { ReuseTabContextComponent } from './reuse-tab-context.component';

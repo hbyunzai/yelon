@@ -2,11 +2,10 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { createTestContext } from '@yelon/testing';
 import { NumberInput } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ChartEChartsComponent } from './echarts.component';
 import { ChartEChartsModule } from './echarts.module';

@@ -12,13 +12,11 @@ import {
   Optional
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { of, pipe, Subscription } from 'rxjs';
-import { delay, switchMap } from 'rxjs/operators';
-
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { of, pipe, Subscription, delay, switchMap } from 'rxjs';
 
 import { YelonLocaleService } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { OnboardingComponent } from './onboarding.component';
 import { OnboardingConfig, OnboardingItem, OnboardingOpType } from './onboarding.types';
@@ -55,7 +53,7 @@ export class OnboardingService implements OnDestroy {
     @Inject(DOCUMENT) private doc: NzSafeAny,
     private configSrv: YunzaiConfigService,
     @Optional() private directionality: Directionality
-  ) { }
+  ) {}
 
   private attach(): void {
     const compRef = (this.compRef = this.resolver.resolveComponentFactory(OnboardingComponent).create(this.injector));

@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { firstValueFrom, Observable, of } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { firstValueFrom, Observable, of, filter } from 'rxjs';
 
 import { YunzaiCacheConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';

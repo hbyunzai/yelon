@@ -1,5 +1,4 @@
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, map } from 'rxjs';
 
 import { toBoolean } from '@yelon/util/decorator';
 import { deepCopy } from '@yelon/util/other';

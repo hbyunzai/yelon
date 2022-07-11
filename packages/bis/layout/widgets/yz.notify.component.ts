@@ -7,8 +7,7 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { forkJoin, Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, Observable, Subscription, map } from 'rxjs';
 
 import { formatDistanceToNow } from 'date-fns';
 

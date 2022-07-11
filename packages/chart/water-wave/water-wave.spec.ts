@@ -15,7 +15,6 @@ describe('chart: water-wave', () => {
       page.genComp(TestComponent);
     });
 
-
     it('should be working', fakeAsync(() => {
       page.dcFirst().isCanvas().isText('.g2-water-wave__desc-title', page.context.title);
       page.context.percent = 30;

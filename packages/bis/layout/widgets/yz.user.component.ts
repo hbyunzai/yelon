@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject, Injector, OnInit } from '@angular/core';
 
-import { NzMessageService } from 'ng-zorro-antd/message';
-
 import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
 import { CacheService } from '@yelon/cache';
 import { WINDOW, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { mergeBisConfig } from '../bis.config';
 

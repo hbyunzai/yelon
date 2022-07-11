@@ -18,17 +18,15 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { merge, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
-
-import { NzAffixComponent } from 'ng-zorro-antd/affix';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { merge, Subject, filter, takeUntil } from 'rxjs';
 
 import { ReuseTabService } from '@yelon/abc/reuse-tab';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN, Menu, MenuService, SettingsService, TitleService } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import { NzAffixComponent } from 'ng-zorro-antd/affix';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 interface PageHeaderPath {
   title?: string;

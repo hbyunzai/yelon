@@ -1,5 +1,3 @@
-
-
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 
 import { createYunzaiApp } from '../utils/testing';

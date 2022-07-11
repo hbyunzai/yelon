@@ -75,8 +75,9 @@ const converters = [highlight()].concat([
     (node: any) => {
       const tagName = JsonML.getTagName(node);
       const attrs = genAttr({ ...JsonML.getAttributes(node) });
-      return `${tagName ? `<${tagName}${attrs ? ` ${attrs}` : ''}>` : ''}${isStandalone(tagName) ? '' : JsonML.getChildren(node).map(toHtml).join('') + (tagName ? `</${tagName}>` : '')
-        }`;
+      return `${tagName ? `<${tagName}${attrs ? ` ${attrs}` : ''}>` : ''}${
+        isStandalone(tagName) ? '' : JsonML.getChildren(node).map(toHtml).join('') + (tagName ? `</${tagName}>` : '')
+      }`;
     }
   ]
 ]);

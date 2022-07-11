@@ -140,7 +140,7 @@ const I18NSERVICE_PROVIDES = [{ provide: YUNZAI_I18N_TOKEN, useClass: YzI18NServ
 ```ts
 import { APP_INITIALIZER, Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconService } from 'ng-zorro-antd/icon';
@@ -316,7 +316,7 @@ export const YZ_APPINIT_PROVIDES = [
 ```ts
 import { Injectable, Injector } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, mergeAll, mergeMap } from 'rxjs/operators';
+import { map, mergeAll, mergeMap } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 

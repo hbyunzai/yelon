@@ -2,10 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { format, formatDistanceToNow } from 'date-fns';
 
+import { toDate } from '@yelon/util/date-time';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
-
-import { toDate } from '@yelon/util/date-time';
 
 @Pipe({ name: '_date' })
 export class DatePipe implements PipeTransform {

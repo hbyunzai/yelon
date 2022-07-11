@@ -13,8 +13,7 @@ import {
   Optional,
   ViewEncapsulation
 } from '@angular/core';
-import { interval, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { interval, Subject, takeUntil } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
 import { InputNumber } from '@yelon/util/decorator';

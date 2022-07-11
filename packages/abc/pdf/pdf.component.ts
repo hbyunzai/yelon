@@ -17,8 +17,7 @@ import {
   SimpleChange,
   ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subject, timer } from 'rxjs';
-import { debounceTime, filter, takeUntil } from 'rxjs/operators';
+import { fromEvent, Subject, timer, debounceTime, filter, takeUntil } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput, ZoneOutside } from '@yelon/util/decorator';

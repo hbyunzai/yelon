@@ -10,12 +10,10 @@ import {
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { delay } from 'rxjs/operators';
-
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { Observable, of, throwError, delay } from 'rxjs';
 
 import { deepCopy } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { MockRequest } from './interface';
 import { MockService } from './mock.service';

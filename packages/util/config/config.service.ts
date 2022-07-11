@@ -1,8 +1,7 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { deepMergeKey } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YunzaiConfig, YunzaiConfigKey, YUNZAI_CONFIG } from './config.types';
 

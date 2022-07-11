@@ -1,11 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { concat } from 'rxjs';
-import { filter, mergeMap, tap } from 'rxjs/operators';
-
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { concat, filter, mergeMap, tap } from 'rxjs';
 
 import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { LodopModule } from './lodop.module';
 import { LodopService } from './lodop.service';

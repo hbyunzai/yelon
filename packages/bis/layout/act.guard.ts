@@ -9,11 +9,10 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { CacheService } from '@yelon/cache';
 import { Menu, User } from '@yelon/theme';
 import { deepCopy, log, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from './bis.config';
 import { PathToRegexpService } from './path-to-regexp.service';

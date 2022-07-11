@@ -19,7 +19,7 @@ import { SFMentionWidgetSchema, SFSchema } from '@yelon/form';
 import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay } from 'rxjs';
 
 const DATA = ['asdf', 'cipchk', '中文', 'にほんご'];
 

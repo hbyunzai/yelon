@@ -2,9 +2,8 @@ import { TestBed } from '@angular/core/testing';
 
 import * as Mock from 'mockjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiMockConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YelonMockModule } from '../index';
 import { MockOptions, MockRequest, MockRule } from './interface';

@@ -12,10 +12,9 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import type { NgClassType } from 'ng-zorro-antd/core/types';
-
 import { YelonLocaleService, LocaleData } from '@yelon/theme';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import type { NgClassType } from 'ng-zorro-antd/core/types';
 
 import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
 

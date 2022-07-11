@@ -1,6 +1,5 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiSFConfig } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { SFValue } from '../interface';
 import { SFSchema } from '../schema/index';

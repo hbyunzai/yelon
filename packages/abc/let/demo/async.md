@@ -17,7 +17,7 @@ One subscription and multiple use.
 import { Platform } from '@angular/cdk/platform';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { interval } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { startWith } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 

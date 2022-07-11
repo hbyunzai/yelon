@@ -56,8 +56,7 @@ export class CodeBoxComponent implements OnInit, OnDestroy {
     private codeSrv: CodeService,
     private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.appService.theme$.pipe(takeUntil(this.destroy$)).subscribe(data => {

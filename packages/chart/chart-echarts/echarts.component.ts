@@ -13,12 +13,10 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, filter, takeUntil } from 'rxjs/operators';
-
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { fromEvent, Subject, debounceTime, filter, takeUntil } from 'rxjs';
 
 import { NumberInput, ZoneOutside } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ChartEChartsService } from './echarts.service';
 import {

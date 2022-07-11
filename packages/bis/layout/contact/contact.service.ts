@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
+import { Observable, map } from 'rxjs';
 
 import { CacheService } from '@yelon/cache';
 import { _HttpClient } from '@yelon/theme';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 
 export interface BaseUserParam {
   realName?: string;
@@ -53,7 +51,7 @@ export interface PageRes<T> {
   providedIn: 'root'
 })
 export class ContactService {
-  constructor(private http: _HttpClient, private cache: CacheService) { }
+  constructor(private http: _HttpClient, private cache: CacheService) {}
 
   // TIPS: How to write an override function in typescript
   /**

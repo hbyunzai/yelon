@@ -18,7 +18,7 @@ import { Component, ViewChild } from '@angular/core';
 import { SFComponent, SFSchema, SFSelectWidgetSchema } from '@yelon/form';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { delay, tap } from 'rxjs';
 
 @Component({
   selector: 'app-demo',

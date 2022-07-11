@@ -10,9 +10,8 @@ import {
 import { Injectable, Injector, Optional } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { mergeConfig } from '../auth.config';
 import { ToLogin } from './helper';

@@ -39,7 +39,7 @@ export class HeaderComponent implements AfterViewInit {
     { name: 'mock' },
     { name: 'util' },
     { name: 'cli' },
-    { name: 'bis' },
+    { name: 'bis' }
   ];
   menuVisible = false;
   regexs = {

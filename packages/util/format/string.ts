@@ -1,6 +1,5 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { deepGet } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /**
  * String formatting

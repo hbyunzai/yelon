@@ -1,6 +1,5 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { BehaviorSubject, Observable, filter } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiThemeI18nConfig } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';

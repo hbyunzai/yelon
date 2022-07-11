@@ -1,5 +1,3 @@
-
-
 import { Rule, SchematicsException, Tree } from '@angular-devkit/schematics';
 
 import { PluginOptions } from './interface';

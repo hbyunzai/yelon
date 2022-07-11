@@ -1,8 +1,7 @@
 import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-
 import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STComponent } from '../st.component';
 import { STMultiSort } from '../st.interfaces';

@@ -1,6 +1,6 @@
 export const ENUS = {
-  "app.footer.thanks":"Thanks",
-  "app.footer.thanks.user":"cipchk",
+  'app.footer.thanks': 'Thanks',
+  'app.footer.thanks.user': 'cipchk',
   slogan: 'A front-end solution based on Antd',
   'app.header.search': 'Search in ng.yunzainfo.com',
   'app.home.preview': 'Preview',
@@ -45,7 +45,7 @@ export const ENUS = {
   'app.header.menu.upgrade': 'HTML Upgrade Tool',
   'app.header.menu.themes': 'Business Theme',
   'app.header.lang': '中文',
-  "app.header.menu.bis":"Yunzai Business",
+  'app.header.menu.bis': 'Yunzai Business',
   'app.footer.resources': 'Resources',
   'app.footer.angular': '中文网',
   'app.footer.antd': 'ANTD for Angular',

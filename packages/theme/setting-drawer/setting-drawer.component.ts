@@ -12,16 +12,14 @@ import {
   OnInit,
   Optional
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { Subject, takeUntil } from 'rxjs';
 
 import { Layout, SettingsService } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { InputBoolean, ZoneOutside } from '@yelon/util/decorator';
 import { deepCopy, LazyService } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { YUNZAIDEFAULTVAR, DEFAULT_COLORS, DEFAULT_VARS } from './setting-drawer.types';
 
