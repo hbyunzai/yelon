@@ -13,6 +13,23 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [13.5.1](https://github.com/hbyunzai/yelon/compare/13.5.0...13.5.1) (2022-07-11)
+
+
+### Bug Fixes
+
+* **abc:qr:** fix can't center ([327977d](https://github.com/hbyunzai/yelon/commit/327977deeedee6b800937ce99064b737f0a0e6c7))
+* **cli:** fix folder name case sensitive ([34eef32](https://github.com/hbyunzai/yelon/commit/34eef32cc59002d7b2733172c319772bf3858411))
+* **form:model:** fix NzFormControlStatusType  type ([1fab037](https://github.com/hbyunzai/yelon/commit/1fab037e2ccd9f8380f32f51d0a474f2d1ed86dc))
+* **form:modle:** lock ng-zorro-antd and revert ([7eee8f4](https://github.com/hbyunzai/yelon/commit/7eee8f4d929e5643d0e4db8b9bec6686f6c0bee3))
+* **util:copy:** fix invalid `copy` in latest chrome ([2b9ca78](https://github.com/hbyunzai/yelon/commit/2b9ca78eb75b6a919aacb2fcafebbb61a5a93113))
+
+
+### Performance Improvements
+
+* 'rxjs/operators' export site has been deprecated ([cfb8959](https://github.com/hbyunzai/yelon/commit/cfb8959aaddce7e27158a9bcfd8bfd4cbcb7f95e))
+
+
 # [13.5.0](https://github.com/hbyunzai/yelon/compare/13.4.2...13.5.0) (2022-05-20)
 
 
