@@ -35,3 +35,11 @@ module: import { QRModule } from '@yelon/abc/qr';
 ### 自定义LOGO
 
 参考 [#100](https://github.com/neocotic/qrious/issues/100#issuecomment-308249343) 的写法。
+
+### 为什么没有居中
+
+原因请参考 [#111](https://github.com/neocotic/qrious/issues/111)，解决的办法设置 `padding` 为 `null`，例如：
+
+```html
+<qr [value]="value" [padding]="null"></qr>
+```
