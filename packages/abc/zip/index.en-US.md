@@ -4,15 +4,34 @@ title: zip
 order: 7
 subtitle: Zip
 cols: 1
-module: import { ZipModule } from '@yelon/abc/zip';
+module: import { ZipModule } from '@delon/abc/zip';
 ---
 
 A Zip file operation based on [jszip](http://stuk.github.io/jszip/).
 
 ## Dependencies
 
+The jszip script file takes the form of lazy loading，you can change the default CDN path via [Global Configuration](/docs/global-config). By default: `https://cdn.jsdelivr.net/npm/jszip@3/dist/jszip.min.js`.
 
-The jszip script file takes the form of lazy loading，you can change the default CDN path (or use the [local path](https://angular.io/guide/workspace-config#asset-config)) via [Global Configuration](/docs/global-config). By default: `https://cdn.jsdelivr.net/npm/jszip@3/dist/jszip.min.js`.
+**Use local path**
+
+```json
+// angular.json
+{
+  "glob": "**/jszip.min.js",
+  "input": "./node_modules/jszip/dist",
+  "output": "assets/jszip/"
+}
+```
+
+```ts
+// global-config.module.ts
+const yunzaiConfig: YunzaiConfig = {
+  zip: {
+    url: '/assets/jszip/jszip.min.js'
+  }
+};
+```
 
 ## API
 

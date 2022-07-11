@@ -9,6 +9,7 @@
     "jszip": "@LIB-PLACEHOLDER",
     "xlsx": "@LIB-PLACEHOLDER",
     "plyr": "@LIB-PLACEHOLDER",
+    "pdfjs-dist": "@LIB-PLACEHOLDER",
     "ngx-countdown": "@LIB-PLACEHOLDER",
     "@yelon/theme": "PEER-0.0.0-PLACEHOLDER",
     "@yelon/util": "PEER-0.0.0-PLACEHOLDER",

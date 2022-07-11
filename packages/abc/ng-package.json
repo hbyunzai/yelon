@@ -13,6 +13,7 @@
     "jszip",
     "xlsx",
     "plyr",
+    "pdfjs-dist",
     "ngx-countdown",
     "@yelon/theme",
     "@yelon/util",

@@ -14,6 +14,7 @@ DEPENDENCIES=$(node -p "
     'jszip',
     'xlsx',
     'plyr',
+    'pdfjs-dist',
     'mockjs',
     '@types/mockjs',
     'ajv',
