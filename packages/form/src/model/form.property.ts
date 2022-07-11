@@ -373,7 +373,7 @@ export abstract class FormProperty {
 
   // #endregion
 
-  updateFeedback(status: NzFormControlStatusType = null, icon?: string | null): void {
+  updateFeedback(status: NzFormControlStatusType = '', icon?: string | null): void {
     this.ui.feedback = status;
     this.ui.feedbackIcon =
       icon ||
@@ -381,7 +381,8 @@ export abstract class FormProperty {
         error: 'close-circle-fill',
         validating: 'loading',
         success: 'check-circle-fill',
-        warning: 'exclamation-circle-fill'
+        warning: 'exclamation-circle-fill',
+        '': null
       }[status!];
     this.widget.detectChanges();
   }
