@@ -13,6 +13,14 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+
+## [13.5.2](https://github.com/hbyunzai/yelon/compare/13.5.1...13.5.2) (2022-07-13)
+
+
+### Bug Fixes
+
+* fix 'null' is not assignable to type 'NzFormControlStatusType' ([85e60b9](https://github.com/hbyunzai/yelon/commit/85e60b9d229a408c3a8ac9c628276f4809ac5682))
+
 ## [13.5.1](https://github.com/hbyunzai/yelon/compare/13.5.0...13.5.1) (2022-07-11)
 
 

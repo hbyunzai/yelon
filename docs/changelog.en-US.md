@@ -13,6 +13,15 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+
+
+## [13.5.2](https://github.com/hbyunzai/yelon/compare/13.5.1...13.5.2) (2022-07-13)
+
+
+### Bug Fixes
+
+* fix 'null' is not assignable to type 'NzFormControlStatusType' ([85e60b9](https://github.com/hbyunzai/yelon/commit/85e60b9d229a408c3a8ac9c628276f4809ac5682))
+
 ## [13.5.1](https://github.com/hbyunzai/yelon/compare/13.5.0...13.5.1) (2022-07-11)
 
 
