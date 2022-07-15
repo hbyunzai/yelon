@@ -34,5 +34,5 @@ Yelon
 - [ng-alain](https://github.com/ng-alain/ng-alain)
 - [org-ng-alain](https://github.com/ng-alain)
 - [ng-zorro](https://ng.ant.design)
-
-
+- Thanks to `JetBrains` for helping this project, providing the author with an open source licensed version of `JetBrains` family bucket
+  ![JetBrains](jetbrains.png)
