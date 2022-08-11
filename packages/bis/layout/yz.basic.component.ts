@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { CacheService } from '@yelon/cache';
 import { LayoutDefaultOptions, LayoutService } from '@yelon/theme/layout-default';
@@ -71,8 +71,7 @@ import { YzStompService } from './yz.stomp.service';
         <router-outlet></router-outlet>
       </ng-template>
     </layout-default>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class YzLayoutBasicComponent implements OnInit, OnDestroy {
   options: LayoutDefaultOptions = {
