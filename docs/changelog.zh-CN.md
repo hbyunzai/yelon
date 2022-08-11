@@ -13,6 +13,18 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## [13.5.2-beta.0](https://github.com/hbyunzai/yelon/compare/13.5.2...13.5.2-beta.0) (2022-08-11)
+
+
+### Bug Fixes
+
+* **bis:layout:** remove onpush ([e877658](https://github.com/hbyunzai/yelon/commit/e877658bd4105c6ef267e6add1781b02987e10cd))
+
+
+### Features
+
+* **readme:** add jetbrains.png ([944b0bc](https://github.com/hbyunzai/yelon/commit/944b0bc58f53fa9a5ea5a1a23d4f54895201453a))
+
 
 ## [13.5.2](https://github.com/hbyunzai/yelon/compare/13.5.1...13.5.2) (2022-07-13)
 
