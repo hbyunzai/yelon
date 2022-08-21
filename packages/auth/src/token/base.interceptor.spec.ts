@@ -103,7 +103,7 @@ describe('auth: base.interceptor', () => {
       it(`should be ignore /login`, done => {
         genModule({ ignores: [/assets\//, /\/login/] }, basicModel);
 
-        http.get('/login', { responseType: 'text' }).subscribe(done);
+        http.get('/login', { responseType: 'text' }).subscribe(() => done());
         const req = httpBed.expectOne('/login') as TestRequest;
         expect(req.request.headers.get('token')).toBeNull();
         req.flush('ok!');
@@ -111,7 +111,7 @@ describe('auth: base.interceptor', () => {
 
       it('should be empty ignore', done => {
         genModule({ ignores: [] }, basicModel);
-        http.get('/login', { responseType: 'text' }).subscribe(done);
+        http.get('/login', { responseType: 'text' }).subscribe(() => done());
         const req = httpBed.expectOne('/login') as TestRequest;
         expect(req.request.headers.get('token')).toBe('123');
         req.flush('ok!');
@@ -119,7 +119,7 @@ describe('auth: base.interceptor', () => {
 
       it('should be undefined', done => {
         genModule({ ignores: undefined }, basicModel);
-        http.get('/login', { responseType: 'text' }).subscribe(done);
+        http.get('/login', { responseType: 'text' }).subscribe(() => done());
         const req = httpBed.expectOne('/login') as TestRequest;
         expect(req.request.headers.get('token')).toBe('123');
         req.flush('ok!');
@@ -130,7 +130,7 @@ describe('auth: base.interceptor', () => {
       describe('in params', () => {
         it(`should working`, done => {
           genModule({}, genModel(SimpleTokenModel, null));
-          http.get('/user', { responseType: 'text', params: { _allow_anonymous: '' } }).subscribe(done);
+          http.get('/user', { responseType: 'text', params: { _allow_anonymous: '' } }).subscribe(() => done());
           const ret = httpBed.expectOne(() => true);
           expect(ret.request.params.has('_allow_anonymous')).toBe(false);
           expect(ret.request.headers.get('Authorization')).toBeNull();
@@ -139,11 +139,11 @@ describe('auth: base.interceptor', () => {
         it(`(full url)`, done => {
           genModule({}, genModel(SimpleTokenModel, null));
           http
-            .get('https://ng.yunzainfo.com/api/user', {
+            .get('https://ng-alain.com/api/user', {
               responseType: 'text',
               params: { _allow_anonymous: '' }
             })
-            .subscribe(done);
+            .subscribe(() => done());
           const ret = httpBed.expectOne(() => true);
           expect(ret.request.headers.get('Authorization')).toBeNull();
           ret.flush('ok!');
@@ -152,7 +152,7 @@ describe('auth: base.interceptor', () => {
       describe('in url', () => {
         it(`should working`, done => {
           genModule({}, genModel(SimpleTokenModel, null));
-          http.get('/user?_allow_anonymous=1', { responseType: 'text' }).subscribe(done);
+          http.get('/user?_allow_anonymous=1', { responseType: 'text' }).subscribe(() => done());
           const ret = httpBed.expectOne(() => true);
           expect(ret.request.url).toBe(`/user`);
           expect(ret.request.headers.get('Authorization')).toBeNull();
@@ -161,10 +161,10 @@ describe('auth: base.interceptor', () => {
         it(`(full url)`, done => {
           genModule({}, genModel(SimpleTokenModel, null));
           http
-            .get('https://ng.yunzainfo.com/api/user?a=1&_allow_anonymous=1&other=a&cn=中文', { responseType: 'text' })
-            .subscribe(done);
+            .get('https://ng-alain.com/api/user?a=1&_allow_anonymous=1&other=a&cn=中文', { responseType: 'text' })
+            .subscribe(() => done());
           const ret = httpBed.expectOne(() => true);
-          expect(ret.request.url).toBe(`https://ng.yunzainfo.com/api/user?a=1&other=a&cn=%E4%B8%AD%E6%96%87`);
+          expect(ret.request.url).toBe(`https://ng-alain.com/api/user?a=1&other=a&cn=%E4%B8%AD%E6%96%87`);
           expect(ret.request.headers.get('Authorization')).toBeNull();
           ret.flush('ok!');
         });
@@ -191,7 +191,7 @@ describe('auth: base.interceptor', () => {
         });
       });
       it('with location', done => {
-        const login_url = 'https://ng.yunzainfo.com/login';
+        const login_url = 'https://ng-alain.com/login';
         genModule({ login_url }, genModel(SimpleTokenModel, null));
         http.get('/test', { responseType: 'text' }).subscribe({
           next: () => {
