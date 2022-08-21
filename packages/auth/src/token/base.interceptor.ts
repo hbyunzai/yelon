@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   HttpErrorResponse,
   HttpEvent,
@@ -11,7 +12,6 @@ import { Injectable, Injector, Optional } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { mergeConfig } from '../auth.config';
 import { ToLogin } from './helper';
@@ -20,7 +20,7 @@ import { ITokenModel } from './interface';
 class HttpAuthInterceptorHandler implements HttpHandler {
   constructor(private next: HttpHandler, private interceptor: HttpInterceptor) {}
 
-  handle(req: HttpRequest<NzSafeAny>): Observable<HttpEvent<NzSafeAny>> {
+  handle(req: HttpRequest<any>): Observable<HttpEvent<any>> {
     return this.interceptor.intercept(req, this.next);
   }
 }
@@ -33,9 +33,9 @@ export abstract class BaseInterceptor implements HttpInterceptor {
 
   abstract isAuth(options: YunzaiAuthConfig): boolean;
 
-  abstract setReq(req: HttpRequest<NzSafeAny>, options: YunzaiAuthConfig): HttpRequest<NzSafeAny>;
+  abstract setReq(req: HttpRequest<any>, options: YunzaiAuthConfig): HttpRequest<any>;
 
-  intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const options = mergeConfig(this.injector.get(YunzaiConfigService));
     if (Array.isArray(options.ignores)) {
       for (const item of options.ignores) {
@@ -43,24 +43,24 @@ export abstract class BaseInterceptor implements HttpInterceptor {
       }
     }
 
-    const ignoreKey = options.allow_anonymous_key!;
-    let ignored = false;
+    const ingoreKey = options.allow_anonymous_key!;
+    let ingored = false;
     let params = req.params;
     let url = req.url;
-    if (req.params.has(ignoreKey)) {
-      params = req.params.delete(ignoreKey);
-      ignored = true;
+    if (req.params.has(ingoreKey)) {
+      params = req.params.delete(ingoreKey);
+      ingored = true;
     }
     const urlArr = req.url.split('?');
     if (urlArr.length > 1) {
       const queryStringParams = new HttpParams({ fromString: urlArr[1] });
-      if (queryStringParams.has(ignoreKey)) {
-        const queryString = queryStringParams.delete(ignoreKey).toString();
+      if (queryStringParams.has(ingoreKey)) {
+        const queryString = queryStringParams.delete(ingoreKey).toString();
         url = queryString.length > 0 ? `${urlArr[0]}?${queryString}` : urlArr[0];
-        ignored = true;
+        ingored = true;
       }
     }
-    if (ignored) {
+    if (ingored) {
       return next.handle(req.clone({ params, url }));
     }
 
@@ -69,7 +69,7 @@ export abstract class BaseInterceptor implements HttpInterceptor {
     } else {
       ToLogin(options, this.injector);
       // Interrupt Http request, so need to generate a new Observable
-      const err$ = new Observable((observer: Observer<HttpEvent<NzSafeAny>>) => {
+      const err$ = new Observable((observer: Observer<HttpEvent<any>>) => {
         const res = new HttpErrorResponse({
           url: req.url,
           headers: req.headers,
@@ -85,7 +85,7 @@ export abstract class BaseInterceptor implements HttpInterceptor {
           const chain = lastInterceptors.reduceRight(
             (_next, _interceptor) => new HttpAuthInterceptorHandler(_next, _interceptor),
             {
-              handle: (_: HttpRequest<NzSafeAny>) => err$
+              handle: (_: HttpRequest<any>) => err$
             }
           );
           return chain.handle(req);

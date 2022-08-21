@@ -402,7 +402,7 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
       this._statistical = result.statistical as STStatisticalResults;
       this.changeEmit('loaded', result.list);
       // Should be re-render in next tike when using virtual scroll
-      // https://github.com/ng-alain/ng-alain/issues/1836
+      // https://github.com/hbyunzai/ng-yunzai/issues/1836
       if (this.cdkVirtualScrollViewport) {
         Promise.resolve().then(() => this.cdkVirtualScrollViewport.checkViewportSize());
       }

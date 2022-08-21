@@ -1,15 +1,13 @@
 /**
  * NOTE：`ACLType` 类型可能会被其他类库所引用，为了减少类库间彼此的依赖性，其他类库会以复制的形式存在
  * 当这里有变化时，请务必同步更新，涉及：`MenuService.acl`、`util.YunzaiACLType`
- * TODO: 尝试增加 `@yelon/core` 类库用于处理这种通用型
+ * TODO: 尝试增加 `ydelon/core` 类库用于处理这种通用型
  */
 
 import { Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
-import { ACLService } from './acl.service';
+import type { ACLService } from './acl.service';
 
 export interface ACLType {
   /**
@@ -33,9 +31,11 @@ export interface ACLType {
    */
   except?: boolean;
 
-  [key: string]: NzSafeAny;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
 
 export type ACLCanType = number | number[] | string | string[] | ACLType;
+
 export type ACLGuardFunctionType = (srv: ACLService, injector: Injector) => Observable<ACLCanType>;
 export type ACLGuardType = ACLCanType | Observable<ACLCanType> | ACLGuardFunctionType;
