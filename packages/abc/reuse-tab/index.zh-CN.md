@@ -227,6 +227,7 @@ export class DemoComponent implements OnReuseInit, OnReuseDestroy {
 | `[disabled]` | 是否禁用 | `boolean` | `false` |
 | `[titleRender]` | 自定义标题渲染 | `TemplateRef<{ $implicit: ReuseItem }>` | - |
 | `(close)` | 关闭回调 | `EventEmitter` | - |
+| `[storageState]` | 是否存储状态，保持最后一次浏览器的状态 | `boolean` | `false` |
 | `(change)` | 切换时回调，接收的参数至少包含：`active`、`list` 两个参数 | `EventEmitter` | - |
 
 **右击菜单**
