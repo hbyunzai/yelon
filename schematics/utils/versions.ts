@@ -39,6 +39,7 @@ export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void
       `source-map-explorer@DEP-0.0.0-PLACEHOLDER`,
       `@angular/language-service@DEP-0.0.0-PLACEHOLDER`,
       `@yelon/testing@${version}`,
+      `rxjs@DEP-0.0.0-PLACEHOLDER`,
       `@stomp/rx-stomp@DEP-0.0.0-PLACEHOLDER`
     ],
     'devDependencies'
