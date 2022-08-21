@@ -113,8 +113,6 @@
 /components/global-footer/zh
 /components/highlight/en
 /components/highlight/zh
-/components/image/en
-/components/image/zh
 /components/let/en
 /components/let/zh
 /components/loading/en
@@ -125,6 +123,8 @@
 /components/media/zh
 /components/notice-icon/en
 /components/notice-icon/zh
+/components/observers/en
+/components/observers/zh
 /components/onboarding/en
 /components/onboarding/zh
 /components/page-header/en

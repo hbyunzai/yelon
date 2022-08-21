@@ -12,6 +12,7 @@ import { LetModule } from '@yelon/abc/let';
 import { LoadingModule } from '@yelon/abc/loading';
 import { MediaModule } from '@yelon/abc/media';
 import { NoticeIconModule } from '@yelon/abc/notice-icon';
+import { ObserversModule } from '@yelon/abc/observers';
 import { OnboardingModule } from '@yelon/abc/onboarding';
 import { PageHeaderModule } from '@yelon/abc/page-header';
 import { PdfModule } from '@yelon/abc/pdf';
@@ -67,6 +68,7 @@ export const SHARED_YELON_MODULES = [
   TagSelectModule,
   NoticeIconModule,
   QuickMenuModule,
+  ObserversModule,
   G2BarModule,
   G2CardModule,
   G2CustomModule,

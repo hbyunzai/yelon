@@ -17,7 +17,7 @@ Using `errors` you can reset `error` values for all `se` components in batches.
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { SEErrorRefresh } from '@delon/abc/se';
+import { SEErrorRefresh } from '@yelon/abc/se';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
