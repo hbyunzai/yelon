@@ -57,6 +57,19 @@ const yunzaiConfig: YunzaiConfig = {
 | `[delay]` | Delayed rendering, unit: ms | `number` | `0` | - |
 | `(change)` | change event | `EventEmitter<PdfChangeEvent>` | - | - |
 
+### Component properties
+
+Used API interfaces.
+
+| Name | Description |
+| --- | ---- |
+| `pdf` | Current PDF instance |
+| `eventBus` | Event bus for PDF files, eg: find document, etc. |
+| `findController` | Find controller, now instead by `eventBus` |
+| `pageViewer` | View Controls |
+| `linkService` | Navigation Service |
+
+
 ## FAQ
 
 ### Why need to specify the height of the pdf component
