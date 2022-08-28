@@ -40,12 +40,11 @@ export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void
       `source-map-explorer@DEP-0.0.0-PLACEHOLDER`,
       `@angular/language-service@DEP-0.0.0-PLACEHOLDER`,
       `@yelon/testing@${version}`,
-      `rxjs@DEP-0.0.0-PLACEHOLDER`,
       `@stomp/rx-stomp@DEP-0.0.0-PLACEHOLDER`
     ],
     'devDependencies'
   );
-  addPackage(tree, [`ng-zorro-antd@DEP-0.0.0-PLACEHOLDER`]);
+  addPackage(tree, [`rxjs@DEP-0.0.0-PLACEHOLDER`, `ng-zorro-antd@DEP-0.0.0-PLACEHOLDER`]);
 }
 
 export function addESLintRule(context: SchematicContext, showLog: Boolean = true): Rule {

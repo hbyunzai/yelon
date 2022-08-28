@@ -26,7 +26,6 @@ DEPENDENCIES=$(node -p "
     'stylelint-declaration-block-no-ignored-properties',
     'stylelint-order',
     'stylelint',
-    'prettier',
     '@antv/data-set',
     '@antv/g2',
     'echarts',
