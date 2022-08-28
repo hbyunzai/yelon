@@ -51,6 +51,7 @@ DEPENDENCIES=$(node -p "
     'eslint-plugin-jsdoc',
     'eslint-plugin-prefer-arrow',
     'eslint-plugin-prettier',
+    'eslint-plugin-deprecation',
     'prettier',
     'husky',
     'lint-staged',

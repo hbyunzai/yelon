@@ -24,6 +24,7 @@ import {
   addHeadStyle,
   addHtmlToBody,
   addPackage,
+  addSchematicCollections,
   BUILD_TARGET_BUILD,
   BUILD_TARGET_SERVE,
   getProject,
@@ -87,7 +88,9 @@ function fixAngularJson(options: ApplicationOptions): Rule {
         initial.maximumError = '3mb';
       }
     }
+
     addStylePreprocessorOptionsToAllProject(workspace);
+    addSchematicCollections(workspace);
   });
 }
 
