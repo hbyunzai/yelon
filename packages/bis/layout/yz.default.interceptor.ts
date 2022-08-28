@@ -12,7 +12,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError, catchError, filter, mergeMap, switchMap, take } from 'rxjs';
 
-import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
+import {YA_SERVICE_TOKEN, ITokenService, ALLOW_ANONYMOUS} from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
 import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
@@ -212,6 +212,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (req.context.get(ALLOW_ANONYMOUS)) return next.handle(req);
     log('yz.default.interceptor.ts: ', 'request ', req);
     // 统一加前缀
     let url = req.url;

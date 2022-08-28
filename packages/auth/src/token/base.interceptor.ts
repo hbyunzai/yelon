@@ -14,6 +14,7 @@ import { Observable, Observer } from 'rxjs';
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 
 import { mergeConfig } from '../auth.config';
+import { ALLOW_ANONYMOUS } from '../token';
 import { ToLogin } from './helper';
 import { ITokenModel } from './interface';
 
@@ -36,6 +37,8 @@ export abstract class BaseInterceptor implements HttpInterceptor {
   abstract setReq(req: HttpRequest<any>, options: YunzaiAuthConfig): HttpRequest<any>;
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (req.context.get(ALLOW_ANONYMOUS)) return next.handle(req);
+
     const options = mergeConfig(this.injector.get(YunzaiConfigService));
     if (Array.isArray(options.ignores)) {
       for (const item of options.ignores) {
@@ -70,11 +73,15 @@ export abstract class BaseInterceptor implements HttpInterceptor {
       ToLogin(options, this.injector);
       // Interrupt Http request, so need to generate a new Observable
       const err$ = new Observable((observer: Observer<HttpEvent<any>>) => {
+        let statusText = '';
+        if (typeof ngDevMode === 'undefined' || ngDevMode) {
+          statusText = `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 [url?_allow_anonymous=true] 来表示忽略校验，更多方法请参考： https://ng-alain.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add [url?_allow_anonymous=true] to ignore the check, please refer to: https://ng-alain.com/auth/getting-started#YunzaiAuthConfig`;
+        }
         const res = new HttpErrorResponse({
           url: req.url,
           headers: req.headers,
           status: 401,
-          statusText: `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 [url?_allow_anonymous=true] 来表示忽略校验，更多方法请参考： https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add [url?_allow_anonymous=true] to ignore the check, please refer to: https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig`
+          statusText
         });
         observer.error(res);
       });

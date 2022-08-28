@@ -2,6 +2,7 @@
 import { DOCUMENT } from '@angular/common';
 import {
   HttpClient,
+  HttpContext,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -19,6 +20,7 @@ import { Observable, throwError, catchError } from 'rxjs';
 import { YunzaiAuthConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 
 import { YelonAuthModule } from '../auth.module';
+import { ALLOW_ANONYMOUS } from '../token';
 import { AuthReferrer, YA_SERVICE_TOKEN, ITokenModel, ITokenService } from './interface';
 import { SimpleInterceptor } from './simple/simple.interceptor';
 import { SimpleTokenModel } from './simple/simple.model';
@@ -126,6 +128,14 @@ describe('auth: base.interceptor', () => {
       });
     });
 
+    it('#ALLOW_ANONYMOUS', () => {
+      genModule({}, genModel(SimpleTokenModel, null));
+      http.get('/user', { context: new HttpContext().set(ALLOW_ANONYMOUS, true) }).subscribe();
+      const ret = httpBed.expectOne(() => true);
+      expect(ret.request.headers.get('Authorization')).toBeNull();
+      ret.flush('ok!');
+    });
+
     describe('#with allow_anonymous_key', () => {
       describe('in params', () => {
         it(`should working`, done => {
@@ -139,7 +149,7 @@ describe('auth: base.interceptor', () => {
         it(`(full url)`, done => {
           genModule({}, genModel(SimpleTokenModel, null));
           http
-            .get('https://ng.yunzainfo.com/api/user', {
+            .get('https://ng-alain.com/api/user', {
               responseType: 'text',
               params: { _allow_anonymous: '' }
             })
@@ -161,10 +171,10 @@ describe('auth: base.interceptor', () => {
         it(`(full url)`, done => {
           genModule({}, genModel(SimpleTokenModel, null));
           http
-            .get('https://ng.yunzainfo.com/api/user?a=1&_allow_anonymous=1&other=a&cn=中文', { responseType: 'text' })
+            .get('https://ng-alain.com/api/user?a=1&_allow_anonymous=1&other=a&cn=中文', { responseType: 'text' })
             .subscribe(() => done());
           const ret = httpBed.expectOne(() => true);
-          expect(ret.request.url).toBe(`https://ng.yunzainfo.com/api/user?a=1&other=a&cn=%E4%B8%AD%E6%96%87`);
+          expect(ret.request.url).toBe(`https://ng-alain.com/api/user?a=1&other=a&cn=%E4%B8%AD%E6%96%87`);
           expect(ret.request.headers.get('Authorization')).toBeNull();
           ret.flush('ok!');
         });
@@ -191,7 +201,7 @@ describe('auth: base.interceptor', () => {
         });
       });
       it('with location', done => {
-        const login_url = 'https://ng.yunzainfo.com/login';
+        const login_url = 'https://ng-alain.com/login';
         genModule({ login_url }, genModel(SimpleTokenModel, null));
         http.get('/test', { responseType: 'text' }).subscribe({
           next: () => {
