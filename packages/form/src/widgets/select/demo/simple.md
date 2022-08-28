@@ -1,7 +1,7 @@
 ---
 title:
-  zh-CN: 基础样例
-  en-US: Basic Usage
+zh-CN: 基础样例
+en-US: Basic Usage
 order: 0
 ---
 
@@ -15,17 +15,17 @@ Simplest of usage.
 
 ```ts
 import { Component, ViewChild } from '@angular/core';
+import { of, delay } from 'rxjs';
+
 import { SFComponent, SFSchema, SFSelectWidgetSchema } from '@yelon/form';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { of } from 'rxjs';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-demo',
   template: `
     <sf #sf [schema]="schema" (formSubmit)="submit($event)"></sf>
     <button nz-button (click)="updateStatus()">Update Status</button>
-  `,
+  `
 })
 export class DemoComponent {
   @ViewChild('sf', { static: false }) private sf!: SFComponent;
@@ -37,13 +37,13 @@ export class DemoComponent {
         enum: [
           { label: '待支付', value: 'WAIT_BUYER_PAY', otherData: 1 },
           { label: '已支付', value: 'TRADE_SUCCESS' },
-          { label: '交易完成', value: 'TRADE_FINISHED' },
+          { label: '交易完成', value: 'TRADE_FINISHED' }
         ],
         default: 'WAIT_BUYER_PAY',
         ui: {
           widget: 'select',
-          change: (value, orgData) => console.log(value, orgData),
-        } as SFSelectWidgetSchema,
+          change: (value, orgData) => console.log(value, orgData)
+        } as SFSelectWidgetSchema
       },
       // 标签
       tags: {
@@ -52,13 +52,13 @@ export class DemoComponent {
         enum: [
           { label: '待支付', value: 'WAIT_BUYER_PAY' },
           { label: '已支付', value: 'TRADE_SUCCESS' },
-          { label: '交易完成', value: 'TRADE_FINISHED' },
+          { label: '交易完成', value: 'TRADE_FINISHED' }
         ],
         ui: {
           widget: 'select',
-          mode: 'tags',
+          mode: 'tags'
         } as SFSelectWidgetSchema,
-        default: null,
+        default: null
       },
       // 异步数据
       async: {
@@ -75,13 +75,23 @@ export class DemoComponent {
                 children: [
                   { label: '待支付', value: 'WAIT_BUYER_PAY' },
                   { label: '已支付', value: 'TRADE_SUCCESS' },
-                  { label: '交易完成', value: 'TRADE_FINISHED' },
-                ],
-              },
-            ]).pipe(delay(1200)),
-        } as SFSelectWidgetSchema,
+                  { label: '交易完成', value: 'TRADE_FINISHED' }
+                ]
+              }
+            ]).pipe(delay(1200))
+        } as SFSelectWidgetSchema
       },
-    },
+      hide: {
+        type: 'string',
+        title: '隐藏项',
+        enum: [
+          { label: '第1个', value: 1 },
+          { label: '第2个', value: 2, hide: true },
+          { label: '第3个(第2个被隐藏了)', value: 3 }
+        ],
+        default: 1
+      }
+    }
   };
 
   constructor(private msg: NzMessageService) {}
