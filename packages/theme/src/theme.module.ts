@@ -25,7 +25,7 @@ const PIPES = [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe];
 
 // #endregion
 
-// #region all delon used icons
+// #region all yelon used icons
 
 // - zorro: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/icon/icons.ts
 
