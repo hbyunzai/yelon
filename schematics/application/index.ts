@@ -20,6 +20,7 @@ import { getLangData } from '../core/lang.config';
 import {
   addStylePreprocessorOptionsToAllProject,
   addAllowedCommonJsDependencies,
+  addAllowSyntheticDefaultImports,
   addAssetsToTarget,
   addHeadStyle,
   addHtmlToBody,
@@ -355,6 +356,7 @@ export default function (options: ApplicationOptions): Rule {
       // Configuring CommonJS dependencies
       // https://angular.io/guide/build#configuring-commonjs-dependencies
       addAllowedCommonJsDependencies([]),
+      addAllowSyntheticDefaultImports,
       // ci
       addRunScriptToPackageJson(),
       addPathsToTsConfig(),
