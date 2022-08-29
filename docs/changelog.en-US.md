@@ -13,6 +13,42 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+
+
+# [14.0.0](https://github.com/hbyunzai/yelon/compare/13.5.2-beta.0...14.0.0) (2022-08-29)
+
+
+### Bug Fixes
+
+* **abc:se:** fix missing error style ([e9f7596](https://github.com/hbyunzai/yelon/commit/e9f75963b2e0ea9198d5c7addeb14a7c0b314d0f))
+* **form:** fix width style ([04c4b24](https://github.com/hbyunzai/yelon/commit/04c4b24ed76c1f3ef32288de1250a243f80ac4f5))
+* **forum:array:** fix invalid `minItems` ([9e5a33c](https://github.com/hbyunzai/yelon/commit/9e5a33c25130a7683be0d8930b31bfabc2fda9f3))
+* **theme:** fix missing xl style in vertical ([eb40f1a](https://github.com/hbyunzai/yelon/commit/eb40f1a66bf8b95923e4f3580e425b7edf486345))
+* **theme:** fix missing xl style in vertical ([b15cbc4](https://github.com/hbyunzai/yelon/commit/b15cbc4e17ca38a8234f7822e0ffd54f8590ff45))
+
+
+### Features
+
+* **abc:observers:** add `[observeSize]` directive ([2d289fd](https://github.com/hbyunzai/yelon/commit/2d289fd2f8e344ec837b6c746bb9e663c45df187))
+* **abc:pdf:** add `eventBus` property ([84814cd](https://github.com/hbyunzai/yelon/commit/84814cd6b33f90cafc1f30665993d80d145a50d9))
+* **abc:reuse-tab:** add `canClose` property ([00f72b6](https://github.com/hbyunzai/yelon/commit/00f72b63ad95afacbb943396016e6e819b6c5af7))
+* **abc:reuse-tab:** support status of the last browser closed ([4e5aab6](https://github.com/hbyunzai/yelon/commit/4e5aab60f42c7bc1fb494440db52102a92020fb0))
+* **abc:st:** add function of `reName` ([34b5127](https://github.com/hbyunzai/yelon/commit/34b51273bc8d3ba35b439e467739fc9d566c0906))
+* **abc:st:** add whether to ignore `null` or `undefined` value ([994a38c](https://github.com/hbyunzai/yelon/commit/994a38c11a2a77ff33980141bf9f9ccff046647c))
+* add `ALLOW_ANONYMOUS`, `CUSTOM_ERROR`, `IGNORE_BASE_URL`, `RAW_BODY` ([6999ac9](https://github.com/hbyunzai/yelon/commit/6999ac9195feba61b2a2094b2f97b4106639ceb6))
+* **form:** add `hide` property ([245306a](https://github.com/hbyunzai/yelon/commit/245306a7e76f0d1e6058b9040dc91f6d18c85e81))
+* **form:** add `visibleIfLogical` logical type ([a07d80e](https://github.com/hbyunzai/yelon/commit/a07d80e4d4a711740125a0707586f33443a9f4fe))
+* **theme:** add `RAW_BODY` token ([e312f96](https://github.com/hbyunzai/yelon/commit/e312f960ec48343a098ead0759a164fa7c663fdb))
+* **util:** add `omit` ([63e06ba](https://github.com/hbyunzai/yelon/commit/63e06bae0930067d01b89588045916319c3677d3))
+
+
+### Performance Improvements
+
+* **cli:** ignore ajv ([1cb5c13](https://github.com/hbyunzai/yelon/commit/1cb5c13b4e0122d7f8658f13e7eaa28fd16e9596))
+* **cli:** sync rxjs version when ng update ([0a7851e](https://github.com/hbyunzai/yelon/commit/0a7851e2eea867b94c47ed4eff1afe2e2595ab72))
+
+
+
 ## [13.5.2-beta.0](https://github.com/hbyunzai/yelon/compare/13.5.2...13.5.2-beta.0) (2022-08-11)
 
 
