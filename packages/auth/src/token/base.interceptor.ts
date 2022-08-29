@@ -75,7 +75,7 @@ export abstract class BaseInterceptor implements HttpInterceptor {
       const err$ = new Observable((observer: Observer<HttpEvent<any>>) => {
         let statusText = '';
         if (typeof ngDevMode === 'undefined' || ngDevMode) {
-          statusText = `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 [url?_allow_anonymous=true] 来表示忽略校验，更多方法请参考： https://ng-alain.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add [url?_allow_anonymous=true] to ignore the check, please refer to: https://ng-alain.com/auth/getting-started#YunzaiAuthConfig`;
+          statusText = `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 [url?_allow_anonymous=true] 来表示忽略校验，更多方法请参考： https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add [url?_allow_anonymous=true] to ignore the check, please refer to: https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig`;
         }
         const res = new HttpErrorResponse({
           url: req.url,

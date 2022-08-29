@@ -87,7 +87,7 @@ export interface ErrorSchema {
   onlyVisual?: boolean;
   /**
    * 是否忽略某些数据类型校验 `ERRORSDEFAULT`
-   * - 值始终包含 `DelonSchemaFormConfig.ingoreKeywords`
+   * - 值始终包含 `YelonSchemaFormConfig.ingoreKeywords`
    */
   ingoreKeywords?: string[];
 

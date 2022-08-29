@@ -74,8 +74,6 @@ function upgradeThirdVersion(): Rule {
 
 function removeThird(): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    // removePackage(tree, [`ngx-countdown`], 'dependencies');
-    // removePackage(tree, ['nz-tslint-rules', 'ng-alain-codelyzer'], 'devDependencies');
     logStart(context, `Remove redundant dependencies: ngx-countdown, ng-yunzai-codelyzer, nz-tslint-rules`);
   };
 }

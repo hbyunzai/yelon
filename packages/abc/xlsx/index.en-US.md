@@ -4,7 +4,7 @@ title: xlsx
 order: 6
 subtitle: Excel
 cols: 1
-module: import { XlsxModule } from '@delon/abc/xlsx';
+module: import { XlsxModule } from '@yelon/abc/xlsx';
 ---
 
 An Excel file operation based on [sheetjs](http://sheetjs.com/).

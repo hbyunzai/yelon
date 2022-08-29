@@ -56,7 +56,7 @@ function finished(): Rule {
 
 export function v14Rule(): Rule {
   return async (tree: Tree, context: SchematicContext) => {
-    logStart(context, `Upgrade @delon/* version number`);
+    logStart(context, `Upgrade @yelon/* version number`);
     UpgradeMainVersions(tree);
     return chain([
       addAllowSyntheticDefaultImports(),

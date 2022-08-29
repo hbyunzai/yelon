@@ -1,7 +1,7 @@
 /**
  * NOTE：`ACLType` 类型可能会被其他类库所引用，为了减少类库间彼此的依赖性，其他类库会以复制的形式存在
  * 当这里有变化时，请务必同步更新，涉及：`MenuService.acl`、`util.YunzaiACLType`
- * TODO: 尝试增加 `ydelon/core` 类库用于处理这种通用型
+ * TODO: 尝试增加 `@yelon/core` 类库用于处理这种通用型
  */
 
 import { Injector } from '@angular/core';
