@@ -47,9 +47,9 @@ export interface ErrorData {
   [key: string]: NzSafeAny;
 
   /**
-   * When specifying `keyword`, you can use `sf` built-in some common types [ERRORSDEFAULT](https://github.com/ng-alain/delon/blob/master/packages/form/src/errors.ts#L4) , direct conversion. Or use the `message` parameter to specify an error message.
+   * When specifying `keyword`, you can use `sf` built-in some common types [ERRORSDEFAULT](https://github.com/hbyunzai/yelon/blob/master/packages/form/src/errors.ts#L4) , direct conversion. Or use the `message` parameter to specify an error message.
    *
-   * 当指定 `keyword` 时，可以利用 `sf` 内置一些常见类型 [ERRORSDEFAULT](https://github.com/ng-alain/delon/blob/master/packages/form/src/errors.ts#L4)，直接转化。或者使用 `message` 参数来指定错误消息。
+   * 当指定 `keyword` 时，可以利用 `sf` 内置一些常见类型 [ERRORSDEFAULT](https://github.com/hbyunzai/yelon/blob/master/packages/form/src/errors.ts#L4)，直接转化。或者使用 `message` 参数来指定错误消息。
    */
   keyword?: string | null;
   dataPath?: string;
@@ -87,7 +87,7 @@ export interface ErrorSchema {
   onlyVisual?: boolean;
   /**
    * 是否忽略某些数据类型校验 `ERRORSDEFAULT`
-   * - 值始终包含 `DelonSchemaFormConfig.ingoreKeywords`
+   * - 值始终包含 `YelonSchemaFormConfig.ingoreKeywords`
    */
   ingoreKeywords?: string[];
 

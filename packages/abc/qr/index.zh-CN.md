@@ -4,7 +4,7 @@ order: 3
 title: qr
 subtitle: 二维码
 cols: 1
-module: import { QRModule } from '@delon/abc/qr';
+module: import { QRModule } from '@yelon/abc/qr';
 ---
 
 基于 [qrious](https://github.com/neocotic/qrious) 生成二维码。
