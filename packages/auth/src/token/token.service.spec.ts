@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 
 import { YunzaiAuthConfig } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YA_SERVICE_TOKEN, ITokenModel, ITokenService } from './interface';
 import { JWTTokenModel } from './jwt/jwt.model';
@@ -16,7 +16,7 @@ describe('auth: token.service', () => {
   } as ITokenModel;
 
   beforeEach(() => {
-    let data: { [key: string]: NzSafeAny } = {};
+    let data: { [key: string]: any } = {};
 
     spyOn(localStorage, 'getItem').and.callFake((key: string): string => {
       return data[key] || null;
@@ -81,6 +81,7 @@ describe('auth: token.service', () => {
     service.change().subscribe(res => {
       if (!res) return;
       expect(res).not.toBeNull();
+      expect(res.token).toBe(VALUE.token);
       expect(service.get()?.token).toBe(VALUE.token);
       done();
     });
@@ -89,13 +90,13 @@ describe('auth: token.service', () => {
 
   describe('#refresh', () => {
     function updateConfig(config?: YunzaiAuthConfig): void {
-      const srvAny: NzSafeAny = service;
+      const srvAny: any = service;
       srvAny._options = { ...srvAny._options, enabledRefresh: true, ...config } as YunzaiAuthConfig;
     }
 
     beforeEach(() => updateConfig());
 
-    afterEach(() => (service as NzSafeAny).ngOnDestroy());
+    afterEach(() => (service as any).ngOnDestroy());
 
     it('should be working', done => {
       updateConfig({ refreshTime: 1, refreshOffset: 1 });

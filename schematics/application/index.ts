@@ -18,12 +18,14 @@ import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
 import { getLangData } from '../core/lang.config';
 import {
-  addStylePreprocessorOptionsToAllProject,
   addAllowedCommonJsDependencies,
+  addAllowSyntheticDefaultImports,
   addAssetsToTarget,
   addHeadStyle,
   addHtmlToBody,
   addPackage,
+  addSchematicCollections,
+  addStylePreprocessorOptionsToAllProject,
   BUILD_TARGET_BUILD,
   BUILD_TARGET_SERVE,
   getProject,
@@ -87,7 +89,9 @@ function fixAngularJson(options: ApplicationOptions): Rule {
         initial.maximumError = '3mb';
       }
     }
+
     addStylePreprocessorOptionsToAllProject(workspace);
+    addSchematicCollections(workspace);
   });
 }
 
@@ -337,7 +341,7 @@ function fixVsCode(): Rule {
       tree.create(filePath, '');
       json = {};
     }
-    json.recommendations = ['cipchk.ng-yunzai-extension-pack'];
+    json.recommendations = ['cipchk.ng-alain-extension-pack'];
     writeJSON(tree, filePath, json);
   };
 }
@@ -352,6 +356,7 @@ export default function (options: ApplicationOptions): Rule {
       // Configuring CommonJS dependencies
       // https://angular.io/guide/build#configuring-commonjs-dependencies
       addAllowedCommonJsDependencies([]),
+      addAllowSyntheticDefaultImports(),
       // ci
       addRunScriptToPackageJson(),
       addPathsToTsConfig(),

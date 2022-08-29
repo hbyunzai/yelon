@@ -11,6 +11,11 @@
       "description": "Updates NG-YUNZAI to v13",
       "factory": "./ng-update/index#updateToV13"
     },
+    "migration-v14": {
+      "version": "14",
+      "description": "Updates NG-Yunzai to v14 [https://github.com/hbyunzai/ng-yunzai]",
+      "factory": "./ng-update/index#updateToV14"
+    },
     "ng-post-update": {
       "description": "Performs cleanup after ng-update.",
       "factory": "./ng-update/index#postUpdate",

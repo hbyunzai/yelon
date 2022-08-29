@@ -8,11 +8,11 @@ import { ErrorCollectModule } from '@yelon/abc/error-collect';
 import { ExceptionModule } from '@yelon/abc/exception';
 import { FooterToolbarModule } from '@yelon/abc/footer-toolbar';
 import { GlobalFooterModule } from '@yelon/abc/global-footer';
-import { ImageModule } from '@yelon/abc/image';
 import { LetModule } from '@yelon/abc/let';
 import { LoadingModule } from '@yelon/abc/loading';
 import { MediaModule } from '@yelon/abc/media';
 import { NoticeIconModule } from '@yelon/abc/notice-icon';
+import { ObserversModule } from '@yelon/abc/observers';
 import { OnboardingModule } from '@yelon/abc/onboarding';
 import { PageHeaderModule } from '@yelon/abc/page-header';
 import { PdfModule } from '@yelon/abc/pdf';
@@ -25,7 +25,6 @@ import { SGModule } from '@yelon/abc/sg';
 import { STModule } from '@yelon/abc/st';
 import { SVModule } from '@yelon/abc/sv';
 import { TagSelectModule } from '@yelon/abc/tag-select';
-// import { YunzaiLayoutModule } from '@yelon/bis/layout';
 import { G2BarModule } from '@yelon/chart/bar';
 import { G2CardModule } from '@yelon/chart/card';
 import { ChartEChartsModule } from '@yelon/chart/chart-echarts';
@@ -47,7 +46,6 @@ import { ThemeBtnModule } from '@yelon/theme/theme-btn';
 import { CurrencyPipeModule, FilterPipeModule, FormatPipeModule } from '@yelon/util/pipes';
 
 export const SHARED_YELON_MODULES = [
-  // YunzaiLayoutModule,
   AvatarListModule,
   CountDownModule,
   DatePickerModule,
@@ -57,7 +55,6 @@ export const SHARED_YELON_MODULES = [
   SVModule,
   SEModule,
   SGModule,
-  ImageModule,
   LoadingModule,
   QRModule,
   OnboardingModule,
@@ -71,6 +68,7 @@ export const SHARED_YELON_MODULES = [
   TagSelectModule,
   NoticeIconModule,
   QuickMenuModule,
+  ObserversModule,
   G2BarModule,
   G2CardModule,
   G2CustomModule,

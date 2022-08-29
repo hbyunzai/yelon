@@ -1,17 +1,6 @@
 <ng-template #icon let-i>
   <ng-container *ngIf="i" [ngSwitch]="i.type">
     <i
-      *ngSwitchCase="'class'"
-      class="sidebar-nav__item-icon"
-      nz-icon
-      [nzType]="i.value"
-      [nzTheme]="i.theme"
-      [nzSpin]="i.spin"
-      [nzTwotoneColor]="i.twoToneColor"
-      [nzIconfont]="i.iconfont"
-      [nzRotate]="i.rotate"
-    ></i>
-    <i
       *ngSwitchCase="'icon'"
       class="sidebar-nav__item-icon"
       nz-icon
@@ -34,7 +23,7 @@
       *ngIf="i._hidden !== true"
       class="sidebar-nav__item"
       [class.sidebar-nav__selected]="i._selected"
-      [class.sidebar-nav__open]="i._open"
+      [class.sidebar-nav__open]="i.open"
     >
       <!-- link -->
       <a
@@ -43,6 +32,7 @@
         [attr.data-id]="i._id"
         class="sidebar-nav__item-link"
         [ngClass]="{ 'sidebar-nav__item-disabled': i.disabled }"
+        (mouseenter)="closeSubMenu()"
       >
         <ng-container *ngIf="i._needIcon">
           <ng-container *ngIf="!collapsed">

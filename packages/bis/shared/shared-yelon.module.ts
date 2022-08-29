@@ -8,7 +8,6 @@ import { ErrorCollectModule } from '@yelon/abc/error-collect';
 import { ExceptionModule } from '@yelon/abc/exception';
 import { FooterToolbarModule } from '@yelon/abc/footer-toolbar';
 import { GlobalFooterModule } from '@yelon/abc/global-footer';
-import { ImageModule } from '@yelon/abc/image';
 import { LetModule } from '@yelon/abc/let';
 import { LoadingModule } from '@yelon/abc/loading';
 import { MediaModule } from '@yelon/abc/media';
@@ -65,7 +64,6 @@ export const YZ_SHARED_YELON_MODULES = [
   SVModule,
   SEModule,
   SGModule,
-  ImageModule,
   LoadingModule,
   QRModule,
   OnboardingModule,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Injectable, Optional } from '@angular/core';
 
 import { deepMergeKey } from '@yelon/util/other';
@@ -23,11 +24,11 @@ export class YunzaiConfigService {
   }
 
   attach<T extends YunzaiConfigKey>(componentThis: unknown, componentName: T, defaultValues: YunzaiConfig[T]): void {
-    Object.assign(componentThis, this.merge(componentName, defaultValues));
+    Object.assign(componentThis as any, this.merge(componentName, defaultValues));
   }
 
   attachKey<T extends YunzaiConfigKey>(componentThis: unknown, componentName: T, key: string): void {
-    Object.assign(componentThis, this.get(componentName, key));
+    Object.assign(componentThis as any, this.get(componentName, key));
   }
 
   set<T extends YunzaiConfigKey>(componentName: T, value: YunzaiConfig[T]): void {

@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { YunzaiAuthConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { BaseInterceptor } from '../base.interceptor';
 import { CheckSimple } from '../helper';
@@ -24,12 +24,12 @@ export class SimpleInterceptor extends BaseInterceptor {
     return CheckSimple(this.model as SimpleTokenModel);
   }
 
-  setReq(req: HttpRequest<NzSafeAny>, options: YunzaiAuthConfig): HttpRequest<NzSafeAny> {
+  setReq(req: HttpRequest<any>, options: YunzaiAuthConfig): HttpRequest<any> {
     const { token_send_template, token_send_key } = options;
     const token = token_send_template!.replace(/\$\{([\w]+)\}/g, (_: string, g) => this.model[g]);
     switch (options.token_send_place) {
       case 'header':
-        const obj: NzSafeAny = {};
+        const obj: any = {};
         obj[token_send_key!] = token;
         req = req.clone({
           setHeaders: obj

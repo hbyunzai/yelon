@@ -88,7 +88,7 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * **abc:st:** add `addRow` method ([f8e522e](https://github.com/hbyunzai/yelon/commit/f8e522edcd8d205b49c387b7483e8ea1b094ed2b))
 * **form:** add feed back ([032f6f0](https://github.com/hbyunzai/yelon/commit/032f6f024ccd33a453afbb68fb4404db9eab9041))
 * **package:** add package-lock.json ([e391b9a](https://github.com/hbyunzai/yelon/commit/e391b9ae5d6b7dbc45e8cd4699008e1de8d988dc))
-* **theme:i18n:** add `AlainI18NGuard` guard ([24fc707](https://github.com/hbyunzai/yelon/commit/24fc70719135acb45afdea1bd3e4a5f9ce8cda71))
+* **theme:i18n:** add `YunzaiI18NGuard` guard ([24fc707](https://github.com/hbyunzai/yelon/commit/24fc70719135acb45afdea1bd3e4a5f9ce8cda71))
 * **theme:theme-btn:** add `themeChange` event ([24d384b](https://github.com/hbyunzai/yelon/commit/24d384baad3e28f4845a8305df770bcafb07243c))
 
 

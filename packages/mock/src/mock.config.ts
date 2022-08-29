@@ -1,4 +1,4 @@
-import { YunzaiMockConfig } from '@yelon/util/config';
+import type { YunzaiMockConfig } from '@yelon/util/config';
 
 export const MOCK_DEFULAT_CONFIG: YunzaiMockConfig = {
   delay: 300,

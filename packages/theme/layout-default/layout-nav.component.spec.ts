@@ -39,6 +39,10 @@ const MOCKMENUS = [
             target: '_top'
           }
         ]
+      },
+      {
+        text: 'widgets',
+        disabled: true
       }
     ]
   }
@@ -73,17 +77,13 @@ class MockACLService {
 
 class MockWindow {
   location = new MockLocation();
-
   open(): void {}
 }
-
 class MockLocation {
   private url!: string;
-
   get href(): string {
     return this.url;
   }
-
   set href(url: string) {
     this.url = url;
   }
@@ -181,11 +181,11 @@ describe('theme: layout-default-nav', () => {
         createComp();
         const data = deepCopy(MOCKMENUS);
         menuSrv.add(data);
-        expect(data[0].children![0]._open).toBeUndefined();
+        expect(data[0].children![0].open).toBe(false);
         const subTitleEl = page.getEl<HTMLElement>('.sidebar-nav__item-link');
         subTitleEl!.click();
         fixture.detectChanges();
-        expect(data[0].children![0]._open).toBe(true);
+        expect(data[0].children![0].open).toBe(true);
       });
 
       it('should be reset menu when service is changed', () => {
@@ -222,6 +222,30 @@ describe('theme: layout-default-nav', () => {
         menuSrv.add([{ i18n: 'i18n <strong>1</strong>' }]);
         page.checkText('.sidebar-nav__item', `i18n 1`);
       });
+
+      it('should be hide when children are hide', () => {
+        createComp();
+        menuSrv.add([
+          {
+            text: 'parent',
+            children: [
+              { text: 'l1', hide: true },
+              { text: 'l2', hide: false }
+            ]
+          }
+        ]);
+        page.checkCount('.sidebar-nav__group-title', 1);
+        menuSrv.add([
+          {
+            text: 'parent',
+            children: [
+              { text: 'l1', hide: true },
+              { text: 'l2', hide: true }
+            ]
+          }
+        ]);
+        page.checkCount('.sidebar-nav__group-title', 0);
+      });
     });
 
     describe('#icon', () => {
@@ -243,7 +267,6 @@ describe('theme: layout-default-nav', () => {
 
         fixture.detectChanges();
       }
-
       describe('with icon', () => {
         it('when is string and includes [anticon-]', () => {
           updateIcon('anticon-edit');
@@ -251,17 +274,17 @@ describe('theme: layout-default-nav', () => {
           expect(el.classList).toContain('anticon-edit');
         });
         it('when is string and http prefix', () => {
-          updateIcon('http://ng-yunzai/1.jpg');
+          updateIcon('http://ng.yunzainfo.com/1.jpg');
           page.checkCount('.sidebar-nav__item-img', 1);
         });
         it('when is class string', () => {
           updateIcon('demo-class');
-          page.checkCount('.demo-class', 0);
+          page.checkCount('.demo-class', 1);
         });
       });
       it('with className', () => {
         updateIcon({ type: 'class', value: 'demo-class' });
-        page.checkCount('.demo-class', 0);
+        page.checkCount('.demo-class', 1);
       });
       it('with img', () => {
         updateIcon({ type: 'img', value: '1.jpg' });
@@ -304,7 +327,7 @@ describe('theme: layout-default-nav', () => {
           page.showSubMenu();
           expect(page.getEl('.sidebar-nav__floating-container .sidebar-nav__item', true) != null).toBe(true);
         });
-        it('should be ignore children title trigger event', () => {
+        it('should be ingore children title trigger event', () => {
           spyOn(context, 'select');
           expect(context.select).not.toHaveBeenCalled();
           const mockMenu = deepCopy(MOCKMENUS) as Nav[];
@@ -363,6 +386,17 @@ describe('theme: layout-default-nav', () => {
           document.dispatchEvent(new MouseEvent('click'));
           fixture.detectChanges();
           expect(router.navigateByUrl).not.toHaveBeenCalled();
+        });
+        it('muse be hide when move to other item', () => {
+          createComp();
+          setSrv.layout.collapsed = true;
+          fixture.detectChanges();
+          page.showSubMenu();
+          expect(page.isShowSubMenu()).toBe(true);
+          const widgetEl = page.getEl<HTMLElement>('.sidebar-nav__item-disabled', true);
+          widgetEl!.dispatchEvent(new Event('mouseenter'));
+          fixture.detectChanges();
+          expect(page.isShowSubMenu()).toBe(false);
         });
       });
       it('#52', () => {
@@ -540,7 +574,7 @@ describe('theme: layout-default-nav', () => {
       fixture.detectChanges();
       page.checkCount('.sidebar-nav__selected', 0);
     }));
-    it('should be ignore _open when enabled openStrictly', fakeAsync(() => {
+    it('should be ingore _open when enabled openStrictly', fakeAsync(() => {
       context.openStrictly = true;
       fixture.detectChanges();
       menuSrv.add(deepCopy(MOCKOPENSTRICTLY));
@@ -560,17 +594,14 @@ describe('theme: layout-default-nav', () => {
         : null;
       return el ? (el as T) : null;
     }
-
     checkText(cls: string, value: NzSafeAny): void {
       const el = this.getEl<HTMLElement>(cls);
       expect(el ? el.innerText.trim() : '').toBe(value);
     }
-
     checkCount(cls: string, count: number = 1): this {
       expect(dl.queryAll(By.css(cls)).length).toBe(count);
       return this;
     }
-
     /** 期望显示子菜单，默认：`true` */
     showSubMenu(resultExpectShow: boolean = true): void {
       let conEl = this.getEl<HTMLElement>(floatingShowCls, true);
@@ -585,7 +616,6 @@ describe('theme: layout-default-nav', () => {
         expect(conEl).toBeNull();
       }
     }
-
     /** 期望隐藏子菜单，默认：`true` */
     hideSubMenu(resultExpectHide: boolean = true): void {
       const containerEl = this.getEl<HTMLElement>(floatingShowCls, true);
@@ -595,6 +625,9 @@ describe('theme: layout-default-nav', () => {
       const conEl = this.getEl<HTMLElement>(floatingShowCls, true);
       if (resultExpectHide) expect(conEl).toBeNull();
       else expect(conEl).not.toBeNull();
+    }
+    isShowSubMenu(): boolean {
+      return page.getEl(floatingShowCls, true) != null;
     }
   }
 });
@@ -618,7 +651,6 @@ class TestComponent {
   autoCloseUnderPad = false;
   recursivePath = false;
   openStrictly = false;
-
   select(): void {}
 }
 

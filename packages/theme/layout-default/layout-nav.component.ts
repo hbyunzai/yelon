@@ -37,7 +37,7 @@ const FLOATINGCLS = 'sidebar-nav__floating';
   templateUrl: './layout-nav.component.html',
   host: {
     '(click)': '_click()',
-    '(document:click)': '_docClick()'
+    '(document:click)': 'closeSubMenu()'
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,7 +59,11 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   @Input() @InputBoolean() disabledAcl = false;
   @Input() @InputBoolean() autoCloseUnderPad = true;
   @Input() @InputBoolean() recursivePath = true;
-  @Input() @InputBoolean() openStrictly = false;
+  @Input()
+  @InputBoolean()
+  set openStrictly(value: boolean) {
+    this.menuSrv.openStrictly = value;
+  }
   @Input() @InputNumber() maxLevelIcon = 3;
   @Output() readonly select = new EventEmitter<Menu>();
 
@@ -92,7 +96,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
       return false;
     }
     const id = +linkNode.dataset!.id!;
-    // Should be ignore children title trigger event
+    // Should be ingore children title trigger event
     if (isNaN(id)) {
       return false;
     }
@@ -112,7 +116,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   private clearFloating(): void {
     if (!this.floatingEl) return;
     this.floatingEl.removeEventListener('click', this.floatingClickHandle.bind(this));
-    // fix ie: https://github.com/hbyunzai/ng-yunzai/issues
+    // fix ie: https://github.com/hbyunzai/yelon/issues/52
     if (this.floatingEl.hasOwnProperty('remove')) {
       this.floatingEl.remove();
     } else if (this.floatingEl.parentNode) {
@@ -201,18 +205,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   }
 
   toggleOpen(item: Nav): void {
-    if (!this.openStrictly) {
-      this.menuSrv.visit(this.list, (i: Nav) => {
-        if (i !== item) i._open = false;
-      });
-      let pItem = item._parent as Nav;
-      while (pItem) {
-        pItem._open = true;
-        pItem = pItem._parent!;
-      }
-    }
-    item._open = !item._open;
-    this.cdr.markForCheck();
+    this.menuSrv.toggleOpen(item);
   }
 
   _click(): void {
@@ -222,36 +215,20 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
     }
   }
 
-  _docClick(): void {
+  closeSubMenu(): void {
     if (this.collapsed) {
       this.hideAll();
     }
   }
 
-  private openedByUrl(url: string | null): void {
-    const { menuSrv, recursivePath, openStrictly } = this;
-    let findItem: Nav | null = menuSrv.getHit(this.menuSrv.menus, url!, recursivePath, (i: Nav) => {
-      i._selected = false;
-      if (!openStrictly) {
-        i._open = false;
-      }
-    });
-    if (findItem == null) return;
-
-    do {
-      findItem._selected = true;
-      if (!openStrictly) {
-        findItem._open = true;
-      }
-      findItem = findItem._parent!;
-    } while (findItem);
+  private openByUrl(url: string | null): void {
+    const { menuSrv, recursivePath } = this;
+    this.menuSrv.open(menuSrv.find({ url, recursive: recursivePath }));
   }
 
   ngOnInit(): void {
     const { doc, router, destroy$, menuSrv, settings, cdr } = this;
     this.bodyEl = doc.querySelector('body');
-    this.openedByUrl(router.url);
-    this.ngZone.runOutsideAngular(() => this.genFloating());
     menuSrv.change.pipe(takeUntil(destroy$)).subscribe(data => {
       menuSrv.visit(data, (i: Nav, _p, depth) => {
         i._text = this.sanitizer.bypassSecurityTrustHtml(i.text!);
@@ -263,20 +240,18 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
             i._hidden = true;
           }
         }
-        if (this.openStrictly) {
-          i._open = i.open != null ? i.open : false;
-        }
         const icon = i.icon as MenuIcon;
         if (icon && icon.type === 'svg' && typeof icon.value === 'string') {
           icon.value = this.sanitizer.bypassSecurityTrustHtml(icon.value!!);
         }
       });
-      this.list = menuSrv.menus.filter((w: Nav) => w._hidden !== true);
+      this.fixHide(data);
+      this.list = data.filter((w: Nav) => w._hidden !== true);
       cdr.detectChanges();
     });
     router.events.pipe(takeUntil(destroy$)).subscribe(e => {
       if (e instanceof NavigationEnd) {
-        this.openedByUrl(e.urlAfterRedirects);
+        this.openByUrl(e.urlAfterRedirects);
         this.underPad();
         this.cdr.detectChanges();
       }
@@ -293,6 +268,23 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
     this.directionality.change?.pipe(takeUntil(destroy$)).subscribe((direction: Direction) => {
       this.dir = direction;
     });
+    this.openByUrl(router.url);
+    this.ngZone.runOutsideAngular(() => this.genFloating());
+  }
+
+  private fixHide(ls: Nav[]): void {
+    const inFn = (list: Nav[]): void => {
+      for (const item of list) {
+        if (item.children && item.children.length > 0) {
+          inFn(item.children);
+          if (!item._hidden) {
+            item._hidden = item.children.every((v: Nav) => v._hidden);
+          }
+        }
+      }
+    };
+
+    inFn(ls);
   }
 
   ngOnDestroy(): void {

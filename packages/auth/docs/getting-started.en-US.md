@@ -68,20 +68,20 @@ The default `YelonAuthModule` does not register any HTTP interceptor, because of
 
 ## YunzaiAuthConfig
 
-| Property | Description | Type | Default | Global Config |
-|----------|-------------|------|---------|---------------|
-| `[store_key]` | `string` | `_token` | `localStorage` storage KEY value | ✅ |
-| `[token_invalid_redirect]` | `boolean` | `true` | Jump to login page if invalid, includs: invalid token, token expired (Only: JWT) | ✅ |
-| `[token_exp_offset]` | `number` | `10` | JWT token expiration time offset value (unit: second) | ✅ |
-| `[token_send_key]` | `string` | Token | Send token parameter name | ✅ |
-| `[token_send_template]` | `string` | `${token}` | Send a token template with a `${property name}` placeholder | ✅ |
-| `[token_send_place]` | `header,body,url` | `header` | Send token parameter position | ✅ |
-| `[login_url]` | `string` | `/login` | Login page routing address | ✅ |
-| `[ignores]` | `RegExp[]` | `[ /\/login/, /assets\// ]` | Ignore the list of URL addresses | ✅ |
-| `[allow_anonymous_key]` | `string` | `_allow_anonymous` | Anonymous login KEY identification, if the request parameter with the KEY is to ignore token check and add action, the key value will be removed when the request is truth | ✅ |
-| `[executeOtherInterceptors]` | `boolean` | `true` | Whether continue to call other interceptor `intercept` method after token missing | ✅ |
-| `[refreshTime]` | `number` | `3000` | Refresh time (unit: ms) | ✅ |
-| `[refreshOffset]` | `number` | `6000` | Offset value (unit: ms), it is recommended to set according to the multiple of `refreshTime` | ✅ |
+| Property | Description | Type | Default                                                                                                                                                                                                                                                                                                                           | Global Config |
+|----------|-------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| `[store_key]` | `string` | `_token` | `localStorage` storage KEY value                                                                                                                                                                                                                                                                                                  | ✅ |
+| `[token_invalid_redirect]` | `boolean` | `true` | Jump to login page if invalid, includs: invalid token, token expired (Only: JWT)                                                                                                                                                                                                                                                  | ✅ |
+| `[token_exp_offset]` | `number` | `10` | JWT token expiration time offset value (unit: second)                                                                                                                                                                                                                                                                             | ✅ |
+| `[token_send_key]` | `string` | Token | Send token parameter name                                                                                                                                                                                                                                                                                                         | ✅ |
+| `[token_send_template]` | `string` | `${token}` | Send a token template with a `${property name}` placeholder                                                                                                                                                                                                                                                                       | ✅ |
+| `[token_send_place]` | `header,body,url` | `header` | Send token parameter position                                                                                                                                                                                                                                                                                                     | ✅ |
+| `[login_url]` | `string` | `/login` | Login page routing address                                                                                                                                                                                                                                                                                                        | ✅ |
+| `[ignores]` | `RegExp[]` | `[ /\/login/, /assets\// ]` | Ignore the list of URL addresses                                                                                                                                                                                                                                                                                                  | ✅ |
+| (deprecated) `[allow_anonymous_key]` | `string` | `_allow_anonymous` | Will be removed in 15.0.0, Pls used [ALLOW_ANONYMOUS](https://github.com/hbyunzai/yelon/blob/master/packages/auth/src/token.ts) `HttpContext` instead. Anonymous login KEY identification, if the request parameter with the KEY is to ignore token check and add action, the key value will be removed when the request is truth | ✅ |
+| `[executeOtherInterceptors]` | `boolean` | `true` | Whether continue to call other interceptor `intercept` method after token missing                                                                                                                                                                                                                                                 | ✅ |
+| `[refreshTime]` | `number` | `3000` | Refresh time (unit: ms)                                                                                                                                                                                                                                                                                                           | ✅ |
+| `[refreshOffset]` | `number` | `6000` | Offset value (unit: ms), it is recommended to set according to the multiple of `refreshTime`                                                                                                                                                                                                                                      | ✅ |
 
 > You can override them via [Global Configuration](/docs/global-config).
 

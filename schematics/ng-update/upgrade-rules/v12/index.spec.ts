@@ -46,7 +46,7 @@ describe('Schematic: ng-update: v12Rule', () => {
                   "assets": ["src/assets", "src/favicon.ico"],
                   "styles": ["src/styles.less"],
                   "scripts": [],
-                  "allowedCommonJsDependencies": ["@antv/g2", "file-saver", "ajv", "ajv-formats", "date-fns"],
+                  "allowedCommonJsDependencies": ["ajv", "ajv-formats"],
                   "aot": false,
                   "vendorChunk": true,
                   "extractLicenses": false,
@@ -137,8 +137,7 @@ describe('Schematic: ng-update: v12Rule', () => {
               }
             }
           }
-        },
-        "defaultProject": "ng-yunzai"
+        }
       }
       `
     );
@@ -305,7 +304,6 @@ describe('Schematic: ng-update: v12Rule', () => {
             }
           }
         },
-        "defaultProject": "app-ui",
         "cli": {
           "analytics": false
         },
