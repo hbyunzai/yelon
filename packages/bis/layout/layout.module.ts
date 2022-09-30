@@ -25,7 +25,8 @@ import {
   YzHeaderUserComponent,
   YzHeaderClearStorageComponent,
   YzHeaderFullScreenComponent,
-  YzHeaderI18NComponent
+  YzHeaderI18NComponent,
+  YzHeaderApplicationGroupComponent
 } from './widgets';
 import { YzLayoutBasicComponent } from './yz.basic.component';
 const COMPONENTS = [
@@ -37,7 +38,8 @@ const COMPONENTS = [
   YzHeaderUserComponent,
   YzHeaderFullScreenComponent,
   YzHeaderClearStorageComponent,
-  YzHeaderI18NComponent
+  YzHeaderI18NComponent,
+  YzHeaderApplicationGroupComponent
 ];
 
 @NgModule({

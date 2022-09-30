@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 
 import { CacheService } from '@yelon/cache';
 import { LayoutDefaultOptions, LayoutService } from '@yelon/theme/layout-default';
+import { WINDOW } from '@yelon/util';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YzStompService } from './yz.stomp.service';
@@ -11,7 +12,19 @@ import { YzStompService } from './yz.stomp.service';
   template: `
     <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="showReuseTab ? contentTpl : noneTpl">
       <layout-default-header-item direction="left">
-        <yz-header-application></yz-header-application>
+        <ng-container [ngSwitch]="headerType">
+          <ng-container *ngSwitchCase="'application'">
+            <yz-header-application></yz-header-application>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'group'">
+            <yz-header-application-group></yz-header-application-group>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            <yz-header-application></yz-header-application>
+          </ng-container>
+        </ng-container>
       </layout-default-header-item>
 
       <layout-default-header-item direction="right" hidden="mobile">
@@ -34,6 +47,20 @@ import { YzStompService } from './yz.stomp.service';
         </div>
         <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
           <div nz-menu style="width: 200px;">
+            <div nz-menu-item>
+              {{ 'menu.application.mode' | i18n }}
+            </div>
+
+            <div nz-menu-item (click)="onHeaderTypeChange('application')">
+              <i nz-icon nzType="appstore" class="mr-sm"></i>
+              {{ 'menu.application.application' | i18n }}
+            </div>
+
+            <div nz-menu-item (click)="onHeaderTypeChange('group')">
+              <i nz-icon nzType="group" class="mr-sm"></i>
+              {{ 'menu.application.group' | i18n }}
+            </div>
+
             <div nz-menu-item>
               <yz-header-fullscreen></yz-header-fullscreen>
             </div>
@@ -86,6 +113,7 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
   showReuseTab: boolean = true;
   showHeader: boolean = true;
   showSider: boolean = true;
+  headerType: string = 'application';
 
   get reuseStyleSheet(): NzSafeAny {
     let cascadingStyleSheet = {};
@@ -107,12 +135,15 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
   constructor(
     private cacheService: CacheService,
     private yzStompService: YzStompService,
-    private layoutService: LayoutService
+    private layoutService: LayoutService,
+    private injector: Injector
   ) {}
 
   ngOnInit(): void {
     const current: NzSafeAny = this.cacheService.get('_yz_current', { mode: 'none' });
     const project: NzSafeAny = this.cacheService.get('_yz_project_info', { mode: 'none' });
+    const headerType = this.cacheService.get('_yz_header_type', { mode: 'none' });
+    if (headerType) this.headerType = headerType;
     this.text = current.text ? current.text : '应用名称';
     this.intro = current.intro ? current.intro : '应用描述';
     this.icon = current.icon ? current.icon : `./assets/tmp/img/avatar.jpg`;
@@ -122,6 +153,11 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
     this.layoutService.reuseTab.asObservable().subscribe(show => (this.showReuseTab = show));
     this.layoutService.header.asObservable().subscribe(show => (this.showHeader = show));
     this.layoutService.sidebar.asObservable().subscribe(show => (this.showSider = show));
+  }
+
+  onHeaderTypeChange(type: string): void {
+    this.cacheService.set('_yz_header_type', type);
+    this.injector.get(WINDOW).location.reload();
   }
 
   ngOnDestroy(): void {
