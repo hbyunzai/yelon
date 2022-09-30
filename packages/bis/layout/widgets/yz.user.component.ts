@@ -22,8 +22,10 @@ export interface UserLink {
       nzPlacement="bottomRight"
       [nzDropdownMenu]="userMenu"
     >
-      <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm"></nz-avatar>
-      {{ username }}
+      <div class="yz-user-name">
+        <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm"></nz-avatar>
+        {{ username }}
+      </div>
     </div>
     <nz-dropdown-menu #userMenu="nzDropdownMenu">
       <div nz-menu class="width-sm">
