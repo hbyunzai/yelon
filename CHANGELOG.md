@@ -1,3 +1,12 @@
+## [14.0.1-beta.1](https://github.com/hbyunzai/yelon/compare/14.0.1-beta.0...14.0.1-beta.1) (2022-10-06)
+
+
+### Bug Fixes
+
+* **bis:layout:** fix reusetab ([3f83fac](https://github.com/hbyunzai/yelon/commit/3f83facc7e3c01b7b0fbd82ceb69d09f20c19e54))
+
+
+
 ## [14.0.1-beta.0](https://github.com/hbyunzai/yelon/compare/14.0.0...14.0.1-beta.0) (2022-10-06)
 
 
