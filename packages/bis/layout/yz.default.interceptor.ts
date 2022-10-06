@@ -12,7 +12,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError, catchError, filter, mergeMap, switchMap, take } from 'rxjs';
 
-import {YA_SERVICE_TOKEN, ITokenService, ALLOW_ANONYMOUS} from '@yelon/auth';
+import { YA_SERVICE_TOKEN, ITokenService, ALLOW_ANONYMOUS } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
 import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
@@ -117,15 +117,18 @@ export class YzDefaultInterceptor implements HttpInterceptor {
     const model = this.tokenSrv.get();
     const form = new FormData();
     form.set('refresh_token', model?.refreshToken);
+    form.set('grant_type', 'refresh_token');
+    form.set('scope', 'webapp');
     log('yz.default.interceptor: use the refresh token to request a new token', model?.refreshToken);
-    return this.http.post(`/auth/user/token/refresh?_allow_anonymous=true`, form);
+    // return this.http.post(`/auth/user/token/refresh?_allow_anonymous=true`, form);
+    return this.http.post(`/auth/oauth/getOrCreateToken/webapp`, form);
   }
 
   private tryRefreshToken(ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandler): Observable<any> {
     // 连刷新Token的请求都错了，那就是真错了
-    if (['/auth/oauth/token'].some(url => req.url.includes(url))) {
+    if (['/auth/oauth/getOrCreateToken/webapp'].some(url => req.url.includes(url))) {
       this.ToLogin();
-      return throwError(ev);
+      return throwError(() => ev);
     }
 
     // 正在刷新token，所有其他请求排队
@@ -163,7 +166,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
       catchError(err => {
         this.refreshToking = false;
         this.ToLogin();
-        return throwError(err);
+        return throwError(() => err);
       })
     );
   }
@@ -205,7 +208,7 @@ export class YzDefaultInterceptor implements HttpInterceptor {
         break;
     }
     if (ev instanceof HttpErrorResponse) {
-      return throwError(ev);
+      return throwError(() => ev);
     } else {
       return of(ev);
     }
