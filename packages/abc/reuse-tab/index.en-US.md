@@ -36,8 +36,9 @@ yunzaiProvides.push({
 
 ```html
 <reuse-tab #reuseTab></reuse-tab>
-<router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+<router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
 ```
+
 
 > **Note: If you do not specify the `(activate)` event, you cannot refresh current tab when uncached.**
 

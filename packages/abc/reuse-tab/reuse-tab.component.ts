@@ -261,6 +261,13 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
     return false;
   }
 
+  /**
+   * 设置激活路由的实例，在 `src/app/layout/basic/basic.component.ts` 修改：
+   *
+   * @example
+   * <reuse-tab #reuseTab></reuse-tab>
+   * <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
+   */
   activate(instance: NzSafeAny): void {
     this.srv.componentRef = { instance };
   }
@@ -279,7 +286,7 @@ export class ReuseTabComponent implements OnInit, OnChanges, OnDestroy {
     ls.forEach((i, idx) => (i.active = pos === idx));
     this.pos = pos;
     // TODO: 目前无法知道为什么 `pos` 无法通过 `nzSelectedIndex` 生效，因此强制使用组件实例的方式来修改，这种方式是安全的
-    // https://github.com/hbyunzai/ng-yunzai/issues/1736
+    // https://github.com/ng-alain/ng-alain/issues/1736
     this.tabset.nzSelectedIndex = pos;
     this.list = ls;
     this.cdr.detectChanges();

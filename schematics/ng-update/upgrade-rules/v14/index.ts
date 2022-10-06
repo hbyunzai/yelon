@@ -8,6 +8,7 @@ import {
   addAllowSyntheticDefaultImports,
   addPackage,
   addSchematicCollections,
+  findFile,
   logStart
 } from '../../../utils';
 import { UpgradeMainVersions } from '../../../utils/versions';
@@ -42,13 +43,34 @@ function addEslintPluginDeprecation(): Rule {
   };
 }
 
+function fixReuseTabActiviteInHtml(): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    const layoutPath = findFile(tree, 'basic/basic.component.ts');
+    if (!tree.exists(layoutPath)) return;
+
+    let layoutContent = tree.get(layoutPath)!.content.toString('utf8');
+    const checkHtml = `<router-outlet (activate)="reuseTab.activate($event)"></router-outlet>`;
+    if (!layoutContent.includes(checkHtml)) return;
+
+    layoutContent = layoutContent.replace(
+      checkHtml,
+      `<router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>`
+    );
+    tree.overwrite(layoutPath, layoutContent);
+    logStart(
+      context,
+      `Fix can't refresh current item in resut-tab (https://github.com/hbyunzai/ng-yunzai/issues/2302)`
+    );
+  };
+}
+
 function finished(): Rule {
   return (_tree: Tree, context: SchematicContext) => {
     context.addTask(new NodePackageInstallTask());
 
     context.logger.info(
       colors.green(
-        `  ✓ Congratulations, Abort more detail please refer to upgrade guide https://github.com/hbyunzai/ng-yunzai`
+        `  ✓ Congratulations, Abort more detail please refer to upgrade guide https://github.com/hbyunzai/ng-yunzai/issues/2285`
       )
     );
   };
@@ -64,6 +86,7 @@ export function v14Rule(): Rule {
       // https://angular.io/guide/build#configuring-commonjs-dependencies
       addAllowedCommonJsDependencies([]),
       fixSchematicCollections(context),
+      fixReuseTabActiviteInHtml(),
       addEslintPluginDeprecation(),
       finished()
     ]);
