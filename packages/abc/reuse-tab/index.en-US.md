@@ -39,7 +39,6 @@ yunzaiProvides.push({
 <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
 ```
 
-
 > **Note: If you do not specify the `(activate)` event, you cannot refresh current tab when uncached.**
 
 > In `src/app/layout/layout.module.ts`
@@ -225,9 +224,9 @@ Turning on `keepingScroll` will restore the previous scrollbar position after re
 | `[routeParamMatchMode]` | Match the pattern when routing parameters are included, for example:`/view/:id`<br> - `strict` Strict mode `/view/1`, `/view/2` Different pages<br> - `loose` Loose mode `/view/1`, `/view/2` Same page and only one tab of component | `strict,loose` | `strict` |
 | `[disabled]` | Whether to disabled | `boolean` | `false` |
 | `[titleRender]` | Custom rendering of the title | `TemplateRef<{ $implicit: ReuseItem }>` | - |
-| `(close)` | Close callback event | `EventEmitter` | - |
 | `[storageState]` | Whether to store the state, keep the last browser state | `boolean` | `false` |
 | `[canClose]` | A function to determine what should be closed | `(options: { item: ReuseItem; includeNonCloseable: boolean }) => Observable<boolean>` | - |
+| `(close)` | Close callback event | `EventEmitter` | - |
 | `(change)` | Callback when switching | `EventEmitter` | - |
 
 **Context Menu**
@@ -301,7 +300,7 @@ Route reuse preserves component data state, which may bring another drawback. Th
 Limiting the maximum number of reuse can reduce memory growth. There are several issues to be aware of:
 
 - `max` Forces a close and ignores the closable state when value changes
-- When it's out of `max` range, it will turn off the first open tab (Only **closable**), ignore close when all pages are **non-closable**
+- When it's out of `max` range, it will turn off the first open tab (Only **closable**), ingore close when all pages are **non-closable**
 
 ### Not supported QueryString parameters
 

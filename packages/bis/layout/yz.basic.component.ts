@@ -92,7 +92,7 @@ import { YzStompService } from './yz.stomp.service';
       </ng-template>
       <ng-template #contentTpl>
         <reuse-tab #reuseTab [ngStyle]="reuseStyleSheet"></reuse-tab>
-        <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+        <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
       </ng-template>
       <ng-template #noneTpl>
         <router-outlet></router-outlet>
@@ -137,7 +137,7 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
     private yzStompService: YzStompService,
     private layoutService: LayoutService,
     private injector: Injector
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const current: NzSafeAny = this.cacheService.get('_yz_current', { mode: 'none' });
