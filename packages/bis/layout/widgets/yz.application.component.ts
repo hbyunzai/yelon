@@ -16,6 +16,8 @@ export enum TOPIC {
 export interface HeaderTopic {
   // 忘了
   attribute: any;
+  // 图标
+  icon: any;
   // 子菜单
   children: HeaderTopic[];
   // 描述
@@ -121,7 +123,7 @@ export class YzHeaderApplicationComponent implements OnInit, OnDestroy {
     private cacheService: CacheService,
     private i18n: YzI18NService,
     private http: _HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.topicData = this.cacheService.get('_yz_header', { mode: 'none' });
@@ -132,7 +134,7 @@ export class YzHeaderApplicationComponent implements OnInit, OnDestroy {
     this.subs.forEach(f => f.unsubscribe());
   }
 
-  diffChange(flag?: boolean) {
+  diffChange(flag?: boolean): void {
     if (flag) {
       this.active = flag;
     } else {
@@ -140,17 +142,17 @@ export class YzHeaderApplicationComponent implements OnInit, OnDestroy {
     }
   }
 
-  initTopic(topic: TOPIC) {
+  initTopic(topic: TOPIC): void {
     this.searchValue = null;
     this.listData = this.cacheService.get('_yz_header', { mode: 'none' });
     this.topic = topic;
   }
 
-  full() {
+  full(): void {
     this.initTopic(TOPIC.FULL);
   }
 
-  own() {
+  own(): void {
     this.initTopic(TOPIC.OWN);
     const temp: HeaderTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
     this.listData = temp
@@ -165,14 +167,14 @@ export class YzHeaderApplicationComponent implements OnInit, OnDestroy {
       });
   }
 
-  every(e: HeaderTopic) {
+  every(e: HeaderTopic): void {
     this.initTopic(TOPIC.EVERY);
     this.choosed = e;
     const temp: HeaderTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
     this.listData = [...temp.filter(t => t.key === e.key)[0].children];
   }
 
-  onSearch() {
+  onSearch(): void {
     const temp: HeaderTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
     // 如果搜索输入的有值
     if (this.searchValue) {
@@ -197,7 +199,7 @@ export class YzHeaderApplicationComponent implements OnInit, OnDestroy {
     }
   }
 
-  open(topic: HeaderTopic) {
+  open(topic: HeaderTopic): void {
     if (topic.key) {
       this.subs.push(
         this.http
