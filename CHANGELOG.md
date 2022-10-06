@@ -1,3 +1,25 @@
+## [14.0.1-beta.0](https://github.com/hbyunzai/yelon/compare/14.0.0...14.0.1-beta.0) (2022-10-06)
+
+
+### Bug Fixes
+
+* **abc:resue-tab:** fix angular.json ([f25d8ad](https://github.com/hbyunzai/yelon/commit/f25d8add6d466d6e2f405f05456d5366652b0271))
+* **abc:reuse-tab:** fix can't refresh current tab ([ca9268c](https://github.com/hbyunzai/yelon/commit/ca9268cbf6cddf91cb0f325747cf6e001161206f))
+* **abc:st:** fix built-in style to classname ([42af04f](https://github.com/hbyunzai/yelon/commit/42af04f8faff7c12ad56b506fcfb783aaabff971))
+* **abc:st:** fix can't close pannel ([f99c471](https://github.com/hbyunzai/yelon/commit/f99c471460dd9782847a9cded59642c70c306da0))
+* **bis:layout:** fix types ([8b3378d](https://github.com/hbyunzai/yelon/commit/8b3378dfb194b7b710daba605f34acca232031d2))
+* **bis:widgets:** fix user name ([d03f417](https://github.com/hbyunzai/yelon/commit/d03f417df9c5f94bd1b1341ebfb5254de19e6e97))
+* **cli:** fix merge allowedCommonJsDependencies ([52c1ec2](https://github.com/hbyunzai/yelon/commit/52c1ec28e3d9370183480a4651854a05c8d2bc93))
+* **interceptor:** fix refresh token request ([f92dae1](https://github.com/hbyunzai/yelon/commit/f92dae1dde60d7789f4b7a804bf12977a7348ef6))
+
+
+### Features
+
+* **bis:widgets:** add group mode ([8e8f3bc](https://github.com/hbyunzai/yelon/commit/8e8f3bc570d83d134f2fa792e4df45afc113cc15))
+* **cli:** add dynamic start page ([6f95974](https://github.com/hbyunzai/yelon/commit/6f959744313eb5bf1a11e989fe1b5f1dce4a1b6f))
+
+
+
 # [14.0.0](https://github.com/hbyunzai/yelon/compare/13.5.2-beta.0...14.0.0) (2022-08-29)
 
 
