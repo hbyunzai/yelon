@@ -5,7 +5,7 @@ import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, warn } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STRowSource } from './st-row.directive';
 import { STWidgetRegistry } from './st-widget';
@@ -363,6 +363,40 @@ export class STColumnSource {
     return res;
   }
 
+  private mergeClass(item: _STColumn): void {
+    const builtInClassNames: string[] = [];
+    if (item._isTruncate) {
+      builtInClassNames.push('text-truncate');
+    }
+    const rawClassName = item.className;
+    if (!rawClassName) {
+      builtInClassNames.push(
+        (
+          {
+            number: 'text-right',
+            currency: 'text-right',
+            date: 'text-center'
+          } as NzSafeAny
+        )[item.type!]
+      );
+      item._className = builtInClassNames.filter(w => !!w);
+      return;
+    }
+
+    const rawClassNameIsArray = Array.isArray(rawClassName);
+    if (!rawClassNameIsArray && typeof rawClassName === 'object') {
+      const objClassNames: NgClassInterface = rawClassName;
+      builtInClassNames.forEach(key => (objClassNames[key] = true));
+      item._className = objClassNames;
+      return;
+    }
+
+    const arrayClassNames = rawClassNameIsArray ? Array.from(rawClassName as string[]) : [rawClassName];
+    arrayClassNames.splice(0, 0, ...builtInClassNames);
+    item._className = [...new Set(arrayClassNames)].filter(w => !!w);
+    console.log(arrayClassNames);
+  }
+
   process(
     list: STColumn[],
     options: STColumnSourceProcessOptions
@@ -440,16 +474,7 @@ export class STColumnSource {
       }
       item._isTruncate = !!item.width && options.widthMode.strictBehavior === 'truncate' && item.type !== 'img';
       // className
-      if (!item.className) {
-        item.className = (
-          {
-            number: 'text-right',
-            currency: 'text-right',
-            date: 'text-center'
-          } as NzSafeAny
-        )[item.type!];
-      }
-      item._className = item.className || (item._isTruncate ? 'text-truncate' : null);
+      this.mergeClass(item);
       // width
       if (typeof item.width === 'number') {
         item._width = item.width;

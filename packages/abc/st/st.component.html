@@ -122,10 +122,8 @@
                 </div>
               </ng-container>
               <ng-container *ngSwitchDefault>
-                <ng-template
-                  [ngTemplateOutlet]="titleTpl"
-                  [ngTemplateOutletContext]="{ $implicit: _c.title }"
-                ></ng-template>
+                <ng-template [ngTemplateOutlet]="titleTpl" [ngTemplateOutletContext]="{ $implicit: _c.title }">
+                </ng-template>
               </ng-container>
             </ng-container>
           </ng-container>
@@ -145,10 +143,8 @@
   </thead>
   <tbody class="st__body">
     <ng-container *ngIf="!_loading">
-      <ng-template
-        [ngTemplateOutlet]="bodyHeader!"
-        [ngTemplateOutletContext]="{ $implicit: _statistical }"
-      ></ng-template>
+      <ng-template [ngTemplateOutlet]="bodyHeader!" [ngTemplateOutletContext]="{ $implicit: _statistical }">
+      </ng-template>
     </ng-container>
     <ng-template #bodyTpl let-i let-index="index">
       <tr
@@ -170,7 +166,7 @@
           [nzLeft]="!!c._left"
           [nzRight]="!!c._right"
           [attr.data-col-index]="cIdx"
-          [ngClass]="c._className!"
+          [ngClass]="c._className"
           [attr.colspan]="c.colSpan"
         >
           <span *ngIf="responsive" class="ant-table-rep__title">
@@ -180,10 +176,8 @@
         </td>
       </tr>
       <tr [nzExpand]="i.expand">
-        <ng-template
-          [ngTemplateOutlet]="expand"
-          [ngTemplateOutletContext]="{ $implicit: i, index: index }"
-        ></ng-template>
+        <ng-template [ngTemplateOutlet]="expand" [ngTemplateOutletContext]="{ $implicit: i, index: index }">
+        </ng-template>
       </tr>
     </ng-template>
     <ng-container *ngIf="!virtualScroll">
