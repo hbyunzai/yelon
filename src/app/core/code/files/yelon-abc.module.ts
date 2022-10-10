@@ -16,6 +16,7 @@ import { LoadingModule } from '@yelon/abc/loading';
 import { LodopModule } from '@yelon/abc/lodop';
 import { NoticeIconModule } from '@yelon/abc/notice-icon';
 import { PageHeaderModule } from '@yelon/abc/page-header';
+import { ObserversModule } from '@yelon/abc/observers';
 import { QRModule } from '@yelon/abc/qr';
 import { QuickMenuModule } from '@yelon/abc/quick-menu';
 import { ResultModule } from '@yelon/abc/result';
@@ -43,6 +44,7 @@ const MODULES = [
   GlobalFooterModule,
   ExceptionModule,
   NoticeIconModule,
+  ObserversModule,
   PageHeaderModule,
   ResultModule,
   TagSelectModule,
