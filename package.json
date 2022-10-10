@@ -89,7 +89,6 @@
     "ngx-countdown": "^14.0.0",
     "ngx-highlight-js": "^14.0.0",
     "ngx-tinymce": "^14.0.0",
-    "ngx-ueditor": "^14.0.0",
     "qrious": "^4.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

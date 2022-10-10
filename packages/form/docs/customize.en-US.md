@@ -26,7 +26,6 @@ By default `@yelon/form` implements some common third-party library widgets, whi
 | ---- | ----------- | -------- | ------ |
 | `markdown` | Markdown Editor | [Document](/form/markdown) | [Source](https://github.com/hbyunzai/yelon/tree/master/packages/form/widgets-third/markdown) |
 | `tinymce` | Tinymce Editor | [Document](/form/tinymce) | [Source](https://github.com/hbyunzai/yelon/tree/master/packages/form/widgets-third/tinymce) |
-| `ueditor` | UEditor Editor | [Document](/form/ueditor) | [Source](https://github.com/hbyunzai/yelon/tree/master/packages/form/widgets-third/ueditor) |
 
 **Create widgets**
 
