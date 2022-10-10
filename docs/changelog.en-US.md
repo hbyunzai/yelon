@@ -13,6 +13,16 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+# [14.1.0](https://github.com/hbyunzai/yelon/compare/14.0.1-beta.1...14.1.0) (2022-10-10)
+
+
+### Bug Fixes
+
+* **abc:st:** fix click trigger on blank area ([ca13cbf](https://github.com/hbyunzai/yelon/commit/ca13cbff3eccef9650079ff2e67b5ff79d6f68b2))
+* **cli:** fix correctly returns undefined ([0c93f55](https://github.com/hbyunzai/yelon/commit/0c93f55682d1739f8e1a5109bd4c3862ad10674f))
+
+
+
 ## [14.0.1-beta.1](https://github.com/hbyunzai/yelon/compare/14.0.1-beta.0...14.0.1-beta.1) (2022-10-06)
 
 
