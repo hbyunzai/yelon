@@ -25,4 +25,8 @@ export interface STAConfig {
    * Model name prefix
    */
   modelTypePrefix?: string;
+  /**
+   * Swagger tag mapping dictionary
+   */
+  tagsMapping?: { [key: string]: string };
 }
