@@ -69,6 +69,7 @@
     "@angular/service-worker": "^14.2.0",
     "@antv/data-set": "^0.11.8",
     "@antv/g2": "^4.2.7",
+    "@github/hotkey": "^2.0.1",
     "@ng-util/monaco-editor": "^14.0.0",
     "@nguniversal/express-engine": "~14.1.0",
     "@stackblitz/sdk": "^1.8.0",
@@ -92,9 +93,7 @@
     "qrious": "^4.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "isutf8": "^4.0.0",
-    "@github/hotkey": "^2.0.1"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.1",
@@ -184,7 +183,7 @@
     "terser": "^5.15.0",
     "ts-node": "~10.9.1",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "^4.8.2",
+    "typescript": "~4.8.2",
     "xlsx": "^0.18.5"
   },
   "lint-staged": {
