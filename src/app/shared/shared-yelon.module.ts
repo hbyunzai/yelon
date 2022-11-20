@@ -9,6 +9,7 @@ import { ExceptionModule } from '@yelon/abc/exception';
 import { FooterToolbarModule } from '@yelon/abc/footer-toolbar';
 import { GlobalFooterModule } from '@yelon/abc/global-footer';
 import { LetModule } from '@yelon/abc/let';
+import { HotkeyModule } from '@yelon/abc/hotkey';
 import { LoadingModule } from '@yelon/abc/loading';
 import { MediaModule } from '@yelon/abc/media';
 import { NoticeIconModule } from '@yelon/abc/notice-icon';
@@ -94,5 +95,6 @@ export const SHARED_YELON_MODULES = [
   FormatPipeModule,
   FilterPipeModule,
   AutoFocusModule,
-  LetModule
+  LetModule,
+  HotkeyModule
 ];
