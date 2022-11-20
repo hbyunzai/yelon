@@ -16,7 +16,8 @@ import {
   YunzaiSTConfig,
   YunzaiSVConfig,
   YunzaiXlsxConfig,
-  YunzaiZipConfig
+  YunzaiZipConfig,
+  YunzaiExceptionType
 } from './abc/index';
 import { YunzaiACLConfig } from './acl/acl.type';
 import { YunzaiAuthConfig } from './auth/auth.type';
@@ -36,6 +37,7 @@ export interface YunzaiConfig {
   bis?: YunzaiBusinessConfig;
   stomp?: YunzaiStompConfig;
   dataRange?: YunzaiDateRangePickerConfig;
+  exception?: YunzaiExceptionType;
   errorCollect?: YunzaiErrorCollectConfig;
   image?: YunzaiImageConfig;
   loading?: YunzaiLoadingConfig;
