@@ -17,7 +17,7 @@ View [source code](https://github.com/hbyunzai/yelon/blob/master/src/app/shared/
 
 ```ts
 import {Component, ViewChild} from '@angular/core';
-import {STColumn, STComponent} from '@delon/abc/st';
+import {STColumn, STComponent} from '@yelon/abc/st';
 
 @Component({
   selector: 'app-demo',
@@ -48,9 +48,9 @@ export class DemoComponent {
   changeImg(): void {
     this.st.setRow(
       0,
-      {picture: {thumbnail: 'https://ng-alain.com/assets/img/logo-color.svg'}},
+      {picture: {thumbnail: 'https://ngsite.yunzainfo.com/assets/tmp/img/avatar.jpg'}},
       {refreshSchema: true, emitReload: false},
     );
   }
 }
-  ```
+```
