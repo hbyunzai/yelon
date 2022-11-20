@@ -159,7 +159,7 @@
     "mustache": "^4.2.0",
     "ng-alain-codelyzer": "^0.0.1",
     "ng-packagr": "^14.2.0",
-    "ng-yunzai-plugin-theme": "^13.0.3",
+    "ng-yunzai-plugin-theme": "^14.0.0",
     "ng-yunzai-sts": "^0.0.3",
     "parse5": "^6.0.1",
     "pdfjs-dist": "^2.15.349",
