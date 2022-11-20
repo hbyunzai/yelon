@@ -1,3 +1,29 @@
+# [14.2.0](https://github.com/hbyunzai/yelon/compare/14.0.1-beta.1...14.2.0) (2022-11-20)
+
+
+### Bug Fixes
+
+* **abc:st:** fix click trigger on blank area ([ca13cbf](https://github.com/hbyunzai/yelon/commit/ca13cbff3eccef9650079ff2e67b5ff79d6f68b2))
+* **abc:st:** fix miss center title when set sort ([319e5b0](https://github.com/hbyunzai/yelon/commit/319e5b008523db30614d65b14618750b36d39f32))
+* **abc:st:** fix st-td html ([0993e27](https://github.com/hbyunzai/yelon/commit/0993e27205aed20d02718b39c20ac01a7b2ad791))
+* **abc:st:** fix use pure recoard data for modal params ([5e0d16a](https://github.com/hbyunzai/yelon/commit/5e0d16aa0d58453c16d871fb8f544720bcc9675c))
+* **cli:** fix correctly returns undefined ([0c93f55](https://github.com/hbyunzai/yelon/commit/0c93f55682d1739f8e1a5109bd4c3862ad10674f))
+* **cli:** upgrade ng-yunzai-plugin-theme ([a01b73a](https://github.com/hbyunzai/yelon/commit/a01b73a0839d836d75a04e90b953d81ce64c0320))
+* **form:** fix form multiple bind visibility ([d0bdbee](https://github.com/hbyunzai/yelon/commit/d0bdbeef7c91020658909dfd357131ebc60d8c46))
+* **form:** fix missing error style ([70bdde9](https://github.com/hbyunzai/yelon/commit/70bdde9e5c3d789cf2bcc3377c1c350db4cc71a0))
+* **theme:setting-drawer:** add lessJs property ([3fb9a1c](https://github.com/hbyunzai/yelon/commit/3fb9a1ce0e03619831c1b4849e0b00b3296e2b82))
+
+
+### Features
+
+* **abc:exception:** add typeDict of global config ([ada084f](https://github.com/hbyunzai/yelon/commit/ada084f5159b281e2326d6cc92ef7802f2009b7e))
+* **abc:hotkey:** add hotkey component ([a4318b2](https://github.com/hbyunzai/yelon/commit/a4318b24b52d7bfaa2136860b21e3142fb748ecc))
+* **abc:notice-icon:** add centered property ([9fe6abc](https://github.com/hbyunzai/yelon/commit/9fe6abcdf37b047b49ef503699573902ad0beadf))
+* **cli:sta:** add tagsMapping property ([e8b108e](https://github.com/hbyunzai/yelon/commit/e8b108e3c2537e4baf5c61adff092271d3a8d843))
+* **util:other:lazy:** add attriburte property ([7e7fd3d](https://github.com/hbyunzai/yelon/commit/7e7fd3d49936c9c5724a4cb9cfef7eabdb109536))
+
+
+
 # [14.1.0](https://github.com/hbyunzai/yelon/compare/14.0.1-beta.1...14.1.0) (2022-10-10)
 
 
