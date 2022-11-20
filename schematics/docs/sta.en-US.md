@@ -38,7 +38,7 @@ Add `sta.json` to the project root directory:
 
 ```json
 {
-  "$schema": "./node_modules/ng-alain/sta/schema.json",
+  "$schema": "./node_modules/ng-yunzai/sta/schema.json",
   "filePath": "swagger.json",
   "tagsMapping": {
     "部门": "Dept"
@@ -49,7 +49,7 @@ Add `sta.json` to the project root directory:
 Run:
 
 ```bash
-ng g ng-alain:sta
+ng g ng-yunzai:sta
 ```
 
 ## FAQ

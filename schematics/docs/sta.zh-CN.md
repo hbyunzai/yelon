@@ -37,7 +37,7 @@ ng g ng-yunzai:sta --name=<Swagger name> --url=<远程URL地址> --filePath=<本
 
 ```json
 {
-  "$schema": "./node_modules/ng-alain/sta/schema.json",
+  "$schema": "./node_modules/ng-yunzai/sta/schema.json",
   "filePath": "swagger.json",
   "tagsMapping": {
     "部门": "Dept"
@@ -48,7 +48,7 @@ ng g ng-yunzai:sta --name=<Swagger name> --url=<远程URL地址> --filePath=<本
 执行：
 
 ```bash
-ng g ng-alain:sta
+ng g ng-yunzai:sta
 ```
 
 ## 常见问题
