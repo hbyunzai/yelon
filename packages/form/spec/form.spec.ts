@@ -1,888 +1,658 @@
-import { registerLocaleData } from '@angular/common';
-import zh from '@angular/common/locales/zh';
-import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { of } from 'rxjs';
+import { DebugElement } from '@angular/core';
+import { ComponentFixture, discardPeriodicTasks, fakeAsync } from '@angular/core/testing';
 
-import { ACLService, YelonACLModule } from '@yelon/acl';
 import { createTestContext } from '@yelon/testing';
-import { YunzaiI18NService, YunzaiThemeModule, YUNZAI_I18N_TOKEN, YelonLocaleService, en_US } from '@yelon/theme';
 import { deepCopy } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzIconService } from 'ng-zorro-antd/icon';
 
-import { FormPropertyFactory } from '../src/model/form.property.factory';
-import { YelonFormModule } from '../src/module';
+import { ObjectProperty } from '../src/model/object.property';
 import { SFSchema } from '../src/schema/index';
-import { WidgetRegistry } from '../src/widget.factory';
-import { SCHEMA, SFPage, TestFormComponent } from './base.spec';
+import { SFUISchema, SFUISchemaItem } from '../src/schema/ui';
+import { configureSFTestSuite, SFPage, TestFormComponent } from './base.spec';
 
-registerLocaleData(zh);
-
-describe('form: component', () => {
+describe('form: schema', () => {
   let fixture: ComponentFixture<TestFormComponent>;
   let dl: DebugElement;
   let context: TestFormComponent;
   let page: SFPage;
 
-  function genModule(options: { acl?: boolean; i18n?: boolean } = {}): void {
-    options = { acl: false, i18n: false, ...options };
-    const imports = [NoopAnimationsModule, YelonFormModule.forRoot(), YunzaiThemeModule.forRoot()];
-    if (options.i18n) {
-      imports.push(YunzaiThemeModule.forRoot());
-    }
-    if (options.acl) {
-      imports.push(YelonACLModule.forRoot());
-    }
-    TestBed.configureTestingModule({
-      imports,
-      declarations: [TestFormComponent, TestModeComponent]
-    });
-  }
+  configureSFTestSuite();
 
-  function createComp(): void {
+  beforeEach(() => {
+    ({ fixture, dl, context } = createTestContext(TestFormComponent));
     fixture.detectChanges();
     page = new SFPage(context.comp);
     page.prop(dl, context, fixture);
-  }
+  });
 
-  describe('', () => {
-    beforeEach(() => {
-      genModule();
-      ({ fixture, dl, context } = createTestContext(TestFormComponent));
-      createComp();
+  describe('[cover schema]', () => {
+    beforeEach(() => spyOn(console, 'warn'));
+    it('should be using select widget when not ui and enum exists', () => {
+      page
+        .newSchema({
+          properties: {
+            name: { type: 'string', enum: ['a'] }
+          }
+        })
+        .checkUI('/name', 'widget', 'select');
     });
-
-    describe('[default]', () => {
-      it('should throw error when parent is not object or array', () => {
-        expect(() => {
-          const factory = context.comp['formPropertyFactory'] as FormPropertyFactory;
-          factory.createProperty({}, {}, {}, { type: 'invalid', path: 'a' } as NzSafeAny, 'a');
-        }).toThrowError(`Instanciation of a FormProperty with an unknown parent type: invalid`);
-      });
-
-      it('should throw error when type is invalid', () => {
-        expect(() => {
-          context.schema = {
-            properties: {
-              a: {
-                type: 'aa' as NzSafeAny
-              }
-            }
-          };
-          fixture.detectChanges();
-        }).toThrowError(`Undefined type aa`);
-      });
-
-      it('should throw error when is invalid schema', () => {
-        expect(() => {
-          context.schema = null;
-          fixture.detectChanges();
-        }).toThrowError('Invalid Schema');
-      });
-
-      it(`Don't support string with root ui property`, () => {
-        expect(() => {
-          context.schema = {
-            ui: 'string',
-            properties: {}
-          };
-          fixture.detectChanges();
-        }).toThrowError(`Don't support string with root ui property`);
-      });
-
-      it('should be used default widget when is invalid schema type', () => {
-        spyOn(console, 'warn');
-        expect(console.warn).not.toHaveBeenCalled();
-        context.schema = {
-          type: 'string',
-          properties: {},
-          ui: {
-            widget: 'asdf'
-          }
-        };
-        fixture.detectChanges();
-        expect(console.warn).toHaveBeenCalled();
-      });
-
-      it('should be console debug informations', () => {
-        spyOn(console, 'warn');
-        expect(console.warn).not.toHaveBeenCalled();
-        context.schema = {
+    it('should be using autocomplete widget when format equal email', () => {
+      page
+        .newSchema({
           properties: {
-            name: { type: 'string' },
-            age: { type: 'number' }
-          },
-          required: ['name', 'age'],
-          ui: {
-            debug: true
+            name: { type: 'string', format: 'email' }
           }
-        };
-        fixture.detectChanges();
-        page.setValue('/name', 'a');
-        expect(console.warn).toHaveBeenCalled();
-      });
-
-      it('should be console debug informations when ajv throw error', () => {
-        spyOn(console, 'warn');
-        expect(console.warn).not.toHaveBeenCalled();
-        context.schema = {
-          properties: {
-            time: {
-              type: 'string',
-              ui: { widget: 'date', mode: 'range' },
-              title: 'Date',
-              format: 'yyyy-MM-dd HH:mm:ss'
-            }
-          },
-          ui: {
-            debug: true
-          }
-        };
-        fixture.detectChanges();
-        expect(console.warn).toHaveBeenCalled();
-      });
-
-      it('should be ingore required when element is hidden', () => {
-        const s: SFSchema = {
-          properties: {
-            name: {
-              type: 'string',
-              ui: { hidden: true }
-            }
-          },
-          required: ['name']
-        };
-        page.newSchema(s);
-        expect(context.comp._schema.required!.indexOf('name') === -1).toBe(true);
-      });
-
-      it('should be ingore trigger formChange event when call refreshSchema method', () => {
-        expect(context.formChange).not.toHaveBeenCalled();
-        page.newSchema({ properties: { name: { type: 'string' } } });
-        expect(context.formChange).not.toHaveBeenCalled();
-      });
-
-      it('should be hava values when call refreshSchema method after', () => {
-        page.newSchema({ properties: { name: { type: 'string', default: 'a' } } });
-        expect(context.formChange).not.toHaveBeenCalled();
-        expect(context.comp.value.name).toBe('a');
-      });
+        })
+        .checkUI('/name', 'widget', 'autocomplete');
     });
-
-    describe('[button]', () => {
-      it('should be has a primary button when default value', () => {
-        page.checkCount('.sf-btns', 1).checkCount('.ant-btn-primary', 1);
-      });
-      it('should be null', () => {
-        context.button = null;
-        fixture.detectChanges();
-        page.checkCount('.sf-btns', 1).checkCount('button', 0);
-      });
-      it('should be undefined', () => {
-        context.button = undefined;
-        fixture.detectChanges();
-        page.checkCount('.sf-btns', 1).checkCount('button', 0);
-      });
-      it('should be none', () => {
-        context.button = 'none';
-        fixture.detectChanges();
-        page.checkCount('.sf-btns', 0);
-      });
-      it('should be icon', () => {
-        context.button = {
-          submit_icon: {
-            type: 'search'
-          },
-          reset_icon: {
-            type: 'file'
+    it('support ui property is a string', () => {
+      page
+        .newSchema({
+          properties: {
+            name: { type: 'string', ui: 'textarea' }
           }
-        };
-        fixture.detectChanges();
-        page.checkCount('[type="submit"] .anticon', 1);
-        page.checkCount('[type="button"] .anticon', 1);
-      });
-      describe('when layout is horizontal', () => {
-        it('should be has a fix 100px width', () => {
-          page
-            .newSchema({
+        })
+        .checkUI('/name', 'widget', 'textarea');
+    });
+    it('should be inherit all properties with * for ui schema', () => {
+      const schema: SFSchema = {
+        properties: {
+          name1: { type: 'string' },
+          name2: {
+            type: 'array',
+            items: {
+              type: 'object',
               properties: {
-                name: {
+                a: {
                   type: 'string',
                   ui: {
-                    spanLabelFixed: 100
-                  }
-                }
-              }
-            })
-            .checkStyle('.sf-btns .ant-form-item-control', 'margin-left', '100px');
-        });
-        it('should be specified grid', () => {
-          const span = 11;
-          context.button = {
-            render: {
-              grid: { span }
-            }
-          };
-          fixture.detectChanges();
-          page.checkCls('.sf-btns .ant-form-item-control', `ant-col-${span}`);
-        });
-        it('should be fixed label', () => {
-          const spanLabelFixed = 56;
-          context.button = {
-            render: {
-              spanLabelFixed
-            }
-          };
-          fixture.detectChanges();
-          page.checkStyle('.sf-btns .ant-form-item-control', 'margin-left', `${spanLabelFixed}px`);
-        });
-      });
-      describe('#size', () => {
-        it('with small', () => {
-          context.button = { render: { size: 'small' } };
-          fixture.detectChanges();
-          page.checkCount('.ant-btn-sm', 2);
-        });
-        it('with large', () => {
-          context.button = { render: { size: 'large' } };
-          fixture.detectChanges();
-          page.checkCount('.ant-btn-lg', 2);
-        });
-      });
-      it('should be update button text when i18n changed', () => {
-        page.checkElText('.ant-btn-primary', '提交');
-        const i18n = TestBed.inject<YelonLocaleService>(YelonLocaleService) as YelonLocaleService;
-        i18n.setLocale(en_US);
-        fixture.detectChanges();
-        page.checkElText('.ant-btn-primary', 'Submit');
-      });
-    });
-
-    describe('properites', () => {
-      describe('#validate', () => {
-        it('should be validate when submitted and not liveValidate', () => {
-          page.submit(false);
-          expect((page.getEl('.ant-btn-primary') as HTMLButtonElement).disabled).toBe(true);
-          context.liveValidate = false;
-          fixture.detectChanges();
-          page.submit(false).setValue('/name', 'cipchk').setValue('/pwd', '1111').submit(true);
-        });
-      });
-
-      describe('#submit', () => {
-        it('should be submit when is valid', () => {
-          page.setValue('/name', 'cipchk').setValue('/pwd', '1111').isValid();
-        });
-        it('should not be submit when is invalid', () => {
-          page.setValue('/name', 'cipchk').isValid(false);
-        });
-      });
-
-      describe('#reset', () => {
-        it('should be set default value', () => {
-          const schema = deepCopy(SCHEMA.user) as SFSchema;
-          schema.properties!.name.default = 'cipchk';
-          page.newSchema(schema).reset().checkValue('/name', 'cipchk');
-        });
-      });
-
-      describe('#layout', () => {
-        ['horizontal', 'vertical', 'inline'].forEach(type => {
-          it(`with ${type}`, () => {
-            context.layout = type;
-            fixture.detectChanges();
-            page.checkCls('form', `ant-form-${type}`);
-          });
-        });
-        describe(`when with horizontal`, () => {
-          it('shoule be fixed label width', () => {
-            page
-              .newSchema({
-                properties: {
-                  name: {
-                    type: 'string',
-                    ui: {
-                      spanLabelFixed: 100
-                    }
-                  }
-                }
-              })
-              .checkStyle('.ant-form-item-label', 'flex', '0 0 100px')
-              .checkStyle('.ant-form-item-control', 'maxWidth', 'calc(100% - 100px)');
-          });
-          it('should inherit parent node', () => {
-            page
-              .newSchema({
-                properties: {
-                  address: {
-                    type: 'object',
-                    ui: { spanLabelFixed: 98 },
-                    properties: {
-                      city: { type: 'string' }
-                    }
-                  }
-                }
-              })
-              .checkStyle('.ant-form-item-label', 'flex', '0 0 98px')
-              .checkStyle('.ant-form-item-control', 'maxWidth', 'calc(100% - 98px)');
-          });
-        });
-      });
-
-      describe('#autocomplete', () => {
-        [null, 'on', 'off'].forEach((type: NzSafeAny) => {
-          it(`with [${type}]`, () => {
-            context.autocomplete = type;
-            fixture.detectChanges();
-            page.checkAttr('form', 'autocomplete', type, !!type);
-          });
-        });
-      });
-
-      describe('#onlyVisual', () => {
-        it('with false', () => {
-          context.onlyVisual = false;
-          fixture.detectChanges();
-          page.checkCount('.sf__no-error', 0);
-          page.checkCount('.ant-form-item-explain', 2);
-        });
-        it('with true', () => {
-          context.onlyVisual = true;
-          fixture.detectChanges();
-          page.checkCount('.sf__no-error', 1);
-          page.checkCount('.ant-form-item-explain', 0);
-        });
-      });
-
-      it('#disabled', () => {
-        const CLS: { [key: string]: string | NzSafeAny[] } = {
-          input: '.ant-input[disabled]',
-          number: '.ant-input-number-disabled',
-          switch: '.ant-switch-disabled'
-        };
-        page.newSchema({
-          properties: {
-            ipt: { type: 'string' },
-            number: { type: 'number' },
-            switch: { type: 'boolean' },
-            select: { type: 'string', enum: ['A'] }
-          }
-        });
-        context.disabled = false;
-        fixture.detectChanges();
-        Object.keys(CLS).forEach(key => {
-          if (Array.isArray(CLS[key])) {
-            page.checkCount(CLS[key][0][0], CLS[key][0][1]);
-          } else {
-            page.checkCount(CLS[key] as string, 0);
-          }
-        });
-        context.disabled = true;
-        fixture.detectChanges();
-        Object.keys(CLS).forEach(key => {
-          if (Array.isArray(CLS[key])) {
-            page.checkCount(CLS[key][1][0], CLS[key][1][1]);
-          } else {
-            page.checkCount(CLS[key] as string, 1);
-          }
-        });
-      });
-
-      it('#loading', () => {
-        context.loading = false;
-        fixture.detectChanges();
-        const CLS = {
-          loading: '[data-type="submit"].ant-btn-loading',
-          disabled: '[data-type="reset"][disabled]'
-        };
-        page.checkCount(CLS.loading, 0);
-        page.checkCount(CLS.disabled, 0);
-        context.loading = true;
-        fixture.detectChanges();
-        page.checkCount(CLS.loading, 1);
-        page.checkCount(CLS.disabled, 1);
-      });
-
-      it('#noColon', () => {
-        context.noColon = true;
-        fixture.detectChanges();
-        const CLS = `.sf__no-colon`;
-        page.checkCount(CLS, 1);
-        context.noColon = false;
-        fixture.detectChanges();
-        page.checkCount(CLS, 0);
-      });
-
-      describe('#cleanValue', () => {
-        it('with true', () => {
-          context.cleanValue = true;
-          fixture.detectChanges();
-          page.newSchema(
-            {
-              properties: {
-                name: { type: 'string' },
-                arr: { type: 'array', items: { type: 'object', properties: { x: { type: 'string' } } } }
-              }
-            },
-            {},
-            { name: 'a', age: 10, arr: [{ x: 1, y: 2 }] }
-          );
-          expect(context.comp.value.age == null).toBe(true);
-          expect(context.comp.value.arr[0].y == null).toBe(true);
-        });
-        it('with false', () => {
-          context.cleanValue = false;
-          fixture.detectChanges();
-          page.newSchema(
-            {
-              properties: {
-                name: { type: 'string' },
-                arr: { type: 'array', items: { type: 'object', properties: { x: { type: 'string' } } } }
-              }
-            },
-            {},
-            { name: 'a', age: 10, arr: [{ x: 1, y: 2 }] }
-          );
-          expect(context.comp.value.age).toBe(10);
-          expect(context.comp.value.arr[0].y).toBe(2);
-        });
-      });
-
-      it('#formChange', () => {
-        page.setValue('/name', 'cipchk');
-        expect(context.formChange).toHaveBeenCalled();
-      });
-
-      it('#formValueChange', () => {
-        page.setValue('/name', 'cipchk');
-        expect(context.formValueChange).toHaveBeenCalled();
-      });
-
-      it('#formSubmit', () => {
-        page.setValue('/name', 'cipchk').setValue('/pwd', 'asdf').submit();
-        expect(context.formSubmit).toHaveBeenCalled();
-      });
-
-      it('#formReset', () => {
-        page.setValue('/name', 'cipchk').setValue('/pwd', 'asdf').reset();
-        expect(context.formReset).toHaveBeenCalled();
-      });
-
-      it('#formError', () => {
-        page.setValue('/name', 'cipchk').setValue('/name', '');
-        expect(context.formError).toHaveBeenCalled();
-      });
-    });
-
-    describe('[widgets]', () => {
-      it('#size', () => {
-        page
-          .newSchema({
-            properties: { name: { type: 'string', ui: { size: 'large' } } }
-          })
-          .checkCls('input', 'ant-input-lg');
-      });
-      it('#disabled', fakeAsync(() => {
-        const el = page
-          .newSchema({ properties: { name: { type: 'string', readOnly: true } } })
-          .getEl('input') as HTMLInputElement;
-        tick();
-        expect(el.disabled).toBe(true);
-        expect(el.classList).toContain('ant-input-disabled');
-      }));
-      it('should be custom class', () => {
-        page
-          .newSchema({
-            properties: { name: { type: 'string', ui: { class: 'test-cls' } } }
-          })
-          .checkCls('sf-string', 'test-cls');
-      });
-      it('should get all registered widgets', () => {
-        const wr = TestBed.inject(WidgetRegistry) as WidgetRegistry;
-        expect(Object.keys(wr.widgets).length).toBeGreaterThan(0);
-      });
-    });
-
-    describe('public methods', () => {
-      it('#getProperty', () => {
-        expect(context.comp.getProperty('/name')).not.toBeNull();
-      });
-      it('#getValue', () => {
-        const name = 'asdf';
-        page.newSchema({ properties: { name: { type: 'string' } } }, null!, { name });
-        expect(context.comp.getValue('/name')).toBe(name);
-      });
-      it('#setValue', () => {
-        const name = 'new-asdf';
-        context.comp.setValue('/name', name);
-        expect(context.comp.value.name).toBe(name);
-      });
-      it('#setValue, shoule be throw error when invlaid path', () => {
-        expect(() => {
-          context.comp.setValue('/invalid-path', 'name');
-        }).toThrow();
-      });
-      it('#updateFeedback', () => {
-        const namePath = '/name';
-        context.comp.updateFeedback(namePath, 'error');
-        page.dc().checkCount('.ant-form-item-has-error', 1).checkCount('.ant-form-item-has-feedback', 1);
-        context.comp.updateFeedback(namePath, 'success', 'left');
-        page
-          .dc()
-          .checkCount('.ant-form-item-has-success', 1)
-          .checkCount('.ant-form-item-has-feedback', 1)
-          .checkCount('.anticon-left', 1);
-        context.comp.updateFeedback(namePath);
-
-        page.dc().checkCount('.ant-form-item-has-feedback', 0);
-      });
-    });
-
-    describe('[Custom Validator]', () => {
-      it('with function and shoule be success when return a empty errors', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'string',
-              ui: {
-                validator: jasmine.createSpy().and.returnValue([{ keyword: 'required', message: 'a' }])
-              }
-            }
-          }
-        };
-        page.newSchema(s);
-        expect(page.getProperty('/a').valid).toBe(false);
-      });
-      it('with function', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'string',
-              ui: {
-                validator: jasmine.createSpy().and.returnValue([])
-              }
-            }
-          }
-        };
-        page.newSchema(s);
-        expect(page.getProperty('/a').valid).toBe(true);
-      });
-      it('with observable', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'string',
-              ui: {
-                validator: jasmine.createSpy().and.returnValue(of([{ keyword: 'required', message: 'a' }]))
-              }
-            }
-          }
-        };
-        page.newSchema(s);
-        expect(page.getProperty('/a').valid).toBe(false);
-      });
-      it('shoule be throw error when non-include a message property', () => {
-        expect(() => {
-          const s: SFSchema = {
-            properties: {
-              a: {
-                type: 'string',
-                ui: {
-                  validator: jasmine.createSpy().and.returnValue([{ keyword: 'required' }])
-                }
-              }
-            }
-          };
-          page.newSchema(s);
-        }).toThrowError();
-      });
-      it('shoule be support custom params in message', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'string',
-              ui: {
-                validator: () => [
-                  {
-                    keyword: 'a',
-                    message: 'a-{id}-{invalid}',
-                    params: {
-                      id: 10
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        };
-        page.newSchema(s);
-        expect(page.getProperty('/a').errors![0].message).toBe(`a-10-`);
-      });
-    });
-
-    describe('[Custom Show Errors]', () => {
-      it('shoule be re-error message via error property', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'string',
-              ui: {
-                errors: {
-                  required: 'REQUEST'
-                }
-              }
-            }
-          },
-          required: ['a']
-        };
-        page.newSchema(s);
-        expect(page.getProperty('/a').errors![0].message).toBe('REQUEST');
-      });
-
-      it('shoule be re-error message via error property and type is function', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'string',
-              ui: {
-                errors: {
-                  required: jasmine.createSpy().and.returnValue('A')
-                }
-              }
-            }
-          },
-          required: ['a']
-        };
-        page.newSchema(s);
-        expect(page.getProperty('/a').errors![0].message).toBe('A');
-        expect((s.properties!.a.ui as NzSafeAny).errors.required).toHaveBeenCalled();
-      });
-
-      it('should be i18n', () => {
-        const iconSrv = TestBed.inject(NzIconService);
-        spyOn(iconSrv, 'getRenderedContent').and.returnValue(of());
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'string'
-            },
-            arr: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  name: {
-                    type: 'string'
+                    grid: { span: 12 }
                   }
                 },
-                required: ['name']
-              }
-            }
-          },
-          required: ['a']
-        };
-        page.newSchema(s, undefined, { a: '', arr: [{ name: '' }] });
-        expect(page.getProperty('/a').errors![0].message).toBe(context.comp.locale.error.required);
-        const i18n = TestBed.inject(YelonLocaleService);
-        i18n.setLocale(en_US);
-        fixture.detectChanges();
-        expect(page.getProperty('/a').errors![0].message).toBe(context.comp.locale.error.required);
-        expect(page.getProperty('/arr').errors![0].message).toBe(context.comp.locale.error.required);
-      });
-
-      it('should be display required * when showRequired is true', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'string',
-              ui: {
-                showRequired: true
-              }
-            }
-          }
-        };
-        page.newSchema(s).checkCount('.ant-form-item-required', 1);
-      });
-
-      it('should be replace valid parameters in error', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'number',
-              title: '单价',
-              multipleOf: 0.01,
-              default: 0.011
-            }
-          }
-        };
-        page.newSchema(s).checkError(`应当是 0.01 的整数倍`);
-      });
-
-      it('#setErrors', () => {
-        const s: SFSchema = {
-          properties: {
-            a: {
-              type: 'number',
-              title: '单价'
-            }
-          }
-        };
-        page.newSchema(s);
-        const aProp = context.comp.getProperty('/a');
-        aProp?.setErrors({ message: 'AA' });
-        page.checkError(`AA`);
-        aProp?.setErrors([{ message: 'BB' }]);
-        page.checkError(`BB`);
-        aProp?.setErrors();
-        page.checkError(``);
-      });
-    });
-  });
-
-  it('#delay', () => {
-    genModule();
-    ({ fixture, dl, context } = createTestContext(TestFormComponent));
-    context.delay = true;
-    spyOn(context.comp, 'refreshSchema');
-    fixture.detectChanges();
-    expect(context.comp.refreshSchema).not.toHaveBeenCalled();
-  });
-
-  describe('#firstVisual', () => {
-    beforeEach(() => {
-      genModule();
-      ({ fixture, dl, context } = createTestContext(TestFormComponent));
-    });
-    it('with false', () => {
-      context.firstVisual = false;
-      createComp();
-      page.checkCount('.ant-form-item-explain', 0);
-    });
-    it('with true', () => {
-      context.firstVisual = true;
-      createComp();
-      page.checkCount('.ant-form-item-explain', 2);
-    });
-  });
-
-  describe('#mode', () => {
-    beforeEach(() => {
-      genModule();
-      ({ fixture, dl, context } = createTestContext(TestModeComponent));
-    });
-    it('should be auto 搜索 in submit', () => {
-      context.mode = 'search';
-      createComp();
-      expect(page.getEl('.ant-btn-primary').textContent).toContain('搜索');
-    });
-    it('should be auto 保存 in submit', () => {
-      context.mode = 'edit';
-      createComp();
-      expect(page.getEl('.ant-btn-primary').textContent).toContain('保存');
-    });
-    it('should be custom text of search', () => {
-      context.mode = 'search';
-      context.button = {
-        search: 'SEARCH'
-      };
-      createComp();
-      expect(page.getEl('.ant-btn-primary').textContent).toContain('SEARCH');
-    });
-    it('should be custom text of edit', () => {
-      context.mode = 'edit';
-      context.button = {
-        edit: 'SAVE'
-      };
-      createComp();
-      expect(page.getEl('.ant-btn-primary').textContent).toContain('SAVE');
-    });
-  });
-
-  describe('ACL', () => {
-    beforeEach(() => genModule({ acl: true }));
-
-    it('should working', fakeAsync(() => {
-      ({ fixture, dl, context } = createTestContext(TestFormComponent));
-      createComp();
-      const acl = TestBed.inject<ACLService>(ACLService);
-      acl.setFull(false);
-      acl.setRole(['admin']);
-      const s: SFSchema = {
-        properties: {
-          a: {
-            type: 'string',
-            ui: {
-              acl: 'admin'
-            }
-          }
-        },
-        required: ['a']
-      };
-      page.newSchema(s);
-      page.checkUI('/a', 'hidden', false);
-      acl.setRole(['user']);
-      tick();
-      fixture.detectChanges();
-      page.checkUI('/a', 'hidden', true);
-    }));
-  });
-
-  describe('I18N', () => {
-    beforeEach(() => genModule({ i18n: true }));
-
-    it('should working', fakeAsync(() => {
-      ({ fixture, dl, context } = createTestContext(TestFormComponent));
-      createComp();
-      const i18n = TestBed.inject(YUNZAI_I18N_TOKEN) as YunzaiI18NService;
-      let lang = 'en';
-      spyOn(i18n, 'fanyi').and.callFake(((key: string) => {
-        if (key === 'null') return null;
-        return lang === 'en' ? key : `zh-${key}`;
-      }) as NzSafeAny);
-      const s: SFSchema = {
-        properties: {
-          a: {
-            type: 'string',
-            title: 'title',
-            description: 'title',
-            ui: {
-              i18n: 'i18n',
-              descriptionI18n: 'descriptionI18n',
-              optionalHelp: {
-                i18n: 'ohi18n'
-              }
-            }
-          },
-          b: {
-            type: 'string',
-            title: 'a',
-            ui: {
-              i18n: 'null'
+                b: { type: 'string' }
+              },
+              ui: { spanLabelFixed: 10 }
             }
           }
         }
       };
-      page.newSchema(s);
+      const label = 10;
+      const ui: SFUISchema = {
+        '*': { spanLabel: label },
+        $name2: {
+          $items: {
+            $a: { spanLabel: 9 }
+          }
+        }
+      };
       page
-        .checkSchema('/a', 'title', 'i18n')
-        .checkSchema('/b', 'title', 'null')
-        .checkSchema('/a', 'description', 'descriptionI18n')
-        .checkUI('/a', 'optionalHelp.text', 'ohi18n');
-      lang = 'zh';
-      i18n.use(lang, {});
+        .newSchema(schema, ui)
+        .checkUI('/name1', 'spanLabel', label)
+        .add()
+        .checkUI('/name2/0/a', 'spanLabel', null) // 当指定标签为固定宽度时无须指定 `spanLabel`，`spanControl` 会强制清理
+        .checkUI('/name2/0/b', 'spanLabelFixed', 10);
+    });
+    it('should be fixed label width', () => {
+      const schema: SFSchema = {
+        properties: {
+          name: { type: 'string' },
+          protocol: {
+            type: 'boolean',
+            title: '同意本协议',
+            description: '《用户协议》',
+            ui: {
+              widget: 'checkbox'
+            },
+            default: true
+          }
+        },
+        ui: { spanLabelFixed: 10, debug: true }
+      };
+      page.newSchema(schema).checkUI('/name', 'spanLabelFixed', 10).checkUI('/protocol', 'spanLabelFixed', 10);
+    });
+    it('support invalid format value', () => {
       page
-        .checkSchema('/a', 'title', 'zh-i18n')
-        .checkSchema('/a', 'description', 'zh-descriptionI18n')
-        .checkUI('/a', 'optionalHelp.text', 'zh-ohi18n');
+        .newSchema({
+          properties: {
+            name: { type: 'string', format: 'email1' }
+          }
+        })
+        .checkUI('/name', 'widget', 'string');
+    });
+    it('should be null spanLabel when not horizontal layout', () => {
+      context.layout = 'inline';
+      fixture.detectChanges();
+      page.checkUI('/name', 'spanLabel', null);
+    });
+    it('should call refreshSchema changed schema', fakeAsync(() => {
+      context.comp.refreshSchema(
+        {
+          properties: {
+            user: {
+              type: 'object',
+              properties: {
+                name: { type: 'string' },
+                age: { type: 'number' }
+              }
+            }
+          }
+        },
+        { '*': { spanLabelFixed: 100, spanControl: 10, offsetControl: 11 } }
+      );
+      page.checkUI('/user/name', 'spanLabelFixed', 100);
+      page.checkUI('/user/name', 'spanControl', null); // 当指定标签为固定宽度时无须指定 `spanLabel`，`spanControl` 会强制清理
+      page.checkUI('/user/name', 'offsetControl', 11);
+      discardPeriodicTasks();
     }));
+    it('support ui is null', () => {
+      expect(() => {
+        context.ui = null;
+        fixture.detectChanges();
+      }).not.toThrow();
+    });
+    describe('#array', () => {
+      const arrUI: SFUISchemaItem = { spanLabel: 10, grid: { arraySpan: 12 } };
+      const arrSchema: SFSchema = {
+        properties: {
+          name: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                a: { type: 'string' }
+              }
+            }
+          }
+        }
+      };
+      describe('[#via in json schema]', () => {
+        it('should be has $items when is array', () => {
+          const schema = deepCopy(arrSchema) as SFSchema;
+          schema.properties!.name.ui = deepCopy(arrUI);
+          page.newSchema(schema).checkUI('/name', 'grid.arraySpan', arrUI.grid!.arraySpan);
+        });
+      });
+      describe('[#via ui property]', () => {
+        it('should be has $items when is array', () => {
+          const schema = deepCopy(arrSchema);
+          const uiSchema: SFUISchema = {
+            $name: {
+              $items: {},
+              ...deepCopy(arrUI)
+            }
+          };
+          page.newSchema(schema, uiSchema).checkUI('/name', 'grid.arraySpan', arrUI.grid!.arraySpan);
+        });
+      });
+    });
+    describe('#optionalHelp', () => {
+      it('should working when value is string', fakeAsync(() => {
+        context.comp.refreshSchema({
+          properties: {
+            name: { type: 'string', ui: { optionalHelp: 'a' } }
+          }
+        });
+        page.checkCount('.sf__optional [nz-tooltip]', 1);
+        discardPeriodicTasks();
+      }));
+      it('should working when value is object', fakeAsync(() => {
+        context.comp.refreshSchema({
+          properties: {
+            name: { type: 'string', ui: { optionalHelp: { text: 'b', placement: 'bottomRight' } } }
+          }
+        });
+        page.checkCount('.sf__optional [nz-tooltip]', 1);
+        discardPeriodicTasks();
+      }));
+      it('should be hide when not text value in object', fakeAsync(() => {
+        context.comp.refreshSchema({
+          properties: {
+            name: { type: 'string', ui: { optionalHelp: { text: '', placement: 'bottomRight' } } }
+          }
+        });
+        page.checkCount('.sf__optional [nz-tooltip]', 0);
+        discardPeriodicTasks();
+      }));
+      it('should be inherit the root config', fakeAsync(() => {
+        context.comp.refreshSchema(
+          {
+            properties: {
+              name: { type: 'string', ui: { optionalHelp: { text: 'a' } } }
+            }
+          },
+          { '*': { optionalHelp: { text: '', placement: 'bottomRight' } } }
+        );
+        const prop = page.getProperty('/name');
+        expect((prop!.ui!.optionalHelp as NzSafeAny).placement!).toBe(`bottomRight`);
+        discardPeriodicTasks();
+      }));
+    });
+  });
+
+  describe('[definitions]', () => {
+    it('should be ref definitions', () => {
+      page
+        .newSchema({
+          definitions: {
+            large: {
+              type: 'string',
+              maxLength: 10
+            }
+          },
+          properties: {
+            name: { $ref: '#/definitions/large' }
+          }
+        })
+        .checkSchema('/name', 'maxLength', 10);
+    });
+    it('should be throw error when not fond defind', () => {
+      expect(() => {
+        page.newSchema({
+          definitions: {},
+          properties: {
+            name: { $ref: '#/definitions/large' }
+          }
+        });
+      }).toThrow();
+    });
+    it('should be throw error when is invalid $ref', () => {
+      expect(() => {
+        page.newSchema({
+          definitions: {},
+          properties: {
+            name: { $ref: 'definitions/large' }
+          }
+        });
+      }).toThrow();
+    });
+  });
+
+  describe('[if]', () => {
+    it('should be changed login type via if', () => {
+      page
+        .newSchema({
+          properties: {
+            login_type: {
+              type: 'string',
+              title: '登录方式',
+              enum: [
+                { label: '手机', value: 'mobile' },
+                { label: '账密', value: 'account' }
+              ],
+              default: 'mobile',
+              ui: {
+                widget: 'radio',
+                class: 'j-login_type'
+              }
+            },
+            mobile: { type: 'string', ui: { class: 'j-mobile' } },
+            code: { type: 'number', ui: { class: 'j-code' } },
+            name: { type: 'string', ui: { class: 'j-name' } },
+            pwd: {
+              type: 'string',
+              ui: {
+                type: 'password',
+                class: 'j-pwd'
+              }
+            }
+          },
+          required: ['login_type'],
+          if: {
+            properties: { login_type: { enum: ['mobile'] } }
+          },
+          then: {
+            required: ['mobile', 'code']
+          },
+          else: {
+            required: ['name', 'pwd']
+          }
+        })
+        .checkCount('.j-mobile', 1)
+        .checkCount('.j-name', 0);
+      const labels = page.getEl('.j-login_type nz-radio-group').querySelectorAll('label');
+      expect(labels.length).toBe(2);
+      labels[1].click();
+      page.checkCount('.j-mobile', 0).checkCount('.j-name', 1);
+    });
+    it('should be not else', () => {
+      page
+        .newSchema({
+          properties: {
+            login_type: {
+              type: 'string',
+              title: '登录方式',
+              enum: [
+                { label: '手机', value: 'mobile' },
+                { label: '账密', value: 'account' }
+              ],
+              default: 'mobile',
+              ui: {
+                widget: 'radio',
+                class: 'j-login_type'
+              }
+            },
+            mobile: { type: 'string', ui: { class: 'j-mobile' } },
+            code: { type: 'number', ui: { class: 'j-code' } },
+            name: { type: 'string', ui: { class: 'j-name' } },
+            pwd: {
+              type: 'string',
+              ui: {
+                type: 'password',
+                class: 'j-pwd'
+              }
+            }
+          },
+          required: ['login_type'],
+          if: {
+            properties: { login_type: { enum: ['mobile'] } }
+          },
+          then: {
+            required: ['mobile', 'code']
+          }
+        })
+        .checkCount('.j-mobile', 1)
+        .checkCount('.j-name', 1);
+      const labels = page.getEl('.j-login_type nz-radio-group').querySelectorAll('label');
+      expect(labels.length).toBe(2);
+      labels[1].click();
+      page.checkCount('.j-mobile', 0).checkCount('.j-name', 1);
+    });
+    it(`should be throw error when is not 'properties' for if`, () => {
+      expect(() => {
+        page.newSchema({
+          properties: { name: { type: 'string' } },
+          if: {},
+          then: {}
+        });
+      }).toThrowError(`if: does not contain 'properties'`);
+    });
+    it(`should be throw error when invalid key for 'properties' in if`, () => {
+      expect(() => {
+        page.newSchema({
+          properties: {
+            login_type: {
+              type: 'string',
+              title: '登录方式',
+              enum: [
+                { label: '手机', value: 'mobile' },
+                { label: '账密', value: 'account' }
+              ],
+              default: 'mobile',
+              ui: {
+                widget: 'radio',
+                class: 'j-login_type'
+              }
+            },
+            mobile: { type: 'string', ui: { class: 'j-mobile' } },
+            code: { type: 'number', ui: { class: 'j-code' } },
+            name: { type: 'string', ui: { class: 'j-name' } },
+            pwd: {
+              type: 'string',
+              ui: {
+                type: 'password',
+                class: 'j-pwd'
+              }
+            }
+          },
+          required: ['login_type'],
+          if: {
+            properties: { login_type1: { enum: ['mobile'] } }
+          },
+          then: {
+            required: ['mobile', 'code']
+          }
+        });
+      }).toThrow();
+    });
+  });
+
+  describe('#visibleIf', () => {
+    it('should be working', () => {
+      page
+        .newSchema({
+          properties: {
+            login_type: {
+              type: 'string',
+              enum: ['m', 'p'],
+              default: 'm',
+              ui: {
+                widget: 'radio',
+                class: 'j-login_type'
+              }
+            },
+            mobile: { type: 'string', ui: { class: 'j-mobile', visibleIf: { login_type: ['m'] } } },
+            code: {
+              type: 'string',
+              ui: {
+                class: 'j-code',
+                visibleIf: { login_type: val => (val === 'm' ? { required: true, show: false } : null) }
+              }
+            },
+            code2: {
+              type: 'string',
+              ui: {
+                class: 'j-code2',
+                visibleIf: { login_type: val => (val === 'm' ? { required: false, show: true } : null) }
+              }
+            },
+            name: { type: 'string', ui: { class: 'j-name', visibleIf: { login_type: ['p'] } } },
+            any: {
+              type: 'string',
+              ui: {
+                class: 'j-any',
+                visibleIf: {
+                  login_type: ['$ANY$']
+                }
+              }
+            }
+          },
+          required: ['login_type']
+        })
+        .checkCount('.j-mobile', 1)
+        .checkCount('.j-code', 0)
+        .checkCount('.j-name', 0)
+        .checkCount('.j-any', 1);
+      expect(page.getProperty('/code').ui._required).toBe(true);
+      expect(page.getProperty('/code2').ui._required).toBe(false);
+      const labels = page.getEl('.j-login_type nz-radio-group').querySelectorAll('label');
+      expect(labels.length).toBe(2);
+      labels[1].click();
+      page.checkCount('.j-mobile', 0).checkCount('.j-name', 1).checkCount('.j-any', 1);
+    });
+    it('logical or', fakeAsync(() => {
+      page.newSchema({
+        properties: {
+          show: {
+            type: 'boolean',
+            ui: {
+              visibleIf: { t1: ['$ANY$'], t2: ['$ANY$'] },
+              visibleIfLogical: 'or',
+              class: 'vi-show'
+            }
+          },
+          t1: {
+            type: 'string',
+            ui: { class: 'vi-t1' }
+          },
+          t2: {
+            type: 'string',
+            ui: { class: 'vi-t2' }
+          }
+        }
+      });
+      page.typeChar('t1', '.vi-t1 input');
+      page.checkCount('.vi-show', 1);
+      page.typeChar('t2', '.vi-t2 input');
+      page.checkCount('.vi-show', 1);
+    }));
+    it('logical and', fakeAsync(() => {
+      page.newSchema({
+        properties: {
+          show: {
+            type: 'boolean',
+            ui: {
+              visibleIf: { t1: ['$ANY$'], t2: ['$ANY$'] },
+              visibleIfLogical: 'and',
+              class: 'vi-show'
+            }
+          },
+          t1: {
+            type: 'string',
+            ui: { class: 'vi-t1' }
+          },
+          t2: {
+            type: 'string',
+            ui: { class: 'vi-t2' }
+          }
+        }
+      });
+      page.typeChar('t1', '.vi-t1 input');
+      page.checkCount('.vi-show', 0);
+      page.typeChar('t2', '.vi-t2 input');
+      page.checkCount('.vi-show', 1);
+    }));
+    it('in array', () => {
+      page
+        .newSchema({
+          properties: {
+            list: {
+              type: 'array',
+              minItems: 1,
+              items: {
+                type: 'object',
+                properties: {
+                  type: {
+                    type: 'string',
+                    title: 'type',
+                    ui: { class: 'j-type' }
+                  },
+                  value: {
+                    type: 'string',
+                    title: 'value',
+                    ui: {
+                      visibleIf: {
+                        type: (val: string) => val === '1'
+                      },
+                      class: 'j-value'
+                    }
+                  }
+                }
+              },
+              default: [{}]
+            }
+          }
+        })
+        .checkCount('.j-type', 1)
+        .checkCount('.j-value', 0)
+        .setValue('/list/0/type', '1')
+        .checkCount('.j-type', 1)
+        .checkCount('.j-value', 1);
+    });
+  });
+
+  describe('[order]', () => {
+    function genKeys(): string {
+      return JSON.stringify(Object.keys((context.comp.rootProperty as ObjectProperty).properties!));
+    }
+
+    function checkOrderKeys(arr: string[]): void {
+      expect(genKeys()).toBe(JSON.stringify(arr));
+    }
+
+    it('should be adjust the order', () => {
+      const order = ['pwd', 'name'];
+      page.newSchema({
+        properties: {
+          name: { type: 'string' },
+          pwd: { type: 'string' }
+        },
+        ui: {
+          order
+        }
+      });
+      checkOrderKeys(order);
+    });
+
+    it('should be used *', () => {
+      page.newSchema({
+        properties: {
+          a: { type: 'string' },
+          b: { type: 'string' },
+          c: { type: 'string' }
+        },
+        ui: {
+          order: ['b', '*']
+        }
+      });
+      checkOrderKeys(['b', 'a', 'c']);
+    });
+
+    describe('should be throw error', () => {
+      beforeEach(() => spyOn(console, 'error'));
+      it('when has extraneous key', () => {
+        expect(() => {
+          page.newSchema({
+            properties: {
+              a: { type: 'string' },
+              b: { type: 'string' }
+            },
+            ui: {
+              order: ['c', 'a']
+            }
+          });
+        }).toThrow();
+      });
+      it('when does not contain all keys', () => {
+        expect(() => {
+          page.newSchema({
+            properties: {
+              a: { type: 'string' },
+              b: { type: 'string' }
+            },
+            ui: {
+              order: ['a']
+            }
+          });
+        }).toThrow();
+      });
+      it('when contains more than one wildcard item', () => {
+        expect(() => {
+          page.newSchema({
+            properties: {
+              a: { type: 'string' },
+              b: { type: 'string' }
+            },
+            ui: {
+              order: ['a', '*', '*', '*', '*']
+            }
+          });
+        }).toThrow();
+      });
+    });
+  });
+
+  describe('[$ref]', () => {
+    it('should be required valid', () => {
+      page
+        .newSchema({
+          definitions: {
+            nameRef: {
+              type: 'string',
+              title: 'nameRef'
+            }
+          },
+          properties: {
+            name: {
+              type: 'string',
+              title: 'Name'
+            },
+            nameTwo: {
+              $ref: '#/definitions/nameRef'
+            }
+          },
+          required: ['name', 'nameTwo']
+        })
+        .checkUI('/nameTwo', '_required', true);
+    });
   });
 });
-
-@Component({
-  template: `
-    <sf [layout]="layout" #comp [schema]="schema" [ui]="ui" [button]="button" [mode]="mode" [loading]="loading"></sf>
-  `
-})
-class TestModeComponent extends TestFormComponent {}

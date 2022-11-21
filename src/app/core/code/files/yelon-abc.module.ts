@@ -13,6 +13,7 @@ import { FullContentModule } from '@yelon/abc/full-content';
 import { GlobalFooterModule } from '@yelon/abc/global-footer';
 import { ImageModule } from '@yelon/abc/image';
 import { LoadingModule } from '@yelon/abc/loading';
+import { HotkeyModule } from '@yelon/abc/hotkey';
 import { LodopModule } from '@yelon/abc/lodop';
 import { NoticeIconModule } from '@yelon/abc/notice-icon';
 import { PageHeaderModule } from '@yelon/abc/page-header';
@@ -62,6 +63,7 @@ const MODULES = [
   SGModule,
   DatePickerModule,
   LoadingModule,
+  HotkeyModule,
   MediaModule,
   OnboardingModule,
   LetModule,

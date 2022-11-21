@@ -13,7 +13,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: install
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: test
         run: npm run test
@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: install
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: test
         run: |
