@@ -7,9 +7,6 @@ i18n: need-update
 
 NG-YUNZAI scaffold is a front-end solution to support middleware and back-end application. It is based on [Angular](https://angular.io/) and [ng-zorro-antd](https://ng.ant.design/docs/introduce/en)(Angular implementation of Ant Design). The scaffold includes a set of common functionalities and business component libraries. It reduces lots of infrastructure development overwhelmingly and let you focus on business logic development.
 
-## Architecture Diagram
-
-![](https://github.com/hbyunzai/yelon/raw/master/_screenshot/architecture.png | width=700)
 
 **@yelon/theme**
 
@@ -48,6 +45,14 @@ Reduce the Http request by storing [cache](/cache) of the dictionary, city data,
 **@yelon/util**
 
 [Daily Utilities](/util)。
+
+**@yelon/bis**
+
+[Bis](/bis)
+
+**@yelon/socket**
+
+[Socket](/socket)
 
 **@yelon/testing**
 

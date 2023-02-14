@@ -6,7 +6,6 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit,
   QueryList,
   Renderer2,
   TemplateRef
@@ -28,7 +27,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
-import { LayoutService } from './layout.service';
+import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
 
 @Component({
@@ -36,38 +35,43 @@ import { LayoutDefaultOptions } from './types';
   exportAs: 'layoutDefault',
   template: `
     <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
-    <layout-default-header *ngIf="showHeader" [options]="options" [items]="headerItems"></layout-default-header>
-    <ng-container *ngIf="showSidebar">
-      <div
-        class="yunzai-default__aside"
-        *ngIf="!options.hideAside"
-        [ngStyle]="!showHeader ? { 'margin-top': '0px' } : {}"
-      >
+    <layout-default-header *ngIf="!opt.hideHeader" [items]="headerItems"></layout-default-header>
+    <div *ngIf="!opt.hideAside" class="yunzai-default__aside">
+      <div class="yunzai-default__aside-wrap">
         <div class="yunzai-default__aside-inner">
           <ng-container *ngTemplateOutlet="asideUser"></ng-container>
           <ng-container *ngTemplateOutlet="nav"></ng-container>
-          <layout-default-nav *ngIf="!nav" class="d-block py-lg"></layout-default-nav>
+          <layout-default-nav *ngIf="!nav"></layout-default-nav>
+        </div>
+        <div *ngIf="opt.showSiderCollapse" class="yunzai-default__aside-link">
+          <ng-container *ngIf="asideBottom === null; else asideBottom">
+            <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
+              <span nz-icon [nzType]="collapsedIcon"></span>
+            </div>
+          </ng-container>
         </div>
       </div>
-    </ng-container>
-    <section
-      class="yunzai-default__content"
-      [ngStyle]="{ 'margin-top': !showHeader ? '0px' : '', 'margin-left': !showSidebar ? '0px' : '' }"
-    >
+    </div>
+    <section class="yunzai-default__content">
       <ng-container *ngTemplateOutlet="content"></ng-container>
       <ng-content></ng-content>
     </section>
   `
 })
-export class LayoutDefaultComponent implements OnInit, OnDestroy {
+export class LayoutDefaultComponent implements OnDestroy {
   @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
   headerItems!: QueryList<LayoutDefaultHeaderItemComponent>;
 
-  showHeader: boolean = true;
-  showSidebar: boolean = true;
+  get opt(): LayoutDefaultOptions {
+    return this.srv.options;
+  }
 
-  @Input() options!: LayoutDefaultOptions;
+  @Input()
+  set options(value: LayoutDefaultOptions | null | undefined) {
+    this.srv.setOptions(value);
+  }
   @Input() asideUser: TemplateRef<void> | null = null;
+  @Input() asideBottom: TemplateRef<NzSafeAny> | null = null;
   @Input() nav: TemplateRef<void> | null = null;
   @Input() content: TemplateRef<void> | null = null;
   @Input() customError?: string | null;
@@ -75,16 +79,31 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   isFetching = false;
 
+  get collapsed(): boolean {
+    return this.settings.layout.collapsed;
+  }
+
+  get collapsedIcon(): string {
+    return this.srv.collapsedIcon;
+  }
+
+  toggleCollapsed(): void {
+    this.srv.toggleCollapsed();
+  }
+
   constructor(
     router: Router,
-    private layoutService: LayoutService,
     private msgSrv: NzMessageService,
     private settings: SettingsService,
     private el: ElementRef,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private doc: NzSafeAny
+    @Inject(DOCUMENT) private doc: NzSafeAny,
+    private srv: LayoutDefaultService
   ) {
     router.events.pipe(takeUntil(this.destroy$)).subscribe(ev => this.processEv(ev));
+    const { destroy$ } = this;
+    this.srv.options$.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
+    this.settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
   }
 
   processEv(ev: Event): void {
@@ -116,25 +135,11 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
       ['yunzai-default']: true,
       [`yunzai-default__fixed`]: layout.fixed,
       [`yunzai-default__collapsed`]: layout.collapsed,
-      [`yunzai-default__hide-aside`]: this.options!.hideAside
+      [`yunzai-default__hide-aside`]: this.opt.hideAside,
+      [`yunzai-default__hide-header`]: this.opt.hideHeader
     });
 
     doc.body.classList[layout.colorWeak ? 'add' : 'remove']('color-weak');
-  }
-
-  ngOnInit(): void {
-    this.options = {
-      logoExpanded: `./assets/logo-full.svg`,
-      logoCollapsed: `./assets/logo.svg`,
-      logoLink: `/`,
-      hideAside: false,
-      ...this.options
-    };
-    const { settings, destroy$ } = this;
-    settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
-    this.setClass();
-    this.layoutService.header.subscribe(h => (this.showHeader = h));
-    this.layoutService.sidebar.subscribe(s => (this.showSidebar = s));
   }
 
   ngOnDestroy(): void {

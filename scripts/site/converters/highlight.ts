@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getCode } from '../utils/utils';
 
 const JsonML = require('jsonml.js/lib/utils');

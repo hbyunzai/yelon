@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { ElementRef, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -82,7 +81,7 @@ export interface STReq {
    */
   allInBody?: boolean;
   /**
-   * 是否延迟加载数据，即渲染结束后不会主动发起请求，默认：`false`
+   * 是否延迟加载数据，即渲染结束后不会主动发起请求，在适当的时机调用 `resetColumns` 来渲染，默认：`false`
    */
   lazyLoad?: boolean;
   /**

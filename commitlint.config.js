@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const types = ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'release', 'revert', 'style', 'test'];
 
-const scopes = ["bit","all","core","abc", "acl", "auth", "cache", "chart", "form", "sf", "mock", "cli", "testing", "theme"];
+const scopes = ["abc", "acl", "auth", "cache", "chart", "form", "sf", "mock", "cli", "testing", "theme", "util"];
 
 function parseMessage(message) {
   const PATTERN = /^(\w+)(?:\(([^)]+)\))?\: (.+)$/;

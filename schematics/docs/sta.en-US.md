@@ -7,8 +7,7 @@ type: Documents
 
 ## Foreword
 
-If the back-end API documentation is described by Swagger, a complete set of API codes can be generated through the
-following commands:
+If the back-end API documentation is described by Swagger, a complete set of API codes can be generated through the following commands:
 
 ```bash
 ng g ng-yunzai:sta --url=https://petstore3.swagger.io/api/v3/openapi.json 
@@ -20,23 +19,23 @@ ng g ng-yunzai:sta --url=https://petstore3.swagger.io/api/v3/openapi.json
 ng g ng-yunzai:sta --name=<Swagger name> --url=<Remote URL> --filePath=<Local Swagger.json> --output=<Path to folder>
 ```
 
-| Name                 | Default           | Description                                                                                              |
-|----------------------|-------------------|----------------------------------------------------------------------------------------------------------|
-| `name`               | `sta`             | Name for swagger project name                                                                            |
-| `url`                | -                 | URL to swagger schema, Choose one of filePath and url.                                                   |
-| `filePath`           | -                 | Path to swagger schema, Choose one of filePath and url.                                                  |
-| `output`             | `src/app/${name}` | Path to folder where will been located the created api module                                            |
-| `responseDataField`  | -                 | The real data field of Response                                                                          |
-| `modelTypePrefix`    | -                 | Model name prefix                                                                                        |
-| `httpClientType`     | `yelon`           | HttpClient request method, 1. `yelon` use `_HttpClient` of `@yelon/theme`, 2. `angular` use `HttpClient` |
-| `generateApiOptions` | -                 | swagger-typescript-api [options](https://github.com/acacode/swagger-typescript-api#-usage)               |
-| `tagsMapping`        | -                 | Swagger tag mapping dictionary                                                                           |
+| Name | Default | Description |
+|------|---------|-------------|
+| `name` | `sta` | Name for swagger project name |
+| `url` | - | URL to swagger schema, Choose one of filePath and url. |
+| `filePath` | - | Path to swagger schema, Choose one of filePath and url. |
+| `output` | `src/app/${name}` | Path to folder where will been located the created api module |
+| `responseDataField` | - | The real data field of Response |
+| `modelTypePrefix` | - | Model name prefix |
+| `httpClientType` | `yelon` | HttpClient request method, 1. `yelon` use `_HttpClient` of `@yelon/theme`, 2. `angular` use `HttpClient` |
+| `generateApiOptions` | - | swagger-typescript-api [options](https://github.com/acacode/swagger-typescript-api#-usage) |
+| `tagsMapping` | - | Swagger tag mapping dictionary |
 
 ## Use config file
 
 Add `sta.json` to the project root directory:
 
-```json
+````json
 {
   "$schema": "./node_modules/ng-yunzai/sta/schema.json",
   "filePath": "swagger.json",
@@ -44,25 +43,23 @@ Add `sta.json` to the project root directory:
     "部门": "Dept"
   }
 }
-```
+````
 
 Run:
 
 ```bash
 ng g ng-yunzai:sta
-```
+````
 
 ## FAQ
 
 ### Path and Service Association
 
-By default, the first `tags` of each `path` will be merged into one Service. Please use `[a-zA-Z][-_a-zA-Z]+` to
-describe `tag` as much as possible.
+By default, the first `tags` of each `path` will be merged into one Service. Please use `[a-zA-Z][-_a-zA-Z]+` to describe `tag` as much as possible.
 
 ### Unexpected name
 
-By default, it will be processed according to the `operationId` item, otherwise it will be automatically combined
-according to the `path` and `method`. A few ways to turn on the languages:
+By default, it will be processed according to the `operationId` item, otherwise it will be automatically combined according to the `path` and `method`. A few ways to turn on the languages:
 
 **.NET CORE**
 
@@ -80,8 +77,8 @@ services.AddSwaggerGen(c =>
 
 **JAVA**
 
-Please refer
-to [Configuring the output of operationId in a Swagger 2.0 spec](https://springfox.github.io/springfox/docs/snapshot/#configuring-the-output-of-operationid-in-a-swagger-2-0-spec).
+Please refer to [Configuring the output of operationId in a Swagger 2.0 spec](https://springfox.github.io/springfox/docs/snapshot/#configuring-the-output-of-operationid-in-a-swagger-2-0-spec).
+
 
 ### Global Response
 
@@ -89,11 +86,10 @@ When all `path`s have a fixed output format, such as success and exceptions have
 
 ```json
 {
-  "status": 200,
-  "error": "Error Message",
-  "result": {}
+   "status": 200,
+   "error": "Error Message",
+   "result": {}
 }
 ```
 
-If an interceptor is used to handle exception messages, when subscribing only needs to always get the data of
-the `result` field, it can be solved by specifying `--responseDataField="result"`.
+If an interceptor is used to handle exception messages, when subscribing only needs to always get the data of the `result` field, it can be solved by specifying `--responseDataField="result"`.

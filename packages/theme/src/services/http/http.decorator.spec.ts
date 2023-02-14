@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -240,9 +239,9 @@ describe('theme: http.decorator', () => {
   });
 
   it('should construct a POST request', () => {
-    srv.save(1, { name: 'cipchk' });
+    srv.save(1, { name: 'devcui' });
     expect(request).toHaveBeenCalled();
-    expect(request.calls.mostRecent().args[2].body.name).toBe('cipchk');
+    expect(request.calls.mostRecent().args[2].body.name).toBe('devcui');
   });
 
   it('should construct a POST request via array body', () => {

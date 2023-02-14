@@ -11,6 +11,8 @@ import pkg from '../../../../package.json';
 import { AppService } from '../app.service';
 import angularJSON from './files/angular.json';
 import appModuleTS from './files/app.module';
+import yelonABCModuleTS from './files/yelon-abc.module';
+import yelonChartModuleTS from './files/yelon-chart.module';
 import environmentTS from './files/environment';
 import globalConfigTS from './files/global-config.module';
 import mainTS from './files/main';
@@ -22,8 +24,6 @@ import readme from './files/readme-cli';
 import sandboxConfigJSON from './files/sandbox.config.json';
 import startupServiceTS from './files/startup.service';
 import tsconfigJSON from './files/tsconfig.json';
-import yelonABCModuleTS from './files/yelon-abc.module';
-import yelonChartModuleTS from './files/yelon-chart.module';
 
 @Injectable({ providedIn: 'root' })
 export class CodeService {
@@ -105,7 +105,6 @@ export class CodeService {
       '@yelon/mock',
       '@yelon/form',
       '@yelon/util',
-      '@yelon/bis',
       'ajv',
       'ajv-formats',
       ...dependencies

@@ -1,6 +1,16 @@
+# # SSR
+# FROM node:lts as dist
+# MAINTAINER authors="devcui <devcui@qq.com>"
+
+# WORKDIR /usr/src/app
+# RUN git clone --depth 1 --branch site https://github.com/hbyunzai/yelon-builds.git .
+
+# EXPOSE 80
+# CMD [ "node", "server/main.js" ]
+
+
 FROM node:lts as dist
-LABEL authors="devcui"
-LABEL email="devcui@outlook.com"
+MAINTAINER authors="devcui <devcui@qq.com>"
 WORKDIR /dist
 RUN git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/yelon.git . \
     && sed -i 's/\/yelon\//\//g' /dist/index.html \
@@ -13,5 +23,3 @@ COPY --from=dist /dist /usr/share/nginx/html
 COPY --from=dist /dist/_nginx/default.conf /etc/nginx/conf.d/
 
 CMD ["nginx", "-g", "daemon off;"]
-
-

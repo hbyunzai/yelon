@@ -3,11 +3,11 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import * as colors from 'ansi-colors';
 
 import { Schema as ApplicationOptions } from '../application/schema';
-import { readJSON, readPackage } from '../utils';
+import { DEFAULT_WORKSPACE_PATH, readJSON, readPackage } from '../utils';
 import { getNodeMajorVersion } from '../utils/node';
 import { Schema as NgAddOptions } from './schema';
 
-const V = 14;
+const V = 15;
 
 function genRules(options: NgAddOptions): Rule {
   return () => {
@@ -55,7 +55,7 @@ function genRules(options: NgAddOptions): Rule {
 }
 
 function isYarn(tree: Tree): boolean {
-  return readJSON(tree, '/angular.json')?.cli?.packageManager === 'yarn';
+  return readJSON(tree, DEFAULT_WORKSPACE_PATH)?.cli?.packageManager === 'yarn';
 }
 
 function finished(): Rule {
@@ -79,7 +79,7 @@ export default function (options: NgAddOptions): Rule {
     }
 
     const nodeVersion = getNodeMajorVersion();
-    const allowNodeVersions = [12, 14, 16];
+    const allowNodeVersions = [14, 16, 18];
     if (!allowNodeVersions.some(v => nodeVersion === v)) {
       const versions = allowNodeVersions.join(', ');
       throw new SchematicsException(
@@ -99,7 +99,7 @@ export default function (options: NgAddOptions): Rule {
     }
     if (!ngCoreVersion.startsWith(`${V}.`)) {
       throw new SchematicsException(
-        `Sorry, the current version only supports angular ${V}.x, pls downgrade the global Anguar-cli version: [yarn global add @angular/cli@${V}] (or via npm: [npm install -g @angular/cli@${V}])`
+        `Sorry, the current version only supports angular ${V}.x, pls downgrade the global Angular-cli version: [yarn global add @angular/cli@${V}] (or via npm: [npm install -g @angular/cli@${V}])`
       );
     }
 

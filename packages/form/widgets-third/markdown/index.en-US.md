@@ -12,7 +12,7 @@ Markdown Editor
 
 **Installation dependencies**  
 
-Since the Markdown editor relies on a third-party plug-in [ngx-simplemde](https://github.com/cipchk/ngx-simplemde), the dependency should be installed first when using it
+Since the Markdown editor relies on a third-party plug-in [ngx-simplemde](https://github.com/devcui/ngx-simplemde), the dependency should be installed first when using it
 
 `yarn add ngx-simplemde`
 
@@ -88,5 +88,5 @@ After using `style.less` as the style entry, you need to import the style file o
 
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
-| `[options]` | Configuration options, [official website](https://github.com/cipchk/ngx-simplemde) | `object` | - |
+| `[options]` | Configuration options, [official website](https://github.com/devcui/ngx-simplemde) | `object` | - |
 | `[change]` | Callback function when content in editor is changed | `(md: string) => void` | - |

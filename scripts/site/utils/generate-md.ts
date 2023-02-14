@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { highlight } from '../converters/highlight';
 import { escapeHTML, genAttr, generateSluggedId, isHeading, isStandalone } from './utils';
 
@@ -57,7 +56,7 @@ const converters = [highlight()].concat([
     (node: any, index: number) => {
       const attrs = { ...JsonML.getAttributes(node) };
       let target = attrs.href.startsWith('//') || attrs.href.startsWith('http') ? ' target="_blank"' : '';
-      if (~attrs.href.indexOf('ng.yunzainfo.com')) target = '';
+      if (~attrs.href.indexOf('ng-yunzai.com')) target = '';
       return `<a${target} href="${attrs.href}" data-url="${attrs.href}">${JsonML.getChildren(node)
         .map(toHtml)
         .join('')}</a>`;

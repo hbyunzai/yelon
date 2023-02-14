@@ -37,7 +37,7 @@ export class DemoComponent implements OnInit {
         this.value = 'https://ng.yunzainfo.com/';
         break;
       case 'email':
-        this.value = 'mailto:cipchk@qq.com';
+        this.value = 'mailto:devcui@outlook.com';
         break;
       case 'tel':
         this.value = 'tel:15900000000';
@@ -48,14 +48,14 @@ export class DemoComponent implements OnInit {
       case 'vcard':
         this.value = `BEGIN:VCARD
 VERSION:4.0
-N:色;卡;;Mr.;
-FN:卡色
+N:cui;dev;;Mr.;
+FN:devcui
 ORG:NG-YUNZAI
 TITLE:NG-YUNZAI
 PHOTO;MEDIATYPE=image/svg:https://ng.yunzainfo.com/assets/img/logo-color.svg
 TEL;TYPE=work,voice;VALUE=uri:tel:15900000000
 ADR;TYPE=WORK;PREF=1;LABEL="中国上海":;;上海;中国
-EMAIL:cipchk@qq.com
+EMAIL:devcui@qq.com
 x-qq:94458893
 END:VCARD`;
         break;

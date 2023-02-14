@@ -19,7 +19,6 @@ Enter a number within certain range with the mouse or keyboard.
 | `[multipleOf]` | Restricted to a multiple of a given number, | `number` | `1` |
 | `[change]` | Change event for the number | `(val?: number) => void` | - |
 
-
 ### ui
 
 | Property | Description | Type | Default |
@@ -29,7 +28,7 @@ Enter a number within certain range with the mouse or keyboard.
 | `[formatter]` | Specifies the format of the value presented | - | - |
 | `[parser]` | Specifies the value extracted from nzFormatter | - | - |
 | `[precision]` | precision of input value | - | - |
-| `[widgetWidth]` | Specify `nz-number` width | `number` | `90` |
+| `[widgetWidth]` | Specify `nz-number` width | `number, string` | `90` |
 | `[hideStep]` | Hide step icon | `boolean` | `false` |
 
 ## QA

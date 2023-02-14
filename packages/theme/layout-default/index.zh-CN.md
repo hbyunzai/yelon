@@ -88,7 +88,7 @@ export class LayoutBasicComponent {
 }
 ```
 
-除此之外，在布局的操作都可以通过 `SettingsService.notify` 来订阅布局的变化（例如：侧边栏的展开与收缩等），注意所有布局相关的变化都会通过这个接口，所以需要做好 `filter` 操作。
+通过 `LayoutDefaultService` 服务可以在运行时动态管理布局。除此之外，在布局的操作都可以通过 `SettingsService.notify` 来订阅布局的变化（例如：侧边栏的展开与收缩等），注意所有布局相关的变化都会通过这个接口，所以需要做好 `filter` 操作。
 
 ## API
 
@@ -98,6 +98,7 @@ export class LayoutBasicComponent {
 |----|----|----|-----|
 | `[options]` | 选项 | `LayoutDefaultOptions` | `-` |
 | `[asideUser]` | 侧边用户信息 | `TemplateRef<void>` | `-` |
+| `[asideBottom]` | 侧边底部信息 | `TemplateRef<void>` | `-` |
 | `[nav]` | 导航信息 | `TemplateRef<void>` | `-` |
 | `[content]` | 内容信息 | `TemplateRef<void>` | `-` |
 | `[customError]` | 自定义异常路由错误消息，当 `null` 时表示不显示错误消息 | `string, null` | `Could not load ${evt.url} route` |
@@ -112,6 +113,9 @@ export class LayoutBasicComponent {
 | `[logoFixWidth]` | 指定固定 Logo 宽度 | `number` | - |
 | `[logoLink]` | 指定 Logo 路由地址 | `string` | `/` |
 | `[hideAside]` | 隐藏侧边栏，同时不显收缩图标按钮 | `boolean` | `false` |
+| `[hideHeader]` | 隐藏顶栏 | `boolean` | `false` |
+| `[showHeaderCollapse]` | 是否在顶栏显示菜单折叠按钮 | `boolean` | `true` |
+| `[showSiderCollapse]` | 是否在侧边栏底部显示菜单折叠按钮 | `boolean` | `false` |
 
 ### layout-default-nav
 
@@ -136,6 +140,10 @@ export class LayoutBasicComponent {
 ### layout-default-header-item-trigger
 
 头部项的触发样式。
+
+### layout-default-top-menu-item
+
+头部业务菜单项，使用方式请参考 [layout.component.ts](https://github.com/hbyunzai/yelon/blob/master/src/dev/layout.component.ts#L65-L72)([预览](https://ng.yunzainfo.com/dev/home))。
 
 ## 布局说明
 
@@ -191,7 +199,7 @@ export class LayoutBasicComponent {
 | `@yunzai-default-aside-nav-icon-width` | `14px` | 侧边栏菜单 ICON 宽度 |
 | `@yunzai-default-aside-nav-img-wh` | `14px` | 侧边栏菜单图像宽高 |
 | `@yunzai-default-aside-nav-padding-top-bottom` | `@layout-gutter` | 侧边栏菜单项上下内边距 |
-| `@yunzai-default-aside-nav-item-height` | `38px` | 侧边栏菜单项高度 |
+| `@yunzai-default-aside-nav-padding-left-right` | `@layout-gutter * 2` | 侧边栏菜单项左右内边距 |
 | `@yunzai-default-aside-nav-text-color` | `rgba(0, 0, 0, 0.65)` | 侧边栏菜单文本颜色 |
 | `@yunzai-default-aside-nav-text-hover-color` | `#108ee9` | 侧边栏菜单文本悬停颜色 |
 | `@yunzai-default-aside-nav-group-text-color` | `rgba(0, 0, 0, 0.43)` | 侧边栏菜单分组文本颜色 |
@@ -237,11 +245,6 @@ export class LayoutBasicComponent {
 
 当调用 `MenuService.setItem(key, newValue)` 时会自动重新渲染主菜单，其中 `key` 必须是存在值，请参考 [Menu](/theme/menu#Menu) 的定义。
 
-
 **如何控制菜单展开**
 
-利用 `SettingsService.setLayout` 对 `collapsed` 进行操作，例如：
-
-```ts
-SettingsService.setLayout('collapsed', status);
-```
+利用 `LayoutDefaultService.toggleCollapsed()` 来运行时手动控制。

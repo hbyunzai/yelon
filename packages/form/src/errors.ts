@@ -87,17 +87,21 @@ export interface ErrorSchema {
   onlyVisual?: boolean;
   /**
    * 是否忽略某些数据类型校验 `ERRORSDEFAULT`
-   * - 值始终包含 `YelonSchemaFormConfig.ingoreKeywords`
+   * - 值始终包含 `YelonSchemaFormConfig.ignoreKeywords`
    */
-  ingoreKeywords?: string[];
+  ignoreKeywords?: string[];
 
   /**
+   * Whether to force to display `*` on the label to indicate that it is required
+   *
    * 是否强制在标签上显示 `*` 来表示必填，一般在当使用自定义校验 `validator` 可能需要必填项处理
    */
   showRequired?: boolean;
 
   /**
-   * 自定义校验
+   * Custom verification, the final result will be merged with Ajv verification results
+   *
+   * 自定义校验，最后结果会与 Ajv 校验结果进行合并显示
    */
   validator?: (
     value: SFValue,
@@ -106,12 +110,11 @@ export interface ErrorSchema {
   ) => ErrorData[] | Observable<ErrorData[]>;
 
   /**
+   * Form status value, only supports `this.sf.getProperty('/department')?.updateFeedback('validating')` calling method
+   *
    * 表单状态值，只支持 `this.sf.getProperty('/department')?.updateFeedback('validating')` 调用方式
+   *
+   * > 注：若遇到出现校验时失焦，可尝试取消
    */
   feedback?: NzFormControlStatusType;
-
-  /**
-   * @deprecated Will be removed of NG-ZORRO don't support
-   */
-  feedbackIcon?: string | null;
 }

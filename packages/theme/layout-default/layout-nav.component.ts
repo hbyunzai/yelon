@@ -37,7 +37,8 @@ const FLOATINGCLS = 'sidebar-nav__floating';
   templateUrl: './layout-nav.component.html',
   host: {
     '(click)': '_click()',
-    '(document:click)': 'closeSubMenu()'
+    '(document:click)': 'closeSubMenu()',
+    '[class.d-block]': `true`
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -96,7 +97,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
       return false;
     }
     const id = +linkNode.dataset!.id!;
-    // Should be ingore children title trigger event
+    // Should be ignore children title trigger event
     if (isNaN(id)) {
       return false;
     }

@@ -19,13 +19,14 @@ describe('NgYunzaiSchematic: application', () => {
       expect(packageJson.dependencies['@yelon/cache']).toBeDefined();
       expect(packageJson.dependencies['@yelon/mock']).toBeDefined();
     });
-    // it('should be add vscode extensions confir', () => {
-    //   const filePath = '.vscode/extensions.json';
-    //   expect(tree.exists(filePath)).toBe(true, `Not found [${filePath}]`);
-    //   const json = JSON.parse(tree.readContent(filePath));
-    //   expect(json != null).toBe(true);
-    //   expect(json.recommendations[0]).toBe('cipchk.ng-yunzai-extension-pack');
-    // });
+    it('should be add vscode extensions config', () => {
+      const filePath = '.vscode/extensions.json';
+      // eslint-disable-next-line deprecation/deprecation
+      expect(tree.exists(filePath)).toBe(true, `Not found [${filePath}]`);
+      const json = JSON.parse(tree.readContent(filePath));
+      expect(json != null).toBe(true);
+      expect(json.recommendations[0]).toBe('devcui.ng-yunzai-extension-pack');
+    });
   });
 
   describe('#i18n', () => {
@@ -108,6 +109,7 @@ describe('NgYunzaiSchematic: application', () => {
       });
     });
   });
+
   describe('#form', () => {
     it(`should be export json-schema.ts in shared/index.ts`, async () => {
       ({ runner, tree } = await createYunzaiApp({ form: false }));

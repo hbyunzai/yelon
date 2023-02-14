@@ -1,7 +1,6 @@
 import { Tree } from '@angular-devkit/schematics';
 import { parse } from 'jsonc-parser';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function readJSON<T = any>(tree: Tree, jsonFile: string, type?: string): T {
   if (!tree.exists(jsonFile)) return null;
 
@@ -20,7 +19,6 @@ export function readJSON<T = any>(tree: Tree, jsonFile: string, type?: string): 
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function writeJSON(tree: Tree, jsonFile: string, json: any): void {
   tree.overwrite(jsonFile, JSON.stringify(json, null, 2));
 }

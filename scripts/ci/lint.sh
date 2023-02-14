@@ -1,8 +1,30 @@
 #!/bin/bash
 
-set -u -e -o pipefail
+set -e
 
-readonly npm_bin="$(cd $(dirname $0)/../.. | pwd)/node_modules/.bin"
+readonly thisDir=$(cd $(dirname $0); pwd)
 
-npm run lint:ts
-$(npm bin)/stylelint 'packages/**/*.less'
+cd $(dirname $0)/../..
+
+TS=false
+LESS=false
+
+for ARG in "$@"; do
+  case "$ARG" in
+    -ts)
+      TS=true
+      ;;
+    -less)
+      LESS=true
+      ;;
+  esac
+done
+
+if [[ ${TS} == true ]]; then
+  npm run lint:ts
+fi
+
+if [[ ${LESS} == true ]]; then
+  $(npm bin)/stylelint 'packages/**/*.less'
+fi
+

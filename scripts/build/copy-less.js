@@ -33,12 +33,12 @@ function copyTheme() {
     'compact.less',
     `theme-default.less`,
     `theme-dark.less`,
-    `theme-compact.less`,
+    `theme-compact.less`
   ].forEach(fileName => {
     fse.copySync(path.join(root, `packages/theme/${fileName}`), path.join(root, `dist/@yelon/theme/${fileName}`));
   });
 }
 
-['theme', 'abc', 'chart', 'acl', 'form', 'theme/src/pipes','bis'].forEach(name => copyLess(name));
+['theme', 'abc', 'chart', 'acl', 'form', 'theme/src/pipes', 'bis', 'bcs'].forEach(name => copyLess(name));
 
 copyTheme();

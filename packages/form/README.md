@@ -1,16 +1,12 @@
-# @yelon/form [![Build Status](https://dev.azure.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/form.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/form)
+# @yelon/form [![Build Status](https://dev.azure.com/ng-yunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/ng-yunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/form.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/form)
 
 Angular form generation based on JSON-Schema.
 
 ## Links
 
-+ [Document](https://ng.yunzainfo.com/form) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/form))
++ [Document](https://ng.yunzainfo.com/form) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/form)
 + [@yelon Source](https://github.com/hbyunzai/yelon)
 + [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
-
-## Architecture
-
-![Architecture](https://raw.githubusercontent.com/hbyunzai/yelon/master/_screenshot/architecture.png)
 
 ## Troubleshooting
 

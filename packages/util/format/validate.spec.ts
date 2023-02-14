@@ -10,7 +10,12 @@ export const TEST_DATA = {
     { k: '-12', v: true },
     { k: 123, v: true },
     { k: '123.1.2', v: false },
-    { k: '123a', v: false }
+    { k: '123a', v: false },
+    { k: '1.123e-10', v: true },
+    { k: '+1.123e-10', v: true },
+    { k: '+.1e-1', v: true },
+    { k: '1.0e+1', v: true },
+    { k: '1.0e+', v: false }
   ],
   int: [
     { k: '123', v: true },
@@ -40,10 +45,10 @@ export const TEST_DATA = {
     { k: '+8615900000000', v: true }
   ],
   url: [
-    { k: 'http://ng.yunzainfo.com', v: true },
+    { k: 'http://ng-yunzai.com', v: true },
     { k: 'https://ng.yunzainfo.com', v: true },
-    { k: '//ng.yunzainfo.com', v: false },
-    { k: 'ng.yunzainfo.com', v: false },
+    { k: '//ng-yunzai.com', v: false },
+    { k: 'ng-yunzai.com', v: false },
     { k: '中国.com', v: false }
   ],
   ip: [

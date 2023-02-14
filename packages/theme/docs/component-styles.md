@@ -45,7 +45,7 @@ title: 组件样式
 
 ## 主题
 
-NG-YUNZAI 至从 `9.3.x` 开始内置暗黑与紧凑两种主题，对于全局只需要修改 [styles.less](https://github.com/ng-yunzai/ng-yunzai/blob/master/src/styles.less) 一个参数，例如切换为暗黑主题：
+NG-YUNZAI 至从 `9.3.x` 开始内置暗黑与紧凑两种主题，对于全局只需要修改 [styles.less](https://github.com/hbyunzai/ng-yunzai/blob/master/src/styles.less) 一个参数，例如切换为暗黑主题：
 
 ```diff
 - // @import '@yelon/theme/theme-dark.less';

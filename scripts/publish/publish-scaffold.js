@@ -52,7 +52,7 @@ function checkout() {
     `git commit -m "release(${nextVersion}): release ${nextVersion}"`,
     execSyncOptions,
   );
-  execSync(`git push origin publish-${nextVersion}`, execSyncOptions);
+  // execSync(`git push origin publish-${nextVersion}`, execSyncOptions);
   log.success('Please go to GitHub and make a pull request.');
   log.success('Bye!');
 }

@@ -135,9 +135,7 @@ describe('theme: i18n', () => {
           RouterTestingModule.withRoutes([{ path: ':lang', component: TestComponent, canActivate: [YunzaiI18NGuard] }])
         ],
         declarations: [TestComponent],
-        providers: [
-          { provide: YUNZAI_CONFIG, useValue: { themeI18n: { paramNameOfUrlGuard: 'lang' } } as YunzaiConfig }
-        ]
+        providers: [{ provide: YUNZAI_CONFIG, useValue: { themeI18n: { paramNameOfUrlGuard: 'lang' } } as YunzaiConfig }]
       });
       fixture = TestBed.createComponent(TestComponent);
       srv = fixture.debugElement.injector.get(YUNZAI_I18N_TOKEN);
@@ -153,7 +151,7 @@ describe('theme: i18n', () => {
 @Component({
   template: `
     <div id="simple">{{ key | i18n }}</div>
-    <div id="param">{{ key | i18n: params }}</div>
+    <div id="param">{{ key | i18n : params }}</div>
   `
 })
 class TestComponent {

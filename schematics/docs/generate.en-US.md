@@ -41,6 +41,7 @@ ng g ng-yunzai:edit edit -m=trade
 | `--modal` | Specifies using modal mode |
 | `--withoutPrefix` | Without prefix to selectors |
 | `--withoutModulePrefixInComponentName` | Without prefix to component name |
+| `--service` | Specifies how to generate service classes, can be set: `ignore`, `root`, `none` |
 
 ## Module
 
@@ -67,7 +68,6 @@ By default, all the codes are stored under `app/routes`, which can be pointed to
    }
 }
 ```
-
 
 ## Business page
 

@@ -119,12 +119,6 @@
       "description": "The declaring NgModule exports this component.",
       "x-user-analytics": 19
     },
-    "lintFix": {
-      "type": "boolean",
-      "description": "Apply lint fixes after generating the component.",
-      "x-user-analytics": 15,
-      "x-deprecated": "Use \"ng lint --fix\" directly instead."
-    },
     "withoutPrefix": {
       "type": "boolean",
       "description": "指定选择器名不加前缀 (Without prefix to selectors)",
@@ -152,7 +146,7 @@
       "description": "指定是否使用模态框 (Specifies using modal mode)",
       "x-prompt": "Would you like to modal mode?"
     },
-     "service": {
+    "service": {
       "type": "string",
       "description": "The service file to use in the new component.",
       "default": "ignore",

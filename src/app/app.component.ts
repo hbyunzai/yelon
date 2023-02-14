@@ -72,6 +72,7 @@ export class AppComponent {
       const item = meta.getPathByUrl(url);
       title.setTitle(item ? item.title || item.subtitle : '');
     });
+
     i18n.change.subscribe(_ => meta.clearMenu());
   }
 }

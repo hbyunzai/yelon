@@ -120,8 +120,8 @@ export class HomeComponent {
 | `[loading]` | 是否加载状态，当 `true` 重置按钮禁止状态，提交按钮加载状态 | `boolean` | `false` |
 | `[noColon]` | 是否不显示 `label` 后面的冒号 | `boolean` | `false` |
 | `[compact]` | 是否紧凑 | `boolean` | `false` |
-| `[delay]` | 是否延迟渲染，需要手动调用 `refreshSchema()` | `boolean` | `false` |
 | `[cleanValue]` | 是否清理未定义 Schema 的数据 | `boolean` | `false` |
+| `[delay]` | 是否延迟渲染，需要手动调用 `refreshSchema()` | `boolean` | `false` |
 | `(formChange)` | 数据变更时回调 | `EventEmitter<{}>` | - |
 | `(formValueChange)` | 值数据变更时回调 | `EventEmitter<SFValueChange>` | - |
 | `(formSubmit)` | 提交表单时回调 | `EventEmitter<{}>` | - |

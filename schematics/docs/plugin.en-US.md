@@ -83,6 +83,7 @@ ng g ng-yunzai:plugin defaultLanguage --defaultLanguage=zh-tw
 | Slovenian | sl | sl | sl_SI | sl_SI |
 | French | fr | fr | fr_FR | fr_FR |
 | Spanish | es | es | es_ES | es_ES |
+| Italian | it | it | it_IT | it_IT |
 
 ### networkEnv
 
@@ -101,7 +102,7 @@ ng g ng-yunzai:plugin networkEnv --packageManager=yarn -t=remove
 
 ### sts
 
-[ng-yunzai-sts](https://github.com/ng-yunzai/sts) Plugins, Build Swagger APIs to list, edit pages, You can finish some interesting things.
+[ng-yunzai-sts](https://github.com/hbyunzai/sts) Plugins, Build Swagger APIs to list, edit pages, You can finish some interesting things.
 
 ```bash
 # add

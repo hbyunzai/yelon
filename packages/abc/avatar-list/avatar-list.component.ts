@@ -15,6 +15,7 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 
 import { InputNumber, NumberInput } from '@yelon/util/decorator';
+
 import type { NgStyleInterface, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 
 import { AvatarListItemComponent } from './avatar-list-item.component';
@@ -45,7 +46,6 @@ export class AvatarListComponent implements AfterViewInit, OnChanges, OnDestroy 
 
   cls = '';
   avatarSize: NzSizeLDSType = 'default';
-
   @Input()
   set size(value: 'large' | 'small' | 'mini' | 'default') {
     this.cls = `avatar-list__item${value === 'default' ? '' : ` avatar-list__${value}`}`;
@@ -60,7 +60,6 @@ export class AvatarListComponent implements AfterViewInit, OnChanges, OnDestroy 
         break;
     }
   }
-
   @Input() @InputNumber() maxLength = 0;
   @Input() excessItemsStyle: NgStyleInterface | null = null;
 

@@ -33,10 +33,7 @@
       "x-user-analytics": 17
     },
     "routingScope": {
-      "enum": [
-        "Child",
-        "Root"
-      ],
+      "enum": ["Child", "Root"],
       "type": "string",
       "description": "The scope for the new routing module.",
       "default": "Child"
@@ -71,33 +68,18 @@
       "type": "string",
       "description": "The service file to use in the new component.",
       "default": "ignore",
-      "enum": [
-        "ignore",
-        "none",
-        "root"
-      ],
+      "enum": ["ignore", "none", "root"],
       "x-prompt": {
         "message": "Which service injectors would you like to use?",
         "type": "list",
         "items": [
-          {
-            "value": "ignore",
-            "label": "Ignore generation of Service files"
-          },
-          {
-            "value": "root",
-            "label": "Use \"@Injectable({ providedIn: 'root' })\""
-          },
-          {
-            "value": "none",
-            "label": "Use \"@Injectable()\" (Should be automatically register to the nearest module)"
-          }
+          { "value": "ignore", "label": "Ignore generation of Service files" },
+          { "value": "root", "label": "Use \"@Injectable({ providedIn: 'root' })\"" },
+          { "value": "none", "label": "Use \"@Injectable()\" (Should be automatically register to the nearest module)" }
         ]
       },
       "x-user-analytics": 20
     }
   },
-  "required": [
-    "name"
-  ]
+  "required": ["name"]
 }

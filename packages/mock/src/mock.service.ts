@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable, OnDestroy } from '@angular/core';
 
 import { YunzaiConfigService, YunzaiMockConfig } from '@yelon/util/config';

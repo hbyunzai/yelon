@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-zh-CN: 基础
-en-US: Basic
+  zh-CN: 基础
+  en-US: Basic
 ---
 
 基础用法。

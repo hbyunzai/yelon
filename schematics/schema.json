@@ -37,16 +37,11 @@
             "anyOf": [
               {
                 "$ref": "#/definitions/themeItem",
-                "required": [
-                  "theme"
-                ]
+                "required": ["theme"]
               },
               {
                 "$ref": "#/definitions/themeItem",
-                "required": [
-                  "key",
-                  "modifyVars"
-                ]
+                "required": ["key", "modifyVars"]
               }
             ]
           }
@@ -81,9 +76,7 @@
           "default": false
         }
       },
-      "required": [
-        "list"
-      ],
+      "required": ["list"],
       "additionalProperties": false
     },
     "themeItem": {
@@ -100,10 +93,7 @@
         "theme": {
           "description": "Theme type, can be set `dark` and `compact`, must choose between `theme` and `modifyVars`",
           "type": "string",
-          "enum": [
-            "dark",
-            "compact"
-          ]
+          "enum": ["dark", "compact"]
         },
         "projectThemeVar": {
           "description": "Project theme less variables, except for `ng-zorro-antd`, `@yelon/*`, and the specified `projectStylePath` file",
@@ -133,9 +123,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "@primary-color"
-          ]
+          "default": ["@primary-color"]
         },
         "ngZorroAntd": {
           "description": "Specify the ng-zorro-antd directory, defualt: `./node_modules/ng-zorro-antd/`",

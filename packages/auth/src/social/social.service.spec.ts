@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DOCUMENT } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
@@ -40,7 +39,7 @@ class MockLocation {
 
 const MockAuth0 = {
   type: 'auth0',
-  url: `//cipchk.auth0.com/login?client=8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5&redirect_uri=${decodeURIComponent(
+  url: `//devcui.auth0.com/login?client=8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5&redirect_uri=${decodeURIComponent(
     'http://localhost:4200/#/login/callback'
   )}`,
   be: { client: '8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5' },
@@ -129,7 +128,7 @@ describe('auth: social.service', () => {
     const jwtToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6ImNpcGNoayIsImFkbWluIjp0cnVlLCJleHAiOjE1MTQ2NDk2MDB9.nocpzY3UnRLJXg6I7unzvH4JUzcBRYBtf_xQ41xCcTw`;
     const swtData: ITokenModel = {
       token: '1234567890-34567890',
-      user: 'cipchk',
+      user: 'devcui',
       uid: 1,
       role: 'admin',
       permission: [1, 2, 3, 4]
@@ -137,8 +136,8 @@ describe('auth: social.service', () => {
     [
       {
         summary: 'swt via url',
-        url: 'http://localhost:4200/login/callback?token=40SOJV-L8oOwwUIs&name=cipchk&uid=1',
-        be: { token: '40SOJV-L8oOwwUIs', name: 'cipchk', uid: '1' }
+        url: 'http://localhost:4200/login/callback?token=40SOJV-L8oOwwUIs&name=devcui&uid=1',
+        be: { token: '40SOJV-L8oOwwUIs', name: 'devcui', uid: '1' }
       },
       {
         summary: 'jwt via url',

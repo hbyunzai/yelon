@@ -1,0 +1,43 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "debug build",
+      "sourceMaps": false,
+      "program": "${workspaceFolder}/scripts/build/packing.js",
+      "args": ["chart"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "site generate",
+      "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
+      "protocol": "inspector",
+      "internalConsoleOptions": "openOnSessionStart",
+      "args": ["${workspaceFolder}/scripts/site/generate.ts", "getting-started"],
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/scripts/site/tsconfig.json",
+        "TS_NODE_TRANSPILE_ONLY": "true"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "schematics test",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "sourceMaps": true,
+      "internalConsoleOptions": "openOnSessionStart",
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/schematics/tsconfig.spec.json"
+      },
+      "args": ["${workspaceFolder}/schematics/test.ts"]
+    }
+  ]
+}

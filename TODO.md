@@ -1,0 +1,2 @@
+- build-schema.sh
+- docs

@@ -69,7 +69,6 @@ Used API interfaces.
 | `pageViewer` | View Controls |
 | `linkService` | Navigation Service |
 
-
 ## FAQ
 
 ### Why need to specify the height of the pdf component

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fse from 'fs-extra';
 
 import { SiteConfig } from '../interfaces';

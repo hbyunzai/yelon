@@ -1,13 +1,3 @@
-<!--
- * @Author: cui <devcui@outlook.com>
- * @Editor: microsoft vscode
- * @Date: 2021-11-07 10:02:21
- * @LastEditTime: 2021-11-14 12:59:18
- * @LastEditors: cui <devcui@outlook.com>
- * @Description: empty description 
- * @FilePath: \yelon\packages\chart\mini-area\index.md
- * MIT License Copyright (c) 2017-present 卡色<cipchk@qq.com>
--->
 ---
 title: g2-mini-area
 subtitle: 迷你区域图
@@ -40,7 +30,6 @@ module: import { G2MiniAreaModule } from '@yelon/chart/mini-area';
 | `[theme]` | 定制图表主题 | `string | LooseObject` | - |
 | `(clickItem)` | 点击项回调 | `EventEmitter<G2MiniAreaClickItem>` | - |
 | `(ready)` | 当G2完成初始化后调用 | `EventEmitter<Chart>` | - |
-
 
 ### G2MiniAreaData
 

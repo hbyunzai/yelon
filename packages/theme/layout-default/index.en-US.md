@@ -88,7 +88,7 @@ export class LayoutBasicComponent {
 }
 ```
 
-In addition, in layout operations, you can subscribe to layout changes through `SettingsService.notify` (for example: sidebar show and hide, etc.). Note that all layout-related changes will pass through this interface, so you need to do `filter` operation.
+The layout can be dynamically managed at runtime through the `LayoutDefaultService` service. In addition, in layout operations, you can subscribe to layout changes through `SettingsService.notify` (for example: sidebar show and hide, etc.). Note that all layout-related changes will pass through this interface, so you need to do `filter` operation.
 
 ## API
 
@@ -98,6 +98,7 @@ In addition, in layout operations, you can subscribe to layout changes through `
 |----------|-------------|------|---------|
 | `[options]` | Options of the layout | `LayoutDefaultOptions` | `-` |
 | `[asideUser]` | Side user of the layout | `TemplateRef<void>` | `-` |
+| `[asideBottom]` | Bottom information of the layout | `TemplateRef<void>` | `-` |
 | `[nav]` | Nav | `TemplateRef<void>` | `-` |
 | `[content]` | Content | `TemplateRef<void>` | `-` |
 | `[customError]` | Custom exception routing error message, can't show when is `null` | `string, null` | `Could not load ${evt.url} route` |
@@ -112,6 +113,9 @@ In addition, in layout operations, you can subscribe to layout changes through `
 | `[logoFixWidth]` | Specify a fixed logo width | `number` | - |
 | `[logoLink]` | Specify the logo routing address | `string` | `/` |
 | `[hideAside]` | Hide the sidebar without showing the collapsed icon button | `boolean` | `false` |
+| `[hideHeader]` | Hide top bar | `boolean` | `false` |
+| `[showHeaderCollapse]` | Whether to display the menu collapse button on the top bar | `boolean` | `true` |
+| `[showSiderCollapse]` | Whether to show the menu collapse button at the bottom of the sidebar | `boolean` | `false` |
 
 ### layout-default-nav
 
@@ -136,6 +140,10 @@ In addition, in layout operations, you can subscribe to layout changes through `
 ### layout-default-header-item-trigger
 
 The trigger style of the head item.
+
+### layout-default-top-menu-item
+
+Header business menu item, please refer to [layout.component.ts](https://github.com/hbyunzai/yelon/blob/master/src/dev/layout.component.ts#L65-L72)([Preview](https://ng.yunzainfo.com/dev/home)).
 
 ## Layout description
 
@@ -191,7 +199,7 @@ The content area is the business page area, the specification details：
 | `@yunzai-default-aside-nav-icon-width` | `14px` | Width of nav icon |
 | `@yunzai-default-aside-nav-img-wh` | `14px` | Width & height of nav image |
 | `@yunzai-default-aside-nav-padding-top-bottom` | `@layout-gutter` | Vertical padding of nav |
-| `@yunzai-default-aside-nav-item-height` | `38px` | Item height of nav |
+| `@yunzai-default-aside-nav-padding-left-right` | `@layout-gutter * 2` | Horizontal padding of nav |
 | `@yunzai-default-aside-nav-text-color` | `rgba(0, 0, 0, 0.65)` | Nav text color |
 | `@yunzai-default-aside-nav-text-hover-color` | `#108ee9` | Nav text hover color |
 | `@yunzai-default-aside-nav-group-text-color` | `rgba(0, 0, 0, 0.43)` | Group text color |
@@ -239,8 +247,4 @@ The menu will be re-rendered via calling `MenuService.setItem(key, newValue)`, p
 
 **How to control menu expand**
 
-Use `SettingsService.setLayout` to operate on `collapsed`, for example:
-
-```ts
-SettingsService.setLayout('collapsed', status);
-````
+Use `LayoutDefaultService.toggleCollapsed()` for manual control at runtime.

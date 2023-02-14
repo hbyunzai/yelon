@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-// import { Router } from '@angular/router';
 import {
   AppstoreOutline,
   BellOutline,
@@ -25,6 +25,7 @@ import {
 import { ReuseCustomContextMenu } from '@yelon/abc/reuse-tab';
 import { YUNZAI_I18N_TOKEN, Menu, MenuService, RTLService, SettingsService, User } from '@yelon/theme';
 import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
+import { deepCopy } from '@yelon/util/other';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -60,6 +61,16 @@ const ICONS = [
           <i nz-icon nzType="github"></i>
         </a>
       </layout-default-header-item>
+      <layout-default-header-item direction="middle">
+        <layout-default-top-menu-item
+          *ngFor="let m of topMenus"
+          (click)="changeMenu(m.key)"
+          [selected]="m.selected"
+          [disabled]="m.disabled"
+        >
+          <i nz-icon nzType="github"></i> {{ m.label }}
+        </layout-default-top-menu-item>
+      </layout-default-header-item>
       <layout-default-header-item direction="right">
         <a class="yunzai-default__nav-item" (click)="rtl.toggle()">{{ rtl.nextDir | uppercase }}</a>
       </layout-default-header-item>
@@ -94,7 +105,11 @@ const ICONS = [
 export class DevLayoutComponent implements OnInit {
   options: LayoutDefaultOptions = {
     logoExpanded: `./assets/logo-full.svg`,
-    logoCollapsed: `./assets/logo.svg`
+    logoCollapsed: `./assets/logo.svg`,
+    hideHeader: false,
+    showHeaderCollapse: false,
+    showSiderCollapse: true
+    // hideAside: true
   };
 
   lang: LangType = 'zh-CN';
@@ -102,6 +117,11 @@ export class DevLayoutComponent implements OnInit {
   get user(): User {
     return this.settings.user;
   }
+  topMenus: Array<{ key: string; label: string; selected?: boolean; disabled?: boolean }> = [
+    { key: '', label: 'Default', selected: true },
+    { key: 'bus', label: 'Bus', selected: false },
+    { key: 'disabled', label: 'Disabbled', disabled: true }
+  ];
 
   menus: Menu[] = [
     {
@@ -110,18 +130,17 @@ export class DevLayoutComponent implements OnInit {
       children: [
         {
           text: 'Dashboard-DISABLED',
-          link: '/dev',
+          link: '/dev/home',
           icon: 'anticon anticon-dashboard',
           i18n: 'app.header.menu.home',
-          badge: 5,
-          disabled: true
+          badge: 5
         },
-        { text: '测试view1-id', link: '/dev/view/1' },
-        { text: '测试view2-id', link: '/dev/view/2' },
-        { text: 'lazy测试1', link: '/dev/lazy/p1' },
-        { text: 'lazy测试2', link: '/dev/lazy/p2' },
-        { text: 'lazy测试view1-id', link: '/dev/lazy/1/view' },
-        { text: 'lazy测试view2-id', link: '/dev/lazy/2/view' },
+        { text: '测试view1-id', link: '/dev/view/1', icon: 'anticon anticon-appstore' },
+        { text: '测试view2-id', link: '/dev/view/2', icon: 'anticon anticon-appstore' },
+        { text: 'lazy测试1', link: '/dev/lazy/p1', icon: 'anticon anticon-appstore' },
+        { text: 'lazy测试2', link: '/dev/lazy/p2', icon: 'anticon anticon-appstore' },
+        { text: 'lazy测试view1-id', link: '/dev/lazy/1/view', icon: 'anticon anticon-appstore' },
+        { text: 'lazy测试view2-id', link: '/dev/lazy/2/view', icon: 'anticon anticon-appstore' },
         {
           text: 'Level1',
           link: '#',
@@ -187,12 +206,30 @@ export class DevLayoutComponent implements OnInit {
     private menuSrv: MenuService,
     public settings: SettingsService,
     public msgSrv: NzMessageService,
-    // private router: Router,
+    private router: Router,
     @Inject(YUNZAI_I18N_TOKEN) private i18n: I18NService,
     public rtl: RTLService
   ) {
     iconSrv.addIcon(...ICONS);
     // this.testReuse();
+  }
+
+  changeMenu(key: string): void {
+    this.menuSrv.add(
+      key === ''
+        ? deepCopy(this.menus)
+        : [
+            {
+              text: 'test',
+              group: true,
+              children: [{ text: `TYPE - ${key}`, link: '/dev/view/1', icon: 'anticon anticon-appstore' }]
+            }
+          ]
+    );
+    for (let tm of this.topMenus) {
+      tm.selected = tm.key === key;
+    }
+    this.loadFirstValidMenu();
   }
 
   // private testReuse(): void {
@@ -219,6 +256,17 @@ export class DevLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menuSrv.add(this.menus);
+    this.menuSrv.add(deepCopy(this.menus));
+  }
+
+  private loadFirstValidMenu(): void {
+    let res: Menu | undefined;
+    this.menuSrv.visit(this.menuSrv.menus, item => {
+      if (res == null && item.hide !== true && item.link != null && item.link.length > 0) {
+        res = item;
+      }
+    });
+    if (res == null) return;
+    this.router.navigateByUrl(res.link!!);
   }
 }

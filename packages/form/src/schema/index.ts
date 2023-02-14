@@ -131,8 +131,8 @@ export interface SFSchema {
    *
    * ```json
    * [
-   *   { "name": "cipchk1", "age": 18 },
-   *   { "name": "cipchk2", "age": 16 }
+   *   { "name": "devcui1", "age": 18 },
+   *   { "name": "devcui2", "age": 16 }
    * ]
    * ```
    */

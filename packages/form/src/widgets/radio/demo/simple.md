@@ -17,8 +17,7 @@ Simplest of usage.
 import { Component } from '@angular/core';
 import { SFRadioWidgetSchema, SFSchema } from '@yelon/form';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { of } from 'rxjs';
-import { delay } from 'rxjs';
+import { of, delay } from 'rxjs';
 
 @Component({
   selector: 'app-demo',

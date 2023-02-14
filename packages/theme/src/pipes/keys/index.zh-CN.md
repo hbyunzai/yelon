@@ -10,7 +10,7 @@ type: Pipe
 例如：
 
 ```typescript
-const data = { name: 'cipchk', address: { city: 'shanghai', district: 'changning' } };
+const data = { name: 'devcui', address: { city: 'shanghai', district: 'changning' } };
 ```
 
 变成可迭代对象：

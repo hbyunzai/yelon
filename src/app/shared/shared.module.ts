@@ -42,7 +42,7 @@ const COMPONENTS = [
   ...DIALOG_COMPONENTS
 ];
 
-const THIRDS = [HighlightJsModule, GithubButtonModule, NgxTinymceModule,  ColorSketchModule];
+const THIRDS = [HighlightJsModule, GithubButtonModule, NgxTinymceModule, ColorSketchModule];
 
 @NgModule({
   imports: [

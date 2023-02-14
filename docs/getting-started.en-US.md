@@ -22,7 +22,7 @@ This document uses the following conventions:
 
 ## Preparation
 
-You will need [node](http://nodejs.org/) and [git](https://git-scm.com/). The project is based on [Typescript](https://www.tslang.com/), [Angular](https://angular.io/), [g2](http://g2.alipay.com/), [@yelon](https://github.com/ng-yunzai/yelon) and [ng-zorro-antd](https://ng.ant.design/). It would be helpful if you have pre-existing knowledge on those.
+You will need [node](http://nodejs.org/) and [git](https://git-scm.com/). The project is based on [Typescript](https://www.tslang.com/), [Angular](https://angular.io/), [g2](http://g2.alipay.com/), [@yelon](https://github.com/hbyunzai/yelon) and [ng-zorro-antd](https://ng.ant.design/). It would be helpful if you have pre-existing knowledge on those.
 
 ## Installation
 
@@ -44,7 +44,7 @@ yarn start
 ### Clone the Git Repository
 
 ```bash
-git clone --depth=1 https://github.com/ng-yunzai/ng-yunzai.git my-project
+git clone --depth=1 https://github.com/hbyunzai/ng-yunzai.git my-project
 cd my-project
 yarn
 yarn start
@@ -111,7 +111,7 @@ This will automatically open [http://localhost:4200](http://localhost:4200). If 
 
 Please read our [CONTRIBUTING.md](/docs/contributing) first.
 
-If you'd like to help us improve NG-ZORRO, just create a [Pull Request](https://github.com/ng-yunzai/ng-yunzai/pulls). Feel free to report bugs and issues [here](https://github.com/ng-yunzai/ng-yunzai/issues).
+If you'd like to help us improve NG-ZORRO, just create a [Pull Request](https://github.com/hbyunzai/ng-yunzai/pulls). Feel free to report bugs and issues [here](https://github.com/hbyunzai/ng-yunzai/issues).
 
 > If you're new to posting issues, we ask that you read [*How To Ask Questions The Smart Way*](http://www.catb.org/~esr/faqs/smart-questions.html)(This guide does not provide actual support services for this project!) and [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
 

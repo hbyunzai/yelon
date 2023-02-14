@@ -93,12 +93,17 @@ yarn config delete sass_binary_site
 
 缺少语言导入，参考[app.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/app.module.ts#L6-L25)。
 
-### 如何本地部署ng.yunzainfo.com文档
+### 如何本地部署ng-yunzai.com文档
 
-我们提供一份在线快照：
+线上文档将只保留最近三个主版本号的数据，若是低版本可以通过本地部署来查看：
 
-```barsh
-git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/yelon.git docs
+```bash
+git clone --depth 1 -b full https://github.com/hbyunzai/archive-docs.git ng-yunzai-doc
+cd ng-yunzai-doc
+yarn
+yarn start
 ```
 
-你可以简单的创建一个 Docker 容器来快速部署 ng.yunzainfo.com 相同的文档站点。
+### 修复360浏览器下部分显示异常
+
+部分360浏览器内置的 Chrome 核心过低，导致部分 CSS3 未支持，可以手动增加 `.browserslistrc` 更多细节参考  [#2310](https://github.com/hbyunzai/ng-yunzai/issues/2310#issuecomment-1299460266)。

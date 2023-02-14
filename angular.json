@@ -1,11 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": "102666b5-dd82-4366-a74f-13ea20486ab4",
-    "packageManager": "yarn"
-  },
   "version": 1,
   "newProjectRoot": "projects",
+  "cli": {
+    "packageManager": "yarn",
+    "analytics": false
+  },
   "projects": {
     "site": {
       "projectType": "application",
@@ -51,10 +51,7 @@
               {
                 "glob": "**/(build|web)/**",
                 "input": "./node_modules/pdfjs-dist/",
-                "ignore": [
-                  "*.js.map",
-                  "*.d.ts"
-                ],
+                "ignore": ["*.js.map", "*.d.ts"],
                 "output": "assets/pdfjs/"
               },
               {
@@ -68,9 +65,7 @@
               "src/styles.less"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules/"
-              ]
+              "includePaths": ["node_modules/"]
             },
             "scripts": [
               "node_modules/aos/dist/aos.js"
@@ -189,20 +184,21 @@
           "options": {
             "main": "packages/test.ts",
             "karmaConfig": "packages/karma.conf.js",
-            "polyfills": "packages/polyfills.ts",
-            "tsConfig": "packages/tsconfig.spec.json",
-            "scripts": [
-              "node_modules/@antv/g2/dist/g2.min.js",
-              "node_modules/@antv/data-set/dist/data-set.js"
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
             ],
-            "codeCoverageExclude": [
-              "schematics/**",
-              "packages/testing/**"
+            "tsConfig": "packages/tsconfig.spec.json",
+            "scripts": ["node_modules/@antv/g2/dist/g2.min.js", "node_modules/@antv/data-set/dist/data-set.js"],
+            "codeCoverageExclude": ["schematics/**", "packages/testing/**"],
+            "include": [
+              "./test.ts",
+              // "**/select.widget.spec.ts"
+              "**/*.spec.ts"
             ]
           }
         }
       }
     }
-  },
-  "defaultProject": "site"
+  }
 }

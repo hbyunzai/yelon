@@ -1,8 +1,8 @@
 ---
 order: 9
 title:
-zh-CN: 批量重置错误消息
-en-US: Bulk reset error value
+  zh-CN: 批量重置错误消息
+  en-US: Bulk reset error value
 ---
 
 ## zh-CN

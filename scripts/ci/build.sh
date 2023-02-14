@@ -1,64 +1,39 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-set -u -e -o pipefail
+set -e
 
-# vars
-readonly p_project=$(cd $(dirname $0)/../.. | pwd)
-readonly p_scaffold=${p_project}/ng-yunzai
-readonly p_packages=${p_project}/packages
-readonly p_schematics=${p_project}/schematics
-readonly p_scripts=${p_project}/scripts
-readonly p_build=${p_scripts}/build
-readonly p_ci=${p_scripts}/ci
-readonly p_src=${p_project}/src
-readonly p_license=${p_project}/LICENSE
-readonly p_packages_dist=${p_project}/dist/@yelon
-readonly p_schematics_dist=${p_project}/dist/ng-yunzai
+readonly thisDir=$(cd $(dirname $0); pwd)
 
-# all function
-source ${p_ci}/util.sh
-source ${p_ci}/build-yelon.sh
-source ${p_ci}/build-less.sh
-source ${p_ci}/build-schematics.sh
-
-# options
-BUILD_PACKAGES=false
-BUILD_SCHEMATICS=false
-BUILD_LESS=false
-CLONE_SCAFFOLD=false
-TEST_CLI=false
-INTEGRATION=false
-# format options
+TRAVIS=false
 for ARG in "$@"; do
   case "$ARG" in
-  -packages)
-    BUILD_PACKAGES=true
-    ;;
-  -schematics)
-    BUILD_SCHEMATICS=true
-    ;;
-  -less)
-    BUILD_LESS=true
-    ;;
-  -scaffold)
-    CLONE_SCAFFOLD=true
-    ;;
+    -travis)
+      TRAVIS=true
+      ;;
   esac
 done
 
-# builds
-if [[ ${CLONE_SCAFFOLD} == true ]]; then
-  cloneScaffold
-fi
+cd $(dirname $0)/../..
 
-if [[ ${BUILD_PACKAGES} == true ]]; then
-  buildYelon
-fi
+DIST="$(pwd)/dist"
 
-if [[ ${BUILD_LESS} == true ]]; then
-  buildYelonLess
-fi
+cloneScaffold() {
+  if [[ ! -d ng-yunzai ]]; then
+    echo ">>> Not found scaffold source files, must be clone ng-yunzai ..."
+    git clone --depth 1 https://github.com/hbyunzai/ng-yunzai.git
+  else
+    echo ">>> Found scaffold source files"
+  fi
+}
 
-if [[ ${BUILD_SCHEMATICS} == true ]]; then
-  buildSchematics
-fi
+buildYelon() {
+  ./scripts/ci/build-yelon.sh
+}
+
+buildSchematies() {
+  ./scripts/ci/build-schematics.sh -b -copy -clone
+}
+
+cloneScaffold
+buildYelon
+buildSchematies

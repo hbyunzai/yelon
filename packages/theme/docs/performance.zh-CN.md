@@ -4,7 +4,7 @@ order: 10
 title: 包体优化
 ---
 
-ng-yunzai 除了提供主题方案以外，还包含一套类似 Bootstrap 的工具集，并且严格遵守 Antd 的设计价值观，对于熟悉 Bootstrap 的人来说会非常友好，因为所有命名方式都尽可能与 Bootstrap 相同。同时，我们为 VSCode 写的 [ng-yunzai插件](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode) 会自动为你提供这套CSS工具集的智能提醒。
+ng-yunzai 除了提供主题方案以外，还包含一套类似 Bootstrap 的工具集，并且严格遵守 Antd 的设计价值观，对于熟悉 Bootstrap 的人来说会非常友好，因为所有命名方式都尽可能与 Bootstrap 相同。同时，我们为 VSCode 写的 [ng-yunzai插件](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode) 会自动为你提供这套CSS工具集的智能提醒。
 
 ## 如何优化
 

@@ -20,7 +20,7 @@ Making a set of widgets for project can lead to faster development work.
 
 **Third-party library**
 
-By default `@yelon/form` implements some common third-party library widgets, which are called third-party component widgets. This widget exists in [widgets-third](https://github.com/ng-yunzai /yelon/tree/master/packages/form/widgets-third) directory; you can use directly.
+By default `@yelon/form` implements some common third-party library widgets, which are called third-party component widgets. This widget exists in [widgets-third](https://github.com/hbyunzai /yelon/tree/master/packages/form/widgets-third) directory; you can use directly.
 
 | Name | Description | Document | Source |
 | ---- | ----------- | -------- | ------ |

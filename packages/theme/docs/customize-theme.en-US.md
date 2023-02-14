@@ -73,7 +73,7 @@ Note: Make sure theme variables exist in global styles, not in component scope s
 yarn add ng-yunzai-plugin-theme -D
 ```
 
-> [ng-yunzai-plugin-theme](https://github.com/ng-yunzai/plugin-theme) is to generate `color.less` and theme CSS files for NG-YUNZAI.
+> [ng-yunzai-plugin-theme](https://github.com/hbyunzai/plugin-theme) is to generate `color.less` and theme CSS files for NG-YUNZAI.
 
 Add `theme` node in `ng-yunzai.json`:
 

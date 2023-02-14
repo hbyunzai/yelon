@@ -15,7 +15,7 @@ import { GlobalFooterLink } from '@yelon/abc/global-footer';
   template: `
     <div style="height: 280px;"></div>
     <global-footer [links]="links">
-      Copyright<i nz-icon nzType="copyright" class="mx-sm"></i>2019<a href="//github.com/cipchk" target="_blank" class="mx-sm">卡色</a>出品
+      Copyright<i nz-icon nzType="copyright" class="mx-sm"></i>2019<a href="//github.com/devcui" target="_blank" class="mx-sm">devcui</a>出品
     </global-footer>
   `,
   styles: [
@@ -35,7 +35,7 @@ export class DemoComponent {
     },
     {
       title: 'Github',
-      href: 'https://github.com/ng-yunzai',
+      href: 'https://github.com/hbyunzai',
       blankTarget: true,
     },
     {

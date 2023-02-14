@@ -5,8 +5,7 @@ import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, MenuService, SettingsService, TitleService } from '@yelon/theme';
 import { ACLService } from '@yelon/acl';<% if (i18n) { %>
 import { I18NService } from '../i18n/i18n.service';<% } %>
-import { Observable, zip, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, zip, of, catchError, map } from 'rxjs';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
@@ -110,7 +109,7 @@ export class StartupService {
     const user: any = {
       name: 'Admin',
       avatar: './assets/tmp/img/avatar.jpg',
-      email: 'cipchk@qq.com',
+      email: 'devcui@outlook.com',
       token: '123456789'
     };
     // Application information: including site name, description, year

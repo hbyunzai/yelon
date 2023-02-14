@@ -23,44 +23,44 @@ const routes: Routes = [
     canActivate: [startPageGuard, SimpleGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘' <% if(!i18n) { %>, titleI18n: 'dashboard' <% } %> } },
-  { path: 'exception', loadChildren: () => import('./exception/exception.module').then(m => m.ExceptionModule) },
-  // 业务子模块
-  // { path: 'widgets', loadChildren: () => import('./widgets/widgets.module').then(m => m.WidgetsModule) },
-]
-  },
-// 空白布局
-// {
-//     path: 'blank',
-//     component: LayoutBlankComponent,
-//     children: [
-//     ]
-// },
-// passport
-{
-  path: 'passport',
-    component: LayoutPassportComponent,
-      children: [
-        { path: 'login', component: UserLoginComponent, data: { title: '登录' <% if(!i18n) { %>, titleI18n: 'pro-login' <% } %> } },
-{ path: 'register', component: UserRegisterComponent, data: { title: '注册' <% if (!i18n) { %>, titleI18n: 'pro-register' <% } %> } },
-{ path: 'register-result', component: UserRegisterResultComponent, data: { title: '注册结果' <% if (!i18n) { %>, titleI18n: 'pro-register-result' <% } %> } },
-{ path: 'lock', component: UserLockComponent, data: { title: '锁屏' <% if (!i18n) { %>, titleI18n: 'lock' <% } %> } },
+      { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘'<% if (!i18n) { %>, titleI18n: 'dashboard'<% } %> } },
+      { path: 'exception', loadChildren: () => import('./exception/exception.module').then(m => m.ExceptionModule) },
+      // 业务子模块
+      // { path: 'widgets', loadChildren: () => import('./widgets/widgets.module').then(m => m.WidgetsModule) },
     ]
   },
-// 单页不包裹Layout
-{ path: 'passport/callback/:type', component: CallbackComponent },
-{ path: '**', redirectTo: 'exception/404' },
+  // 空白布局
+  // {
+  //     path: 'blank',
+  //     component: LayoutBlankComponent,
+  //     children: [
+  //     ]
+  // },
+  // passport
+  {
+    path: 'passport',
+    component: LayoutPassportComponent,
+    children: [
+      { path: 'login', component: UserLoginComponent, data: { title: '登录'<% if (!i18n) { %>, titleI18n: 'pro-login'<% } %> } },
+      { path: 'register', component: UserRegisterComponent, data: { title: '注册'<% if (!i18n) { %>, titleI18n: 'pro-register'<% } %> } },
+      { path: 'register-result', component: UserRegisterResultComponent, data: { title: '注册结果'<% if (!i18n) { %>, titleI18n: 'pro-register-result'<% } %> } },
+      { path: 'lock', component: UserLockComponent, data: { title: '锁屏'<% if (!i18n) { %>, titleI18n: 'lock'<% } %> } },
+    ]
+  },
+  // 单页不包裹Layout
+  { path: 'passport/callback/:type', component: CallbackComponent },
+  { path: '**', redirectTo: 'exception/404' },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(
       routes, {
-      useHash: environment.useHash,
-      // NOTICE: If you use `reuse-tab` component and turn on keepingScroll you can set to `disabled`
-      // Pls refer to https://ng.yunzainfo.com/components/reuse-tab
-      scrollPositionRestoration: 'top',
-    }
+        useHash: environment.useHash,
+        // NOTICE: If you use `reuse-tab` component and turn on keepingScroll you can set to `disabled`
+        // Pls refer to https://ng.yunzainfo.com/components/reuse-tab
+        scrollPositionRestoration: 'top',
+      }
     )],
   exports: [RouterModule],
 })

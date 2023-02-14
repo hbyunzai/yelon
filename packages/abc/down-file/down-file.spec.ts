@@ -7,6 +7,7 @@ import { By } from '@angular/platform-browser';
 
 import * as fs from 'file-saver';
 
+import { _HttpClient } from '@yelon/theme';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { DownFileModule } from './down-file.module';

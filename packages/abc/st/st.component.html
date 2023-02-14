@@ -33,7 +33,7 @@
   [nzFrontPagination]="false"
   [nzBordered]="bordered"
   [nzSize]="size"
-  [nzLoading]="_loading"
+  [nzLoading]="noColumns || _loading"
   [nzLoadingDelay]="loadingDelay"
   [nzLoadingIndicator]="loadingIndicator"
   [nzTitle]="header!"
@@ -54,6 +54,7 @@
   [nzShowTotal]="totalTpl"
   [nzWidthConfig]="_widthConfig"
   (contextmenu)="onContextmenu($event)"
+  [class.st__no-column]="noColumns"
 >
   <thead *ngIf="showHeader">
     <tr *ngFor="let row of _headers; let rowFirst = first">
@@ -66,13 +67,14 @@
           [nzWidth]="$any(_c).width"
           [nzLeft]="_c._left!"
           [nzRight]="_c._right!"
-          [ngClass]="_c.className!"
+          [ngClass]="_c._className"
           [attr.data-col]="_c.indexKey"
           [attr.data-col-index]="index"
           [nzShowSort]="_c._sort.enabled"
           [nzSortOrder]="$any(_c)._sort.default"
           (nzSortOrderChange)="sort(_c, index, $event)"
-          [nzCustomFilter]="$any(_c).filter"
+          [nzCustomFilter]="!!_c.filter"
+          [class.st__has-filter]="_c.filter"
           nz-resizable
           [nzDisabled]="last || $any(_c).resizable.disabled"
           [nzMaxWidth]="$any(_c).resizable.maxWidth"
@@ -122,8 +124,10 @@
                 </div>
               </ng-container>
               <ng-container *ngSwitchDefault>
-                <ng-template [ngTemplateOutlet]="titleTpl" [ngTemplateOutletContext]="{ $implicit: _c.title }">
-                </ng-template>
+                <ng-template
+                  [ngTemplateOutlet]="titleTpl"
+                  [ngTemplateOutletContext]="{ $implicit: _c.title }"
+                ></ng-template>
               </ng-container>
             </ng-container>
           </ng-container>
@@ -143,8 +147,10 @@
   </thead>
   <tbody class="st__body">
     <ng-container *ngIf="!_loading">
-      <ng-template [ngTemplateOutlet]="bodyHeader!" [ngTemplateOutletContext]="{ $implicit: _statistical }">
-      </ng-template>
+      <ng-template
+        [ngTemplateOutlet]="bodyHeader!"
+        [ngTemplateOutletContext]="{ $implicit: _statistical }"
+      ></ng-template>
     </ng-container>
     <ng-template #bodyTpl let-i let-index="index">
       <tr
@@ -176,8 +182,10 @@
         </td>
       </tr>
       <tr [nzExpand]="i.expand">
-        <ng-template [ngTemplateOutlet]="expand" [ngTemplateOutletContext]="{ $implicit: i, index: index }">
-        </ng-template>
+        <ng-template
+          [ngTemplateOutlet]="expand"
+          [ngTemplateOutletContext]="{ $implicit: i, index: index }"
+        ></ng-template>
       </tr>
     </ng-template>
     <ng-container *ngIf="!virtualScroll">

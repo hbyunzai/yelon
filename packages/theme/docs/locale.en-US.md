@@ -56,7 +56,6 @@ Note: `en_US` is the package name, follow below.
 | Spanish | es_ES |
 | Italian | it_IT |
 
-
 ## Add a new language
 
 If you can't find your language, you are welcome to create a locale package based on [en_US](https://github.com/hbyunzai/yelon/tree/master/packages/theme/src/locale/languages/en-US.ts) (You can also refer to [#308](https://github.com/hbyunzai/yelon/pull/308) to contribute language package to us) and send us a pull request.

@@ -1,0 +1,12 @@
+{
+  "name": "@yelon/socket",
+  "version": "0.0.0-PLACEHOLDER",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ng-zorro-antd": "@LIB-PLACEHOLDER",
+    "@stomp/rx-stomp":"@LIB-PLACEHOLDER",
+    "@yelon/util":"PEER-0.0.0-PLACEHOLDER",
+    "@yelon/cache":"PEER-0.0.0-PLACEHOLDER"
+  }
+}

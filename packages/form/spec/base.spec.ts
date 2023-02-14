@@ -37,7 +37,7 @@ let context: TestFormComponent;
 export function builder(options?: {
   detectChanges?: boolean;
   template?: string;
-  ingoreAntd?: boolean;
+  ignoreAntd?: boolean;
   imports?: NzSafeAny[];
 }): {
   fixture: ComponentFixture<TestFormComponent>;
@@ -303,6 +303,14 @@ export class SFPage {
     const node = this.getEl(cls) as HTMLInputElement;
     typeInElement(value, node);
     tick();
+    return this.dc();
+  }
+
+  typeCharByDebugElement(value: NzSafeAny, cls: string = 'input'): this {
+    const node = this.getDl(cls);
+    const input = node.nativeElement as HTMLInputElement;
+    input.focus();
+    node.triggerEventHandler('input', { target: { value } });
     return this.dc();
   }
 

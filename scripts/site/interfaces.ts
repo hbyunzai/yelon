@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SiteConfig {
   /** github 项目地址 */
   github: string;

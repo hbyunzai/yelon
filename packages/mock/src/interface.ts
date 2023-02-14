@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpRequest } from '@angular/common/http';
 
 export class MockOptions {

@@ -1,7 +1,7 @@
 ---
 title:
-zh-CN: 异步
-en-US: async
+  zh-CN: 异步
+  en-US: async
 order: 2
 ---
 
@@ -16,8 +16,7 @@ One subscription and multiple use.
 ```ts
 import { Platform } from '@angular/cdk/platform';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { interval } from 'rxjs';
-import { startWith } from 'rxjs';
+import { interval, startWith } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 

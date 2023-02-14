@@ -4,9 +4,7 @@
       "factory": "./ng-add",
       "description": "Create an Yunzai workspace.",
       "schema": "./ng-add/schema.json",
-      "aliases": [
-        "yunzai-shell"
-      ]
+      "aliases": ["yunzai-shell"]
     },
     "ng-update": {
       "factory": "./ng-update/index#updateToV13",

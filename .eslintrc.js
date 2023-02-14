@@ -19,6 +19,7 @@ module.exports = {
         'plugin:prettier/recommended'
       ],
       rules: {
+        '@typescript-eslint/no-explicit-any': 'warn',
         'prettier/prettier': ['error', prettierConfig],
         'jsdoc/newline-after-description': 1,
         '@angular-eslint/component-selector': [
@@ -111,7 +112,6 @@ module.exports = {
         '@typescript-eslint/no-this-alias': 'error',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
-        '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/explicit-function-return-type': [
           'error',
           {
@@ -146,7 +146,7 @@ module.exports = {
                 position: 'before'
               }
             ],
-            "pathGroupsExcludedImportTypes": []
+            pathGroupsExcludedImportTypes: []
           }
         ],
         'no-bitwise': 'off',

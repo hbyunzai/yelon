@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YunzaiI18NServiceFake } from '@yelon/theme';
 import { deepGet } from '@yelon/util/other';
@@ -49,15 +47,12 @@ describe('st: column-source', () => {
     page = new PageObject();
   }
 
-  it('should be throw error when is empty columns', () => {
-    expect(() => {
-      genModule({});
-      srv.process(null!, { widthMode: null!, resizable: {}, safeType: 'safeHtml' });
-    }).toThrow();
-    expect(() => {
-      genModule({});
-      srv.process([], options);
-    }).toThrow();
+  it('should be support empty columns', () => {
+    genModule({});
+    const res = srv.process([], options);
+    expect(res.columns.length).toBe(0);
+    expect(res.headers.length).toBe(0);
+    expect(res.headerWidths).toBe(null);
   });
 
   describe('[columns property]', () => {
@@ -399,7 +394,7 @@ describe('st: column-source', () => {
       });
       describe('#type', () => {
         describe('with keyword', () => {
-          it('should be ingore specify menus values', () => {
+          it('should be ignore specify menus values', () => {
             const res = srv.process([{ title: '', filter: { type: 'keyword' } }], options).columns[0].filter;
             expect(res!.menus!.length).toBe(1);
           });
@@ -612,7 +607,7 @@ describe('st: column-source', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [{ index: 'id' }] }], options);
         expect(res.headers.length).toBe(2);
       });
-      it('should be ingored grouping columns when children when is empty', () => {
+      it('should be ignored grouping columns when children when is empty', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [] }], options);
         expect(res.headers.length).toBe(1);
       });

@@ -48,7 +48,7 @@ export class SEContainerComponent {
   static ngAcceptInputType_colInCon: NumberInput;
   static ngAcceptInputType_labelWidth: NumberInput;
   static ngAcceptInputType_firstVisual: BooleanInput;
-  static ngAcceptInputType_ingoreDirty: BooleanInput;
+  static ngAcceptInputType_ignoreDirty: BooleanInput;
   static ngAcceptInputType_line: BooleanInput;
   static ngAcceptInputType_noColon: BooleanInput;
 
@@ -82,7 +82,7 @@ export class SEContainerComponent {
 
   @Input() size!: 'default' | 'compact';
   @Input() @InputBoolean() firstVisual!: boolean;
-  @Input() @InputBoolean() ingoreDirty!: boolean;
+  @Input() @InputBoolean() ignoreDirty!: boolean;
   @Input() @InputBoolean() line = false;
   @Input()
   set errors(val: SEErrorRefresh[]) {

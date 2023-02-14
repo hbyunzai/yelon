@@ -1,8 +1,8 @@
 ---
 order: 2
 title:
-zh-CN: 定制化
-en-US: Customization
+  zh-CN: 定制化
+  en-US: Customization
 ---
 
 ## zh-CN

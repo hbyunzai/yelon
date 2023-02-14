@@ -1,4 +1,3 @@
-
 ---
 title: Conditional expression
 type: Examples

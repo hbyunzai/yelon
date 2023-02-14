@@ -93,12 +93,17 @@ Finally, redefine the new path in `src/styles/theme.less`:
 
 For missing language imports, refer to [app.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/app.module.ts#L6-L25).
 
-### How to deploy ng.yunzainfo.com documentation site in local
+### How to deploy ng-yunzai.com documentation site in local
 
-We provided an online snapshot:
+Online documents will only retain the data of the last three major version numbers. If the version is low, you can view it through local deployment:
 
-```barsh
-git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/yelon.git docs
+```bash
+git clone --depth 1 -b full https://github.com/hbyunzai/archive-docs.git ng-yunzai-doc
+cd ng-yunzai-doc
+yarn
+yarn start
 ```
 
-You can simply create a Docker container to quickly deploy the same documentation site as ng.yunzainfo.com.
+### Fix the abnormal display of the lower part of the 360 browser
+
+The built-in Chrome core of some 360 browsers is too low, resulting in some CSS3 not supported, you can manually increase `.browserslistrc` For more details, refer to [#2310](https://github.com/hbyunzai/ng-yunzai/issues/2310#issuecomment-1299460266).

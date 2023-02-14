@@ -44,8 +44,8 @@ export class HeaderSearchComponent implements AfterViewInit {
       const curHost = location.hostname;
       const isLocal = curHost.includes('localhost');
       docsearch({
-        appId: 'M5FWUU1G0X',
-        apiKey: '2fa1e6f2c7ef5b6e15c62df3354bbb0f',
+        appId: 'KNI4PDQPLT',
+        apiKey: 'f77b841e2a1f87742bef959fe09cc80e',
         indexName: `ng-yunzai`,
         inputSelector: '#search-box input',
         algoliaOptions: {

@@ -154,7 +154,6 @@ class RestService extends BaseApi {
   - 当支持 Body 时（例如：`POST`、`PUT`）为内容体等同 `@Body`
   - 当不支持 Body 时（例如：`GET`、`DELETE` 等）为 `QueryString`
 
-
 ## HttpContext
 
 ### CUSTOM_ERROR
@@ -184,7 +183,6 @@ this.http.post(`login`, {
 this.http.get(`/path`) // Request Url: /api/path
 this.http.get(`/path`, { context: new HttpContext().set(IGNORE_BASE_URL, true) }) // Request Url: /path
 ```
-
 
 ### RAW_BODY
 

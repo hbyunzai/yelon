@@ -1,7 +1,7 @@
 ---
 title:
-zh-CN: 抖动与顺序
-en-US: Debounce and order
+  zh-CN: 抖动与顺序
+  en-US: Debounce and order
 order: 0
 ---
 

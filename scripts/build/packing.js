@@ -11,7 +11,7 @@ console.time(`${name}:time`);
 ngPackage
   .ngPackagr()
   .forProject(path.resolve(target, `ng-package.json`))
-  .withTsConfig(path.resolve(target, `tsconfig.lib.json`))
+  .withTsConfig(path.resolve(target, 'tsconfig.lib.json'))
   .build()
   .then(() => {
     console.timeEnd(`${name}:time`);

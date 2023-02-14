@@ -155,14 +155,14 @@ The routing URL may be affected by the browser's own historical memory, so that 
 
 A developer must first sharpen his tools if he is to do his work well, NG-YUNZAI recommended to use the [Visual Studio Code](https://code.visualstudio.com/) IDE, because ng-yunzai adds some extra features to VSCode to better help you. Development.
 
-> Or use the [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-extension-pack) suite directly.
+> Or use the [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-extension-pack) suite directly.
 
 ### Code fragment
 
-- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode)
+- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)
 
 ### Class style smart reminder
 
 ng-yunzai has a lot of built-in toolkit styles ([API](/theme/tools)), and the following plugins can be installed directly into the HTML template.
 
-- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode)
+- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)

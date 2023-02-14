@@ -49,7 +49,6 @@ const option: FormatMaskOption = {
 formatMask('你好123', option) => NH123
 ```
 
-
 ### mega
 
 大数据格式化。

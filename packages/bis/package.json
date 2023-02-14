@@ -13,6 +13,7 @@
     "@yelon/chart": "PEER-0.0.0-PLACEHOLDER",
     "@yelon/form": "PEER-0.0.0-PLACEHOLDER",
     "@yelon/testing": "PEER-0.0.0-PLACEHOLDER",
-    "@yelon/util": "PEER-0.0.0-PLACEHOLDER"
+    "@yelon/util": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/bcs": "PEER-0.0.0-PLACEHOLDER"
   }
 }

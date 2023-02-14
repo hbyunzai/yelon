@@ -55,7 +55,7 @@ Ng Yunzai 会关注所有的 pull request，我们会 review 以及合并你的�
 
 ### yelon 基建类库
 
-1. `npm run site` 在本地运行 ng.yunzainfo.com 网站
+1. `npm run site` 在本地运行 ng-yunzai.com 网站
 2. `npm run lint` 检查 packages 代码风格
 3. `npm run test` 运行 packages 所有类库测试
 4. `npm run release` 构建 packages 发布包

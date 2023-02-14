@@ -3,6 +3,28 @@
   "version": "0.0.0-PLACEHOLDER",
   "author": "devcui<devcui@outlook.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbyunzai/yelon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hbyunzai/ng-yunzai/issues"
+  },
+  "homepage": "https://ng.yunzainfo.com",
+  "keywords": [
+    "@yelon/acl",
+    "angular acl",
+    "ng acl",
+    "ngx acl",
+    "yelon",
+    "ng-yunzai",
+    "yunzai",
+    "antd",
+    "ng-zorro-antd",
+    "acl",
+    "angular",
+    "component"
+  ],
   "dependencies": {
     "@yelon/util": "PEER-0.0.0-PLACEHOLDER"
   }

@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "yunzai-shared-zorro",
+    "entryFile": "index.ts"
+  }
+}

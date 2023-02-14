@@ -41,7 +41,7 @@ ng g ng-yunzai:sta --name=<Swagger name> --url=<远程URL地址> --filePath=<本
   "filePath": "swagger.json",
   "tagsMapping": {
     "部门": "Dept"
-    }
+  }
 }
 ```
 

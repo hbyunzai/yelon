@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ITokenModel } from '../interface';
 import { urlBase64Decode } from './jwt.helper';
 

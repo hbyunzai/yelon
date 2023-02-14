@@ -11,13 +11,12 @@ import { ExceptionModule } from '@yelon/abc/exception';
 import { FooterToolbarModule } from '@yelon/abc/footer-toolbar';
 import { FullContentModule } from '@yelon/abc/full-content';
 import { GlobalFooterModule } from '@yelon/abc/global-footer';
-import { ImageModule } from '@yelon/abc/image';
 import { LoadingModule } from '@yelon/abc/loading';
 import { HotkeyModule } from '@yelon/abc/hotkey';
 import { LodopModule } from '@yelon/abc/lodop';
 import { NoticeIconModule } from '@yelon/abc/notice-icon';
-import { PageHeaderModule } from '@yelon/abc/page-header';
 import { ObserversModule } from '@yelon/abc/observers';
+import { PageHeaderModule } from '@yelon/abc/page-header';
 import { QRModule } from '@yelon/abc/qr';
 import { QuickMenuModule } from '@yelon/abc/quick-menu';
 import { ResultModule } from '@yelon/abc/result';
@@ -39,7 +38,6 @@ const MODULES = [
   ErrorCollectModule,
   FooterToolbarModule,
   DownFileModule,
-  ImageModule,
   AvatarListModule,
   EllipsisModule,
   GlobalFooterModule,

@@ -4,12 +4,13 @@
   "deleteDestPath": true,
   "lib": {
     "flatModuleFile": "bis",
-    "entryFile": "public_api.ts"
+    "entryFile": "index.ts"
   },
   "allowedNonPeerDependencies": [
     "date-fns",
     "ng-zorro-antd",
     "@ant-design/icons-angular",
+    "@yelon/socket",
     "@yelon/theme",
     "@yelon/acl",
     "@yelon/cache",
@@ -19,6 +20,7 @@
     "@yelon/form",
     "@yelon/mock",
     "@yelon/testing",
-    "@yelon/util"
+    "@yelon/util",
+    "@yelon/bcs"
   ]
 }

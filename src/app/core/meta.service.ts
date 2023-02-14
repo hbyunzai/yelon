@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Injectable } from '@angular/core';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
@@ -6,7 +5,6 @@ import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { Meta, MetaList, MetaSearchGroup, MetaSearchGroupItem } from '../interfaces';
 import { META as ACLMeta } from '../routes/gen/acl/meta';
 import { META as AuthMeta } from '../routes/gen/auth/meta';
-import { META as BisMeta } from '../routes/gen/bis/meta';
 import { META as CacheMeta } from '../routes/gen/cache/meta';
 import { META as ChartMeta } from '../routes/gen/chart/meta';
 import { META as CliMeta } from '../routes/gen/cli/meta';
@@ -29,8 +27,7 @@ const FULLMETAS = [
   UtilMeta,
   FormMeta,
   CliMeta,
-  ThemeMeta,
-  BisMeta
+  ThemeMeta
 ] as Meta[];
 
 @Injectable({ providedIn: 'root' })
@@ -48,14 +45,12 @@ export class MetaService {
     for (const g of FULLMETAS) {
       for (const item of g.list!) {
         const curTitle = item.meta![i18n.defaultLang].title;
-        if (curTitle) {
-          item._t =
-            typeof curTitle !== 'string'
-              ? Object.values(curTitle!)
-                  .map(v => v)
-                  .join('-')
-              : curTitle;
-        }
+        item._t =
+          typeof curTitle !== 'string'
+            ? Object.values(curTitle!)
+                .map(v => v)
+                .join('-')
+            : curTitle;
       }
     }
   }

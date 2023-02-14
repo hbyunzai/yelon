@@ -15,6 +15,7 @@ console.log(`Use packagePath: ` + packagePath);
 if (!fs.existsSync(packagePath)) {
   throw Error(`所选的文件不存在, ${packagePath}`)
 }
+
 const json = fs.readJSONSync(packagePath);
 // Update third party
 ['dependencies', 'devDependencies'].forEach(type => {
@@ -28,7 +29,7 @@ const json = fs.readJSONSync(packagePath);
 if (name === 'ng-yunzai') {
   json.version = nextVersion;
 }
-['abc', 'acl', 'auth', 'chart', 'cache', 'mock', 'form', 'theme', 'util','bis'].forEach(v => {
+['abc', 'acl', 'auth', 'chart', 'cache', 'mock', 'form', 'theme', 'util'].forEach(v => {
   json.dependencies[`@yelon/${v}`] = `^${nextVersion}`;
 });
 json.devDependencies[`@yelon/testing`] = `^${nextVersion}`;

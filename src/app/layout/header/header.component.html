@@ -34,11 +34,11 @@
         </ul>
       </nz-dropdown-menu>
     </li>
-    <li nz-menu-item>
-      <a href="https://ng.yunzainfo.com/" target="_blank">
+    <!-- <li nz-menu-item>
+      <a href="https://e.ng-yunzai.com/" target="_blank">
         {{ 'app.header.menu.themes' | i18n }}
       </a>
-    </li>
+    </li> -->
     <ng-container *ngIf="isMobile">
       <a nz-menu-item href="https://github.com/hbyunzai/ng-yunzai" target="_blank">Github</a>
       <li nz-menu-item (click)="langChange(i18n.zone === 'zh' ? 'en' : 'zh')">
@@ -74,7 +74,7 @@
     <ng-container *ngIf="!isMobile">
       <ng-template [ngTemplateOutlet]="menu"></ng-template>
       <nz-select nzSize="small" class="version" [ngModel]="currentVersion" (ngModelChange)="toVersion($event)">
-        <nz-option *ngFor="let version of oldVersionList" [nzLabel]="version" [nzValue]="version"></nz-option>
+        <nz-option *ngFor="let version of oldVersionList" [nzLabel]="version + '.x'" [nzValue]="version"></nz-option>
         <nz-option [nzLabel]="currentVersion" [nzValue]="currentVersion"></nz-option>
       </nz-select>
       <button

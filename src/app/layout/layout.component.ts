@@ -1,8 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { delay, filter, takeUntil } from 'rxjs/operators';
+import { Subject, delay, filter, takeUntil } from 'rxjs';
 
 import { RTL, RTLService, SettingsService } from '@yelon/theme';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -77,7 +76,7 @@ export class LayoutComponent implements OnDestroy {
     this.location.replaceState(path, (direction === RTL ? `?direction=${RTL}` : '') + fragment);
   }
 
-  themeChange(theme: any): void {
+  themeChange(theme: string): void {
     this.appSrv.setTheme(theme as SiteTheme);
   }
 

@@ -48,7 +48,6 @@ ng g ng-yunzai:edit edit -m=trade
 
 > ng-yunzai 有自己的一套文件组织结构，当你破坏这些结构时，可能会导致下列指令产生异常。
 
-
 | 参数 | 描述 |
 | ---- | --- |
 | `-m` 或 `--module` | 指定目标模块 |
@@ -56,6 +55,7 @@ ng g ng-yunzai:edit edit -m=trade
 | `--modal` | 指定是否使用模态框 |
 | `--withoutPrefix` | 指定选择器名不加前缀 |
 | `--withoutModulePrefixInComponentName` | 组件名不加模块名前缀 |
+| `--service` | 指定如何生成服务类，包含：`ignore`、`root`、`none` |
 
 ## Module 模块
 

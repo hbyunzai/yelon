@@ -1,8 +1,8 @@
 ---
 order: 1
 title:
-zh-CN: MP4基础样例
-en-US: MP4 Basic Usage
+  zh-CN: MP4基础样例
+  en-US: MP4 Basic Usage
 ---
 
 ## zh-CN

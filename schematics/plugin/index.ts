@@ -3,6 +3,7 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 
 import { getProject } from '../utils';
 import { PluginOptions } from './interface';
+import { pluginAsdf } from './plugin.asdf';
 import { pluginCodeStyle } from './plugin.code-style';
 import { pluginDefaultLanguage } from './plugin.default-language';
 import { pluginDocker } from './plugin.docker';
@@ -58,6 +59,9 @@ export default function (options: PluginSchema): Rule {
         break;
       case 'rtl':
         rules.push(pluginRTL(pluginOptions));
+        break;
+      case 'asdf':
+        rules.push(pluginAsdf());
         break;
       default:
         throw new SchematicsException(`Could not find plugin name: ${options.name}`);

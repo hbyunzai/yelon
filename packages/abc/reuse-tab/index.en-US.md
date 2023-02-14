@@ -300,7 +300,7 @@ Route reuse preserves component data state, which may bring another drawback. Th
 Limiting the maximum number of reuse can reduce memory growth. There are several issues to be aware of:
 
 - `max` Forces a close and ignores the closable state when value changes
-- When it's out of `max` range, it will turn off the first open tab (Only **closable**), ingore close when all pages are **non-closable**
+- When it's out of `max` range, it will turn off the first open tab (Only **closable**), ignore close when all pages are **non-closable**
 
 ### Not supported QueryString parameters
 

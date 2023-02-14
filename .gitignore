@@ -1,7 +1,7 @@
 node_modules
 npm-debug.log
 # package-lock.json
-
+yarn.lock
 yarn-error.log
 /coverage
 /coverage-report
@@ -20,6 +20,7 @@ debug.log
 __ngcc_entry_points__.json
 report.*.json
 /.angular/cache
+/.husky/_
 
 src/app/routes/gen
 src/assets/color.less
@@ -31,7 +32,3 @@ src/assets/style.dark.css
 /integration
 scripts/build/var.less
 /schematics/plugin/files/rtl
-node_modules
-.DS_Store
-
-/.husky/_

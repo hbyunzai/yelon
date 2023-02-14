@@ -1,7 +1,9 @@
 import { strings } from '@angular-devkit/core';
 import { Rule, Tree } from '@angular-devkit/schematics';
 import { findNodes, getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
-import { Attribute, Element, parseFragment } from 'parse5';
+import { parseFragment } from 'parse5';
+import type { Attribute } from 'parse5/dist/common/token';
+import type { Element } from 'parse5/dist/tree-adapters/default';
 import * as ts from 'typescript';
 
 import { getSourceFile } from '../utils';
@@ -25,6 +27,7 @@ const WHITE_ICONS = [
   'CloseCircleOutline',
   'CloseOutline',
   'CopyOutline',
+  'DeleteOutline',
   'DoubleLeftOutline',
   'DoubleRightOutline',
   'DownOutline',
@@ -271,7 +274,7 @@ export const ICONS = [ ];
     return;
   }
   const source = getSourceFile(tree, path);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const allImports = findNodes(source as any, ts.SyntaxKind.ImportDeclaration);
   const iconImport = allImports.find((w: ts.ImportDeclaration) =>
     w.moduleSpecifier.getText().includes('@ant-design/icons-angular/icons')
@@ -310,7 +313,7 @@ export function pluginIcon(options: PluginOptions): Rule {
     const icons = getIcons(options, tree);
     genIconFile(options, tree, icons);
     console.log(`\n\n`);
-    console.log(`生成成功，如果是首次运行，需要手动引用，参考: https://ng.yunzainfo.com/theme/icon/zh`);
+    console.log(`生成成功，如果是首次运行，需要手动引用，参考：https://ng.yunzainfo.com/theme/icon/zh`);
     console.log(
       `Finished, if it's first run, you need manually reference it, refer to: https://ng.yunzainfo.com/theme/icon/en`
     );

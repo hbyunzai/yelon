@@ -14,13 +14,13 @@ NG-YUNZAI uses [ESLint](https://eslint.org/) to **guarantee code quality** and [
 
 It is recommended to install several plugins for more friendly development in vscode:
 
-- [ng-zorro snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode)
-- [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode)
+- [ng-zorro snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-zorro-vscode)
+- [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
-Of course, NG-YUNZAI has prepared a complete set of extension packs for everyone, just install [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-extension-pack).
+Of course, NG-YUNZAI has prepared a complete set of extension packs for everyone, just install [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-extension-pack).
 
 ## Git - pre commit Hook
 
@@ -79,4 +79,4 @@ Of course, you can easily adjust the default configuration in `angular.json`.
 
 ### VSCode snippets
 
-VSCode is the best choice for writing Angular. Naturally NG-YUNZAI also created the corresponding snippets extension: [ng-zorro-vscode](//marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode) and [ng-yunzai-vscode](//marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode).
+VSCode is the best choice for writing Angular. Naturally NG-YUNZAI also created the corresponding snippets extension: [ng-zorro-vscode](//marketplace.visualstudio.com/items?itemName=devcui.ng-zorro-vscode) and [ng-yunzai-vscode](//marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode).

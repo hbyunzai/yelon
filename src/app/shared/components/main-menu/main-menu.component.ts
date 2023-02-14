@@ -8,8 +8,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, takeUntil } from 'rxjs';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';

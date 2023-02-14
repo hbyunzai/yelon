@@ -34,7 +34,6 @@ import { getProject, NgYunzaiProjectDefinition } from './workspace';
 const TEMPLATE_FILENAME_RE = /\.template$/;
 
 export interface CommonSchema extends ComponentSchema {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
   _filesPath?: string;
   schematicName?: string;
@@ -130,7 +129,7 @@ function resolveSchema(
       const overridePath = `${overrideDir}/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.ts`;
       if (tree.exists(overridePath) || tree.exists(`${overridePath}.template`)) {
         // 所在目录与命令目录同属一个目录结构，因此无须特殊处理
-        schema._filesPath = path.relative(__dirname, process.cwd()) + overrideDir;
+        schema._filesPath = path.relative(__dirname, rootPath) + overrideDir;
       }
     }
     schema._filesPath = schema._filesPath || './files';
@@ -182,7 +181,7 @@ export function addValueToVariable(
   if (!node) {
     throw new SchematicsException(`Could not find any [${variableName}] variable in path '${filePath}'.`);
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const arr = (node.parent as any).initializer as ts.ArrayLiteralExpression;
 
   const change = new InsertChange(

@@ -4,7 +4,6 @@ subtitle: 深获取、拷贝、合并、延迟、断言
 type: Tools
 ---
 
-
 ## omit
 
 忽略 `obj` 指定属性。
@@ -23,7 +22,7 @@ omit({ a: 1, b: 2 }, key => key === 'a') // { a: 1 }
 const obj = {
   id: 1,
   user: {
-    name: 'cipchk',
+    name: 'devcui',
     age: 18
   }
 };
@@ -37,7 +36,7 @@ deepGet(obj, 'user.age'); // 18
 基于 [extend](https://github.com/justmoon/node-extend) 的深度拷贝。
 
 ```ts
-const source = { a: 1, user: { name: 'cipchk' } };
+const source = { a: 1, user: { name: 'devcui' } };
 const obj = deepCopy(source);
 ```
 
@@ -67,14 +66,6 @@ export class AppComponent {
     });
   }
 }
-```
-
-## Resize
-
-重新计算长宽高等css属性，用于改变js属性触发了变更检测但css没有被重新计算的情况
-
-```ts
-resizeWindow();
 ```
 
 ## assert

@@ -23,7 +23,6 @@ export class JWTInterceptor extends BaseInterceptor {
     return CheckJwt(this.model as JWTTokenModel, options.token_exp_offset!);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setReq(req: HttpRequest<any>, _options: YunzaiAuthConfig): HttpRequest<any> {
     return req.clone({
       setHeaders: {

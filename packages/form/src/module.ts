@@ -79,6 +79,7 @@ import { CustomWidget } from './widgets/custom/custom.widget';
 import { DateWidget } from './widgets/date/date.widget';
 import { MentionWidget } from './widgets/mention/mention.widget';
 import { NumberWidget } from './widgets/number/number.widget';
+import { NzWidgetRegistry } from './widgets/nz-widget.registry';
 import { ObjectWidget } from './widgets/object/object.widget';
 import { RadioWidget } from './widgets/radio/radio.widget';
 import { RateWidget } from './widgets/rate/rate.widget';
@@ -92,7 +93,6 @@ import { TimeWidget } from './widgets/time/time.widget';
 import { TransferWidget } from './widgets/transfer/transfer.widget';
 import { TreeSelectWidget } from './widgets/tree-select/tree-select.widget';
 import { UploadWidget } from './widgets/upload/upload.widget';
-import { NzWidgetRegistry } from './widgets';
 
 const WIDGETS = [
   ObjectWidget,

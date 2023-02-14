@@ -45,6 +45,7 @@ ng g ng-yunzai:plugin codeStyle
 # remove
 ng g ng-yunzai:plugin codeStyle -t=remove
 ```
+
 ### docker
 
 支持 Docker 部署。
@@ -84,6 +85,7 @@ ng g ng-yunzai:plugin defaultLanguage --defaultLanguage=zh-tw
 | 斯洛文尼亚文 | sl | sl | sl_SI | sl_SI |
 | 法文 | fr | fr | fr_FR | fr_FR |
 | 西班牙语 | es | es | es_ES | es_ES |
+| 意大利语 | it | it | it_IT | it_IT |
 
 ### networkEnv
 
@@ -102,7 +104,7 @@ ng g ng-yunzai:plugin networkEnv --packageManager=yarn -t=remove
 
 ### sts
 
-[ng-yunzai-sts](https://github.com/ng-yunzai/sts) 插件，构建 Swagger API 转换为列表、编辑页，更多有趣的玩法请自行想象。
+[ng-yunzai-sts](https://github.com/hbyunzai/sts) 插件，构建 Swagger API 转换为列表、编辑页，更多有趣的玩法请自行想象。
 
 ```bash
 # add

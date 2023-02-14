@@ -125,7 +125,8 @@ describe('form: widget: autocomplete', () => {
           properties: {
             a: {
               type: 'string',
-              format: 'email'
+              format: 'email',
+              default: typeValue
             }
           }
         })
@@ -145,11 +146,11 @@ describe('form: widget: autocomplete', () => {
             a: {
               type: 'string',
               format: 'email',
-              enum: suffixes
+              enum: suffixes,
+              default: typeValue
             }
           }
         })
-        .time(100)
         .typeChar(typeValue)
         .checkCount('nz-auto-option', suffixes.length)
         .click('nz-auto-option')
@@ -177,7 +178,7 @@ describe('form: widget: autocomplete', () => {
         .asyncEnd();
     }));
     it('should be show default value via schema.default', fakeAsync(() => {
-      const email = 'cipchk@qq.com';
+      const email = 'devcui@qq.com';
       page
         .newSchema({
           properties: {

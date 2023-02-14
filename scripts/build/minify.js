@@ -89,7 +89,6 @@ const distFiles = {
     'mock/**/index.html',
     'theme/**/index.html',
     'util/**/index.html',
-    'bis/**/index.html',
   ],
   js: ['ngsw-worker.js', 'worker-basic.min.js', 'safety-worker.js'],
   json: ['manifest.json'],

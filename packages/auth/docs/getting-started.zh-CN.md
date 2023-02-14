@@ -61,26 +61,25 @@ import { YelonAuthModule, SimpleInterceptor } from '@yelon/auth';
 export class AppModule { }
 ```
 
-**为什么需要HTTP_INTERCEPTORS**
+**为什么需要手动注册HTTP_INTERCEPTORS**
 
 默认 `YelonAuthModule` 并不会注册任何HTTP拦截器，主要是因为 @yelon/auth 提供了多种不同[认证风格](/auth/getting-started#认证风格)。
 
 ## YunzaiAuthConfig
 
-| 成员 | 说明 | 类型 | 默认值                                                                                                                                                                                                         | 全局配置 |
-|----|----|----|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------|
-| `[store_key]` | `string` | `_token` | `localStorage` 的存储KEY值                                                                                                                                                                                      | ✅ |
-| `[token_invalid_redirect]` | `boolean` | `true` | 无效时跳转至登录页，包括：无效token值、token已过期（限JWT）                                                                                                                                                                        | ✅ |
-| `[token_exp_offset]` | `number` | `10` | JWT token过期时间偏移值（单位：秒）                                                                                                                                                                                      | ✅ |
-| `[token_send_key]` | `string` | Token | 发送token参数名                                                                                                                                                                                                  | ✅ |
-| `[token_send_template]` | `string` | `${token}` | 发送token模板，以 `${属性名}` 表示占位符，属性名要确保存在否则以空字符代替                                                                                                                                                                 | ✅ |
-| `[token_send_place]` | `header,body,url` | `header` | 发送token参数位置                                                                                                                                                                                                 | ✅ |
-| `[login_url]` | `string` | `/login` | 登录页路由地址                                                                                                                                                                                                     | ✅ |
-| `[ignores]` | `RegExp[]` | `[ /\/login/, /assets\// ]` | 忽略 URL 地址清单                                                                                                                                                                                                 | ✅ |
-| (deprecated) `[allow_anonymous_key]` | `string` | `_allow_anonymous` | Will be removed in 15.0.0, Pls used [ALLOW_ANONYMOUS](https://github.com/hbyunzai/yelon/blob/master/packages/auth/src/token.ts) `HttpContext` instead. 允许匿名登录标识号，若请求参数中带有该KEY表示忽略TOKEN校验与添加动作，同时真实请求时会移除该数据 | ✅ |
-| `[executeOtherInterceptors]` | `boolean` | `true` | 是否校验失效时命中后继续调用后续拦截器的 `intercept` 方法                                                                                                                                                                         | ✅ |
-| `[refreshTime]` | `number` | `3000` | 刷新时长（单位：ms）                                                                                                                                                                                                 | ✅ |
-| `[refreshOffset]` | `number` | `6000` | 偏移值（单位：ms），建议根据 `refreshTime` 倍数来设置                                                                                                                                                                         | ✅ |
+| 成员 | 说明 | 类型 | 默认值 | 全局配置 |
+|----|----|----|-----|------|
+| `[store_key]` | `string` | `_token` | `localStorage` 的存储KEY值 | ✅ |
+| `[token_invalid_redirect]` | `boolean` | `true` | 无效时跳转至登录页，包括：无效token值、token已过期（限JWT） | ✅ |
+| `[token_exp_offset]` | `number` | `10` | JWT token过期时间偏移值（单位：秒） | ✅ |
+| `[token_send_key]` | `string` | Token | 发送token参数名 | ✅ |
+| `[token_send_template]` | `string` | `${token}` | 发送token模板，以 `${属性名}` 表示占位符，属性名要确保存在否则以空字符代替 | ✅ |
+| `[token_send_place]` | `header,body,url` | `header` | 发送token参数位置 | ✅ |
+| `[login_url]` | `string` | `/login` | 登录页路由地址 | ✅ |
+| `[ignores]` | `RegExp[]` | `[ /\/login/, /assets\// ]` | 忽略 URL 地址清单，除此之外还可以通过 [ALLOW_ANONYMOUS](/auth/qa/zh) 进行控制是否忽略。 | ✅ |
+| `[executeOtherInterceptors]` | `boolean` | `true` | 是否校验失效时命中后继续调用后续拦截器的 `intercept` 方法 | ✅ |
+| `[refreshTime]` | `number` | `3000` | 刷新时长（单位：ms） | ✅ |
+| `[refreshOffset]` | `number` | `6000` | 偏移值（单位：ms），建议根据 `refreshTime` 倍数来设置 | ✅ |
 
 > 可以通过[全局配置](/docs/global-config)覆盖它们。
 

@@ -17,7 +17,7 @@ export class DevPageComponent implements OnInit {
   now = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
   id = 0;
 
-  constructor(public route: ActivatedRoute) { }
+  constructor(public route: ActivatedRoute) {}
 
   ngOnInit(): void {
     console.log('ngoninit');

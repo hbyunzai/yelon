@@ -1,8 +1,8 @@
 ---
 order: 2
 title:
-zh-CN: MP3基础样例
-en-US: MP3 Basic Usage
+  zh-CN: MP3基础样例
+  en-US: MP3 Basic Usage
 ---
 
 ## zh-CN

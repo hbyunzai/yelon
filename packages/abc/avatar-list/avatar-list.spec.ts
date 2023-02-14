@@ -80,7 +80,7 @@ describe('abc: avatar-list', () => {
         tips="Niko"
         src="https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png"
       ></avatar-list-item>
-      <avatar-list-item tips="Cipchk" text="Cipchk"></avatar-list-item>
+      <avatar-list-item tips="devcui" text="devcui"></avatar-list-item>
       <avatar-list-item tips="heart-o"></avatar-list-item>
     </avatar-list>
   `

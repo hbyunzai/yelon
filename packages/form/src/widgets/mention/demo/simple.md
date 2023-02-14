@@ -18,10 +18,9 @@ import { Component } from '@angular/core';
 import { SFMentionWidgetSchema, SFSchema } from '@yelon/form';
 import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { of } from 'rxjs';
-import { delay } from 'rxjs';
+import { of, delay } from 'rxjs';
 
-const DATA = ['asdf', 'cipchk', '中文', 'にほんご'];
+const DATA = ['asdf', 'devcui', '中文', 'にほんご'];
 
 @Component({
   selector: 'app-demo',

@@ -3,6 +3,7 @@ import { InjectionToken } from '@angular/core';
 import {
   YunzaiDateRangePickerConfig,
   YunzaiErrorCollectConfig,
+  YunzaiExceptionType,
   YunzaiImageConfig,
   YunzaiLoadingConfig,
   YunzaiLodopConfig,
@@ -16,8 +17,7 @@ import {
   YunzaiSTConfig,
   YunzaiSVConfig,
   YunzaiXlsxConfig,
-  YunzaiZipConfig,
-  YunzaiExceptionType
+  YunzaiZipConfig
 } from './abc/index';
 import { YunzaiACLConfig } from './acl/acl.type';
 import { YunzaiAuthConfig } from './auth/auth.type';
@@ -26,16 +26,14 @@ import { YunzaiCacheConfig } from './cache/cache.type';
 import { YunzaiChartConfig } from './chart/chart.type';
 import { YunzaiMockConfig } from './mock/mock.type';
 import { YunzaiSFConfig } from './sf/sf.type';
-import { YunzaiStompConfig } from './stomp/stomp.type';
-import { YunzaiThemeHttpClientConfig } from './theme/http.type';
-import { YunzaiThemeI18nConfig } from './theme/i18n.type';
-import { YunzaiThemeResponsiveConfig } from './theme/responsive.type';
+import { YunzaiSocketConfig } from './socket/socket.type';
+import { YunzaiThemeHttpClientConfig, YunzaiThemeResponsiveConfig, YunzaiThemeI18nConfig } from './theme/index';
 import { YunzaiUtilArrayConfig } from './util/array.type';
 import { YunzaiUtilCurrencyConfig } from './util/currency.type';
 
 export interface YunzaiConfig {
   bis?: YunzaiBusinessConfig;
-  stomp?: YunzaiStompConfig;
+  socket?: YunzaiSocketConfig;
   dataRange?: YunzaiDateRangePickerConfig;
   exception?: YunzaiExceptionType;
   errorCollect?: YunzaiErrorCollectConfig;

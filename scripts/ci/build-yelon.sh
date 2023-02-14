@@ -1,8 +1,15 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
+#!/usr/bin/env node --max-old-space-size=4096
 
 set -u -e -o pipefail
 
-packages=(
+cd $(dirname $0)/../..
+
+source ./scripts/ci/utils.sh
+
+DEBUG=false
+NOCSS=false
+PACKAGES=(
   util
   testing
   acl
@@ -13,30 +20,104 @@ packages=(
   chart
   mock
   form
+  socket
   bis
+  bcs
 )
+NODE_PACKAGES=(cli)
+
+for ARG in "$@"; do
+  case "$ARG" in
+    -n)
+      PACKAGES=($2)
+      ;;
+    -debug)
+      DEBUG=true
+      ;;
+    -nocss)
+      NOCSS=true
+      ;;
+  esac
+done
+
+buildLess() {
+  echo 'copy styles...'
+  node ./scripts/build/copy-less.js
+  echo 'fix zorro path...'
+  node ./scripts/build/fix-zorro-path.js
+  echo 'build full css...'
+  node ./scripts/build/generate-css.js
+}
 
 addBanners() {
-  license_banner=${p_packages}/license-banner.txt
   for file in ${1}/*; do
     if [[ -f ${file} && "${file##*.}" != "map" ]]; then
-      cat ${license_banner} >${file}.tmp
-      cat ${file} >>${file}.tmp
+      cat ${LICENSE_BANNER} > ${file}.tmp
+      cat ${file} >> ${file}.tmp
       mv ${file}.tmp ${file}
     fi
   done
 }
 
-copyYelonSchemas() {
-  cp ${p_packages}/abc/onboarding/schema.json ${p_packages_dist}/abc/onboarding/schema.json
+copySchemas() {
+  cp ${SOURCE}/abc/onboarding/schema.json ${DIST}/abc/onboarding/schema.json
 }
 
-buildYelon() {
-  for package_name in ${packages[@]}; do
-    node --max_old_space_size=4096 ${p_build}/packing.js ${package_name}
-    addBanners ${p_packages_dist}/${package_name}/bundles
-    cp ${p_project}/LICENSE ${p_packages_dist}/${package_name}/LICENSE
+echo "=====BUILDING: Version ${VERSION}, Zorro Version ${ZORROVERSION}"
+
+N="
+"
+PWD=`pwd`
+
+SOURCE=${PWD}/packages
+DIST=${PWD}/dist/@yelon
+
+# fix linux
+# npm rebuild node-sass
+
+build() {
+  for NAME in ${PACKAGES[@]}
+  do
+    echo "====== PACKAGING ${NAME}"
+
+    LICENSE_BANNER=${SOURCE}/license-banner.txt
+
+    if ! containsElement "${NAME}" "${NODE_PACKAGES[@]}"; then
+      # packaging
+      node --max_old_space_size=4096 ${PWD}/scripts/build/packing ${NAME}
+      # license banner
+      addBanners ${DIST}/${NAME}/bundles
+      # license file
+      cp ${PWD}/LICENSE ${DIST}/${NAME}/LICENSE
+    else
+      echo "not yet!!!"
+    fi
+
   done
-  updateVersionReferences ${p_packages_dist}
-  copyYelonSchemas
+
+  if [[ ${NOCSS} == false ]]; then
+    buildLess
+  fi
+  # package version
+  updateVersionReferences ${DIST}
+  copySchemas
 }
+
+build
+
+echo 'FINISHED!'
+
+# TODO: just only cipchk
+# clear | bash ./scripts/ci/build-yelon.sh -debug
+# clear | bash ./scripts/ci/build-yelon.sh -n chart -nocss
+if [[ ${DEBUG} == true ]]; then
+  cd ../../
+  DEBUG_FROM=${PWD}/work/yelon/dist/@yelon/theme/*
+  DEBUG_TO=${PWD}/work/ng11-strict/node_modules/@yelon/theme
+  echo "DEBUG_FROM:${DEBUG_FROM}"
+  echo "DEBUG_TO:${DEBUG_TO}"
+  rm -rf ${DEBUG_TO}
+  mkdir -p ${DEBUG_TO}
+  rsync -a ${DEBUG_FROM} ${DEBUG_TO}
+  echo "DEBUG FINISHED~!"
+fi

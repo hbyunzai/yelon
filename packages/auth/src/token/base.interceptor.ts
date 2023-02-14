@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
-  HttpParams,
   HttpRequest,
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
@@ -44,27 +42,6 @@ export abstract class BaseInterceptor implements HttpInterceptor {
       for (const item of options.ignores) {
         if (item.test(req.url)) return next.handle(req);
       }
-    }
-
-    const ingoreKey = options.allow_anonymous_key!;
-    let ingored = false;
-    let params = req.params;
-    let url = req.url;
-    if (req.params.has(ingoreKey)) {
-      params = req.params.delete(ingoreKey);
-      ingored = true;
-    }
-    const urlArr = req.url.split('?');
-    if (urlArr.length > 1) {
-      const queryStringParams = new HttpParams({ fromString: urlArr[1] });
-      if (queryStringParams.has(ingoreKey)) {
-        const queryString = queryStringParams.delete(ingoreKey).toString();
-        url = queryString.length > 0 ? `${urlArr[0]}?${queryString}` : urlArr[0];
-        ingored = true;
-      }
-    }
-    if (ingored) {
-      return next.handle(req.clone({ params, url }));
     }
 
     if (this.isAuth(options)) {

@@ -56,7 +56,6 @@ switchLanguage() {
 | 西班牙语 | es_ES |
 | 意大利语 | it_IT |
 
-
 ## 增加语言包
 
 如果你找不到你需要的语言包，欢迎你在 [英文语言包](https://github.com/hbyunzai/yelon/tree/master/packages/theme/src/locale/languages/en-US.ts)（你也可以参考 [#308](https://github.com/hbyunzai/yelon/pull/308) 向我们贡献语言包）的基础上创建一个新的语言包，并给我们 Pull Request。

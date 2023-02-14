@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 
 import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';

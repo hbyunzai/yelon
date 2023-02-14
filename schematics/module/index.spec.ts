@@ -33,6 +33,7 @@ describe('NgYunzaiSchematic: module', () => {
     const content = tree.readContent('/projects/foo/src/app/app.module.ts');
     expect(content).toContain(`import { TradeModule } from './trade/trade.module';`);
   });
+
   it('shuold be include service', async () => {
     tree = await runner.runSchematicAsync('module', { ...defaultOptions, service: 'none' }, tree).toPromise();
     const content = tree.readContent('/projects/foo/src/app/routes/trade/trade.service.ts');

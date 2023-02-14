@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   HttpClient,
   HttpEvent,
@@ -14,7 +13,7 @@ import { Component, NgModule, Type } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable, mapTo } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import * as Mock from 'mockjs';
 
@@ -48,7 +47,7 @@ const DATA = {
 let otherRes = new HttpResponse();
 class OtherInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req.clone()).pipe(mapTo(otherRes));
+    return next.handle(req.clone()).pipe(map(() => otherRes));
   }
 }
 
@@ -253,6 +252,7 @@ describe('mock: interceptor', () => {
 
       const fixture = TestBed.createComponent(RootComponent);
       fixture.detectChanges();
+
       const router = TestBed.inject<Router>(Router);
       router.resetConfig([{ path: 'lazy', loadChildren: () => LazyModule }]);
       router.navigateByUrl(`/lazy/child`);

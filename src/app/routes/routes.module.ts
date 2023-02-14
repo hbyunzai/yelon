@@ -36,8 +36,7 @@ const routes: Route[] = [
         path: 'form-pages',
         loadChildren: () => import('./form-pages/form-pages.module').then(m => m.FormPagesModule)
       },
-      { path: 'cli', loadChildren: () => import('./gen/cli/cli.module').then(m => m.CliModule) },
-      { path: 'bis', loadChildren: () => import('./gen/bis/bis.module').then(m => m.BisModule) }
+      { path: 'cli', loadChildren: () => import('./gen/cli/cli.module').then(m => m.CliModule) }
       // #endregion
     ]
   },

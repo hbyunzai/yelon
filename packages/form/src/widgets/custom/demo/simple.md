@@ -1,7 +1,7 @@
 ---
 title:
-zh-CN: 基础样例
-en-US: Basic Usage
+  zh-CN: 基础样例
+  en-US: Basic Usage
 order: 0
 ---
 

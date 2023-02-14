@@ -1,8 +1,8 @@
 ---
 order: 2
 title:
-zh-CN: 导出
-en-US: Export
+  zh-CN: 导出
+  en-US: Export
 ---
 
 ## zh-CN

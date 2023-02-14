@@ -15,6 +15,6 @@ module: import { HotkeyModule } from '@yelon/abc/hotkey';
 
 ### [hotkey]
 
-| 成员 | 说明 | 类型 | 默认值 |
+| 成员 | 说明 | 类型 | 默认值 | 
 |----|----|----|-----|
 | `hotkey` | 指定[热键格式](https://github.com/github/hotkey#hotkey-string-format) | `string` | - |

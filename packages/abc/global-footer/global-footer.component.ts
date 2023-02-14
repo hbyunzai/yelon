@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntil, Subject } from 'rxjs';
 
 import { WINDOW } from '@yelon/util/token';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';

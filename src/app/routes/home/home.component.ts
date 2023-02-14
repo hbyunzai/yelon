@@ -19,9 +19,9 @@ import { I18NService } from '@core';
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   list = [
     { type: 'basic', url: 'https://ng-yunzai.github.io/ng-yunzai' },
-    { type: 'pro', url: 'https://e.ng.yunzainfo.com/theme/pro' },
-    { type: 'ms', url: 'https://e.ng.yunzainfo.com/theme/ms' },
-    { type: 'yun', url: 'https://e.ng.yunzainfo.com/theme/yun' }
+    { type: 'pro', url: 'https://e.ng-yunzai.com/theme/pro' },
+    { type: 'ms', url: 'https://e.ng-yunzai.com/theme/ms' },
+    { type: 'yun', url: 'https://e.ng-yunzai.com/theme/yun' }
   ];
   themes = ['pro', 'ms', 'yun'];
   get isBrowser(): boolean {

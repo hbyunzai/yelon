@@ -49,7 +49,7 @@ describe('Pipe: keys', () => {
 })
 class TestComponent {
   data: NzSafeAny = {
-    name: 'cipchk',
+    name: 'devcui',
     address: { city: 'shanghai', district: 'changning' }
   };
   dist = { 1: '正常', 2: '删除' };

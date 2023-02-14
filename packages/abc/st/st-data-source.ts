@@ -273,7 +273,6 @@ export class STDataSource {
   private getByRemote(url: string, options: STDataSourceOptions): Observable<unknown> {
     const { req, page, paginator, pi, ps, singleSort, multiSort, columns } = options;
     const method = (req.method || 'GET').toUpperCase();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let params: { [param: string]: any } = {};
     const reName = req.reName as STReqReNameType;
     if (paginator) {

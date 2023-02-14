@@ -89,7 +89,6 @@ export class SettingsService<L extends Layout = Layout, U extends User = User, A
     this.notify$.next({ type: 'layout', name, value } as NzSafeAny);
     return true;
   }
-
   getLayout<T>(): T {
     return this._layout as unknown as T;
   }
@@ -101,7 +100,6 @@ export class SettingsService<L extends Layout = Layout, U extends User = User, A
     this.setData(this.KEYS.app, value);
     this.notify$.next({ type: 'app', value });
   }
-
   getApp<T>(): T {
     return this._app as unknown as T;
   }
@@ -113,7 +111,6 @@ export class SettingsService<L extends Layout = Layout, U extends User = User, A
     this.setData(this.KEYS.user, value);
     this.notify$.next({ type: 'user', value });
   }
-
   getUser<T>(): T {
     return this._user as unknown as T;
   }

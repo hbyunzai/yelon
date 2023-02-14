@@ -7,9 +7,6 @@ i18n: need-update
 
 NG-YUNZAI 目标是提供更多通用性业务模块，让开发者更加专注于业务。所以在你着手开始开发前，有必要了解整个 NG-YUNZAI 的体系结构，从整体上了解 NG-YUNZAI 包含了哪些东西及其含义，才能更好的利用这些业务组件库快速构建项目。
 
-## 结构图
-
-![](./assets/screenshot/architecture.png | width=700)
 
 | 类库 | 文档 | 描述 |
 |----|----|----|
@@ -22,6 +19,8 @@ NG-YUNZAI 目标是提供更多通用性业务模块，让开发者更加专注�
 | **@yelon/cache** | [文档](/acl) | 将字典、城市数据等缓存至内存或持久化当中，有效减少 Http 请求 |
 | **@yelon/mock** | [文档](/mock) | Mock 会拦截 Angular Http 请求并返回测试数据，当后端未完成接口时 Mock 技术是一项不会影响前端开发进度的工具 |
 | **@yelon/util** | [文档](/util) | 包含数组、延迟、字符串、日期、校验等常见工具集 |
+| **@yelon/bis** | [文档](/bis) | 包含云在整体布局和加载流程 |
+| **@yelon/socket** | [文档](/socket) | 包含Socket编程相关库 |
 | **@yelon/testing** | - | 常用测试套件 |
 | **CLI Schematics** | [文档](/cli) | 快速生成统一的模板、可插拔的插件等 |
 

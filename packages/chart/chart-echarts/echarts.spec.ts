@@ -7,9 +7,10 @@ import { NumberInput } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+import { ChartEChartsOn } from '.';
 import { ChartEChartsComponent } from './echarts.component';
 import { ChartEChartsModule } from './echarts.module';
-import { ChartEChartsOn, ChartEChartsEvent, ChartEChartsOption } from './echarts.types';
+import { ChartEChartsEvent, ChartEChartsOption } from './echarts.types';
 
 // let isClassECharts = false;
 class MockLazyService {

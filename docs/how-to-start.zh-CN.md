@@ -189,14 +189,14 @@ const routes: Routes = [
 
 “工欲善其事，必先利其器是”，NG-YUNZAI 脚手架推荐使用 [Visual Studio Code](https://code.visualstudio.com/) IDE，因为 NG-YUNZAI 针对 VSCode 增加一些额外的特性，可以更好的帮助你开发。
 
-> 或者直接使用 [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-extension-pack) 套件。
+> 或者直接使用 [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-extension-pack) 套件。
 
 ### 代码片断
 
-- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode)
+- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)
 
 ### Class样式智能提醒
 
 ng-yunzai 内置了大量的工具集样式（[API](/theme/tools)），安装以下插件可以直接在HTML模板里直接访问到它们。
 
-- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode)
+- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)

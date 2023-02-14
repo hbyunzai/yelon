@@ -6,7 +6,6 @@ title:
 type: Advance
 ---
 
-
 ## 包体大小优化
 
 分为JavaScript脚本文件和CSS文件，以下只描述脚本部分，有关CSS文件请参考[优化主题系统](/theme/performance)。

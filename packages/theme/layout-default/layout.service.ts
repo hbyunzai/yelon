@@ -1,65 +1,68 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { getUrlParam, resizeWindow } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { SettingsService } from '@yelon/theme';
+
+import { LayoutDefaultOptions } from './types';
+
+const DEFAULT: LayoutDefaultOptions = {
+  logoExpanded: `./assets/logo-full.svg`,
+  logoCollapsed: `./assets/logo.svg`,
+  logoLink: `/`,
+  showHeaderCollapse: true,
+  showSiderCollapse: false,
+  hideAside: false,
+  hideHeader: false
+};
 
 @Injectable({ providedIn: 'root' })
-export class LayoutService {
-  header: BehaviorSubject<NzSafeAny> = new BehaviorSubject(true);
-  sidebar: BehaviorSubject<NzSafeAny> = new BehaviorSubject(true);
-  reuseTab: BehaviorSubject<NzSafeAny> = new BehaviorSubject(true);
+export class LayoutDefaultService {
+  private _options$ = new BehaviorSubject<LayoutDefaultOptions>(DEFAULT);
+  private _options: LayoutDefaultOptions = DEFAULT;
 
-  constructor() {
-    if (getUrlParam(window.location.href, 'showResuseTab') !== null) {
-      if (getUrlParam(window.location.href, 'showResuseTab') === 'true') {
-        this.showReuseTab();
-      } else {
-        this.hideReuseTab();
-      }
+  get options(): LayoutDefaultOptions {
+    return this._options;
+  }
+
+  get options$(): Observable<LayoutDefaultOptions> {
+    return this._options$.asObservable();
+  }
+
+  get collapsedIcon(): string {
+    const collapsed = this.settings.layout.collapsed;
+    let type = collapsed ? 'unfold' : 'fold';
+    if (this.settings.layout.direction === 'rtl') {
+      type = collapsed ? 'fold' : 'unfold';
     }
-    if (getUrlParam(window.location.href, 'showHeader') !== null) {
-      if (getUrlParam(window.location.href, 'showHeader') === 'true') {
-        this.showHeader();
-      } else {
-        this.hideHeader();
-      }
-    }
-    if (getUrlParam(window.location.href, 'showSider') !== null) {
-      if (getUrlParam(window.location.href, 'showSider') === 'true') {
-        this.showSidebar();
-      } else {
-        this.hideSidebar();
-      }
-    }
+    return `menu-${type}`;
   }
 
-  hideSidebar(): void {
-    this.sidebar.next(false);
-    resizeWindow();
-  }
-  hideHeader(): void {
-    this.header.next(false);
-    resizeWindow();
+  constructor(private settings: SettingsService) {}
+
+  private notify(): void {
+    this._options$.next(this._options);
   }
 
-  showSidebar(): void {
-    this.sidebar.next(true);
-    resizeWindow();
+  /**
+   * Set layout configuration
+   *
+   * 设置布局配置
+   */
+  setOptions(options?: LayoutDefaultOptions | null): void {
+    this._options = {
+      ...DEFAULT,
+      ...options
+    };
+    this.notify();
   }
 
-  showHeader(): void {
-    this.header.next(true);
-    resizeWindow();
-  }
-
-  showReuseTab(): void {
-    this.reuseTab.next(true);
-    resizeWindow();
-  }
-
-  hideReuseTab(): void {
-    this.reuseTab.next(false);
-    resizeWindow();
+  /**
+   * Toggle the collapsed state of the sidebar menu bar
+   *
+   * 切换侧边栏菜单栏折叠状态
+   */
+  toggleCollapsed(status?: boolean): void {
+    this.settings.setLayout('collapsed', status != null ? status : !this.settings.layout.collapsed);
+    this.notify();
   }
 }
