@@ -21,8 +21,8 @@ PACKAGES=(
   mock
   form
   socket
-  bis
   bcs
+  bis
 )
 NODE_PACKAGES=(cli)
 
