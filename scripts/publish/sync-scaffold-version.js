@@ -7,13 +7,13 @@ const nextJson = fs.readJSONSync(path.join(__dirname, '../../package.json'));
 const nextVersion = nextJson.version;
 const nextVersions = {
   ...nextJson.dependencies,
-  ...nextJson.devDependencies,
+  ...nextJson.devDependencies
 };
 const name = (process.argv.length >= 2 ? process.argv[2] : '') || 'ng-yunzai';
 const packagePath = path.resolve(__dirname, name.startsWith('../') ? name : `../../../${name}/package.json`);
 console.log(`Use packagePath: ` + packagePath);
 if (!fs.existsSync(packagePath)) {
-  throw Error(`所选的文件不存在, ${packagePath}`)
+  throw Error(`所选的文件不存在, ${packagePath}`);
 }
 
 const json = fs.readJSONSync(packagePath);
@@ -29,7 +29,7 @@ const json = fs.readJSONSync(packagePath);
 if (name === 'ng-yunzai') {
   json.version = nextVersion;
 }
-['abc', 'acl', 'auth', 'chart', 'cache', 'mock', 'form', 'theme', 'util'].forEach(v => {
+['abc', 'acl', 'auth', 'chart', 'cache', 'mock', 'form', 'theme', 'util', 'bcs', 'bis', 'socket'].forEach(v => {
   json.dependencies[`@yelon/${v}`] = `^${nextVersion}`;
 });
 json.devDependencies[`@yelon/testing`] = `^${nextVersion}`;
@@ -37,5 +37,5 @@ json.devDependencies[`ng-yunzai`] = `^${nextVersion}`;
 
 // Save
 fs.writeJSONSync(packagePath, json, {
-  spaces: 2,
+  spaces: 2
 });
