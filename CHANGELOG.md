@@ -1,3 +1,7 @@
+# [15.0.0-beta.2](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.1...15.0.0-beta.2) (2023-02-15)
+
+
+
 # [15.0.0-beta.1](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.0...15.0.0-beta.1) (2023-02-14)
 
 
