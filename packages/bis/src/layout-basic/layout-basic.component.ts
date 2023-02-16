@@ -69,6 +69,9 @@ import { LayoutDisplayService } from './layout-display.service';
           </div>
         </nz-dropdown-menu>
       </layout-default-header-item>
+      <layout-default-header-item direction="right">
+        <yunzai-user></yunzai-user>
+      </layout-default-header-item>
       <!-- setting end -->
     </layout-default>
     <ng-template #asideUserTpl>
@@ -93,7 +96,7 @@ import { LayoutDisplayService } from './layout-display.service';
       <router-outlet></router-outlet>
     </ng-template> `
 })
-export class YzLayoutBasicComponent implements OnInit, OnDestroy {
+class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   public NavType = NavType;
   private state: LayoutBasicState = {
     options: {
@@ -166,7 +169,7 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
 
   initAside(): void {
     const aside: LayoutBasicAside = this.cacheService.get('_yz_current', { mode: 'none' });
-    this.state.aside = aside;
+    this.state.aside = { ...aside };
   }
 
   initLogo(): void {
@@ -220,3 +223,4 @@ export class YzLayoutBasicComponent implements OnInit, OnDestroy {
     this.state.destroy$.complete();
   }
 }
+export { YunzaiLayoutBasicComponent as YzLayoutBasicComponent, YunzaiLayoutBasicComponent };

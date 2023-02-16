@@ -94,8 +94,8 @@ class YunzaiStartupService {
       // cache current
       this.cacheService.set('_yz_current', {
         name: currentMenu.text,
-        intro: currentMenu.intro,
-        icon: currentMenu.appIconUrl
+        intro: currentMenu.intro || '',
+        icon: currentMenu.appIconUrl || './assets/tmp/img/avatar.jpg'
       });
       // cache displayIndex
       const attributes = currentMenu.attribute;

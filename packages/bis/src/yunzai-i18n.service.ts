@@ -116,4 +116,4 @@ class YunzaiI18NService extends YunzaiI18nBaseService {
   }
 }
 
-export { YunzaiI18NService as YzI18nService, YunzaiI18NService };
+export { YunzaiI18NService as YzI18NService, YunzaiI18NService };

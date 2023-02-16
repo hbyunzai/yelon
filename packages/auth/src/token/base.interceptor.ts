@@ -4,7 +4,8 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HTTP_INTERCEPTORS
+  HTTP_INTERCEPTORS,
+  HttpParams
 } from '@angular/common/http';
 import { Injectable, Injector, Optional } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
@@ -42,6 +43,27 @@ export abstract class BaseInterceptor implements HttpInterceptor {
       for (const item of options.ignores) {
         if (item.test(req.url)) return next.handle(req);
       }
+    }
+
+    const ignoreKey = options.allow_anonymous_key!;
+    let ignored = false;
+    let params = req.params;
+    let url = req.url;
+    if (req.params.has(ignoreKey)) {
+      params = req.params.delete(ignoreKey);
+      ignored = true;
+    }
+    const urlArr = req.url.split('?');
+    if (urlArr.length > 1) {
+      const queryStringParams = new HttpParams({ fromString: urlArr[1] });
+      if (queryStringParams.has(ignoreKey)) {
+        const queryString = queryStringParams.delete(ignoreKey).toString();
+        url = queryString.length > 0 ? `${urlArr[0]}?${queryString}` : urlArr[0];
+        ignored = true;
+      }
+    }
+    if (ignored) {
+      return next.handle(req.clone({ params, url }));
     }
 
     if (this.isAuth(options)) {
