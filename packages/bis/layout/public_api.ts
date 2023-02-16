@@ -1,4 +1,3 @@
-export * from './icon/style-icons';
 export * from './layout-basic';
 export * from './layout-nav';
 export * from './widgets';
