@@ -1,1 +1,1 @@
-export * from './icon/style-icons';
+export default void 0;
