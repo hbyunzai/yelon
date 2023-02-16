@@ -13,6 +13,13 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+# [15.0.0-beta.3](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.2...15.0.0-beta.3) (2023-02-16)
+
+
+### Bug Fixes
+
+* **bis:** fix i18nName and layout user ([7aa452e](https://github.com/hbyunzai/yelon/commit/7aa452ea2a68ec91d99115abfe2781d6e989aca9))
+
 # [15.0.0-beta.2](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.1...15.0.0-beta.2) (2023-02-15)
 
 
