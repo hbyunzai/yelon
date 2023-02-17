@@ -1,3 +1,12 @@
+# [15.0.0-beta.7](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.6...15.0.0-beta.7) (2023-02-17)
+
+
+### Bug Fixes
+
+* **theme:layout:** fix display service cascade ([4d1209f](https://github.com/hbyunzai/yelon/commit/4d1209f0019d300a877e7fac7e5cb54aba8350d4))
+
+
+
 # [15.0.0-beta.6](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.5...15.0.0-beta.6) (2023-02-17)
 
 
