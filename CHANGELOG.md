@@ -1,3 +1,12 @@
+# [15.0.0-beta.5](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.4...15.0.0-beta.5) (2023-02-17)
+
+
+### Bug Fixes
+
+* **bis:** fix index.less path ([15338b4](https://github.com/hbyunzai/yelon/commit/15338b4d869357faf3e5a82102ab89c92367ab92))
+
+
+
 # [15.0.0-beta.4](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.3...15.0.0-beta.4) (2023-02-17)
 
 

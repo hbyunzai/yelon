@@ -13,6 +13,14 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+# [15.0.0-beta.5](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.4...15.0.0-beta.5) (2023-02-17)
+
+
+### Bug Fixes
+
+* **bis:** fix index.less path ([15338b4](https://github.com/hbyunzai/yelon/commit/15338b4d869357faf3e5a82102ab89c92367ab92))
+
+
 # [15.0.0-beta.4](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.3...15.0.0-beta.4) (2023-02-17)
 
 
