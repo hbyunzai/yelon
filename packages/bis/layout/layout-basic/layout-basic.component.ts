@@ -1,14 +1,12 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { CacheService, YunzaiProjectInfo } from '@yelon/cache';
 import { StompService } from '@yelon/socket';
-import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
-import { WINDOW } from '@yelon/util';
+import { LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
+import { WINDOW, log } from '@yelon/util';
 
 import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
-import { LayoutDisplayService } from './layout-display.service';
 @Component({
   selector: `yz-layout-basic`,
   template: `<layout-default
@@ -154,7 +152,6 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
     private layoutDisplayService: LayoutDisplayService,
     private cacheService: CacheService,
     private stompService: StompService,
-    private router: Router,
     @Inject(WINDOW) private win: typeof window
   ) {}
 
@@ -199,21 +196,14 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
 
   toIndex(): void {
     const defaultRoute = this.cacheService.get('_yz_defaultRoute', { mode: 'none' });
-    this.router.navigateByUrl(defaultRoute);
+    log('YunzaiLayoutBasicComponent: ', `todo: the default route was ${defaultRoute}, 但是还没想好如何实现.`);
   }
-
   onNavTypeChange(type: NavType): void {
     this.cacheService.set('_yz_header_type', type);
     this.win.location.reload();
   }
 
   addLayoutDisplayListener(): void {
-    this.layoutDisplayService.listen('nav', (display: boolean) => {
-      this.state.display.nav = display;
-    });
-    this.layoutDisplayService.listen('aside', (display: boolean) => {
-      this.state.display.aside = display;
-    });
     this.layoutDisplayService.listen('reuseTab', (display: boolean) => {
       this.state.display.reusetab = display;
     });

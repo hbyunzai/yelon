@@ -7,3 +7,4 @@ export * from './layout-top-menu-item';
 export * from './layout-nav.component';
 export * from './types';
 export * from './layout.service';
+export * from './layout-display.service';

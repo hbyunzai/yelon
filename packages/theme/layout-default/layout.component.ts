@@ -6,6 +6,7 @@ import {
   Inject,
   Input,
   OnDestroy,
+  OnInit,
   QueryList,
   Renderer2,
   TemplateRef
@@ -26,6 +27,7 @@ import { updateHostClass } from '@yelon/util/browser';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
+import { LayoutDisplayService } from './layout-display.service';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
@@ -35,30 +37,39 @@ import { LayoutDefaultOptions } from './types';
   exportAs: 'layoutDefault',
   template: `
     <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
-    <layout-default-header *ngIf="!opt.hideHeader" [items]="headerItems"></layout-default-header>
-    <div *ngIf="!opt.hideAside" class="yunzai-default__aside">
-      <div class="yunzai-default__aside-wrap">
-        <div class="yunzai-default__aside-inner">
-          <ng-container *ngTemplateOutlet="asideUser"></ng-container>
-          <ng-container *ngTemplateOutlet="nav"></ng-container>
-          <layout-default-nav *ngIf="!nav"></layout-default-nav>
-        </div>
-        <div *ngIf="opt.showSiderCollapse" class="yunzai-default__aside-link">
-          <ng-container *ngIf="asideBottom === null; else asideBottom">
-            <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
-              <span nz-icon [nzType]="collapsedIcon"></span>
-            </div>
-          </ng-container>
+    <layout-default-header *ngIf="!opt.hideHeader && displayNav" [items]="headerItems"></layout-default-header>
+    <ng-container *ngIf="displayAside">
+      <div
+        *ngIf="!opt.hideAside"
+        class="yunzai-default__aside"
+        [ngStyle]="!displayAside ? { 'margin-top': '0px' } : {}"
+      >
+        <div class="yunzai-default__aside-wrap">
+          <div class="yunzai-default__aside-inner">
+            <ng-container *ngTemplateOutlet="asideUser"></ng-container>
+            <ng-container *ngTemplateOutlet="nav"></ng-container>
+            <layout-default-nav *ngIf="!nav"></layout-default-nav>
+          </div>
+          <div *ngIf="opt.showSiderCollapse" class="yunzai-default__aside-link">
+            <ng-container *ngIf="asideBottom === null; else asideBottom">
+              <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
+                <span nz-icon [nzType]="collapsedIcon"></span>
+              </div>
+            </ng-container>
+          </div>
         </div>
       </div>
-    </div>
-    <section class="yunzai-default__content">
+    </ng-container>
+    <section
+      class="yunzai-default__content"
+      [ngStyle]="{ 'margin-top': !displayNav ? '0px' : '', 'margin-left': !displayAside ? '0px' : '' }"
+    >
       <ng-container *ngTemplateOutlet="content"></ng-container>
       <ng-content></ng-content>
     </section>
   `
 })
-export class LayoutDefaultComponent implements OnDestroy {
+export class LayoutDefaultComponent implements OnInit, OnDestroy {
   @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
   headerItems!: QueryList<LayoutDefaultHeaderItemComponent>;
 
@@ -75,6 +86,9 @@ export class LayoutDefaultComponent implements OnDestroy {
   @Input() nav: TemplateRef<void> | null = null;
   @Input() content: TemplateRef<void> | null = null;
   @Input() customError?: string | null;
+
+  displayNav = true;
+  displayAside = true;
 
   private destroy$ = new Subject<void>();
   isFetching = false;
@@ -98,12 +112,21 @@ export class LayoutDefaultComponent implements OnDestroy {
     private el: ElementRef,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private doc: NzSafeAny,
-    private srv: LayoutDefaultService
+    private srv: LayoutDefaultService,
+    private layoutDisplayService: LayoutDisplayService
   ) {
     router.events.pipe(takeUntil(this.destroy$)).subscribe(ev => this.processEv(ev));
     const { destroy$ } = this;
     this.srv.options$.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
     this.settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
+  }
+  ngOnInit(): void {
+    this.layoutDisplayService.listen('nav', display => {
+      this.displayNav = display;
+    });
+    this.layoutDisplayService.listen('aside', display => {
+      this.displayAside = display;
+    });
   }
 
   processEv(ev: Event): void {
