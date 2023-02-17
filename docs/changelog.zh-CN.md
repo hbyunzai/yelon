@@ -13,6 +13,14 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+# [15.0.0-beta.6](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.5...15.0.0-beta.6) (2023-02-17)
+
+
+### Bug Fixes
+
+* **bis:layout:** fix layout display service ([2871cdc](https://github.com/hbyunzai/yelon/commit/2871cdcc8df096a3e244955f2d092d517ea1ccfa))
+
+
 # [15.0.0-beta.5](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.4...15.0.0-beta.5) (2023-02-17)
 
 
