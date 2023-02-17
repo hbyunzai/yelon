@@ -1,6 +1,6 @@
 {
   "name": "yelon",
-  "version": "15.0.0-beta.3",
+  "version": "15.0.0-beta.4",
   "description": "Yelon is a set of essential modules for NG-YUNZAI.",
   "keywords": [
     "yelon",
@@ -160,7 +160,7 @@
     "mustache": "^4.2.0",
     "ng-alain-codelyzer": "^0.0.1",
     "ng-packagr": "^15.1.0",
-    "ng-yunzai-plugin-theme": "^15.0.1",
+    "ng-yunzai-plugin-theme": "^15.0.2",
     "ng-yunzai-sts": "^0.0.3",
     "parse5": "^7.1.2",
     "pdfjs-dist": "^3.2.146",
