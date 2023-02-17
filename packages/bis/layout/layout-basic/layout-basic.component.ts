@@ -136,7 +136,7 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
     if (!this.state.display.nav) {
       cascadingStyleSheet = {
         ...cascadingStyleSheet,
-        top: 0
+        top: '0px'
       };
     }
     if (!this.state.display.aside) {
@@ -206,6 +206,13 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   addLayoutDisplayListener(): void {
     this.layoutDisplayService.listen('reuseTab', (display: boolean) => {
       this.state.display.reusetab = display;
+    });
+    this.layoutDisplayService.listen('nav', (display: boolean) => {
+      this.state.display.nav = display;
+    });
+
+    this.layoutDisplayService.listen('aside', (display: boolean) => {
+      this.state.display.aside = display;
     });
   }
 

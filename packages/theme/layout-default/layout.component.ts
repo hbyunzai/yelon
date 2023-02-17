@@ -39,11 +39,7 @@ import { LayoutDefaultOptions } from './types';
     <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
     <layout-default-header *ngIf="!opt.hideHeader && displayNav" [items]="headerItems"></layout-default-header>
     <ng-container *ngIf="displayAside">
-      <div
-        *ngIf="!opt.hideAside"
-        class="yunzai-default__aside"
-        [ngStyle]="!displayAside ? { 'margin-top': '0px' } : {}"
-      >
+      <div *ngIf="!opt.hideAside" class="yunzai-default__aside" [ngStyle]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
             <ng-container *ngTemplateOutlet="asideUser"></ng-container>
@@ -60,10 +56,7 @@ import { LayoutDefaultOptions } from './types';
         </div>
       </div>
     </ng-container>
-    <section
-      class="yunzai-default__content"
-      [ngStyle]="{ 'margin-top': !displayNav ? '0px' : '', 'margin-left': !displayAside ? '0px' : '' }"
-    >
+    <section class="yunzai-default__content" [ngStyle]="contentStyle">
       <ng-container *ngTemplateOutlet="content"></ng-container>
       <ng-content></ng-content>
     </section>
@@ -86,6 +79,19 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   @Input() nav: TemplateRef<void> | null = null;
   @Input() content: TemplateRef<void> | null = null;
   @Input() customError?: string | null;
+
+  get contentStyle(): any {
+    return {
+      'margin-top': !this.displayNav ? '0px' : '',
+      'margin-left': !this.displayAside ? '0px' : ''
+    };
+  }
+
+  get asideStyle(): any {
+    return {
+      'margin-top': !this.displayNav ? '0px' : ''
+    };
+  }
 
   displayNav = true;
   displayAside = true;
