@@ -25,7 +25,7 @@ describe('NgYunzaiSchematic: application', () => {
       expect(tree.exists(filePath)).toBe(true, `Not found [${filePath}]`);
       const json = JSON.parse(tree.readContent(filePath));
       expect(json != null).toBe(true);
-      expect(json.recommendations[0]).toBe('devcui.ng-yunzai-extension-pack');
+      expect(json.recommendations[0]).toBe('yunzai-bot.ng-yunzai-extension-pack');
     });
   });
 

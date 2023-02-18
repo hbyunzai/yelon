@@ -17,9 +17,6 @@ NG-YUNZAI 技术栈基于 Typescript、Angular、图表G2 和 NG-ZORRO，在开�
   - [G2图表中文文档](https://g2.antv.vision/zh)，如果需要图表开发，则这份文档是必备
 - 辅助类
   - [Ant Design 指引文章](https://ant.design/docs/spec/introduce-cn)，学习 Ant Design 的设计理念，非常值得阅读的部分
-  - [NG-ZORRO 社区推荐](https://ng.ant.design/docs/recommendation/zh)，一份非常值得学习的清单
-  - NG-YUNZAI 入门视频（[YouTube](https://www.youtube.com/watch?v=lPnNKPuULVw&list=PLhWkvn5F8uyJRimbVZ944unzRrHeujngw)、[腾讯视频](http://v.qq.com/vplus/2c1dd5c6db4feeeea25e9827b38c171e/foldervideos/870001501oy1ijf)、[B站](https://space.bilibili.com/12207877/#/channel/detail?cid=50229)）
-  - [NG-YUNZAI 知乎专栏](https://zhuanlan.zhihu.com/ng-yunzai)
 
 ## 写在前面
 
@@ -189,14 +186,14 @@ const routes: Routes = [
 
 “工欲善其事，必先利其器是”，NG-YUNZAI 脚手架推荐使用 [Visual Studio Code](https://code.visualstudio.com/) IDE，因为 NG-YUNZAI 针对 VSCode 增加一些额外的特性，可以更好的帮助你开发。
 
-> 或者直接使用 [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-extension-pack) 套件。
+> 或者直接使用 [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-extension-pack) 套件。
 
 ### 代码片断
 
-- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)
+- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode)
 
 ### Class样式智能提醒
 
 ng-yunzai 内置了大量的工具集样式（[API](/theme/tools)），安装以下插件可以直接在HTML模板里直接访问到它们。
 
-- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)
+- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode)

@@ -14,13 +14,13 @@ NG-YUNZAI 使用 [ESLint](https://eslint.org/) 来**保证代码质量** 与 [Pr
 
 推荐安装几个插件在 vscode 中更友好的开发：
 
-- [ng-zorro snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-zorro-vscode)
-- [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)
+- [ng-zorro snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode)
+- [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
-当然，NG-YUNZAI 为大家准备了一套完整的扩展包，只需要安装 [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-extension-pack) 即可。
+当然，NG-YUNZAI 为大家准备了一套完整的扩展包，只需要安装 [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-extension-pack) 即可。
 
 ### Git - pre commit 勾子
 
@@ -77,4 +77,4 @@ vscode 是编写 Angular 最佳的选择，你可以在项目的任何目录里�
 
 ### vscode snippets
 
-vscode 是编写 Angular 最佳的选择，自然 NG-YUNZAI 也制作了相应 snippets 扩展插件：[ng-zorro-vscode](//marketplace.visualstudio.com/items?itemName=devcui.ng-zorro-vscode) 和 [ng-yunzai-vscode](//marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)。
+vscode 是编写 Angular 最佳的选择，自然 NG-YUNZAI 也制作了相应 snippets 扩展插件：[ng-zorro-vscode](//marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode) 和 [ng-yunzai-vscode](//marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode)。

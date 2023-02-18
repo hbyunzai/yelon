@@ -20,9 +20,6 @@ NG-YUNZAI's base component library comes from NG-ZORRO, so you can get a very de
 
 NG-YUNZAI is a scaffold that can be used directly in production environments. The prerequisite for understanding these details is that you have a certain knowledge of Angular. The following documents may be helpful to you before you start:
 
-- NG-YUNZAI Getting started video ([YouTube](https://www.youtube.com/watch?v=lPnNKPuULVw&list=PLhWkvn5F8uyJRimbVZ944unzRrHeujngw)、[Tencent video](http://v.qq.com/vplus/2c1dd5c6db4feeeea25e9827b38c171e/foldervideos/870001501oy1ijf)、[Station B](https://space.bilibili.com/12207877/#/channel/detail?cid=50229)）
-- [Know the column](https://zhuanlan.zhihu.com/ng-yunzai)
-
 When running an app via `ng serve`, a complete Angular startup process would look like this:
 
 1. Trigger `APP_INITIALIZER` (the scaffolding implementation is implemented in `StartupService.load`) to get the application information.
@@ -155,14 +152,14 @@ The routing URL may be affected by the browser's own historical memory, so that 
 
 A developer must first sharpen his tools if he is to do his work well, NG-YUNZAI recommended to use the [Visual Studio Code](https://code.visualstudio.com/) IDE, because ng-yunzai adds some extra features to VSCode to better help you. Development.
 
-> Or use the [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-extension-pack) suite directly.
+> Or use the [NG-YUNZAI Extension Pack](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-extension-pack) suite directly.
 
 ### Code fragment
 
-- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)
+- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode)
 
 ### Class style smart reminder
 
 ng-yunzai has a lot of built-in toolkit styles ([API](/theme/tools)), and the following plugins can be installed directly into the HTML template.
 
-- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=devcui.ng-yunzai-vscode)
+- [NG-YUNZAI Snippets](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode)
