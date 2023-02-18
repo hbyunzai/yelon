@@ -69,7 +69,7 @@ copyFiles() {
     # ng-yunzai.json
     "${1}ng-yunzai.json|${2}application/files/root/"
     # ci
-    #"${1}.vscode|${2}application/files/root/.vscode"
+    "${1}.vscode|${2}application/files/root/.vscode"
     # LICENSE
     "${1}LICENSE|${2}application/files/root"
     "${1}README.md|${2}application/files/root"

@@ -1,6 +1,6 @@
-import {Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 
-import {YunzaiNavTopic} from '@yelon/cache';
+import { YunzaiNavTopic } from '@yelon/cache';
 
 export enum TopicType {
   FULL,

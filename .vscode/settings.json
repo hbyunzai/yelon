@@ -32,11 +32,5 @@
     "*.json": "jsonc",
     ".prettierrc": "json",
     ".stylelintrc": "json"
-  },
-  "angular.enable-strict-mode-prompt": false,
-  "cSpell.words": [
-    "antv",
-    "ngsw",
-    "prerender"
-  ]
+  }
 }

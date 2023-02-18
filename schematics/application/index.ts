@@ -366,7 +366,7 @@ function fixVsCode(): Rule {
       tree.create(filePath, '');
       json = {};
     }
-    json.recommendations = ['cipchk.ng-yunzai-extension-pack'];
+    json.recommendations = ['yunzai-bot.ng-yunzai-extension-pack'];
     writeJSON(tree, filePath, json);
   };
 }
