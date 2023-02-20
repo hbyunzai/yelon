@@ -13,6 +13,25 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+# [15.1.0](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.7...15.1.0) (2023-02-20)
+
+
+### Bug Fixes
+
+* **abc:st:** fix invalid total of global config ([43a0c93](https://github.com/hbyunzai/yelon/commit/43a0c936fbbb4bf145dfdbf4c17f51dac7dc0fcc))
+* **bcs:** fix empty less ([3fd737d](https://github.com/hbyunzai/yelon/commit/3fd737d659fdb9635ebc9902d740fccb860bab85))
+* **ci:** fix azure pipeline ([cfd0275](https://github.com/hbyunzai/yelon/commit/cfd027581e697c36d7417a35c9476bf5669782af))
+* **ci:** fix ci lint script ([db45ddc](https://github.com/hbyunzai/yelon/commit/db45ddc6757b63162b815f92748edc89d9de8250))
+* **form:** async ng-zorro-antd ([4c3e4e4](https://github.com/hbyunzai/yelon/commit/4c3e4e4fd2b3fbf3febe769e698b400bead28048))
+* **form:** fix ui value should inherit parent ui ([#1582](https://github.com/hbyunzai/yelon/issues/1582)) ([0200a76](https://github.com/hbyunzai/yelon/commit/0200a76d64432ceeb991ba778227779f29cab0b9))
+* **scripts:** fix less lint script ([1c2969e](https://github.com/hbyunzai/yelon/commit/1c2969e930dba9ec4f45b8f1a73843f3837bf7d1))
+
+
+### Features
+
+* **all:** add vscode plugin and lint code ([0e63daf](https://github.com/hbyunzai/yelon/commit/0e63daf8acc1907355188e747ae1921241a69014))
+
+
 # [15.0.0-beta.7](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.6...15.0.0-beta.7) (2023-02-17)
 
 
