@@ -21,7 +21,7 @@ for ARG in "$@"; do
 done
 
 if [[ ${TS} == true ]]; then
-  npm run lint:ts
+  npm run lint:style
 fi
 
 if [[ ${LESS} == true ]]; then
