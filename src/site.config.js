@@ -4,7 +4,7 @@ module.exports = {
   tocMaxDepth: 3, // toc max depth
   template: {
     examples: './src/templates/examples.ts',
-    examples_index: './src/templates/examples_index.ts',
+    examples_index: './src/templates/examples_index.ts'
   },
   modules: [
     {
@@ -14,36 +14,36 @@ module.exports = {
       types: [
         {
           'zh-CN': '入门',
-          'en-US': 'Basic',
+          'en-US': 'Basic'
         },
         {
           'zh-CN': '开发',
-          'en-US': 'Dev',
+          'en-US': 'Dev'
         },
         {
           'zh-CN': '进阶',
-          'en-US': 'Advance',
+          'en-US': 'Advance'
         },
         {
           'zh-CN': '其他',
-          'en-US': 'Other',
-        },
+          'en-US': 'Other'
+        }
       ],
       defaultRoute: 'getting-started',
       metaIncludeAttributes: ['name', 'types', 'github'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
-        },
-      ],
+          hasSubDir: false
+        }
+      ]
     },
     {
       name: 'components',
@@ -52,28 +52,28 @@ module.exports = {
       types: [
         {
           'zh-CN': 'CURD',
-          'en-US': 'CURD',
+          'en-US': 'CURD'
         },
         {
           'zh-CN': '基础',
-          'en-US': 'Basic',
+          'en-US': 'Basic'
         },
         {
           'zh-CN': '表单',
-          'en-US': 'Form',
+          'en-US': 'Form'
         },
         {
           'zh-CN': '布局',
-          'en-US': 'Layout',
+          'en-US': 'Layout'
         },
         {
           'zh-CN': '业务',
-          'en-US': 'Business',
+          'en-US': 'Business'
         },
         {
           'zh-CN': '其它',
-          'en-US': 'Other',
-        },
+          'en-US': 'Other'
+        }
       ],
       extraRouteMeta: [
         {
@@ -86,14 +86,14 @@ module.exports = {
             'zh-CN': {
               type: 'CURD',
               title: 'sf',
-              subtitle: '动态表单',
+              subtitle: '动态表单'
             },
             'en-US': {
               type: 'CURD',
               title: 'sf',
-              subtitle: 'Dynamic Form',
-            },
-          },
+              subtitle: 'Dynamic Form'
+            }
+          }
         },
         {
           name: 'chart',
@@ -105,14 +105,14 @@ module.exports = {
             'zh-CN': {
               type: 'Basic',
               title: '图表',
-              subtitle: 'G2',
+              subtitle: 'G2'
             },
             'en-US': {
               type: 'Basic',
               title: 'Chart',
-              subtitle: 'G2',
-            },
-          },
+              subtitle: 'G2'
+            }
+          }
         },
         {
           name: 'auth',
@@ -123,13 +123,13 @@ module.exports = {
           meta: {
             'zh-CN': {
               type: 'Business',
-              title: '用户认证',
+              title: '用户认证'
             },
             'en-US': {
               type: 'Business',
-              title: 'Authentication',
-            },
-          },
+              title: 'Authentication'
+            }
+          }
         },
         {
           name: 'acl',
@@ -140,13 +140,13 @@ module.exports = {
           meta: {
             'zh-CN': {
               type: 'Business',
-              title: '访问控制列表',
+              title: '访问控制列表'
             },
             'en-US': {
               type: 'Business',
-              title: 'Access Control List',
-            },
-          },
+              title: 'Access Control List'
+            }
+          }
         },
         {
           name: 'cache',
@@ -157,13 +157,13 @@ module.exports = {
           meta: {
             'zh-CN': {
               type: 'Business',
-              title: '缓存',
+              title: '缓存'
             },
             'en-US': {
               type: 'Business',
-              title: 'Cache',
-            },
-          },
+              title: 'Cache'
+            }
+          }
         },
         {
           name: 'mock',
@@ -174,13 +174,13 @@ module.exports = {
           meta: {
             'zh-CN': {
               type: 'Business',
-              title: 'Mock模拟数据',
+              title: 'Mock模拟数据'
             },
             'en-US': {
               type: 'Business',
-              title: 'Mock',
-            },
-          },
+              title: 'Mock'
+            }
+          }
         },
         {
           name: 'util',
@@ -191,13 +191,13 @@ module.exports = {
           meta: {
             'zh-CN': {
               type: 'Basic',
-              title: '工具集',
+              title: '工具集'
             },
             'en-US': {
               type: 'Basic',
-              title: 'Utils',
-            },
-          },
+              title: 'Utils'
+            }
+          }
         },
         {
           name: 'theme',
@@ -208,32 +208,32 @@ module.exports = {
           meta: {
             'zh-CN': {
               type: 'Basic',
-              title: '主题系统',
+              title: '主题系统'
             },
             'en-US': {
               type: 'Basic',
-              title: 'Theme System',
-            },
-          },
-        },
+              title: 'Theme System'
+            }
+          }
+        }
       ],
       module: '@yelon/abc',
       defaultRoute: 'sv',
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/abc'],
           ignores: ['README.md'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: true,
-        },
-      ],
+          hasSubDir: true
+        }
+      ]
     },
     {
       name: 'auth',
@@ -242,8 +242,8 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
-        },
+          'en-US': 'Documents'
+        }
       ],
       module: '@yelon/auth',
       defaultRoute: 'getting-started',
@@ -251,17 +251,17 @@ module.exports = {
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/auth/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
-        },
-      ],
+          hasSubDir: false
+        }
+      ]
     },
     {
       name: 'acl',
@@ -270,8 +270,8 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
-        },
+          'en-US': 'Documents'
+        }
       ],
       module: '@yelon/acl',
       defaultRoute: 'getting-started',
@@ -279,17 +279,17 @@ module.exports = {
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/acl/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
-        },
-      ],
+          hasSubDir: false
+        }
+      ]
     },
     {
       name: 'cache',
@@ -298,8 +298,8 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
-        },
+          'en-US': 'Documents'
+        }
       ],
       module: '@yelon/cache',
       defaultRoute: 'getting-started',
@@ -307,17 +307,17 @@ module.exports = {
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/cache/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
-        },
-      ],
+          hasSubDir: false
+        }
+      ]
     },
     {
       name: 'mock',
@@ -326,8 +326,8 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
-        },
+          'en-US': 'Documents'
+        }
       ],
       module: '@yelon/mock',
       defaultRoute: 'getting-started',
@@ -335,17 +335,17 @@ module.exports = {
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/mock/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
-        },
-      ],
+          hasSubDir: false
+        }
+      ]
     },
     {
       name: 'util',
@@ -354,16 +354,16 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
+          'en-US': 'Documents'
         },
         {
           'zh-CN': '工具类',
-          'en-US': 'Tools',
+          'en-US': 'Tools'
         },
         {
           'zh-CN': '管道',
-          'en-US': 'Pipes',
-        },
+          'en-US': 'Pipes'
+        }
       ],
       module: '@yelon/util',
       defaultRoute: 'getting-started',
@@ -371,25 +371,25 @@ module.exports = {
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/util/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
+          hasSubDir: false
         },
         {
           src: ['./packages/util'],
           ignores: ['docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: true,
-        },
-      ],
+          hasSubDir: true
+        }
+      ]
     },
     {
       name: 'form',
@@ -398,20 +398,20 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
+          'en-US': 'Documents'
         },
         {
           'zh-CN': 'Examples',
-          'en-US': 'Examples',
+          'en-US': 'Examples'
         },
         {
           'zh-CN': '小部件',
-          'en-US': 'Widgets',
+          'en-US': 'Widgets'
         },
         {
           'zh-CN': '第三方小部件',
-          'en-US': 'Third Widgets',
-        },
+          'en-US': 'Third Widgets'
+        }
       ],
       module: '@yelon/form',
       defaultRoute: 'getting-started',
@@ -420,44 +420,44 @@ module.exports = {
           name: 'validator',
           route: '/form-pages/validator',
           i18n: false,
-          meta: { 'zh-CN': { type: 'Examples', title: '在线校验器' } },
-        },
+          meta: { 'zh-CN': { type: 'Examples', title: '在线校验器' } }
+        }
       ],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/form/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
+          hasSubDir: false
         },
         {
           src: ['./packages/form/examples'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: true,
+          hasSubDir: true
         },
         {
           src: ['./packages/form/src/widgets'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: true,
+          hasSubDir: true
         },
         {
           src: ['./packages/form/widgets-third'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: true,
-        },
-      ],
+          hasSubDir: true
+        }
+      ]
     },
     {
       name: 'chart',
@@ -466,16 +466,16 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
+          'en-US': 'Documents'
         },
         {
           'zh-CN': 'G2',
-          'en-US': 'G2',
+          'en-US': 'G2'
         },
         {
           'zh-CN': 'ECharts',
-          'en-US': 'ECharts',
-        },
+          'en-US': 'ECharts'
+        }
       ],
       module: '@yelon/chart',
       defaultRoute: 'getting-started',
@@ -483,25 +483,25 @@ module.exports = {
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/chart/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
+          hasSubDir: false
         },
         {
           src: ['./packages/chart'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
           ignores: ['docs'],
-          hasSubDir: true,
-        },
-      ],
+          hasSubDir: true
+        }
+      ]
     },
     {
       name: 'cli',
@@ -510,8 +510,8 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
-        },
+          'en-US': 'Documents'
+        }
       ],
       module: 'ng-yunzai',
       defaultRoute: 'getting-started',
@@ -519,17 +519,17 @@ module.exports = {
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./schematics/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
-        },
-      ],
+          hasSubDir: false
+        }
+      ]
     },
     {
       name: 'theme',
@@ -538,24 +538,24 @@ module.exports = {
       types: [
         {
           'zh-CN': '文档',
-          'en-US': 'Documents',
+          'en-US': 'Documents'
         },
         {
           'zh-CN': '主题',
-          'en-US': 'Theme',
+          'en-US': 'Theme'
         },
         {
           'zh-CN': '服务',
-          'en-US': 'Service',
+          'en-US': 'Service'
         },
         {
           'zh-CN': '路由',
-          'en-US': 'Router',
+          'en-US': 'Router'
         },
         {
           'zh-CN': '管道',
-          'en-US': 'Pipe',
-        },
+          'en-US': 'Pipe'
+        }
       ],
       module: 'ng-yunzai',
       defaultRoute: 'getting-started',
@@ -563,62 +563,185 @@ module.exports = {
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
       template: {
         meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts',
+        module: './src/templates/module.ts'
       },
       dir: [
         {
           src: ['./packages/theme/docs'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
+          hasSubDir: false
         },
         {
           src: ['./packages/theme/layout-default'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
           reName: 'layout-default',
-          hasSubDir: false,
+          hasSubDir: false
         },
         {
           src: ['./packages/theme/layout-blank'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
           reName: 'layout-blank',
-          hasSubDir: false,
+          hasSubDir: false
         },
         {
           src: ['./packages/theme/theme-btn'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
           reName: 'theme-btn',
-          hasSubDir: false,
+          hasSubDir: false
         },
         {
           src: ['./packages/theme/src/router'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: false,
+          hasSubDir: false
         },
         {
           src: ['./packages/theme/src/pipes'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: true,
+          hasSubDir: true
         },
         {
           src: ['./packages/theme/src/services'],
           template: {
-            content: './src/templates/content.ts',
+            content: './src/templates/content.ts'
           },
-          hasSubDir: true,
-        },
-      ],
+          hasSubDir: true
+        }
+      ]
     },
-  ],
+    {
+      name: 'bis',
+      github: 'https://github.com/hbyunzai/yelon',
+      dist: './src/app/routes/gen/bis',
+      types: [
+        {
+          'zh-CN': '文档',
+          'en-US': 'Documents'
+        }
+      ],
+      module: '@yelon/bis',
+      defaultRoute: 'getting-started',
+      extraRouteMeta: [],
+      metaIncludeAttributes: ['name', 'types', 'github', 'module'],
+      template: {
+        meta: './src/templates/meta.ts',
+        module: './src/templates/module.ts'
+      },
+      dir: [
+        {
+          src: ['./packages/bis'],
+          template: {
+            content: './src/templates/content.ts'
+          },
+          ignores: ['docs'],
+          hasSubDir: true
+        },
+        {
+          src: ['./packages/bis/docs'],
+          template: {
+            content: './src/templates/content.ts'
+          },
+          hasSubDir: false
+        },
+        {
+          src: ['./packages/bis/layout'],
+          template: {
+            content: './src/templates/content.ts'
+          },
+          hasSubDir: false
+        }
+      ]
+    },
+    {
+      name: 'bcs',
+      github: 'https://github.com/hbyunzai/yelon',
+      dist: './src/app/routes/gen/bcs',
+      types: [
+        {
+          'zh-CN': '文档',
+          'en-US': 'Documents'
+        },
+        {
+          'zh-CN': '基础',
+          'en-US': 'Basic'
+        },
+        {
+          'zh-CN': '其它',
+          'en-US': 'Other'
+        }
+      ],
+      module: '@yelon/bcs',
+      defaultRoute: 'getting-started',
+      extraRouteMeta: [],
+      metaIncludeAttributes: ['name', 'types', 'github', 'module'],
+      template: {
+        meta: './src/templates/meta.ts',
+        module: './src/templates/module.ts'
+      },
+      dir: [
+        {
+          src: ['./packages/bcs'],
+          template: {
+            content: './src/templates/content.ts'
+          },
+          ignores: ['docs'],
+          hasSubDir: true
+        },
+        {
+          src: ['./packages/bcs/docs'],
+          template: {
+            content: './src/templates/content.ts'
+          },
+          hasSubDir: false
+        }
+      ]
+    },
+    {
+      name: 'socket',
+      github: 'https://github.com/hbyunzai/yelon',
+      dist: './src/app/routes/gen/socket',
+      types: [
+        {
+          'zh-CN': '文档',
+          'en-US': 'Documents'
+        }
+      ],
+      module: '@yelon/socket',
+      defaultRoute: 'getting-started',
+      extraRouteMeta: [],
+      metaIncludeAttributes: ['name', 'types', 'github', 'module'],
+      template: {
+        meta: './src/templates/meta.ts',
+        module: './src/templates/module.ts'
+      },
+      dir: [
+        {
+          src: ['./packages/socket'],
+          template: {
+            content: './src/templates/content.ts'
+          },
+          ignores: ['docs'],
+          hasSubDir: true
+        },
+        {
+          src: ['./packages/socket/docs'],
+          template: {
+            content: './src/templates/content.ts'
+          },
+          hasSubDir: false
+        }
+      ]
+    }
+  ]
 };

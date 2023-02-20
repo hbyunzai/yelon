@@ -32,6 +32,9 @@ const routes: Route[] = [
       { path: 'util', loadChildren: () => import('./gen/util/util.module').then(m => m.UtilModule) },
       { path: 'chart', loadChildren: () => import('./gen/chart/chart.module').then(m => m.ChartModule) },
       { path: 'form', loadChildren: () => import('./gen/form/form.module').then(m => m.FormModule) },
+      { path: 'bis', loadChildren: () => import('./gen/bis/bis.module').then(m => m.BisModule) },
+      { path: 'bcs', loadChildren: () => import('./gen/bcs/bcs.module').then(m => m.BcsModule) },
+      { path: 'socket', loadChildren: () => import('./gen/socket/socket.module').then(m => m.SocketModule) },
       {
         path: 'form-pages',
         loadChildren: () => import('./form-pages/form-pages.module').then(m => m.FormPagesModule)
