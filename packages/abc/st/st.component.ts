@@ -260,8 +260,6 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
     configSrv: YunzaiConfigService,
     private cms: NzContextMenuService
   ) {
-    this.setCog(configSrv.merge('st', ST_DEFAULT_CONFIG)!);
-
     this.yelonI18n.change.pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.locale = this.yelonI18n.getData('st');
       if (this._columns.length > 0) {
@@ -276,6 +274,8 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
         filter(() => this._columns.length > 0)
       )
       .subscribe(() => this.refreshColumns());
+
+    this.setCog(configSrv.merge('st', ST_DEFAULT_CONFIG)!);
   }
 
   private setCog(cog: YunzaiSTConfig): void {
@@ -409,7 +409,7 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
       this._statistical = result.statistical as STStatisticalResults;
       this.changeEmit('loaded', result.list);
       // Should be re-render in next tike when using virtual scroll
-      // https://github.com/hbyunzai/ng-yunzai/issues/1836
+      // https://github.com/ng-alain/ng-alain/issues/1836
       if (this.cdkVirtualScrollViewport) {
         Promise.resolve().then(() => this.cdkVirtualScrollViewport.checkViewportSize());
       }
