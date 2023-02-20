@@ -21,10 +21,10 @@ for ARG in "$@"; do
 done
 
 if [[ ${TS} == true ]]; then
-  npm run lint:style
+  npm run lint:ts
 fi
 
 if [[ ${LESS} == true ]]; then
-  $(npm bin)/stylelint 'packages/**/*.less'
+  npm run lint:style
 fi
 
