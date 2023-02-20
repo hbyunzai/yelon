@@ -45,7 +45,7 @@ export interface SFGridSchema {
    */
   span?: number | null;
   /**
-   * 数据栅格占位格数，为 `0` 时相当于 `display: none`
+   * 数组索引栅格占位格数，为 `0` 时相当于 `display: none`，限 `type: 'array'` 时有效
    */
   arraySpan?: number | null;
   /**
@@ -87,7 +87,7 @@ export type SFBuiltInWidgets =
 
 export interface SFRenderSchema {
   /**
-   * 指定采用什么小部件渲染，所有小部件名可[查阅文档](https://ng.yunzainfo.com/)
+   * 指定采用什么小部件渲染，所有小部件名可[查阅文档](https://ng-alain.com/)
    */
   widget?: SFBuiltInWidgets | (string & {});
   /**
