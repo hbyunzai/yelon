@@ -46,20 +46,20 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
         <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
           <div nz-menu style="width: 200px;">
             <div nz-menu-item>
-              {{ 'menu.application.mode' | i18n }}
+              {{ 'mode.nav' | i18n }}
             </div>
 
             <div nz-menu-item (click)="onNavTypeChange(NavType.APPLICATION)">
               <i nz-icon nzType="appstore" class="mr-sm"></i>
-              {{ 'menu.application.application' | i18n }}
+              {{ 'mode.nav.application' | i18n }}
             </div>
             <div nz-menu-item (click)="onNavTypeChange(NavType.GROUP)">
               <i nz-icon nzType="group" class="mr-sm"></i>
-              {{ 'menu.application.group' | i18n }}
+              {{ 'mode.nav.group' | i18n }}
             </div>
             <div nz-menu-item (click)="onNavTypeChange(NavType.TILE)">
               <i nz-icon nzType="appstore" class="mr-sm"></i>
-              {{ 'menu.application.tile' | i18n }}
+              {{ 'mode.nav.tile' | i18n }}
             </div>
             <div nz-menu-item> <yunzai-fullscreen></yunzai-fullscreen> </div>
             <div nz-menu-item> <yunzai-clearstorage></yunzai-clearstorage> </div>
@@ -82,7 +82,7 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
       </div>
       <nz-dropdown-menu #userMenu="nzDropdownMenu">
         <ul nz-menu>
-          <li nz-menu-item routerLink="/">{{ 'menu.backtohome' | i18n }}</li>
+          <li nz-menu-item routerLink="/">{{ 'back.home' | i18n }}</li>
         </ul>
       </nz-dropdown-menu>
     </ng-template>

@@ -11,7 +11,7 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
   template: `
     <div *ngIf="showLangText" nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight">
       <i nz-icon nzType="global"></i>
-      {{ 'menu.lang' | i18n }}
+      {{ 'lang.nav' | i18n }}
       <i nz-icon nzType="down"></i>
     </div>
     <i

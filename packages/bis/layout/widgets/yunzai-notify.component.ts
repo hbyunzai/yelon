@@ -42,25 +42,25 @@ export class YunzaiNotifyComponent implements OnInit, OnDestroy {
       key: 'msg',
       title: this.y18n.fanyi('notify.message'),
       list: [],
-      emptyText: this.y18n.fanyi('notify.message.emptyText'),
+      emptyText: this.y18n.fanyi('notify.message.empty'),
       emptyImage: './assets/tmp/img/message.svg',
-      clearText: this.y18n.fanyi('notify.message.clearText')
+      clearText: this.y18n.fanyi('notify.message.clear')
     },
     {
       key: 'todo',
       title: this.y18n.fanyi('notify.todo'),
       list: [],
-      emptyText: this.y18n.fanyi('notify.todo.emptyText'),
+      emptyText: this.y18n.fanyi('notify.todo.empty'),
       emptyImage: './assets/tmp/img/todo.svg',
-      clearText: this.y18n.fanyi('notify.todo.clearText')
+      clearText: this.y18n.fanyi('notify.todo.clear')
     },
     {
       key: 'notice',
       title: this.y18n.fanyi('notify.notice'),
       list: [],
-      emptyText: this.y18n.fanyi('notify.notice.emptyText'),
+      emptyText: this.y18n.fanyi('notify.notice.empty'),
       emptyImage: './assets/tmp/img/notice.svg',
-      clearText: this.y18n.fanyi('notify.notice.clearText')
+      clearText: this.y18n.fanyi('notify.notice.clear')
     }
   ];
   loading = false;
