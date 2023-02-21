@@ -71,7 +71,9 @@ class YunzaiI18NService extends YunzaiI18nBaseService {
     if (this._currentLang === lang) return;
 
     const key = `_yz_lang_${lang}`;
+
     this.cacheService.set(key, data);
+    this.cacheService.set(this.cacheDefaultKey, lang);
 
     this._data = this.flatData(data, []);
 
