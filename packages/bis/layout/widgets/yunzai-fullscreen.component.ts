@@ -6,7 +6,7 @@ import screenfull from 'screenfull';
   selector: 'yunzai-fullscreen',
   template: `
     <i nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></i>
-    {{ (status ? 'menu.fullscreen.exit' : 'menu.fullscreen') | i18n }}
+    {{ (status ? 'exitFullscreen' : 'fullscreen') | i18n }}
   `,
   host: {
     '[class.d-block]': 'true'

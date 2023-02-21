@@ -41,15 +41,15 @@ import { LayoutNavApplicationState, TopicType } from './types';
     <!--      template end-->
 
     <!--      button start-->
-    <div class="yunzai-default__nav-item" (click)="diffChange()"> {{ 'application.button' | i18n }}</div>
+    <div class="yunzai-default__nav-item" (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
     <!--      button end-->
 
     <!--      header start-->
     <div class="yz-application" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div class="yz-application-text" (click)="full()">{{ 'application.all' | i18n }}</div>
-        <div class="yz-application-text" (click)="own()">{{ 'application.mine' | i18n }}</div>
-        <div class="yz-application-text" *ngFor="let d of state.topics" (click)="every(d)">{{ d.name }}</div>
+        <div class="yz-application-text" (click)="full()">{{ 'mode.nav.all' | i18n }}</div>
+        <div class="yz-application-text" (click)="own()">{{ 'mode.nav.mine' | i18n }}</div>
+        <div class="yz-application-text" *ngFor="let d of state.topics" (click)="every(d)">{{ d.name | i18n }}</div>
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
         <div *ngSwitchCase="TopicType.FULL">
@@ -65,8 +65,8 @@ import { LayoutNavApplicationState, TopicType } from './types';
             <ul>
               <li *ngFor="let d of state.list" (click)="open(d)">
                 <a href="javascript:;">
-                  <h4>{{ d.name }}</h4>
-                  <p>{{ d.intro }}</p>
+                  <h4>{{ d.name | i18n }}</h4>
+                  <p>{{ d.intro | i18n }}</p>
                 </a>
               </li>
             </ul>

@@ -8,7 +8,14 @@ export const AUTH_DEFAULT_CONFIG: YunzaiAuthConfig = {
   token_send_template: '${token}',
   token_send_place: 'header',
   login_url: '/login',
-  ignores: [/\/login/, /assets\//, /passport\//, /\/auth\/oauth\/getOrCreateToken\/webapp/, /\/auth\/oauth\/token/],
+  ignores: [
+    /\/login/,
+    /assets\//,
+    /passport\//,
+    /\/auth\/oauth\/getOrCreateToken\/webapp/,
+    /\/auth\/oauth\/token/,
+    /i18n/
+  ],
   allow_anonymous_key: `_allow_anonymous`,
   executeOtherInterceptors: true,
   refreshTime: 3000,
