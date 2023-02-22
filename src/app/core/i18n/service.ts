@@ -1,7 +1,14 @@
 import { Platform } from '@angular/cdk/platform';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
-import { YunzaiI18nBaseService, YelonLocaleService, en_US as yelonEnUS, zh_CN as yelonZhCn } from '@yelon/theme';
+import {
+  YunzaiI18nBaseService,
+  YelonLocaleService,
+  en_US as yelonEnUS,
+  zh_CN as yelonZhCn,
+  YunzaiI18NType
+} from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
@@ -67,8 +74,12 @@ export class I18NService extends YunzaiI18nBaseService {
     if (emit !== false) this._change$.next(lang);
   }
 
-  getLangs(): Array<{ code: string; text: string }> {
+  getLangsSync(): Array<{ code: string; text: string }> {
     return this._langs;
+  }
+
+  getLangs(): Observable<YunzaiI18NType[]> {
+    return of([]);
   }
 
   get defaultLang(): LangType {

@@ -6,5 +6,6 @@ export * from './yunzai-act.guard';
 export * from './yunzai-auth.service';
 export * from './yunzai-default.interceptor';
 export * from './yunzai-i18n.service';
+export * from './yunzai-lang';
 export * from './yunzai-layout.module';
 export * from './yunzai-startup.service';

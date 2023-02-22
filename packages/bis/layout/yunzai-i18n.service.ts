@@ -1,13 +1,23 @@
 import { Platform } from '@angular/cdk/platform';
 import { registerLocaleData } from '@angular/common';
+import ngEn from '@angular/common/locales/en';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, catchError, of, takeUntil } from 'rxjs';
 
+import { enUS as dfEn } from 'date-fns/locale';
+
 import { CacheService } from '@yelon/cache';
-import { YelonLocaleService, SettingsService, _HttpClient, YunzaiI18nBaseService, YunzaiI18NType } from '@yelon/theme';
+import {
+  YelonLocaleService,
+  SettingsService,
+  _HttpClient,
+  YunzaiI18nBaseService,
+  YunzaiI18NType,
+  en_US as yelonEnUS
+} from '@yelon/theme';
 import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzI18nService } from 'ng-zorro-antd/i18n';
+import { NzI18nService, en_US as zorroEnUS } from 'ng-zorro-antd/i18n';
 
 import { mergeBisConfig } from './bis.config';
 import { YUNZAI_LANGS } from './yunzai-lang';
@@ -33,12 +43,12 @@ class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
   ) {
     super(cogSrv);
     const defaultLang = this.getDefaultLang();
+    this.bis = mergeBisConfig(cogSrv);
     this.getLangs()
       .pipe(takeUntil(this.destroy$))
       .subscribe(langs => {
         this._defaultLang = langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
       });
-    this.bis = mergeBisConfig(cogSrv);
   }
 
   private getDefaultLang(): string {
@@ -79,13 +89,21 @@ class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
     this._data = this.flatData(data, []);
 
     const item = YUNZAI_LANGS[lang];
-    registerLocaleData(item.ng);
-    this.nzI18nService.setLocale(item.zorro);
-    this.nzI18nService.setDateLocale(item.date);
-    this.yelonLocaleService.setLocale(item.yelon);
-    this._currentLang = lang;
-
-    this._change$.next(lang);
+    if (item) {
+      registerLocaleData(item.ng);
+      this.nzI18nService.setLocale(item.zorro);
+      this.nzI18nService.setDateLocale(item.date);
+      this.yelonLocaleService.setLocale(item.yelon);
+      this._currentLang = lang;
+      this._change$.next(lang);
+    } else {
+      registerLocaleData(ngEn);
+      this.nzI18nService.setLocale(zorroEnUS);
+      this.nzI18nService.setDateLocale(dfEn);
+      this.yelonLocaleService.setLocale(yelonEnUS);
+      this._currentLang = lang;
+      this._change$.next(lang);
+    }
   }
 
   getLangs(): Observable<YunzaiI18NType[]> {

@@ -11,7 +11,7 @@ import { LayoutNavApplicationState, TopicType } from './types';
 @Component({
   selector: `layout-nav-application`,
   template: `
-    <!--      template start-->
+    <!--      search start-->
     <ng-template #search>
       <div nz-row class="yz-application-list-search">
         <nz-input-group [nzPrefix]="prefixTemplate">
@@ -28,17 +28,20 @@ import { LayoutNavApplicationState, TopicType } from './types';
         </nz-input-group>
       </div>
     </ng-template>
+    <!-- search end -->
+
+    <!-- right menu start -->
     <ng-template #ld>
       <div class="yz-application-list">
         <ul>
           <li *ngFor="let d of state.list">
-            <h5>{{ d.name }}</h5>
-            <a href="javascript:;" *ngFor="let cd of d.children" (click)="open(cd)">{{ cd.name }}</a>
+            <h5>{{ d.name | i18n }}</h5>
+            <a href="javascript:;" *ngFor="let cd of d.children" (click)="open(cd)">{{ cd.name | i18n }}</a>
           </li>
         </ul>
       </div>
     </ng-template>
-    <!--      template end-->
+    <!-- right menu end -->
 
     <!--      button start-->
     <div class="yunzai-default__nav-item" (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
@@ -97,12 +100,15 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.state.list = this.state.topics = this.cacheService.get('_yz_header', { mode: 'none' });
+    this.state.topics = [...this.cacheService.get('_yz_header', { mode: 'none' })];
+    this.full();
   }
 
   initTopic(type: TopicType): void {
+    console.log(type);
     this.state.search = null;
-    this.state.list = this.cacheService.get('_yz_header', { mode: 'none' });
+    this.state.list = [...this.cacheService.get('_yz_header', { mode: 'none' })];
+    console.log(this.state.list);
     this.state.type = type;
   }
 
@@ -169,20 +175,22 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   onSearch(): void {
     const temp: YunzaiNavTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
     if (this.state.search) {
-      this.state.list = temp
-        .filter((topic: YunzaiNavTopic) => {
-          if (this.i18n.fanyi(topic.name).includes(this.state.search!)) {
-            return topic;
-          } else {
-            topic.children = topic.children.filter((child: YunzaiNavTopic) => {
-              return this.i18n.fanyi(child.name).includes(this.state.search!);
-            });
-            return topic;
-          }
-        })
-        .filter((topic: YunzaiNavTopic) => {
-          return topic.children.length > 0;
-        });
+      this.state.list = [
+        ...temp
+          .filter((topic: YunzaiNavTopic) => {
+            if (this.i18n.fanyi(topic.name).includes(this.state.search!)) {
+              return topic;
+            } else {
+              topic.children = topic.children.filter((child: YunzaiNavTopic) => {
+                return this.i18n.fanyi(child.name).includes(this.state.search!);
+              });
+              return topic;
+            }
+          })
+          .filter((topic: YunzaiNavTopic) => {
+            return topic.children.length > 0;
+          })
+      ];
     } else {
       this.state.list = this.cacheService.get('_yz_header', { mode: 'none' });
     }

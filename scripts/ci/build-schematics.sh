@@ -77,7 +77,6 @@ copyFiles() {
     # mock
     "${1}_mock/_user.ts|${2}application/files/root/_mock/"
     # src
-    "${1}src/favicon.ico|${2}application/files/src/"
     "${1}src/typings.d.ts|${2}application/files/src/"
     "${1}src/environments|${2}application/files/src/"
     "${1}src/styles|${2}application/files/src/"
@@ -98,6 +97,7 @@ copyFiles() {
     "${1}src/assets/tmp/img/todo.svg|${2}application/files/src/assets/tmp/img/"
     "${1}src/assets/tmp/img/message.png|${2}application/files/src/assets/tmp/img/"
     "${1}src/assets/tmp/img/todo.png|${2}application/files/src/assets/tmp/img/"
+    "${1}src/favicon.ico|${2}application/files/src/assets/"
     # core
     "${1}src/app/core/i18n|${2}application/files/src/app/core/"
     "${1}src/app/core/net|${2}application/files/src/app/core/"

@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { CacheService, YunzaiProjectInfo } from '@yelon/cache';
 import { StompService } from '@yelon/socket';
 import { LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
-import { WINDOW, log } from '@yelon/util';
+import { WINDOW, hasFavicon, log, setFavicon } from '@yelon/util';
 
 import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
 @Component({
@@ -76,8 +76,8 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
       <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="yunzai-default__aside-user">
         <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon"></nz-avatar>
         <div class="yunzai-default__aside-user-info">
-          <strong>{{ aside.name }}</strong>
-          <p class="mb0">{{ aside.intro }}</p>
+          <strong>{{ aside.name | i18n }}</strong>
+          <p class="mb0">{{ aside.intro | i18n }}</p>
         </div>
       </div>
       <nz-dropdown-menu #userMenu="nzDropdownMenu">
@@ -157,11 +157,26 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initLogo();
+    this.initFavicon();
     this.initNavType();
     this.initAside();
     this.addLayoutDisplayListener();
     this.stompService.listen();
     this.toIndex();
+  }
+
+  initFavicon(): void {
+    console.log('init favicon');
+    const projectInfo: YunzaiProjectInfo = this.cacheService.get('_yz_project_info', { mode: 'none' });
+    if (projectInfo.faviconUrl) {
+      hasFavicon(projectInfo.faviconUrl).then((has: boolean) => {
+        if (has) {
+          setFavicon(projectInfo.faviconUrl);
+        } else {
+          setFavicon('./assets/favicon.ico');
+        }
+      });
+    }
   }
 
   initAside(): void {

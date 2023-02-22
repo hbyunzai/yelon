@@ -4,7 +4,6 @@ import ngEsEs from '@angular/common/locales/es';
 import ngFr from '@angular/common/locales/fr';
 import ngHr from '@angular/common/locales/hr';
 import ngIt from '@angular/common/locales/it';
-import ngJa from '@angular/common/locales/ja';
 import ngKo from '@angular/common/locales/ko';
 import ngPl from '@angular/common/locales/pl';
 import ngSl from '@angular/common/locales/sl';
@@ -21,7 +20,6 @@ import {
   fr as dfFr,
   hr as dfHr,
   it as dfIt,
-  ja as dfJa,
   ko as dfKo,
   pl as dfPl,
   sl as dfSl,
@@ -35,7 +33,6 @@ import {
   fr_FR as yelonFrFR,
   hr_HR as yelonHrHR,
   it_IT as yelonItIT,
-  ja_JP as yelonJaJP,
   ko_KR as yelonKoKR,
   pl_PL as yelonPlPL,
   sl_SI as yelonSlSI,
@@ -50,7 +47,6 @@ import {
   fr_FR as zorroFrFR,
   hr_HR as zorroHrHR,
   it_IT as zorroItIT,
-  ja_JP as zorroJaJP,
   ko_KR as zorroKoKR,
   pl_PL as zorroPlPL,
   sl_SI as zorroSlSI,
@@ -132,14 +128,6 @@ export const YUNZAI_LANGS: { [key: string]: LangConfigData } = {
     date: dfIt,
     yelon: yelonItIT,
     abbr: '🇮🇹'
-  },
-  'ja-JP': {
-    text: '日本語',
-    ng: ngJa,
-    zorro: zorroJaJP,
-    date: dfJa,
-    yelon: yelonJaJP,
-    abbr: '🇯🇵'
   },
   'ko-KR': {
     text: '한국어',
