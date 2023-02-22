@@ -1,10 +1,17 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
-import { BehaviorSubject, Observable, filter } from 'rxjs';
+import { BehaviorSubject, Observable, filter, of } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiThemeI18nConfig } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { _HttpClient } from '../http/http.client';
+
+export interface YunzaiI18NType {
+  code: string;
+  text: string;
+  abbr: string;
+  icon?: string;
+}
 
 export interface YunzaiI18NService {
   [key: string]: NzSafeAny;
@@ -44,7 +51,7 @@ export interface YunzaiI18NService {
    *
    * 返回当前语言列表
    */
-  getLangs(): NzSafeAny[];
+  getLangs(): Observable<YunzaiI18NType[]>;
 
   /**
    * Translate 翻译
@@ -121,7 +128,7 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
 
   abstract use(lang: string, data?: Record<string, unknown>): void;
 
-  abstract getLangs(): NzSafeAny[];
+  abstract getLangs(): Observable<YunzaiI18NType[]>;
 
   fanyi(path: string, params?: Record<string, unknown>): string {
     let content = this._data[path] || '';
@@ -149,7 +156,7 @@ export class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     this._change$.next(lang);
   }
 
-  getLangs(): NzSafeAny[] {
-    return [];
+  getLangs(): Observable<YunzaiI18NType[]> {
+    return of([]);
   }
 }

@@ -1,7 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 
-import { YUNZAI_I18N_TOKEN, SettingsService } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, SettingsService, YunzaiI18NType } from '@yelon/theme';
 import { BooleanInput, InputBoolean } from '@yelon/util/decorator';
 
 import { YunzaiI18NService } from '../yunzai-i18n.service';
@@ -30,7 +31,12 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
           [nzSelected]="item.code === curLangCode"
           (click)="change(item.code)"
         >
-          <span role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span>
+          <template *ngIf="!item.icon">
+            <span role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span>
+          </template>
+          <template *ngIf="item.icon">
+            <img [src]="'data:image/png;base64,' + item.icon" [alt]="item.abbr" class="pr-xs" />
+          </template>
           {{ item.text }}
         </li>
       </ul>
@@ -38,14 +44,13 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YunzaiI18NComponent {
+export class YunzaiI18NComponent implements OnDestroy {
   static ngAcceptInputType_showLangText: BooleanInput;
+  private destroy$: Subject<any> = new Subject();
   /** Whether to display language text */
   @Input() @InputBoolean() showLangText = true;
 
-  get langs(): Array<{ code: string; text: string; abbr: string }> {
-    return this.i18n.getLangs();
-  }
+  langs: YunzaiI18NType[] = [];
 
   get curLangCode(): string {
     return this.settings.layout.lang;
@@ -55,7 +60,14 @@ export class YunzaiI18NComponent {
     private settings: SettingsService,
     @Inject(YUNZAI_I18N_TOKEN) private i18n: YunzaiI18NService,
     @Inject(DOCUMENT) private doc: any
-  ) {}
+  ) {
+    this.i18n
+      .getLangs()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(langs => {
+        this.langs = langs;
+      });
+  }
 
   change(lang: string): void {
     const spinEl = this.doc.createElement('div');
@@ -68,5 +80,9 @@ export class YunzaiI18NComponent {
       this.settings.setLayout('lang', lang);
       setTimeout(() => this.doc.location.reload());
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.complete();
   }
 }
