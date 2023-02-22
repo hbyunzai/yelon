@@ -6,7 +6,7 @@ import { _HttpClient } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
 
 import { YunzaiI18NService } from '../yunzai-i18n.service';
-import { LayoutNavApplicationState, TopicType } from './types';
+import { LayoutNavApplicationState } from './types';
 
 @Component({
   selector: `layout-nav-application`,
@@ -34,9 +34,9 @@ import { LayoutNavApplicationState, TopicType } from './types';
     <ng-template #ld>
       <div class="yz-application-list">
         <ul>
-          <li *ngFor="let d of state.list">
-            <h5>{{ d.name | i18n }}</h5>
-            <a href="javascript:;" *ngFor="let cd of d.children" (click)="open(cd)">{{ cd.name | i18n }}</a>
+          <li *ngFor="let topic of state.list">
+            <h5>{{ topic.name | i18n }}</h5>
+            <a href="javascript:;" *ngFor="let nav of topic.children" (click)="open(nav)">{{ nav.name | i18n }}</a>
           </li>
         </ul>
       </div>
@@ -50,26 +50,28 @@ import { LayoutNavApplicationState, TopicType } from './types';
     <!--      header start-->
     <div class="yz-application" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div class="yz-application-text" (click)="full()">{{ 'mode.nav.all' | i18n }}</div>
-        <div class="yz-application-text" (click)="own()">{{ 'mode.nav.mine' | i18n }}</div>
-        <div class="yz-application-text" *ngFor="let d of state.topics" (click)="every(d)">{{ d.name | i18n }}</div>
+        <div class="yz-application-text" (click)="attachNav('all')">{{ 'mode.nav.all' | i18n }}</div>
+        <div class="yz-application-text" (click)="attachNav('mine')">{{ 'mode.nav.mine' | i18n }}</div>
+        <div class="yz-application-text" *ngFor="let nav of state.topics" (click)="attachNav('other', nav)">{{
+          nav.name | i18n
+        }}</div>
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
-        <div *ngSwitchCase="TopicType.FULL">
+        <div *ngIf="state.type === 'all'">
           <ng-template [ngTemplateOutlet]="search"></ng-template>
           <ng-template [ngTemplateOutlet]="ld"></ng-template>
         </div>
-        <div *ngSwitchCase="TopicType.OWN">
+        <div *ngIf="state.type === 'mine'">
           <ng-template [ngTemplateOutlet]="search"></ng-template>
           <ng-template [ngTemplateOutlet]="ld"></ng-template>
         </div>
-        <div *ngSwitchCase="TopicType.EVERY" class="yz-application-list">
+        <div *ngIf="state.type === 'other'" class="yz-application-list">
           <div class="yz-application-list-item">
             <ul>
-              <li *ngFor="let d of state.list" (click)="open(d)">
+              <li *ngFor="let nav of state.list" (click)="open(nav)">
                 <a href="javascript:;">
-                  <h4>{{ d.name | i18n }}</h4>
-                  <p>{{ d.intro | i18n }}</p>
+                  <h4>{{ nav.name | i18n }}</h4>
+                  <p>{{ nav.intro | i18n }}</p>
                 </a>
               </li>
             </ul>
@@ -81,10 +83,9 @@ import { LayoutNavApplicationState, TopicType } from './types';
   `
 })
 export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
-  public TopicType = TopicType;
   state: LayoutNavApplicationState = {
     active: false,
-    type: TopicType.FULL,
+    type: 'all',
     topic: undefined,
     topics: [],
     list: [],
@@ -100,24 +101,37 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.state.topics = [...this.cacheService.get('_yz_header', { mode: 'none' })];
-    this.full();
+    this.fetchAllTopic();
+    this.attachNav('all');
   }
 
-  initTopic(type: TopicType): void {
-    console.log(type);
-    this.state.search = null;
-    this.state.list = [...this.cacheService.get('_yz_header', { mode: 'none' })];
-    console.log(this.state.list);
+  fetchAllTopic(): void {
+    this.state.topics = this.cacheService.get('_yz_header', { mode: 'none' });
+  }
+
+  attachNav(type: 'all' | 'mine' | 'other', topic?: YunzaiNavTopic): void {
     this.state.type = type;
+    this.clearSearch();
+    if (type === 'all') {
+      this.displayAllNav();
+    }
+    if (type === 'mine') {
+      this.displayMineNav();
+    }
+    if (type === 'other' && topic) {
+      this.displayOtherNav(topic);
+    }
   }
 
-  full(): void {
-    this.initTopic(TopicType.FULL);
+  clearSearch(): void {
+    this.state.search = null;
   }
 
-  own(): void {
-    this.initTopic(TopicType.OWN);
+  displayAllNav(): void {
+    this.state.list = this.cacheService.get('_yz_header', { mode: 'none' });
+  }
+
+  displayMineNav(): void {
     const temp: YunzaiNavTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
     this.state.list = temp
       .filter((topic: YunzaiNavTopic) => {
@@ -131,11 +145,10 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
       });
   }
 
-  every(e: YunzaiNavTopic): void {
-    this.initTopic(TopicType.EVERY);
-    this.state.topic = e;
+  displayOtherNav(topic: YunzaiNavTopic): void {
+    this.state.topic = topic;
     const temp: YunzaiNavTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
-    this.state.list = [...temp.filter(t => t.key === e.key)[0].children];
+    this.state.list = temp.filter(t => t.key === topic.key)[0].children;
   }
 
   diffChange(flag?: boolean): void {
@@ -175,22 +188,20 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   onSearch(): void {
     const temp: YunzaiNavTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
     if (this.state.search) {
-      this.state.list = [
-        ...temp
-          .filter((topic: YunzaiNavTopic) => {
-            if (this.i18n.fanyi(topic.name).includes(this.state.search!)) {
-              return topic;
-            } else {
-              topic.children = topic.children.filter((child: YunzaiNavTopic) => {
-                return this.i18n.fanyi(child.name).includes(this.state.search!);
-              });
-              return topic;
-            }
-          })
-          .filter((topic: YunzaiNavTopic) => {
-            return topic.children.length > 0;
-          })
-      ];
+      this.state.list = temp
+        .filter((topic: YunzaiNavTopic) => {
+          if (this.i18n.fanyi(topic.name).includes(this.state.search!)) {
+            return topic;
+          } else {
+            topic.children = topic.children.filter((child: YunzaiNavTopic) => {
+              return this.i18n.fanyi(child.name).includes(this.state.search!);
+            });
+            return topic;
+          }
+        })
+        .filter((topic: YunzaiNavTopic) => {
+          return topic.children.length > 0;
+        });
     } else {
       this.state.list = this.cacheService.get('_yz_header', { mode: 'none' });
     }

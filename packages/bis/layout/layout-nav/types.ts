@@ -2,15 +2,9 @@ import { Subject } from 'rxjs';
 
 import { YunzaiNavTopic } from '@yelon/cache';
 
-export enum TopicType {
-  FULL,
-  OWN,
-  EVERY
-}
-
 export interface LayoutNavApplicationState {
   active: boolean;
-  type: TopicType;
+  type: 'all' | 'mine' | 'other';
   topic?: YunzaiNavTopic;
   topics: YunzaiNavTopic[];
   list: YunzaiNavTopic[];
