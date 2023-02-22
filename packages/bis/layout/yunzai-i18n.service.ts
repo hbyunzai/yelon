@@ -72,7 +72,7 @@ class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
         return this.http.get(`assets/tmp/i18n/${lang}.json`);
       } else {
         return this.http
-          .get(`${this.bis.baseUrl}/i18n/api/v2/${lang}?_allow_anonymous`)
+          .get(`${this.bis.baseUrl}/i18n/api/v2/language/${lang}?_allow_anonymous`)
           .pipe(catchError(() => this.http.get(`assets/tmp/i18n/${lang}.json`)));
       }
     }
@@ -109,12 +109,14 @@ class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
   getLangs(): Observable<YunzaiI18NType[]> {
     const langs = Object.keys(YUNZAI_LANGS).map(code => {
       const item = YUNZAI_LANGS[code];
-      return { code, text: item.text, abbr: item.abbr, icon: undefined };
+      return { code, text: item.text, abbr: item.abbr, image: undefined };
     });
     if (ngDevMode) {
       return of(langs);
     } else {
-      return this.http.get(`${this.bis.baseUrl}/i18n/api/v2/list?_allow_anonymous`).pipe(catchError(() => of(langs)));
+      return this.http
+        .get(`${this.bis.baseUrl}/i18n/api/v2/language?_allow_anonymous`)
+        .pipe(catchError(() => of(langs)));
     }
   }
 
