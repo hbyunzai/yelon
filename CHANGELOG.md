@@ -1,3 +1,20 @@
+## [15.1.1-beta.0](https://github.com/hbyunzai/yelon/compare/15.1.0...15.1.1-beta.0) (2023-02-24)
+
+
+### Bug Fixes
+
+* **i18n:** fix i18n icon key ([528c767](https://github.com/hbyunzai/yelon/commit/528c7676f861d11f22acdeadcfafc6e14e74183d))
+* **i18n:** fix missing export ([5dbc996](https://github.com/hbyunzai/yelon/commit/5dbc9969cd6dc7dcdecfc4eeecdb7c7ea0a5f2b7))
+
+
+### Features
+
+* **bis:** add dynamic i18n ([508a10e](https://github.com/hbyunzai/yelon/commit/508a10e92fea2d95b6dead91d8c687c2d48d672f))
+* **i18n:** add defualt lang ([515d3bc](https://github.com/hbyunzai/yelon/commit/515d3bc1104f99582af16a8f580de6322198b2d6))
+* **i18n:** add origin lang list ([f025ad1](https://github.com/hbyunzai/yelon/commit/f025ad11e3a019266a61be63c53e908f5c2e1a10))
+
+
+
 # [15.1.0](https://github.com/hbyunzai/yelon/compare/15.0.0-beta.7...15.1.0) (2023-02-20)
 
 
