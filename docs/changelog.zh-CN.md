@@ -13,6 +13,14 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## [15.1.1](https://github.com/hbyunzai/yelon/compare/15.1.1-beta.0...15.1.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* **widget:** fix i18n list icon ([cdf36c8](https://github.com/hbyunzai/yelon/commit/cdf36c84fa5e9d362e927d76733621e8613e32b8))
+
+
 ## [15.1.1-beta.0](https://github.com/hbyunzai/yelon/compare/15.1.0...15.1.1-beta.0) (2023-02-24)
 
 

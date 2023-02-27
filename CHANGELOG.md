@@ -1,3 +1,12 @@
+## [15.1.1](https://github.com/hbyunzai/yelon/compare/15.1.1-beta.0...15.1.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* **widget:** fix i18n list icon ([cdf36c8](https://github.com/hbyunzai/yelon/commit/cdf36c84fa5e9d362e927d76733621e8613e32b8))
+
+
+
 ## [15.1.1-beta.0](https://github.com/hbyunzai/yelon/compare/15.1.0...15.1.1-beta.0) (2023-02-24)
 
 
