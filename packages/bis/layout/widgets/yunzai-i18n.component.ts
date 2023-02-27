@@ -31,12 +31,16 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
           [nzSelected]="item.code === curLangCode"
           (click)="change(item.code)"
         >
-          <template *ngIf="!item.icon">
-            <span role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span>
-          </template>
-          <template *ngIf="item.icon">
-            <img [src]="'data:image/png;base64,' + item.icon" [alt]="item.abbr" class="pr-xs" />
-          </template>
+          <span *ngIf="!item.icon" role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span>
+          <img
+            *ngIf="item.icon"
+            style="margin-right:4px"
+            width="50px"
+            height="30px"
+            [src]="'data:image/png;base64,' + item.icon"
+            [alt]="item.abbr"
+            class="pr-xs"
+          />
           {{ item.text }}
         </li>
       </ul>

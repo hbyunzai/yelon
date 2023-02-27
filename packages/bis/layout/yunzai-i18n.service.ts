@@ -5,6 +5,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, catchError, of, takeUntil } from 'rxjs';
 
 import { enUS as dfEn } from 'date-fns/locale';
+import { map } from 'rxjs/operators';
 
 import { CacheService } from '@yelon/cache';
 import {
@@ -64,30 +65,24 @@ class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
   }
 
   loadLangData(lang: string): Observable<NzSafeAny> {
-    const key = `_yz_lang_${lang}`;
-    if (this.cacheService.getNone(key)) {
-      return of(this.cacheService.get(key));
+    if (ngDevMode) {
+      return this.http.get(`assets/tmp/i18n/${lang}.json`);
     } else {
-      if (ngDevMode) {
-        return this.http.get(`assets/tmp/i18n/${lang}.json`);
-      } else {
-        return this.http
-          .get(`${this.bis.baseUrl}/i18n/api/v2/language/${lang}?_allow_anonymous`)
-          .pipe(catchError(() => this.http.get(`assets/tmp/i18n/${lang}.json`)));
+      if (this.getLang(lang)) {
+        return of(this.getLang(lang));
       }
+      return this.http
+        .get(`${this.bis.baseUrl}/i18n/api/v2/language/${lang}?_allow_anonymous`)
+        .pipe(catchError(() => this.http.get(`assets/tmp/i18n/${lang}.json`)));
     }
   }
 
   use(lang: string, data: Record<string, unknown>): void {
     if (this._currentLang === lang) return;
-
-    const key = `_yz_lang_${lang}`;
-
-    this.cacheService.set(key, data);
-    this.cacheService.set(this.cacheDefaultKey, lang);
-
+    if (!ngDevMode) {
+      this.cacheLang(lang, data);
+    }
     this._data = this.flatData(data, []);
-
     const item = YUNZAI_LANGS[lang];
     if (item) {
       registerLocaleData(item.ng);
@@ -114,10 +109,37 @@ class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
     if (ngDevMode) {
       return of(langs);
     } else {
-      return this.http
-        .get(`${this.bis.baseUrl}/i18n/api/v2/language?_allow_anonymous`)
-        .pipe(catchError(() => of(langs)));
+      if (this.getCachedLangs().length > 0) {
+        return of(this.getCachedLangs());
+      }
+      return this.http.get(`${this.bis.baseUrl}/i18n/api/v2/language?_allow_anonymous`).pipe(
+        map((response: any) => {
+          this.cacheLangs(response.data);
+          return response.data;
+        }),
+        catchError(() => of(langs))
+      );
     }
+  }
+
+  cacheLang(lang: string, data: Record<string, unknown>): void {
+    const key = `_yz_lang_${lang}`;
+    this.cacheService.set(key, data);
+  }
+
+  getLang(lang: string): Record<string, unknown> {
+    const key = `_yz_lang_${lang}`;
+    return this.cacheService.get(key, { mode: 'none' });
+  }
+
+  cacheLangs(langs: YunzaiI18NType[]): void {
+    const key = `_yz_langs`;
+    this.cacheService.set(key, langs);
+  }
+
+  getCachedLangs(): YunzaiI18NType[] {
+    const key = `_yz_langs`;
+    return this.cacheService.get(key, { mode: 'none' }) || [];
   }
 
   ngOnDestroy(): void {

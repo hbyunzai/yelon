@@ -69,7 +69,6 @@ export const YUNZAI_I18N_TOKEN = new InjectionToken<YunzaiI18NService>('yunzaiI1
 
 @Injectable()
 export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
-  public cacheDefaultKey = `_yz_lang_default`;
   private cog: YunzaiThemeI18nConfig;
   protected _change$ = new BehaviorSubject<string | null>(null);
   protected _currentLang: string = '';

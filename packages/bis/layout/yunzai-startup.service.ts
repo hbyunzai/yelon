@@ -35,8 +35,7 @@ class YunzaiStartupService {
 
   load(): Observable<void> {
     log('startup.service: ', 'load');
-    let defaultLang: string | null = this.cacheService.getNone(this.i18n.cacheDefaultKey);
-    if (!defaultLang) defaultLang = this.i18n.defaultLang;
+    let defaultLang: string = this.settingService.layout.lang || this.i18n.defaultLang;
     return this.i18n.loadLangData(defaultLang).pipe(
       mergeMap(langData => {
         log('startup.service: ', 'set i18n, defaultLang->', defaultLang, ' langData->', langData);

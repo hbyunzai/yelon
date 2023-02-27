@@ -166,7 +166,6 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   }
 
   initFavicon(): void {
-    console.log('init favicon');
     const projectInfo: YunzaiProjectInfo = this.cacheService.get('_yz_project_info', { mode: 'none' });
     if (projectInfo.faviconUrl) {
       hasFavicon(projectInfo.faviconUrl).then((has: boolean) => {
