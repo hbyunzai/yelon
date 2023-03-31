@@ -13,6 +13,13 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [15.1.2](https://github.com/hbyunzai/yelon/compare/15.1.1...15.1.2) (2023-03-31)
+
+
+### Bug Fixes
+
+* **bis:** add token transform func ([e174946](https://github.com/hbyunzai/yelon/commit/e174946
+
 ## [15.1.1](https://github.com/hbyunzai/yelon/compare/15.1.1-beta.0...15.1.1) (2023-02-27)
 
 

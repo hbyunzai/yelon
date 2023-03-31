@@ -1,3 +1,12 @@
+## [15.1.2](https://github.com/hbyunzai/yelon/compare/15.1.1...15.1.2) (2023-03-31)
+
+
+### Bug Fixes
+
+* **bis:** add token transform func ([e174946](https://github.com/hbyunzai/yelon/commit/e1749465da48b50dfe81ef093136bb31ca843e7a))
+
+
+
 ## [15.1.1](https://github.com/hbyunzai/yelon/compare/15.1.1-beta.0...15.1.1) (2023-02-27)
 
 
