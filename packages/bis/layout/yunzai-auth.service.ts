@@ -35,7 +35,20 @@ class YunzaiAuthService {
   askToken(): Observable<ITokenModel> {
     log('yz.auth.service: ', 'askToken');
     if (this.tokenService.get()?.token) {
-      return of(this.tokenService.get()!);
+      const notCovertToken = this.tokenService.get();
+      let convertedToken: ITokenModel;
+      if (notCovertToken && notCovertToken['access_token']) {
+        convertedToken = {
+          token: notCovertToken['access_token'],
+          expired: notCovertToken['expires_in'],
+          refreshToken: notCovertToken['refresh_token'],
+          scope: notCovertToken['scope'],
+          tokenType: notCovertToken['token_type']
+        };
+        return of(convertedToken);
+      } else {
+        return of(this.tokenService.get()!);
+      }
     } else {
       if (this.config.loginForm) {
         return this.fetchTokenByUP();

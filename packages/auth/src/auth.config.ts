@@ -1,7 +1,7 @@
 import type { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 
 export const AUTH_DEFAULT_CONFIG: YunzaiAuthConfig = {
-  store_key: `_token`,
+  store_key: `_yz_token`,
   token_invalid_redirect: true,
   token_exp_offset: 10,
   token_send_key: `token`,
