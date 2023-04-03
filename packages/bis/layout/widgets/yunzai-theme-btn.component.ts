@@ -25,6 +25,7 @@ export interface YunzaiThemeBtnType extends ThemeBtnType {
   selector: 'yunzai-theme-btn',
   template: `
     <div
+      name="_nav_theme"
       class="yunzai-default__nav-item"
       nz-dropdown
       [nzDropdownMenu]="iconMenu"
@@ -45,6 +46,8 @@ export interface YunzaiThemeBtnType extends ThemeBtnType {
       <ul nz-menu>
         <li
           nz-menu-item
+          name="_nav_theme"
+          [attr.data-text]="theme.text | i18n"
           *ngFor="let theme of types"
           (click)="onThemeChange(theme.key)"
           [style]="{ color: theme.color }"

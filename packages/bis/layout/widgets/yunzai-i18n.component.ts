@@ -23,9 +23,11 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
       nz-icon
       nzType="global"
     ></i>
-    <nz-dropdown-menu #langMenu="nzDropdownMenu">
+    <nz-dropdown-menu name="_nav_lang" #langMenu="nzDropdownMenu">
       <ul nz-menu>
         <li
+          name="_nav_lang"
+          [attr.data-text]="item.text"
           nz-menu-item
           *ngFor="let item of langs"
           [nzSelected]="item.code === curLangCode"

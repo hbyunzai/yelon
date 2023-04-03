@@ -18,6 +18,7 @@ export interface UserLink {
   template: `
     <div
       class="yunzai-default__nav-item d-flex align-items-center px-sm"
+      name="_nav_user"
       nz-dropdown
       nzPlacement="bottomRight"
       [nzDropdownMenu]="userMenu"
@@ -29,12 +30,12 @@ export interface UserLink {
     </div>
     <nz-dropdown-menu #userMenu="nzDropdownMenu">
       <div nz-menu class="width-sm">
-        <div nz-menu-item *ngFor="let m of menus" (click)="to(m.url)">
+        <div name="_nav_user" [attr.data-name]="m.name | i18n" nz-menu-item *ngFor="let m of menus" (click)="to(m.url)">
           <i nz-icon [nzType]="m.icon" class="mr-sm"></i>
           {{ m.name | i18n }}
         </div>
         <li nz-menu-divider></li>
-        <div nz-menu-item (click)="logout()">
+        <div name="_nav_user" data-name="注销登录" nz-menu-item (click)="logout()">
           <i nz-icon nzType="logout" class="mr-sm"></i>
           {{ 'logout' | i18n }}
         </div>

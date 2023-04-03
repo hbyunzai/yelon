@@ -16,6 +16,7 @@ import { LayoutNavApplicationState } from './types';
       <div nz-row class="yz-application-list-search">
         <nz-input-group [nzPrefix]="prefixTemplate">
           <input
+            name="_nav_search"
             type="text"
             nz-input
             placeholder="{{ 'application.search' | i18n }}"
@@ -36,7 +37,14 @@ import { LayoutNavApplicationState } from './types';
         <ul>
           <li *ngFor="let topic of state.list">
             <h5>{{ topic.name | i18n }}</h5>
-            <a href="javascript:;" *ngFor="let nav of topic.children" (click)="open(nav)">{{ nav.name | i18n }}</a>
+            <a
+              name="_nav_item"
+              [attr.data-name]="nav.name | i18n"
+              href="javascript:;"
+              *ngFor="let nav of topic.children"
+              (click)="open(nav)"
+              >{{ nav.name | i18n }}</a
+            >
           </li>
         </ul>
       </div>
@@ -44,17 +52,26 @@ import { LayoutNavApplicationState } from './types';
     <!-- right menu end -->
 
     <!--      button start-->
-    <div class="yunzai-default__nav-item" (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
+    <div name="_nav_app" class="yunzai-default__nav-item" (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
     <!--      button end-->
 
     <!--      header start-->
     <div class="yz-application" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div class="yz-application-text" (click)="attachNav('all')">{{ 'mode.nav.all' | i18n }}</div>
-        <div class="yz-application-text" (click)="attachNav('mine')">{{ 'mode.nav.mine' | i18n }}</div>
-        <div class="yz-application-text" *ngFor="let nav of state.topics" (click)="attachNav('other', nav)">{{
-          nav.name | i18n
+        <div name="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')">{{
+          'mode.nav.all' | i18n
         }}</div>
+        <div name="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')">{{
+          'mode.nav.mine' | i18n
+        }}</div>
+        <div
+          name="_nav_topic"
+          [attr.data-name]="nav.name | i18n"
+          class="yz-application-text"
+          *ngFor="let nav of state.topics"
+          (click)="attachNav('other', nav)"
+          >{{ nav.name | i18n }}</div
+        >
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
         <div *ngIf="state.type === 'all'">
@@ -68,7 +85,12 @@ import { LayoutNavApplicationState } from './types';
         <div *ngIf="state.type === 'other'" class="yz-application-list">
           <div class="yz-application-list-item">
             <ul>
-              <li *ngFor="let nav of state.list" (click)="open(nav)">
+              <li
+                name="_nav_item"
+                [attr.data-name]="nav.name | i18n"
+                *ngFor="let nav of state.list"
+                (click)="open(nav)"
+              >
                 <a href="javascript:;">
                   <h4>{{ nav.name | i18n }}</h4>
                   <p>{{ nav.intro | i18n }}</p>

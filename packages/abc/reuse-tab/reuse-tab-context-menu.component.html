@@ -1,5 +1,8 @@
 <ul nz-menu>
   <li
+    name="_reusetab_refresh"
+    [attr.data-url]="item.url"
+    [attr.data-title]="item.title"
     *ngIf="item.active"
     nz-menu-item
     (click)="click($event, 'refresh')"
@@ -7,14 +10,28 @@
     [innerHTML]="i18n.refresh"
   ></li>
   <li
+    name="_reusetab_close"
+    [attr.data-url]="item.url"
+    [attr.data-title]="item.title"
     nz-menu-item
     (click)="click($event, 'close')"
     data-type="close"
     [nzDisabled]="!item.closable"
     [innerHTML]="i18n.close"
   ></li>
-  <li nz-menu-item (click)="click($event, 'closeOther')" data-type="closeOther" [innerHTML]="i18n.closeOther"></li>
   <li
+    name="_reusetab_closeOther"
+    [attr.data-url]="item.url"
+    [attr.data-title]="item.title"
+    nz-menu-item
+    (click)="click($event, 'closeOther')"
+    data-type="closeOther"
+    [innerHTML]="i18n.closeOther"
+  ></li>
+  <li
+    name="_reusetab_closeRight"
+    [attr.data-url]="item.url"
+    [attr.data-title]="item.title"
     nz-menu-item
     (click)="click($event, 'closeRight')"
     data-type="closeRight"
@@ -24,6 +41,9 @@
   <ng-container *ngIf="customContextMenu!.length > 0">
     <li nz-menu-divider></li>
     <li
+      name="_reusetab_custom"
+      [attr.data-url]="item.url"
+      [attr.data-title]="item.title"
       *ngFor="let i of customContextMenu"
       nz-menu-item
       [attr.data-type]="i.id"

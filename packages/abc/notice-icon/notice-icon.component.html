@@ -7,6 +7,7 @@
   <ng-template [ngTemplateOutlet]="badgeTpl"></ng-template>
 </div>
 <div
+  name="_nav_notify"
   *ngIf="data!.length > 0"
   nz-dropdown
   [nzVisible]="popoverVisible"
@@ -21,8 +22,9 @@
 <nz-dropdown-menu #noticeMenu="nzDropdownMenu">
   <nz-spin [nzSpinning]="loading" [nzDelay]="0">
     <nz-tabset nzSelectedIndex="0" [nzCentered]="centered">
-      <nz-tab *ngFor="let i of data" [nzTitle]="i.title">
+      <nz-tab [attr.name]="i.key" *ngFor="let i of data" [nzTitle]="i.title">
         <notice-icon-tab
+          [attr.name]="i.key"
           [locale]="locale"
           [data]="i"
           (select)="onSelect($event)"
