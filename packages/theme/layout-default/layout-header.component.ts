@@ -33,7 +33,7 @@ interface LayoutDefaultHeaderItem {
     </ng-template>
     <div class="yunzai-default__header-logo" [style.width.px]="opt.logoFixWidth">
       <ng-container *ngIf="!opt.logo; else opt.logo!">
-        <a name="_nav_logo" [routerLink]="opt.logoLink" class="yunzai-default__header-logo-link">
+        <a data-event-id="_nav_logo" [routerLink]="opt.logoLink" class="yunzai-default__header-logo-link">
           <img class="yunzai-default__header-logo-expanded" [attr.src]="opt.logoExpanded" [attr.alt]="app.name" />
           <img class="yunzai-default__header-logo-collapsed" [attr.src]="opt.logoCollapsed" [attr.alt]="app.name" />
         </a>
@@ -43,7 +43,7 @@ interface LayoutDefaultHeaderItem {
       <ul class="yunzai-default__nav">
         <li *ngIf="!opt.hideAside && opt.showHeaderCollapse">
           <div
-            name="_nav_toggle"
+            data-event-id="_nav_toggle"
             class="yunzai-default__nav-item yunzai-default__nav-item--collapse"
             (click)="toggleCollapsed()"
           >

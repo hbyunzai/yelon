@@ -15,7 +15,7 @@ import { LayoutNavGroupState } from './types';
         <nz-tab *ngFor="let menu of state.topics" [nzTitle]="groupTitleTpl">
           <ng-template #groupTitleTpl>
             <a
-              name="_nav_topic"
+              data-event-id="_nav_topic"
               [attr.data-name]="menu.name | i18n"
               nz-dropdown
               [nzDropdownMenu]="menuTpl"
@@ -29,7 +29,7 @@ import { LayoutNavGroupState } from './types';
             <nz-dropdown-menu #menuTpl="nzDropdownMenu">
               <ul nz-menu nzSelectable *ngIf="menu.children && menu.children.length > 0">
                 <ng-container *ngFor="let item of menu.children">
-                  <li name="_nav_item" [attr.data-name]="item.name | i18n" nz-menu-item (click)="open(item)">
+                  <li data-event-id="_nav_item" [attr.data-name]="item.name | i18n" nz-menu-item (click)="open(item)">
                     <i nz-icon *ngIf="item.icon" [nzType]="item.icon" nzTheme="outline"></i>{{ item.name | i18n }}
                   </li>
                 </ng-container>

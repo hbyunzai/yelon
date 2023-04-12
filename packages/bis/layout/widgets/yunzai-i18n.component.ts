@@ -23,10 +23,10 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
       nz-icon
       nzType="global"
     ></i>
-    <nz-dropdown-menu name="_nav_lang" #langMenu="nzDropdownMenu">
+    <nz-dropdown-menu data-event-id="_nav_lang" #langMenu="nzDropdownMenu">
       <ul nz-menu>
         <li
-          name="_nav_lang"
+          data-event-id="_nav_lang"
           [attr.data-text]="item.text"
           nz-menu-item
           *ngFor="let item of langs"

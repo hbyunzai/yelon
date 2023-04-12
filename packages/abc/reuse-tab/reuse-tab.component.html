@@ -1,5 +1,5 @@
 <nz-tabset
-  name="_reusetab"
+  data-event-id="_reusetab"
   #tabset
   [nzSelectedIndex]="pos"
   [nzAnimated]="false"
@@ -11,7 +11,7 @@
   <nz-tab *ngFor="let i of list; let index = index" [nzTitle]="titleTemplate" (nzClick)="_to(index)">
     <ng-template #titleTemplate>
       <div
-        name="_reusetab"
+        data-event-id="_reusetab"
         [attr.data-title]="i.title"
         [reuse-tab-context-menu]="i"
         [customContextMenu]="customContextMenu"
@@ -29,7 +29,7 @@
       </div>
       <i
         *ngIf="i.closable"
-        name="_reusetab_close"
+        data-event-id="_reusetab_close"
         [attr.data-title]="i.title"
         nz-icon
         nzType="close"

@@ -1,7 +1,7 @@
 <ng-template #icon let-i>
-  <ng-container *ngIf="i" [ngSwitch]="i.type">
+  <ng-container data-event-container="_route_icon_container" *ngIf="i" [ngSwitch]="i.type">
     <i
-      name="_route_icon"
+      data-event-id="_route_icon"
       *ngSwitchCase="'icon'"
       class="sidebar-nav__item-icon"
       nz-icon
@@ -13,25 +13,25 @@
       [nzRotate]="i.rotate"
     ></i>
     <i
-      name="_route_icon"
+      data-event-id="_route_icon"
       *ngSwitchCase="'iconfont'"
       class="sidebar-nav__item-icon"
       nz-icon
       [nzIconfont]="i.iconfont"
     ></i>
     <img
-      name="_route_icon"
+      data-event-id="_route_icon"
       *ngSwitchCase="'img'"
       [src]="i.value"
       class="sidebar-nav__item-icon sidebar-nav__item-img"
     />
     <span
-      name="_route_icon"
+      data-event-id="_route_icon"
       *ngSwitchCase="'svg'"
       class="sidebar-nav__item-icon sidebar-nav__item-svg"
       [innerHTML]="i.value"
     ></span>
-    <i name="_route_icon" *ngSwitchDefault class="sidebar-nav__item-icon {{ i.value }}"></i>
+    <i data-event-id="_route_icon" *ngSwitchDefault class="sidebar-nav__item-icon {{ i.value }}"></i>
   </ng-container>
 </ng-template>
 <ng-template #tree let-ls>
@@ -44,7 +44,7 @@
     >
       <!-- link -->
       <a
-        name="_route_link"
+        data-event-id="_route_link"
         *ngIf="i.children.length === 0"
         (click)="to(i)"
         [attr.data-text]="i.text"
@@ -65,7 +65,7 @@
       </a>
       <!-- has children link -->
       <a
-        name="_route_toggle"
+        data-event-id="_route_toggle"
         [attr.data-text]="i.text"
         [attr.data-id]="i._id"
         *ngIf="i.children.length > 0"
@@ -88,7 +88,7 @@
 <ul class="sidebar-nav">
   <ng-container *ngFor="let group of list">
     <li
-      name="_route_group"
+      data-event-id="_route_group"
       [attr.data-id]="group.id"
       [attr.data-text]="group.text"
       class="sidebar-nav__item sidebar-nav__group-title"

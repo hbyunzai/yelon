@@ -10,7 +10,7 @@
   <nz-list [nzDataSource]="data.list" [nzRenderItem]="item">
     <ng-template #item let-item>
       <nz-list-item
-        [attr.name]="data.key"
+        [attr.data-event-id]="data.key"
         [attr.data-desc]="item.description"
         [attr.data-title]="item.title"
         (click)="onClick(item)"
@@ -37,7 +37,7 @@
       </nz-list-item>
     </ng-template>
   </nz-list>
-  <div [attr.name]="'_nav_clear_' + data.key" class="notice-icon__clear" (click)="onClear()">{{
+  <div [attr.data-event-id]="'_nav_clear_' + data.key" class="notice-icon__clear" (click)="onClear()">{{
     data.clearText || locale.clearText
   }}</div>
 </ng-template>

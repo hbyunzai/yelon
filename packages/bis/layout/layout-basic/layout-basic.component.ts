@@ -35,7 +35,7 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
       <!-- setting -->
       <layout-default-header-item direction="right" hidden="mobile">
         <div
-          name="_nav_settings"
+          data-event-id="_nav_settings"
           layout-default-header-item-trigger
           nz-dropdown
           [nzDropdownMenu]="settingsMenu"
@@ -46,25 +46,30 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
         </div>
         <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
           <div nz-menu style="width: 200px;">
-            <div name="_nav_mode" nz-menu-item>
+            <div data-event-id="_nav_mode" nz-menu-item>
               {{ 'mode.nav' | i18n }}
             </div>
 
-            <div name="_nav_mode" data-type="application" nz-menu-item (click)="onNavTypeChange(NavType.APPLICATION)">
+            <div
+              data-event-id="_nav_mode"
+              data-type="application"
+              nz-menu-item
+              (click)="onNavTypeChange(NavType.APPLICATION)"
+            >
               <i nz-icon nzType="appstore" class="mr-sm"></i>
               {{ 'mode.nav.application' | i18n }}
             </div>
-            <div name="_nav_mode" data-type="group" nz-menu-item (click)="onNavTypeChange(NavType.GROUP)">
+            <div data-event-id="_nav_mode" data-type="group" nz-menu-item (click)="onNavTypeChange(NavType.GROUP)">
               <i nz-icon nzType="group" class="mr-sm"></i>
               {{ 'mode.nav.group' | i18n }}
             </div>
-            <div name="_nav_mode" data-type="tile" nz-menu-item (click)="onNavTypeChange(NavType.TILE)">
+            <div data-event-id="_nav_mode" data-type="tile" nz-menu-item (click)="onNavTypeChange(NavType.TILE)">
               <i nz-icon nzType="appstore" class="mr-sm"></i>
               {{ 'mode.nav.tile' | i18n }}
             </div>
-            <div name="_nav_fullscreen" nz-menu-item> <yunzai-fullscreen></yunzai-fullscreen> </div>
-            <div name="_nav_clearstorage" nz-menu-item> <yunzai-clearstorage></yunzai-clearstorage> </div>
-            <div name="_nav_i18n" nz-menu-item> <yunzai-i18n></yunzai-i18n> </div>
+            <div data-event-id="_nav_fullscreen" nz-menu-item> <yunzai-fullscreen></yunzai-fullscreen> </div>
+            <div data-event-id="_nav_clearstorage" nz-menu-item> <yunzai-clearstorage></yunzai-clearstorage> </div>
+            <div data-event-id="_nav_i18n" nz-menu-item> <yunzai-i18n></yunzai-i18n> </div>
           </div>
         </nz-dropdown-menu>
       </layout-default-header-item>
@@ -75,7 +80,7 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
     </layout-default>
     <ng-template #asideUserTpl>
       <div
-        name="_route_user"
+        data-event-id="_route_user"
         nz-dropdown
         nzTrigger="click"
         [nzDropdownMenu]="userMenu"
@@ -89,7 +94,7 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
       </div>
       <nz-dropdown-menu #userMenu="nzDropdownMenu">
         <ul nz-menu>
-          <li name="_route_backhome" nz-menu-item routerLink="/">{{ 'back.home' | i18n }}</li>
+          <li data-event-id="_route_backhome" nz-menu-item routerLink="/">{{ 'back.home' | i18n }}</li>
         </ul>
       </nz-dropdown-menu>
     </ng-template>
