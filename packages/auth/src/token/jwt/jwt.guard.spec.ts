@@ -28,7 +28,7 @@ describe('auth: JWTGuard', () => {
           },
           {
             path: 'lazy',
-            canLoad: [JWTGuard],
+            canMatch: [JWTGuard],
             loadChildren: () => AModule
           },
           {
@@ -42,7 +42,7 @@ describe('auth: JWTGuard', () => {
     srv = TestBed.inject(YA_SERVICE_TOKEN);
     router = TestBed.inject<Router>(Router);
     srv.set({
-      token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6ImRldmN1aSIsImFkbWluIjp0cnVlLCJleHAiOjQ2NzA0MDk2MDB9.shHyoX0bx_ArosYG28D2iwuKyIBtG-lq1yEMvF8Y7tE`
+      token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6ImNpcGNoayIsImFkbWluIjp0cnVlLCJleHAiOjQ2NzA0MDk2MDB9.IINuMTwqwCQP63fSQ-ZPgOEaE8lilrUceUX9Wy47PBk`
     });
   });
 

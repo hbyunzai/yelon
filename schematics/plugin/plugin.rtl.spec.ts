@@ -8,7 +8,7 @@ describe('NgYunzaiSchematic: plugin: rtl', () => {
 
   beforeEach(async () => {
     ({ runner, tree } = await createYunzaiApp());
-    tree = await runner.runSchematicAsync('plugin', { name: 'rtl', type: 'add' }, tree).toPromise();
+    tree = await runner.runSchematic('plugin', { name: 'rtl', type: 'add' }, tree);
   });
 
   it(`should be working`, () => {

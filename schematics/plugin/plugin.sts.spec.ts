@@ -8,11 +8,11 @@ describe('NgYunzaiSchematic: plugin: sts', () => {
 
   beforeEach(async () => {
     ({ runner, tree } = await createYunzaiApp());
-    tree = await runner.runSchematicAsync('plugin', { name: 'sts', type: 'add' }, tree).toPromise();
+    tree = await runner.runSchematic('plugin', { name: 'sts', type: 'add' }, tree);
   });
 
   describe('when add', () => {
-    it(`should add fiels`, () => {
+    it(`should add files`, () => {
       const json = JSON.parse(tree.readContent('package.json'));
       expect(json.devDependencies['ng-yunzai-sts']).toBeDefined();
       expect(tree.exists(`/_cli-tpl/_fix.js`)).toBe(true);
@@ -30,10 +30,8 @@ describe('NgYunzaiSchematic: plugin: sts', () => {
   });
 
   describe('when remove', () => {
-    beforeEach(
-      async () => (tree = await runner.runSchematicAsync('plugin', { name: 'sts', type: 'remove' }, tree).toPromise())
-    );
-    it(`should add fiels`, () => {
+    beforeEach(async () => (tree = await runner.runSchematic('plugin', { name: 'sts', type: 'remove' }, tree)));
+    it(`should add files`, () => {
       const json = JSON.parse(tree.readContent('package.json'));
       expect(json.devDependencies['ng-yunzai-sts']).not.toBeDefined();
     });

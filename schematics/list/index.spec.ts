@@ -14,7 +14,7 @@ describe('Schematic: list', () => {
   beforeEach(async () => {
     ({ runner, tree } = await createYunzaiAndModuleApp());
 
-    tree = await runner.runSchematicAsync('list', { name: 'list', module: 'trade' }, tree).toPromise();
+    tree = await runner.runSchematic('list', { name: 'list', module: 'trade' }, tree);
   });
 
   it('should be generate list page', () => {
@@ -29,31 +29,29 @@ describe('Schematic: list', () => {
     expect(tree.readContent(tsPath)).toContain(`TradeListComponent`);
   });
 
-  it('shuold be exclude style', () => {
+  it('should be exclude style', () => {
     expect(tree.readContent(tsPath)).not.toContain(`styleUrls`);
   });
 
   it('should be support targets (like: list/edit)', async () => {
-    tree = await runner
-      .runSchematicAsync('list', { name: 'list2', module: 'trade', target: 'list/edit' }, tree)
-      .toPromise();
+    tree = await runner.runSchematic('list', { name: 'list2', module: 'trade', target: 'list/edit' }, tree);
     expect(tree.exists(`/projects/foo/src/app/routes/trade/list/edit/list2/list2.component.html`)).toBe(true);
   });
 
   it('should be throw error when directory already exists', async () => {
     spyOn(fs, 'existsSync').and.returnValue(true);
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     spyOn(fs, 'readdirSync').and.returnValue({ length: 1 } as any);
     try {
-      tree = await runner.runSchematicAsync('list', { name: 'list', module: 'trade' }, tree).toPromise();
+      tree = await runner.runSchematic('list', { name: 'list', module: 'trade' }, tree);
       expect(true).toBe(false);
     } catch (e) {
       expect(e.message).toContain(`already exists`);
     }
   });
 
-  it('shuold be include service', async () => {
-    tree = await runner.runSchematicAsync('list', { name: 'list', module: 'trade', service: 'none' }, tree).toPromise();
+  it('should be include service', async () => {
+    tree = await runner.runSchematic('list', { name: 'list', module: 'trade', service: 'none' }, tree);
     const servicePath = '/projects/foo/src/app/routes/trade/list/list.service.ts';
     expect(tree.readContent(servicePath)).toContain(`@Injectable()`);
     expect(tree.readContent(modulePath)).toContain(`TradeService`);

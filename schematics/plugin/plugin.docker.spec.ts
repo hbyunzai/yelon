@@ -8,11 +8,11 @@ describe('NgYunzaiSchematic: plugin: docker', () => {
 
   beforeEach(async () => {
     ({ runner, tree } = await createYunzaiApp());
-    tree = await runner.runSchematicAsync('plugin', { name: 'docker', type: 'add' }, tree).toPromise();
+    tree = await runner.runSchematic('plugin', { name: 'docker', type: 'add' }, tree);
   });
 
   describe('when add', () => {
-    it(`should add fiels`, () => {
+    it(`should add files`, () => {
       expect(tree.exists(`/projects/${APPNAME}/.dockerignore`)).toBe(true);
       expect(tree.exists(`/projects/${APPNAME}/docker-compose.yml`)).toBe(true);
       expect(tree.exists(`/projects/${APPNAME}/Dockerfile`)).toBe(true);
@@ -21,11 +21,8 @@ describe('NgYunzaiSchematic: plugin: docker', () => {
   });
 
   describe('when remove', () => {
-    beforeEach(
-      async () =>
-        (tree = await runner.runSchematicAsync('plugin', { name: 'docker', type: 'remove' }, tree).toPromise())
-    );
-    it(`should add fiels`, () => {
+    beforeEach(async () => (tree = await runner.runSchematic('plugin', { name: 'docker', type: 'remove' }, tree)));
+    it(`should add files`, () => {
       expect(tree.exists(`/projects/${APPNAME}/.dockerignore`)).toBe(false);
       expect(tree.exists(`/projects/${APPNAME}/docker-compose.yml`)).toBe(false);
       expect(tree.exists(`/projects/${APPNAME}/Dockerfile`)).toBe(false);

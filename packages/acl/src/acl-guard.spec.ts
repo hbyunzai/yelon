@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -131,10 +132,10 @@ describe('acl: guard', () => {
       });
   });
 
-  describe(`#canLoad`, () => {
+  describe(`#canMatch`, () => {
     it(`should be can load when has [user] role`, (done: () => void) => {
       srv
-        .canLoad({
+        .canMatch({
           data: {
             guard: of('user')
           }
@@ -146,7 +147,7 @@ describe('acl: guard', () => {
     });
     it(`should be can load when is null`, (done: () => void) => {
       srv
-        .canLoad({
+        .canMatch({
           data: {
             guard: null
           }
