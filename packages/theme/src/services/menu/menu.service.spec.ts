@@ -44,7 +44,8 @@ describe('Service: Menu', () => {
     },
     { text: 'text', externalLink: '//ng-yunzai.com' },
     { text: 'text', link: '/demo2', i18n: 'text' },
-    { text: 'sub', children: [] }
+    { text: 'sub', children: [] },
+    { text: 'hide', link: '/hide', hide: true }
   ];
 
   afterEach(() => srv.ngOnDestroy());
