@@ -1,3 +1,25 @@
+# [15.2.0](https://github.com/hbyunzai/yelon/compare/15.1.2...15.2.0) (2023-04-25)
+
+
+### Bug Fixes
+
+*  instead of  ([#1586](https://github.com/hbyunzai/yelon/issues/1586)) …chore: chore struct ([cae728d](https://github.com/hbyunzai/yelon/commit/cae728d9584e4bf80a85e7e17f46efa73c62eadf))
+* **abc:pdf:** use instead of ([ea87514](https://github.com/hbyunzai/yelon/commit/ea87514600401dc2496933a31fa72d45eaa35215))
+* **abc:st:** fix missing row class in fixed column ([b64ea7d](https://github.com/hbyunzai/yelon/commit/b64ea7dc35009f7db46a5c4393642d4217156fcb))
+* **form:** fix can't render due to inherited ([c2105b2](https://github.com/hbyunzai/yelon/commit/c2105b26927c2a39cf1b608e66e26ce108b17907))
+* **form:** fix out of memory error ([832885e](https://github.com/hbyunzai/yelon/commit/832885e101a639be7f0890bbd6ed75145ee26b69))
+* **form:** remote transfer body backgroun in dark ([e22a2ab](https://github.com/hbyunzai/yelon/commit/e22a2ab404d256f4eb9d1461048eeb18bcfff6e2))
+* **test:** disable should be ignore children title trigger event test ([dc63860](https://github.com/hbyunzai/yelon/commit/dc63860ca0c4a43a790a3e452fdcbbe6555e3c6a))
+
+
+### Features
+
+* **all:** change burying_point name ([57973c5](https://github.com/hbyunzai/yelon/commit/57973c56b717692970e08c29e5e675e57bd03932))
+* **nav:** add burying_point ([456f7f3](https://github.com/hbyunzai/yelon/commit/456f7f320e0bfcec0921d7914b9177f2d4ef4e0a))
+* **theme:** add  of ([f06c95e](https://github.com/hbyunzai/yelon/commit/f06c95e1872db7ef499961df3300d90735d38e39))
+
+
+
 ## [15.1.2](https://github.com/hbyunzai/yelon/compare/15.1.1...15.1.2) (2023-03-31)
 
 
