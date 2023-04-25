@@ -18,7 +18,7 @@ module: import { PdfModule } from '@yelon/abc/pdf';
 ```json
 // angular.json
 {
-  "glob": "**/(build|web)/**",
+  "glob": "**/(build,web)/**",
   "input": "./node_modules/pdfjs-dist/",
   "ignore": ["*.js.map", "*.d.ts"],
   "output": "assets/pdfjs/"
