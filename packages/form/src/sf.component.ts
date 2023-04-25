@@ -205,27 +205,27 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Get form element property based on [path](https://ng-alain.com/form/qa#path)
+   * Get form element property based on [path](https://ng.yunzainfo.com/form/qa#path)
    *
-   * 根据[路径](https://ng-alain.com/form/qa#path)获取表单元素属性
+   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素属性
    */
   getProperty(path: string): FormProperty | null | undefined {
     return this.rootProperty?.searchProperty(path);
   }
 
   /**
-   * Get element value based on [path](https://ng-alain.com/form/qa#path)
+   * Get element value based on [path](https://ng.yunzainfo.com/form/qa#path)
    *
-   * 根据[路径](https://ng-alain.com/form/qa#path)获取表单元素值
+   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素值
    */
   getValue(path: string): NzSafeAny {
     return this.getProperty(path)?.value;
   }
 
   /**
-   * Set form element new value based on [path](https://ng-alain.com/form/qa#path)
+   * Set form element new value based on [path](https://ng.yunzainfo.com/form/qa#path)
    *
-   * 根据[路径](https://ng-alain.com/form/qa#path)设置某个表单元素属性值
+   * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素属性值
    */
   setValue(path: string, value: NzSafeAny): this {
     const item = this.getProperty(path);
@@ -324,25 +324,28 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
       Object.keys(schema.properties!).forEach(key => {
         const uiKey = `$${key}`;
         const property = retrieveSchema(schema.properties![key] as SFSchema, definitions);
-        const curSetUi = deepCopy({
+        const curUi = deepCopy({
           ...(property.ui as SFUISchemaItem),
           ...uiSchema[uiKey]
         });
         const ui = deepCopy({
           ...this._defUi,
           ...parentUiSchema,
+          // 忽略部分会引起呈现的属性
+          visibleIf: undefined,
+          hidden: undefined,
           widget: property.type,
           ...(property.format && (this.options.formatMap as NzSafeAny)[property.format]),
           ...(typeof property.ui === 'string' ? { widget: property.ui } : null),
           ...(!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
             ? { widget: 'select' }
             : null),
-          ...curSetUi
-        }) as SFUISchemaItemRun;
+          ...curUi
+        } as SFUISchemaItemRun) as SFUISchemaItemRun;
         // 继承父节点布局属性
         if (isHorizontal) {
           if (parentUiSchema.spanLabelFixed) {
-            if (!curSetUi.spanLabelFixed) {
+            if (!curUi.spanLabelFixed) {
               ui.spanLabelFixed = parentUiSchema.spanLabelFixed;
             }
           } else {
