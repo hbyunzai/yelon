@@ -130,6 +130,7 @@ class YunzaiAuthService {
 
   cacheInit(): Observable<void[]> {
     log('yz.auth.service: ', 'cacheInit');
+    const tenant = this.cacheService.get('_yz_tenant', { mode: 'none' });
     const user = this.cacheService.get('_yz_user', { mode: 'none' });
     const header = this.cacheService.get('_yz_header', { mode: 'none' });
     const project = this.cacheService.get('_yz_project_info', { mode: 'none' });
@@ -137,11 +138,12 @@ class YunzaiAuthService {
       mergeMap(([u, h, p]) => {
         let list = [];
         // user cache
-        if (!u) {
+        if (!u || !tenant) {
           log('yz.auth.service: ', 'fetch user cache');
           list.push(
             this.httpClient.get(`/auth/user`).pipe(
               map((user: any) => {
+                this.cacheService.set('_yz_tenant', user.tenantId);
                 this.cacheService.set('_yz_user', user.principal);
               })
             )
