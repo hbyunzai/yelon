@@ -11,14 +11,20 @@
   <nz-tab *ngFor="let i of list; let index = index" [nzTitle]="titleTemplate" (nzClick)="_to(index)">
     <ng-template #titleTemplate>
       <div
+        class="reuse-tab__name"
         data-event-id="_reusetab"
-        [attr.data-title]="i.title"
         [reuse-tab-context-menu]="i"
         [customContextMenu]="customContextMenu"
-        class="reuse-tab__name"
+        [attr.data-title]="i.title"
         [attr.title]="i.title"
       >
-        <span [class.reuse-tab__name-width]="tabMaxWidth" [style.max-width.px]="tabMaxWidth">
+        <span
+          data-event-id="_reusetab"
+          [class.reuse-tab__name-width]="tabMaxWidth"
+          [style.max-width.px]="tabMaxWidth"
+          [attr.data-title]="i.title"
+          [attr.title]="i.title"
+        >
           <ng-container
             *ngIf="titleRender; else defaultTitle"
             [ngTemplateOutlet]="titleRender"
@@ -31,6 +37,7 @@
         *ngIf="i.closable"
         data-event-id="_reusetab_close"
         [attr.data-title]="i.title"
+        [attr.title]="i.title"
         nz-icon
         nzType="close"
         class="reuse-tab__op"
