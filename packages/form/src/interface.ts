@@ -72,6 +72,10 @@ export interface SFButton {
   search?: string;
   /** 编辑按钮文本，默认：`保存` */
   edit?: string;
+  /**
+   * 埋点
+   */
+  deid?: string;
 }
 
 export interface SFButtonIcon {

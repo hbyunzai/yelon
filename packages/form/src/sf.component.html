@@ -28,6 +28,8 @@
                 type="submit"
                 nz-button
                 data-type="submit"
+                [attr.data-event-id]="_btn.deid"
+                [attr.title]="_btn.deid ? _btn.deid + 'submit' : 'submit'"
                 [nzType]="_btn.submit_type!"
                 [nzSize]="_btn.render!.size!"
                 [nzLoading]="loading"
@@ -48,6 +50,8 @@
                 type="button"
                 nz-button
                 data-type="reset"
+                [attr.data-event-id]="_btn.deid"
+                [attr.title]="_btn.deid ? _btn.deid + 'reset' : 'reset'"
                 [nzType]="_btn.reset_type!"
                 [nzSize]="_btn.render!.size!"
                 [disabled]="loading"
