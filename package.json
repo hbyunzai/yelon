@@ -163,7 +163,7 @@
     "ng-yunzai-plugin-theme": "^15.0.2",
     "ng-yunzai-sts": "^0.0.3",
     "parse5": "^7.1.2",
-    "pdfjs-dist": "^3.2.146",
+    "pdfjs-dist": "^3.6.172",
     "plyr": "^3.7.3",
     "prettier": "^2.8.3",
     "protractor": "~7.0.0",
