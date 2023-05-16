@@ -1,3 +1,19 @@
+## [15.2.1](https://github.com/hbyunzai/yelon/compare/15.2.0...15.2.1) (2023-05-16)
+
+
+### Bug Fixes
+
+* **abc:pdf:** fix pdf of latest version ([a06e037](https://github.com/hbyunzai/yelon/commit/a06e037f06c4c2bc9a7039a74e08cd8004e7c4fe))
+* **form:textarea:** fix missing property `autosize` ([91e6f96](https://github.com/hbyunzai/yelon/commit/91e6f9617ded16b98c13c28dfac935706c146331))
+
+
+### Features
+
+* **bp:reusetab:** add reuse tab buying point ([dc1a1a8](https://github.com/hbyunzai/yelon/commit/dc1a1a848df200649057ee3404244d04dad62309))
+* **startup:** add tenant cache ([9278987](https://github.com/hbyunzai/yelon/commit/9278987da6fadc2ca80f74dc8a7aff59efb0b43f))
+
+
+
 # [15.2.0](https://github.com/hbyunzai/yelon/compare/15.1.2...15.2.0) (2023-04-25)
 
 
