@@ -18,7 +18,7 @@
     [nzCancelText]="i.pop.cancelText"
     [nzOkText]="i.pop.okText"
     [nzOkType]="i.pop.okType"
-    (nzOnConfirm)="_btn(i, $event)"
+    (nzOnConfirm)="_btn(i)"
     class="st__btn-text"
     [ngClass]="i.className"
     (click)="_stopPropagation($event)"
