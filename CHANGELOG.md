@@ -1,3 +1,12 @@
+## [15.2.2](https://github.com/hbyunzai/yelon/compare/15.2.0...15.2.2) (2023-05-17)
+
+
+
+### Features
+
+* **sf:** add data event properties ([288095a](https://github.com/hbyunzai/yelon/commit/288095a21125f06623573db2d7bc25c782921758))
+
+
 ## [15.2.1](https://github.com/hbyunzai/yelon/compare/15.2.0...15.2.1) (2023-05-16)
 
 
