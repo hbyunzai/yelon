@@ -13,6 +13,14 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## [15.2.2](https://github.com/hbyunzai/yelon/compare/15.2.0...15.2.2) (2023-05-17)
+
+
+
+### Features
+
+* **sf:** add data event properties ([288095a](https://github.com/hbyunzai/yelon/commit/288095a21125f06623573db2d7bc25c782921758))
+
 ## [15.2.1](https://github.com/hbyunzai/yelon/compare/15.2.0...15.2.1) (2023-05-16)
 
 
