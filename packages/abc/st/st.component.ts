@@ -34,6 +34,7 @@ import {
   ModalHelper,
   YNPipe
 } from '@yelon/theme';
+import { GlobalEventSubjectService } from '@yelon/util/analysis';
 import { YunzaiConfigService, YunzaiSTConfig } from '@yelon/util/config';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput, toBoolean } from '@yelon/util/decorator';
 import { deepCopy, deepMergeKey } from '@yelon/util/other';
@@ -940,7 +941,8 @@ export class STTdComponent {
     @Host() private stComp: STComponent,
     private router: Router,
     private modalHelper: ModalHelper,
-    private drawerHelper: DrawerHelper
+    private drawerHelper: DrawerHelper,
+    private globalEventSubject: GlobalEventSubjectService
   ) {}
 
   private report(type: _STTdNotifyType): void {
@@ -974,6 +976,9 @@ export class STTdComponent {
 
   _btn(btn: STColumnButton, ev?: Event): void {
     ev?.stopPropagation();
+    if (ev) {
+      this.globalEventSubject.clickEvents.next(ev);
+    }
     const cog = this.stComp.cog;
     let record = this.i;
     if (btn.type === 'modal' || btn.type === 'static') {

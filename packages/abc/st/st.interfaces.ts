@@ -805,6 +805,11 @@ export interface STColumnButton<T extends STData = any> {
    */
   className?: NgClassType;
 
+  /**
+   * 埋点时使用 data-event-id
+   */
+  deid?: string;
+
   [key: string]: any;
 }
 
