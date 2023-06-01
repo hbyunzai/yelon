@@ -1,3 +1,12 @@
+## [15.2.3](https://github.com/hbyunzai/yelon/compare/15.2.2...15.2.3) (2023-06-01)
+
+
+### Bug Fixes
+
+* **yunzai-auth:** fix cache clear ([0a7258b](https://github.com/hbyunzai/yelon/commit/0a7258b90d710c41917492df33310d6b68b178e8))
+
+
+
 ## [15.2.2](https://github.com/hbyunzai/yelon/compare/15.2.0...15.2.2) (2023-05-17)
 
 
