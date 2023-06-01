@@ -84,7 +84,7 @@ class YunzaiAuthService {
           // 查看缓存中的用户是否与token验证回的用户id相同，如果不同则缓存为过期缓存，进行清除
           if (response && response.userId) {
             const user = this.cacheService.get('_yz_user', { mode: 'none' });
-            if (user && user.id && user.id === response.userId) {
+            if (user && user.id && user.id !== response.userId) {
               this.cacheService.clear();
             }
           }
