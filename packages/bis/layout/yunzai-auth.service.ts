@@ -84,6 +84,11 @@ class YunzaiAuthService {
           switch (response.errcode) {
             case 2000:
               const { access_token, expires_in, refresh_token, scope, token_type } = response.data;
+              // 如果token不一致，清除缓存
+              const token = this.tokenService.get()?.token;
+              if (token && access_token && token !== access_token) {
+                this.cacheService.clear();
+              }
               return {
                 token: access_token,
                 expired: expires_in,
