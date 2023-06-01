@@ -34,11 +34,28 @@ class YunzaiAuthService {
 
   askToken(): Observable<ITokenModel> {
     log('yz.auth.service: ', 'askToken');
+    // if (this.tokenService.get()?.token) {
+    //   const notCovertToken = this.tokenService.get();
+    //   let convertedToken: ITokenModel;
+    //   if (notCovertToken && notCovertToken['access_token']) {
+    //     convertedToken = {
+    //       token: notCovertToken['access_token'],
+    //       expired: notCovertToken['expires_in'],
+    //       refreshToken: notCovertToken['refresh_token'],
+    //       scope: notCovertToken['scope'],
+    //       tokenType: notCovertToken['token_type']
+    //     };
+    //     return of(convertedToken);
+    //   } else {
+    //     return of(this.tokenService.get()!);
+    //   }
+    // } else {
     if (this.config.loginForm) {
       return this.fetchTokenByUP();
     } else {
       return this.fetchTokenByCas();
     }
+    // }
   }
 
   fetchTokenByUP(): Observable<ITokenModel> {
@@ -64,14 +81,16 @@ class YunzaiAuthService {
       .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
       .pipe(
         map((response: any) => {
+          // 查看缓存中的用户是否与token验证回的用户id相同，如果不同则缓存为过期缓存，进行清除
+          if (response && response.userId) {
+            const user = this.cacheService.get('_yz_user', { mode: 'none' });
+            if (user && user.id && user.id === response.userId) {
+              this.cacheService.clear();
+            }
+          }
           switch (response.errcode) {
             case 2000:
               const { access_token, expires_in, refresh_token, scope, token_type } = response.data;
-              // 如果token不一致，清除缓存
-              const token = this.tokenService.get()?.token;
-              if (token && access_token && token !== access_token) {
-                this.cacheService.clear();
-              }
               return {
                 token: access_token,
                 expired: expires_in,
