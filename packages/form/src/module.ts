@@ -124,8 +124,7 @@ const WIDGETS = [
 @NgModule({
   imports: [CommonModule, FormsModule, YelonLocaleModule, ...ZORROS],
   declarations: [...COMPONENTS, ...WIDGETS],
-  exports: COMPONENTS,
-  entryComponents: WIDGETS
+  exports: COMPONENTS
 })
 export class YelonFormModule {
   static forRoot(): ModuleWithProviders<YelonFormModule> {

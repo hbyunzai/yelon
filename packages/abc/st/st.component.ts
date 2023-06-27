@@ -34,7 +34,6 @@ import {
   ModalHelper,
   YNPipe
 } from '@yelon/theme';
-import { GlobalEventSubjectService } from '@yelon/util/analysis';
 import { YunzaiConfigService, YunzaiSTConfig } from '@yelon/util/config';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput, toBoolean } from '@yelon/util/decorator';
 import { deepCopy, deepMergeKey } from '@yelon/util/other';
@@ -215,11 +214,11 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() header?: string | TemplateRef<void> | null;
   @Input() @InputBoolean() showHeader = true;
   @Input() footer?: string | TemplateRef<void> | null;
-  @Input() bodyHeader?: TemplateRef<STStatisticalResults> | null;
-  @Input() body?: TemplateRef<STStatisticalResults> | null;
+  @Input() bodyHeader?: TemplateRef<{ $implicit: STStatisticalResults }> | null;
+  @Input() body?: TemplateRef<{ $implicit: STStatisticalResults }> | null;
   @Input() @InputBoolean() expandRowByClick = false;
   @Input() @InputBoolean() expandAccordion = false;
-  @Input() expand: TemplateRef<{ $implicit: NzSafeAny; column: STColumn }> | null = null;
+  @Input() expand: TemplateRef<{ $implicit: NzSafeAny; index: number }> | null = null;
   @Input() noResult?: string | TemplateRef<void> | null;
   @Input() @InputBoolean() responsive: boolean = true;
   @Input() @InputBoolean() responsiveHideHeaderFooter?: boolean;
@@ -411,7 +410,7 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
       this._statistical = result.statistical as STStatisticalResults;
       this.changeEmit('loaded', result.list);
       // Should be re-render in next tike when using virtual scroll
-      // https://github.com/ng-alain/ng-alain/issues/1836
+      // https://github.com/hbyunzai/ng-yunzai/issues/1836
       if (this.cdkVirtualScrollViewport) {
         Promise.resolve().then(() => this.cdkVirtualScrollViewport.checkViewportSize());
       }
@@ -941,8 +940,7 @@ export class STTdComponent {
     @Host() private stComp: STComponent,
     private router: Router,
     private modalHelper: ModalHelper,
-    private drawerHelper: DrawerHelper,
-    private globalEventSubject: GlobalEventSubjectService
+    private drawerHelper: DrawerHelper
   ) {}
 
   private report(type: _STTdNotifyType): void {
@@ -976,9 +974,6 @@ export class STTdComponent {
 
   _btn(btn: STColumnButton, ev?: Event): void {
     ev?.stopPropagation();
-    if (ev) {
-      this.globalEventSubject.clickEvents.next(ev);
-    }
     const cog = this.stComp.cog;
     let record = this.i;
     if (btn.type === 'modal' || btn.type === 'static') {

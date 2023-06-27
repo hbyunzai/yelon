@@ -7,7 +7,7 @@ import { DEFAULT_WORKSPACE_PATH, readJSON, readPackage } from '../utils';
 import { getNodeMajorVersion } from '../utils/node';
 import { Schema as NgAddOptions } from './schema';
 
-const V = 15;
+const V = 16;
 
 function genRules(options: NgAddOptions): Rule {
   return () => {
@@ -99,7 +99,7 @@ export default function (options: NgAddOptions): Rule {
     }
     if (!ngCoreVersion.startsWith(`${V}.`)) {
       throw new SchematicsException(
-        `Sorry, the current version only supports angular ${V}.x, pls downgrade the global Angular-cli version: [yarn global add @angular/cli@${V}] (or via npm: [npm install -g @angular/cli@${V}])`
+        `Sorry, the current version only supports angular ${V}.x, pls downgrade the global Anguar-cli version: [yarn global add @angular/cli@${V}] (or via npm: [npm install -g @angular/cli@${V}])`
       );
     }
 
