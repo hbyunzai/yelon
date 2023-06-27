@@ -14,7 +14,7 @@ import { MetaSearchGroupItem } from '../../interfaces';
 import { LayoutComponent } from '../layout.component';
 
 const pkg = require('../../../../package.json');
-const minimumVersion = 12;
+const minimumVersion = 13;
 
 @Component({
   selector: 'app-header',
@@ -28,7 +28,7 @@ const minimumVersion = 12;
 export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile!: boolean;
-  oldVersionList = [14, 13, 12];
+  oldVersionList = [15, 14, 13, 12];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string; selected?: boolean }> = [
     { name: 'theme' },
