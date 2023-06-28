@@ -174,7 +174,7 @@
     "sitemap": "^7.1.1",
     "source-map-explorer": "^2.5.3",
     "stream": "0.0.2",
-    "stylelint": "^15.6.2",
+    "stylelint": "^15.9.0",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^33.0.0",
