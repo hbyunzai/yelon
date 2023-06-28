@@ -1,3 +1,12 @@
+## [16.0.2](https://github.com/hbyunzai/yelon/compare/16.0.1...16.0.2) (2023-06-28)
+
+
+### Bug Fixes
+
+* **stylelint:** downgrade dependency ([be448b0](https://github.com/hbyunzai/yelon/commit/be448b0c92229a80bd1b7f79e5e0ec97b953cbde))
+
+
+
 ## [16.0.1](https://github.com/hbyunzai/yelon/compare/15.2.6...16.0.1) (2023-06-28)
 
 
