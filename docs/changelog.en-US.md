@@ -13,6 +13,14 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [16.0.1](https://github.com/hbyunzai/yelon/compare/15.2.6...16.0.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* **stylelint:** fix stylelint version ([ac69beb](https://github.com/hbyunzai/yelon/commit/ac69beb3ae6dc373f9c670de57ffa7191ebadef6))
+
+
 # [16.0.0](https://github.com/hbyunzai/yelon/compare/15.2.6...16.0.0) (2023-06-27)
 
 
