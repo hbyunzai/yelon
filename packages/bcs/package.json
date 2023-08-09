@@ -21,15 +21,15 @@
     "component"
   ],
   "dependencies": {
-    "@yelon/theme": "PEER-0.0.0-PLACEHOLDER",
-    "@yelon/util": "PEER-0.0.0-PLACEHOLDER",
+    "ng-zorro-antd": "@LIB-PLACEHOLDER",
     "@yelon/acl": "PEER-0.0.0-PLACEHOLDER",
     "@yelon/auth": "PEER-0.0.0-PLACEHOLDER",
-    "@yelon/bis": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/theme": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/mock": "PEER-0.0.0-PLACEHOLDER",
     "@yelon/cache": "PEER-0.0.0-PLACEHOLDER",
     "@yelon/chart": "PEER-0.0.0-PLACEHOLDER",
     "@yelon/form": "PEER-0.0.0-PLACEHOLDER",
-    "@yelon/mock": "PEER-0.0.0-PLACEHOLDER",
-    "@yelon/socket": "PEER-0.0.0-PLACEHOLDER"
+    "@yelon/testing": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/util": "PEER-0.0.0-PLACEHOLDER",
   }
 }

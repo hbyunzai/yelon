@@ -1,8 +1,13 @@
 import { ChangeDetectionStrategy, Component, Inject, Injector, OnInit } from '@angular/core';
 
 import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
-import { CacheService } from '@yelon/cache';
-import { WINDOW, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
+import {
+  useLocalStorageProjectInfo,
+  useLocalStorageUser,
+  WINDOW,
+  YunzaiBusinessConfig,
+  YunzaiConfigService
+} from '@yelon/util';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { mergeBisConfig } from '../bis.config';
@@ -59,7 +64,6 @@ export class YunzaiUserComponent implements OnInit {
     @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
     // @ts-ignore
     private configService: YunzaiConfigService,
-    private cacheService: CacheService
   ) {
     this.config = mergeBisConfig(configService);
   }
@@ -69,13 +73,15 @@ export class YunzaiUserComponent implements OnInit {
   menus: UserLink[] = [];
 
   ngOnInit(): void {
-    const projectInfo = this.cacheService.get('_yz_project_info', { mode: 'none' });
-    const user = this.cacheService.get('_yz_user', { mode: 'none' });
+    const [,getProjectInfo]=useLocalStorageProjectInfo()
+    const [,getUser]=useLocalStorageUser()
+    const projectInfo = getProjectInfo()!
+    const user = getUser()!
     this.username = user.realname ? user.realname : '未命名';
     this.icon = user.avatarId
       ? `${this.config.baseUrl}/filecenter/file/${user.avatarId}`
       : `./assets/tmp/img/avatar.jpg`;
-    this.menus = projectInfo.profileList;
+    this.menus = projectInfo.profileList as UserLink[];
   }
 
   logout(): void {

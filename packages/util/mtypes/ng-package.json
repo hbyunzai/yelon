@@ -1,7 +1,6 @@
-
 {
   "lib": {
-    "flatModuleFile": "layout-default",
+    "flatModuleFile": "mtypes",
     "entryFile": "index.ts"
   }
 }

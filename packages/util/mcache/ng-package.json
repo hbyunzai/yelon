@@ -1,7 +1,6 @@
-
 {
   "lib": {
-    "flatModuleFile": "layout-default",
+    "flatModuleFile": "mcache",
     "entryFile": "index.ts"
   }
 }

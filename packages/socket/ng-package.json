@@ -4,12 +4,11 @@
   "deleteDestPath": true,
   "lib": {
     "flatModuleFile": "socket",
-    "entryFile": "public_api.ts"
+    "entryFile": "index.ts"
   },
   "allowedNonPeerDependencies": [
     "ng-zorro-antd",
     "@stomp/rx-stomp",
-    "@yelon/util",
-    "@yelon/cache"
+    "@yelon/util"
   ]
 }

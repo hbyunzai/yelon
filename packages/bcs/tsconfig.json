@@ -1,9 +1,8 @@
-// Configuration for IDEs only.
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "..",
     "baseUrl": ".",
+    "rootDir": "..",
     "paths": {
       "@yelon/bcs/*": ["./*"],
       "@yelon/*": [ "../*" ]

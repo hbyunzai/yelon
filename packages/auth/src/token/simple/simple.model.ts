@@ -3,7 +3,7 @@ import { ITokenModel } from '../interface';
 export class SimpleTokenModel implements ITokenModel {
   [key: string]: any;
 
-  token: string | null | undefined;
+  access_token: string | null | undefined;
 
-  expired?: number;
+  expires_in?: number;
 }

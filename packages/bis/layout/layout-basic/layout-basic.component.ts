@@ -1,15 +1,25 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Subject} from 'rxjs';
 
-import { CacheService, YunzaiProjectInfo } from '@yelon/cache';
-import { StompService } from '@yelon/socket';
-import { LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
-import { WINDOW, hasFavicon, log, setFavicon } from '@yelon/util';
+import {StompService} from '@yelon/socket';
+import {LayoutDefaultOptions, LayoutDisplayService} from '@yelon/theme/layout-default';
+import {
+  WINDOW,
+  hasFavicon,
+  log,
+  setFavicon,
+  NavType,
+  LayoutBasicAside,
+  YunzaiProjectInfo,
+  useLocalStorageCurrent, useLocalStorageProjectInfo, useLocalStorageHeaderType, useLocalStorageDefaultRoute
+} from '@yelon/util';
 
-import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
+import {LayoutBasicState} from './interface';
+
 @Component({
   selector: `yz-layout-basic`,
-  template: `<layout-default
+  template: `
+    <layout-default
       [options]="options"
       [asideUser]="asideUserTpl"
       [content]="displayReusetab ? contentTpl : noneTpl"
@@ -20,9 +30,15 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
           <ng-container *ngSwitchCase="NavType.APPLICATION">
             <layout-nav-application></layout-nav-application>
           </ng-container>
-          <ng-container *ngSwitchCase="NavType.GROUP"> <layout-nav-group></layout-nav-group></ng-container>
-          <ng-container *ngSwitchCase="NavType.TILE"> <layout-nav-tile></layout-nav-tile> </ng-container>
-          <ng-container *ngSwitchDefault> <layout-nav-application></layout-nav-application> </ng-container>
+          <ng-container *ngSwitchCase="NavType.GROUP">
+            <layout-nav-group></layout-nav-group>
+          </ng-container>
+          <ng-container *ngSwitchCase="NavType.TILE">
+            <layout-nav-tile></layout-nav-tile>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <layout-nav-application></layout-nav-application>
+          </ng-container>
         </ng-container>
       </layout-default-header-item>
       <!-- nav end -->
@@ -67,9 +83,15 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
               <i nz-icon nzType="appstore" class="mr-sm"></i>
               {{ 'mode.nav.tile' | i18n }}
             </div>
-            <div data-event-id="_nav_fullscreen" nz-menu-item> <yunzai-fullscreen></yunzai-fullscreen> </div>
-            <div data-event-id="_nav_clearstorage" nz-menu-item> <yunzai-clearstorage></yunzai-clearstorage> </div>
-            <div data-event-id="_nav_i18n" nz-menu-item> <yunzai-i18n></yunzai-i18n> </div>
+            <div data-event-id="_nav_fullscreen" nz-menu-item>
+              <yunzai-fullscreen></yunzai-fullscreen>
+            </div>
+            <div data-event-id="_nav_clearstorage" nz-menu-item>
+              <yunzai-clearstorage></yunzai-clearstorage>
+            </div>
+            <div data-event-id="_nav_i18n" nz-menu-item>
+              <yunzai-i18n></yunzai-i18n>
+            </div>
           </div>
         </nz-dropdown-menu>
       </layout-default-header-item>
@@ -106,7 +128,7 @@ import { LayoutBasicAside, LayoutBasicState, NavType } from './interface';
       <router-outlet></router-outlet>
     </ng-template> `
 })
-class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
+export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   public NavType = NavType;
   private state: LayoutBasicState = {
     options: {
@@ -162,10 +184,10 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
 
   constructor(
     private layoutDisplayService: LayoutDisplayService,
-    private cacheService: CacheService,
     private stompService: StompService,
     @Inject(WINDOW) private win: typeof window
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.initLogo();
@@ -178,7 +200,8 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   }
 
   initFavicon(): void {
-    const projectInfo: YunzaiProjectInfo = this.cacheService.get('_yz_project_info', { mode: 'none' });
+    const [, getProjectInfo] = useLocalStorageProjectInfo()
+    const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
     if (projectInfo.faviconUrl) {
       hasFavicon(projectInfo.faviconUrl).then((has: boolean) => {
         if (has) {
@@ -191,26 +214,28 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   }
 
   initAside(): void {
-    const aside: LayoutBasicAside = this.cacheService.get('_yz_current', { mode: 'none' });
-    this.state.aside = { ...aside };
+    const [, getCurrent] = useLocalStorageCurrent()
+    const aside: LayoutBasicAside = getCurrent()!
+    this.state.aside = {...aside};
   }
 
   initLogo(): void {
-    const projectInfo: YunzaiProjectInfo = this.cacheService.get('_yz_project_info', { mode: 'none' });
+    const [, getProjectInfo] = useLocalStorageProjectInfo()
+    const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
     this.state.options.logoExpanded = projectInfo.maxLogoUrl ? projectInfo.maxLogoUrl : `./assets/logo-full.svg`;
     this.state.options.logoCollapsed = projectInfo.miniLogoUrl ? projectInfo.miniLogoUrl : `./assets/logo.svg`;
   }
 
   initNavType(): void {
-    //  from browser cache
-    const navType: NavType = this.cacheService.get('_yz_header_type', { mode: 'none' });
+    const [, getHeaderType] = useLocalStorageHeaderType()
+    const [, getProjectInfo] = useLocalStorageProjectInfo()
+    const navType: NavType | null = getHeaderType()
+    const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
     if (navType !== null) {
       this.state.navType = navType;
       return;
     }
-    // from project info
-    const projectInfo: YunzaiProjectInfo = this.cacheService.get('_yz_project_info', { mode: 'none' });
-    let fetchedNavType: string | undefined = undefined;
+    let fetchedNavType: any;
     if (projectInfo.headerStyle && projectInfo.headerStyle.length > 0) {
       fetchedNavType = projectInfo.headerStyle.pop()?.value;
     }
@@ -218,14 +243,18 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
     if (!fetchedNavType) {
       fetchedNavType = NavType.APPLICATION;
     }
+    this.state.navType = fetchedNavType;
   }
 
   toIndex(): void {
-    const defaultRoute = this.cacheService.get('_yz_defaultRoute', { mode: 'none' });
+    const [, getDefaultRoute] = useLocalStorageDefaultRoute()
+    const defaultRoute = getDefaultRoute()!
     log('YunzaiLayoutBasicComponent: ', `todo: the default route was ${defaultRoute}, 但是还没想好如何实现.`);
   }
+
   onNavTypeChange(type: NavType): void {
-    this.cacheService.set('_yz_header_type', type);
+    const [setHeaderType,] = useLocalStorageHeaderType()
+    setHeaderType(type)
     this.win.location.reload();
   }
 
@@ -246,4 +275,4 @@ class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
     this.state.destroy$.complete();
   }
 }
-export { YunzaiLayoutBasicComponent as YzLayoutBasicComponent, YunzaiLayoutBasicComponent };
+

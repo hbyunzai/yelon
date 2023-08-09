@@ -26,7 +26,7 @@ export class JWTInterceptor extends BaseInterceptor {
   setReq(req: HttpRequest<any>, _options: YunzaiAuthConfig): HttpRequest<any> {
     return req.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.model.token}`
+        Authorization: `Bearer ${this.model.access_token}`
       }
     });
   }

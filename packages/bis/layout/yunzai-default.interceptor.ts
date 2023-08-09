@@ -102,7 +102,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
   }
 
   private reAttachToken(req: HttpRequest<any>): HttpRequest<any> {
-    const token = this.tokenSrv.get()?.token;
+    const token = this.tokenSrv.get()?.access_token;
     return req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`
@@ -113,11 +113,10 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
   private refreshTokenRequest(): Observable<any> {
     const model = this.tokenSrv.get();
     const form = new FormData();
-    form.set('refresh_token', model?.refreshToken);
+    form.set('refresh_token', model?.refresh_token!);
     form.set('grant_type', 'refresh_token');
     form.set('scope', 'webapp');
-    log('yz.default.interceptor: use the refresh token to request a new token', model?.refreshToken);
-    // return this.http.post(`/auth/user/token/refresh?_allow_anonymous=true`, form);
+    log('yz.default.interceptor: use the refresh token to request a new token', model?.refresh_token);
     return this.http.post(`/auth/oauth/getOrCreateToken/webapp`, form);
   }
 
@@ -146,14 +145,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
       switchMap(res => {
         log('yz.default.interceptor: refresh token accessed -> ', res);
         // 重新保存新 token
-        const { access_token, expires_in, refresh_token, scope, token_type } = res;
-        this.tokenSrv.set({
-          token: access_token,
-          expired: expires_in,
-          refreshToken: refresh_token,
-          tokenType: token_type,
-          scope
-        });
+        this.tokenSrv.set(res);
         // 通知后续请求继续执行
         this.refreshToking = false;
         this.refreshToken$.next(res);

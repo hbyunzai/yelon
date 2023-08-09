@@ -75,7 +75,7 @@ export class ModalHelper {
         nzContent: comp,
         nzWidth: width ? width : undefined,
         nzFooter: null,
-        nzComponentParams: params
+        nzData: params
       };
       const subject = this.srv.create({ ...defaultOptions, ...modalOptions });
       const afterClose$ = subject.afterClose.subscribe((res: NzSafeAny) => {

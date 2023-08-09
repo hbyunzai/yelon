@@ -1,12 +1,10 @@
-import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import {Component, Injector, OnDestroy, OnInit} from '@angular/core';
+import {Subject, takeUntil} from 'rxjs';
 
-import { CacheService, YunzaiNavTopic } from '@yelon/cache';
-import { _HttpClient } from '@yelon/theme';
-import { WINDOW } from '@yelon/util';
+import {_HttpClient} from '@yelon/theme';
+import {LayoutNavApplicationState, useLocalStorageHeader, WINDOW, YunzaiNavTopic} from '@yelon/util';
 
-import { YunzaiI18NService } from '../yunzai-i18n.service';
-import { LayoutNavApplicationState } from './types';
+import {YunzaiI18NService} from '../yunzai-i18n.service';
 
 @Component({
   selector: `layout-nav-application`,
@@ -43,7 +41,7 @@ import { LayoutNavApplicationState } from './types';
               href="javascript:;"
               *ngFor="let nav of topic.children"
               (click)="open(nav)"
-              >{{ nav.name | i18n }}</a
+            >{{ nav.name | i18n }}</a
             >
           </li>
         </ul>
@@ -60,17 +58,17 @@ import { LayoutNavApplicationState } from './types';
       <div nz-col [nzSpan]="3" class="yz-application-topic">
         <div data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')">{{
           'mode.nav.all' | i18n
-        }}</div>
+          }}</div>
         <div data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')">{{
           'mode.nav.mine' | i18n
-        }}</div>
+          }}</div>
         <div
           data-event-id="_nav_topic"
           [attr.data-name]="nav.name | i18n"
           class="yz-application-text"
           *ngFor="let nav of state.topics"
           (click)="attachNav('other', nav)"
-          >{{ nav.name | i18n }}</div
+        >{{ nav.name | i18n }}</div
         >
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
@@ -116,11 +114,11 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private cacheService: CacheService,
     private i18n: YunzaiI18NService,
     private http: _HttpClient,
     private inject: Injector
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.fetchAllTopic();
@@ -128,7 +126,8 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   }
 
   fetchAllTopic(): void {
-    this.state.topics = this.cacheService.get('_yz_header', { mode: 'none' });
+    const [, getTopics] = useLocalStorageHeader()
+    this.state.topics = getTopics()!
   }
 
   attachNav(type: 'all' | 'mine' | 'other', topic?: YunzaiNavTopic): void {
@@ -150,12 +149,13 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   }
 
   displayAllNav(): void {
-    this.state.list = this.cacheService.get('_yz_header', { mode: 'none' });
+    const [, getTopics] = useLocalStorageHeader()
+    this.state.list = getTopics()!
   }
 
   displayMineNav(): void {
-    const temp: YunzaiNavTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
-    this.state.list = temp
+    const [, getTopics] = useLocalStorageHeader()
+    this.state.list = getTopics()!
       .filter((topic: YunzaiNavTopic) => {
         topic.children = topic.children.filter((child: YunzaiNavTopic) => {
           return child.auth;
@@ -168,8 +168,9 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   }
 
   displayOtherNav(topic: YunzaiNavTopic): void {
+    const [, getTopics] = useLocalStorageHeader()
     this.state.topic = topic;
-    const temp: YunzaiNavTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
+    const temp: YunzaiNavTopic[] = getTopics()!;
     this.state.list = temp.filter(t => t.key === topic.key)[0].children;
   }
 
@@ -208,7 +209,8 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   }
 
   onSearch(): void {
-    const temp: YunzaiNavTopic[] = this.cacheService.get('_yz_header', { mode: 'none' });
+    const [, getTopics] = useLocalStorageHeader()
+    const temp: YunzaiNavTopic[] = getTopics()!;
     if (this.state.search) {
       this.state.list = temp
         .filter((topic: YunzaiNavTopic) => {
@@ -225,7 +227,8 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
           return topic.children.length > 0;
         });
     } else {
-      this.state.list = this.cacheService.get('_yz_header', { mode: 'none' });
+      const [, getTopics] = useLocalStorageHeader()
+      this.state.list = getTopics()!
     }
   }
 
