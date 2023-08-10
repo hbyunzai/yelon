@@ -4,8 +4,8 @@ export const AUTH_DEFAULT_CONFIG: YunzaiAuthConfig = {
   store_key: `_yz_token`,
   token_invalid_redirect: true,
   token_exp_offset: 10,
-  token_send_key: `token`,
-  token_send_template: '${token}',
+  token_send_key: `Authorization`,
+  token_send_template: 'Bearer ${access_token}',
   token_send_place: 'header',
   login_url: '/login',
   ignores: [

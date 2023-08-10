@@ -90,7 +90,7 @@ export class YunzaiAuthService {
                 log('yz.auth.service: get token->', token);
                 this.configService.set('auth', {
                     token_send_key: 'Authorization',
-                    token_send_template: `${token.token_type} \${token}`,
+                    token_send_template: `${token.token_type} \${access_token}`,
                     token_send_place: 'header'
                 });
                 log('yz.auth.service: ', 'set token');
@@ -110,9 +110,13 @@ export class YunzaiAuthService {
         return combineLatest([this.httpClient.get(`/auth/user`), this.httpClient.get(`/auth/allheader/v2`), this.httpClient.get(`/app-manager/project/info`)])
             .pipe(
                 map(([user, header, project]) => {
+                    log('yz.auth.service: ', 'set user');
                     setUser(user.principal)
+                    log('yz.auth.service: ', 'set tenant');
                     setTenant(user.tenantId)
+                    log('yz.auth.service: ', 'set header');
                     setHeader(header.data)
+                    log('yz.auth.service: ', 'set project');
                     setProject(project.data)
                     return void 0
                 })

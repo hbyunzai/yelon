@@ -18,9 +18,9 @@ export interface YunzaiAuthConfig {
    */
   token_send_key?: string;
   /**
-   * 发送token模板（默认为：`'${token}'`），使用 `${token}` 表示token点位符（**注意：**请务必使用 \`\` 包裹），例如：
+   * 发送token模板（默认为：`'${access_token}'`），使用 `${access_token}` 表示token点位符（**注意：**请务必使用 \`\` 包裹），例如：
    *
-   * - `Bearer ${token}`
+   * - `Bearer ${access_token}`
    */
   token_send_template?: string;
   /**
