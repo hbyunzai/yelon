@@ -20,5 +20,6 @@
     "@yelon/mock",
     "@yelon/testing",
     "@yelon/util",
+    "@yelon/bis"
   ]
 }

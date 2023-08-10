@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "yunzai-dept-tree",
+    "entryFile": "index.ts"
+  }
+}

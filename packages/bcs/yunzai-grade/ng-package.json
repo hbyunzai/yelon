@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "yunzai-grade",
+    "entryFile": "index.ts"
+  }
+}
