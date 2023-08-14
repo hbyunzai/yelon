@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "yunzai-role-tree",
+    "entryFile": "index.ts"
+  }
+}

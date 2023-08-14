@@ -1,7 +1,7 @@
 ---
 type: Basic
 title: yunzai-dept-tree
-subtitle: 联系人
+subtitle: 部门树
 cols: 1
 order: 1
 module: import { YunzaiDeptTreeModule } from '@yelon/bcs/yunzai-dept-tree';

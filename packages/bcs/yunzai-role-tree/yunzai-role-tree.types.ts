@@ -1,0 +1,29 @@
+import {SFSchema} from "@yelon/form";
+import {Subject} from "rxjs";
+
+export interface YunzaiRoleTreeState {
+    loading: boolean
+    schema: SFSchema
+    data: YunzaiRoleTree[]
+    dataBackup: YunzaiRoleTree[]
+    expandKeys: string[]
+    $destroy: Subject<any>
+}
+
+export interface YunzaiRoleTreeProps {
+    wrap?: boolean
+    expand?: boolean
+    multiple?: boolean
+    roleGroupCode?: string
+    data?: YunzaiRoleTree[]
+}
+
+
+export interface YunzaiRoleTree {
+    children: YunzaiRoleTree[]
+    code: string
+    key: string
+    leaf: boolean
+    title: string
+    type: string
+}
