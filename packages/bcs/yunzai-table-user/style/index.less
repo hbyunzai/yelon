@@ -1,0 +1,76 @@
+.right-list-title {
+  overflow: hidden;
+  //width: calc(100% - 60px);
+  width: 100%;
+  padding: 11px 8px 12px;
+  border-bottom: 1px solid #e8e8e8;
+
+  h3 {
+    display: inline-block;
+    border-left: 4px solid #1990fc;
+    line-height: 20px;
+    padding-left: 8px;
+    float: left;
+    font-size: 16px;
+    margin: 0;
+    max-width: calc(100% - 30px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  div {
+    float: right;
+  }
+}
+
+.people-item {
+  overflow: hidden;
+  display: block !important;
+
+  &:hover {
+    background: #e6f7fe;
+  }
+
+  .del-btn {
+    float: right;
+    display: block;
+    color: rgba(0, 0, 0, .65) !important;
+  }
+
+  .people-item-right {
+    float: left;
+    display: block;
+    font-size: 14px;
+    max-width: 60%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: rgba(0, 0, 0, .65) !important;
+  }
+}
+
+.yz-selected-contacts-card-title {
+  height: 57px;
+  line-height: 56px;
+  border-bottom: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
+  background-color: #fafafa;
+  overflow: hidden;
+  text-align: center;
+
+  a {
+    display: inline-block;
+    width: 25%;
+    //float: left;
+    color: #444444;
+    height: 56px;
+    line-height: 57px;
+    text-align: center;
+
+    &.active {
+      color: #1990fc;
+      border-bottom: 3px solid #1990fc;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<nz-card *ngIf="wrapped">
+  <ng-container [ngTemplateOutlet]="tableTpl"></ng-container>
+</nz-card>
+
+<ng-container *ngIf="!wrapped" [ngTemplateOutlet]="tableTpl"></ng-container>
+
+<ng-template #tableTpl>
+  <div style="height:100%">
+    <div style="float:left;width:70%">
+      <ng-container [ngTemplateOutlet]="form"></ng-container>
+      <st #st virtualScroll [scroll]="scroll">
+        <ng-template st-row="checkbox_all" let-item type="title">
+          <label
+            *ngIf="!disableCheck"
+            nz-checkbox
+            (change)="onCheckedAll($event)"
+            [nzChecked]="isAllChecked()"
+          ></label>
+        </ng-template>
+        <ng-template st-row="checkbox" let-item let-index="index">
+          <label *ngIf="!disableCheck" nz-checkbox (change)="onCheckedItem(item)"
+                 [nzChecked]="isChecked(item)"></label>
+        </ng-template>
+        <ng-template st-row="rolesName" let-item
+                     let-index="index">{{renderRoles(item.roles)}}</ng-template>
+      </st>
+    </div>
+    <div style="float:left;width:30%">
+      <ng-container *ngIf="list" [ngTemplateOutlet]="listTpl"></ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #listTpl>
+  <div class="right-list-title">
+    <h3>{{"table-user.checked"|i18n}}</h3>
+    <div *ngIf="hasCheck">
+      <a style="cursor: default;">{{checked.length}} </a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a style="cursor: pointer" href="javascript:;" (click)="unCheckAll()">{{"table-user.clear"|i18n}}</a>
+    </div>
+  </div>
+
+  <div class="yz-selected-contacts">
+    <nz-empty *ngIf="!hasCheck" style="margin: 90px auto;"></nz-empty>
+    <ul nz-menu nzMode="inline" class="yz-role-contacts">
+      <li nz-menu-item *ngFor="let item of checked;let i=index" class="people-item">
+        <div class="people-item-right">{{item?.realName || '--'}}</div>
+        <span class="del-btn" (click)="unCheck(item)">
+              <i nz-icon nzType="close" nzTheme="outline"></i>
+            </span>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #form>
+  <sf layout="inline" #sf [schema]="schema" button="none"></sf>
+  <button nz-button nzType="primary" (click)="onReset()">{{'reset'|i18n}}</button>
+</ng-template>
