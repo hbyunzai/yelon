@@ -1,9 +1,9 @@
 ---
 type: Basic
-title: yunzai-contact
-subtitle: 联系人
+title: yunzai-dept-tree
+subtitle: 部门树
 cols: 1
-module: import { YunzaiContactModule } from '@yelon/bcs/yunzai-contact';
+module: import { YunzaiContactModule } from '@yelon/bcs/yunzai-dept-tree';
 ---
 
 
