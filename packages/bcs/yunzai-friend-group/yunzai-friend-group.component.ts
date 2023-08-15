@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from "@angular/core";
-import {YunzaiFriendService} from "./yunzai-friend.service";
+import {YunzaiFriendGroupService} from "./yunzai-friend-group.service";
 import {catchError, debounceTime, map, Subject, takeUntil, throwError} from "rxjs";
 import {SFComponent} from "@yelon/form";
-import {YunzaiFriendGroup, YunzaiFriendGroupProps, YunzaiFriendGroupState} from "./yunzai-friend.types";
-import {defaultSchema} from "./yunzai-friend.schema";
+import {YunzaiFriendGroup, YunzaiFriendGroupProps, YunzaiFriendGroupState} from "./yunzai-friend-group.types";
+import {defaultSchema} from "./yunzai-friend-group.schema";
 
 @Component({
     selector: `yunzai-friend-group`,
-    templateUrl: `./yunzai-friend.html`
+    templateUrl: `./yunzai-friend-group.html`
 })
-export class YunzaiFriendComponent implements OnInit, AfterViewInit {
+export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit {
 
     @Input() props?: YunzaiFriendGroupProps;
     @Output() onQueryComplete: EventEmitter<YunzaiFriendGroup[]> = new EventEmitter<YunzaiFriendGroup[]>();
@@ -36,7 +36,7 @@ export class YunzaiFriendComponent implements OnInit, AfterViewInit {
     }
 
     constructor(
-        private friendsService: YunzaiFriendService
+        private friendsService: YunzaiFriendGroupService
     ) {
     }
 

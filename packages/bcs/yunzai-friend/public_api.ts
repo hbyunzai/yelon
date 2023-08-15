@@ -1,5 +1,0 @@
-export * from "./yunzai-friend.component"
-export * from "./yunzai-friend.module"
-export * from "./yunzai-friend.schema"
-export * from "./yunzai-friend.service"
-export * from "./yunzai-friend.types"

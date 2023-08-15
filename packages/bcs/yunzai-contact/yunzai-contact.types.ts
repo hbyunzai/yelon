@@ -1,4 +1,4 @@
-import {YunzaiFriendGroupProps} from "@yelon/bcs/yunzai-friend";
+import {YunzaiFriendGroupProps} from "@yelon/bcs/yunzai-friend-group";
 import {YunzaiTableUserProps} from "@yelon/bcs/yunzai-table-user";
 import {YunzaiRoleTreeProps} from "@yelon/bcs/yunzai-role-tree";
 import {YunzaiDormitoryTreeProps} from "@yelon/bcs/yunzai-dormitory-tree";

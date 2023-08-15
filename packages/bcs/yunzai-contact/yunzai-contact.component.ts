@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output, ViewChild} from "@angular/core";
 import {YunzaiDeptTree, YunzaiDeptTreeProps} from "@yelon/bcs/yunzai-dept-tree";
 import {YunzaiDormitoryTree, YunzaiDormitoryTreeProps} from "@yelon/bcs/yunzai-dormitory-tree";
-import {YunzaiFriendGroup, YunzaiFriendGroupProps} from "@yelon/bcs/yunzai-friend";
+import {YunzaiFriendGroup, YunzaiFriendGroupProps} from "@yelon/bcs/yunzai-friend-group";
 import {YunzaiRoleTree, YunzaiRoleTreeProps} from "@yelon/bcs/yunzai-role-tree";
 import {YunzaiTableUser, YunzaiTableUserComponent, YunzaiTableUserProps} from "@yelon/bcs/yunzai-table-user";
 import {YunzaiContactProps, YunzaiContactState} from "./yunzai-contact.types";

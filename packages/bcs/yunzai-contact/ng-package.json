@@ -1,6 +1,6 @@
 {
   "lib": {
-    "flatModuleFile": "yunzai-table-user",
+    "flatModuleFile": "yunzai-contact",
     "entryFile": "index.ts"
   }
 }

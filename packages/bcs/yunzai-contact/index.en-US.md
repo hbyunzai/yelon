@@ -1,7 +1,7 @@
 ---
 type: Basic
-title: yunzai-table-user
-subtitle: Table User
+title: yunzai-contact
+subtitle: Contact
 cols: 1
 module: import { YunzaiTableUserModule } from '@yelon/bcs/yunzai-table-user';
 ---

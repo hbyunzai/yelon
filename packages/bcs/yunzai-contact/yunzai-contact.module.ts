@@ -8,15 +8,15 @@ import {RouterModule} from "@angular/router";
 import {YunzaiContactComponent} from "./yunzai-contact.component";
 import {YunzaiDeptTreeModule} from "@yelon/bcs/yunzai-dept-tree";
 import {YunzaiDormitoryTreeModule} from "@yelon/bcs/yunzai-dormitory-tree";
-import {YunzaiFriendModule} from "@yelon/bcs/yunzai-friend";
 import {YunzaiRoleTreeModule} from "@yelon/bcs/yunzai-role-tree";
 import {YunzaiTableUserModule} from "@yelon/bcs/yunzai-table-user"
+import {YunzaiFriendGroupModule} from "@yelon/bcs/yunzai-friend-group";
 
 @NgModule({
     imports: [
         YunzaiDeptTreeModule,
         YunzaiDormitoryTreeModule,
-        YunzaiFriendModule,
+        YunzaiFriendGroupModule,
         YunzaiRoleTreeModule,
         YunzaiTableUserModule,
         HttpClientModule,

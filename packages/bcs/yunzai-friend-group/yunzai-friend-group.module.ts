@@ -5,7 +5,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import {YunzaiFriendComponent} from "./yunzai-friend.component";
+import {YunzaiFriendGroupComponent} from "./yunzai-friend-group.component";
 
 @NgModule({
     imports: [
@@ -17,8 +17,8 @@ import {YunzaiFriendComponent} from "./yunzai-friend.component";
         YunzaiSharedZorroModule,
         YunzaiSharedYelonModule
     ],
-    declarations: [YunzaiFriendComponent],
-    exports: [YunzaiFriendComponent]
+    declarations: [YunzaiFriendGroupComponent],
+    exports: [YunzaiFriendGroupComponent]
 })
-export class YunzaiFriendModule {
+export class YunzaiFriendGroupModule {
 }

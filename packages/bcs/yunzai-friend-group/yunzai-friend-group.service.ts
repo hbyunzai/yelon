@@ -2,12 +2,12 @@ import {Injectable} from "@angular/core";
 import {_HttpClient} from "@yelon/theme";
 import {map, Observable} from "rxjs";
 import {YunzaiResponse} from "@yelon/util";
-import {YunzaiFriendGroup} from "./yunzai-friend.types";
+import {YunzaiFriendGroup} from "./yunzai-friend-group.types";
 
 @Injectable({
   providedIn: "root"
 })
-export class YunzaiFriendService {
+export class YunzaiFriendGroupService {
   constructor(private http: _HttpClient) {
   }
 
