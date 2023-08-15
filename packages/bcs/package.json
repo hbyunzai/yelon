@@ -1,0 +1,36 @@
+{
+  "name": "@yelon/bcs",
+  "version": "0.0.0-PLACEHOLDER",
+  "author": "devcui<devcui@outlook.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbyunzai/yelon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hbyunzai/ng-yunzai/issues"
+  },
+  "homepage": "https://ng.yunzainfo.com",
+  "keywords": [
+    "yelon",
+    "ng-yunzai",
+    "yunzai",
+    "antd",
+    "ng-zorro-antd",
+    "angular",
+    "component"
+  ],
+  "dependencies": {
+    "ng-zorro-antd": "@LIB-PLACEHOLDER",
+    "@yelon/acl": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/auth": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/theme": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/mock": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/cache": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/chart": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/form": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/testing": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/util": "PEER-0.0.0-PLACEHOLDER",
+    "@yelon/bis": "PEER-0.0.0-PLACEHOLDER"
+  }
+}
