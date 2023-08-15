@@ -316,11 +316,11 @@ export class YunzaiTableUserComponent implements OnInit, OnDestroy, AfterViewIni
 
     onSearch(value: SFValue = {}): void {
         if (!this.inSearch) return
-        if (Array.isArray(this.state.data)) {
-            let tempData = this.state.data
+        if (Array.isArray(this.state.data) && Array.isArray(this.state.dataBackup)) {
+            let tempData = this.state.dataBackup
             if (value['realName']) tempData = tempData.filter(d => d.realName.includes(value["realName"]))
-            if (value['idCard']) tempData = this.state.data.filter(d => d.idCard = value["idCard"])
-            if (value['userCode']) tempData = this.state.data.filter(d => d.userCode = value["userCode"])
+            if (value['idCard']) tempData = this.state.dataBackup.filter(d => d.idCard = value["idCard"])
+            if (value['userCode']) tempData = this.state.dataBackup.filter(d => d.userCode = value["userCode"])
             this.st.data = tempData
             this.st.reload()
         }
@@ -338,6 +338,9 @@ export class YunzaiTableUserComponent implements OnInit, OnDestroy, AfterViewIni
 
     public onQuery(): void {
         if (!this.st) return
+        if (Array.isArray(this.state.data) && Array.isArray(this.state.dataBackup)) {
+            this.st.data = this.state.dataBackup
+        }
         this.st.reload()
     }
 

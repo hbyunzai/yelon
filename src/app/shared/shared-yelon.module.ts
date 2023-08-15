@@ -49,6 +49,8 @@ import {CurrencyPipeModule, FilterPipeModule, FormatPipeModule} from '@yelon/uti
 import {YunzaiDeptTreeModule} from "@yelon/bcs/yunzai-dept-tree";
 import {YunzaiRoleTreeModule} from "@yelon/bcs/yunzai-role-tree";
 import {YunzaiDormitoryTreeModule} from "@yelon/bcs/yunzai-dormitory-tree";
+import {YunzaiFriendModule} from "@yelon/bcs/yunzai-friend";
+import {YunzaiTableUserModule} from "@yelon/bcs/yunzai-table-user";
 
 export const SHARED_YELON_MODULES = [
     AvatarListModule,
@@ -101,8 +103,10 @@ export const SHARED_YELON_MODULES = [
     AutoFocusModule,
     LetModule,
     HotkeyModule,
+    YunzaiTableUserModule,
     YunzaiDormitoryTreeModule,
     YunzaiRoleTreeModule,
     YunzaiDeptTreeModule,
+    YunzaiFriendModule,
     YunzaiContactModule,
 ];
