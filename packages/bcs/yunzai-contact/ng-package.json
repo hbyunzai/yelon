@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "yunzai-table-user",
+    "entryFile": "index.ts"
+  }
+}

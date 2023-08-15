@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {catchError, map, Observable, throwError} from "rxjs";
 import {_HttpClient} from "@yelon/theme";
-import {NzMessageService} from "ng-zorro-antd/message";
 import {Page, YunzaiPageResponse} from "@yelon/util";
 import {YunzaiTableUser, YunzaiTableUserParam} from "./yunzai-table-user.types";
 
@@ -10,7 +9,6 @@ export class YunzaiTableUserService {
 
     constructor(
         private http: _HttpClient,
-        private msg: NzMessageService
     ) {
     }
 
