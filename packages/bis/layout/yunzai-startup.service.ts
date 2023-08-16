@@ -112,6 +112,9 @@ export class YunzaiStartupService {
 
 export function mapYzSideToYelonMenu(menus: YunzaiMenu[]): void {
     menus.forEach(menu => {
+        if (menu.children && menu.hideChildren) {
+            menu.children.forEach(c => c.hide = true)
+        }
         menu.badgeDot = menu.badge_dot || null;
         menu.badgeStatus = menu.badge_status || null;
         menu.shortcutRoot = menu.shortcut_root || null;
