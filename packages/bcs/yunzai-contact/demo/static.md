@@ -1,9 +1,11 @@
 ---
 order: 0
 title:
-  zh-CN: 静态数据源
-  en-US: static datasource
+  zh-CN: 组件方式
+  en-US: use component
 ---
+
+ 使用组件方式
 
 ```ts
 import {Component} from "@angular/core";
@@ -189,3 +191,5 @@ export class DemoComponent {
     }
 }
 ```
+
+
