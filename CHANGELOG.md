@@ -1,3 +1,12 @@
+## [16.0.5](https://github.com/hbyunzai/yelon/compare/16.0.4...16.0.5) (2023-08-16)
+
+
+### Bug Fixes
+
+* **bis:** fix hide menu children and header type key ([7c21452](https://github.com/hbyunzai/yelon/commit/7c214528eabaa80b2fccadc8fddf165e54e81c72))
+
+
+
 ## [16.0.4](https://github.com/hbyunzai/yelon/compare/16.0.3...16.0.4) (2023-08-16)
 
 
