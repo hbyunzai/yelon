@@ -37,6 +37,65 @@ module: import { YunzaiTableUserModule } from '@yelon/bcs/yunzai-table-user';
 | disableFriendGroup   | 是否关闭好友组       | bool |
 | wrap                 | 是否使用nz-card包裹 | bool |
 
+
+### 函数签名
+service函数签名,`nzOnOk`为回调函数，`param`为传入参数
+
+```ts
+const create = (
+    nzOnOk: (users: YunzaiTableUser[]) => Observable<boolean>,
+    param: YunzaiContactParam = {
+        props: {
+            wrap: false,
+            disableFriendGroup: false,
+            disableDormitoryTree: false,
+            disableDeptTree: false,
+            disableRoleTree: false
+        },
+        deptTree: {
+            multiple: false,
+            wrap: false,
+            expand: true,
+            class: true,
+            historyClass: true,
+            grade: true,
+            types: [YUNZAI_DEPT_TYPES.DEPT, YUNZAI_DEPT_TYPES.CLASS],
+        },
+        dormitoryTree: {
+            multiple: false,
+            wrap: false,
+            expand: true,
+        },
+        roleTree: {
+            wrap: false,
+            expand: true,
+            multiple: false
+        },
+        friendGroup: {
+            wrap: false
+        },
+        tableUser: {
+            wrap: false,
+            filteredColumns: [],
+            page: {
+                pageNum: 1,
+                pageSize: 20,
+                pageParam: {}
+            },
+            customColumns: [],
+            list: true,
+            check: {
+                pageCheck: true,
+                disable: false,
+                data: [],
+            }
+        }
+    }
+): void => {
+}
+```
+
+
 ### others
 
 其他属性请查找相应组件的API
