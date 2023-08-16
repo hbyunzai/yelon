@@ -20,7 +20,7 @@ function get<T>(key: string): T | null {
 
 function set<T>(key: string, data: T): void {
     if (key === YZ_HEADER_TYPE_KEY) {
-        localStorage.setItem(YZ_HEADER_TYPE_KEY, data)
+        localStorage.setItem(YZ_HEADER_TYPE_KEY, data as string)
         return
     }
     localStorage.setItem(key, JSON.stringify(data));
