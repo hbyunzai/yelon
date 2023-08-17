@@ -1,19 +1,18 @@
-import {Injectable} from "@angular/core";
-import {NzModalService} from "ng-zorro-antd/modal";
-import {lastValueFrom, Observable} from "rxjs";
-import {YunzaiTableUser} from "@yelon/bcs/yunzai-table-user";
-import {YUNZAI_DEPT_TYPES} from "@yelon/bcs/yunzai-dept-tree";
-import {YunzaiContactComponent} from "./yunzai-contact.component";
-import {YunzaiContactParam} from "./yunzai-contact.types";
+import { Injectable } from '@angular/core';
+import { lastValueFrom, Observable } from 'rxjs';
 
+import { YUNZAI_DEPT_TYPES } from '@yelon/bcs/yunzai-dept-tree';
+import { YunzaiTableUser } from '@yelon/bcs/yunzai-table-user';
+import { NzModalService } from 'ng-zorro-antd/modal';
+
+import { YunzaiContactComponent } from './yunzai-contact.component';
+import { YunzaiContactParam } from './yunzai-contact.types';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class YunzaiContactService {
-
-  constructor(private modal: NzModalService) {
-  }
+  constructor(private modal: NzModalService) {}
 
   create(
     nzOnOk: (users: YunzaiTableUser[]) => Observable<boolean>,
@@ -32,12 +31,12 @@ export class YunzaiContactService {
         class: true,
         historyClass: true,
         grade: true,
-        types: [YUNZAI_DEPT_TYPES.DEPT, YUNZAI_DEPT_TYPES.CLASS],
+        types: [YUNZAI_DEPT_TYPES.DEPT, YUNZAI_DEPT_TYPES.CLASS]
       },
       dormitoryTree: {
         multiple: false,
         wrap: false,
-        expand: true,
+        expand: true
       },
       roleTree: {
         wrap: false,
@@ -60,27 +59,27 @@ export class YunzaiContactService {
         check: {
           pageCheck: true,
           disable: false,
-          data: [],
+          data: []
         }
       }
     }
   ): void {
-    let value: YunzaiTableUser[] = []
-    const contactComponent = this.modal.create<YunzaiContactComponent>({
-      nzTitle: '人员选择',
-      nzContent: YunzaiContactComponent,
-      nzWidth: 1200,
-      nzData: param,
-      nzOnOk: () => lastValueFrom(nzOnOk(value))
-    }).getContentComponent();
-    contactComponent.deptTree = param.deptTree
-    contactComponent.props = param.props
-    contactComponent.roleTree = param.roleTree
-    contactComponent.dormitoryTree = param.dormitoryTree
-    contactComponent.friendGroup = param.friendGroup
-    contactComponent.tableUser = param.tableUser
-    contactComponent.onSelect.subscribe((users) => value = users)
+    let value: YunzaiTableUser[] = [];
+    const contactComponent = this.modal
+      .create<YunzaiContactComponent>({
+        nzTitle: '人员选择',
+        nzContent: YunzaiContactComponent,
+        nzWidth: 1200,
+        nzData: param,
+        nzOnOk: () => lastValueFrom(nzOnOk(value))
+      })
+      .getContentComponent();
+    contactComponent.deptTree = param.deptTree;
+    contactComponent.props = param.props;
+    contactComponent.roleTree = param.roleTree;
+    contactComponent.dormitoryTree = param.dormitoryTree;
+    contactComponent.friendGroup = param.friendGroup;
+    contactComponent.tableUser = param.tableUser;
+    contactComponent.onSelect.subscribe(users => (value = users));
   }
-
-
 }

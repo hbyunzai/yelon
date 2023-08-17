@@ -20,7 +20,7 @@
 <ng-template #content>
   <ng-container [ngTemplateOutlet]="roleForm"></ng-container>
   <nz-tree
-    *ngIf="nodes.length>0"
+    *ngIf="nodes.length > 0"
     (nzClick)="activeNode($event)"
     [nzExpandedKeys]="state.expandKeys"
     [nzData]="nodes"
@@ -29,29 +29,26 @@
     [nzExpandedIcon]="blank"
     [nzBlockNode]="true"
     [nzHideUnMatched]="true"
-    [nzTreeTemplate]="treeTemplate"></nz-tree>
-  <nz-empty *ngIf="nodes.length===0"></nz-empty>
+    [nzTreeTemplate]="treeTemplate"
+  ></nz-tree>
+  <nz-empty *ngIf="nodes.length === 0"></nz-empty>
 </ng-template>
 <!--      end content-->
 
 <!--      tree -->
 <ng-template #treeTemplate let-node let-origin="origin">
-        <span *ngIf="!node.isLeaf" [title]="node.title">
-          <i nz-icon nzTheme="twotone" [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'" (click)="open(node)"></i>
-          <span class="leaf-name">{{ node.title }}</span>
-        </span>
+  <span *ngIf="!node.isLeaf" [title]="node.title">
+    <i nz-icon nzTheme="twotone" [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'" (click)="open(node)"></i>
+    <span class="leaf-name">{{ node.title }}</span>
+  </span>
   <span *ngIf="node.isLeaf" [title]="node.title">
-          <span nz-icon nzType="file" nzTheme="twotone"></span>
-          <span class="leaf-name">{{ node.title }}</span>
-        </span>
+    <span nz-icon nzType="file" nzTheme="twotone"></span>
+    <span class="leaf-name">{{ node.title }}</span>
+  </span>
 </ng-template>
 <!--      end tree-->
 
 <ng-template #roleForm>
-  <sf #form
-      layout="inline"
-      [button]="'none'"
-      [schema]="state.schema"
-  ></sf>
+  <sf #form layout="inline" [button]="'none'" [schema]="state.schema"></sf>
 </ng-template>
 <ng-template #blank></ng-template>

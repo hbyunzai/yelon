@@ -1,8 +1,8 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
-import {StompService} from '@yelon/socket';
-import {LayoutDefaultOptions, LayoutDisplayService} from '@yelon/theme/layout-default';
+import { StompService } from '@yelon/socket';
+import { LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
 import {
   WINDOW,
   hasFavicon,
@@ -11,19 +11,18 @@ import {
   NavType,
   LayoutBasicAside,
   YunzaiProjectInfo,
-  useLocalStorageCurrent, useLocalStorageProjectInfo, useLocalStorageHeaderType, useLocalStorageDefaultRoute
+  useLocalStorageCurrent,
+  useLocalStorageProjectInfo,
+  useLocalStorageHeaderType,
+  useLocalStorageDefaultRoute
 } from '@yelon/util';
 
-import {LayoutBasicState} from './interface';
+import { LayoutBasicState } from './interface';
 
 @Component({
   selector: `yz-layout-basic`,
   template: `
-    <layout-default
-      [options]="options"
-      [asideUser]="asideUserTpl"
-      [content]="displayReusetab ? contentTpl : noneTpl"
-    >
+    <layout-default [options]="options" [asideUser]="asideUserTpl" [content]="displayReusetab ? contentTpl : noneTpl">
       <!-- nav -->
       <layout-default-header-item direction="left">
         <ng-container [ngSwitch]="navType">
@@ -126,7 +125,8 @@ import {LayoutBasicState} from './interface';
     </ng-template>
     <ng-template #noneTpl>
       <router-outlet></router-outlet>
-    </ng-template> `
+    </ng-template>
+  `
 })
 export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   public NavType = NavType;
@@ -186,8 +186,7 @@ export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
     private layoutDisplayService: LayoutDisplayService,
     private stompService: StompService,
     @Inject(WINDOW) private win: typeof window
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.initLogo();
@@ -200,7 +199,7 @@ export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   }
 
   initFavicon(): void {
-    const [, getProjectInfo] = useLocalStorageProjectInfo()
+    const [, getProjectInfo] = useLocalStorageProjectInfo();
     const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
     if (projectInfo.faviconUrl) {
       hasFavicon(projectInfo.faviconUrl).then((has: boolean) => {
@@ -214,22 +213,22 @@ export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   }
 
   initAside(): void {
-    const [, getCurrent] = useLocalStorageCurrent()
-    const aside: LayoutBasicAside = getCurrent()!
-    this.state.aside = {...aside};
+    const [, getCurrent] = useLocalStorageCurrent();
+    const aside: LayoutBasicAside = getCurrent()!;
+    this.state.aside = { ...aside };
   }
 
   initLogo(): void {
-    const [, getProjectInfo] = useLocalStorageProjectInfo()
+    const [, getProjectInfo] = useLocalStorageProjectInfo();
     const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
     this.state.options.logoExpanded = projectInfo.maxLogoUrl ? projectInfo.maxLogoUrl : `./assets/logo-full.svg`;
     this.state.options.logoCollapsed = projectInfo.miniLogoUrl ? projectInfo.miniLogoUrl : `./assets/logo.svg`;
   }
 
   initNavType(): void {
-    const [, getHeaderType] = useLocalStorageHeaderType()
-    const [, getProjectInfo] = useLocalStorageProjectInfo()
-    const navType: NavType | null = getHeaderType()
+    const [, getHeaderType] = useLocalStorageHeaderType();
+    const [, getProjectInfo] = useLocalStorageProjectInfo();
+    const navType: NavType | null = getHeaderType();
     const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
     if (navType !== null) {
       this.state.navType = navType;
@@ -247,14 +246,14 @@ export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
   }
 
   toIndex(): void {
-    const [, getDefaultRoute] = useLocalStorageDefaultRoute()
-    const defaultRoute = getDefaultRoute()!
+    const [, getDefaultRoute] = useLocalStorageDefaultRoute();
+    const defaultRoute = getDefaultRoute()!;
     log('YunzaiLayoutBasicComponent: ', `todo: the default route was ${defaultRoute}, 但是还没想好如何实现.`);
   }
 
   onNavTypeChange(type: NavType): void {
-    const [setHeaderType,] = useLocalStorageHeaderType()
-    setHeaderType(type)
+    const [setHeaderType] = useLocalStorageHeaderType();
+    setHeaderType(type);
     this.win.location.reload();
   }
 
@@ -275,4 +274,3 @@ export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
     this.state.destroy$.complete();
   }
 }
-

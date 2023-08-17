@@ -1,14 +1,14 @@
-import {SFSchema} from "@yelon/form";
+import { SFSchema } from '@yelon/form';
 
 export const defaultSchema: SFSchema = {
   properties: {
     search: {
-      title: "name",
+      title: 'name',
       type: 'string',
       ui: {
-        i18n: "input.name",
-        widget: 'string',
+        i18n: 'input.name',
+        widget: 'string'
       }
     }
   }
-}
+};

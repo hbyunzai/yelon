@@ -1,8 +1,7 @@
 import { Subject } from 'rxjs';
+
 import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
-import {LayoutBasicAside, LayoutBasicDisplay, NavType} from "@yelon/util";
-
-
+import { LayoutBasicAside, LayoutBasicDisplay, NavType } from '@yelon/util';
 
 export interface LayoutBasicState {
   options: LayoutDefaultOptions;

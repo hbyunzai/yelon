@@ -1,2 +1,2 @@
-export * from "./yunzai-grade.service"
-export * from "./yunzai-grade.types"
+export * from './yunzai-grade.service';
+export * from './yunzai-grade.types';

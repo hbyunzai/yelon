@@ -1,18 +1,17 @@
-import {DOCUMENT} from '@angular/common';
-import {Inject, Injectable, Injector, isDevMode, OnDestroy} from '@angular/core';
-import {Observable, Subject, takeUntil} from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, Injector, isDevMode, OnDestroy } from '@angular/core';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
-import {RxStomp} from '@stomp/rx-stomp';
-import {IRxStompPublishParams} from '@stomp/rx-stomp/esm6/i-rx-stomp-publish-params';
-import {IMessage, StompHeaders} from '@stomp/stompjs';
+import { RxStomp } from '@stomp/rx-stomp';
+import { IRxStompPublishParams } from '@stomp/rx-stomp/esm6/i-rx-stomp-publish-params';
+import { IMessage, StompHeaders } from '@stomp/stompjs';
 
-import {YunzaiConfigService, YunzaiSocketConfig, log, WINDOW, useLocalStorageUser} from '@yelon/util';
+import { YunzaiConfigService, YunzaiSocketConfig, log, WINDOW, useLocalStorageUser, YunzaiUser } from '@yelon/util';
 
-import {NotificationService} from './notification.service';
-import {mergeSocketConfig, SOCKET_DEFAULT_CONFIG} from './socket.config';
-import {YunzaiUser} from "@yelon/util";
+import { NotificationService } from './notification.service';
+import { mergeSocketConfig, SOCKET_DEFAULT_CONFIG } from './socket.config';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class StompService implements OnDestroy {
   config: YunzaiSocketConfig = SOCKET_DEFAULT_CONFIG;
   rxStomp: RxStomp;
@@ -25,9 +24,9 @@ export class StompService implements OnDestroy {
     private notifyService: NotificationService,
     @Inject(WINDOW) private win: any
   ) {
-    const [, getUser] = useLocalStorageUser()
+    const [, getUser] = useLocalStorageUser();
     if (!this.user) {
-      this.user = getUser()!
+      this.user = getUser()!;
     }
     this.config = mergeSocketConfig(this.configService);
     this.rxStomp = new RxStomp();
@@ -37,8 +36,8 @@ export class StompService implements OnDestroy {
       this.rxStomp.configure(this.config);
       return;
     }
-    const {location} = this.injector.get(DOCUMENT);
-    const {protocol, host} = location;
+    const { location } = this.injector.get(DOCUMENT);
+    const { protocol, host } = location;
     log('stomp.service: ', `protocol is ${protocol},host is ${host}`);
     if (protocol.includes('http') && !protocol.includes('https')) {
       this.config.brokerURL = `ws://${host}${this.config.brokerURL}`;

@@ -1,4 +1,4 @@
-import {YunzaiPageResult} from './page';
+import { YunzaiPageResult } from './page';
 
 export interface YunzaiResponse<T> {
   data: T;

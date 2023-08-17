@@ -1,1 +1,1 @@
-export * from "./localStorageUtils"
+export * from './localStorageUtils';

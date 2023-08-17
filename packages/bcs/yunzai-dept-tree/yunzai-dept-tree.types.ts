@@ -1,45 +1,43 @@
-import {Subject} from "rxjs";
-import {SFSchema} from "@yelon/form";
+import { Subject } from 'rxjs';
+
+import { SFSchema } from '@yelon/form';
 
 export interface YunzaiDeptTree {
-    children: YunzaiDeptTree[],
-    icon: string,
-    key: string,
-    title: string,
-    value: string
+  children: YunzaiDeptTree[];
+  icon: string;
+  key: string;
+  title: string;
+  value: string;
 }
 
 export interface YunzaiDeptTreeProps {
-    multiple?: boolean
-    // has nzcard
-    wrap?: boolean
-    // expand
-    expand?: boolean
-    // deptTypes = []
-    types?: YUNZAI_DEPT_TYPES[],
-    // grade
-    grade?: boolean
-    gradeId?: string
-    // includeClass
-    class?: boolean
-    // includeHistoryClass
-    historyClass?: boolean
-    data?: YunzaiDeptTree[]
+  multiple?: boolean;
+  // has nzcard
+  wrap?: boolean;
+  // expand
+  expand?: boolean;
+  // deptTypes = []
+  types?: YUNZAI_DEPT_TYPES[];
+  // grade
+  grade?: boolean;
+  gradeId?: string;
+  // includeClass
+  class?: boolean;
+  // includeHistoryClass
+  historyClass?: boolean;
+  data?: YunzaiDeptTree[];
 }
 
 export interface YunzaiDeptTreeState {
-    loading: boolean;
-    schema: SFSchema;
-    data: YunzaiDeptTree[];
-    dataBackup: YunzaiDeptTree[];
-    expandKeys: string[]
-    $destroy: Subject<any>,
+  loading: boolean;
+  schema: SFSchema;
+  data: YunzaiDeptTree[];
+  dataBackup: YunzaiDeptTree[];
+  expandKeys: string[];
+  $destroy: Subject<any>;
 }
-
 
 export enum YUNZAI_DEPT_TYPES {
-    DEPT = 2,
-    CLASS = "class"
+  DEPT = 2,
+  CLASS = 'class'
 }
-
-

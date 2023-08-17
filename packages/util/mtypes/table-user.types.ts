@@ -65,45 +65,45 @@ export interface TableUserDept {
 }
 
 export interface TableUserParam {
-  buildId?: string
-  deptId?: string
-  floor?: string
-  friendGroupId?: string
-  idCard?: string
-  realName?: string
-  roleId?: string
-  roomId?: string
-  userCode?: string
-  userTypes?: number
+  buildId?: string;
+  deptId?: string;
+  floor?: string;
+  friendGroupId?: string;
+  idCard?: string;
+  realName?: string;
+  roleId?: string;
+  roomId?: string;
+  userCode?: string;
+  userTypes?: number;
 }
 
 export interface TableUserProps {
   wrap?: boolean;
-  data?: TableUser[]
-  filteredColumns?: string[]
-  customColumns?: STColumn[]
-  additionalColumns?: STColumn[],
-  page?: any
+  data?: TableUser[];
+  filteredColumns?: string[];
+  customColumns?: STColumn[];
+  additionalColumns?: STColumn[];
+  page?: any;
   list?: boolean;
   scroll?: {
     x?: string | null;
     y?: string | null;
-  }
+  };
   check?: {
-    disable?: boolean
-    data?: TableUser[]
-    pageCheck?: boolean
-  }
+    disable?: boolean;
+    data?: TableUser[];
+    pageCheck?: boolean;
+  };
 }
 
 export interface TableUserState {
-  data: TableUser[] | string
-  dataBackup: TableUser[] | string
-  columns: STColumn[]
-  page: any
-  schema: SFSchema
+  data: TableUser[] | string;
+  dataBackup: TableUser[] | string;
+  columns: STColumn[];
+  page: any;
+  schema: SFSchema;
   check: {
-    data: STData[],
-  },
+    data: STData[];
+  };
   destroy$: Subject<any>;
 }

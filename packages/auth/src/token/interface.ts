@@ -1,9 +1,9 @@
-import {InjectionToken} from '@angular/core';
-import {Observable} from 'rxjs';
+import { InjectionToken } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import {YunzaiAuthConfig} from '@yelon/util/config';
+import { YunzaiAuthConfig } from '@yelon/util/config';
 
-import {YA_SERVICE_TOKEN_FACTORY} from './token.service';
+import { YA_SERVICE_TOKEN_FACTORY } from './token.service';
 
 export const YA_SERVICE_TOKEN = new InjectionToken<ITokenService>('YA_SERVICE_TOKEN', {
   providedIn: 'root',
@@ -13,12 +13,12 @@ export const YA_SERVICE_TOKEN = new InjectionToken<ITokenService>('YA_SERVICE_TO
 export interface ITokenModel {
   [key: string]: any;
 
-  access_token: string | null | undefined,
+  access_token: string | null | undefined;
   // 秒
-  expires_in?: number,
-  refresh_token?: string,
-  scope?: string,
-  token_type?: string
+  expires_in?: number;
+  refresh_token?: string;
+  scope?: string;
+  token_type?: string;
 }
 
 export interface AuthReferrer {

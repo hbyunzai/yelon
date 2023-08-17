@@ -1,4 +1,3 @@
-
 export interface YunzaiPageParam<T> {
   pageNum?: number;
   pageSize?: number;
@@ -68,21 +67,18 @@ export class YunzaiPageBuilder<T extends any | unknown> {
   }
 }
 
-
 export class Page<T> {
-
   pageNum = 1;
   pageSize = 30;
-  param?: Partial<T>
+  param?: Partial<T>;
 
   private constructor(pageNum: number, pageSize: number, param?: Partial<T>) {
-    this.pageNum = pageNum
-    this.pageSize = pageSize
-    this.param = param
+    this.pageNum = pageNum;
+    this.pageSize = pageSize;
+    this.param = param;
   }
 
   static create<T>(): Page<T> {
-    return new Page<T>(1, 30)
+    return new Page<T>(1, 30);
   }
-
 }

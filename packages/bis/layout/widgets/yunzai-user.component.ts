@@ -63,7 +63,7 @@ export class YunzaiUserComponent implements OnInit {
     private msg: NzMessageService,
     @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
     // @ts-ignore
-    private configService: YunzaiConfigService,
+    private configService: YunzaiConfigService
   ) {
     this.config = mergeBisConfig(configService);
   }
@@ -73,10 +73,10 @@ export class YunzaiUserComponent implements OnInit {
   menus: UserLink[] = [];
 
   ngOnInit(): void {
-    const [,getProjectInfo]=useLocalStorageProjectInfo()
-    const [,getUser]=useLocalStorageUser()
-    const projectInfo = getProjectInfo()!
-    const user = getUser()!
+    const [, getProjectInfo] = useLocalStorageProjectInfo();
+    const [, getUser] = useLocalStorageUser();
+    const projectInfo = getProjectInfo()!;
+    const user = getUser()!;
     this.username = user.realname ? user.realname : '未命名';
     this.icon = user.avatarId
       ? `${this.config.baseUrl}/filecenter/file/${user.avatarId}`

@@ -1,5 +1,6 @@
-import {Subject} from "rxjs";
-import {YunzaiNavTopic} from "./header-menu.type";
+import { Subject } from 'rxjs';
+
+import { YunzaiNavTopic } from './header-menu.type';
 
 export enum NavType {
   APPLICATION = 'application',
