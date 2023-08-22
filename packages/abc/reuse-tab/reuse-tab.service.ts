@@ -99,8 +99,6 @@ export class ReuseTabService implements OnDestroy {
   }
   /** 自定义当前标题 */
   set title(value: string | ReuseTitle) {
-    if (this.cached == null) return;
-
     const url = this.curUrl;
     if (typeof value === 'string') value = { text: value };
     this.cached.title[url] = value;
