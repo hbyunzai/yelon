@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
-import { YunzaiI18NGuard } from '@yelon/theme';
+import { yunzaiI18nCanActivate } from '@yelon/theme';
+
 
 import { NotFoundComponent } from './404/404.component';
 import { HomeComponent } from './home/home.component';
@@ -14,7 +15,7 @@ const routes: Route[] = [
   {
     path: '',
     component: LayoutComponent,
-    canActivateChild: [YunzaiI18NGuard],
+    canActivateChild: [yunzaiI18nCanActivate],
     children: [
       { path: '', redirectTo: 'en', pathMatch: 'full' },
       { path: ':lang', component: HomeComponent, data: { titleI18n: 'slogan' } },

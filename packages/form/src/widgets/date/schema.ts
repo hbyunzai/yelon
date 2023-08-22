@@ -38,7 +38,7 @@ export interface SFDateWidgetSchema extends SFUISchemaItem {
   displayFormat?: string;
 
   /**
-   * The end value corresponding to the date range `key`, a date range [demo](https://ng-alain.com/form/date/en#form-date-range).
+   * The end value corresponding to the date range `key`, a date range [demo](https://ng.yunzainfo.com/form/date/en#form-date-range).
    */
   end?: string;
 
