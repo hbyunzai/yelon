@@ -132,13 +132,13 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
     private srv: LayoutDefaultService,
     private layoutDisplayService: LayoutDisplayService
   ) {
+    const { destroy$ } = this;
     router.events
       .pipe(
         takeUntil(destroy$),
         filter(() => !this.fetchingStrictly)
       )
       .subscribe(ev => this.processEv(ev));
-    const { destroy$ } = this;
     this.srv.options$.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
     this.settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
   }
