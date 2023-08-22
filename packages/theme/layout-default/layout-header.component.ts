@@ -2,13 +2,11 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
+  Component, DestroyRef, inject,
   Input,
-  OnDestroy,
   QueryList,
   TemplateRef
 } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
 
 import { App, SettingsService } from '@yelon/theme';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -16,6 +14,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultHeaderItemDirection, LayoutDefaultHeaderItemHidden, LayoutDefaultOptions } from './types';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 interface LayoutDefaultHeaderItem {
   host: TemplateRef<NzSafeAny>;
@@ -65,8 +64,8 @@ interface LayoutDefaultHeaderItem {
   },
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutDefaultHeaderComponent implements AfterViewInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+export class LayoutDefaultHeaderComponent implements AfterViewInit {
+  private destroy$ = inject(DestroyRef);
 
   @Input() items!: QueryList<LayoutDefaultHeaderItemComponent>;
 
@@ -105,8 +104,8 @@ export class LayoutDefaultHeaderComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.items.changes.pipe(takeUntil(this.destroy$)).subscribe(() => this.refresh());
-    this.srv.options$.pipe(takeUntil(this.destroy$)).subscribe(() => this.cdr.detectChanges());
+    this.items.changes.pipe(takeUntilDestroyed(this.destroy$)).subscribe(() => this.refresh());
+    this.srv.options$.pipe(takeUntilDestroyed(this.destroy$)).subscribe(() => this.cdr.detectChanges());
     this.refresh();
   }
 
@@ -114,8 +113,4 @@ export class LayoutDefaultHeaderComponent implements AfterViewInit, OnDestroy {
     this.srv.toggleCollapsed();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 }

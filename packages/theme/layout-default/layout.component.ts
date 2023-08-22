@@ -1,16 +1,17 @@
-import { DOCUMENT } from '@angular/common';
+import {DOCUMENT} from '@angular/common';
 import {
   Component,
   ContentChildren,
   ElementRef,
   Inject,
   Input,
-  OnDestroy,
   OnInit,
   QueryList,
   Renderer2,
   TemplateRef
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+
 import {
   NavigationCancel,
   NavigationEnd,
@@ -20,18 +21,18 @@ import {
   Router,
   Event
 } from '@angular/router';
-import { filter, Subject, takeUntil } from 'rxjs';
+import {filter} from 'rxjs';
 
-import { SettingsService } from '@yelon/theme';
-import { BooleanInput, InputBoolean } from '@yelon/util';
-import { updateHostClass } from '@yelon/util/browser';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import {SettingsService} from '@yelon/theme';
+import {BooleanInput, InputBoolean} from '@yelon/util';
+import {updateHostClass} from '@yelon/util/browser';
+import type {NzSafeAny} from 'ng-zorro-antd/core/types';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
-import { LayoutDisplayService } from './layout-display.service';
-import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
-import { LayoutDefaultService } from './layout.service';
-import { LayoutDefaultOptions } from './types';
+import {LayoutDisplayService} from './layout-display.service';
+import {LayoutDefaultHeaderItemComponent} from './layout-header-item.component';
+import {LayoutDefaultService} from './layout.service';
+import {LayoutDefaultOptions} from './types';
 
 @Component({
   selector: 'layout-default',
@@ -63,11 +64,11 @@ import { LayoutDefaultOptions } from './types';
     </section>
   `
 })
-export class LayoutDefaultComponent implements OnInit, OnDestroy {
+export class LayoutDefaultComponent implements OnInit {
   static ngAcceptInputType_fetchingStrictly: BooleanInput;
   static ngAcceptInputType_fetching: BooleanInput;
 
-  @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
+  @ContentChildren(LayoutDefaultHeaderItemComponent, {descendants: false})
   headerItems!: QueryList<LayoutDefaultHeaderItemComponent>;
 
   get opt(): LayoutDefaultOptions {
@@ -78,6 +79,7 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   set options(value: LayoutDefaultOptions | null | undefined) {
     this.srv.setOptions(value);
   }
+
   @Input() asideUser: TemplateRef<void> | null = null;
   @Input() asideBottom: TemplateRef<NzSafeAny> | null = null;
   @Input() nav: TemplateRef<void> | null = null;
@@ -88,7 +90,6 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   displayNav = true;
   displayAside = true;
 
-  private destroy$ = new Subject<void>();
   private isFetching = false;
 
   get showFetching(): boolean {
@@ -131,16 +132,16 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
     private srv: LayoutDefaultService,
     private layoutDisplayService: LayoutDisplayService
   ) {
-    const { destroy$ } = this;
     router.events
       .pipe(
-        takeUntil(destroy$),
+        takeUntilDestroyed(),
         filter(() => !this.fetchingStrictly)
       )
       .subscribe(ev => this.processEv(ev));
-    this.srv.options$.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
-    this.settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
+    this.srv.options$.pipe(takeUntilDestroyed()).subscribe(() => this.setClass());
+    this.settings.notify.pipe(takeUntilDestroyed()).subscribe(() => this.setClass());
   }
+
   ngOnInit(): void {
     this.layoutDisplayService.listen('nav', display => {
       this.displayNav = display;
@@ -158,7 +159,7 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
       this.isFetching = false;
       const err = this.customError === null ? null : this.customError ?? `Could not load ${ev.url} route`;
       if (err && ev instanceof NavigationError) {
-        this.msgSrv.error(err, { nzDuration: 1000 * 3 });
+        this.msgSrv.error(err, {nzDuration: 1000 * 3});
       }
       return;
     }
@@ -173,7 +174,7 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   }
 
   private setClass(): void {
-    const { el, doc, renderer, settings } = this;
+    const {el, doc, renderer, settings} = this;
     const layout = settings.layout;
     updateHostClass(el.nativeElement, renderer, {
       ['yunzai-default']: true,
@@ -186,8 +187,4 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
     doc.body.classList[layout.colorWeak ? 'add' : 'remove']('color-weak');
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 }
