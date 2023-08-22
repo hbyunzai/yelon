@@ -31,7 +31,7 @@ export class SGContainerComponent {
     return -(this.gutter / 2);
   }
 
-  constructor(configSrv: AlainConfigService) {
+  constructor(configSrv: YunzaiConfigService) {
     configSrv.attach(this, 'sg', {
       gutter: 32,
       col: 2

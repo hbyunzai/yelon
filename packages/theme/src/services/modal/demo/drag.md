@@ -15,7 +15,7 @@ Support for dragging dialogs.
 
 ```ts
 import { Component } from '@angular/core';
-import { ModalHelper } from '@delon/theme';
+import { ModalHelper } from '@yelon/theme';
 import { DemoModalComponent } from '@shared';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
