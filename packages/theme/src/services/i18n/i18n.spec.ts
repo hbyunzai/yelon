@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from './i18n';
-import { YunzaiI18NGuard } from './i18n-url.guard';
+import { yunzaiI18nCanActivate, yunzaiI18nCanActivateChild } from './i18n-url.guard';
 import { YunzaiThemeModule } from '../../theme.module';
 
 describe('theme: i18n', () => {
@@ -93,8 +93,8 @@ describe('theme: i18n', () => {
             {
               path: ':i18n',
               component: TestComponent,
-              canActivate: [YunzaiI18NGuard],
-              canActivateChild: [YunzaiI18NGuard]
+              canActivate: [yunzaiI18nCanActivate],
+              canActivateChild: [yunzaiI18nCanActivateChild]
             }
           ])
         ],
@@ -114,7 +114,7 @@ describe('theme: i18n', () => {
         imports: [
           YunzaiThemeModule.forRoot(),
           RouterTestingModule.withRoutes([
-            { path: ':invalid', component: TestComponent, canActivate: [YunzaiI18NGuard] }
+            { path: ':invalid', component: TestComponent, canActivate: [yunzaiI18nCanActivate] }
           ])
         ],
         declarations: [TestComponent]
@@ -132,12 +132,12 @@ describe('theme: i18n', () => {
       TestBed.configureTestingModule({
         imports: [
           YunzaiThemeModule.forRoot(),
-          RouterTestingModule.withRoutes([{ path: ':lang', component: TestComponent, canActivate: [YunzaiI18NGuard] }])
+          RouterTestingModule.withRoutes([
+            { path: ':lang', component: TestComponent, canActivate: [yunzaiI18nCanActivate] }
+          ])
         ],
         declarations: [TestComponent],
-        providers: [
-          { provide: YUNZAI_CONFIG, useValue: { themeI18n: { paramNameOfUrlGuard: 'lang' } } as YunzaiConfig }
-        ]
+        providers: [{ provide: YUNZAI_CONFIG, useValue: { themeI18n: { paramNameOfUrlGuard: 'lang' } } as YunzaiConfig }]
       });
       fixture = TestBed.createComponent(TestComponent);
       srv = fixture.debugElement.injector.get(YUNZAI_I18N_TOKEN);
