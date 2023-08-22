@@ -20,7 +20,7 @@ import {
   Router,
   Event
 } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import {filter, Subject, takeUntil} from 'rxjs';
 
 import { SettingsService } from '@yelon/theme';
 import { updateHostClass } from '@yelon/util/browser';
@@ -31,12 +31,13 @@ import { LayoutDisplayService } from './layout-display.service';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
+import {BooleanInput, InputBoolean} from "@yelon/util";
 
 @Component({
   selector: 'layout-default',
   exportAs: 'layoutDefault',
   template: `
-    <div class="yunzai-default__progress-bar" *ngIf="isFetching"></div>
+    <div class="yunzai-default__progress-bar" *ngIf="showFetching"></div>
     <layout-default-header *ngIf="!opt.hideHeader && displayNav" [items]="headerItems"></layout-default-header>
     <ng-container *ngIf="displayAside">
       <div *ngIf="!opt.hideAside" class="yunzai-default__aside" [ngStyle]="asideStyle">
@@ -63,6 +64,9 @@ import { LayoutDefaultOptions } from './types';
   `
 })
 export class LayoutDefaultComponent implements OnInit, OnDestroy {
+  static ngAcceptInputType_fetchingStrictly: BooleanInput;
+  static ngAcceptInputType_fetching: BooleanInput;
+
   @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
   headerItems!: QueryList<LayoutDefaultHeaderItemComponent>;
 
@@ -79,6 +83,18 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   @Input() nav: TemplateRef<void> | null = null;
   @Input() content: TemplateRef<void> | null = null;
   @Input() customError?: string | null;
+  @Input() @InputBoolean() fetchingStrictly = false;
+  @Input() @InputBoolean() fetching = false;
+  displayNav = true;
+  displayAside = true;
+
+  private destroy$ = new Subject<void>();
+  private isFetching = false;
+
+  get showFetching(): boolean {
+    if (this.fetchingStrictly) return this.fetching;
+    return this.isFetching;
+  }
 
   get contentStyle(): any {
     return {
@@ -93,11 +109,6 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
     };
   }
 
-  displayNav = true;
-  displayAside = true;
-
-  private destroy$ = new Subject<void>();
-  isFetching = false;
 
   get collapsed(): boolean {
     return this.settings.layout.collapsed;
@@ -121,7 +132,12 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
     private srv: LayoutDefaultService,
     private layoutDisplayService: LayoutDisplayService
   ) {
-    router.events.pipe(takeUntil(this.destroy$)).subscribe(ev => this.processEv(ev));
+    router.events
+      .pipe(
+        takeUntil(destroy$),
+        filter(() => !this.fetchingStrictly)
+      )
+      .subscribe(ev => this.processEv(ev));
     const { destroy$ } = this;
     this.srv.options$.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
     this.settings.notify.pipe(takeUntil(destroy$)).subscribe(() => this.setClass());
@@ -172,7 +188,7 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
+    this.destroy$.next(void 0);
     this.destroy$.complete();
   }
 }
