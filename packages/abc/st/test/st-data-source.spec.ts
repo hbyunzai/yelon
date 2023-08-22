@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DecimalPipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import { firstValueFrom, of, throwError } from 'rxjs';
@@ -9,7 +10,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { STDataSource, STDataSourceOptions } from '../st-data-source';
 import { ST_DEFAULT_CONFIG } from '../st.config';
 import { STColumnButton, STColumnFilterMenu, STData } from '../st.interfaces';
-import { _STColumn } from '../st.types';
+import { _STColumn, _STDataValue } from '../st.types';
 
 const DEFAULT = {
   pi: 1,
@@ -193,7 +194,7 @@ describe('abc: table: data-souce', () => {
           done();
         });
       });
-      it('should be null, muse be ignore sort processing', done => {
+      it('should be null, muse be ingore sort processing', done => {
         options.columns[0]._sort = {
           enabled: true,
           compare: null,
@@ -907,6 +908,42 @@ describe('abc: table: data-souce', () => {
         done();
       });
     });
+    describe('#onCell', () => {
+      it('should be working', done => {
+        const index = 1;
+        options.data = genData();
+        options.columns = [
+          { index: 'a', onCell: (_, idx) => ({ colSpan: idx === index ? 2 : 1 }) },
+          { index: 'b', onCell: (_, idx) => ({ rowSpan: idx === index ? 2 : 1 }) }
+        ] as _STColumn[];
+        srv.process(options).subscribe(res => {
+          const values = res.list[index]._values as _STDataValue[];
+          expect(values[0].props?.colSpan).toBe(2);
+          expect(values[0].props?.rowSpan).toBe(1);
+
+          expect(values[1].props?.colSpan).toBe(1);
+          expect(values[1].props?.rowSpan).toBe(2);
+          done();
+        });
+      });
+      it('should be ignore when set 0', done => {
+        const index = 1;
+        options.data = genData();
+        options.columns = [
+          { index: 'a', onCell: (_, idx) => ({ colSpan: idx === index ? 0 : 1 }) },
+          { index: 'b', onCell: (_, idx) => ({ rowSpan: idx === index ? 0 : 1 }) }
+        ] as _STColumn[];
+        srv.process(options).subscribe(res => {
+          const values = res.list[index]._values as _STDataValue[];
+          expect(values[0].props?.colSpan).toBeNull();
+          expect(values[0].props?.rowSpan).toBe(1);
+
+          expect(values[1].props?.colSpan).toBe(1);
+          expect(values[1].props?.rowSpan).toBeNull();
+          done();
+        });
+      });
+    });
   });
 
   describe('[buttons]', () => {
@@ -1071,7 +1108,7 @@ describe('abc: table: data-souce', () => {
           done();
         });
       });
-      it('should be ignore currency', done => {
+      it('should be ingore currency', done => {
         options.columns = [{ title: '', index: 'a', statistical: { type: 'sum', currency: false } }] as _STColumn[];
         options.data = [{ a: 1 }, { a: 2 }, { a: 0.1 }];
 

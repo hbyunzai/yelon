@@ -257,12 +257,12 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
     @Inject(DOCUMENT) private doc: NzSafeAny,
     private columnSource: STColumnSource,
     private dataSource: STDataSource,
-    private yelonI18n: YelonLocaleService,
+    private delonI18n: YelonLocaleService,
     configSrv: YunzaiConfigService,
     private cms: NzContextMenuService
   ) {
-    this.yelonI18n.change.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.locale = this.yelonI18n.getData('st');
+    this.delonI18n.change.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.locale = this.delonI18n.getData('st');
       if (this._columns.length > 0) {
         this.updateTotalTpl();
         this.cd();
@@ -410,7 +410,7 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
       this._statistical = result.statistical as STStatisticalResults;
       this.changeEmit('loaded', result.list);
       // Should be re-render in next tike when using virtual scroll
-      // https://github.com/hbyunzai/ng-yunzai/issues/1836
+      // https://github.com/ng-alain/ng-alain/issues/1836
       if (this.cdkVirtualScrollViewport) {
         Promise.resolve().then(() => this.cdkVirtualScrollViewport.checkViewportSize());
       }
@@ -559,14 +559,21 @@ export class STComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private _refColAndData(): this {
-    this._columns
-      .filter(w => w.type === 'no')
-      .forEach(c =>
-        this._data.forEach((i, idx) => {
+    this._columns.forEach(c => {
+      this._data.forEach((i, idx) => {
+        const values = i._values as _STDataValue[];
+        if (c.type === 'no') {
           const text = `${this.dataSource.getNoIndex(i, c, idx)}`;
-          i._values![c.__point!] = { text, _text: text, org: idx, safeType: 'text' } as _STDataValue;
-        })
-      );
+          values[c.__point!] = {
+            text,
+            _text: text,
+            org: idx,
+            safeType: 'text'
+          } as _STDataValue;
+        }
+        values[c.__point!].props = this.dataSource.getCell(c, i, idx);
+      });
+    });
 
     return this.refreshData();
   }
