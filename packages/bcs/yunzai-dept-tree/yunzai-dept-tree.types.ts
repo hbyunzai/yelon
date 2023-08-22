@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 
 import { SFSchema } from '@yelon/form';
 
@@ -34,7 +33,6 @@ export interface YunzaiDeptTreeState {
   data: YunzaiDeptTree[];
   dataBackup: YunzaiDeptTree[];
   expandKeys: string[];
-  $destroy: Subject<any>;
 }
 
 export enum YUNZAI_DEPT_TYPES {

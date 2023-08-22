@@ -1,5 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, Inject,  OnInit } from '@angular/core';
 
 import { StompService } from '@yelon/socket';
 import { LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
@@ -128,7 +127,7 @@ import { LayoutBasicState } from './interface';
     </ng-template>
   `
 })
-export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
+export class YunzaiLayoutBasicComponent implements OnInit {
   public NavType = NavType;
   private state: LayoutBasicState = {
     options: {
@@ -146,7 +145,6 @@ export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
       reusetab: true
     },
     navType: NavType.APPLICATION,
-    destroy$: new Subject()
   };
 
   get options(): LayoutDefaultOptions {
@@ -270,7 +268,4 @@ export class YunzaiLayoutBasicComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.state.destroy$.complete();
-  }
 }

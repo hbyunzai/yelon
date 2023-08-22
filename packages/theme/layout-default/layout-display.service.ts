@@ -1,20 +1,20 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Subject, takeUntil, tap } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
 
-import { resizeWindow } from '@yelon/util';
+import {resizeWindow} from '@yelon/util';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Injectable({
   providedIn: 'root'
 })
-export class LayoutDisplayService implements OnDestroy {
+export class LayoutDisplayService {
   private displayNav: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private displayAside: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private displayReuseTab: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  private destroy$: Subject<boolean> = new Subject();
 
   constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params => {
+    this.activatedRoute.queryParams.pipe(takeUntilDestroyed()).subscribe(params => {
       if (params['displayNav']) {
         try {
           const displayNav = params['displayNav'];
@@ -74,19 +74,19 @@ export class LayoutDisplayService implements OnDestroy {
   }
 
   listen(component: 'nav' | 'aside' | 'reuseTab', callback: (display: boolean) => void): void {
-    this.displayNav.pipe(tap(this.destroy$)).subscribe(display => {
+    this.displayNav.pipe(takeUntilDestroyed()).subscribe(display => {
       if (component === 'nav') {
         callback(display);
         resizeWindow();
       }
     });
-    this.displayAside.pipe(tap(this.destroy$)).subscribe(display => {
+    this.displayAside.pipe(takeUntilDestroyed()).subscribe(display => {
       if (component === 'aside') {
         callback(display);
         resizeWindow();
       }
     });
-    this.displayReuseTab.pipe(tap(this.destroy$)).subscribe(display => {
+    this.displayReuseTab.pipe(takeUntilDestroyed()).subscribe(display => {
       if (component === 'reuseTab') {
         callback(display);
         resizeWindow();
@@ -94,7 +94,4 @@ export class LayoutDisplayService implements OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.complete();
-  }
 }

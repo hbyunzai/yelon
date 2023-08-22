@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 
 import { SFSchema } from '@yelon/form';
 
@@ -33,7 +32,6 @@ export interface YunzaiDormitoryTreeState {
   data: YunzaiDormitoryTree[];
   dataBackup: YunzaiDormitoryTree[];
   expandKeys: string[];
-  $destroy: Subject<any>;
 }
 
 export interface YunzaiDormitoryTreeProps {

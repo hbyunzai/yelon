@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
+import { catchError, debounceTime, map, of,  switchMap, throwError, zip } from 'rxjs';
 
 import { SFComponent } from '@yelon/form';
 import { SFValueChange } from '@yelon/form/src/interface';
@@ -8,6 +8,7 @@ import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
 import { defaultSchema } from './yunzai-role-tree.schema';
 import { YunzaiRoleTreeService } from './yunzai-role-tree.service';
 import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunzai-role-tree.types';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: `yunzai-role-tree`,
@@ -26,7 +27,6 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit {
     data: [],
     dataBackup: [],
     expandKeys: [],
-    $destroy: new Subject<any>()
   };
 
   get data(): YunzaiRoleTree[] {
@@ -94,7 +94,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit {
   hookFormChange(): void {
     this.sf.formValueChange
       .pipe(
-        takeUntil(this.state.$destroy),
+        takeUntilDestroyed(),
         debounceTime(1000),
         map(value => {
           this.load();
@@ -151,7 +151,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit {
     this.roleTreeService
       .tree(roleGroupCode)
       .pipe(
-        takeUntil(this.state.$destroy),
+        takeUntilDestroyed(),
         map((roles: YunzaiRoleTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(roles);

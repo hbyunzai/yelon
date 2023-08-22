@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 
 import { YunzaiTableUser } from '@yelon/bcs/yunzai-table-user';
 import { SFSchema } from '@yelon/form';
@@ -15,7 +14,6 @@ export interface YunzaiFriendGroupState {
   schema: SFSchema;
   data: YunzaiFriendGroup[];
   dataBackup: YunzaiFriendGroup[];
-  $destroy: Subject<any>;
 }
 
 export interface YunzaiFriendGroupProps {

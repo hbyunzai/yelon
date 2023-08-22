@@ -19,7 +19,6 @@ module.exports = {
         'plugin:prettier/recommended'
       ],
       rules: {
-        '@typescript-eslint/no-explicit-any': 'warn',
         'prettier/prettier': ['error', prettierConfig],
         'jsdoc/newline-after-description': 1,
         '@angular-eslint/component-selector': [
@@ -112,6 +111,7 @@ module.exports = {
         '@typescript-eslint/no-this-alias': 'error',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
+        '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/explicit-function-return-type': [
           'error',
           {
@@ -136,7 +136,7 @@ module.exports = {
                 position: 'before'
               },
               {
-                pattern: '{ng-zorro-antd/**,@yelon/**}',
+                pattern: '{ng-zorro-antd/**,@delon/**}',
                 group: 'internal',
                 position: 'before'
               },
@@ -146,7 +146,7 @@ module.exports = {
                 position: 'before'
               }
             ],
-            pathGroupsExcludedImportTypes: []
+            "pathGroupsExcludedImportTypes": []
           }
         ],
         'no-bitwise': 'off',
@@ -178,7 +178,9 @@ module.exports = {
     {
       files: ['*.html'],
       extends: ['plugin:@angular-eslint/template/recommended'],
-      rules: {}
+      rules: {
+        "@angular-eslint/template/prefer-self-closing-tags": "error"
+      }
     },
     {
       files: ['*.html'],

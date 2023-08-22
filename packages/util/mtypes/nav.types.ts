@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 
 import { YunzaiNavTopic } from './header-menu.type';
 
@@ -27,10 +26,8 @@ export interface LayoutNavApplicationState {
   topics: YunzaiNavTopic[];
   list: YunzaiNavTopic[];
   search: string | null;
-  destroy$: Subject<any>;
 }
 
 export interface LayoutNavGroupState {
   topics: YunzaiNavTopic[];
-  destroy$: Subject<any>;
 }

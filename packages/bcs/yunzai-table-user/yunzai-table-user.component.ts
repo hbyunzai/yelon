@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { debounceTime, Subject, takeUntil } from 'rxjs';
+import { AfterViewInit, Component, EventEmitter, Input,  OnInit, Output, ViewChild } from '@angular/core';
+import { debounceTime, } from 'rxjs';
 
 import { STColumn, STComponent, STData, STRequestOptions } from '@yelon/abc/st';
 import { SFComponent, SFSchema, SFValue } from '@yelon/form';
@@ -11,12 +11,13 @@ import {
   YunzaiTableUserRole,
   YunzaiTableUserState
 } from './yunzai-table-user.types';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: `yunzai-table-user`,
   templateUrl: `./yunzai-table-user.html`
 })
-export class YunzaiTableUserComponent implements OnInit, OnDestroy, AfterViewInit {
+export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   @ViewChild('st') st!: STComponent;
   @ViewChild('sf') sf!: SFComponent;
   @Input() props?: YunzaiTableUserProps;
@@ -64,8 +65,7 @@ export class YunzaiTableUserComponent implements OnInit, OnDestroy, AfterViewIni
     },
     check: {
       data: []
-    },
-    destroy$: new Subject<any>()
+    }
   };
 
   get wrapped(): boolean {
@@ -303,7 +303,7 @@ export class YunzaiTableUserComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   hookSearch(): void {
-    this.sf.formValueChange.pipe(takeUntil(this.state.destroy$), debounceTime(1000)).subscribe(event => {
+    this.sf.formValueChange.pipe(takeUntilDestroyed(), debounceTime(1000)).subscribe(event => {
       const { value } = event;
       this.onSearch(value);
     });
@@ -350,7 +350,4 @@ export class YunzaiTableUserComponent implements OnInit, OnDestroy, AfterViewIni
     }
   }
 
-  ngOnDestroy(): void {
-    this.state.destroy$.complete();
-  }
 }

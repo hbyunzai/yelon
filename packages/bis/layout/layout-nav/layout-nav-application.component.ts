@@ -1,10 +1,10 @@
-import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Component, Injector, OnInit } from '@angular/core';
 
 import { _HttpClient } from '@yelon/theme';
 import { LayoutNavApplicationState, useLocalStorageHeader, WINDOW, YunzaiNavTopic } from '@yelon/util';
 
 import { YunzaiI18NService } from '../yunzai-i18n.service';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: `layout-nav-application`,
@@ -102,7 +102,7 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
     <!--      header end-->
   `
 })
-export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
+export class LayoutNavApplicationComponent implements OnInit {
   state: LayoutNavApplicationState = {
     active: false,
     type: 'all',
@@ -110,7 +110,6 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
     topics: [],
     list: [],
     search: null,
-    destroy$: new Subject<any>()
   };
 
   constructor(
@@ -188,7 +187,7 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
           appId: topic.key,
           createDate: new Date()
         })
-        .pipe(takeUntil(this.state.destroy$))
+        .pipe(takeUntilDestroyed())
         .subscribe();
     }
     switch (topic.target) {
@@ -231,7 +230,4 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.state.destroy$.complete();
-  }
 }

@@ -1,11 +1,11 @@
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import {DOCUMENT} from '@angular/common';
+import {ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 
-import { YUNZAI_I18N_TOKEN, SettingsService, YunzaiI18NType } from '@yelon/theme';
-import { BooleanInput, InputBoolean } from '@yelon/util/decorator';
+import {YUNZAI_I18N_TOKEN, SettingsService, YunzaiI18NType} from '@yelon/theme';
+import {YunzaiI18NService} from "../yunzai-i18n.service"
+import {BooleanInput, InputBoolean} from '@yelon/util/decorator';
 
-import { YunzaiI18NService } from '../yunzai-i18n.service';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'yunzai-i18n',
@@ -50,9 +50,8 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YunzaiI18NComponent implements OnDestroy {
+export class YunzaiI18NComponent {
   static ngAcceptInputType_showLangText: BooleanInput;
-  private destroy$: Subject<any> = new Subject();
   /** Whether to display language text */
   @Input() @InputBoolean() showLangText = true;
 
@@ -69,7 +68,7 @@ export class YunzaiI18NComponent implements OnDestroy {
   ) {
     this.i18n
       .getLangs()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed())
       .subscribe(langs => {
         this.langs = langs;
       });
@@ -88,7 +87,4 @@ export class YunzaiI18NComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.complete();
-  }
 }

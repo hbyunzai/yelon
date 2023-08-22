@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, tap, throwError, zip } from 'rxjs';
+import { AfterViewInit, Component, EventEmitter, Input,  OnInit, Output, ViewChild } from '@angular/core';
+import { catchError, debounceTime, map, of,  switchMap,  throwError, zip } from 'rxjs';
 
 import { YunzaiGrade, YunzaiGradeService } from '@yelon/bcs/yunzai-grade';
 import { SFComponent, SFValueChange } from '@yelon/form';
@@ -8,12 +8,13 @@ import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
 import { generateSchema } from './yunzai-dept-tree.schema';
 import { YunzaiDeptTreeService } from './yunzai-dept-tree.service';
 import { YUNZAI_DEPT_TYPES, YunzaiDeptTree, YunzaiDeptTreeProps, YunzaiDeptTreeState } from './yunzai-dept-tree.types';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: `yunzai-dept-tree`,
   templateUrl: `./yunzai-dept-tree.html`
 })
-export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit {
+export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit {
   @ViewChild('form') sf!: SFComponent;
   @Input() props?: YunzaiDeptTreeProps;
   @Output() onQueryComplete: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
@@ -25,7 +26,6 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
     data: [],
     dataBackup: [],
     expandKeys: [],
-    $destroy: new Subject<any>()
   };
 
   get data(): YunzaiDeptTree[] {
@@ -118,7 +118,7 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
 
   setupSchema(): void {
     const grades = this.gradeService.grades().pipe(
-      takeUntil(this.state.$destroy),
+      takeUntilDestroyed(),
       map((grades: YunzaiGrade[]) => {
         return grades.map(grade => {
           return { label: grade.name, value: grade.openId };
@@ -212,7 +212,7 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
     this.deptTreeService
       .tree(this.includeClass, this.includeClassHistory, this.deptTypes, this.gradeId)
       .pipe(
-        tap(this.state.$destroy),
+        takeUntilDestroyed(),
         map((depts: YunzaiDeptTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(depts);
@@ -248,7 +248,4 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
     }
   }
 
-  ngOnDestroy() {
-    this.state.$destroy.complete();
-  }
 }

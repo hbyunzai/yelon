@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
+import { catchError, debounceTime, map, of, switchMap, throwError, zip } from 'rxjs';
 
 import { SFComponent } from '@yelon/form';
 import { SFValueChange } from '@yelon/form/src/interface';
@@ -14,6 +14,7 @@ import {
   YunzaiDormitoryTreeState,
   YunzaiDormitoryTreeType
 } from './yunzai-dormitory-tree.types';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: `yunzai-dormitory-tree`,
@@ -32,7 +33,6 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit {
     data: [],
     dataBackup: [],
     expandKeys: [],
-    $destroy: new Subject<any>()
   };
 
   get data(): YunzaiDormitoryTree[] {
@@ -100,7 +100,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit {
   hookFormChange(): void {
     this.sf.formValueChange
       .pipe(
-        takeUntil(this.state.$destroy),
+        takeUntilDestroyed(),
         debounceTime(1000),
         map(value => {
           this.load();
@@ -157,7 +157,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit {
     this.dormitoryService
       .tree(param)
       .pipe(
-        takeUntil(this.state.$destroy),
+        takeUntilDestroyed(),
         map((dorms: YunzaiDormitoryTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(dorms);

@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 
 import { STColumn, STData } from '@yelon/abc/st';
 import { SFSchema } from '@yelon/form';
@@ -110,5 +109,4 @@ export interface YunzaiTableUserState {
   check: {
     data: STData[];
   };
-  destroy$: Subject<any>;
 }

@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 
 import { SFSchema } from '@yelon/form';
 
@@ -8,7 +7,6 @@ export interface YunzaiRoleTreeState {
   data: YunzaiRoleTree[];
   dataBackup: YunzaiRoleTree[];
   expandKeys: string[];
-  $destroy: Subject<any>;
 }
 
 export interface YunzaiRoleTreeProps {

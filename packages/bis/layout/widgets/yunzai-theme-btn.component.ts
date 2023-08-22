@@ -11,11 +11,11 @@ import {
   Inject,
   Optional
 } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
 
 import { ThemeBtnType, YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 export interface YunzaiThemeBtnType extends ThemeBtnType {
   color?: string;
@@ -68,7 +68,7 @@ export interface YunzaiThemeBtnType extends ThemeBtnType {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YunzaiThemBtnComponent implements OnInit, OnDestroy {
+export class YunzaiThemBtnComponent implements OnInit,OnDestroy {
   private theme = 'default';
   @Input() types: YunzaiThemeBtnType[] = [
     { key: 'default', text: 'theme.default', color: '#2163ff' },
@@ -86,7 +86,6 @@ export class YunzaiThemBtnComponent implements OnInit, OnDestroy {
   ];
   @Input() devTips = `When the dark.css file can't be found, you need to run it once: npm run theme`;
   @Input() deployUrl = '';
-  private destroy$ = new Subject<void>();
   dir: Direction = 'ltr';
 
   constructor(
@@ -100,7 +99,7 @@ export class YunzaiThemBtnComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.dir = this.directionality.value;
-    this.directionality.change?.pipe(takeUntil(this.destroy$)).subscribe((direction: Direction) => {
+    this.directionality.change?.pipe(takeUntilDestroyed()).subscribe((direction: Direction) => {
       this.dir = direction;
     });
     this.initTheme();
@@ -148,7 +147,5 @@ export class YunzaiThemBtnComponent implements OnInit, OnDestroy {
     if (el != null) {
       this.doc.body.removeChild(el);
     }
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
