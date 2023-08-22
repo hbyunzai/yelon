@@ -28,7 +28,10 @@ export class G2Service implements OnDestroy {
     )!;
   }
 
-  constructor(private cogSrv: YunzaiConfigService, private lazySrv: LazyService) {
+  constructor(
+    private cogSrv: YunzaiConfigService,
+    private lazySrv: LazyService
+  ) {
     this.cog = { theme: '' };
   }
 

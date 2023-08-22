@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 
+import { I18NService } from './i18n/service';
 import { Meta, MetaList, MetaSearchGroup, MetaSearchGroupItem } from '../interfaces';
 import { META as ACLMeta } from '../routes/gen/acl/meta';
 import { META as AuthMeta } from '../routes/gen/auth/meta';
@@ -17,7 +18,6 @@ import { META as MockMeta } from '../routes/gen/mock/meta';
 import { META as SocketMeta } from '../routes/gen/socket/meta';
 import { META as ThemeMeta } from '../routes/gen/theme/meta';
 import { META as UtilMeta } from '../routes/gen/util/meta';
-import { I18NService } from './i18n/service';
 
 const FULLMETAS = [
   DocsMeta,

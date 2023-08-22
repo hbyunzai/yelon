@@ -44,7 +44,10 @@ export class LayoutNavGroupComponent implements OnInit, OnDestroy {
     destroy$: new Subject<any>()
   };
 
-  constructor(private inject: Injector, private http: _HttpClient) {}
+  constructor(
+    private inject: Injector,
+    private http: _HttpClient
+  ) {}
 
   ngOnInit(): void {
     const [, getTopics] = useLocalStorageHeader();

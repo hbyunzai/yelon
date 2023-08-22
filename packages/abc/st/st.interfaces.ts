@@ -96,13 +96,13 @@ export interface STRequestOptions {
   headers?:
     | HttpHeaders
     | {
-    [header: string]: string | string[];
-  };
+        [header: string]: string | string[];
+      };
   params?:
     | HttpParams
     | {
-    [param: string]: string | string[];
-  };
+        [param: string]: string | string[];
+      };
   observe?: 'body' | 'events' | 'response';
   reportProgress?: boolean;
   responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';

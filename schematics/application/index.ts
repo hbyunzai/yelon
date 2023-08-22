@@ -16,6 +16,7 @@ import {
 } from '@angular-devkit/schematics';
 import { getWorkspace, updateWorkspace } from '@schematics/angular/utility/workspace';
 
+import { Schema as ApplicationOptions } from './schema';
 import { getLangData } from '../core/lang.config';
 import {
   addAllowedCommonJsDependencies,
@@ -43,7 +44,6 @@ import {
 } from '../utils';
 import { addImportNotation } from '../utils/less';
 import { addESLintRule, UpgradeMainVersions } from '../utils/versions';
-import { Schema as ApplicationOptions } from './schema';
 
 let project: ProjectDefinition;
 
@@ -203,7 +203,7 @@ function addSchematics(options: ApplicationOptions): Rule {
     const p = getProjectFromWorkspace(workspace, options.project);
     const schematics = p.extensions.schematics;
     schematics['ng-yunzai:module'] = {
-      routing: true,
+      routing: true
     };
     schematics['ng-yunzai:list'] = {
       skipTests: false
@@ -220,7 +220,7 @@ function addSchematics(options: ApplicationOptions): Rule {
       skipTests: false
     };
     schematics['@schematics/angular:module'] = {
-      routing: true,
+      routing: true
     };
     schematics['@schematics/angular:component'] = {
       skipTests: false,

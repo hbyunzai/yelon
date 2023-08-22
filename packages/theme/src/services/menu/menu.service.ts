@@ -4,8 +4,8 @@ import { BehaviorSubject, Observable, Subscription, share } from 'rxjs';
 import { ACLService } from '@yelon/acl';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { Menu, MenuIcon, MenuInner } from './interface';
+import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 
 /**
  * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)

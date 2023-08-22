@@ -3,9 +3,9 @@ import { BehaviorSubject, interval, Observable, Subject, Subscription, filter, m
 
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 
+import { AuthReferrer, ITokenModel, ITokenService } from './interface';
 import { mergeConfig } from '../auth.config';
 import { YA_STORE_TOKEN, IStore } from '../store/interface';
-import { AuthReferrer, ITokenModel, ITokenService } from './interface';
 
 export function YA_SERVICE_TOKEN_FACTORY(): ITokenService {
   return new TokenService(inject(YunzaiConfigService), inject(YA_STORE_TOKEN));
@@ -22,7 +22,10 @@ export class TokenService implements ITokenService, OnDestroy {
   private _referrer: AuthReferrer = {};
   private _options: YunzaiAuthConfig;
 
-  constructor(configSrv: YunzaiConfigService, @Inject(YA_STORE_TOKEN) private store: IStore) {
+  constructor(
+    configSrv: YunzaiConfigService,
+    @Inject(YA_STORE_TOKEN) private store: IStore
+  ) {
     this._options = mergeConfig(configSrv);
   }
 

@@ -113,7 +113,11 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
     destroy$: new Subject<any>()
   };
 
-  constructor(private i18n: YunzaiI18NService, private http: _HttpClient, private inject: Injector) {}
+  constructor(
+    private i18n: YunzaiI18NService,
+    private http: _HttpClient,
+    private inject: Injector
+  ) {}
 
   ngOnInit(): void {
     this.fetchAllTopic();

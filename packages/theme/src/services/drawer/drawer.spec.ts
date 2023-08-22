@@ -5,8 +5,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NzDrawerModule, NzDrawerRef } from 'ng-zorro-antd/drawer';
 
-import { YunzaiThemeModule } from '../../theme.module';
 import { DrawerHelper } from './drawer.helper';
+import { YunzaiThemeModule } from '../../theme.module';
 
 describe('theme: DrawerHelper', () => {
   let drawer: DrawerHelper;

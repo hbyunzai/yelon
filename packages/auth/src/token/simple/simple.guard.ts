@@ -10,9 +10,9 @@ import {
 
 import { YunzaiAuthConfig } from '@yelon/util/config';
 
+import { SimpleTokenModel } from './simple.model';
 import { CheckSimple, ToLogin } from '../helper';
 import { YA_SERVICE_TOKEN, ITokenService } from '../interface';
-import { SimpleTokenModel } from './simple.model';
 
 /**
  * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
@@ -39,7 +39,10 @@ export class SimpleGuard implements CanActivate, CanActivateChild, CanMatch {
     return this.srv.options;
   }
 
-  constructor(@Inject(YA_SERVICE_TOKEN) private srv: ITokenService, private injector: Injector) {}
+  constructor(
+    @Inject(YA_SERVICE_TOKEN) private srv: ITokenService,
+    private injector: Injector
+  ) {}
 
   private process(): boolean {
     const res = CheckSimple(this.srv.get() as SimpleTokenModel);

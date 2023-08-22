@@ -20,9 +20,10 @@ import {
   Router,
   Event
 } from '@angular/router';
-import {filter, Subject, takeUntil} from 'rxjs';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 import { SettingsService } from '@yelon/theme';
+import { BooleanInput, InputBoolean } from '@yelon/util';
 import { updateHostClass } from '@yelon/util/browser';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -31,7 +32,6 @@ import { LayoutDisplayService } from './layout-display.service';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
-import {BooleanInput, InputBoolean} from "@yelon/util";
 
 @Component({
   selector: 'layout-default',
@@ -108,7 +108,6 @@ export class LayoutDefaultComponent implements OnInit, OnDestroy {
       'margin-top': !this.displayNav ? '0px' : ''
     };
   }
-
 
   get collapsed(): boolean {
     return this.settings.layout.collapsed;

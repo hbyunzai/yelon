@@ -17,7 +17,10 @@ export type HttpObserve = 'body' | 'events' | 'response';
 @Injectable({ providedIn: 'root' })
 export class _HttpClient {
   private cog: YunzaiThemeHttpClientConfig;
-  constructor(private http: HttpClient, cogSrv: YunzaiConfigService) {
+  constructor(
+    private http: HttpClient,
+    cogSrv: YunzaiConfigService
+  ) {
     this.cog = cogSrv.merge('themeHttp', {
       nullValueHandling: 'include',
       dateValueHandling: 'timestamp'

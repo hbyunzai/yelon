@@ -25,7 +25,10 @@ export class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
   protected ajv!: Ajv;
   protected options!: YunzaiSFConfig;
 
-  constructor(@Inject(YunzaiConfigService) cogSrv: YunzaiConfigService, private ngZone: NgZone) {
+  constructor(
+    @Inject(YunzaiConfigService) cogSrv: YunzaiConfigService,
+    private ngZone: NgZone
+  ) {
     super();
     if (!(typeof document === 'object' && !!document)) {
       return;

@@ -6,9 +6,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 
-import { YunzaiThemeModule } from '../../theme.module';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from './i18n';
 import { YunzaiI18NGuard } from './i18n-url.guard';
+import { YunzaiThemeModule } from '../../theme.module';
 
 describe('theme: i18n', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -153,7 +153,7 @@ describe('theme: i18n', () => {
 @Component({
   template: `
     <div id="simple">{{ key | i18n }}</div>
-    <div id="param">{{ key | i18n : params }}</div>
+    <div id="param">{{ key | i18n: params }}</div>
   `
 })
 class TestComponent {

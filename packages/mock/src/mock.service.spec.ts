@@ -4,9 +4,9 @@ import * as Mock from 'mockjs';
 
 import { YunzaiMockConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 
-import { YelonMockModule } from '../index';
 import { MockOptions, MockRequest, MockRule } from './interface';
 import { MockService } from './mock.service';
+import { YelonMockModule } from '../index';
 
 const DATA = {
   USERS: {

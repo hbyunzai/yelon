@@ -5,7 +5,10 @@ import { CurrencyMegaOptions, CurrencyService } from '@yelon/util/format';
 @Pipe({ name: 'mega' })
 export class CurrencyMegaPipe implements PipeTransform {
   private isCN = false;
-  constructor(private srv: CurrencyService, @Inject(LOCALE_ID) locale: string) {
+  constructor(
+    private srv: CurrencyService,
+    @Inject(LOCALE_ID) locale: string
+  ) {
     this.isCN = locale.startsWith('zh');
   }
 

@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 
 import { YunzaiAuthConfig } from '@yelon/util/config';
 
+import { JWTTokenModel } from './jwt.model';
 import { BaseInterceptor } from '../base.interceptor';
 import { CheckJwt } from '../helper';
 import { YA_SERVICE_TOKEN } from '../interface';
-import { JWTTokenModel } from './jwt.model';
 
 /**
  * JWT 拦截器

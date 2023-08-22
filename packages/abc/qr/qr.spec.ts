@@ -6,9 +6,9 @@ import { of } from 'rxjs';
 import { createTestContext } from '@yelon/testing';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YunzaiConfigService, LazyService } from '../../util';
 import { QRComponent } from './qr.component';
 import { QRModule } from './qr.module';
+import { YunzaiConfigService, LazyService } from '../../util';
 
 describe('abc: qr', () => {
   let fixture: ComponentFixture<TestComponent>;

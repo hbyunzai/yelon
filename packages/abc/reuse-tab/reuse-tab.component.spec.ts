@@ -9,7 +9,6 @@ import { YUNZAI_I18N_TOKEN, YelonLocaleModule, YelonLocaleService, en_US, MenuSe
 import { ScrollService } from '@yelon/util/browser';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YunzaiI18NServiceFake } from '../../theme/src/services/i18n/i18n';
 import { ReuseTabComponent } from './reuse-tab.component';
 import {
   ReuseCanClose,
@@ -22,6 +21,7 @@ import { ReuseTabModule } from './reuse-tab.module';
 import { ReuseTabService } from './reuse-tab.service';
 import { REUSE_TAB_STORAGE_STATE } from './reuse-tab.state';
 import { ReuseTabStrategy } from './reuse-tab.strategy';
+import { YunzaiI18NServiceFake } from '../../theme/src/services/i18n/i18n';
 
 let i18nResult = 'zh';
 @Injectable()

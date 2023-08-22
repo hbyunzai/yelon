@@ -1,5 +1,5 @@
-import { ITokenModel } from '../interface';
 import { urlBase64Decode } from './jwt.helper';
+import { ITokenModel } from '../interface';
 
 export interface JWT {
   /**

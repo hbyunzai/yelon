@@ -7,8 +7,6 @@ import { getParameters } from 'codesandbox/lib/api/define';
 import { deepCopy } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import pkg from '../../../../package.json';
-import { AppService } from '../app.service';
 import angularJSON from './files/angular.json';
 import appModuleTS from './files/app.module';
 import environmentTS from './files/environment';
@@ -24,6 +22,8 @@ import startupServiceTS from './files/startup.service';
 import tsconfigJSON from './files/tsconfig.json';
 import yelonABCModuleTS from './files/yelon-abc.module';
 import yelonChartModuleTS from './files/yelon-chart.module';
+import pkg from '../../../../package.json';
+import { AppService } from '../app.service';
 
 @Injectable({ providedIn: 'root' })
 export class CodeService {
@@ -138,7 +138,10 @@ export class CodeService {
     return res;
   }
 
-  constructor(private appSrv: AppService, @Inject(DOCUMENT) document: NzSafeAny) {
+  constructor(
+    private appSrv: AppService,
+    @Inject(DOCUMENT) document: NzSafeAny
+  ) {
     this.document = document;
   }
 

@@ -5,10 +5,10 @@ import { createTestContext } from '@yelon/testing';
 import { deepCopy } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+import { configureSFTestSuite, SFPage, TestFormComponent } from './base.spec';
 import { ObjectProperty } from '../src/model/object.property';
 import { SFSchema } from '../src/schema/index';
 import { SFUISchema, SFUISchemaItem } from '../src/schema/ui';
-import { configureSFTestSuite, SFPage, TestFormComponent } from './base.spec';
 
 describe('form: schema', () => {
   let fixture: ComponentFixture<TestFormComponent>;

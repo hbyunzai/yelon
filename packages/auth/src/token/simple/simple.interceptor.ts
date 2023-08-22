@@ -4,10 +4,10 @@ import { Injectable } from '@angular/core';
 import { YunzaiAuthConfig } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
 
+import { SimpleTokenModel } from './simple.model';
 import { BaseInterceptor } from '../base.interceptor';
 import { CheckSimple } from '../helper';
 import { YA_SERVICE_TOKEN } from '../interface';
-import { SimpleTokenModel } from './simple.model';
 
 /**
  * Simple 拦截器
