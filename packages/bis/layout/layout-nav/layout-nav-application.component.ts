@@ -1,10 +1,18 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 
-import { _HttpClient } from '@yelon/theme';
-import { LayoutNavApplicationState, useLocalStorageHeader, WINDOW, YunzaiNavTopic } from '@yelon/util';
+import {_HttpClient} from '@yelon/theme';
+import {
+  LayoutNavApplicationState,
+  useLocalStorageHeader,
+  WINDOW,
+  YunzaiBusinessConfig,
+  YunzaiConfigService,
+  YunzaiNavTopic
+} from '@yelon/util';
 
-import { YunzaiI18NService } from '../yunzai-i18n.service';
+import {YunzaiI18NService} from '../yunzai-i18n.service';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "../bis.config";
 
 @Component({
   selector: `layout-nav-application`,
@@ -41,7 +49,7 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
               href="javascript:;"
               *ngFor="let nav of topic.children"
               (click)="open(nav)"
-              >{{ nav.name | i18n }}</a
+            >{{ nav.name | i18n }}</a
             >
           </li>
         </ul>
@@ -56,19 +64,21 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
     <!--      header start-->
     <div class="yz-application" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')">{{
+        <div *ngIf="showAllMenu" data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text"
+             (click)="attachNav('all')">{{
           'mode.nav.all' | i18n
-        }}</div>
-        <div data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')">{{
+          }}</div>
+        <div *ngIf="showMineMenu" data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text"
+             (click)="attachNav('mine')">{{
           'mode.nav.mine' | i18n
-        }}</div>
+          }}</div>
         <div
           data-event-id="_nav_topic"
           [attr.data-name]="nav.name | i18n"
           class="yz-application-text"
           *ngFor="let nav of state.topics"
           (click)="attachNav('other', nav)"
-          >{{ nav.name | i18n }}</div
+        >{{ nav.name | i18n }}</div
         >
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
@@ -103,6 +113,7 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   `
 })
 export class LayoutNavApplicationComponent implements OnInit {
+  private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
   state: LayoutNavApplicationState = {
     active: false,
     type: 'all',
@@ -112,11 +123,25 @@ export class LayoutNavApplicationComponent implements OnInit {
     search: null,
   };
 
+  get showAllMenu(): boolean {
+    if (this.bis.nav) return this.bis.nav!.all!
+    return true
+  }
+
+  get showMineMenu(): boolean {
+    if (this.bis.nav) return this.bis.nav!.all!
+    return true
+  }
+
   constructor(
     private i18n: YunzaiI18NService,
     private http: _HttpClient,
-    private inject: Injector
-  ) {}
+    private inject: Injector,
+    // @ts-ignore
+    private configService: YunzaiConfigService
+  ) {
+    this.bis = mergeBisConfig(configService)
+  }
 
   ngOnInit(): void {
     this.fetchAllTopic();
