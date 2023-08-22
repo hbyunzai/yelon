@@ -148,8 +148,8 @@ export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit, 
     this._labelWidth = parent.nzLayout === 'horizontal' ? (labelWidth != null ? labelWidth : parent.labelWidth) : null;
     clsMap.forEach(cls => ren.removeClass(el, cls));
     clsMap.length = 0;
-    const repCls =
-      parent.nzLayout === 'horizontal' ? rep.genCls(col != null ? col : parent.colInCon || parent.col) : [];
+    const parentCol = parent.colInCon || parent.col;
+    const repCls = parent.nzLayout === 'horizontal' ? rep.genCls(col != null ? col : parentCol, parentCol) : [];
     clsMap.push(`ant-form-item`, ...repCls, `${prefixCls}__item`);
     if (line || parent.line) {
       clsMap.push(`${prefixCls}__line`);
@@ -188,7 +188,7 @@ export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit, 
       return;
     }
     this.invalid =
-      !this.onceFlag && invalid && this.parent.ignoreDirty === false && !this.ngControl?.dirty ? false : invalid;
+      !this.onceFlag && invalid && this.parent.ingoreDirty === false && !this.ngControl?.dirty ? false : invalid;
     const errors = this.ngControl?.errors;
     if (errors != null && Object.keys(errors).length > 0) {
       const key = Object.keys(errors)[0] || '';

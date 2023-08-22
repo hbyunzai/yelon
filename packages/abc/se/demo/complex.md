@@ -27,10 +27,10 @@ import { STColumn } from '@yelon/abc/st';
         1000
         <ng-template #optionalHelpTpl> Via by ng-template </ng-template>
       </se>
-      <se label="Name" required col="3" optionalHelp="The background color is #f50" optionalHelpColor="#f50">
-        <input type="text" nz-input [(ngModel)]="i.user_name" name="user_name" required />
+        <se label="Name" required col="2" optionalHelp="The background color is #f50" optionalHelpColor="#f50">
+        <input type="text" nz-input [(ngModel)]="i.user_name" name="user_name" required placeholder="占两栏" />
       </se>
-      <se label="Age" required col="3">
+      <se label="Age" required>
         <nz-select [(ngModel)]="i.user_age" name="user_age" nzAllowClear nzPlaceHolder="Choose">
           <nz-option [nzValue]="1" nzLabel="1"></nz-option>
           <nz-option [nzValue]="2" nzLabel="2"></nz-option>
