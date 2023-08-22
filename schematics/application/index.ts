@@ -204,7 +204,6 @@ function addSchematics(options: ApplicationOptions): Rule {
     const schematics = p.extensions.schematics;
     schematics['ng-yunzai:module'] = {
       routing: true,
-      skipTests: false
     };
     schematics['ng-yunzai:list'] = {
       skipTests: false
@@ -222,7 +221,6 @@ function addSchematics(options: ApplicationOptions): Rule {
     };
     schematics['@schematics/angular:module'] = {
       routing: true,
-      skipTests: false
     };
     schematics['@schematics/angular:component'] = {
       skipTests: false,

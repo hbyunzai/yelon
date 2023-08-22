@@ -14,37 +14,36 @@ However, parameters can be preset via `angular.json`.
   "schematics": {
     "ng-yunzai:module": {
       "routing": true,
-      "spec": false
     },
     "ng-yunzai:list": {
-      "spec": false
+      "skipTests": false
     },
     "ng-yunzai:edit": {
-      "spec": false,
+      "skipTests": false,
       "modal": true
     },
     "ng-yunzai:view": {
-      "spec": false,
+      "skipTests": false,
       "modal": true
     },
     "ng-yunzai:curd": {
-      "spec": false
+      "skipTests": false
     },
     "@schematics/angular:module": {
       "routing": true,
-      "spec": false
+      "skipTests": false
     },
     "@schematics/angular:component": {
-      "spec": false,
+      "skipTests": false,
       "flat": false,
       "inlineStyle": true,
       "inlineTemplate": false
     },
     "@schematics/angular:directive": {
-      "spec": false
+      "skipTests": false
     },
     "@schematics/angular:service": {
-      "spec": false
+      "skipTests": false
     }
   }
 }
