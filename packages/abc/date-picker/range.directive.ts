@@ -12,7 +12,6 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Subject } from 'rxjs';
 
 import {
   YunzaiConfigService,
@@ -36,7 +35,6 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
 
   private defaultShortcuts: YunzaiDateRangePickerShortcut;
   private _shortcut: YunzaiDateRangePickerShortcut | null = null;
-  private destroy$ = new Subject<void>();
   private shortcutFactory: ComponentRef<RangePickerShortcutTplComponent> | null = null;
   start: Date | null = null;
   end: Date | null = null;
@@ -195,7 +193,5 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.destoryShortcut();
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
