@@ -1,6 +1,6 @@
-import { Direction, Directionality } from '@angular/cdk/bidi';
-import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
+import {Direction, Directionality} from '@angular/cdk/bidi';
+import {Platform} from '@angular/cdk/platform';
+import {DOCUMENT} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,13 +9,13 @@ import {
   OnInit,
   Renderer2,
   Inject,
-  Optional, inject, DestroyRef
+  Optional
 } from '@angular/core';
 
-import { ThemeBtnType, YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
-import { YunzaiConfigService } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {ThemeBtnType, YUNZAI_THEME_BTN_KEYS} from '@yelon/theme/theme-btn';
+import {YunzaiConfigService} from '@yelon/util/config';
+import {NzSafeAny} from 'ng-zorro-antd/core/types';
+import {Subject, takeUntil} from "rxjs";
 
 export interface YunzaiThemeBtnType extends ThemeBtnType {
   color?: string;
@@ -68,25 +68,26 @@ export interface YunzaiThemeBtnType extends ThemeBtnType {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YunzaiThemBtnComponent implements OnInit,OnDestroy {
+export class YunzaiThemBtnComponent implements OnInit, OnDestroy {
   private theme = 'default';
   @Input() types: YunzaiThemeBtnType[] = [
-    { key: 'default', text: 'theme.default', color: '#2163ff' },
-    { key: 'compact', text: 'theme.compact', color: '#2163ff' },
-    { key: 'dark', text: 'theme.dark', color: '#020202' },
-    { key: 'yuhong', text: 'theme.yuhong', color: '#C04851' },
-    { key: 'danjuhuang', text: 'theme.danjuhuang', color: '#FBA414' },
-    { key: 'xinghuang', text: 'theme.xinghuang', color: '#F28E16' },
-    { key: 'shilv', text: 'theme.shilv', color: '#57C3C2' },
-    { key: 'zhulv', text: 'theme.zhulv', color: '#1BA784' },
-    { key: 'youlan', text: 'theme.youlan', color: '#1781B5' },
-    { key: 'dianqing', text: 'theme.dianqing', color: '#1661AB' },
-    { key: 'shangengzi', text: 'theme.shangengzi', color: '#61649F' },
-    { key: 'shuiniuhui', text: 'theme.shuiniuhui', color: '#2F2F35' }
+    {key: 'default', text: 'theme.default', color: '#2163ff'},
+    {key: 'compact', text: 'theme.compact', color: '#2163ff'},
+    {key: 'dark', text: 'theme.dark', color: '#020202'},
+    {key: 'yuhong', text: 'theme.yuhong', color: '#C04851'},
+    {key: 'danjuhuang', text: 'theme.danjuhuang', color: '#FBA414'},
+    {key: 'xinghuang', text: 'theme.xinghuang', color: '#F28E16'},
+    {key: 'shilv', text: 'theme.shilv', color: '#57C3C2'},
+    {key: 'zhulv', text: 'theme.zhulv', color: '#1BA784'},
+    {key: 'youlan', text: 'theme.youlan', color: '#1781B5'},
+    {key: 'dianqing', text: 'theme.dianqing', color: '#1661AB'},
+    {key: 'shangengzi', text: 'theme.shangengzi', color: '#61649F'},
+    {key: 'shuiniuhui', text: 'theme.shuiniuhui', color: '#2F2F35'}
   ];
   @Input() devTips = `When the dark.css file can't be found, you need to run it once: npm run theme`;
   @Input() deployUrl = '';
   dir: Direction = 'ltr';
+  private $destroy = new Subject()
 
   constructor(
     private renderer: Renderer2,
@@ -95,11 +96,12 @@ export class YunzaiThemBtnComponent implements OnInit,OnDestroy {
     @Inject(DOCUMENT) private doc: NzSafeAny,
     @Optional() private directionality: Directionality,
     @Inject(YUNZAI_THEME_BTN_KEYS) private KEYS: string
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.dir = this.directionality.value;
-    this.directionality.change?.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe((direction: Direction) => {
+    this.directionality.change?.pipe(takeUntil(this.$destroy)).subscribe((direction: Direction) => {
       this.dir = direction;
     });
     this.initTheme();
@@ -115,7 +117,7 @@ export class YunzaiThemBtnComponent implements OnInit,OnDestroy {
   }
 
   private updateChartTheme(): void {
-    this.configSrv.set('chart', { theme: this.theme === 'dark' ? 'dark' : '' });
+    this.configSrv.set('chart', {theme: this.theme === 'dark' ? 'dark' : ''});
   }
 
   onThemeChange(theme: string): void {
@@ -143,6 +145,7 @@ export class YunzaiThemBtnComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.$destroy.complete()
     const el = this.doc.getElementById(this.KEYS);
     if (el != null) {
       this.doc.body.removeChild(el);

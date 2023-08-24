@@ -1,8 +1,8 @@
 import { Platform } from '@angular/cdk/platform';
 import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
-import {DestroyRef, inject, Injectable} from '@angular/core';
-import { Observable, catchError, of } from 'rxjs';
+import { Injectable, OnDestroy} from '@angular/core';
+import {Observable, catchError, of, Subject, takeUntil} from 'rxjs';
 
 import { enUS as dfEn } from 'date-fns/locale';
 import { map } from 'rxjs/operators';
@@ -22,16 +22,16 @@ import { NzI18nService, en_US as zorroEnUS } from 'ng-zorro-antd/i18n';
 
 import { mergeBisConfig } from './bis.config';
 import { YUNZAI_LANGS } from './yunzai-lang';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 declare const ngDevMode: boolean;
 
 const DEFAULT = 'zh-CN';
 
 @Injectable({ providedIn: 'root' })
-export class YunzaiI18NService extends YunzaiI18nBaseService  {
+export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy{
   protected override _defaultLang = DEFAULT;
   private bis: YunzaiBusinessConfig;
+  private $destroy =new Subject()
 
   constructor(
     private http: _HttpClient,
@@ -45,7 +45,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService  {
     const defaultLang = this.getDefaultLang();
     this.bis = mergeBisConfig(cogSrv);
     this.getLangs()
-      .pipe(takeUntilDestroyed(inject(DestroyRef)))
+      .pipe(takeUntil(this.$destroy))
       .subscribe(langs => {
         this._defaultLang = langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
       });
@@ -139,6 +139,9 @@ export class YunzaiI18NService extends YunzaiI18nBaseService  {
   getCachedLangs(): YunzaiI18NType[] {
     const [, getLangs] = useLocalStorageLangs();
     return getLangs() || [];
+  }
+  ngOnDestroy() {
+    this.$destroy.complete()
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, Inject, Injector, OnInit} from '@angular/core';
+import {Component, Inject, Injector, OnDestroy, OnInit} from '@angular/core';
 
 import {_HttpClient} from '@yelon/theme';
 import {
@@ -11,8 +11,8 @@ import {
 } from '@yelon/util';
 
 import {YunzaiI18NService} from '../yunzai-i18n.service';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "../bis.config";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: `layout-nav-application`,
@@ -113,8 +113,9 @@ import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "../bis.config";
     <!--      header end-->
   `
 })
-export class LayoutNavApplicationComponent implements OnInit {
+export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
+  private $destroy = new Subject();
   state: LayoutNavApplicationState = {
     active: false,
     type: 'all',
@@ -222,7 +223,7 @@ export class LayoutNavApplicationComponent implements OnInit {
           appId: topic.key,
           createDate: new Date()
         })
-        .pipe(takeUntilDestroyed(inject(DestroyRef)))
+        .pipe(takeUntil(this.$destroy))
         .subscribe();
     }
     switch (topic.target) {
@@ -263,6 +264,10 @@ export class LayoutNavApplicationComponent implements OnInit {
       const [, getTopics] = useLocalStorageHeader();
       this.state.list = getTopics()!;
     }
+  }
+
+  ngOnDestroy() {
+    this.$destroy.complete()
   }
 
 }
