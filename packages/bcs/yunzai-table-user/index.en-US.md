@@ -14,6 +14,7 @@ module: import { YunzaiTableUserModule } from "@yelon/bcs/yunzai-table-user";
 |-------------------|-----------------|--------------------------------------------------------------|
 | wrap              | 是否使用nz-card包裹   | bool                                                         |  
 | data              | 静态数据源           | YunzaiTableUser[]                                            |  
+| userIds           | 已经被选择的用户id集合    | string[]                                                     |  
 | filteredColumns   | 列过滤(通过index属性)  | string[]                                                     |  
 | customColumns     | 自定义列(通过index属性) | STColumn[]                                                   |  
 | additionalColumns | 附加列             | STColumn[]                                                   |  

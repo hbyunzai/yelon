@@ -1,6 +1,5 @@
-
-import { STColumn, STData } from '@yelon/abc/st';
-import { SFSchema } from '@yelon/form';
+import {STColumn, STData} from '@yelon/abc/st';
+import {SFSchema} from '@yelon/form';
 
 export interface YunzaiTableUser {
   userId: string;
@@ -83,6 +82,7 @@ export interface YunzaiTableUserParam {
 
 export interface YunzaiTableUserProps {
   wrap?: boolean;
+  userIds?: string[];
   data?: YunzaiTableUser[];
   filteredColumns?: string[];
   customColumns?: STColumn[];

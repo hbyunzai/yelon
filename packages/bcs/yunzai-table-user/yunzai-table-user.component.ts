@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, EventEmitter, Input,  OnInit, Output, ViewChild } from '@angular/core';
-import { debounceTime, } from 'rxjs';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {debounceTime,} from 'rxjs';
 
-import { STColumn, STComponent, STData, STRequestOptions } from '@yelon/abc/st';
-import { SFComponent, SFSchema, SFValue } from '@yelon/form';
+import {STColumn, STComponent, STData, STRequestOptions} from '@yelon/abc/st';
+import {SFComponent, SFSchema, SFValue} from '@yelon/form';
 
 import {
   YunzaiTableUser,
@@ -12,6 +12,7 @@ import {
   YunzaiTableUserState
 } from './yunzai-table-user.types';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {YunzaiTableUserService} from "./yunzai-table-user.service";
 
 @Component({
   selector: `yunzai-table-user`,
@@ -26,12 +27,12 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   state: YunzaiTableUserState = {
     columns: [
       {index: "checkbox", render: "checkbox", renderTitle: 'checkbox_all', width: 20, fixed: 'left'},
-      { index: 'no', type: 'no', title: { i18n: 'table-user.no' }, width: 50 },
-      { index: 'realName', title: { i18n: 'table-user.realName' }, width: 100 },
-      { index: 'userCode', title: { i18n: 'table-user.usercode' }, width: 100 },
-      { index: 'dept.deptName', title: { i18n: 'table-user.deptName' }, width: 100 },
-      { index: 'rolesName', render: 'rolesName', title: { i18n: 'table-user.roleName' }, width: 100 },
-      { index: 'idCard', title: { i18n: 'table-user.idcard' }, width: 100 }
+      {index: 'no', type: 'no', title: {i18n: 'table-user.no'}, width: 50},
+      {index: 'realName', title: {i18n: 'table-user.realName'}, width: 100},
+      {index: 'userCode', title: {i18n: 'table-user.usercode'}, width: 100},
+      {index: 'dept.deptName', title: {i18n: 'table-user.deptName'}, width: 100},
+      {index: 'rolesName', render: 'rolesName', title: {i18n: 'table-user.roleName'}, width: 100},
+      {index: 'idCard', title: {i18n: 'table-user.idcard'}, width: 100}
     ],
     data: [],
     dataBackup: [],
@@ -101,7 +102,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     y?: string | null;
   } {
     if (this.props && this.props.scroll) return this.props.scroll;
-    return { x: '1200px', y: '600px' };
+    return {x: '1200px', y: '600px'};
   }
 
   get inSearch(): boolean {
@@ -109,7 +110,12 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     return Object.keys(value).length > 0;
   }
 
-  constructor() {}
+  get userIds(): string[] {
+    return this.props?.userIds || []
+  }
+
+  constructor(private service: YunzaiTableUserService) {
+  }
 
   ngOnInit(): void {
     this.setupPropsToState();
@@ -187,7 +193,15 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   setupPropsChecked(): void {
     if (!this.props || !this.props.check || !this.props.check.data) return;
-    this.state.check.data = this.props.check.data;
+    let checked = this.props.check.data
+    if (this.userIds.length > 0) {
+      this.service.usersByIds(this.userIds)
+        .pipe(takeUntilDestroyed())
+        .subscribe((users) => {
+          checked = checked.concat(users)
+          this.state.check.data = checked
+        })
+    }
   }
 
   setupTableData(): void {
@@ -203,7 +217,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   setupTableColumn(): void {
     if (!this.st) return;
-    this.st.resetColumns({ columns: this.state.columns });
+    this.st.resetColumns({columns: this.state.columns});
   }
 
   setupTableRequest(): void {
@@ -239,7 +253,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   resetChecked(): void {
     if (!this.props || !this.props.check || !this.props.check.data) return;
     this.state.check.data = this.props.check.data.map(id => {
-      return { userId: id };
+      return {userId: id};
     });
   }
 
@@ -304,7 +318,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   hookSearch(): void {
     this.sf.formValueChange.pipe(takeUntilDestroyed(), debounceTime(1000)).subscribe(event => {
-      const { value } = event;
+      const {value} = event;
       this.onSearch(value);
     });
   }
@@ -320,7 +334,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
       this.st.reload();
     }
     if (typeof this.state.data === 'string') {
-      this.state.page.pageParam = { ...this.state.page.pageParam, ...value };
+      this.state.page.pageParam = {...this.state.page.pageParam, ...value};
       this.onQuery();
     }
   }
@@ -339,9 +353,9 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     this.st.reload();
   }
 
-  public setTableParam(param: YunzaiTableUserParam) :void{
+  public setTableParam(param: YunzaiTableUserParam): void {
     if (this.inSearch) {
-      this.state.page.pageParam = { ...param, ...this.sf.value };
+      this.state.page.pageParam = {...param, ...this.sf.value};
       this.onSearch(this.sf.value);
     }
     if (!this.inSearch) {
