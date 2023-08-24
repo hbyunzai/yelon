@@ -36,20 +36,20 @@ import { YunzaiContactProps, YunzaiContactState } from './yunzai-contact.types';
 
           <nz-row class="yz-select-contacts-modal-tree">
             <nz-col [nzSpan]="24" [ngSwitch]="state.cursor">
-              <app-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree"
-                             (onSelect)="onDeptSelect($event)"></app-dept-tree>
-              <app-dormitory-tree *ngSwitchCase="'dormitoryTree'" [props]="dormitoryTree"
-                                  (onSelect)="onDormTreeSelect($event)"></app-dormitory-tree>
-              <app-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree"
-                             (onSelect)="onRoleTreeSelect($event)"></app-role-tree>
-              <app-friend-group *ngSwitchCase="'friendGroup'" [props]="friendGroup"
-                                (onSelect)="onFriendSelect($event)"></app-friend-group>
+              <yunzai-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree"
+                             (onSelect)="onDeptSelect($event)"></yunzai-dept-tree>
+              <yunzai-dormitory-tree *ngSwitchCase="'dormitoryTree'" [props]="dormitoryTree"
+                                  (onSelect)="onDormTreeSelect($event)"></yunzai-dormitory-tree>
+              <yunzai-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree"
+                             (onSelect)="onRoleTreeSelect($event)"></yunzai-role-tree>
+              <yunzai-friend-group *ngSwitchCase="'friendGroup'" [props]="friendGroup"
+                                (onSelect)="onFriendSelect($event)"></yunzai-friend-group>
             </nz-col>
           </nz-row>
         </nz-col>
         <nz-col [nzSpan]="18">
-          <app-table-user #table [props]="tableUserProps"
-                          (onChecked)="onTableUserChecked($event)"></app-table-user>
+          <yunzai-table-user #table [props]="tableUserProps"
+                          (onChecked)="onTableUserChecked($event)"></yunzai-table-user>
         </nz-col>
       </nz-row>
     </ng-template>
@@ -85,6 +85,7 @@ export class YunzaiContactComponent {
         pageNum: 1,
         pageSize: 20
       },
+      userIds:[],
       list: true,
       check: {
         pageCheck: true,

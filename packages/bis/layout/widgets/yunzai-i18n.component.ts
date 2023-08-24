@@ -1,5 +1,5 @@
 import {DOCUMENT} from '@angular/common';
-import {ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, Inject, Input} from '@angular/core';
 
 import {YUNZAI_I18N_TOKEN, SettingsService, YunzaiI18NType} from '@yelon/theme';
 import {YunzaiI18NService} from "../yunzai-i18n.service"
@@ -68,7 +68,7 @@ export class YunzaiI18NComponent {
   ) {
     this.i18n
       .getLangs()
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(inject(DestroyRef)))
       .subscribe(langs => {
         this.langs = langs;
       });

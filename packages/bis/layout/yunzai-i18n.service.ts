@@ -1,7 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
-import { Injectable } from '@angular/core';
+import {DestroyRef, inject, Injectable} from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 
 import { enUS as dfEn } from 'date-fns/locale';
@@ -45,7 +45,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService  {
     const defaultLang = this.getDefaultLang();
     this.bis = mergeBisConfig(cogSrv);
     this.getLangs()
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(inject(DestroyRef)))
       .subscribe(langs => {
         this._defaultLang = langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
       });

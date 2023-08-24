@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, Inject, Injector, OnInit} from '@angular/core';
 
 import {_HttpClient} from '@yelon/theme';
 import {
@@ -13,35 +13,9 @@ import {
 import {YunzaiI18NService} from '../yunzai-i18n.service';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "../bis.config";
-import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: `layout-nav-application`,
-  animations: [
-    trigger("applicationUnderline", [
-      state('display', style({width: '100%'})),
-      state('hide', style({width: '0'})),
-      transition('hide => display', animate('.2s .1s')),
-      transition('display => hide', animate(300))
-    ]),
-    trigger("menu", [
-      // 产品服务动画
-      state('hide', style({display: 'none'})),
-      state('display', style({display: 'block'})),
-      transition('hide => display', [
-        animate(
-          '0.15s',
-          keyframes([style({opacity: 0}), style({opacity: 1})])
-        )
-      ]),
-      transition('display => hide', [
-        animate(
-          '0.15s',
-          keyframes([style({opacity: 1}), style({opacity: 0})])
-        )
-      ])
-    ])
-  ],
   template: `
     <!--      search start-->
     <ng-template #search>
@@ -84,12 +58,12 @@ import {animate, keyframes, state, style, transition, trigger} from "@angular/an
     <!-- right menu end -->
 
     <!--      button start-->
-    <div data-event-id="_nav_app" class="yunzai-default__nav-item"
-         [@applicationUnderline]='state.status'> {{ 'mode.nav' | i18n }}</div>
+    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item"
+         (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
     <!--      button end-->
 
     <!--      header start-->
-    <div class="yz-application" [@menu]="state.status">
+    <div class="yz-application" id="navDropdown" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
         <div *ngIf="showAllMenu" data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text"
              (click)="attachNav('all')">{{
@@ -142,7 +116,7 @@ import {animate, keyframes, state, style, transition, trigger} from "@angular/an
 export class LayoutNavApplicationComponent implements OnInit {
   private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
   state: LayoutNavApplicationState = {
-    status: "hide",
+    active: false,
     type: 'all',
     topic: undefined,
     topics: [],
@@ -156,7 +130,7 @@ export class LayoutNavApplicationComponent implements OnInit {
   }
 
   get showMineMenu(): boolean {
-    if (this.bis.nav) return this.bis.nav!.all!
+    if (this.bis.nav) return this.bis.nav!.mine!
     return true
   }
 
@@ -165,7 +139,8 @@ export class LayoutNavApplicationComponent implements OnInit {
     private http: _HttpClient,
     private inject: Injector,
     // @ts-ignore
-    private configService: YunzaiConfigService
+    private configService: YunzaiConfigService,
+    @Inject(WINDOW) private win: any
   ) {
     this.bis = mergeBisConfig(configService)
   }
@@ -173,6 +148,14 @@ export class LayoutNavApplicationComponent implements OnInit {
   ngOnInit(): void {
     this.fetchAllTopic();
     this.attachNav('all');
+    this.win.addEventListener("click", (event: any) => {
+      const {target} = event
+      const btn = this.win.document.getElementById("navBtn")
+      const dropdown = this.win.document.getElementById("navDropdown")
+      if (btn && dropdown && !dropdown.contains(target) && !btn.contains(target)) {
+        this.state.active = false
+      }
+    })
   }
 
   fetchAllTopic(): void {
@@ -224,6 +207,13 @@ export class LayoutNavApplicationComponent implements OnInit {
     this.state.list = temp.filter(t => t.key === topic.key)[0].children;
   }
 
+  diffChange(flag?: boolean): void {
+    if (flag) {
+      this.state.active = flag;
+    } else {
+      this.state.active = !this.state.active;
+    }
+  }
 
   open(topic: YunzaiNavTopic): void {
     if (topic.key) {
@@ -232,7 +222,7 @@ export class LayoutNavApplicationComponent implements OnInit {
           appId: topic.key,
           createDate: new Date()
         })
-        .pipe(takeUntilDestroyed())
+        .pipe(takeUntilDestroyed(inject(DestroyRef)))
         .subscribe();
     }
     switch (topic.target) {

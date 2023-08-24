@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import {Component, DestroyRef, inject, Injector, OnInit} from '@angular/core';
 
 import { _HttpClient } from '@yelon/theme';
 import { LayoutNavGroupState, useLocalStorageHeader, WINDOW, YunzaiNavTopic } from '@yelon/util';
@@ -60,7 +60,7 @@ export class LayoutNavGroupComponent implements OnInit {
           appId: topic.key,
           createDate: new Date()
         })
-        .pipe(takeUntilDestroyed())
+        .pipe(takeUntilDestroyed(inject(DestroyRef)))
         .subscribe();
     }
     switch (topic.target) {

@@ -9,7 +9,7 @@ import {
   OnInit,
   Renderer2,
   Inject,
-  Optional
+  Optional, inject, DestroyRef
 } from '@angular/core';
 
 import { ThemeBtnType, YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
@@ -99,7 +99,7 @@ export class YunzaiThemBtnComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.dir = this.directionality.value;
-    this.directionality.change?.pipe(takeUntilDestroyed()).subscribe((direction: Direction) => {
+    this.directionality.change?.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe((direction: Direction) => {
       this.dir = direction;
     });
     this.initTheme();

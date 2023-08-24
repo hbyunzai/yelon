@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {DestroyRef, inject, Injectable} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 
@@ -74,19 +74,19 @@ export class LayoutDisplayService {
   }
 
   listen(component: 'nav' | 'aside' | 'reuseTab', callback: (display: boolean) => void): void {
-    this.displayNav.pipe(takeUntilDestroyed()).subscribe(display => {
+    this.displayNav.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(display => {
       if (component === 'nav') {
         callback(display);
         resizeWindow();
       }
     });
-    this.displayAside.pipe(takeUntilDestroyed()).subscribe(display => {
+    this.displayAside.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(display => {
       if (component === 'aside') {
         callback(display);
         resizeWindow();
       }
     });
-    this.displayReuseTab.pipe(takeUntilDestroyed()).subscribe(display => {
+    this.displayReuseTab.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(display => {
       if (component === 'reuseTab') {
         callback(display);
         resizeWindow();
