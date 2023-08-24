@@ -2,7 +2,6 @@ import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output
 import {catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip} from 'rxjs';
 
 import {SFComponent, SFValueChange} from '@yelon/form';
-import { SFValueChange } from '@yelon/form/src/interface';
 import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
 
 import { defaultSchema } from './yunzai-role-tree.schema';
