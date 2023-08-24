@@ -13,9 +13,35 @@ import {
 import {YunzaiI18NService} from '../yunzai-i18n.service';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "../bis.config";
+import {animate, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: `layout-nav-application`,
+  animations: [
+    trigger("applicationUnderline", [
+      state('display', style({width: '100%'})),
+      state('hide', style({width: '0'})),
+      transition('hide => display', animate('.2s .1s')),
+      transition('display => hide', animate(300))
+    ]),
+    trigger("menu", [
+      // 产品服务动画
+      state('hide', style({display: 'none'})),
+      state('display', style({display: 'block'})),
+      transition('hide => display', [
+        animate(
+          '0.15s',
+          keyframes([style({opacity: 0}), style({opacity: 1})])
+        )
+      ]),
+      transition('display => hide', [
+        animate(
+          '0.15s',
+          keyframes([style({opacity: 1}), style({opacity: 0})])
+        )
+      ])
+    ])
+  ],
   template: `
     <!--      search start-->
     <ng-template #search>
@@ -58,11 +84,12 @@ import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "../bis.config";
     <!-- right menu end -->
 
     <!--      button start-->
-    <div data-event-id="_nav_app" class="yunzai-default__nav-item" (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
+    <div data-event-id="_nav_app" class="yunzai-default__nav-item"
+         [@applicationUnderline]='state.status'> {{ 'mode.nav' | i18n }}</div>
     <!--      button end-->
 
     <!--      header start-->
-    <div class="yz-application" nz-row *ngIf="state.active">
+    <div class="yz-application" [@menu]="state.status">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
         <div *ngIf="showAllMenu" data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text"
              (click)="attachNav('all')">{{
@@ -115,7 +142,7 @@ import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "../bis.config";
 export class LayoutNavApplicationComponent implements OnInit {
   private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
   state: LayoutNavApplicationState = {
-    active: false,
+    status: "hide",
     type: 'all',
     topic: undefined,
     topics: [],
@@ -197,13 +224,6 @@ export class LayoutNavApplicationComponent implements OnInit {
     this.state.list = temp.filter(t => t.key === topic.key)[0].children;
   }
 
-  diffChange(flag?: boolean): void {
-    if (flag) {
-      this.state.active = flag;
-    } else {
-      this.state.active = !this.state.active;
-    }
-  }
 
   open(topic: YunzaiNavTopic): void {
     if (topic.key) {

@@ -1,5 +1,4 @@
-
-import { YunzaiNavTopic } from './header-menu.type';
+import {YunzaiNavTopic} from './header-menu.type';
 
 export enum NavType {
   APPLICATION = 'application',
@@ -20,7 +19,7 @@ export interface LayoutBasicDisplay {
 }
 
 export interface LayoutNavApplicationState {
-  active: boolean;
+  status: 'display' | 'hide';
   type: 'all' | 'mine' | 'other';
   topic?: YunzaiNavTopic;
   topics: YunzaiNavTopic[];
