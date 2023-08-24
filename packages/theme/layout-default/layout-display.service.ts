@@ -1,6 +1,6 @@
-import {DestroyRef, inject, Injectable} from '@angular/core';
+import {DestroyRef, inject, Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject, takeUntil} from 'rxjs';
 
 import {resizeWindow} from '@yelon/util';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
@@ -8,10 +8,11 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 @Injectable({
   providedIn: 'root'
 })
-export class LayoutDisplayService {
+export class LayoutDisplayService implements OnDestroy {
   private displayNav: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private displayAside: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private displayReuseTab: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  private $destroy = new Subject<void>()
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.pipe(takeUntilDestroyed()).subscribe(params => {
@@ -74,19 +75,19 @@ export class LayoutDisplayService {
   }
 
   listen(component: 'nav' | 'aside' | 'reuseTab', callback: (display: boolean) => void): void {
-    this.displayNav.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(display => {
+    this.displayNav.pipe(takeUntil(this.$destroy)).subscribe(display => {
       if (component === 'nav') {
         callback(display);
         resizeWindow();
       }
     });
-    this.displayAside.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(display => {
+    this.displayAside.pipe(takeUntil(this.$destroy)).subscribe(display => {
       if (component === 'aside') {
         callback(display);
         resizeWindow();
       }
     });
-    this.displayReuseTab.pipe(takeUntilDestroyed(inject(DestroyRef))).subscribe(display => {
+    this.displayReuseTab.pipe(takeUntil(this.$destroy)).subscribe(display => {
       if (component === 'reuseTab') {
         callback(display);
         resizeWindow();
@@ -94,4 +95,7 @@ export class LayoutDisplayService {
     });
   }
 
+  ngOnDestroy() {
+    this.$destroy.complete()
+  }
 }
