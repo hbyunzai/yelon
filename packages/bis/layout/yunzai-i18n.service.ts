@@ -1,11 +1,11 @@
-import { Platform } from '@angular/cdk/platform';
-import { registerLocaleData } from '@angular/common';
+import {Platform} from '@angular/cdk/platform';
+import {registerLocaleData} from '@angular/common';
 import ngEn from '@angular/common/locales/en';
-import { Injectable, OnDestroy} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Observable, catchError, of, Subject, takeUntil} from 'rxjs';
 
-import { enUS as dfEn } from 'date-fns/locale';
-import { map } from 'rxjs/operators';
+import {enUS as dfEn} from 'date-fns/locale';
+import {map} from 'rxjs/operators';
 
 import {
   YelonLocaleService,
@@ -15,23 +15,23 @@ import {
   YunzaiI18NType,
   en_US as yelonEnUS
 } from '@yelon/theme';
-import { useLocalStorageLang, useLocalStorageLangs } from '@yelon/util';
-import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzI18nService, en_US as zorroEnUS } from 'ng-zorro-antd/i18n';
+import {useLocalStorageLang, useLocalStorageLangs} from '@yelon/util';
+import {YunzaiBusinessConfig, YunzaiConfigService} from '@yelon/util/config';
+import {NzSafeAny} from 'ng-zorro-antd/core/types';
+import {NzI18nService, en_US as zorroEnUS} from 'ng-zorro-antd/i18n';
 
-import { mergeBisConfig } from './bis.config';
-import { YUNZAI_LANGS } from './yunzai-lang';
+import {mergeBisConfig} from './bis.config';
+import {YUNZAI_LANGS} from './yunzai-lang';
 
 declare const ngDevMode: boolean;
 
 const DEFAULT = 'zh-CN';
 
-@Injectable({ providedIn: 'root' })
-export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy{
+@Injectable({providedIn: 'root'})
+export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
   protected override _defaultLang = DEFAULT;
   private bis: YunzaiBusinessConfig;
-  private $destroy =new Subject()
+  private $destroy = new Subject()
 
   constructor(
     private http: _HttpClient,
@@ -67,7 +67,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     if (ngDevMode) {
       return this.http.get(`assets/tmp/i18n/${lang}.json`);
     } else {
-      if (this.getLang(lang)) {
+      if (this.getLang(lang) !== {}) {
         return of(this.getLang(lang));
       }
       return this.http
@@ -103,7 +103,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
   getLangs(): Observable<YunzaiI18NType[]> {
     const langs = Object.keys(YUNZAI_LANGS).map(code => {
       const item = YUNZAI_LANGS[code];
-      return { code, text: item.text, abbr: item.abbr, image: undefined };
+      return {code, text: item.text, abbr: item.abbr, image: undefined};
     });
     if (ngDevMode) {
       return of(langs);
@@ -140,6 +140,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     const [, getLangs] = useLocalStorageLangs();
     return getLangs() || [];
   }
+
   ngOnDestroy() {
     this.$destroy.complete()
   }
