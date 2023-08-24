@@ -1,4 +1,4 @@
-import {DestroyRef, inject, Injectable, OnDestroy} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject, Subject, takeUntil} from 'rxjs';
 
