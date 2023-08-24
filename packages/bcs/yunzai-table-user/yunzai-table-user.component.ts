@@ -25,7 +25,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   state: YunzaiTableUserState = {
     columns: [
-      { index: 'checkbox', render: 'checkbox', renderTitle: 'checkbox_all', width: 50, fixed: 'left' },
+      {index: "checkbox", render: "checkbox", renderTitle: 'checkbox_all', width: 20, fixed: 'left'},
       { index: 'no', type: 'no', title: { i18n: 'table-user.no' }, width: 50 },
       { index: 'realName', title: { i18n: 'table-user.realName' }, width: 100 },
       { index: 'userCode', title: { i18n: 'table-user.usercode' }, width: 100 },

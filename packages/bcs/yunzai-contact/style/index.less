@@ -1,0 +1,61 @@
+@selectContactsModalType: 57px;
+@selectContactsModalTree: 550px;
+
+
+.yz-select-contacts-modal .ant-modal-body {
+  padding: 0;
+}
+
+.yz-select-contacts-modal-type {
+  height: @selectContactsModalType;
+  line-height: @selectContactsModalType - 1px;
+  background-color: #fafafa;
+  border-bottom: 1px solid #e8e8e8;
+  overflow: hidden;
+  text-align: center;
+
+  .ant-radio-group {
+    display: block;
+    width: 100%;
+  }
+
+  .ant-radio-button-wrapper {
+    height: @selectContactsModalType;
+    padding: 0;
+    line-height: @selectContactsModalType - 1px;
+    background: none;
+    width: 25%;
+    border: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .ant-radio-button-wrapper-checked {
+    border-bottom: 4px solid #1990fc;
+    background: #e6f7ff;
+  }
+}
+
+.yz-select-contacts-modal-tree {
+  padding: 12px;
+  height: @selectContactsModalTree;
+  overflow-y: auto;
+  .sf__inline .sf__item{
+    width: 100%;
+  }
+  .ant-form-inline .ant-form-item{
+    margin-right: 0;
+  }
+}
+
+.yz-select-contacts-modal-right {
+  padding: 12px;
+  float:left;
+  height: @selectContactsModalType + @selectContactsModalTree;
+  overflow-y: auto;
+  border-left: 1px solid #e8e8e8;
+  nz-table{
+    margin-top: 12px;
+  }
+}

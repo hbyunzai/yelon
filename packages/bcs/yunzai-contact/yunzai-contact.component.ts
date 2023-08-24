@@ -20,50 +20,36 @@ import { YunzaiContactProps, YunzaiContactState } from './yunzai-contact.types';
     <ng-template #content>
       <nz-row>
         <nz-col [nzSpan]="6">
-          <nz-row>
-            <nz-col [nzSpan]="24">
-              <nz-radio-group [(ngModel)]="state.cursor">
-                <label *ngIf="!disableDeptTree" nz-radio-button nzValue="deptTree">{{ 'deptTree' | i18n }}</label>
-                <label *ngIf="!disableRoleTree" nz-radio-button nzValue="roleTree">{{ 'roleTree' | i18n }}</label>
-                <label *ngIf="!disableDormitoryTree" nz-radio-button nzValue="dormitoryTree">{{
-                  'dormitoryTree' | i18n
-                }}</label>
-                <label *ngIf="!disableFriendGroup" nz-radio-button nzValue="friendGroup">{{
-                  'friendGroup' | i18n
-                }}</label>
-              </nz-radio-group>
-            </nz-col>
 
+          <div class="yz-select-contacts-modal-type">
+            <nz-radio-group [(ngModel)]="state.cursor">
+              <label *ngIf="!disableDeptTree" nz-radio-button
+                     nzValue="deptTree">{{'deptTree'|i18n}}</label>
+              <label *ngIf="!disableRoleTree" nz-radio-button
+                     nzValue="roleTree">{{'roleTree'|i18n}}</label>
+              <label *ngIf="!disableDormitoryTree" nz-radio-button
+                     nzValue="dormitoryTree">{{'dormitoryTree'|i18n}}</label>
+              <label *ngIf="!disableFriendGroup" nz-radio-button
+                     nzValue="friendGroup">{{'friendGroup'|i18n}}</label>
+            </nz-radio-group>
+          </div>
+
+          <nz-row class="yz-select-contacts-modal-tree">
             <nz-col [nzSpan]="24" [ngSwitch]="state.cursor">
-              <yunzai-dept-tree
-                *ngSwitchCase="'deptTree'"
-                [props]="deptTree"
-                (onSelect)="onDeptSelect($event)"
-              ></yunzai-dept-tree>
-              <yunzai-dormitory-tree
-                *ngSwitchCase="'dormitoryTree'"
-                [props]="dormitoryTree"
-                (onSelect)="onDormTreeSelect($event)"
-              ></yunzai-dormitory-tree>
-              <yunzai-role-tree
-                *ngSwitchCase="'roleTree'"
-                [props]="roleTree"
-                (onSelect)="onRoleTreeSelect($event)"
-              ></yunzai-role-tree>
-              <yunzai-friend-group
-                *ngSwitchCase="'friendGroup'"
-                [props]="friendGroup"
-                (onSelect)="onFriendSelect($event)"
-              ></yunzai-friend-group>
+              <app-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree"
+                             (onSelect)="onDeptSelect($event)"></app-dept-tree>
+              <app-dormitory-tree *ngSwitchCase="'dormitoryTree'" [props]="dormitoryTree"
+                                  (onSelect)="onDormTreeSelect($event)"></app-dormitory-tree>
+              <app-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree"
+                             (onSelect)="onRoleTreeSelect($event)"></app-role-tree>
+              <app-friend-group *ngSwitchCase="'friendGroup'" [props]="friendGroup"
+                                (onSelect)="onFriendSelect($event)"></app-friend-group>
             </nz-col>
           </nz-row>
         </nz-col>
         <nz-col [nzSpan]="18">
-          <yunzai-table-user
-            #table
-            [props]="tableUserProps"
-            (onChecked)="onTableUserChecked($event)"
-          ></yunzai-table-user>
+          <app-table-user #table [props]="tableUserProps"
+                          (onChecked)="onTableUserChecked($event)"></app-table-user>
         </nz-col>
       </nz-row>
     </ng-template>

@@ -69,6 +69,7 @@ export class YunzaiContactService {
       .create<YunzaiContactComponent>({
         nzTitle: '人员选择',
         nzContent: YunzaiContactComponent,
+        nzClassName: 'yz-select-contacts-modal',
         nzWidth: 1200,
         nzData: param,
         nzOnOk: () => lastValueFrom(nzOnOk(value))
