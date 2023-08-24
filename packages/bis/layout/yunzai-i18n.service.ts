@@ -67,7 +67,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     if (ngDevMode) {
       return this.http.get(`assets/tmp/i18n/${lang}.json`);
     } else {
-      if (this.getLang(lang) !== {}) {
+      if (this.getLang(lang) !== null) {
         return of(this.getLang(lang));
       }
       return this.http
@@ -126,9 +126,9 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     setLang(lang, data);
   }
 
-  getLang(lang: string): Record<string, unknown> {
+  getLang(lang: string): Record<string, unknown> | null {
     const [, getL] = useLocalStorageLang();
-    return getL(lang) || {};
+    return getL(lang) || null;
   }
 
   cacheLangs(langs: YunzaiI18NType[]): void {
