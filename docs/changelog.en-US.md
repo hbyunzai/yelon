@@ -13,6 +13,41 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+# [16.2.0](https://github.com/hbyunzai/yelon/compare/16.0.5...16.2.0) (2023-08-24)
+
+
+### Bug Fixes
+
+* **abc:onboarding:** fix `ComponentFactoryResolver` ([76e3b09](https://github.com/hbyunzai/yelon/commit/76e3b09f4ba5a41ea598eae9401dbb07095f490d))
+* **abc:reuse-tab:** fix cache ([ac4632f](https://github.com/hbyunzai/yelon/commit/ac4632f5158b23f7381eb38096c2a3d53491e4e5))
+* **abc:reuse-tab:** fix missing export cache ([9baeb77](https://github.com/hbyunzai/yelon/commit/9baeb77f9199dada6ac113d3f7eee0e000e50c3f))
+* **auth:cookie:** fix cookie expires ([ddc8fb6](https://github.com/hbyunzai/yelon/commit/ddc8fb69fb69b6c9c6dce073b79003b84c5408e8))
+* **bcs:contact:** fix style ([a5f6bc5](https://github.com/hbyunzai/yelon/commit/a5f6bc5541cbecbd2c14ad04c8607d302767646e))
+* **bcs:** fix tag name ([bd895ee](https://github.com/hbyunzai/yelon/commit/bd895ee3f3c83ed7021adce99c470983f757a81c))
+* **chat:timeline:** fix `y2` to be optional ([e6c0d4e](https://github.com/hbyunzai/yelon/commit/e6c0d4e546054436b16f8c14a6f7b96151259f47))
+* **cli:** remove `skipTests` from generating module ([825ac78](https://github.com/hbyunzai/yelon/commit/825ac7832caae31852eb8a6c0973f8b58f9fcea8))
+* **cli:** remove `stylelint-config-prettier` ([571fa7f](https://github.com/hbyunzai/yelon/commit/571fa7f35ba1c20ee1d37ec8ac1c9414a7766f90))
+* fix misalignment of `col` placeholders in `se`, `sv`, `sg` ([62bc221](https://github.com/hbyunzai/yelon/commit/62bc22170c3de08d6dabfac38a10a14f22edbf3d))
+* **layoout:** fix layout-display.service.ts channel ([e32fab9](https://github.com/hbyunzai/yelon/commit/e32fab913354d6099b1cabba32fd2d6058398ebe))
+* **layout:** fix destroy can't find ([c4f189e](https://github.com/hbyunzai/yelon/commit/c4f189ec1f6e133b4a85ceade01585b911e4fea4))
+* **se:** fix spell ([ecfb7b0](https://github.com/hbyunzai/yelon/commit/ecfb7b0ec492f903fd7ce7089192e6c663f96f3a))
+* **theme:modal:** removed `nzComponentParams ([6507ead](https://github.com/hbyunzai/yelon/commit/6507ead349cfaf6f4184dc601a5e8b0609d2483a))
+* **theme:table:** fix table image spacing ([dadeddc](https://github.com/hbyunzai/yelon/commit/dadeddcb9c1b5ec7aaf02c6898498b46b8d98fcc))
+* **theme:title:** fix ignore empty title ([f3d35d8](https://github.com/hbyunzai/yelon/commit/f3d35d8c35a4fea77b45cbc5623c13bc75bae0b1))
+* **theme:** fix ant-btn preserve white spaces when is link type ([6249f0e](https://github.com/hbyunzai/yelon/commit/6249f0e205f7f1f8cd3df49d40d52e57856554a8))
+
+
+### Features
+
+* **abc:reuse-tab:** support custom cache data ([4e4171b](https://github.com/hbyunzai/yelon/commit/4e4171b3a72a14407243d33eca340ef5558a6db3))
+* **abc:st:** add `onCell`, support colSpan and rowSpan merging ([c219e8c](https://github.com/hbyunzai/yelon/commit/c219e8cc5e0ff04f91768e3ce5f84865a9cee0de))
+* **abc:st:** button support function method of `icon`, `className` ([486a077](https://github.com/hbyunzai/yelon/commit/486a07760b22de7064a37e886c55980e34319962))
+* **bcs:table:** add ids params ([e71e344](https://github.com/hbyunzai/yelon/commit/e71e3440d5aad453972476e7806a3fa94fdc9fa5))
+* **bis:** add show all/mine menu config ([b6073ae](https://github.com/hbyunzai/yelon/commit/b6073aea60ec9a7fc8b86ee7cdd837434dcd870e))
+* **theme:layout-default:** add `fetching` property ([0acbfdf](https://github.com/hbyunzai/yelon/commit/0acbfdffbb6f33f9e7f776d3d47764a30e4bfc69))
+* **theme:modal:** support drag ([4cb5065](https://github.com/hbyunzai/yelon/commit/4cb5065fc1a4054ce3717865dbdbaa6bcd219b7d))
+
+
 ## [16.0.5](https://github.com/hbyunzai/yelon/compare/16.0.4...16.0.5) (2023-08-16)
 
 
