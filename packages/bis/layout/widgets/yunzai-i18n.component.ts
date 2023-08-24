@@ -6,7 +6,6 @@ import {YunzaiI18NService} from "../yunzai-i18n.service"
 import {BooleanInput, InputBoolean} from '@yelon/util/decorator';
 
 import {Subject, takeUntil} from "rxjs";
-import setTimeout from "$GLOBAL$";
 
 @Component({
   selector: 'yunzai-i18n',
