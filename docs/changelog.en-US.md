@@ -13,6 +13,15 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [16.2.3](https://github.com/hbyunzai/yelon/compare/16.2.2...16.2.3) (2023-08-24)
+
+
+### Bug Fixes
+
+* **bis:** fix destroy ([9e7dabc](https://github.com/hbyunzai/yelon/commit/9e7dabc88d1d719008d8b3261a0a8cd24ff7cc7b))
+* **bis:** fix error import ([ccdc0f5](https://github.com/hbyunzai/yelon/commit/ccdc0f5ea323f07adb15b0f6872be4021b3bd1a2))
+
+
 ## [16.2.2](https://github.com/hbyunzai/yelon/compare/16.2.1...16.2.2) (2023-08-24)
 
 blank version
