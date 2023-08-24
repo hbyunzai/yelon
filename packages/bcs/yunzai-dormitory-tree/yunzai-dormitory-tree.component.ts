@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { catchError, debounceTime, map, of, switchMap, throwError, zip } from 'rxjs';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip} from 'rxjs';
 
-import { SFComponent } from '@yelon/form';
+import {SFComponent, SFValueChange} from '@yelon/form';
 import { SFValueChange } from '@yelon/form/src/interface';
 import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
 
@@ -14,18 +14,18 @@ import {
   YunzaiDormitoryTreeState,
   YunzaiDormitoryTreeType
 } from './yunzai-dormitory-tree.types';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: `yunzai-dormitory-tree`,
   templateUrl: `./yunzai-dormitory-tree.html`
 })
-export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit {
+export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit ,OnDestroy{
   @ViewChild('form') sf!: SFComponent;
 
   @Input() props?: YunzaiDormitoryTreeProps;
   @Output() onQueryComplete: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
   @Output() onSelect: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
+  private $destroy = new Subject()
 
   state: YunzaiDormitoryTreeState = {
     loading: false,
@@ -100,7 +100,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit {
   hookFormChange(): void {
     this.sf.formValueChange
       .pipe(
-        takeUntilDestroyed(),
+        takeUntil(this.$destroy),
         debounceTime(1000),
         map(value => {
           this.load();
@@ -157,7 +157,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit {
     this.dormitoryService
       .tree(param)
       .pipe(
-        takeUntilDestroyed(),
+        takeUntil(this.$destroy),
         map((dorms: YunzaiDormitoryTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(dorms);
@@ -213,5 +213,9 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit {
         node.isExpanded = !node.isExpanded;
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.complete()
   }
 }

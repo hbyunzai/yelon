@@ -1,25 +1,25 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { catchError, debounceTime, map, of,  switchMap, throwError, zip } from 'rxjs';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip} from 'rxjs';
 
-import { SFComponent } from '@yelon/form';
+import {SFComponent, SFValueChange} from '@yelon/form';
 import { SFValueChange } from '@yelon/form/src/interface';
 import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
 
 import { defaultSchema } from './yunzai-role-tree.schema';
 import { YunzaiRoleTreeService } from './yunzai-role-tree.service';
 import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunzai-role-tree.types';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: `yunzai-role-tree`,
   templateUrl: `./yunzai-role-tree.html`
 })
-export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit {
+export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   @ViewChild('form') sf!: SFComponent;
 
   @Input() props?: YunzaiRoleTreeProps;
   @Output() readonly onQueryComplete: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
   @Output() readonly onSelect: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
+  private $destroy = new Subject();
 
   state: YunzaiRoleTreeState = {
     loading: false,
@@ -94,7 +94,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit {
   hookFormChange(): void {
     this.sf.formValueChange
       .pipe(
-        takeUntilDestroyed(),
+        takeUntil(this.$destroy),
         debounceTime(1000),
         map(value => {
           this.load();
@@ -151,7 +151,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit {
     this.roleTreeService
       .tree(roleGroupCode)
       .pipe(
-        takeUntilDestroyed(),
+        takeUntil(this.$destroy),
         map((roles: YunzaiRoleTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(roles);
@@ -207,5 +207,9 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit {
         node.isExpanded = !node.isExpanded;
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.complete();
   }
 }

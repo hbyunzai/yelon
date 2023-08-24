@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {debounceTime,} from 'rxjs';
+import {debounceTime, Subject, takeUntil,} from 'rxjs';
 
 import {STColumn, STComponent, STData, STRequestOptions} from '@yelon/abc/st';
 import {SFComponent, SFSchema, SFValue} from '@yelon/form';
@@ -11,7 +11,6 @@ import {
   YunzaiTableUserRole,
   YunzaiTableUserState
 } from './yunzai-table-user.types';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {YunzaiTableUserService} from "./yunzai-table-user.service";
 
 @Component({
@@ -23,6 +22,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   @ViewChild('sf') sf!: SFComponent;
   @Input() props?: YunzaiTableUserProps;
   @Output() readonly onChecked: EventEmitter<YunzaiTableUser[]> = new EventEmitter<YunzaiTableUser[]>();
+  private $destroy = new Subject()
 
   state: YunzaiTableUserState = {
     columns: [
@@ -196,7 +196,9 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     let checked = this.props.check.data
     if (this.userIds.length > 0) {
       this.service.usersByIds(this.userIds)
-        .pipe(takeUntilDestroyed())
+        .pipe(
+          takeUntil(this.$destroy)
+        )
         .subscribe((users) => {
           checked = checked.concat(users)
           this.state.check.data = checked
@@ -317,7 +319,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   }
 
   hookSearch(): void {
-    this.sf.formValueChange.pipe(takeUntilDestroyed(), debounceTime(1000)).subscribe(event => {
+    this.sf.formValueChange.pipe(takeUntil(this.$destroy), debounceTime(1000)).subscribe(event => {
       const {value} = event;
       this.onSearch(value);
     });

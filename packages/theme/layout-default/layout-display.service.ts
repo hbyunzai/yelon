@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject, Subject, takeUntil} from 'rxjs';
 
 import {resizeWindow} from '@yelon/util';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class LayoutDisplayService implements OnDestroy {
   private $destroy = new Subject<void>()
 
   constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.queryParams.pipe(takeUntilDestroyed()).subscribe(params => {
+    this.activatedRoute.queryParams.pipe(takeUntil(this.$destroy)).subscribe(params => {
       if (params['displayNav']) {
         try {
           const displayNav = params['displayNav'];

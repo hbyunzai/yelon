@@ -1,22 +1,22 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { catchError, debounceTime, map,  throwError } from 'rxjs';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {catchError, debounceTime, map, Subject, takeUntil, throwError} from 'rxjs';
 
 import { SFComponent } from '@yelon/form';
 
 import { defaultSchema } from './yunzai-friend-group.schema';
 import { YunzaiFriendGroupService } from './yunzai-friend-group.service';
 import { YunzaiFriendGroup, YunzaiFriendGroupProps, YunzaiFriendGroupState } from './yunzai-friend-group.types';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: `yunzai-friend-group`,
   templateUrl: `./yunzai-friend-group.html`
 })
-export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit {
+export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit,OnDestroy {
   @Input() props?: YunzaiFriendGroupProps;
   @Output() readonly onQueryComplete: EventEmitter<YunzaiFriendGroup[]> = new EventEmitter<YunzaiFriendGroup[]>();
   @Output() readonly onSelect: EventEmitter<YunzaiFriendGroup> = new EventEmitter<YunzaiFriendGroup>();
   @ViewChild('form') sf!: SFComponent;
+  private $destroy = new Subject();
 
   state: YunzaiFriendGroupState = {
     loading: false,
@@ -52,7 +52,7 @@ export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit {
   }
 
   hookFormChange(): void {
-    this.sf.formValueChange.pipe(takeUntilDestroyed(), debounceTime(1000)).subscribe(change => {
+    this.sf.formValueChange.pipe(takeUntil(this.$destroy), debounceTime(1000)).subscribe(change => {
       const {
         value: { search }
       } = change;
@@ -73,7 +73,7 @@ export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit {
     this.friendsService
       .groups()
       .pipe(
-        takeUntilDestroyed(),
+        takeUntil(this.$destroy),
         catchError(error => {
           this.state.loading = false;
           return throwError(error);
@@ -86,5 +86,9 @@ export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit {
         })
       )
       .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.complete()
   }
 }
