@@ -13,6 +13,16 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## [16.2.4](https://github.com/hbyunzai/yelon/compare/16.2.3...16.2.4) (2023-08-25)
+
+
+### Bug Fixes
+
+* **bcs:** contact not emit ([be30cbe](https://github.com/hbyunzai/yelon/commit/be30cbee96e079d93762592c09e8a3709a0f5a1c))
+* **i18n:** nullObject is {} ([2202e26](https://github.com/hbyunzai/yelon/commit/2202e266a994d59ad4ccdc37c8b3971428e58a98))
+* **i18n:** nullObject is {} ([e1c54e2](https://github.com/hbyunzai/yelon/commit/e1c54e25061aae3de72205d6ae0342a3763b1a79))
+
+
 ## [16.2.3](https://github.com/hbyunzai/yelon/compare/16.2.2...16.2.3) (2023-08-24)
 
 
