@@ -193,16 +193,15 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   setupPropsChecked(): void {
     if (!this.props || !this.props.check || !this.props.check.data) return;
-    let checked = this.props.check.data
+    this.state.check.data = this.props.check.data
     if (this.userIds.length > 0) {
       this.service.usersByIds(this.userIds)
-        .pipe(
-          takeUntil(this.$destroy)
-        )
         .subscribe((users) => {
-          checked = checked.concat(users)
-          this.state.check.data = checked
+          this.state.check.data = this.state.check.data.concat(users)
+          this.onChecked.emit(this.state.check.data as any)
         })
+    } else {
+      this.onChecked.emit(this.state.check.data as any)
     }
   }
 
