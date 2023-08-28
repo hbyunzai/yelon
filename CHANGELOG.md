@@ -1,3 +1,12 @@
+## [16.2.5](https://github.com/hbyunzai/yelon/compare/16.2.4...16.2.5) (2023-08-28)
+
+
+### Bug Fixes
+
+* **i18n:** remove i18n data from cache ([56fc04d](https://github.com/hbyunzai/yelon/commit/56fc04d8fbb18a025b802eeb2345af0287b5c8c0))
+
+
+
 ## [16.2.4](https://github.com/hbyunzai/yelon/compare/16.2.3...16.2.4) (2023-08-25)
 
 
