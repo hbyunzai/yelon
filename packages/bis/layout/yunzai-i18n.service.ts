@@ -15,7 +15,6 @@ import {
   YunzaiI18NType,
   en_US as yelonEnUS
 } from '@yelon/theme';
-import {useLocalStorageLang, useLocalStorageLangs} from '@yelon/util';
 import {YunzaiBusinessConfig, YunzaiConfigService} from '@yelon/util/config';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import {NzI18nService, en_US as zorroEnUS} from 'ng-zorro-antd/i18n';
@@ -67,9 +66,6 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     if (ngDevMode) {
       return this.http.get(`assets/tmp/i18n/${lang}.json`);
     } else {
-      if (this.getLang(lang) !== null) {
-        return of(this.getLang(lang));
-      }
       return this.http
         .get(`${this.bis.baseUrl}/i18n/api/v2/language/${lang}?_allow_anonymous`)
         .pipe(catchError(() => this.http.get(`assets/tmp/i18n/${lang}.json`)));
@@ -78,9 +74,6 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
 
   use(lang: string, data: Record<string, unknown>): void {
     if (this._currentLang === lang) return;
-    if (!ngDevMode) {
-      this.cacheLang(lang, data);
-    }
     this._data = this.flatData(data, []);
     const item = YUNZAI_LANGS[lang];
     if (item) {
@@ -108,12 +101,8 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     if (ngDevMode) {
       return of(langs);
     } else {
-      if (this.getCachedLangs().length > 0) {
-        return of(this.getCachedLangs());
-      }
-      return this.http.get(`${this.bis.baseUrl}/i18n/api/v2/language?_allow_anonymous`).pipe(
+      return this.http.get(`${this.bis.baseUrl}/i18n/api/v2/language`).pipe(
         map((response: any) => {
-          this.cacheLangs(response.data);
           return response.data;
         }),
         catchError(() => of(langs))
@@ -121,25 +110,6 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     }
   }
 
-  cacheLang(lang: string, data: Record<string, unknown>): void {
-    const [setLang] = useLocalStorageLang();
-    setLang(lang, data);
-  }
-
-  getLang(lang: string): Record<string, unknown> | null {
-    const [, getL] = useLocalStorageLang();
-    return getL(lang) || null;
-  }
-
-  cacheLangs(langs: YunzaiI18NType[]): void {
-    const [setLangs] = useLocalStorageLangs();
-    setLangs(langs);
-  }
-
-  getCachedLangs(): YunzaiI18NType[] {
-    const [, getLangs] = useLocalStorageLangs();
-    return getLangs() || [];
-  }
 
   ngOnDestroy() {
     this.$destroy.complete()
