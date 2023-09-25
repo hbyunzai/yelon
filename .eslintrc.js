@@ -92,12 +92,6 @@ module.exports = {
             accessibility: 'explicit'
           }
         ],
-        '@typescript-eslint/no-explicit-any': [
-          'off',
-          {
-            ignoreRestArgs: true
-          }
-        ],
         '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/no-for-in-array': 'error',
         '@typescript-eslint/no-inferrable-types': [
@@ -111,7 +105,7 @@ module.exports = {
         '@typescript-eslint/no-this-alias': 'error',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
-        '@typescript-eslint/no-explicit-any': 'error',
+        '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/explicit-function-return-type': [
           'error',
           {

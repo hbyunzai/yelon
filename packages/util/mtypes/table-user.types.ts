@@ -41,7 +41,8 @@ export interface TableUserRole {
   roleDesc: string | null;
   displayIndex: number | null;
   landingPageUrl: string | null;
-  roleGroups: any; // Change this type based on the actual structure if available
+  // @ts-ignore no-explicit-any
+  roleGroups: any;
   thisDepartment: boolean;
   onlyOne: boolean;
   onlyDeptOne: boolean;
@@ -62,48 +63,4 @@ export interface TableUserDept {
   children: TableUserDept[];
   pid: string | null;
   expand: boolean;
-}
-
-export interface TableUserParam {
-  buildId?: string;
-  deptId?: string;
-  floor?: string;
-  friendGroupId?: string;
-  idCard?: string;
-  realName?: string;
-  roleId?: string;
-  roomId?: string;
-  userCode?: string;
-  userTypes?: number;
-}
-
-export interface TableUserProps {
-  wrap?: boolean;
-  data?: TableUser[];
-  filteredColumns?: string[];
-  customColumns?: STColumn[];
-  additionalColumns?: STColumn[];
-  page?: any;
-  list?: boolean;
-  scroll?: {
-    x?: string | null;
-    y?: string | null;
-  };
-  check?: {
-    disable?: boolean;
-    data?: TableUser[];
-    pageCheck?: boolean;
-  };
-}
-
-export interface TableUserState {
-  data: TableUser[] | string;
-  dataBackup: TableUser[] | string;
-  columns: STColumn[];
-  page: any;
-  schema: SFSchema;
-  check: {
-    data: STData[];
-  };
-  destroy$: Subject<any>;
 }
