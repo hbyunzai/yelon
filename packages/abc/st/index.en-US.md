@@ -22,7 +22,7 @@ The value is URL.
 - Use `res.process` to optimize data before rendering table
 - Use `page.zeroIndexed` to adjust the http request when `pi` parameter follows the `0` base index, default is `1` base index
 - Automatically cancel paging when the response body value is an array type
-- Use `_HttpClient` send request, so applies to [YunzaiThemeConfig](/theme/http#YunzaiThemeConfig) configuration
+- Use `_HttpClient` send request, so applies to [AlainThemeConfig](/theme/http#AlainThemeConfig) configuration
 
 ### Static
 
@@ -286,8 +286,8 @@ class TestComponent {
 | `[statistical]` | Statistics | `STStatisticalType,STStatistical` | - |
 | `[resizable]` | Resize header, **Multiple headers not supported** | `STResizable, boolean` | - | - |
 | `[children]` | Group columns | `STColumn[]` | - |
-| `[safeType]` | Safe rendering type, Support [global config](https://ng.yunzainfo.com/docs/global-config) | `text,html,safeHtml` | `safeHtml` |
-| `[customRequest]` | Override the default request behavior, you can customize your own request implementation, for example: Graphql, Support [global config](https://ng.yunzainfo.com/docs/global-config) | `(options: STCustomRequestOptions) => Observable<any>` | - |
+| `[safeType]` | Safe rendering type, Support [global config](https://ng-alain.com/docs/global-config) | `text,html,safeHtml` | `safeHtml` |
+| `[customRequest]` | Override the default request behavior, you can customize your own request implementation, for example: Graphql, Support [global config](https://ng-alain.com/docs/global-config) | `(options: STCustomRequestOptions) => Observable<any>` | - |
 
 ### STColumnTitle
 
@@ -303,7 +303,7 @@ class TestComponent {
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
 | `[default]` | Default order of sorted values | `ascend,descend` | - |
-| `[compare]` | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction, `null` ignore local sort but keeping sort function. | `(a: STData, b: STData) => number, null` | - |
+| `[compare]` | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction, `null` ingore local sort but keeping sort function. | `(a: STData, b: STData) => number, null` | - |
 | `[key]` | Unique key of this column, default is `index` property value<br>`multiSort: false` => `key: 'name' => ?name=1&pi=1`<br>`multiSort: true` allow multiple sort keys, or use `STMultiSort` to specify multi-column sort key merge rule | `string` | - |
 | `[reName]` | Map name<br>`{ ascend: '0', descend: '1' }` => `?name=1&pi=1`<br>`{ ascend: 'asc', descend: 'desc' }` => `?name=desc&pi=1` | `{ ascend?: string, descend?: string }` | - |
 
@@ -371,7 +371,7 @@ class TestComponent {
 |----------|-------------|------|---------|---------------|
 | `[component]` | Modal component class | `any` | - | - |
 | `[params]` | Dialog parameter | `(record: STData) => Object` | - | - |
-| `[paramsName]` | Receive parameter name of the target component, If target component receive value is null, pls check [global-config.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/global-config.module.ts#L52) Global settings | `string` | `record` | ✅ |
+| `[paramsName]` | Receive parameter name of the target component, If target component receive value is null, pls check [global-config.module.ts](https://github.com/ng-alain/ng-alain/blob/master/src/app/global-config.module.ts#L52) Global settings | `string` | `record` | ✅ |
 | `[size]` | Size of modal, support number type | `'sm','md','lg','xl'` | `'lg'` | ✅ |
 | `[exact]` | Exact match return value, default is `true`, If the return value is not null (`null` or `undefined`) is considered successful, otherwise it is considered error. | `boolean` | `true` | ✅ |
 | `[includeTabs]` | Whether to wrap the nz-tabset, fix content spacing problem | `boolean` | - | - |
@@ -384,7 +384,7 @@ class TestComponent {
 | `[title]` | Title of drawer | `string` | - | - |
 | `[component]` | Drawer component class | `any` | - | - |
 | `[params]` | Dialog parameter | `(record: STData) => Object` | - | - |
-| `[paramsName]` | Receive parameter name of the target component, If target component receive value is null, pls check [global-config.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/global-config.module.ts#L52) Global settings | `string` | `record` | ✅ |
+| `[paramsName]` | Receive parameter name of the target component, If target component receive value is null, pls check [global-config.module.ts](https://github.com/ng-alain/ng-alain/blob/master/src/app/global-config.module.ts#L52) Global settings | `string` | `record` | ✅ |
 | `[size]` | Size of drawer, support number type | `'sm','md','lg','xl'` | `'md'` | ✅ |
 | `[drawerOptions]` | nz-drawer raw parameters [NzDrawerOptions](https://ng.ant.design/components/drawer/zh#nzdraweroptions) | `any` | - | ✅ |
 | `[footer]` | Whether to include the bottom toolbar | `boolean` | `true` | ✅ |
@@ -412,7 +412,7 @@ class TestComponent {
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
 | `[type]` | Currency rendering type | `commas, mega` | `commas` |
-| `[format]` | See [CurrencyService.format](https://ng.yunzainfo.com/util/format/en#format) | `CurrencyFormatOptions` | - |
+| `[format]` | See [CurrencyService.format](https://ng-alain.com/util/format/en#format) | `CurrencyFormatOptions` | - |
 
 ### STColumnBadge
 
@@ -420,6 +420,7 @@ class TestComponent {
 |----------|-------------|------|---------|
 | `[text]` | Badge text | `string` | - |
 | `[color]` | Badge color value | `success,processing,default,error,warning` | - |
+| `[tooltip]` | Text popup tip | `string` | - |
 
 ### STColumnTag
 
@@ -427,13 +428,14 @@ class TestComponent {
 |----------|-------------|------|---------|
 | `[text]` | Tag text | `string` | - |
 | `[color]` | Tag color value | `string` | - |
+| `[tooltip]` | Text popup tip | `string` | - |
 
 ### STWidgetColumn
 
-| Property | Description | Type | Default |
-|----------|-------------|------|---------|
+| Property | Description                                                                                                                                                                     | Type | Default |
+|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------|---------|
 | `[type]` | Specify the type name, which can be customized by `STWidgetRegistry`, [for example](https://github.com/hbyunzai/yelon/blob/master/src/app/shared/st-widget/st-widget.module.ts) | `string` | - |
-| `[params]` | Parameters of the target component | `(options: { record: STData; column: STColumn }) => {}` | - |
+| `[params]` | Parameters of the target component                                                                                                                                              | `(options: { record: STData; column: STColumn }) => {}` | - |
 
 ### STWidthMode
 

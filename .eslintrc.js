@@ -130,7 +130,7 @@ module.exports = {
                 position: 'before'
               },
               {
-                pattern: '{ng-zorro-antd/**,@delon/**}',
+                pattern: '{ng-zorro-antd/**,@yelon/**}',
                 group: 'internal',
                 position: 'before'
               },

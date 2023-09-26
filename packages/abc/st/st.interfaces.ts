@@ -96,13 +96,13 @@ export interface STRequestOptions {
   headers?:
     | HttpHeaders
     | {
-    [header: string]: string | string[];
-  };
+        [header: string]: string | string[];
+      };
   params?:
     | HttpParams
     | {
-    [param: string]: string | string[];
-  };
+        [param: string]: string | string[];
+      };
   observe?: 'body' | 'events' | 'response';
   reportProgress?: boolean;
   responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
@@ -1060,6 +1060,12 @@ export interface STColumnBadgeValue {
    * 徽标颜色值
    */
   color?: 'success' | 'processing' | 'default' | 'error' | 'warning';
+  /**
+   * Text popup tip
+   *
+   * 文字提示
+   */
+  tooltip?: string;
 }
 
 /**
@@ -1093,6 +1099,13 @@ export interface STColumnTagValue {
     | 'green'
     | 'cyan'
     | string;
+
+  /**
+   * Text popup tip
+   *
+   * 文字提示
+   */
+  tooltip?: string;
 }
 
 export type STChangeType =

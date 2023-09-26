@@ -11,7 +11,7 @@ module: import { STModule } from '@yelon/abc/st';
 
 ## 关于数据源
 
-`data` 支持三种不同格式数据源，整体分为：URL和静态数据两类；但可以透过参数的配置达到不同的效果，同时有非常多参数可通过 `YunzaiSTConfig` 重置默认值，使整个 `st` 组件模板达到极简。
+`data` 支持三种不同格式数据源，整体分为：URL和静态数据两类；但可以透过参数的配置达到不同的效果，同时有非常多参数可通过 `AlainSTConfig` 重置默认值，使整个 `st` 组件模板达到极简。
 
 ### URL
 
@@ -22,7 +22,7 @@ module: import { STModule } from '@yelon/abc/st';
 - 通过 `res.process` 可以对表格渲染前对数据进一步优化
 - 通过 `page.zeroIndexed` 可以调整 http 请求时 `pi` 参数是否遵循 0 基索引，默认情况下为 1 基索引
 - 若返回体的值是数组类型，则强制不分页
-- 使用 `_HttpClient` 发起请求，因此满足 [YunzaiThemeConfig](/theme/http#YunzaiThemeConfig) 的配置也适用
+- 使用 `_HttpClient` 发起请求，因此满足 [AlainThemeConfig](/theme/http#AlainThemeConfig) 的配置也适用
 
 ### 静态数据
 
@@ -286,8 +286,8 @@ class TestComponent {
 | `[statistical]` | 统计信息 | `STStatisticalType,STStatistical` | - |
 | `[resizable]` | 调整表头配置项，**不支持多表头** | `STResizable, boolean` | - | - |
 | `[children]` | 多表头 | `STColumn[]` | - |
-| `[safeType]` | 安全渲染方式，支持[全局配置](https://ng.yunzainfo.com/docs/global-config/zh) | `text,html,safeHtml` | `safeHtml` |
-| `[customRequest]` | 覆盖默认的请求行为，可以自定义自己的请求实现，例如：Graphql，支持[全局配置](https://ng.yunzainfo.com/docs/global-config/zh) | `(options: STCustomRequestOptions) => Observable<any>` | - |
+| `[safeType]` | 安全渲染方式，支持[全局配置](https://ng-alain.com/docs/global-config/zh) | `text,html,safeHtml` | `safeHtml` |
+| `[customRequest]` | 覆盖默认的请求行为，可以自定义自己的请求实现，例如：Graphql，支持[全局配置](https://ng-alain.com/docs/global-config/zh) | `(options: STCustomRequestOptions) => Observable<any>` | - |
 
 ### STColumnTitle
 
@@ -371,7 +371,7 @@ class TestComponent {
 |----|----|----|-----|------|
 | `[component]` | 目标组件对象 | `any` | - | - |
 | `[params]` | 目标组件的接收参数对象 | `(record: STData) => Object` | - | - |
-| `[paramsName]` | 目标组件的接收参数名，若目标组件接收值为空时，检查 [global-config.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/global-config.module.ts#L52) 全局设置 | `string` | `record` | ✅ |
+| `[paramsName]` | 目标组件的接收参数名，若目标组件接收值为空时，检查 [global-config.module.ts](https://github.com/ng-alain/ng-alain/blob/master/src/app/global-config.module.ts#L52) 全局设置 | `string` | `record` | ✅ |
 | `[size]` | 对话框大小，支持数字类型 | `'sm','md','lg','xl'` | `'lg'` | ✅ |
 | `[exact]` | 是否精准（默认：`true`），若返回值非空值（`null`或`undefined`）视为成功，否则视为错误 | `boolean` | `true` | ✅ |
 | `[includeTabs]` | 是否包裹标签页，修复模态包含标签间距问题 | `boolean` | - | - |
@@ -384,7 +384,7 @@ class TestComponent {
 | `[title]` | 标题 | `any` | - | - |
 | `[component]` | 目标组件对象 | `any` | - | - |
 | `[params]` | 目标组件的接收参数对象 | `(record: STData) => Object` | - | - |
-| `[paramsName]` | 目标组件的接收参数名，若目标组件接收值为空时，检查 [global-config.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/global-config.module.ts#L52) 全局设置 | `string` | `record` | ✅ |
+| `[paramsName]` | 目标组件的接收参数名，若目标组件接收值为空时，检查 [global-config.module.ts](https://github.com/ng-alain/ng-alain/blob/master/src/app/global-config.module.ts#L52) 全局设置 | `string` | `record` | ✅ |
 | `[size]` | 抽屉大小，支持数字类型 | `'sm','md','lg','xl'` | `'md'` | ✅ |
 | `[drawerOptions]` | 抽屉 [NzDrawerOptions](https://ng.ant.design/components/drawer/zh#nzdraweroptions) 参数 | `any` | - | ✅ |
 | `[footer]` | 是否包含底部工具条 | `boolean` | `true` | ✅ |
@@ -412,7 +412,7 @@ class TestComponent {
 | 成员 | 说明 | 类型 | 默认值 |
 |----------|-------------|------|---------|
 | `[type]` | 货币渲染类型 | `commas, mega` | `commas` |
-| `[format]` | 见 [CurrencyService.format](https://ng.yunzainfo.com/util/format/zh#format) | `CurrencyFormatOptions` | - |
+| `[format]` | 见 [CurrencyService.format](https://ng-alain.com/util/format/zh#format) | `CurrencyFormatOptions` | - |
 
 ### STColumnBadge
 
@@ -420,6 +420,7 @@ class TestComponent {
 |----|----|----|-----|
 | `[text]` | 文本 | `string` | - |
 | `[color]` | 徽标颜色值 | `success,processing,default,error,warning` | - |
+| `[tooltip]` | 文字提示 | `string` | - |
 
 ### STColumnTag
 
@@ -427,13 +428,14 @@ class TestComponent {
 |----|----|----|-----|
 | `[text]` | 文本 | `string` | - |
 | `[color]` | Tag颜色值 | `string` | - |
+| `[tooltip]` | 文字提示 | `string` | - |
 
 ### STWidgetColumn
 
-| 成员 | 说明 | 类型 | 默认值 |
-|----|----|----|-----|
+| 成员 | 说明                                                                                                                                  | 类型 | 默认值 |
+|----|-------------------------------------------------------------------------------------------------------------------------------------|----|-----|
 | `[type]` | 指定类型名，可通过定义 `STWidgetRegistry` 来定制，[例如](https://github.com/hbyunzai/yelon/blob/master/src/app/shared/st-widget/st-widget.module.ts) | `string` | - |
-| `[params]` | 目标组件的参数 | `(options: { record: STData; column: STColumn }) => {}` | - |
+| `[params]` | 目标组件的参数                                                                                                                             | `(options: { record: STData; column: STColumn }) => {}` | - |
 
 
 ### STWidthMode

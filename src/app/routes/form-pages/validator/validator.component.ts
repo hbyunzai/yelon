@@ -13,7 +13,7 @@ import { AppService, CodeService, I18NService } from '@core';
 
 const stackBlitzTpl = `
 import { Component } from '@angular/core';
-import { SFSchema } from '@delon/form';
+import { SFSchema } from '@yelon/form';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
