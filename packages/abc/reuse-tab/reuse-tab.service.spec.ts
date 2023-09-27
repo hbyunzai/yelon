@@ -102,7 +102,7 @@ describe('abc: reuse-tab(service)', () => {
         srv.store(getSnapshot(4), {});
         expect(srv.count).toBe(2);
       });
-      it('should be ingore close when all is not closable', () => {
+      it('should be ignore close when all is not closable', () => {
         srv.max = 2;
         srv.store(getSnapshot(1), {});
         srv.store(getSnapshot(2), {});

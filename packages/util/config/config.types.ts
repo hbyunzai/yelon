@@ -17,7 +17,8 @@ import {
   YunzaiSTConfig,
   YunzaiSVConfig,
   YunzaiXlsxConfig,
-  YunzaiZipConfig
+  YunzaiZipConfig,
+  YunzaiCellConfig
 } from './abc/index';
 import { YunzaiACLConfig } from './acl/acl.type';
 import { YunzaiAuthConfig } from './auth/auth.type';
@@ -48,6 +49,7 @@ export interface YunzaiConfig {
   sv?: YunzaiSVConfig;
   st?: YunzaiSTConfig;
   sf?: YunzaiSFConfig;
+  cell?: YunzaiCellConfig;
   xlsx?: YunzaiXlsxConfig;
   zip?: YunzaiZipConfig;
   pdf?: YunzaiPdfConfig;

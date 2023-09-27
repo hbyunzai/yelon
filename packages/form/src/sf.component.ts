@@ -532,8 +532,8 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.platform.isBrowser) {
       return;
     }
-    const ingoreRender = ['disabled', 'loading'];
-    if (Object.keys(changes).every(key => ingoreRender.includes(key))) {
+    const ignoreRender = ['disabled', 'loading'];
+    if (Object.keys(changes).every(key => ignoreRender.includes(key))) {
       this.cdr.detectChanges();
       return;
     }

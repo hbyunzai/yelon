@@ -7,6 +7,7 @@ import localeZh from '@angular/common/locales/zh';
 import { APP_INITIALIZER, ErrorHandler, Inject, Injector, NgModule, PLATFORM_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CellWidgetModule } from './shared/cell-widget/module';
 
 // angular i18n
 registerLocaleData(localeZh);
@@ -60,6 +61,7 @@ function registerElements(injector: Injector, platformId: {}): void {
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     HttpClientModule,
+      CellWidgetModule,
     BidiModule,
     GlobalConfigModule.forRoot(),
     LayoutModule,

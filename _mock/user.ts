@@ -27,6 +27,9 @@ export const USERS = {
         email: `aaa${r(1, 10)}@qq.com`,
         phone: `phone-${r(1000, 100000)}`,
         price: r(10, 10000000),
+        total: r(10, 10000000),
+        website: `https://${r(10, 10000000)}.com/`,
+        disabled: r(1, 100) > 50,
         registered: new Date()
       });
     }
