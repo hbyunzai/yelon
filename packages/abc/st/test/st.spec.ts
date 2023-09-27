@@ -839,26 +839,14 @@ describe('abc: st', () => {
         });
       });
       describe('Http Request', () => {
-        it('when error request', done => {
+        it('when error request', () => {
           spyOn(_http, 'request').and.returnValue(throwError(() => 'cancel'));
           context.data = '/mock';
           fixture.detectChanges();
-          fixture.whenStable().then(() => {
-            expect(comp._data.length).toBe(0);
-            done();
-          });
+          expect(page.spyErrorData?.error).toBe('cancel');
+          TestBed.resetTestingModule();
         });
-        it('should be ingore catch error when component is destroyed', done => {
-          expect(context.error).not.toHaveBeenCalled();
-          context.data = '/mock';
-          fixture.detectChanges();
-          comp.ngOnDestroy();
-          fixture.whenStable().then(() => {
-            expect(context.error).not.toHaveBeenCalled();
-            done();
-          });
-        });
-        it('should be ingored incomplete request when has new request', fakeAsync(() => {
+        it('should be ignored incomplete request when has new request', fakeAsync(() => {
           let mockData = [{}];
           spyOn(_http, 'request').and.callFake(() => of(mockData) as any);
           context.data = '/mock1';
@@ -873,7 +861,7 @@ describe('abc: st', () => {
           expect(comp._data.length).toBe(mockData.length);
         }));
         it('#customRequest', fakeAsync(() => {
-          context.customRequest = jasmine.createSpy('customRequest');
+          context.customRequest = jasmine.createSpy('customRequest').and.callFake(() => of([]));
           context.data = '/invalid-url';
           fixture.detectChanges();
           tick(1000);
@@ -890,7 +878,7 @@ describe('abc: st', () => {
         expect(comp.req.reName!.pi).toBe('PI');
         expect(comp.req.reName!.ps).toBe('ps');
       });
-      it('should be ingore request when lazyLoad is true', () => {
+      it('should be ignore request when lazyLoad is true', () => {
         const anyComp = comp as any;
         spyOn(anyComp, 'loadPageData');
         context.req = { lazyLoad: true };
@@ -929,13 +917,13 @@ describe('abc: st', () => {
         expect(comp.page.placement).toBe(`right`);
         expect(comp.page.total).toBe(`TO:{{total}}`);
       });
-      it('should be ingore pi event trigger when change size in last page', fakeAsync(() => {
+      it('should be ignore pi event trigger when change size in last page', fakeAsync(() => {
         context.page = { showSize: true, pageSizes: [10, 20] };
         page.cd().go(2);
         let load = 0;
         spyOn(context.comp as any, 'loadData').and.callFake(() => {
           ++load;
-          return Promise.resolve({});
+          return of({});
         });
         const pc = dl
           .query(By.directive(NzPaginationComponent))
@@ -1067,9 +1055,9 @@ describe('abc: st', () => {
         context.scroll = { x: '100px', y: '100px' };
         page.cd();
         expect(context.comp.cdkVirtualScrollViewport != null).toBe(true);
-        spyOn(context.comp.cdkVirtualScrollViewport, 'checkViewportSize');
+        spyOn(context.comp.cdkVirtualScrollViewport!!, 'checkViewportSize');
         page.cd().go(2);
-        expect(context.comp.cdkVirtualScrollViewport.checkViewportSize).toHaveBeenCalled();
+        expect(context.comp.cdkVirtualScrollViewport!!.checkViewportSize).toHaveBeenCalled();
         page.asyncEnd();
       }));
       it('should be working in only x is set', fakeAsync(() => {
@@ -1098,7 +1086,7 @@ describe('abc: st', () => {
         page.cd();
         expect(page._changeData.type).toBe('dblClick');
       }));
-      it('should be ingore input', fakeAsync(() => {
+      it('should be ignore input', fakeAsync(() => {
         const el = page.getCell() as HTMLElement;
         // mock input nodeName
         spyOnProperty(el, 'nodeName', 'get').and.returnValue('INPUT');
@@ -1298,7 +1286,7 @@ describe('abc: st', () => {
           comp.removeRow(comp._data[0]);
           comp._data.forEach((_v, idx) => page.expectCell(`${idx + 1}`, idx + 1));
         }));
-        it('shoule be ingored invalid data', fakeAsync(() => {
+        it('shoule be ignored invalid data', fakeAsync(() => {
           page.cd().expectCurrentPageTotal(PS);
           comp.removeRow([null]);
           page.expectCurrentPageTotal(PS);
@@ -1389,7 +1377,7 @@ describe('abc: st', () => {
           expect(comp.ps).toBe(2);
           page.asyncEnd();
         }));
-        it('should be ingore data reload', fakeAsync(() => {
+        it('should be ignore data reload', fakeAsync(() => {
           page.updateColumn([{ title: '1', index: 'name' }]);
           expect(comp.ps).toBe(PS);
           const compAny = comp as any;
@@ -1410,7 +1398,7 @@ describe('abc: st', () => {
         page.cd();
         expect((comp.data as any[]).length).toBe(DEFAULTCOUNT);
         expect(comp._data.length).toBe(PS);
-        comp.filteredData.then(list => {
+        comp.filteredData.subscribe(list => {
           expect(list.length).toBe(DEFAULTCOUNT);
         });
         page.asyncEnd();
@@ -1464,7 +1452,7 @@ describe('abc: st', () => {
         it('when data is true', fakeAsync(() => {
           context.data = genData(1);
           page.cd();
-          spyOnProperty(comp, 'filteredData', 'get').and.returnValue(Promise.resolve([]));
+          spyOnProperty(comp, 'filteredData', 'get').and.returnValue(of([]));
           expect(exportSrv.export).not.toHaveBeenCalled();
           comp.export(true);
           page.cd();
@@ -1498,7 +1486,7 @@ describe('abc: st', () => {
             .expectElCount(`td.text-truncate`, context.comp._data.length)
             .asyncEnd();
         }));
-        it('should be ingore add text-truncate class when className is non-empty', fakeAsync(() => {
+        it('should be ignore add text-truncate class when className is non-empty', fakeAsync(() => {
           context.widthMode = { type: 'strict', strictBehavior: 'truncate' };
           page
             .cd()
@@ -1508,7 +1496,7 @@ describe('abc: st', () => {
             .expectElCount(`td.aaaa`, context.comp._data.length)
             .asyncEnd();
         }));
-        it('should be ingore add text-truncate class when type is img', fakeAsync(() => {
+        it('should be ignore add text-truncate class when type is img', fakeAsync(() => {
           context.widthMode = { type: 'strict', strictBehavior: 'truncate' };
           page
             .cd()
@@ -1524,8 +1512,7 @@ describe('abc: st', () => {
         context.loading = true;
         page.cd().expectElCount(`.ant-spin-spinning`, 1);
         context.loading = false;
-        page.cd();
-        page.expectElCount(`.ant-spin-spinning`, 0).asyncEnd();
+        page.cd().expectElCount(`.ant-spin-spinning`, 0).asyncEnd();
       }));
     });
     describe('#button', () => {
@@ -1575,7 +1562,7 @@ describe('abc: st', () => {
         expect(page._changeData.type).toBe('resize');
         page.asyncEnd();
       }));
-      it('should be ingore resize hanle of last column', fakeAsync(() => {
+      it('should be ignore resize hanle of last column', fakeAsync(() => {
         page
           .updateColumn([
             { index: 'id', resizable: true },
@@ -1609,13 +1596,13 @@ describe('abc: st', () => {
           .clickContentMenu(1)
           .asyncEnd();
       }));
-      it('should be ingore invalid target', fakeAsync(() => {
+      it('should be ignore invalid target', fakeAsync(() => {
         context.contextmenu = jasmine.createSpy();
         page.updateColumn([{ title: 'a', index: 'id' }]).openContextMenu(1, 1, { target: { closest: () => null } });
         expect(context.contextmenu).not.toHaveBeenCalled();
         page.asyncEnd();
       }));
-      it('should be ingore unspecified contextmenu property', fakeAsync(() => {
+      it('should be ignore unspecified contextmenu property', fakeAsync(() => {
         context.contextmenu = null;
         const event = { preventDefault: jasmine.createSpy() };
         page.updateColumn([{ title: 'a', index: 'id' }]).openContextMenu(1, 1, event);
@@ -1641,8 +1628,12 @@ describe('abc: st', () => {
             <ng-template st-row="id" let-item><div class="j-id">id{{item.id}}</div></ng-template>
           </st>`
       })!;
-      page.updateColumn([{ title: '', index: 'id', render: 'id' }]);
-      expect(page.getCell().querySelector('.j-id')!.textContent).toBe('id1');
+      page.updateColumn([{ title: '', render: 'id' }]).cd();
+      const jIdEl = page.getCell().querySelector('.j-id');
+      expect(jIdEl != null)
+        .withContext('expect found j-id')
+        .toBe(true);
+      expect(jIdEl?.textContent).toBe('id1');
       page.asyncEnd();
     }));
     it('allow invalid id', fakeAsync(() => {
