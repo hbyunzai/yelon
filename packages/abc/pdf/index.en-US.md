@@ -15,10 +15,14 @@ pdf.js libary is lazy loading by default，you can change the default root CDN p
 
 **Use local path**
 
+```bash
+yarn add pdfjs-dist
+```
+
 ```json
 // angular.json
 {
-  "glob": "**/(build,web)/**",
+  "glob": "{build,web}/**",
   "input": "./node_modules/pdfjs-dist/",
   "ignore": ["*.js.map", "*.d.ts"],
   "output": "assets/pdfjs/"

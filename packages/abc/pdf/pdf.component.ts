@@ -22,11 +22,11 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, timer, debounceTime, filter } from 'rxjs';
 
-import type { PDFDocumentLoadingTask, PDFDocumentProxy } from 'pdfjs-dist';
-import type { EventBus } from 'pdfjs-dist/types/web/event_utils';
-import type { PDFFindController } from 'pdfjs-dist/types/web/pdf_find_controller';
-import type { PDFLinkService } from 'pdfjs-dist/types/web/pdf_link_service';
-import type { PDFViewer } from 'pdfjs-dist/types/web/pdf_viewer';
+// import type { PDFDocumentLoadingTask, PDFDocumentProxy } from 'pdfjs-dist';
+// import type { EventBus } from 'pdfjs-dist/types/web/event_utils';
+// import type { PDFFindController } from 'pdfjs-dist/types/web/pdf_find_controller';
+// import type { PDFLinkService } from 'pdfjs-dist/types/web/pdf_link_service';
+// import type { PDFViewer } from 'pdfjs-dist/types/web/pdf_viewer';
 
 import { YunzaiConfigService } from '@yelon/util/config';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput, ZoneOutside } from '@yelon/util/decorator';
@@ -36,6 +36,16 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { PDF_DEFULAT_CONFIG } from './pdf.config';
 import { PdfChangeEvent, PdfChangeEventType, PdfExternalLinkTarget, PdfTextLayerMode, PdfZoomScale } from './pdf.types';
 
+// TODO: Although pdfjs-dist is an optional dependency on canvas
+// will be installed automatically when the dependency is installed by default;
+// This requires a higher environment and often fails to install
+type PDFDocumentLoadingTask = NzSafeAny;
+type PDFDocumentProxy = NzSafeAny;
+type EventBus = NzSafeAny;
+type PDFFindController = NzSafeAny;
+type PDFLinkService = NzSafeAny;
+type PDFViewer = NzSafeAny;
+
 const CSS_UNITS: number = 96.0 / 72.0;
 const BORDER_WIDTH = 9;
 
@@ -43,7 +53,7 @@ const BORDER_WIDTH = 9;
   selector: 'pdf',
   exportAs: 'pdf',
   template: `
-    <nz-skeleton *ngIf="!inited || loading"></nz-skeleton>
+    <nz-skeleton *ngIf="!inited || loading" />
     <div class="pdf-container">
       <div class="pdfViewer"></div>
     </div>
@@ -325,7 +335,7 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
     const currentViewer = this.pageViewer;
     if (!currentViewer) return;
 
-    this._pdf!.getPage(currentViewer.currentPageNumber).then(page => {
+    this._pdf!.getPage(currentViewer.currentPageNumber).then((page: NzSafeAny) => {
       const { _rotation, _zoom } = this;
       const rotation = _rotation || page.rotate;
       const viewportWidth =

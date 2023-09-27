@@ -15,10 +15,14 @@ module: import { PdfModule } from '@yelon/abc/pdf';
 
 **使用本地路径**
 
+```bash
+yarn add pdfjs-dist
+```
+
 ```json
 // angular.json
 {
-  "glob": "**/(build,web)/**",
+  "glob": "{build,web}/**",
   "input": "./node_modules/pdfjs-dist/",
   "ignore": ["*.js.map", "*.d.ts"],
   "output": "assets/pdfjs/"
