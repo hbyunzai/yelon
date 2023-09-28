@@ -54,7 +54,7 @@ function registerElements(injector: Injector, platformId: {}): void {
 }
 
 // import { RouteReuseStrategy } from '@angular/router';
-// import { ReuseTabService, ReuseTabStrategy } from '@delon/abc/reuse-tab';
+// import { ReuseTabService, ReuseTabStrategy } from '@yelon/abc/reuse-tab';
 
 @NgModule({
   imports: [
