@@ -47,7 +47,7 @@ describe('Service: Title', () => {
   let title: TestTitleService;
   let srv: TitleService;
   let i18n: YunzaiI18NService;
-  const alain = 'Yunzai';
+  const yunzai = 'Yunzai';
   const notPageName = 'Not Page Name';
 
   function genModule(providers: NzSafeAny[] = [], loadI18n: boolean = true): void {
@@ -69,55 +69,55 @@ describe('Service: Title', () => {
     beforeEach(() => genModule());
 
     it('should set the default empty title', fakeAsync(() => {
-      srv.suffix = alain;
+      srv.suffix = yunzai;
       srv.setTitle();
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`${notPageName} - ${alain}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`${notPageName} - ${yunzai}`);
     }));
 
     it('should be ignore when empty title & default title', fakeAsync(() => {
       srv.default = '';
-      srv.suffix = alain;
+      srv.suffix = yunzai;
       srv.setTitle();
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`${alain}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`${yunzai}`);
     }));
 
     it('should set new title', fakeAsync(() => {
-      srv.suffix = alain;
+      srv.suffix = yunzai;
       srv.setTitle('newTitle');
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`newTitle - ${alain}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`newTitle - ${yunzai}`);
     }));
 
     it('should set new title via array', fakeAsync(() => {
-      srv.suffix = alain;
+      srv.suffix = yunzai;
       srv.setTitle(['newTitle']);
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`newTitle - ${alain}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`newTitle - ${yunzai}`);
     }));
 
     it('#separator', fakeAsync(() => {
-      srv.suffix = alain;
+      srv.suffix = yunzai;
       srv.separator = ' / ';
       srv.setTitle('newTitle');
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`newTitle / ${alain}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`newTitle / ${yunzai}`);
     }));
 
     it('#prefix', fakeAsync(() => {
-      srv.prefix = alain;
+      srv.prefix = yunzai;
       srv.setTitle('newTitle');
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`${alain} - newTitle`);
+      expect(title.setTitle).toHaveBeenCalledWith(`${yunzai} - newTitle`);
     }));
 
     it('#reverse', fakeAsync(() => {
       srv.reverse = true;
-      srv.suffix = alain;
+      srv.suffix = yunzai;
       srv.setTitle('newTitle');
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`${alain} - newTitle`);
+      expect(title.setTitle).toHaveBeenCalledWith(`${yunzai} - newTitle`);
     }));
 
     it('#default', fakeAsync(() => {
@@ -139,7 +139,7 @@ describe('Service: Title', () => {
               firstChild: {
                 snapshot: {
                   data: {
-                    title: alain
+                    title: yunzai
                   }
                 }
               }
@@ -148,7 +148,7 @@ describe('Service: Title', () => {
         ]);
         srv.setTitle();
         tick(srv.DELAY_TIME + 1);
-        expect(title.setTitle).toHaveBeenCalledWith(alain);
+        expect(title.setTitle).toHaveBeenCalledWith(yunzai);
       }));
       it('with observable', fakeAsync(() => {
         genModule([
@@ -251,10 +251,10 @@ describe('Service: Title', () => {
   describe('[i18n]', () => {
     it('should be set when not i18n service', fakeAsync(() => {
       genModule([], false);
-      srv.suffix = alain;
+      srv.suffix = yunzai;
       srv.setTitle();
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`${notPageName} - ${alain}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`${notPageName} - ${yunzai}`);
     }));
     it('should be reset title when i18n has changed', () => {
       genModule();
@@ -264,11 +264,11 @@ describe('Service: Title', () => {
     });
     it('#setTitleByI18n', fakeAsync(() => {
       genModule([], true);
-      srv.suffix = alain;
+      srv.suffix = yunzai;
       const key = 'aa';
       srv.setTitleByI18n(key);
       tick(srv.DELAY_TIME + 1);
-      expect(title.setTitle).toHaveBeenCalledWith(`${key} - ${alain}`);
+      expect(title.setTitle).toHaveBeenCalledWith(`${key} - ${yunzai}`);
     }));
   });
 });

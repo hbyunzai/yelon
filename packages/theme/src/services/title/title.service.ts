@@ -93,7 +93,7 @@ export class TitleService implements OnDestroy {
       delay(this.DELAY_TIME),
       map(() => {
         const el = ((this.selector != null ? this.doc.querySelector(this.selector) : null) ||
-          this.doc.querySelector('.alain-default__content-title h1') ||
+          this.doc.querySelector('.yunzai-default__content-title h1') ||
           this.doc.querySelector('.page-header__title')) as HTMLElement;
         if (el) {
           let text = '';

@@ -151,7 +151,7 @@ function makeMethod(method: METHOD_TYPE) {
         const http = injector.get(_HttpClient, null) as _HttpClient;
         if (http == null) {
           throw new TypeError(
-            `Not found '_HttpClient', You can import 'AlainThemeModule' && 'HttpClientModule' in your root module.`
+            `Not found '_HttpClient', You can import 'YunzaiThemeModule' && 'HttpClientModule' in your root module.`
           );
         }
 
