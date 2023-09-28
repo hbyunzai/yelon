@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const { dependencies } = require('echarts');
 
 function findPkgJsonDir(p){
   let currentDir = p;
