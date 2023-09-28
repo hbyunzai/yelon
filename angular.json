@@ -3,8 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "cli": {
-    "packageManager": "yarn",
-    "analytics": false
+    "packageManager": "yarn"
   },
   "projects": {
     "site": {
@@ -49,7 +48,7 @@
                 "output": "assets/qrious/"
               },
               {
-                "glob": "**/(build,web)/**",
+                "glob": "{build,web}/**",
                 "input": "./node_modules/pdfjs-dist/",
                 "ignore": ["*.js.map", "*.d.ts"],
                 "output": "assets/pdfjs/"

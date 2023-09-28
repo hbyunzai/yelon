@@ -92,6 +92,12 @@ module.exports = {
             accessibility: 'explicit'
           }
         ],
+        '@typescript-eslint/no-explicit-any': [
+          'off',
+          {
+            ignoreRestArgs: true
+          }
+        ],
         '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/no-for-in-array': 'error',
         '@typescript-eslint/no-inferrable-types': [
@@ -105,7 +111,7 @@ module.exports = {
         '@typescript-eslint/no-this-alias': 'error',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/explicit-function-return-type': [
           'error',
           {
@@ -130,7 +136,7 @@ module.exports = {
                 position: 'before'
               },
               {
-                pattern: '{ng-zorro-antd/**,@yelon/**}',
+                pattern: '{ng-zorro-antd/**,@delon/**}',
                 group: 'internal',
                 position: 'before'
               },
@@ -173,7 +179,7 @@ module.exports = {
       files: ['*.html'],
       extends: ['plugin:@angular-eslint/template/recommended'],
       rules: {
-        // "@angular-eslint/template/prefer-self-closing-tags": "error"
+        "@angular-eslint/template/prefer-self-closing-tags": "error"
       }
     },
     {
@@ -183,6 +189,10 @@ module.exports = {
       rules: {
         'prettier/prettier': ['error', { parser: 'angular' }]
       }
+    },
+    {
+      files: ['*.js'],
+      parserOptions: { sourceType: 'module' }
     }
   ]
 };
