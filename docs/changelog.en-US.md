@@ -13,6 +13,28 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+# [16.3.0](https://github.com/hbyunzai/yelon/compare/16.2.5...16.3.0) (2023-09-28)
+
+
+### Bug Fixes
+
+* **abc:pdf:** fix ignore dependency `pdfjs-dist` ([b804bb1](https://github.com/hbyunzai/yelon/commit/b804bb17a6176e7ad168aaa412cada8b6be52abc))
+* **form:select:** fix ignore reset option data when set `onSearch` ([68d194e](https://github.com/hbyunzai/yelon/commit/68d194ec81a587a32af7b246d31947834e6b141b))
+* **scripts:** fix version script ([d0e6b69](https://github.com/hbyunzai/yelon/commit/d0e6b69e25ccc8ebe0b3c883d9ffd3bb288bfac8))
+* **theme:http:** fix missing `content` of `HttpOptions` ([e0592bd](https://github.com/hbyunzai/yelon/commit/e0592bdad298e5fb1d5230e600875d15fc157ffe))
+
+
+### Features
+
+* **abc:cell:** add `cell` component ([#1530](https://github.com/hbyunzai/yelon/issues/1530)) ([e3da675](https://github.com/hbyunzai/yelon/commit/e3da675917abb5ba50b70b8b778d31d770a4df04))
+* **abc:page-header:** add `titleSub` property ([8fec9d7](https://github.com/hbyunzai/yelon/commit/8fec9d7a890a01f5fbd822c12f279beec297b1c2))
+* **abc:st:** add `tooltip` in tag or badge ([92a7032](https://github.com/hbyunzai/yelon/commit/92a70320745dc003794a94ca2d765d318ac8ab73))
+* **abc:sv:** add `bordered` property ([360083c](https://github.com/hbyunzai/yelon/commit/360083c9faf04052e18a74d3f1da7f4adb9dbece))
+* **cli:** add `bindToComponentInputs` of `ng add` ([5cf8c87](https://github.com/hbyunzai/yelon/commit/5cf8c870c1a40d9b5c65b62f9c0e4a4b3abee01d))
+* **theme:drawer:** add `closeAll`, `openDrawers` method ([937cf39](https://github.com/hbyunzai/yelon/commit/937cf3914f79cdd0dd56e828bd4e3608b40b6f67))
+* **theme:modal:** add size support percentage ([514e6c2](https://github.com/hbyunzai/yelon/commit/514e6c24e8215ec1edf244bdead2492bab81668a))
+
+
 ## [16.2.5](https://github.com/hbyunzai/yelon/compare/16.2.4...16.2.5) (2023-08-28)
 
 
