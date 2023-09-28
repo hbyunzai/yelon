@@ -1,4 +1,5 @@
-import { HttpHeaders } from '@angular/common/http';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpHeaders, HttpContext } from '@angular/common/http';
 import { Inject, Injectable, Injector } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 
@@ -26,6 +27,7 @@ export interface HttpOptions {
   responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
   reportProgress?: boolean;
   withCredentials?: boolean;
+  context?: HttpContext;
 }
 
 interface ParamType {
@@ -149,7 +151,7 @@ function makeMethod(method: METHOD_TYPE) {
         const http = injector.get(_HttpClient, null) as _HttpClient;
         if (http == null) {
           throw new TypeError(
-            `Not found '_HttpClient', You can import 'YunzaiThemeModule' && 'HttpClientModule' in your root module.`
+            `Not found '_HttpClient', You can import 'AlainThemeModule' && 'HttpClientModule' in your root module.`
           );
         }
 
