@@ -216,7 +216,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
     if (url.includes('.json') && url.includes('assets')) {
       url = req.url;
     }
-    if (url.includes('i18n')) return next.handle(req);
+    // if (url.includes('i18n')) return next.handle(req);
     // 加入语言头
     const newReq = req.clone({ url, setHeaders: this.getAdditionalHeaders(req.headers) });
     return next.handle(newReq).pipe(
