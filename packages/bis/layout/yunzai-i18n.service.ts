@@ -64,7 +64,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
       return this.http.get(`assets/tmp/i18n/${lang}.json`);
     } else {
       return this.http
-        .get(`/i18n/api/v2/language/${lang}?_allow_anonymous`)
+        .get(`/i18n/api/v2/language/${lang}`)
         .pipe(catchError(() => this.http.get(`assets/tmp/i18n/${lang}.json`)));
     }
   }
