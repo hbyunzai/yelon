@@ -13,8 +13,7 @@ export const AUTH_DEFAULT_CONFIG: YunzaiAuthConfig = {
     /assets\//,
     /passport\//,
     /\/auth\/oauth\/getOrCreateToken\/webapp/,
-    /\/auth\/oauth\/token/,
-    /i18n/
+    /\/auth\/oauth\/token/
   ],
   allow_anonymous_key: `_allow_anonymous`,
   executeOtherInterceptors: true,

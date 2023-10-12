@@ -15,11 +15,10 @@ import {
   YunzaiI18NType,
   en_US as yelonEnUS
 } from '@yelon/theme';
-import {YunzaiBusinessConfig, YunzaiConfigService} from '@yelon/util/config';
+import { YunzaiConfigService} from '@yelon/util/config';
 import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import {NzI18nService, en_US as zorroEnUS} from 'ng-zorro-antd/i18n';
 
-import {mergeBisConfig} from './bis.config';
 import {YUNZAI_LANGS} from './yunzai-lang';
 
 declare const ngDevMode: boolean;
@@ -29,7 +28,6 @@ const DEFAULT = 'zh-CN';
 @Injectable({providedIn: 'root'})
 export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
   protected override _defaultLang = DEFAULT;
-  private bis: YunzaiBusinessConfig;
   private $destroy = new Subject()
 
   constructor(
@@ -42,7 +40,6 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
   ) {
     super(cogSrv);
     const defaultLang = this.getDefaultLang();
-    this.bis = mergeBisConfig(cogSrv);
     this.getLangs()
       .pipe(takeUntil(this.$destroy))
       .subscribe(langs => {
@@ -67,7 +64,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
       return this.http.get(`assets/tmp/i18n/${lang}.json`);
     } else {
       return this.http
-        .get(`${this.bis.baseUrl}/i18n/api/v2/language/${lang}?_allow_anonymous`)
+        .get(`/i18n/api/v2/language/${lang}?_allow_anonymous`)
         .pipe(catchError(() => this.http.get(`assets/tmp/i18n/${lang}.json`)));
     }
   }
@@ -101,7 +98,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     if (ngDevMode) {
       return of(langs);
     } else {
-      return this.http.get(`${this.bis.baseUrl}/i18n/api/v2/language`).pipe(
+      return this.http.get(`/i18n/api/v2/language`).pipe(
         map((response: any) => {
           return response.data;
         }),
