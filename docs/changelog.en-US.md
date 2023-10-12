@@ -13,6 +13,14 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [16.3.2](https://github.com/hbyunzai/yelon/compare/16.3.1...16.3.2) (2023-10-12)
+
+
+### Bug Fixes
+
+* **i18n:** fix i18n prefix url ([1a7d3dd](https://github.com/hbyunzai/yelon/commit/1a7d3dd5fdd97b6d3c85ad879da6dac8829f2986))
+
+
 ## [16.3.1](https://github.com/hbyunzai/yelon/compare/16.3.0...16.3.1) (2023-10-11)
 
 
