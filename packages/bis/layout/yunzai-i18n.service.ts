@@ -1,11 +1,12 @@
 import {Platform} from '@angular/cdk/platform';
 import {registerLocaleData} from '@angular/common';
 import ngEn from '@angular/common/locales/en';
-import {Injectable, OnDestroy} from '@angular/core';
+import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {Observable, catchError, of, Subject, takeUntil} from 'rxjs';
 
 import {enUS as dfEn} from 'date-fns/locale';
 import {map} from 'rxjs/operators';
+import {ITokenService} from "@yelon/auth"
 
 import {
   YelonLocaleService,
@@ -20,6 +21,7 @@ import {NzSafeAny} from 'ng-zorro-antd/core/types';
 import {NzI18nService, en_US as zorroEnUS} from 'ng-zorro-antd/i18n';
 
 import {YUNZAI_LANGS} from './yunzai-lang';
+import { YA_SERVICE_TOKEN} from "@yelon/auth";
 
 declare const ngDevMode: boolean;
 
@@ -36,15 +38,18 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     private nzI18nService: NzI18nService,
     private yelonLocaleService: YelonLocaleService,
     private platform: Platform,
+    @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
     cogSrv: YunzaiConfigService
   ) {
     super(cogSrv);
-    const defaultLang = this.getDefaultLang();
-    this.getLangs()
-      .pipe(takeUntil(this.$destroy))
-      .subscribe(langs => {
-        this._defaultLang = langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
-      });
+    if(this.tokenService.get()?.access_token){
+      const defaultLang = this.getDefaultLang();
+      this.getLangs()
+        .pipe(takeUntil(this.$destroy))
+        .subscribe(langs => {
+          this._defaultLang = langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
+        });
+    }
   }
 
   private getDefaultLang(): string {
