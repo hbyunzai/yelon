@@ -13,6 +13,15 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## [16.3.4](https://github.com/hbyunzai/yelon/compare/16.3.3...16.3.4) (2023-10-16)
+
+
+### Bug Fixes
+
+* **auth:** fix i18n service queryList when haven't token ([e3eeb62](https://github.com/hbyunzai/yelon/commit/e3eeb6240ca7a0fff8f947a2a22b75d274dced8d))
+* **interceptor:** fix logger ([7916e84](https://github.com/hbyunzai/yelon/commit/7916e84ac8f3d65e438c40e89b2fef9c1e3ff5eb))
+
+
 ## [16.3.3](https://github.com/hbyunzai/yelon/compare/16.3.2...16.3.3) (2023-10-12)
 
 
