@@ -175,6 +175,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
       case 200:
         return of(ev);
       case 401:
+        console.log("http401: ",req.url)
         if (this.config.refreshTokenEnabled && this.config.refreshTokenType === 're-request') {
           const unAuthorizationReq = req.clone();
           unAuthorizationReq.headers.delete('Authorization');
