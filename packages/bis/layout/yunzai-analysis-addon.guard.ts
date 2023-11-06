@@ -2,7 +2,6 @@ import {Inject, inject, Injectable} from "@angular/core";
 import {CanActivateChildFn, CanActivateFn} from "@angular/router";
 import {
   deepCopy,
-  log,
   PathToRegexpService,
   useLocalStorageUser,
   YunzaiBusinessConfig,
@@ -30,12 +29,9 @@ export class YunzaiAnalysisAddonGuardService {
     private pathToRegexp: PathToRegexpService,
     @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
   ) {
-    log('act: ');
     this.bis = mergeBisConfig(this.configService);
-    log('act: config ', this.bis);
     const [, getUser] = useLocalStorageUser();
     const user: YunzaiUser = getUser()!;
-    log('act: user ', user);
     // @ts-ignore
     this.menus = deepCopy((user.menu as any) || []).filter((m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode) as Menu[];
     if (user) {
@@ -54,9 +50,7 @@ export class YunzaiAnalysisAddonGuardService {
     if (this.menus && this.menus.length > 0) {
       AnalysisAddon.putValueInAnalysis({system: (this.menus[0] as Menu).text})
     }
-    log('act: menus ', this.menus);
     this.getAllLinks(this.menus, this.links);
-    log('act: links ', this.links);
   }
 
 
@@ -85,7 +79,7 @@ export class YunzaiAnalysisAddonGuardService {
   getAllLinks(menu: Menu[], links: Array<{ title: string, link: string }>): void {
     menu.forEach((sider: Menu) => {
       if (sider.link) {
-        links.push({title: sider.text || sider.link, link: sider.link});
+        links.push({title: sider.text ? sider.text : sider.link, link: sider.link});
       }
       if (sider.children && sider.children.length > 0) {
         this.getAllLinks(sider.children, links);
