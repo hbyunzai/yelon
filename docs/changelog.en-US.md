@@ -13,6 +13,14 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [16.3.5](https://github.com/hbyunzai/yelon/compare/16.3.4...16.3.5) (2023-11-06)
+
+
+### Features
+
+* **bis:** add analysis plugins ([4ceddf8](https://github.com/hbyunzai/yelon/commit/4ceddf8788f6a822ab9b70386a7048d9e602ecbf))
+* **bis:** add analysis plugins ([52e9631](https://github.com/hbyunzai/yelon/commit/52e9631d06dd87be2488f60374b1cb344edb4e90))
+
 ## [16.3.4](https://github.com/hbyunzai/yelon/compare/16.3.3...16.3.4) (2023-10-16)
 
 
