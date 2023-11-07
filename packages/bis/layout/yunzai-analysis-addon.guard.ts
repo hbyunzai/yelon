@@ -57,6 +57,14 @@ export class YunzaiAnalysisAddonGuardService {
   process(url: string): boolean {
     let flag = false;
     this.links.forEach((link) => {
+      if (link.link === url.split('?')[0]) {
+        flag = true
+        AnalysisAddon.putValueInAnalysis({
+          routename: link.title,
+          routeurl: link.link
+        })
+        return
+      }
       const regexp: RegExp = this.pathToRegexp.stringToRegexp(link, null, null);
       if (regexp.test(url.split('?')[0])) {
         flag = true
