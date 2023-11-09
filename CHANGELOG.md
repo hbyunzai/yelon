@@ -1,3 +1,12 @@
+## [16.3.9](https://github.com/hbyunzai/yelon/compare/16.3.8...16.3.9) (2023-11-09)
+
+
+### Bug Fixes
+
+* **bis:analysis:** fix guard ([a22c4e7](https://github.com/hbyunzai/yelon/commit/a22c4e7fb75a831fdc5b386a203ffcd6920a9a81))
+
+
+
 ## [16.3.8](https://github.com/hbyunzai/yelon/compare/16.3.7...16.3.8) (2023-11-08)
 
 
