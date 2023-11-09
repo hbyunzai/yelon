@@ -3,7 +3,7 @@ import {CanActivateChildFn, CanActivateFn} from "@angular/router";
 import {
   deepCopy,
   PathToRegexpService,
-  useLocalStorageUser,
+  useLocalStorageUser, WINDOW,
   YunzaiBusinessConfig,
   YunzaiConfigService,
   YunzaiUser
@@ -11,7 +11,6 @@ import {
 import {Menu} from "@yelon/theme";
 import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "./bis.config";
 import {NzSafeAny} from "ng-zorro-antd/core/types";
-import {AnalysisAddon} from "./analysis.addon";
 import {ITokenService, YA_SERVICE_TOKEN} from "@yelon/auth";
 
 @Injectable({
@@ -22,11 +21,13 @@ export class YunzaiAnalysisAddonGuardService {
   private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
   private menus: NzSafeAny[] = [];
   private links: Array<{ title: string, link: string }> = [];
+  private value: NzSafeAny = {}
 
 
   constructor(
     private configService: YunzaiConfigService,
     private pathToRegexp: PathToRegexpService,
+    @Inject(WINDOW) private win: any,
     @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
   ) {
     this.bis = mergeBisConfig(this.configService);
@@ -35,7 +36,7 @@ export class YunzaiAnalysisAddonGuardService {
     // @ts-ignore
     this.menus = deepCopy((user.menu as any) || []).filter((m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode) as Menu[];
     if (user) {
-      AnalysisAddon.putValueInAnalysis({
+      this.value = {
         userid: user.id,
         realname: user.realname,
         usertype: user.userType,
@@ -45,10 +46,10 @@ export class YunzaiAnalysisAddonGuardService {
         deptid: user.deptId,
         deptname: user.deptName,
         token: this.tokenService.get()?.access_token
-      })
+      }
     }
     if (this.menus && this.menus.length > 0) {
-      AnalysisAddon.putValueInAnalysis({system: (this.menus[0] as Menu).text})
+      this.value['system'] = (this.menus[0] as Menu).text
     }
     this.getAllLinks(this.menus, this.links);
   }
@@ -59,27 +60,30 @@ export class YunzaiAnalysisAddonGuardService {
     this.links.forEach((link) => {
       if (link.link === url.split('?')[0]) {
         flag = true
-        AnalysisAddon.putValueInAnalysis({
-          routename: link.title,
-          routeurl: link.link
-        })
+        this.value['routename'] = link.title
+        this.value['routeurl'] = link.link
+        if (this.win['yunzai']) {
+          this.win['yunzai'].setExtra(this.value)
+        }
         return
       }
       const regexp: RegExp = this.pathToRegexp.stringToRegexp(link, null, null);
       if (regexp.test(url.split('?')[0])) {
         flag = true
-        AnalysisAddon.putValueInAnalysis({
-          routename: link.title,
-          routeurl: link.link
-        })
+        this.value['routename'] = link.title
+        this.value['routeurl'] = link.link
+        if (this.win['yunzai']) {
+          this.win['yunzai'].setExtra(this.value)
+        }
         return;
       }
     });
     if (!flag) {
-      AnalysisAddon.putValueInAnalysis({
-        routename: url,
-        routeurl: url
-      })
+      this.value['routename'] = url
+      this.value['routeurl'] = url
+      if (this.win['yunzai']) {
+        this.win['yunzai'].setExtra(this.value)
+      }
     }
     return true
   }
