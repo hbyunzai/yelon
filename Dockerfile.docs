@@ -1,6 +1,6 @@
 # # SSR
 # FROM node:lts as dist
-# MAINTAINER authors="devcui <devcui@qq.com>"
+# MAINTAINER authors="yunzaibot <yunzai-bot@outlook.com>"
 
 # WORKDIR /usr/src/app
 # RUN git clone --depth 1 --branch site https://github.com/hbyunzai/yelon-builds.git .
@@ -10,11 +10,9 @@
 
 
 FROM node:lts as dist
-MAINTAINER authors="devcui <devcui@qq.com>"
+MAINTAINER authors="yunzaibot <yunzai-bot@outlook.com>"
 WORKDIR /dist
-RUN git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/yelon.git . \
-    && sed -i 's/\/yelon\//\//g' /dist/index.html \
-    && sed -i 's/\/yelon\//\//g' /dist/404.html
+RUN git clone --depth 1 --branch gh-pages https://github.com/hbyunzai/delon.git .
 COPY _nginx _nginx
 
 FROM nginx:stable-alpine
