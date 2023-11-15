@@ -130,7 +130,7 @@ describe('form: widget: autocomplete', () => {
             }
           }
         })
-        .time(100)
+        .dc(100)
         .typeChar(typeValue)
         .checkCount('nz-auto-option', config.uiEmailSuffixes!.length)
         .click('nz-auto-option')
@@ -178,7 +178,7 @@ describe('form: widget: autocomplete', () => {
         .asyncEnd();
     }));
     it('should be show default value via schema.default', fakeAsync(() => {
-      const email = 'devcui@qq.com';
+      const email = 'cipchk@qq.com';
       page
         .newSchema({
           properties: {

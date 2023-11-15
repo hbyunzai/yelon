@@ -1,4 +1,5 @@
-import { BehaviorSubject, combineLatest, Observable, distinctUntilChanged, map } from 'rxjs';
+import { Injector, NgZone } from '@angular/core';
+import { BehaviorSubject, combineLatest, Observable, distinctUntilChanged, map, take } from 'rxjs';
 
 import { YunzaiSFConfig } from '@yelon/util/config';
 import { NzFormStatusService } from 'ng-zorro-antd/core/form';
@@ -33,6 +34,7 @@ export abstract class FormProperty {
   propertyId?: string;
 
   constructor(
+    private injector: Injector,
     schemaValidatorFactory: SchemaValidatorFactory,
     schema: SFSchema,
     ui: SFUISchema | SFUISchemaItem,
@@ -312,7 +314,12 @@ export abstract class FormProperty {
     this._visibilityChanges.next(visible);
     // 渲染时需要重新触发 reset
     if (visible) {
-      this.resetValue(this.value, true);
+      this.injector
+        .get(NgZone)
+        .onStable.pipe(take(1))
+        .subscribe(() => {
+          this.resetValue(this.value, true);
+        });
     }
     return this;
   }
@@ -321,7 +328,7 @@ export abstract class FormProperty {
     const visibleIf = (this.ui as SFUISchemaItem).visibleIf;
     if (typeof visibleIf === 'object' && Object.keys(visibleIf).length === 0) {
       this.setVisible(false);
-    } else if (visibleIf !== null) {
+    } else if (visibleIf != null) {
       const propertiesBinding: Array<Observable<boolean>> = [];
       for (const dependencyPath in visibleIf) {
         if (visibleIf.hasOwnProperty(dependencyPath)) {
