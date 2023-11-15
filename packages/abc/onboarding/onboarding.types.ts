@@ -1,12 +1,20 @@
-import { TemplateRef } from '@angular/core';
-import { SafeHtml } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import {TemplateRef} from '@angular/core';
+import {SafeHtml} from '@angular/platform-browser';
+import {Observable} from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type {NzSafeAny} from 'ng-zorro-antd/core/types';
 
 export type OnboardingOpType = 'next' | 'prev' | 'skip' | 'done';
 
 export interface OnboardingConfig {
+  /**
+   * Storage identification Key, The default is `localStorage` local storage, allowing the use of `ONBOARDING_STORE_TOKEN` to change the storage method
+   */
+  key?: string;
+  /**
+   * Current version
+   */
+  keyVersion?: unknown;
   /**
    * Onboarding items
    */
