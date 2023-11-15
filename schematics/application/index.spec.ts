@@ -27,6 +27,10 @@ describe('NgYunzaiSchematic: application', () => {
       expect(json != null).toBe(true);
       expect(json.recommendations[0]).toBe('yunzai-bot.ng-yunzai-extension-pack');
     });
+    it('should be add addFileReplacements', () => {
+      const angualrJson = tree.readContent('angular.json');
+      expect(angualrJson).toContain(`fileReplacements`);
+    });
   });
 
   describe('#i18n', () => {
