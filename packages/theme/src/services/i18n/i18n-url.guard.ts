@@ -25,7 +25,9 @@ export class YunzaiI18NGuardService {
 }
 
 /**
- * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
+ * Internationalization guard, automatically recognizes the language in Url and triggers the `YUNZAI_I18N_TOKEN.use` method
+ *
+ * 国际化守卫，自动识别Url中的语言，并触发 `YUNZAI_I18N_TOKEN.use` 方法
  *
  * ```ts
  * data: {
@@ -37,7 +39,9 @@ export class YunzaiI18NGuardService {
 export const yunzaiI18nCanActivate: CanActivateFn = childRoute => inject(YunzaiI18NGuardService).process(childRoute);
 
 /**
- * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).
+ * Internationalization guard, automatically recognizes the language in Url and triggers the `YUNZAI_I18N_TOKEN.use` method
+ *
+ * 国际化守卫，自动识别Url中的语言，并触发 `YUNZAI_I18N_TOKEN.use` 方法
  *
  * ```ts
  * data: {
