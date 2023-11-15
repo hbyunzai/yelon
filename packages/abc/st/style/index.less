@@ -95,8 +95,7 @@
       right: 0;
       bottom: 0;
       display: flex;
-      align-items: center;
-      justify-items: center;
+      place-items: center center;
     }
 
     .@{ant-prefix}-table-filter-trigger {
@@ -129,11 +128,11 @@
   // 修复 `st` 会导致内嵌表格的BUG
   .@{ant-prefix}-table-tbody > tr {
     .@{ant-prefix}-table-wrapper:only-child {
-      // 修复 https://github.com/hbyunzai/ng-yunzai/issues/1619
+      // 修复 https://github.com/ng-yunzai/ng-yunzai/issues/1619
       .ant-table-tbody > tr:last-child > td {
         border-bottom: @border-width-base @border-style-base @border-color-split;
       }
-      // 额外产生边距 https://github.com/hbyunzai/ng-yunzai/issues/1608
+      // 额外产生边距 https://github.com/ng-yunzai/ng-yunzai/issues/1608
       .@{ant-prefix}-table {
         margin: 0;
       }
@@ -141,7 +140,7 @@
   }
   // 若 `widthMode` 为 `truncate` 会导致固定列的阴影失效，其他情况不存在此情况
   // 这里使用 `text-truncate` 来区分
-  // https://github.com/hbyunzai/ng-yunzai/issues/2336
+  // https://github.com/ng-yunzai/ng-yunzai/issues/2336
   .text-truncate.@{ant-prefix}-table {
     &-cell-fix-left-first::after,
     &-cell-fix-left-last::after {
@@ -165,7 +164,7 @@
   }
 
   // 修复rowClassName在固定列下无作用
-  // https://github.com/hbyunzai/ng-yunzai/issues/2383
+  // https://github.com/ng-yunzai/ng-yunzai/issues/2383
   &__row-class {
     // 限定只有数据单元格才会默认添加该样式
     .@{ant-prefix}-table-tbody > tr > td {
