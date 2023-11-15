@@ -7,6 +7,10 @@
     "$schema": {
       "type": "string"
     },
+    "defaultProject": {
+      "type": "string",
+      "description": "Default project name"
+    },
     "theme": {
       "$ref": "#/definitions/theme"
     },
