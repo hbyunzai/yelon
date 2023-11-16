@@ -84,6 +84,7 @@ export class YunzaiNotifyComponent implements OnInit, OnDestroy {
     this.count = 0;
     this.loading = true;
     this.subs.push(
+      // @ts-ignore
       forkJoin(this.loadTodo(), this.loadMessage()).subscribe(() => {
         this.loading = false;
         this.cdr.detectChanges();

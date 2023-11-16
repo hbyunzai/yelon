@@ -1,13 +1,5 @@
-import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChild,
-  Router,
-  RouterStateSnapshot,
-  UrlTree
-} from '@angular/router';
-import { Observable } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 
 import { Menu } from '@yelon/theme';
 import {
@@ -23,10 +15,8 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from './bis.config';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ActGuard implements CanActivate, CanActivateChild {
+@Injectable({ providedIn: 'root' })
+export class ActGuardService {
   private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
   private menus: NzSafeAny[] = [];
   private links: string[] = [];
@@ -51,20 +41,24 @@ export class ActGuard implements CanActivate, CanActivateChild {
     log('act: links ', this.links);
   }
 
-  canActivate(
-    _: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    log('act: can activate ', state);
-    if (this.preHandle(state)) {
+  process(url: string): boolean {
+    log('act: can activate ', url);
+    if (this.preHandle(url)) {
       return true;
     }
     log('act: can activate child prehandle success');
     let canactivate = false;
     this.links.forEach((link: string) => {
+      // path = /xxx
+      if (link === url.split('?')[0]) {
+        canactivate = true;
+        log(`act: link value ${link} equals url value ${url}`);
+        return;
+      }
+      // paht = /xxx/:xx
       const regexp: RegExp = this.pathToRegexp.stringToRegexp(link, null, null);
-      log(`act: ${link} test ${state.url.split('?')[0]}`);
-      if (regexp.test(state.url.split('?')[0])) {
+      log(`act: ${link} test ${url.split('?')[0]}`);
+      if (regexp.test(url.split('?')[0])) {
         canactivate = true;
         log(`act: test value ${canactivate}`);
         return;
@@ -80,49 +74,15 @@ export class ActGuard implements CanActivate, CanActivateChild {
     }
   }
 
-  canActivateChild(
-    _: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    log('act: can activate child ', state);
-    if (this.preHandle(state)) {
-      return true;
-    }
-    log('act: can activate child prehandle success');
-
-    let canactivate = false;
-    this.links.forEach((link: string) => {
-      if (link === state.url.split('?')[0]) {
-        canactivate = true;
-        return;
-      }
-      const regexp: RegExp = this.pathToRegexp.stringToRegexp(link, null, null);
-      if (regexp.test(state.url.split('?')[0])) {
-        log(`act: ${link} test ${state.url.split('?')[0]}`);
-        canactivate = true;
-        log(`act: test value ${canactivate}`);
-        return;
-      }
-    });
-    if (canactivate) {
-      log(`act: test sucess`);
-      return true;
-    } else {
-      log(`act: test error`);
-      this.router.navigate(['displayIndex']);
-      return false;
-    }
-  }
-
-  preHandle(state: RouterStateSnapshot): boolean {
+  preHandle(url: string): boolean {
     return (
-      state.url.includes('error') ||
-      state.url.includes('exception') ||
-      state.url.includes('displayIndex') ||
-      state.url === '' ||
-      state.url === null ||
-      state.url === '/' ||
-      state.url.includes('iframePage')
+      url.includes('error') ||
+      url.includes('exception') ||
+      url.includes('displayIndex') ||
+      url === '' ||
+      url === null ||
+      url === '/' ||
+      url.includes('iframePage')
     );
   }
 
@@ -137,3 +97,6 @@ export class ActGuard implements CanActivate, CanActivateChild {
     });
   }
 }
+
+export const actGuardCanActive: CanActivateFn = (_, state) => inject(ActGuardService).process(state.url);
+export const actGuardCanActiveChild: CanActivateChildFn = (_, state) => inject(ActGuardService).process(state.url);
