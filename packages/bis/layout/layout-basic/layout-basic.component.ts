@@ -122,7 +122,7 @@ import { LayoutBasicState } from './interface';
       <reuse-tab #reuseTab [ngStyle]="reusetabCSS" />
       <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)" />
     </ng-template>
-    <ng-template #noneTpl> <router-outle />> </ng-template>
+    <ng-template #noneTpl> <router-outlet /> </ng-template>
   `
 })
 export class YunzaiLayoutBasicComponent implements OnInit {
