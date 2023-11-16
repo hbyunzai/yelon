@@ -42,7 +42,7 @@ publishToNext() {
 }
 
 syncNpmMirror() {
-  (cd ${ROOT}/@delon; for p in `ls .`; do curl -X PUT https://registry-direct.npmmirror.com/-/package/@yelon/$p/syncs; done)
+  (cd ${ROOT}/@yelon; for p in `ls .`; do curl -X PUT https://registry-direct.npmmirror.com/-/package/@yelon/$p/syncs; done)
   curl -X PUT https://registry-direct.npmmirror.com/-/package/ng-yunzai/syncs
 }
 
@@ -52,4 +52,4 @@ if [[ ${NEXT} == true ]]; then
 else
   publishToMaster
 fi
-syncTaobao
+syncNpmMirror
