@@ -20,7 +20,6 @@ module.exports = {
       ],
       rules: {
         'prettier/prettier': ['error', prettierConfig],
-        'jsdoc/newline-after-description': 1,
         '@angular-eslint/component-selector': [
           'off',
           {
@@ -111,7 +110,6 @@ module.exports = {
         '@typescript-eslint/no-this-alias': 'error',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
-        '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/explicit-function-return-type': [
           'error',
           {
@@ -151,18 +149,15 @@ module.exports = {
         ],
         'no-bitwise': 'off',
         'no-duplicate-imports': 'error',
-        'no-invalid-this': 'off',
         'no-irregular-whitespace': 'error',
         'no-magic-numbers': 'off',
         'no-multiple-empty-lines': 'error',
         'no-redeclare': 'off',
-        'no-underscore-dangle': 'off',
         'no-sparse-arrays': 'error',
         'no-template-curly-in-string': 'off',
         'prefer-object-spread': 'error',
         'prefer-template': 'error',
         yoda: 'error',
-        '@angular-eslint/no-input-rename': 'off',
         '@angular-eslint/no-output-native': 'off',
         '@typescript-eslint/member-ordering': 'off',
         'no-invalid-this': 'off',
@@ -172,7 +167,6 @@ module.exports = {
         'prefer-const': 'off',
         'max-len': 'off',
         'deprecation/deprecation': 'warn',
-        'jsdoc/newline-after-description': 'off'
       }
     },
     {

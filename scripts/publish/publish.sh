@@ -41,9 +41,9 @@ publishToNext() {
   npm publish --tag next
 }
 
-syncTaobao() {
-  (cd ${ROOT}/@yelon; for p in `ls .`; do curl -X PUT https://npmmirror.com/sync/@yelon/$p?sync_upstream=true; done)
-  curl -X PUT https://npmmirror.com/sync/ng-yunzai?sync_upstream=true
+syncNpmMirror() {
+  (cd ${ROOT}/@delon; for p in `ls .`; do curl -X PUT https://registry-direct.npmmirror.com/-/package/@yelon/$p/syncs; done)
+  curl -X PUT https://registry-direct.npmmirror.com/-/package/ng-yunzai/syncs
 }
 
 clone
