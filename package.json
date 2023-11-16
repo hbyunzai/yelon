@@ -55,7 +55,7 @@
     "ssr": "npm run ng-high-memory run site:serve-ssr",
     "ssr:serve": "node src/dist/server/main.js",
     "ssr:prerender": "npm run ng-high-memory run site:prerender",
-    "sync:yelon:version": "node scripts/build/fix-version.js"
+    "sync:delon:version": "node scripts/build/fix-version.js"
   },
   "dependencies": {
     "@angular/animations": "^16.2.0",
