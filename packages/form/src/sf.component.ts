@@ -1,4 +1,4 @@
-import {Platform} from '@angular/cdk/platform';
+import { Platform } from '@angular/cdk/platform';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -17,29 +17,29 @@ import {
   TemplateRef,
   ViewEncapsulation
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {DomSanitizer} from '@angular/platform-browser';
-import {merge, Observable, filter} from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DomSanitizer } from '@angular/platform-browser';
+import { merge, Observable, filter } from 'rxjs';
 
-import {ACLService} from '@yelon/acl';
-import {YunzaiI18NService, YUNZAI_I18N_TOKEN, YelonLocaleService, LocaleData} from '@yelon/theme';
-import {YunzaiConfigService, YunzaiSFConfig} from '@yelon/util/config';
-import {BooleanInput, InputBoolean} from '@yelon/util/decorator';
-import {deepCopy} from '@yelon/util/other';
-import type {NzSafeAny} from 'ng-zorro-antd/core/types';
-import type {NzFormControlStatusType} from 'ng-zorro-antd/form';
+import { ACLService } from '@yelon/acl';
+import { YunzaiI18NService, YUNZAI_I18N_TOKEN, YelonLocaleService, LocaleData } from '@yelon/theme';
+import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
+import { BooleanInput, InputBoolean } from '@yelon/util/decorator';
+import { deepCopy } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 
-import {mergeConfig} from './config';
-import type {ErrorData} from './errors';
-import type {SFButton, SFLayout, SFMode, SFValueChange} from './interface';
-import {FormProperty, PropertyGroup} from './model/form.property';
-import {FormPropertyFactory} from './model/form.property.factory';
-import type {SFSchema} from './schema/index';
-import type {SFOptionalHelp, SFUISchema, SFUISchemaItem, SFUISchemaItemRun} from './schema/ui';
-import {TerminatorService} from './terminator.service';
-import {di, resolveIfSchema, retrieveSchema} from './utils';
-import {SchemaValidatorFactory} from './validator.factory';
-import {WidgetFactory} from './widget.factory';
+import { mergeConfig } from './config';
+import type { ErrorData } from './errors';
+import type { SFButton, SFLayout, SFMode, SFValueChange } from './interface';
+import { FormProperty, PropertyGroup } from './model/form.property';
+import { FormPropertyFactory } from './model/form.property.factory';
+import type { SFSchema } from './schema/index';
+import type { SFOptionalHelp, SFUISchema, SFUISchemaItem, SFUISchemaItemRun } from './schema/ui';
+import { TerminatorService } from './terminator.service';
+import { di, resolveIfSchema, retrieveSchema } from './utils';
+import { SchemaValidatorFactory } from './validator.factory';
+import { WidgetFactory } from './widget.factory';
 
 export function useFactory(
   injector: Injector,
@@ -287,7 +287,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     this.localeSrv.change.pipe(takeUntilDestroyed()).subscribe(() => {
       this.locale = this.localeSrv.getData('sf');
       if (this._inited) {
-        this.validator({emitError: false, onlyRoot: false});
+        this.validator({ emitError: false, onlyRoot: false });
         this.coverButtonProperty();
         this.cdr.markForCheck();
       }
@@ -311,13 +311,13 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private inheritUI(ui: SFUISchemaItemRun): void {
-    ['optionalHelp'].filter(key => !!this._defUi[key]).forEach(key => (ui[key] = {...this._defUi[key], ...ui[key]}));
+    ['optionalHelp'].filter(key => !!this._defUi[key]).forEach(key => (ui[key] = { ...this._defUi[key], ...ui[key] }));
   }
 
   private coverProperty(): void {
     const isHorizontal = this.layout === 'horizontal';
     const _schema = deepCopy(this.schema);
-    const {definitions} = _schema;
+    const { definitions } = _schema;
 
     const inFn = (
       schema: SFSchema,
@@ -346,9 +346,9 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
           optionalHelp: undefined,
           widget: property.type,
           ...(property.format && (this.options.formatMap as NzSafeAny)[property.format]),
-          ...(typeof property.ui === 'string' ? {widget: property.ui} : null),
+          ...(typeof property.ui === 'string' ? { widget: property.ui } : null),
           ...(!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
-            ? {widget: 'select'}
+            ? { widget: 'select' }
             : null),
           ...curUi
         } as SFUISchemaItemRun;
@@ -480,7 +480,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     // root
-    this._ui = {...this._defUi};
+    this._ui = { ...this._defUi };
 
     inFn(_schema, _schema, this.ui, this.ui, this._ui);
 
@@ -495,7 +495,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
 
   private coverButtonProperty(): void {
     this._btn = {
-      render: {size: 'default'},
+      render: { size: 'default' },
       ...this.locale,
       ...this.options.button,
       ...(this.button as SFButton)
@@ -582,7 +582,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
    * - `emitError` 当表单无效时是否触发 `formError` 事件，默认：`true`
    * - `onlyRoot` 只对根进行检验，不进行向下逐个递归，根已经包含整个 Json Schema，默认：`true`
    */
-  validator(options: { emitError?: boolean; onlyRoot?: boolean } = {emitError: true, onlyRoot: true}): boolean {
+  validator(options: { emitError?: boolean; onlyRoot?: boolean } = { emitError: true, onlyRoot: true }): boolean {
     if (this.rootProperty == null || !this.platform.isBrowser) {
       return false;
     }
@@ -638,7 +638,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
 
     this.schema.type = 'object';
 
-    this._formData = {...this.formData};
+    this._formData = { ...this.formData };
 
     if (this._inited) this.terminator.destroy();
 
@@ -654,13 +654,13 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
 
     let isFirst = true;
     this.rootProperty.valueChanges.subscribe(res => {
-      this._item = {...(this.cleanValue ? null : this.formData), ...res.value};
+      this._item = { ...(this.cleanValue ? null : this.formData), ...res.value };
       if (isFirst) {
         isFirst = false;
         return;
       }
       this.formChange.emit(this._item);
-      this.formValueChange.emit({value: this._item, path: res.path, pathValue: res.pathValue});
+      this.formValueChange.emit({ value: this._item, path: res.path, pathValue: res.pathValue });
     });
     this.rootProperty.errorsChanges.subscribe(errors => {
       this._valid = !(errors && errors.length);

@@ -1,16 +1,15 @@
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {Component, ElementRef, HostBinding, Inject, Renderer2} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, ElementRef, HostBinding, Inject, Renderer2 } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
-import {YUNZAI_I18N_TOKEN, DrawerHelper, TitleService, VERSION as VERSION_ALAIN} from '@yelon/theme';
-import {VERSION as VERSION_ZORRO} from 'ng-zorro-antd/version';
+import { YUNZAI_I18N_TOKEN, DrawerHelper, TitleService, VERSION as VERSION_ALAIN } from '@yelon/theme';
+import { VERSION as VERSION_ZORRO } from 'ng-zorro-antd/version';
 
-import {I18NService, MetaService, MobileService} from '@core';
+import { I18NService, MetaService, MobileService } from '@core';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <router-outlet/>`
+  template: ` <router-outlet />`
 })
 export class AppComponent {
   @HostBinding('class.mobile')
@@ -61,7 +60,7 @@ export class AppComponent {
         } else {
           newUrl = redirectArr.concat(urlLang).join('/');
         }
-        router.navigateByUrl(newUrl, {replaceUrl: true});
+        router.navigateByUrl(newUrl, { replaceUrl: true });
         return;
       }
 

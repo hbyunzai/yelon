@@ -29,7 +29,7 @@ export interface UserLink {
       [nzDropdownMenu]="userMenu"
     >
       <div class="yz-user-name">
-        <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm"></nz-avatar>
+        <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm" />
         {{ username }}
       </div>
     </div>

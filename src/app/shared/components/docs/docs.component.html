@@ -2,7 +2,7 @@
   <nz-anchor nzShowInkInFixed nzAffix="false" (nzClick)="goLink($event)">
     <nz-link *ngFor="let t of data.con.toc" [nzHref]="'#' + t.id" [nzTitle]="t.title">
       <ng-container *ngIf="t.children && t.children.length > 0">
-        <nz-link *ngFor="let t2 of t.children" [nzHref]="'#' + t2.id" [nzTitle]="t2.title"></nz-link>
+        <nz-link *ngFor="let t2 of t.children" [nzHref]="'#' + t2.id" [nzTitle]="t2.title" />
       </ng-container>
     </nz-link>
   </nz-anchor>
@@ -38,7 +38,7 @@
           IMPORT MODULE
         </span>
       </div>
-      <edit-button [item]="item"></edit-button>
+      <edit-button [item]="item" />
     </h1>
   </div>
   <div *ngIf="data.con.content" class="markdown" [innerHTML]="data.con.content" routeTransfer></div>

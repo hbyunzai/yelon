@@ -3,8 +3,10 @@ import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, DestroyRef,
-  EventEmitter, inject,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
   Inject,
   Input,
   NgZone,
@@ -15,15 +17,15 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
-import {  filter } from 'rxjs';
+import { filter } from 'rxjs';
 
 import { Menu, MenuIcon, MenuInner, MenuService, SettingsService } from '@yelon/theme';
 import { BooleanInput, InputBoolean, InputNumber, NumberInput, ZoneOutside } from '@yelon/util/decorator';
 import { WINDOW } from '@yelon/util/token';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 export interface Nav extends MenuInner {
   _needIcon?: boolean;

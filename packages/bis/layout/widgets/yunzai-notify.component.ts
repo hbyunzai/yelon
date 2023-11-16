@@ -32,7 +32,7 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
       btnIconClass="yunzai-default__nav-item-icon"
       (select)="select($event)"
       (clear)="clear($event)"
-    ></notice-icon>
+    />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

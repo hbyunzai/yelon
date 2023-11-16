@@ -61,7 +61,7 @@ function registerElements(injector: Injector, platformId: {}): void {
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     HttpClientModule,
-      CellWidgetModule,
+    CellWidgetModule,
     BidiModule,
     GlobalConfigModule.forRoot(),
     LayoutModule,

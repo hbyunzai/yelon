@@ -282,6 +282,6 @@ describe('mock: interceptor', () => {
 
 @Component({
   selector: 'root-cmp',
-  template: ` <router-outlet></router-outlet> `
+  template: ` <router-outlet /> `
 })
 class RootComponent {}

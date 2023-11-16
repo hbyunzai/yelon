@@ -1,13 +1,13 @@
-import {Platform} from '@angular/cdk/platform';
-import {registerLocaleData} from '@angular/common';
+import { Platform } from '@angular/cdk/platform';
+import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
-import {Inject, Injectable, OnDestroy} from '@angular/core';
-import {Observable, catchError, of, Subject, takeUntil} from 'rxjs';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Observable, catchError, of, Subject, takeUntil } from 'rxjs';
 
-import {enUS as dfEn} from 'date-fns/locale';
-import {map} from 'rxjs/operators';
-import {ITokenService} from "@yelon/auth"
+import { enUS as dfEn } from 'date-fns/locale';
+import { map } from 'rxjs/operators';
 
+import { ITokenService, YA_SERVICE_TOKEN } from '@yelon/auth';
 import {
   YelonLocaleService,
   SettingsService,
@@ -16,21 +16,20 @@ import {
   YunzaiI18NType,
   en_US as yelonEnUS
 } from '@yelon/theme';
-import { YunzaiConfigService} from '@yelon/util/config';
-import {NzSafeAny} from 'ng-zorro-antd/core/types';
-import {NzI18nService, en_US as zorroEnUS} from 'ng-zorro-antd/i18n';
+import { YunzaiConfigService } from '@yelon/util/config';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzI18nService, en_US as zorroEnUS } from 'ng-zorro-antd/i18n';
 
-import {YUNZAI_LANGS} from './yunzai-lang';
-import { YA_SERVICE_TOKEN} from "@yelon/auth";
+import { YUNZAI_LANGS } from './yunzai-lang';
 
 declare const ngDevMode: boolean;
 
 const DEFAULT = 'zh-CN';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
   protected override _defaultLang = DEFAULT;
-  private $destroy = new Subject()
+  private $destroy = new Subject();
 
   constructor(
     private http: _HttpClient,
@@ -42,7 +41,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     cogSrv: YunzaiConfigService
   ) {
     super(cogSrv);
-    if(this.tokenService.get()?.access_token){
+    if (this.tokenService.get()?.access_token) {
       const defaultLang = this.getDefaultLang();
       this.getLangs()
         .pipe(takeUntil(this.$destroy))
@@ -98,7 +97,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
   getLangs(): Observable<YunzaiI18NType[]> {
     const langs = Object.keys(YUNZAI_LANGS).map(code => {
       const item = YUNZAI_LANGS[code];
-      return {code, text: item.text, abbr: item.abbr, image: undefined};
+      return { code, text: item.text, abbr: item.abbr, image: undefined };
     });
     if (ngDevMode) {
       return of(langs);
@@ -112,10 +111,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
     }
   }
 
-
-  ngOnDestroy() {
-    this.$destroy.complete()
+  ngOnDestroy(): void {
+    this.$destroy.complete();
   }
-
 }
-

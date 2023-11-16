@@ -139,7 +139,7 @@
               [locale]="locale"
               (n)="handleFilterNotify($event)"
               (handle)="_handleFilter(_c, $event)"
-            ></st-filter>
+            />
           </ng-container>
         </th>
       </ng-container>
@@ -183,7 +183,7 @@
                 [ngTemplateOutletContext]="{ $implicit: c.title }"
               ></ng-template>
             </span>
-            <st-td [data]="_data" [i]="i" [index]="index" [c]="c" [cIdx]="cIdx" (n)="_handleTd($event)"></st-td>
+            <st-td [data]="_data" [i]="i" [index]="index" [c]="c" [cIdx]="cIdx" (n)="_handleTd($event)" />
           </td>
         </ng-container>
       </tr>

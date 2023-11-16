@@ -1,8 +1,8 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {BehaviorSubject, Subject, takeUntil} from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
-import {resizeWindow} from '@yelon/util';
+import { resizeWindow } from '@yelon/util';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class LayoutDisplayService implements OnDestroy {
   private displayNav: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private displayAside: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private displayReuseTab: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  private $destroy = new Subject<void>()
+  private $destroy = new Subject<void>();
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.pipe(takeUntil(this.$destroy)).subscribe(params => {
@@ -94,7 +94,7 @@ export class LayoutDisplayService implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.$destroy.complete()
+  ngOnDestroy(): void {
+    this.$destroy.complete();
   }
 }

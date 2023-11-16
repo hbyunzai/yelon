@@ -28,7 +28,7 @@ let nextUniqueId = 0;
   host: { '[class.sf__item]': 'true' },
   template: `
     <ng-template #target></ng-template>
-    <ng-container *ngTemplateOutlet="footer"></ng-container>
+    <ng-container *ngTemplateOutlet="footer" />
   `,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,

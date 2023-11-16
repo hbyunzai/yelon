@@ -1,8 +1,8 @@
-import {APP_INITIALIZER, Inject, Injectable} from '@angular/core';
-import {Observable, mergeMap, of} from 'rxjs';
+import { APP_INITIALIZER, Inject, Injectable } from '@angular/core';
+import { Observable, mergeMap, of } from 'rxjs';
 
-import {ACLService} from '@yelon/acl';
-import {Menu, MenuService, SettingsService, TitleService, YUNZAI_I18N_TOKEN} from '@yelon/theme';
+import { ACLService } from '@yelon/acl';
+import { Menu, MenuService, SettingsService, TitleService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import {
   YunzaiMenu,
   WINDOW,
@@ -15,13 +15,13 @@ import {
   useLocalStorageUser,
   useLocalStorageDefaultRoute
 } from '@yelon/util';
-import {NzSafeAny} from 'ng-zorro-antd/core/types';
-import {NzIconService} from 'ng-zorro-antd/icon';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzIconService } from 'ng-zorro-antd/icon';
 
-import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from './bis.config';
-import {ICONS} from './icon/style-icons';
-import {YunzaiAuthService} from './yunzai-auth.service';
-import {YunzaiI18NService} from './yunzai-i18n.service';
+import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from './bis.config';
+import { ICONS } from './icon/style-icons';
+import { YunzaiAuthService } from './yunzai-auth.service';
+import { YunzaiI18NService } from './yunzai-i18n.service';
 
 @Injectable()
 export class YunzaiStartupService {
@@ -49,12 +49,12 @@ export class YunzaiStartupService {
       mergeMap(() => {
         return this.i18n.loadLangData(defaultLang);
       }),
-      mergeMap((langData) => {
+      mergeMap(langData => {
         log('startup.service: ', 'set i18n, defaultLang->', defaultLang, ' langData->', langData);
         this.i18n.use(defaultLang!, langData);
-        return of(void 0)
+        return of(void 0);
       }),
-      mergeMap((v) => {
+      mergeMap(v => {
         this.systemInit();
         log('startup.service: preloader finish');
         if (this.win && this.win.appBootstrap) {
@@ -62,7 +62,7 @@ export class YunzaiStartupService {
         }
         return of(v);
       })
-    )
+    );
   }
 
   systemInit(): void {
@@ -78,7 +78,7 @@ export class YunzaiStartupService {
     mapYzSideToYelonMenu(yunzaiMenus);
     const currentMenu = yunzaiMenus.pop();
     if (currentMenu) {
-      this.settingService.setApp({name: currentMenu.text, description: currentMenu.intro});
+      this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
       this.settingService.setUser({
         name: yunzaiUser.realname,
         avatar: `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}` || '',

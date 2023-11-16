@@ -42,7 +42,7 @@
   <ng-container *ngIf="inited && data.length > 0">
     <ng-container *ngIf="grid_span === 0">
       <ng-template [ngTemplateOutlet]="all"></ng-template>
-      <nz-checkbox-group [ngModel]="data" (ngModelChange)="notifySet()"></nz-checkbox-group>
+      <nz-checkbox-group [ngModel]="data" (ngModelChange)="notifySet()" />
     </ng-container>
     <ng-container *ngIf="grid_span !== 0">
       <nz-checkbox-wrapper class="sf__checkbox-list" (nzOnChange)="groupInGridChange($event)">

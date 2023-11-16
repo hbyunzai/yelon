@@ -1,6 +1,7 @@
-import {Component, Inject, Injector, OnDestroy, OnInit} from '@angular/core';
+import { Component, Inject, Injector, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 
-import {_HttpClient} from '@yelon/theme';
+import { _HttpClient } from '@yelon/theme';
 import {
   LayoutNavApplicationState,
   useLocalStorageHeader,
@@ -10,9 +11,8 @@ import {
   YunzaiNavTopic
 } from '@yelon/util';
 
-import {YunzaiI18NService} from '../yunzai-i18n.service';
-import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from "../bis.config";
-import {Subject, takeUntil} from "rxjs";
+import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from '../bis.config';
+import { YunzaiI18NService } from '../yunzai-i18n.service';
 
 @Component({
   selector: `layout-nav-application`,
@@ -49,7 +49,7 @@ import {Subject, takeUntil} from "rxjs";
               href="javascript:;"
               *ngFor="let nav of topic.children"
               (click)="open(nav)"
-            >{{ nav.name | i18n }}</a
+              >{{ nav.name | i18n }}</a
             >
           </li>
         </ul>
@@ -58,28 +58,37 @@ import {Subject, takeUntil} from "rxjs";
     <!-- right menu end -->
 
     <!--      button start-->
-    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item"
-         (click)="diffChange()"> {{ 'mode.nav' | i18n }}</div>
+    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item" (click)="diffChange()">{{
+      'mode.nav' | i18n
+    }}</div>
     <!--      button end-->
 
     <!--      header start-->
     <div class="yz-application" id="navDropdown" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
-        <div *ngIf="showAllMenu" data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text"
-             (click)="attachNav('all')">{{
-          'mode.nav.all' | i18n
-          }}</div>
-        <div *ngIf="showMineMenu" data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text"
-             (click)="attachNav('mine')">{{
-          'mode.nav.mine' | i18n
-          }}</div>
+        <div
+          *ngIf="showAllMenu"
+          data-event-id="_nav_topic"
+          data-name="全部应用"
+          class="yz-application-text"
+          (click)="attachNav('all')"
+          >{{ 'mode.nav.all' | i18n }}</div
+        >
+        <div
+          *ngIf="showMineMenu"
+          data-event-id="_nav_topic"
+          data-name="我的应用"
+          class="yz-application-text"
+          (click)="attachNav('mine')"
+          >{{ 'mode.nav.mine' | i18n }}</div
+        >
         <div
           data-event-id="_nav_topic"
           [attr.data-name]="nav.name | i18n"
           class="yz-application-text"
           *ngFor="let nav of state.topics"
           (click)="attachNav('other', nav)"
-        >{{ nav.name | i18n }}</div
+          >{{ nav.name | i18n }}</div
         >
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
@@ -122,17 +131,17 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
     topic: undefined,
     topics: [],
     list: [],
-    search: null,
+    search: null
   };
 
   get showAllMenu(): boolean {
-    if (this.bis.nav) return this.bis.nav!.all!
-    return true
+    if (this.bis.nav) return this.bis.nav!.all!;
+    return true;
   }
 
   get showMineMenu(): boolean {
-    if (this.bis.nav) return this.bis.nav!.mine!
-    return true
+    if (this.bis.nav) return this.bis.nav!.mine!;
+    return true;
   }
 
   constructor(
@@ -143,20 +152,20 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
     private configService: YunzaiConfigService,
     @Inject(WINDOW) private win: any
   ) {
-    this.bis = mergeBisConfig(configService)
+    this.bis = mergeBisConfig(configService);
   }
 
   ngOnInit(): void {
     this.fetchAllTopic();
     this.attachNav('all');
-    this.win.addEventListener("click", (event: any) => {
-      const {target} = event
-      const btn = this.win.document.getElementById("navBtn")
-      const dropdown = this.win.document.getElementById("navDropdown")
+    this.win.addEventListener('click', (event: any) => {
+      const { target } = event;
+      const btn = this.win.document.getElementById('navBtn');
+      const dropdown = this.win.document.getElementById('navDropdown');
       if (btn && dropdown && !dropdown.contains(target) && !btn.contains(target)) {
-        this.state.active = false
+        this.state.active = false;
       }
-    })
+    });
   }
 
   fetchAllTopic(): void {
@@ -266,8 +275,7 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.$destroy.complete()
+  ngOnDestroy(): void {
+    this.$destroy.complete();
   }
-
 }

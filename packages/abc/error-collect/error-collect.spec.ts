@@ -95,7 +95,7 @@ describe('abc: error-collect', () => {
           <input nz-input formControlName="email" id="email" />
         </nz-form-control>
       </nz-form-item>
-      <error-collect #ec [freq]="freq" [offsetTop]="offsetTop"></error-collect>
+      <error-collect #ec [freq]="freq" [offsetTop]="offsetTop" />
     </form>
   `
 })

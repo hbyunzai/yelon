@@ -8,7 +8,7 @@ import { copy } from '@yelon/util/browser';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import {I18NService, LangType, MobileService} from '@core';
+import { I18NService, LangType, MobileService } from '@core';
 
 import { MetaSearchGroupItem } from '../../interfaces';
 import { LayoutComponent } from '../layout.component';

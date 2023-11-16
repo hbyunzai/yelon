@@ -1,4 +1,4 @@
-import { Component, Inject,  OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
 import { StompService } from '@yelon/socket';
 import { LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
@@ -26,25 +26,25 @@ import { LayoutBasicState } from './interface';
       <layout-default-header-item direction="left">
         <ng-container [ngSwitch]="navType">
           <ng-container *ngSwitchCase="NavType.APPLICATION">
-            <layout-nav-application></layout-nav-application>
+            <layout-nav-application />
           </ng-container>
           <ng-container *ngSwitchCase="NavType.GROUP">
-            <layout-nav-group></layout-nav-group>
+            <layout-nav-group />
           </ng-container>
           <ng-container *ngSwitchCase="NavType.TILE">
-            <layout-nav-tile></layout-nav-tile>
+            <layout-nav-tile />
           </ng-container>
           <ng-container *ngSwitchDefault>
-            <layout-nav-application></layout-nav-application>
+            <layout-nav-application />
           </ng-container>
         </ng-container>
       </layout-default-header-item>
       <!-- nav end -->
       <layout-default-header-item direction="right" hidden="mobile">
-        <yunzai-notify></yunzai-notify>
+        <yunzai-notify />
       </layout-default-header-item>
       <layout-default-header-item direction="right" hidden="mobile">
-        <yunzai-theme-btn></yunzai-theme-btn>
+        <yunzai-theme-btn />
       </layout-default-header-item>
       <!-- setting -->
       <layout-default-header-item direction="right" hidden="mobile">
@@ -82,19 +82,19 @@ import { LayoutBasicState } from './interface';
               {{ 'mode.nav.tile' | i18n }}
             </div>
             <div data-event-id="_nav_fullscreen" nz-menu-item>
-              <yunzai-fullscreen></yunzai-fullscreen>
+              <yunzai-fullscreen />
             </div>
             <div data-event-id="_nav_clearstorage" nz-menu-item>
-              <yunzai-clearstorage></yunzai-clearstorage>
+              <yunzai-clearstorage />
             </div>
             <div data-event-id="_nav_i18n" nz-menu-item>
-              <yunzai-i18n></yunzai-i18n>
+              <yunzai-i18n />
             </div>
           </div>
         </nz-dropdown-menu>
       </layout-default-header-item>
       <layout-default-header-item direction="right">
-        <yunzai-user></yunzai-user>
+        <yunzai-user />
       </layout-default-header-item>
       <!-- setting end -->
     </layout-default>
@@ -106,7 +106,7 @@ import { LayoutBasicState } from './interface';
         [nzDropdownMenu]="userMenu"
         class="yunzai-default__aside-user"
       >
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon"></nz-avatar>
+        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon" />
         <div class="yunzai-default__aside-user-info">
           <strong>{{ aside.name | i18n }}</strong>
           <p class="mb0">{{ aside.intro | i18n }}</p>
@@ -119,12 +119,10 @@ import { LayoutBasicState } from './interface';
       </nz-dropdown-menu>
     </ng-template>
     <ng-template #contentTpl>
-      <reuse-tab #reuseTab [ngStyle]="reusetabCSS"></reuse-tab>
-      <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
+      <reuse-tab #reuseTab [ngStyle]="reusetabCSS" />
+      <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)" />
     </ng-template>
-    <ng-template #noneTpl>
-      <router-outlet></router-outlet>
-    </ng-template>
+    <ng-template #noneTpl> <router-outle />> </ng-template>
   `
 })
 export class YunzaiLayoutBasicComponent implements OnInit {
@@ -144,7 +142,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
       aside: true,
       reusetab: true
     },
-    navType: NavType.APPLICATION,
+    navType: NavType.APPLICATION
   };
 
   get options(): LayoutDefaultOptions {
@@ -267,5 +265,4 @@ export class YunzaiLayoutBasicComponent implements OnInit {
       this.state.display.aside = display;
     });
   }
-
 }

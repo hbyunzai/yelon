@@ -1,8 +1,8 @@
-import {TemplateRef} from '@angular/core';
-import {SafeHtml} from '@angular/platform-browser';
-import {Observable} from 'rxjs';
+import { TemplateRef } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 
-import type {NzSafeAny} from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export type OnboardingOpType = 'next' | 'prev' | 'skip' | 'done';
 

@@ -10,5 +10,4 @@ export * from './yunzai-lang';
 export * from './yunzai-layout.module';
 export * from './yunzai-startup.service';
 export * from './html-names';
-export * from "./analysis.addon";
-export * from "./yunzai-analysis-addon.guard";
+export * from './yunzai-analysis-addon.guard';

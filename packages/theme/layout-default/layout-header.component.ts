@@ -2,11 +2,14 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, DestroyRef, inject,
+  Component,
+  DestroyRef,
+  inject,
   Input,
   QueryList,
   TemplateRef
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { App, SettingsService } from '@yelon/theme';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -14,7 +17,6 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultHeaderItemDirection, LayoutDefaultHeaderItemHidden, LayoutDefaultOptions } from './types';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 interface LayoutDefaultHeaderItem {
   host: TemplateRef<NzSafeAny>;
@@ -27,7 +29,7 @@ interface LayoutDefaultHeaderItem {
   template: `
     <ng-template #render let-ls>
       <li *ngFor="let i of ls" [class.hidden-mobile]="i.hidden === 'mobile'" [class.hidden-pc]="i.hidden === 'pc'">
-        <ng-container *ngTemplateOutlet="i.host"></ng-container>
+        <ng-container *ngTemplateOutlet="i.host" />
       </li>
     </ng-template>
     <div class="yunzai-default__header-logo" [style.width.px]="opt.logoFixWidth">
@@ -52,7 +54,7 @@ interface LayoutDefaultHeaderItem {
         <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: left }"></ng-template>
       </ul>
       <div *ngIf="middle.length > 0" class="yunzai-default__nav yunzai-default__nav-middle">
-        <ng-container *ngTemplateOutlet="middle[0].host"></ng-container>
+        <ng-container *ngTemplateOutlet="middle[0].host" />
       </div>
       <ul class="yunzai-default__nav">
         <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: right }"></ng-template>
@@ -112,5 +114,4 @@ export class LayoutDefaultHeaderComponent implements AfterViewInit {
   toggleCollapsed(): void {
     this.srv.toggleCollapsed();
   }
-
 }

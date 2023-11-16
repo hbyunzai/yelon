@@ -1,4 +1,4 @@
-import {DOCUMENT} from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
   ContentChildren,
@@ -10,8 +10,7 @@ import {
   Renderer2,
   TemplateRef
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -21,32 +20,32 @@ import {
   Router,
   Event
 } from '@angular/router';
-import {filter} from 'rxjs';
+import { filter } from 'rxjs';
 
-import {SettingsService} from '@yelon/theme';
-import {BooleanInput, InputBoolean} from '@yelon/util';
-import {updateHostClass} from '@yelon/util/browser';
-import type {NzSafeAny} from 'ng-zorro-antd/core/types';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import { SettingsService } from '@yelon/theme';
+import { BooleanInput, InputBoolean } from '@yelon/util';
+import { updateHostClass } from '@yelon/util/browser';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
-import {LayoutDisplayService} from './layout-display.service';
-import {LayoutDefaultHeaderItemComponent} from './layout-header-item.component';
-import {LayoutDefaultService} from './layout.service';
-import {LayoutDefaultOptions} from './types';
+import { LayoutDisplayService } from './layout-display.service';
+import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
+import { LayoutDefaultService } from './layout.service';
+import { LayoutDefaultOptions } from './types';
 
 @Component({
   selector: 'layout-default',
   exportAs: 'layoutDefault',
   template: `
     <div class="yunzai-default__progress-bar" *ngIf="showFetching"></div>
-    <layout-default-header *ngIf="!opt.hideHeader && displayNav" [items]="headerItems"></layout-default-header>
+    <layout-default-header *ngIf="!opt.hideHeader && displayNav" [items]="headerItems" />
     <ng-container *ngIf="displayAside">
       <div *ngIf="!opt.hideAside" class="yunzai-default__aside" [ngStyle]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
-            <ng-container *ngTemplateOutlet="asideUser"></ng-container>
-            <ng-container *ngTemplateOutlet="nav"></ng-container>
-            <layout-default-nav *ngIf="!nav"></layout-default-nav>
+            <ng-container *ngTemplateOutlet="asideUser" />
+            <ng-container *ngTemplateOutlet="nav" />
+            <layout-default-nav *ngIf="!nav" />
           </div>
           <div *ngIf="opt.showSiderCollapse" class="yunzai-default__aside-link">
             <ng-container *ngIf="asideBottom === null; else asideBottom">
@@ -59,7 +58,7 @@ import {LayoutDefaultOptions} from './types';
       </div>
     </ng-container>
     <section class="yunzai-default__content" [ngStyle]="contentStyle">
-      <ng-container *ngTemplateOutlet="content"></ng-container>
+      <ng-container *ngTemplateOutlet="content" />
       <ng-content></ng-content>
     </section>
   `
@@ -68,7 +67,7 @@ export class LayoutDefaultComponent implements OnInit {
   static ngAcceptInputType_fetchingStrictly: BooleanInput;
   static ngAcceptInputType_fetching: BooleanInput;
 
-  @ContentChildren(LayoutDefaultHeaderItemComponent, {descendants: false})
+  @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
   headerItems!: QueryList<LayoutDefaultHeaderItemComponent>;
 
   get opt(): LayoutDefaultOptions {
@@ -159,7 +158,7 @@ export class LayoutDefaultComponent implements OnInit {
       this.isFetching = false;
       const err = this.customError === null ? null : this.customError ?? `Could not load ${ev.url} route`;
       if (err && ev instanceof NavigationError) {
-        this.msgSrv.error(err, {nzDuration: 1000 * 3});
+        this.msgSrv.error(err, { nzDuration: 1000 * 3 });
       }
       return;
     }
@@ -174,7 +173,7 @@ export class LayoutDefaultComponent implements OnInit {
   }
 
   private setClass(): void {
-    const {el, doc, renderer, settings} = this;
+    const { el, doc, renderer, settings } = this;
     const layout = settings.layout;
     updateHostClass(el.nativeElement, renderer, {
       ['yunzai-default']: true,
@@ -186,5 +185,4 @@ export class LayoutDefaultComponent implements OnInit {
 
     doc.body.classList[layout.colorWeak ? 'add' : 'remove']('color-weak');
   }
-
 }

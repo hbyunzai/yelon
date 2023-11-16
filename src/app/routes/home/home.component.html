@@ -18,13 +18,7 @@
           国内镜像：<a href="https://ng-yunzai.gitee.io" target="_blank">ng-yunzai.gitee.io</a>
         </ng-template>
       </a>
-      <github-button
-        *ngIf="isBrowser"
-        type="stargazers"
-        size="large"
-        namespace="ng-yunzai"
-        repo="ng-yunzai"
-      ></github-button>
+      <github-button *ngIf="isBrowser" type="stargazers" size="large" namespace="ng-yunzai" repo="ng-yunzai" />
     </div>
   </div>
   <nz-carousel class="page-banner__img" nzAutoPlay>
@@ -116,4 +110,4 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>
+<app-footer />

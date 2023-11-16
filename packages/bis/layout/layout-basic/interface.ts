@@ -1,4 +1,3 @@
-
 import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
 import { LayoutBasicAside, LayoutBasicDisplay, NavType } from '@yelon/util';
 

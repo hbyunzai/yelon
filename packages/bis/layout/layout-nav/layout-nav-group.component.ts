@@ -1,8 +1,8 @@
-import {Component, Injector, OnDestroy, OnInit} from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 
 import { _HttpClient } from '@yelon/theme';
 import { LayoutNavGroupState, useLocalStorageHeader, WINDOW, YunzaiNavTopic } from '@yelon/util';
-import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: `layout-nav-group`,
@@ -38,8 +38,8 @@ import {Subject, takeUntil} from "rxjs";
     </div>
   `
 })
-export class LayoutNavGroupComponent implements OnInit,OnDestroy {
-  private $destroy = new Subject()
+export class LayoutNavGroupComponent implements OnInit, OnDestroy {
+  private $destroy = new Subject();
   state: LayoutNavGroupState = {
     topics: []
   };
@@ -80,7 +80,7 @@ export class LayoutNavGroupComponent implements OnInit,OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.$destroy.complete()
+  ngOnDestroy(): void {
+    this.$destroy.complete();
   }
 }

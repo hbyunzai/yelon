@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -7,9 +7,9 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from '@angular/router';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
-import {Menu} from '@yelon/theme';
+import { Menu } from '@yelon/theme';
 import {
   deepCopy,
   log,
@@ -19,9 +19,9 @@ import {
   useLocalStorageUser,
   YunzaiUser
 } from '@yelon/util';
-import {NzSafeAny} from 'ng-zorro-antd/core/types';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import {BUSINESS_DEFAULT_CONFIG, mergeBisConfig} from './bis.config';
+import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from './bis.config';
 
 @Injectable({
   providedIn: 'root'
@@ -93,8 +93,8 @@ export class ActGuard implements CanActivate, CanActivateChild {
     let canactivate = false;
     this.links.forEach((link: string) => {
       if (link === state.url.split('?')[0]) {
-        canactivate = true
-        return
+        canactivate = true;
+        return;
       }
       const regexp: RegExp = this.pathToRegexp.stringToRegexp(link, null, null);
       if (regexp.test(state.url.split('?')[0])) {

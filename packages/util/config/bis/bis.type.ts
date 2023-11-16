@@ -5,7 +5,7 @@ export interface YunzaiBusinessConfig {
   refreshTokenEnabled?: boolean;
   refreshTokenType?: 're-request' | 'auth-refresh';
   nav?: {
-    mine?: boolean
-    all?: boolean
-  }
+    mine?: boolean;
+    all?: boolean;
+  };
 }
