@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 import { default as ngLang } from '@angular/common/locales/zh';
 import { YELON_LOCALE, zh_CN as yelonLang } from '@yelon/theme';
 import { zhCN as dateLang } from 'date-fns/locale';
-import { NZ_DATE_LOCALE, NZ_I18N, zh_CN as zorroLang } from 'ng-zorro-antd/i18n';
+import { NZ_DATE_LOCALE, provideNzI18n, zh_CN as zorroLang } from 'ng-zorro-antd/i18n';
 const LANG = {
   abbr: 'zh',
   ng: ngLang,
@@ -26,7 +26,7 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(LANG.ng, LANG.abbr);
 const LANG_PROVIDES = [
   { provide: LOCALE_ID, useValue: LANG.abbr },
-  { provide: NZ_I18N, useValue: LANG.zorro },
+  provideNzI18n(LANG.zorro),
   { provide: NZ_DATE_LOCALE, useValue: LANG.date },
   { provide: YELON_LOCALE, useValue: LANG.yelon },
 ];

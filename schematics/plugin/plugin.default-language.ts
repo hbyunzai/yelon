@@ -40,8 +40,9 @@ export function pluginDefaultLanguage(options: PluginOptions): Rule {
       .replace(/abbr: '([^']+)/, `abbr: '${options.defaultLanguage}`);
     // zorro
     content = content.replace(/NZ_I18N, ([^ ]+)/, `NZ_I18N, ${targetLang.zorro}`);
+    content = content.replace(/provideNzI18n, ([^ ]+)/, `provideNzI18n, ${targetLang.zorro}`);
     // yelon
-    content = content.replace(/YELON_LOCALE, ([^ ]+)/, `YELON_LOCALE, ${targetLang.zorro}`);
+    content = content.replace(/YELON_LOCALE, ([^ ]+)/, `DELON_LOCALE, ${targetLang.zorro}`);
     tree.overwrite(modulePath, content);
   };
 }

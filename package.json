@@ -55,7 +55,7 @@
     "ssr": "npm run ng-high-memory run site:serve-ssr",
     "ssr:serve": "node src/dist/server/main.js",
     "ssr:prerender": "npm run ng-high-memory run site:prerender",
-    "sync:delon:version": "node scripts/build/fix-version.js"
+    "sync:yelon:version": "node scripts/build/fix-version.js"
   },
   "dependencies": {
     "@angular/animations": "^16.2.0",
@@ -87,7 +87,7 @@
     "file-saver": "^2.0.5",
     "isutf8": "^4.0.0",
     "ng-github-button": "^16.0.0",
-    "ng-zorro-antd": "16.1.0",
+    "ng-zorro-antd": "^16.2.0",
     "ngx-color": "~9.0.0",
     "ngx-countdown": "^16.0.0",
     "ngx-highlight-js": "^16.1.0",
