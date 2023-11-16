@@ -1,3 +1,32 @@
+## 16.4.0 (2023-11-16)
+
+* fix(all): fix layout EOF ([33184c3](https://github.com/hbyunzai/yelon/commit/33184c3))
+* fix(bis): fix layour tag ([346df96](https://github.com/hbyunzai/yelon/commit/346df96))
+* fix(bis): fix tile template ([aebc946](https://github.com/hbyunzai/yelon/commit/aebc946))
+* fix(cli): missing `fileReplacements` in Angular16 ([d99464c](https://github.com/hbyunzai/yelon/commit/d99464c))
+* fix(form): fix `visibleIf` to correctly trigger `reset` ([2e2f505](https://github.com/hbyunzai/yelon/commit/2e2f505))
+* fix(form): fix render UI can't be inherit ([7073027](https://github.com/hbyunzai/yelon/commit/7073027))
+* fix(guard): update gurad version to angular16 ([61554a2](https://github.com/hbyunzai/yelon/commit/61554a2))
+* fix(token): fix @ token to &#64; ([3c0cc74](https://github.com/hbyunzai/yelon/commit/3c0cc74)), closes [#64](https://github.com/hbyunzai/yelon/issues/64)
+* chore: add `defaultProject` in `schema.json` ([c6526fc](https://github.com/hbyunzai/yelon/commit/c6526fc))
+* chore: chore deploy-site.yml ([2d9ad02](https://github.com/hbyunzai/yelon/commit/2d9ad02))
+* chore: chore eslint rules ([118331e](https://github.com/hbyunzai/yelon/commit/118331e))
+* chore: correct Docker configuration ([22f2c4c](https://github.com/hbyunzai/yelon/commit/22f2c4c))
+* chore: correct mirror gitee ([be5b9ca](https://github.com/hbyunzai/yelon/commit/be5b9ca))
+* chore: correctly use local language in document site ([d2d40b0](https://github.com/hbyunzai/yelon/commit/d2d40b0))
+* chore: fix shallow update not allowed ([4b1b4a8](https://github.com/hbyunzai/yelon/commit/4b1b4a8))
+* chore: lint code ([adbfa5b](https://github.com/hbyunzai/yelon/commit/adbfa5b))
+* feat: add provide function ([fc06ef9](https://github.com/hbyunzai/yelon/commit/fc06ef9))
+* feat(abc:onboarding): add `key` ([c48dcf3](https://github.com/hbyunzai/yelon/commit/c48dcf3))
+* feat(abc:theme): add `.tag-wrap-list-spacing` class ([dedf854](https://github.com/hbyunzai/yelon/commit/dedf854))
+* fix(abc:onboarding): correct dark style ([97d983a](https://github.com/hbyunzai/yelon/commit/97d983a))
+* fix(abc:st): correct width misalignment in export excel ([c13ff9c](https://github.com/hbyunzai/yelon/commit/c13ff9c))
+* fix(form:array): fix invalid ui in `ui` schema ([00097a4](https://github.com/hbyunzai/yelon/commit/00097a4))
+* fix(form:select): correct trigger onSearch in reset when set value ([7806d1a](https://github.com/hbyunzai/yelon/commit/7806d1a))
+* style: fix `declaration-block-no-redundant-longhand-properties` ([f1ea558](https://github.com/hbyunzai/yelon/commit/f1ea558))
+
+
+
 ## [16.3.9](https://github.com/hbyunzai/yelon/compare/16.3.8...16.3.9) (2023-11-09)
 
 
