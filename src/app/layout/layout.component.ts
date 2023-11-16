@@ -17,7 +17,7 @@ import { AppService, SiteTheme } from '../core/app.service';
       <nz-spin *ngIf="isFetching" class="fetching" nzSpinning />
       <router-outlet />
       <nz-back-top />
-      <theme-btn (themeChange)="themeChange($event) />
+      <theme-btn (themeChange)="themeChange($event)" />
     </ng-container>
   `,
   host: {
