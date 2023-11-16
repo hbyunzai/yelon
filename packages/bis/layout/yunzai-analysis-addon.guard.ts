@@ -40,6 +40,7 @@ export class YunzaiAnalysisAddonGuardService {
     ) as Menu[];
     if (user) {
       this.value = {
+        systemCode: this.bis.systemCode,
         userid: user.id,
         realname: user.realname,
         usertype: user.userType,
