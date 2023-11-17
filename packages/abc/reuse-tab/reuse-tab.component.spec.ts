@@ -867,7 +867,7 @@ class AppComponent {}
       (change)="change($event)"
       (close)="close($event)"
     />>
-    <div id="children"><router-outle />></div>
+    <div id="children"><router-outlet /></div>
     <ng-template #titleRender let-i>{{ i.url }}</ng-template>
   `
 })
