@@ -1,3 +1,9 @@
+## 16.4.4 (2023-11-20)
+
+* fix(docs): fix package ([52d70d2](https://github.com/hbyunzai/yelon/commit/52d70d2))
+
+
+
 ## 16.4.3 (2023-11-20)
 
 * fix(ci): fix github workflow ([dc51831](https://github.com/hbyunzai/yelon/commit/dc51831))
