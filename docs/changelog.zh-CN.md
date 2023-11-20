@@ -13,6 +13,10 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## 16.4.3 (2023-11-20)
+
+* fix(ci): fix github workflow ([dc51831](https://github.com/hbyunzai/yelon/commit/dc51831))
+
 
 ## 16.4.2 (2023-11-20)
 
