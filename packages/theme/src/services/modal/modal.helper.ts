@@ -7,6 +7,7 @@ import { deepMerge } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ModalOptions, NzModalService } from 'ng-zorro-antd/modal';
 
+const CLS_DRAG = 'MODAL-DRAG';
 export interface ModalHelperOptions {
   /** 大小；例如：lg、600、80%, 默认：`lg` */
   size?: 'sm' | 'md' | 'lg' | 'xl' | '' | number | string;
