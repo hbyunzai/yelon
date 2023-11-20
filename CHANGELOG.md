@@ -1,3 +1,18 @@
+## 16.4.2 (2023-11-20)
+
+* chore: remove plugin-default-language.spec ([7a6810e](https://github.com/hbyunzai/yelon/commit/7a6810e))
+* chore: upgrade ng-zorro-antd ([2377713](https://github.com/hbyunzai/yelon/commit/2377713))
+* feat(abc:qr): will be removed in 18.0.0 ([8f4977f](https://github.com/hbyunzai/yelon/commit/8f4977f))
+* perf(theme:modal): perf code ([c79b808](https://github.com/hbyunzai/yelon/commit/c79b808))
+* docs: update demo ([fc4994d](https://github.com/hbyunzai/yelon/commit/fc4994d))
+* docs: update demo ([936bfa5](https://github.com/hbyunzai/yelon/commit/936bfa5))
+* docs: update qa ([7d3d352](https://github.com/hbyunzai/yelon/commit/7d3d352))
+* fix(abc): fix reuse-tab spec ([5f22f80](https://github.com/hbyunzai/yelon/commit/5f22f80))
+* fix(scripts): fix npm mirror sync ([7e9e3ca](https://github.com/hbyunzai/yelon/commit/7e9e3ca))
+* feat(bis): add analysis field ([1416c16](https://github.com/hbyunzai/yelon/commit/1416c16))
+
+
+
 ## 16.4.0 (2023-11-16)
 
 * fix(all): fix layout EOF ([33184c3](https://github.com/hbyunzai/yelon/commit/33184c3))
