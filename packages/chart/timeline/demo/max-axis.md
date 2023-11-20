@@ -10,7 +10,7 @@ title:
 ```ts
 import {Component} from '@angular/core';
 
-import {G2TimelineData, G2TimelineMap} from '@delon/chart/timeline';
+import {G2TimelineData, G2TimelineMap} from '@yelon/chart/timeline';
 
 @Component({
     selector: 'app-demo',
