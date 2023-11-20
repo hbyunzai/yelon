@@ -13,6 +13,11 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## 16.4.4 (2023-11-20)
+
+* fix(docs): fix package ([52d70d2](https://github.com/hbyunzai/yelon/commit/52d70d2))
+
+
 ## 16.4.3 (2023-11-20)
 
 * fix(ci): fix github workflow ([dc51831](https://github.com/hbyunzai/yelon/commit/dc51831))
