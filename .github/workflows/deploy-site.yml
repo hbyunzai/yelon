@@ -28,7 +28,6 @@ jobs:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./src/dist/browser
-          emptyCommits: false
 
       - name: deploy-to-surge
         uses: dswistowski/surge-sh-action@v1
