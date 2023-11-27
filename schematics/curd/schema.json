@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "SchematicsNgYunzaiCURDComponent",
-  "title": "Ng Yunzai CURD Component Options Schema",
+  "title": "NG-YUNZAI CURD Component Options Schema",
   "type": "object",
   "properties": {
     "path": {

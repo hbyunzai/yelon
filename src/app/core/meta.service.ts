@@ -207,15 +207,17 @@ export class MetaService {
   }
 
   getPathByUrl(url: string): any {
-    url = url.split('=')[0].split('?')[0];
+    url = url
+      .split('=')[0]
+      .split('?')[0]
+      .replace(/\/(en|zh)$/, '/');
     let ret: any;
     (this._menus || []).forEach((cat: any) => {
       if (ret) return;
-      ret = cat.list.find((i: any) => i.url === url);
+      ret = cat.list.find((i: { url: string }) => i.url.startsWith(url));
     });
     return ret;
   }
-
   private refPage(url: string): void {
     this.next = null;
     this.prev = null;

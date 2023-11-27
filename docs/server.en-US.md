@@ -6,15 +6,17 @@ type: Dev
 
 NG-YUNZAI is a single-page application based on the Angular technology stack. We provide development models for front-end code and native analog data.
 Work in the form of the Restful API with the server application of any technology stack. The basics of interacting with the server are briefly described below.
+
 ## Front-end request process
 
 In NG-YUNZAI, a complete front-end UI interaction to the server-side processing flow looks like this:
 
 1. Start Angular for the first time to execute `APP_INITIALIZER`;
+  - Usually some APP general data is loaded before startup, such as currently authorized user data, menu data, dictionary data, configuration data, etc.
 2. UI component interaction;
 3. Send the request using the encapsulated [_HttpClient](/theme/http);
 4. Trigger the user authentication interceptor [@yelon/auth](/auth/getting-started) and add the `token` parameter uniformly;
-    - If there is no `token` or an expired interrupt subsequent request, jump directly to the login page;
+  - If there is no `token` or an expired interrupt subsequent request, jump directly to the login page;
 5. Trigger the default interceptor to process the prefix and other information;
 6. Get the server back;
 7. Trigger the default interceptor to handle request exceptions, business exceptions, etc.
@@ -48,7 +50,7 @@ Sometimes when you want to develop the front-end first, you can use [@yelon/mock
 
 ```ts
 export const USERS = {
-  'GET /users': { users: [1, 2], total: 2 }
+  'GET /users': {users: [1, 2], total: 2}
 }
 ```
 

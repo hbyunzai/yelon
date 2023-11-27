@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "SchematicsNgYunzaiEmptyComponent",
-  "title": "Ng Yunzai Empty Component Options Schema",
+  "title": "NG-YUNZAI Empty Component Options Schema",
   "type": "object",
   "additionalProperties": true,
   "properties": {
