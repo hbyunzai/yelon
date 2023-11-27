@@ -119,11 +119,11 @@ stages:
           - script: yarn run test:cli
     dependsOn: env
 
-#  - stage: lint
-#    jobs:
-#      - job: packages
-#        steps:
-#          - script: yarn install
-#            displayName: 'Install'
-#          - script: yarn run lint
-#    dependsOn: env
+  - stage: lint
+    jobs:
+      - job: packages
+        steps:
+          - script: yarn install
+            displayName: 'Install'
+          - script: yarn run lint
+    dependsOn: env

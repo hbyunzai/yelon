@@ -1,7 +1,7 @@
 html {
-  height: 100%; // http://updates.html5rocks.com/2013/12/300ms-tap-delay-gone-away
-  direction: ltr;
   touch-action: manipulation;
+  direction: ltr;
+  height: 100%; // http://updates.html5rocks.com/2013/12/300ms-tap-delay-gone-away
 }
 
 html,
@@ -18,15 +18,16 @@ body {
 
 @{yunzai-default-prefix} {
   position: relative;
+  overflow-x: hidden;
   display: block;
   width: 100%;
   height: auto;
   min-height: 100%;
-  overflow-x: hidden;
 
   &__unwrap {
     margin-right: -@yunzai-default-content-padding;
     margin-left: -@yunzai-default-content-padding;
+
     @media (max-width: @mobile-max) {
       margin-right: 0;
       margin-left: 0;
@@ -35,6 +36,7 @@ body {
 
   &__content {
     margin: 0 @yunzai-default-content-padding @yunzai-default-content-padding @yunzai-default-content-padding;
+    .router-ant();
 
     &-title {
       display: flex;
@@ -52,27 +54,27 @@ body {
 
       > h1 {
         margin-bottom: 0;
-        font-weight: normal;
         font-size: 18px;
+        font-weight: normal;
 
         > small {
           display: block;
-          color: @muted-color;
           font-size: 12px;
+          color: @muted-color;
         }
       }
     }
+
     // fix width
     nz-input-group {
       width: auto;
     }
-    .router-ant();
   }
 
   &__hide-aside {
     @{yunzai-default-prefix}__content {
-      margin-left: @yunzai-default-content-padding !important;
       transform: none !important;
+      margin-left: @yunzai-default-content-padding !important;
     }
   }
 
@@ -88,6 +90,7 @@ body {
   @{yunzai-default-prefix}__content {
     margin-left: (@yunzai-default-aside-wd + @yunzai-default-content-padding);
   }
+
   @{yunzai-default-prefix}__collapsed {
     @{yunzai-default-prefix} {
       &__sidebar {
@@ -101,13 +104,14 @@ body {
   }
 }
 
-.layout-default-rtl-mixin(@enabled) when(@enabled=true) {
+.layout-default-rtl-mixin(@enabled) when (@enabled=true) {
   [dir='rtl'] {
     @media (min-width: @mobile-min) {
       @{yunzai-default-prefix}__content {
         margin-right: (@yunzai-default-aside-wd + @yunzai-default-content-padding);
         margin-left: 0;
       }
+
       @{yunzai-default-prefix}__collapsed {
         @{yunzai-default-prefix} {
           &__content {
@@ -119,4 +123,5 @@ body {
     }
   }
 }
+
 .layout-default-rtl-mixin(@rtl-enabled);

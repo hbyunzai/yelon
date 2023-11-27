@@ -15,16 +15,16 @@
     transition: border-left-color 0.4s ease;
 
     &-link {
+      user-select: none;
       position: relative;
+      overflow: hidden;
       display: block;
       padding: @yunzai-default-aside-nav-padding-top-bottom @yunzai-default-aside-nav-padding-left-right * 2
-        @yunzai-default-aside-nav-padding-top-bottom @yunzai-default-aside-nav-padding-left-right;
-      overflow: hidden;
+      @yunzai-default-aside-nav-padding-top-bottom @yunzai-default-aside-nav-padding-left-right;
       color: @yunzai-default-aside-nav-text-color;
-      white-space: nowrap;
       text-decoration: none !important;
       text-overflow: ellipsis;
-      user-select: none;
+      white-space: nowrap;
 
       &:hover {
         color: @yunzai-default-aside-nav-text-hover-color;
@@ -97,8 +97,8 @@
   }
 
   &__sub {
-    display: none;
     overflow: hidden;
+    display: none;
 
     @{sidebar-nav-prefix}__item {
       border-left: 0 !important;
@@ -113,6 +113,7 @@
 
       &::before,
       &::after {
+        content: '';
         position: absolute;
         width: 6px;
         height: 1.5px;
@@ -120,7 +121,6 @@
         background-image: linear-gradient(to right, @menu-item-color, @menu-item-color);
         border-radius: 2px;
         transition: background-color 0.3s @ease-in-out, transform 0.3s @ease-in-out, top 0.3s @ease-in-out;
-        content: '';
       }
 
       &::before {
@@ -270,7 +270,7 @@
   }
 }
 
-.layout-default-sidebarnav-rtl-mixin(@enabled) when(@enabled=true) {
+.layout-default-sidebarnav-rtl-mixin(@enabled) when (@enabled=true) {
   [dir='rtl'] {
     @{sidebar-nav-prefix} {
       &__item {
@@ -285,6 +285,7 @@
         left: @layout-gutter * 2;
       }
     }
+
     @media (min-width: @mobile-min) {
       @{yunzai-default-prefix}__collapsed {
         @{sidebar-nav-prefix}:not(@{sidebar-nav-prefix}__sub) {
@@ -300,4 +301,5 @@
     }
   }
 }
+
 .layout-default-sidebarnav-rtl-mixin(@rtl-enabled);
