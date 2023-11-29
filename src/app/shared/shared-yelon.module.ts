@@ -31,6 +31,7 @@ import { YunzaiContactModule } from '@yelon/bcs/yunzai-contact';
 import { YunzaiDeptTreeModule } from '@yelon/bcs/yunzai-dept-tree';
 import { YunzaiDormitoryTreeModule } from '@yelon/bcs/yunzai-dormitory-tree';
 import { YunzaiFriendGroupModule } from '@yelon/bcs/yunzai-friend-group';
+import { YunzaiIframePageModule } from '@yelon/bcs/yunzai-iframe-page';
 import { YunzaiRoleTreeModule } from '@yelon/bcs/yunzai-role-tree';
 import { YunzaiTableUserModule } from '@yelon/bcs/yunzai-table-user';
 import { G2BarModule } from '@yelon/chart/bar';
@@ -110,5 +111,6 @@ export const SHARED_YELON_MODULES = [
   YunzaiRoleTreeModule,
   YunzaiDeptTreeModule,
   YunzaiFriendGroupModule,
-  YunzaiContactModule
+  YunzaiContactModule,
+  YunzaiIframePageModule
 ];

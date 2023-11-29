@@ -16,6 +16,9 @@ import { UserLoginComponent } from './passport/login/login.component';
 import { UserRegisterResultComponent } from './passport/register-result/register-result.component';
 import { UserRegisterComponent } from './passport/register/register.component';
 
+// 某个模块作为单个外部链接(iframePage)
+import {YunzaiIframePageComponent} from "@yelon/bcs/yunzai-iframe-page/yunzai-iframe-page.component";
+
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +28,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘'<% if (!i18n) { %>, titleI18n: 'dashboard'<% } %> } },
       { path: 'exception', loadChildren: () => import('./exception/exception.module').then(m => m.ExceptionModule) },
+      { path: 'iframePage', component: YunzaiIframePageComponent},
       // 业务子模块
       // { path: 'widgets', loadChildren: () => import('./widgets/widgets.module').then(m => m.WidgetsModule) },
     ]

@@ -31,6 +31,8 @@
 /bcs/yunzai-friend-group/zh
 /bcs/yunzai-grade/en
 /bcs/yunzai-grade/zh
+/bcs/yunzai-iframe-page/en
+/bcs/yunzai-iframe-page/zh
 /bcs/yunzai-role-tree/en
 /bcs/yunzai-role-tree/zh
 /bcs/yunzai-shared-yelon/en

@@ -20,6 +20,8 @@ export class MenuService implements OnDestroy {
    */
   openStrictly = false;
 
+  private $routerLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   constructor(
     @Optional()
     @Inject(YUNZAI_I18N_TOKEN)
@@ -349,5 +351,14 @@ export class MenuService implements OnDestroy {
   ngOnDestroy(): void {
     this._change$.unsubscribe();
     this.i18n$.unsubscribe();
+  }
+
+  // 路由跳转路径
+  setRouterLink(url: string): void {
+    this.$routerLink.next(url);
+  }
+
+  getRouterLink(): Observable<string> {
+    return this.$routerLink.asObservable();
   }
 }

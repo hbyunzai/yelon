@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "yunzai-iframe-page",
+    "entryFile": "index.ts"
+  }
+}
