@@ -13,6 +13,19 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [16.4.5](https://github.com/hbyunzai/yelon/compare/16.4.4...16.4.5) (2023-11-29)
+
+
+### Bug Fixes
+
+* fix ghpage ([318729d](https://github.com/hbyunzai/yelon/commit/318729de5ee073f7d754262ec9e550fbadba02ed))
+
+
+### Features
+
+* **bcs:** 增加“外部链接页面”组件 ([3fb4ccb](https://github.com/hbyunzai/yelon/commit/3fb4ccb3ff800b09b85a72d0b3ebe27ffb533a8a))
+
+
 ## 16.4.4 (2023-11-20)
 
 * fix(docs): fix package ([52d70d2](https://github.com/hbyunzai/yelon/commit/52d70d2))
