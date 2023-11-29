@@ -17,7 +17,7 @@ import { UserRegisterResultComponent } from './passport/register-result/register
 import { UserRegisterComponent } from './passport/register/register.component';
 
 // 某个模块作为单个外部链接(iframePage)
-import {YunzaiIframePageComponent} from "@yelon/bcs/yunzai-iframe-page/yunzai-iframe-page.component";
+import {YunzaiIframePageComponent} from "@yelon/bcs/yunzai-iframe-page";
 
 const routes: Routes = [
   {
