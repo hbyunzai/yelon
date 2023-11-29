@@ -13,6 +13,15 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+
+## [16.4.6](https://github.com/hbyunzai/yelon/compare/16.4.5...16.4.6) (2023-11-29)
+
+
+### Features
+
+* **bcs:** fix iframe components  ([21d22d9](https://github.com/hbyunzai/yelon/commit/21d22d92d7703e357f7ae20ac49a033eebdbedab))
+
+
 ## [16.4.5](https://github.com/hbyunzai/yelon/compare/16.4.4...16.4.5) (2023-11-29)
 
 
