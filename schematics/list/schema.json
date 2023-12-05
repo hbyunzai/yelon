@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "SchematicsNgYunzaiListComponent",
-  "title": "Ng Yunzai List Component Options Schema",
+  "title": "NG-YUNZAI List Component Options Schema",
   "type": "object",
   "additionalProperties": true,
   "properties": {

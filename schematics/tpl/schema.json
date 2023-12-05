@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "SchematicsNgYunzaiTplComponent",
-  "title": "Ng Yunzai Tpl Options Schema",
+  "title": "NG-YUNZAI Tpl Options Schema",
   "type": "object",
   "additionalProperties": true,
   "properties": {

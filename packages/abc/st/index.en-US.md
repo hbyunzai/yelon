@@ -24,7 +24,7 @@ The value is URL.
 - Use `page.zeroIndexed` to adjust the http request when `pi` parameter follows the `0` base index, default is `1` base
   index
 - Automatically cancel paging when the response body value is an array type
-- Use `_HttpClient` send request, so applies to [YunzaiThemeConfig](/theme/http#AlainThemeConfig) configuration
+- Use `_HttpClient` send request, so applies to [YunzaiThemeConfig](/theme/http#YunzaiThemeConfig) configuration
 
 ### Static
 
