@@ -37,7 +37,11 @@
       </nz-list-item>
     </ng-template>
   </nz-list>
-  <div [attr.data-event-id]="'_nav_clear_' + data.key" class="notice-icon__clear" (click)="onClear()">{{
-    data.clearText || locale.clearText
-  }}</div>
+  <div
+    [attr.data-event-desc]="''"
+    [attr.data-event-id]="'_nav_clear_' + data.key"
+    class="notice-icon__clear"
+    (click)="onClear()"
+    >{{ data.clearText || locale.clearText }}</div
+  >
 </ng-template>
