@@ -17,6 +17,7 @@ import { YUNZAI_I18N_TOKEN, _HttpClient } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
 import { YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util/config';
 import { log } from '@yelon/util/other';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { mergeBisConfig } from './bis.config';
@@ -43,7 +44,7 @@ const CODEMESSAGE: { [key: number]: string } = {
 class YunzaiDefaultInterceptor implements HttpInterceptor {
   private jump = false;
   private refreshToking = false;
-  private refreshToken$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private refreshToken$: BehaviorSubject<NzSafeAny> = new BehaviorSubject<NzSafeAny>(null);
 
   private get notification(): NzNotificationService {
     return this.injector.get(NzNotificationService);
@@ -101,7 +102,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
     }, 5000);
   }
 
-  private reAttachToken(req: HttpRequest<any>): HttpRequest<any> {
+  private reAttachToken(req: HttpRequest<NzSafeAny>): HttpRequest<NzSafeAny> {
     const token = this.tokenSrv.get()?.access_token;
     return req.clone({
       setHeaders: {
@@ -110,7 +111,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
     });
   }
 
-  private refreshTokenRequest(): Observable<any> {
+  private refreshTokenRequest(): Observable<NzSafeAny> {
     const model = this.tokenSrv.get();
     const form = new FormData();
     form.set('refresh_token', model?.refresh_token!);
@@ -120,7 +121,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
     return this.http.post(`/auth/oauth/getOrCreateToken/webapp`, form);
   }
 
-  private tryRefreshToken(ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+  private tryRefreshToken(ev: HttpResponseBase, req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<NzSafeAny> {
     // 连刷新Token的请求都错了，那就是真错了
     if (['/auth/oauth/getOrCreateToken/webapp'].some(url => req.url.includes(url))) {
       this.ToLogin();
@@ -169,7 +170,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
     return res;
   }
 
-  private handleData(ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+  private handleData(ev: HttpResponseBase, req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<NzSafeAny> {
     this.checkStatus(ev);
     switch (ev.status) {
       case 200:
@@ -206,7 +207,7 @@ class YunzaiDefaultInterceptor implements HttpInterceptor {
     }
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
     if (req.context.get(ALLOW_ANONYMOUS)) return next.handle(req);
     log('yz.default.interceptor.ts: ', 'request ', req);
     // 统一加前缀

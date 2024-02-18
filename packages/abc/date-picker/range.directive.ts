@@ -12,7 +12,11 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { YunzaiConfigService, YunzaiDateRangePickerShortcut, YunzaiDateRangePickerShortcutItem } from '@yelon/util/config';
+import {
+  YunzaiConfigService,
+  YunzaiDateRangePickerShortcut,
+  YunzaiDateRangePickerShortcutItem
+} from '@yelon/util/config';
 import { fixEndTimeOfRange, getTimeDistance } from '@yelon/util/date-time';
 import { assert, deepMergeKey } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';

@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
 
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +15,7 @@ export class PathToRegexpService {
     'g'
   );
 
-  parse(str: any, options: any) {
+  parse(str: NzSafeAny, options: NzSafeAny) {
     const tokens = [];
     let key = 0;
     let index = 0;
@@ -78,18 +80,18 @@ export class PathToRegexpService {
       });
     }
 
-    // Push any remaining characters.
+    // Push NzSafeAny remaining characters.
     if (path || index < str.length) {
       tokens.push(path + str.substr(index));
     }
 
     return tokens;
   }
-  compile(str: any, options: any) {
+  compile(str: NzSafeAny, options: NzSafeAny) {
     return this.tokensToFunction(this.parse(str, options), options);
   }
 
-  tokensToFunction(tokens: any, options: any) {
+  tokensToFunction(tokens: NzSafeAny, options: NzSafeAny) {
     const matches = new Array(tokens.length);
 
     for (let i = 0; i < tokens.length; i++) {
@@ -98,7 +100,7 @@ export class PathToRegexpService {
       }
     }
 
-    return function (data: any, options: any) {
+    return function (data: NzSafeAny, options: NzSafeAny) {
       let path = '';
       const encode = (options && options.encode) || encodeURIComponent;
       const validate = options ? options.validate !== false : true;
@@ -162,19 +164,19 @@ export class PathToRegexpService {
     };
   }
 
-  escapeString(str: any) {
+  escapeString(str: NzSafeAny) {
     return str.replace(/([.+*?=^!:${}()[\]|/\\])/g, '\\$1');
   }
 
-  escapeGroup(group: any) {
+  escapeGroup(group: NzSafeAny) {
     return group.replace(/([=!:$/()])/g, '\\$1');
   }
 
-  flags(options: any) {
+  flags(options: NzSafeAny) {
     return options && options.sensitive ? '' : 'i';
   }
 
-  regexpToRegexp(path: any, keys: any) {
+  regexpToRegexp(path: NzSafeAny, keys: NzSafeAny) {
     if (!keys) {
       return path;
     }
@@ -197,7 +199,7 @@ export class PathToRegexpService {
     return path;
   }
 
-  arrayToRegexp(path: any, keys: any, options: any): RegExp {
+  arrayToRegexp(path: NzSafeAny, keys: NzSafeAny, options: NzSafeAny): RegExp {
     const parts = [];
 
     for (let i = 0; i < path.length; i++) {
@@ -207,11 +209,11 @@ export class PathToRegexpService {
     return new RegExp(`(?:${parts.join('|')})`, this.flags(options));
   }
 
-  stringToRegexp(path: any, keys: any, options: any) {
+  stringToRegexp(path: NzSafeAny, keys: NzSafeAny, options: NzSafeAny) {
     return this.tokensToRegExp(this.parse(path, options), keys, options);
   }
 
-  tokensToRegExp(tokens: any, keys: any, options: any) {
+  tokensToRegExp(tokens: NzSafeAny, keys: NzSafeAny, options: NzSafeAny) {
     options = options || {};
 
     const strict = options.strict;
@@ -273,7 +275,7 @@ export class PathToRegexpService {
     return new RegExp(route, this.flags(options));
   }
 
-  pathToRegexp(path: any, keys: any, options: any) {
+  pathToRegexp(path: NzSafeAny, keys: NzSafeAny, options: NzSafeAny) {
     if (path instanceof RegExp) {
       return this.regexpToRegexp(path, keys);
     }

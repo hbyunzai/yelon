@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
+
 import { StompService } from '@yelon/socket';
-import {  LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
+import { LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
 import {
   WINDOW,
   hasFavicon,

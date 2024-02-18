@@ -33,7 +33,7 @@ export class ActGuardService {
     const user: YunzaiUser = getUser()!;
     log('act: user ', user);
     // @ts-ignore
-    this.menus = deepCopy((user.menu as any) || []).filter(
+    this.menus = deepCopy((user.menu as NzSafeAny) || []).filter(
       (m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode
     ) as Menu[];
     log('act: menus ', this.menus);

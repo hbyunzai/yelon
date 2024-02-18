@@ -1,5 +1,7 @@
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 export interface YunzaiMenu {
-  [key: string]: any;
+  [key: string]: NzSafeAny;
   appCode: string;
   appIconUrl: string;
   appType: string;
@@ -34,8 +36,8 @@ export interface YunzaiMenu {
 }
 
 export interface YunzaiMenuAttribute {
-  defaultRoute: any;
-  dataPlatform: any;
-  targetUser: any;
-  starConfig: any;
+  defaultRoute: NzSafeAny;
+  dataPlatform: NzSafeAny;
+  targetUser: NzSafeAny;
+  starConfig: NzSafeAny;
 }

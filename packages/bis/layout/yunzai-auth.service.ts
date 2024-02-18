@@ -13,6 +13,7 @@ import {
   YunzaiBusinessConfig,
   YunzaiConfigService
 } from '@yelon/util';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { mergeBisConfig } from './bis.config';
 
@@ -48,7 +49,7 @@ export class YunzaiAuthService {
   fetchTokenByUP(): Observable<ITokenModel> {
     log('yz.auth.service: ', 'fetchTokenByUP');
     return this.httpClient.post(`/auth/oauth/token?_allow_anonymous=true`, this.config.loginForm).pipe(
-      map((response: any) => {
+      map((response: NzSafeAny) => {
         return response;
       })
     );
@@ -60,7 +61,7 @@ export class YunzaiAuthService {
     return this.httpClient
       .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
       .pipe(
-        map((response: any) => {
+        map((response: NzSafeAny) => {
           switch (response.errcode) {
             case 2000:
               return response.data;

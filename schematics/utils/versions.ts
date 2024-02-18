@@ -1,9 +1,9 @@
-import {Tree, Rule} from '@angular-devkit/schematics';
-import {updateWorkspace} from '@schematics/angular/utility/workspace';
+import { Tree, Rule } from '@angular-devkit/schematics';
+import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
-import {VERSION} from './lib-versions';
-import {addPackage} from './package';
-import {BUILD_TARGET_LINT, getProjectFromWorkspace} from './workspace';
+import { VERSION } from './lib-versions';
+import { addPackage } from './package';
+import { BUILD_TARGET_LINT, getProjectFromWorkspace } from './workspace';
 
 /**
  * 修复主要依赖的版本号
@@ -11,7 +11,9 @@ import {BUILD_TARGET_LINT, getProjectFromWorkspace} from './workspace';
 export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void {
   addPackage(
     tree,
-    ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart', 'bcs', 'bis', 'socket'].map(name => `@yelon/${name}@${version}`)
+    ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart', 'bcs', 'bis', 'socket'].map(
+      name => `@yelon/${name}@${version}`
+    )
   );
   addPackage(
     tree,

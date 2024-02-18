@@ -103,7 +103,7 @@ export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestro
       return of(langs);
     } else {
       return this.http.get(`/i18n/api/v2/language`).pipe(
-        map((response: any) => {
+        map((response: NzSafeAny) => {
           return response.data;
         }),
         catchError(() => of(langs))

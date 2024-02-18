@@ -28,14 +28,14 @@ export class YunzaiAnalysisAddonGuardService {
   constructor(
     private configService: YunzaiConfigService,
     private pathToRegexp: PathToRegexpService,
-    @Inject(WINDOW) private win: any,
+    @Inject(WINDOW) private win: NzSafeAny,
     @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService
   ) {
     this.bis = mergeBisConfig(this.configService);
     const [, getUser] = useLocalStorageUser();
     const user: YunzaiUser = getUser()!;
     // @ts-ignore
-    this.menus = deepCopy((user.menu as any) || []).filter(
+    this.menus = deepCopy((user.menu as NzSafeAny) || []).filter(
       (m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode
     ) as Menu[];
     if (user) {

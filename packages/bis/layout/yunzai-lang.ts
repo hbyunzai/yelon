@@ -40,6 +40,7 @@ import {
   zh_CN as yelonZhCn,
   zh_TW as yelonZhTw
 } from '@yelon/theme';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import {
   el_GR as zorroElGR,
   en_US as zorroEnUS,
@@ -58,10 +59,10 @@ import {
 export interface LangConfigData {
   abbr: string;
   text: string;
-  ng: any;
-  zorro: any;
-  date: any;
-  yelon: any;
+  ng: NzSafeAny;
+  zorro: NzSafeAny;
+  date: NzSafeAny;
+  yelon: NzSafeAny;
 }
 
 export const YUNZAI_LANGS: { [key: string]: LangConfigData } = {

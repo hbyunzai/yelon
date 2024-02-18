@@ -18,9 +18,9 @@ async function withGithub(url, json, method) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Basic ${Buffer.from(TOKEN).toString('base64')}`,
+      Authorization: `Basic ${Buffer.from(TOKEN).toString('base64')}`
     },
-    body: json ? JSON.stringify(json) : undefined,
+    body: json ? JSON.stringify(json) : undefined
   });
 
   return res.json();
@@ -28,7 +28,7 @@ async function withGithub(url, json, method) {
 
 (async function run() {
   if (PR == null) {
-    console.log('未获取到PR，忽略处理')
+    console.log('未获取到PR，忽略处理');
     return;
   }
 
@@ -36,6 +36,8 @@ async function withGithub(url, json, method) {
   console.log(`commentUrl`, commentUrl);
   const comments = await withGithub(commentUrl);
   console.log(`comments data`, comments);
+
+  if (!comments) return;
 
   // Find my comment
   const updateComment = comments.find(({ body }) => body.includes(REPLACE_MARK));
@@ -45,15 +47,15 @@ async function withGithub(url, json, method) {
   let res;
   if (!updateComment) {
     res = await withGithub(commentUrl, {
-      body: wrappedComment,
+      body: wrappedComment
     });
   } else {
     res = await withGithub(
       `https://api.github.com/repos/${REPO}/issues/comments/${updateComment.id}`,
       {
-        body: wrappedComment,
+        body: wrappedComment
       },
-      'PATCH',
+      'PATCH'
     );
   }
 

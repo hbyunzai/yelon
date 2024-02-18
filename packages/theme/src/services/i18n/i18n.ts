@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, filter, of } from 'rxjs';
 import { YunzaiConfigService, YunzaiThemeI18nConfig } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-
 export interface YunzaiI18NType {
   code: string;
   text: string;

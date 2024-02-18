@@ -24,7 +24,6 @@ export class MenuService implements OnDestroy {
 
   private $routerLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-
   constructor() {
     this.i18n$ = this.i18nSrv?.change.subscribe(() => this.resume());
   }

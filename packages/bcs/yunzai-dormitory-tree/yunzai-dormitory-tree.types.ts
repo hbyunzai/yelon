@@ -1,4 +1,3 @@
-
 import { SFSchema } from '@yelon/form';
 
 export enum YunzaiDormitoryTreeType {

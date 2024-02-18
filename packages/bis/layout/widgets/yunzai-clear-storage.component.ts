@@ -12,7 +12,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   host: {
     '[class.d-block]': 'true'
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YunzaiClearStorageComponent {
   constructor(

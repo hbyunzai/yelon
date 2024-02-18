@@ -28,10 +28,10 @@ import { updateHostClass } from '@yelon/util/browser';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
+import { LayoutDisplayService } from './layout-display.service';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
-import {LayoutDisplayService} from './layout-display.service';
 
 @Component({
   selector: 'layout-default',
