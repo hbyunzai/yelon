@@ -1,54 +1,70 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
+import { NoticeIconModule } from '@yelon/abc/notice-icon';
+import { ReuseTabModule } from '@yelon/abc/reuse-tab';
+import { YunzaiThemeModule } from '@yelon/theme';
+import { LayoutDefaultModule } from '@yelon/theme/layout-default';
 import { YUNZAI_THEME_BTN_KEYS } from '@yelon/theme/theme-btn';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
-import { YunzaiLayoutBasicComponent } from './layout-basic/layout-basic.component';
+import { YunzaiLayoutBasicComponent } from './layout-basic';
 import { LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent } from './layout-nav';
 import {
   YunzaiClearStorageComponent,
   YunzaiFullScreenComponent,
   YunzaiI18NComponent,
   YunzaiNotifyComponent,
-  YunzaiThemBtnComponent,
+  YunzaiThemeBtnComponent,
   YunzaiUserComponent
 } from './widgets';
 
-const WIDGETS = [
+const COMPONENTS = [
   YunzaiClearStorageComponent,
   YunzaiFullScreenComponent,
   YunzaiI18NComponent,
   YunzaiNotifyComponent,
-  YunzaiThemBtnComponent,
-  YunzaiUserComponent
+  YunzaiThemeBtnComponent,
+  YunzaiUserComponent,
+  YunzaiLayoutBasicComponent,
+  LayoutNavApplicationComponent,
+  LayoutNavGroupComponent,
+  LayoutNavTileComponent
 ];
-
-const LAYOUT_NAV_COMPONENTS = [LayoutNavApplicationComponent, LayoutNavGroupComponent, LayoutNavTileComponent];
-
-const COMPONENTS = [YunzaiLayoutBasicComponent];
 
 @NgModule({
   imports: [
-    HttpClientModule,
-    CommonModule,
-    FormsModule,
     RouterModule,
-    ReactiveFormsModule,
-    YunzaiSharedYelonModule,
-    YunzaiSharedZorroModule
+    ReuseTabModule,
+    LayoutDefaultModule,
+    CommonModule,
+    NzTabsModule,
+    NgOptimizedImage,
+    NzToolTipModule,
+    NzDropDownModule,
+    NzAvatarModule,
+    NoticeIconModule,
+    FormsModule,
+    NzGridModule,
+    YunzaiThemeModule,
+    NzInputModule,
+    NzIconModule
   ],
+  declarations: COMPONENTS,
   providers: [
     {
       provide: YUNZAI_THEME_BTN_KEYS,
       useValue: 'site-theme'
     }
   ],
-  declarations: [...COMPONENTS, ...WIDGETS, ...LAYOUT_NAV_COMPONENTS],
-  exports: [...COMPONENTS, ...WIDGETS, ...LAYOUT_NAV_COMPONENTS]
+  exports: COMPONENTS
 })
 export class YunzaiLayoutModule {}

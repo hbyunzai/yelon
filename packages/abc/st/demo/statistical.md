@@ -15,7 +15,10 @@ Support `count`, `distinctCount`, `sum`, `average`, `max`, `min` or custom funct
 
 ```ts
 import { Component } from '@angular/core';
-import { STColumn, STData } from '@yelon/abc/st';
+
+import { STColumn, STData, STModule } from '@yelon/abc/st';
+import { CurrencyPricePipe } from '@yelon/util';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-demo',
@@ -23,7 +26,7 @@ import { STColumn, STData } from '@yelon/abc/st';
     <button nz-button (click)="data = []">Clean Data</button>
     <st #st [data]="data" [columns]="columns" [body]="bodyTpl">
       <ng-template #bodyTpl let-s>
-        <ng-container *ngIf="st.count > 0">
+        @if (st.count > 0) {
           <tr>
             <td>合计</td>
             <td>{{ s.len.text }} 个</td>
@@ -39,10 +42,12 @@ import { STColumn, STData } from '@yelon/abc/st';
             <td class="text-right">{{ s.sum.value / s.len.value | price }}</td>
             <td colspan="4"></td>
           </tr>
-        </ng-container>
+        }
       </ng-template>
     </st>
   `,
+  standalone: true,
+  imports: [STModule, NzButtonModule, CurrencyPricePipe]
 })
 export class DemoComponent {
   data: STData[] = Array(100)
@@ -50,7 +55,7 @@ export class DemoComponent {
     .map((_, idx) => ({
       id: idx + 1,
       price: ~~(Math.random() * 100),
-      age: ~~(Math.random() * 100) > 50 ? '女' : '男',
+      age: ~~(Math.random() * 100) > 50 ? '女' : '男'
     }));
   columns: STColumn[] = [
     { title: '行号', type: 'no' },
@@ -65,8 +70,8 @@ export class DemoComponent {
       index: 'price',
       type: 'currency',
       statistical: { type: values => ({ value: values[0], text: `**${values[0]}` }), currency: false },
-      key: 'custom',
-    },
+      key: 'custom'
+    }
   ];
 }
 ```

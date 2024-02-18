@@ -1,35 +1,36 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { YunzaiDeptTreeModule } from '@yelon/bcs/yunzai-dept-tree';
 import { YunzaiDormitoryTreeModule } from '@yelon/bcs/yunzai-dormitory-tree';
 import { YunzaiFriendGroupModule } from '@yelon/bcs/yunzai-friend-group';
 import { YunzaiRoleTreeModule } from '@yelon/bcs/yunzai-role-tree';
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
 import { YunzaiTableUserModule } from '@yelon/bcs/yunzai-table-user';
+import { YunzaiThemeModule } from '@yelon/theme';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 import { YunzaiContactComponent } from './yunzai-contact.component';
 
+const COMPONENTS = [YunzaiContactComponent];
+
 @NgModule({
   imports: [
+    YunzaiThemeModule,
     YunzaiDeptTreeModule,
     YunzaiDormitoryTreeModule,
     YunzaiFriendGroupModule,
     YunzaiRoleTreeModule,
     YunzaiTableUserModule,
-    HttpClientModule,
     CommonModule,
+    NzCardModule,
+    NzGridModule,
+    NzRadioModule,
     FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    YunzaiSharedZorroModule,
-    YunzaiSharedYelonModule
+    ...COMPONENTS
   ],
-  declarations: [YunzaiContactComponent],
-  exports: [YunzaiContactComponent]
+  exports: COMPONENTS
 })
 export class YunzaiContactModule {}

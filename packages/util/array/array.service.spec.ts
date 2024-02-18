@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 
-import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { provideYunzaiConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
 import { NzTreeBaseService, NzTreeNode } from 'ng-zorro-antd/core/tree';
 
@@ -229,16 +230,7 @@ describe('utils: array', () => {
   describe('[config]', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
-        providers: [
-          {
-            provide: YUNZAI_CONFIG,
-            useValue: {
-              utilArray: {
-                idMapName: 'ID'
-              }
-            } as YunzaiConfig
-          }
-        ]
+        providers: [provideYunzaiConfig({ utilArray: { idMapName: 'ID' } })]
       });
       srv = TestBed.inject<ArrayService>(ArrayService);
     });

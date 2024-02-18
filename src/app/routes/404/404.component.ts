@@ -1,13 +1,14 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 
-import { I18NService } from '@core';
-
 @Component({
   selector: 'not-found',
-  templateUrl: './404.component.html'
+  templateUrl: './404.component.html',
+  standalone: true,
+  imports: [RouterLink]
 })
 export class NotFoundComponent {
-  constructor(@Inject(YUNZAI_I18N_TOKEN) public i18n: I18NService) {}
+  readonly i18n = inject(YUNZAI_I18N_TOKEN);
 }

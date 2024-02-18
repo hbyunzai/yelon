@@ -20,13 +20,11 @@ const log = {
   },
   success: msg => {
     print(chalk.bgGreen.black('SUCCESS'), chalk.green(msg));
-  }
+  },
 };
 
 function main() {
-  const result = read.question(
-    chalk.bgYellow.black(`请输入要过期的版本号范围，可以通过 https://semver.npmjs.com/ 来获取`) + '  '
-  );
+  const result = read.question(chalk.bgYellow.black(`请输入要过期的版本号范围，可以通过 https://semver.npmjs.com/ 来获取`) + '  ');
 
   if (result === '') {
     log.warn(`空版本信息，中断操作`);
@@ -41,8 +39,8 @@ function main() {
 
   const confirmResult = read.question(
     chalk.bgYellow.black(
-      `将对所有包体进行以下过期处理【npm deprecate ng-yunzai@"${result}" "Please use latest"】，确认吗？（输入 Y 确认）`
-    ) + '  '
+      `将对所有包体进行以下过期处理【npm deprecate ng-yunzai@"${result}" "Please use latest"】，确认吗？（输入 Y 确认）`,
+    ) + '  ',
   );
 
   if (confirmResult !== 'Y') {

@@ -19,14 +19,6 @@ describe('NgYunzaiSchematic: application', () => {
       expect(packageJson.dependencies['@yelon/cache']).toBeDefined();
       expect(packageJson.dependencies['@yelon/mock']).toBeDefined();
     });
-    it('should be add vscode extensions config', () => {
-      const filePath = '.vscode/extensions.json';
-      // eslint-disable-next-line deprecation/deprecation
-      expect(tree.exists(filePath)).toBe(true, `Not found [${filePath}]`);
-      const json = JSON.parse(tree.readContent(filePath));
-      expect(json != null).toBe(true);
-      expect(json.recommendations[0]).toBe('yunzai-bot.ng-yunzai-extension-pack');
-    });
     it('should be add addFileReplacements', () => {
       const angualrJson = tree.readContent('angular.json');
       expect(angualrJson).toContain(`fileReplacements`);
@@ -37,15 +29,15 @@ describe('NgYunzaiSchematic: application', () => {
     describe('with true', () => {
       beforeEach(async () => ({ runner, tree } = await createYunzaiApp({ i18n: true })));
       it(`can add i18n related`, () => {
-        const specTs = tree.readContent('/projects/foo/src/app/app.module.ts');
-        expect(specTs).toContain(`import { I18NService } from '@core'`);
+        const specTs = tree.readContent('/projects/foo/src/app/app.config.ts');
+        expect(specTs).toContain(`I18NService`);
       });
     });
     describe('with false', () => {
       beforeEach(async () => ({ runner, tree } = await createYunzaiApp({ i18n: false })));
       it(`can't add i18n related`, () => {
-        const specTs = tree.readContent('/projects/foo/src/app/app.module.ts');
-        expect(specTs).not.toContain(`@core/i18n/`);
+        const specTs = tree.readContent('/projects/foo/src/app/app.config.ts');
+        expect(specTs).not.toContain(`I18NService`);
       });
     });
     describe('default language', () => {
@@ -113,6 +105,75 @@ describe('NgYunzaiSchematic: application', () => {
       ({ runner, tree } = await createYunzaiApp({ form: false }));
       const content = tree.readContent('/projects/foo/src/app/shared/index.ts');
       expect(content).not.toContain(`json-schema`);
+    });
+  });
+
+  describe('#multiple-projects', () => {
+    let runner: SchematicTestRunner;
+    let tree: UnitTestTree;
+    let projectName = 'mgr';
+    beforeEach(async () => {
+      const baseRunner = createNgRunner();
+      const workspaceTree = await baseRunner.runSchematic('workspace', {
+        name: 'workspace',
+        newProjectRoot: 'projects',
+        version: '16.0.0'
+      });
+      await baseRunner.runSchematic(
+        'application',
+        {
+          name: 'h5',
+          inlineStyle: false,
+          inlineTemplate: false,
+          routing: false,
+          style: 'css',
+          skipTests: false,
+          skipPackageJson: false
+        },
+        workspaceTree
+      );
+      tree = await baseRunner.runSchematic(
+        'application',
+        {
+          name: projectName,
+          inlineStyle: false,
+          inlineTemplate: false,
+          routing: false,
+          style: 'css',
+          skipTests: false,
+          skipPackageJson: false
+        },
+        workspaceTree
+      );
+      runner = createYunzaiRunner();
+    });
+    it(`should be working`, async () => {
+      tree = await runner.runSchematic(
+        'ng-add',
+        {
+          skipPackageJson: false,
+          project: projectName
+        },
+        tree
+      );
+      const content = tree.readContent(`/projects/${projectName}/src/app/app.config.ts`);
+      expect(content).toContain(`provideYunzai`);
+      expect(tree.exists(`/projects/h5/src/app/shared/index.ts`)).toBe(false);
+    });
+    it(`should be throw error when not found project name`, async () => {
+      try {
+        tree = await runner.runSchematic(
+          'ng-add',
+          {
+            skipPackageJson: false,
+            project: `${projectName}invalid`
+          },
+          tree
+        );
+        expect(true).toBe(false);
+      } catch (ex) {
+        expect(ex.message).toContain(`Not found under the projects node of angular.json`);
+      }
     });
   });
 });

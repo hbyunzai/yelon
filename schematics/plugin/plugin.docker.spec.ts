@@ -12,7 +12,7 @@ describe('NgYunzaiSchematic: plugin: docker', () => {
   });
 
   describe('when add', () => {
-    it(`should add files`, () => {
+    it(`should add fiels`, () => {
       expect(tree.exists(`/projects/${APPNAME}/.dockerignore`)).toBe(true);
       expect(tree.exists(`/projects/${APPNAME}/docker-compose.yml`)).toBe(true);
       expect(tree.exists(`/projects/${APPNAME}/Dockerfile`)).toBe(true);
@@ -22,7 +22,7 @@ describe('NgYunzaiSchematic: plugin: docker', () => {
 
   describe('when remove', () => {
     beforeEach(async () => (tree = await runner.runSchematic('plugin', { name: 'docker', type: 'remove' }, tree)));
-    it(`should add files`, () => {
+    it(`should add fiels`, () => {
       expect(tree.exists(`/projects/${APPNAME}/.dockerignore`)).toBe(false);
       expect(tree.exists(`/projects/${APPNAME}/docker-compose.yml`)).toBe(false);
       expect(tree.exists(`/projects/${APPNAME}/Dockerfile`)).toBe(false);

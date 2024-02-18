@@ -5,10 +5,12 @@ import {
   Input,
   OnInit,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
+  inject
 } from '@angular/core';
 
 import { YelonLocaleService } from '@yelon/theme';
+import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
 
 import {
   CloseType,
@@ -27,9 +29,13 @@ import {
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [NzMenuDirective, NzMenuItemComponent]
 })
 export class ReuseTabContextMenuComponent implements OnInit {
+  private readonly i18nSrv = inject(YelonLocaleService);
+
   private _i18n!: ReuseContextI18n;
   @Input()
   set i18n(value: ReuseContextI18n) {
@@ -49,8 +55,6 @@ export class ReuseTabContextMenuComponent implements OnInit {
   get includeNonCloseable(): boolean {
     return this.event.ctrlKey;
   }
-
-  constructor(private i18nSrv: YelonLocaleService) {}
 
   private notify(type: CloseType): void {
     this.close.next({

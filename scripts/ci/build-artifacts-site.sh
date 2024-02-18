@@ -23,8 +23,8 @@ commitMessageCheck=$(git log --oneline -n 2)
 
 echo "Current commit author name: ${commitAuthorName}"
 
-# if [[ ${commitAuthorName} != 'devcui' && ${commitAuthorName} != 'devcui' ]]; then
-#   echo "Warning: Just only devcui or devcui user"
+# if [[ ${commitAuthorName} != 'yunzai-bot' && ${commitAuthorName} != 'yunzai-bot' ]]; then
+#   echo "Warning: Just only yunzai-bot or yunzai-bot user"
 #   exit 0
 # fi
 

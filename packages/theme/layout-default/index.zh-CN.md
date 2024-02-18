@@ -41,14 +41,14 @@ import { environment } from '@env/environment';
         </div>
       </layout-default-header-item>
       <layout-default-header-item direction="middle">
-        <header-search class="yunzai-default__search" [toggleChange]="searchToggleStatus"></header-search>
+        <header-search class="yunzai-default__search" [toggleChange]="searchToggleStatus" />
       </layout-default-header-item>
       <layout-default-header-item direction="right" hidden="mobile">
-        <header-task></header-task>
+        <header-task />
       </layout-default-header-item>
       <ng-template #asideUserTpl>
         <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="yunzai-default__aside-user">
-          <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="user.avatar"></nz-avatar>
+          <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="user.avatar" />
           <div class="yunzai-default__aside-user-info">
             <strong>{{ user.name }}</strong>
             <p class="mb0">{{ user.email }}</p>
@@ -62,15 +62,17 @@ import { environment } from '@env/environment';
         </nz-dropdown-menu>
       </ng-template>
       <ng-template #navTpl>
-        <layout-default-nav class="d-block py-lg"></layout-default-nav>
+        <layout-default-nav class="d-block py-lg" />
       </ng-template>
       <ng-template #contentTpl>
-        <router-outlet></router-outlet>
+        <router-outlet />
       </ng-template>
     </layout-default>
 
-    <setting-drawer *ngIf="showSettingDrawer"></setting-drawer>
-    <theme-btn></theme-btn>
+    @if (showSettingDrawer) {
+      <setting-drawer />
+    }
+    <theme-btn />
   `,
 })
 export class LayoutBasicComponent {
@@ -105,7 +107,6 @@ export class LayoutBasicComponent {
 | `[fetchingStrictly]` | 是否完全受控顶部加载动画状态 | `boolean` | `false` |
 | `[fetching]` | 顶部加载动画状态 | `boolean` | `false` |
 
-
 ### LayoutDefaultOptions
 
 | 成员 | 说明 | 类型 | 默认值 |
@@ -127,6 +128,7 @@ export class LayoutBasicComponent {
 | `[disabledAcl]` | `acl` 校验失败时以 `disabled` 状态显示 | `boolean` | `false` |
 | `[autoCloseUnderPad]` | 小于Pad宽度时路由切换后自动关闭侧边栏 | `boolean` | `true` |
 | `[recursivePath]` | 自动向上递归查找，菜单数据源包含 `/ware`，则 `/ware/1` 也视为 `/ware` 项 | `boolean` | `true` |
+| `[hideEmptyChildren]` | 当所有子项都为隐藏时，是否也隐藏父级 | `boolean` | `true` |
 | `[openStrictly]` | 展开完全受控，不再自动关闭已展开的项 | `boolean` | `false` |
 | `[maxLevelIcon]` | Icon最多显示到第几层 | `number` | `3` |
 | `(select)` | 点击菜单时回调（包含 `disabled`） | `EventEmitter<Menu>` | - |

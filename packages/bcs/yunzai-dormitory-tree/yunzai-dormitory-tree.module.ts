@@ -1,25 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
+import { YelonFormModule } from '@yelon/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
 
 import { YunzaiDormitoryTreeComponent } from './yunzai-dormitory-tree.component';
 
+const COMPONENTS = [YunzaiDormitoryTreeComponent];
+
 @NgModule({
   imports: [
-    HttpClientModule,
     CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    YunzaiSharedZorroModule,
-    YunzaiSharedYelonModule
+    YelonFormModule,
+    NzIconModule,
+    NzEmptyModule,
+    NzTreeModule,
+    NzSpinModule,
+    NzCardModule,
+    ...COMPONENTS
   ],
-  declarations: [YunzaiDormitoryTreeComponent],
-  exports: [YunzaiDormitoryTreeComponent]
+  exports: COMPONENTS
 })
 export class YunzaiDormitoryTreeModule {}

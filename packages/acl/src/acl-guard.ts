@@ -5,13 +5,11 @@ import { Observable, of, map, tap } from 'rxjs';
 import { ACLService } from './acl.service';
 import type { ACLCanType, ACLGuardData } from './acl.type';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ACLGuardService {
-  constructor(
-    private srv: ACLService,
-    private router: Router,
-    private injector: Injector
-  ) {}
+  private readonly srv = inject(ACLService);
+  private readonly router = inject(Router);
+  private readonly injector = inject(Injector);
 
   process(data?: ACLGuardData): Observable<boolean> {
     data = {

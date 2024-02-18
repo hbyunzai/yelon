@@ -12,7 +12,7 @@ module: import { G2WaterWaveModule } from '@yelon/chart/water-wave';
 
 ## API
 
-### g2-water-wave
+### g2-water-wave:standalone
 
 | 参数 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|

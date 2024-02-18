@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { provideYunzaiConfig } from '@yelon/util/config';
 
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from './i18n';
 import { yunzaiI18nCanActivate, yunzaiI18nCanActivateChild } from './i18n-url.guard';
@@ -23,14 +23,15 @@ describe('theme: i18n', () => {
   describe('', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [YunzaiThemeModule.forRoot()],
+        imports: [YunzaiThemeModule],
         declarations: [TestComponent]
       });
       fixture = TestBed.createComponent(TestComponent);
       srv = fixture.debugElement.injector.get(YUNZAI_I18N_TOKEN);
       srv.use('en', {
         simple: 'a',
-        param: 'a-{{value}}'
+        param: 'a-{{value}}',
+        paramArr: 'a-{0},{ 1 }'
       });
       fixture.detectChanges();
     });
@@ -38,11 +39,31 @@ describe('theme: i18n', () => {
       check('a');
     });
 
-    it('should be param', () => {
-      fixture.componentInstance.key = 'param';
-      fixture.componentInstance.params = { value: '1' };
-      fixture.detectChanges();
-      check('a-1', 'param');
+    describe('#param', () => {
+      it('with object', () => {
+        fixture.componentInstance.key = 'param';
+        fixture.componentInstance.params = { value: '1' };
+        fixture.detectChanges();
+        check('a-1', 'param');
+      });
+      it('with base type', () => {
+        fixture.componentInstance.key = 'paramArr';
+        fixture.componentInstance.params = 'A';
+        fixture.detectChanges();
+        check('a-A,{ 1 }', 'param');
+      });
+      it('with base type', () => {
+        fixture.componentInstance.key = 'paramArr';
+        fixture.componentInstance.params = 100;
+        fixture.detectChanges();
+        check('a-100,{ 1 }', 'param');
+      });
+      it('with array', () => {
+        fixture.componentInstance.key = 'paramArr';
+        fixture.componentInstance.params = [1, 2];
+        fixture.detectChanges();
+        check('a-1,2', 'param');
+      });
     });
 
     it('should be return path when is invalid', () => {
@@ -68,9 +89,9 @@ describe('theme: i18n', () => {
 
   it('#interpolation', () => {
     TestBed.configureTestingModule({
-      imports: [YunzaiThemeModule.forRoot()],
+      imports: [YunzaiThemeModule],
       declarations: [TestComponent],
-      providers: [{ provide: YUNZAI_CONFIG, useValue: { themeI18n: { interpolation: ['#', '#'] } } as YunzaiConfig }]
+      providers: [provideYunzaiConfig({ themeI18n: { interpolation: ['#', '#'] } })]
     });
     fixture = TestBed.createComponent(TestComponent);
     srv = fixture.debugElement.injector.get(YUNZAI_I18N_TOKEN);
@@ -88,7 +109,7 @@ describe('theme: i18n', () => {
     it('should be working', fakeAsync(() => {
       TestBed.configureTestingModule({
         imports: [
-          YunzaiThemeModule.forRoot(),
+          YunzaiThemeModule,
           RouterTestingModule.withRoutes([
             {
               path: ':i18n',
@@ -112,7 +133,7 @@ describe('theme: i18n', () => {
     it('should be can not work', fakeAsync(() => {
       TestBed.configureTestingModule({
         imports: [
-          YunzaiThemeModule.forRoot(),
+          YunzaiThemeModule,
           RouterTestingModule.withRoutes([
             { path: ':invalid', component: TestComponent, canActivate: [yunzaiI18nCanActivate] }
           ])
@@ -131,15 +152,13 @@ describe('theme: i18n', () => {
     it('should be working', fakeAsync(() => {
       TestBed.configureTestingModule({
         imports: [
-          YunzaiThemeModule.forRoot(),
+          YunzaiThemeModule,
           RouterTestingModule.withRoutes([
             { path: ':lang', component: TestComponent, canActivate: [yunzaiI18nCanActivate] }
           ])
         ],
         declarations: [TestComponent],
-        providers: [
-          { provide: YUNZAI_CONFIG, useValue: { themeI18n: { paramNameOfUrlGuard: 'lang' } } as YunzaiConfig }
-        ]
+        providers: [provideYunzaiConfig({ themeI18n: { paramNameOfUrlGuard: 'lang' } })]
       });
       fixture = TestBed.createComponent(TestComponent);
       srv = fixture.debugElement.injector.get(YUNZAI_I18N_TOKEN);

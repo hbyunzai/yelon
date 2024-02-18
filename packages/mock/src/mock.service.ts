@@ -1,17 +1,19 @@
-import { Injectable, OnDestroy } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
 
 import { YunzaiConfigService, YunzaiMockConfig } from '@yelon/util/config';
 
 import { MockCachedRule, MockOptions, MockRule } from './interface';
-import { MOCK_DEFULAT_CONFIG } from './mock.config';
+import { MOCK_DEFAULT_CONFIG } from './mock.config';
+import { YELON_MOCK_CONFIG } from './provide';
 
 @Injectable({ providedIn: 'root' })
 export class MockService implements OnDestroy {
   private cached: MockCachedRule[] = [];
   readonly config: YunzaiMockConfig;
 
-  constructor(cogSrv: YunzaiConfigService, options: MockOptions) {
-    this.config = cogSrv.merge('mock', MOCK_DEFULAT_CONFIG)!;
+  constructor(cogSrv: YunzaiConfigService, @Optional() @Inject(YELON_MOCK_CONFIG) options?: MockOptions) {
+    this.config = cogSrv.merge('mock', MOCK_DEFAULT_CONFIG)!;
     this.setData(options?.data);
   }
 

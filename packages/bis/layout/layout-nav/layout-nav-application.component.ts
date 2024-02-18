@@ -10,6 +10,7 @@ import {
   YunzaiConfigService,
   YunzaiNavTopic
 } from '@yelon/util';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from '../bis.config';
 import { YunzaiI18NService } from '../yunzai-i18n.service';
@@ -93,12 +94,12 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
       </div>
       <div nz-col [nzSpan]="21" [ngSwitch]="state.topic" class="yz-application-container">
         <div *ngIf="state.type === 'all'">
-          <ng-template [ngTemplateOutlet]="search"></ng-template>
-          <ng-template [ngTemplateOutlet]="ld"></ng-template>
+          <ng-template [ngTemplateOutlet]="search" />
+          <ng-template [ngTemplateOutlet]="ld" />
         </div>
         <div *ngIf="state.type === 'mine'">
-          <ng-template [ngTemplateOutlet]="search"></ng-template>
-          <ng-template [ngTemplateOutlet]="ld"></ng-template>
+          <ng-template [ngTemplateOutlet]="search" />
+          <ng-template [ngTemplateOutlet]="ld" />
         </div>
         <div *ngIf="state.type === 'other'" class="yz-application-list">
           <div class="yz-application-list-item">
@@ -150,7 +151,7 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
     private inject: Injector,
     // @ts-ignore
     private configService: YunzaiConfigService,
-    @Inject(WINDOW) private win: any
+    @Inject(WINDOW) private win: NzSafeAny
   ) {
     this.bis = mergeBisConfig(configService);
   }
@@ -158,7 +159,7 @@ export class LayoutNavApplicationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchAllTopic();
     this.attachNav('all');
-    this.win.addEventListener('click', (event: any) => {
+    this.win.addEventListener('click', (event: NzSafeAny) => {
       const { target } = event;
       const btn = this.win.document.getElementById('navBtn');
       const dropdown = this.win.document.getElementById('navDropdown');

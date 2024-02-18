@@ -36,7 +36,7 @@ export const USERS = {
 
 ## Value
 
-Supports three types: `Object`, `Array`, `(req: MockRequest) => any`.
+Supports three types: `Object`, `Array`, `(req: MockRequest) => any | Observable<any> | Promise<any>`.
 
 ```ts
 import { MockStatusError } from '@yelon/mock';
@@ -51,7 +51,14 @@ export const USERS = {
   // Support HttpResponse
   '/http': (req: MockRequest) => new HttpResponse({ body: 'Body', headers: new HttpHeaders({ 'token': '1' }) }),
   // Send Status Error
-  '/404': () => { throw new MockStatusError(404); }
+  '/404': () => { throw new MockStatusError(404); },
+  // Support Observable
+  '/obs': () => of(1),
+  // Support Promise
+  '/promise': async () => {
+    await delay(10);
+    return 1;
+  }
 };
 ```
 
@@ -72,23 +79,32 @@ When you want to respond to a `404` http status.
 ## Demo
 
 ```ts
-import { MockStatusError } from '@yelon/mock';
+import {MockStatusError} from '@yelon/mock';
 
 export const USERS = {
   // Support object or array values
-  'GET /users': { users: [1, 2], total: 2 },
+  'GET /users': {users: [1, 2], total: 2},
   // GET: can be ignored
-  '/users/1': { users: [1, 2], total: 2 },
+  '/users/1': {users: [1, 2], total: 2},
   // POST
-  'POST /users/1': { uid: 1 },
+  'POST /users/1': {uid: 1},
   // Get request parameters: queryString、headers、body
   '/qs': (req: MockRequest) => req.queryString.pi,
   // Routing parameters
   '/users/:id': (req: MockRequest) => req.params, // /users/100, output: { id: 100 }
   // Send Status Error
-  '/404': () => { throw new MockStatusError(404); },
+  '/404': () => {
+    throw new MockStatusError(404);
+  },
   // Regular expressions need to be wrapped with `()`
-  '/data/(.*)': (req: MockRequest) => req
+  '/data/(.*)': (req: MockRequest) => req,
+  // Support Observable
+  '/obs': () => of(1),
+  // Support Promise
+  '/promise': async () => {
+    await delay(10);
+    return 1;
+  }
 };
 ```
 

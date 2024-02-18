@@ -1,6 +1,7 @@
-import { InjectionToken } from '@angular/core';
+import { EnvironmentProviders, InjectionToken, makeEnvironmentProviders } from '@angular/core';
 
 import {
+  YunzaiCellConfig,
   YunzaiDateRangePickerConfig,
   YunzaiErrorCollectConfig,
   YunzaiExceptionType,
@@ -17,8 +18,7 @@ import {
   YunzaiSTConfig,
   YunzaiSVConfig,
   YunzaiXlsxConfig,
-  YunzaiZipConfig,
-  YunzaiCellConfig
+  YunzaiZipConfig
 } from './abc/index';
 import { YunzaiACLConfig } from './acl/acl.type';
 import { YunzaiAuthConfig } from './auth/auth.type';
@@ -29,6 +29,7 @@ import { YunzaiMockConfig } from './mock/mock.type';
 import { YunzaiSFConfig } from './sf/sf.type';
 import { YunzaiSocketConfig } from './socket/socket.type';
 import { YunzaiThemeHttpClientConfig, YunzaiThemeResponsiveConfig, YunzaiThemeI18nConfig } from './theme/index';
+import { YunzaiThemePipeConfig } from './theme/pipe.type';
 import { YunzaiUtilArrayConfig } from './util/array.type';
 import { YunzaiUtilCurrencyConfig } from './util/currency.type';
 
@@ -64,6 +65,7 @@ export interface YunzaiConfig {
   themeHttp?: YunzaiThemeHttpClientConfig;
   themeResponsive?: YunzaiThemeResponsiveConfig;
   themeI18n?: YunzaiThemeI18nConfig;
+  themePipe?: YunzaiThemePipeConfig;
 }
 
 export type YunzaiConfigKey = keyof YunzaiConfig;
@@ -75,4 +77,8 @@ export const YUNZAI_CONFIG = new InjectionToken<YunzaiConfig>('yunzai-config', {
 
 export function YUNZAI_CONFIG_FACTORY(): YunzaiConfig {
   return {};
+}
+
+export function provideYunzaiConfig(config: YunzaiConfig): EnvironmentProviders {
+  return makeEnvironmentProviders([{ provide: YUNZAI_CONFIG, useValue: config }]);
 }

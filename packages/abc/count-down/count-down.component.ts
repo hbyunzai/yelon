@@ -14,10 +14,14 @@ import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdo
 @Component({
   selector: 'count-down',
   exportAs: 'countDown',
-  template: ` <countdown #cd *ngIf="config" [config]="config" (event)="handleEvent($event)" /> `,
+  template: `@if (config) {
+    <countdown #cd [config]="config" (event)="handleEvent($event)" />
+  }`,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CountdownComponent]
 })
 export class CountDownComponent {
   @ViewChild('cd', { static: false }) readonly instance!: CountdownComponent;

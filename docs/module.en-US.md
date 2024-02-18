@@ -36,7 +36,6 @@ NG-ZORRO, @yelon/abc, @yelon/chart, etc. have changed from all import to on-dema
 
 + Angular Module: `BrowserModule`, `BrowserAnimationsModule`, `HttpClientModule`
 + `YunzaiThemeModule` Theme system
-+ `YelonMockModule` Mock data
 + `YunzaiAuthModule` User authentication module
 + `YunzaiACLModule` Privilege module
 + Internationalization module

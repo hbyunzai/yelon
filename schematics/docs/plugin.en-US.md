@@ -84,25 +84,11 @@ ng g ng-yunzai:plugin defaultLanguage --defaultLanguage=zh-tw
 | French | fr | fr | fr_FR | fr_FR |
 | Spanish | es | es | es_ES | es_ES |
 | Italian | it | it | it_IT | it_IT |
-
-### networkEnv
-
-Allow chinese users to add a taobao mirror configuration file `.npmrc` or `.yarnrc` to solve network problems.
-
-```bash
-# add npm
-ng g ng-yunzai:plugin networkEnv --packageManager=npm
-# add yarn
-ng g ng-yunzai:plugin networkEnv --packageManager=yarn
-# remove npm
-ng g ng-yunzai:plugin networkEnv --packageManager=npm -t=remove
-# remove yarn
-ng g ng-yunzai:plugin networkEnv --packageManager=yarn -t=remove
-```
+| Vietnamese | vi | vi | vi_VI | vi_VI |
 
 ### sts
 
-[ng-yunzai-sts](https://github.com/hbyunzai/sts) Plugins, Build Swagger APIs to list, edit pages, You can finish some interesting things.
+[ng-yunzai-sts](https://github.com/ng-yunzai/sts) Plugins, Build Swagger APIs to list, edit pages, You can finish some interesting things.
 
 ```bash
 # add

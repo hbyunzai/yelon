@@ -1,5 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 
 import sdk from '@stackblitz/sdk';
 import { getParameters } from 'codesandbox/lib/api/define';
@@ -8,141 +10,52 @@ import { deepCopy } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import angularJSON from './files/angular.json';
-import appModuleTS from './files/app.module';
-import environmentTS from './files/environment';
-import globalConfigTS from './files/global-config.module';
+import appConfigTS from './files/app.config';
 import mainTS from './files/main';
-import mainCliTS from './files/main-cli';
-import nzZorroAntdModuleTS from './files/ng-zorro-antd.module';
+import mockUser from './files/mock-user';
 import packageJSON from './files/package.json';
-import polyfillTS from './files/polyfill';
 import readme from './files/readme-cli';
-import sandboxConfigJSON from './files/sandbox.config.json';
+import sandboxConfigJSON from './files/sandbox';
 import startupServiceTS from './files/startup.service';
 import tsconfigJSON from './files/tsconfig.json';
-import yelonABCModuleTS from './files/yelon-abc.module';
-import yelonChartModuleTS from './files/yelon-chart.module';
 import pkg from '../../../../package.json';
 import { AppService } from '../app.service';
 
 @Injectable({ providedIn: 'root' })
 export class CodeService {
-  private document: Document;
-
-  // private get dependencies(): { [key: string]: string } {
-  //   const res: { [key: string]: string } = {};
-  //   [
-  //     '@angular/animations',
-  //     '@angular/compiler',
-  //     '@angular/common',
-  //     '@angular/core',
-  //     '@angular/forms',
-  //     '@angular/platform-browser',
-  //     '@angular/platform-browser-dynamic',
-  //     '@angular/router',
-  //     '@ant-design/icons-angular',
-  //     'core-js@3.8.3',
-  //     'rxjs',
-  //     'tslib',
-  //     'zone.js',
-  //     'date-fns',
-  //     `@angular/cdk@^${MAX_MAIN_VERSION}.x`,
-  //     'ng-zorro-antd',
-  //     '@yelon/theme',
-  //     '@yelon/abc',
-  //     '@yelon/chart',
-  //     '@yelon/acl',
-  //     '@yelon/auth',
-  //     '@yelon/cache',
-  //     '@yelon/mock',
-  //     '@yelon/form',
-  //     '@yelon/util',
-  //     'ajv',
-  //     'ajv-formats'
-  //   ].forEach(key => {
-  //     const includeVersion = key.lastIndexOf(`@`);
-  //     if (includeVersion > 1) {
-  //       res[key.substring(0, includeVersion)] = key.substring(includeVersion + 1);
-  //       return;
-  //     }
-  //     const version = key.startsWith('@yelon')
-  //       ? `~${pkg.version}`
-  //       : (
-  //           (pkg.dependencies || pkg.devDependencies) as {
-  //             [key: string]: string;
-  //           }
-  //         )[key];
-  //     res[key] = version || '*';
-  //   });
-  //   return res;
-  // }
+  private appSrv = inject(AppService);
+  private http = inject(HttpClient);
+  private document = inject(DOCUMENT);
 
   private get themePath(): string {
     return `node_modules/@yelon/theme/${this.appSrv.theme}.css`;
   }
 
-  private genPackage({
-    dependencies = [],
-    devDependencies = [],
-    includeCli = false
-  }: {
-    dependencies: string[];
-    devDependencies: string[];
-    includeCli: boolean;
-  }): Record<string, string | Record<string, string>> {
+  private genPackage({ includeCli = false }: { includeCli: boolean }): Record<string, string | Record<string, string>> {
     const ngCoreVersion = pkg.dependencies['@angular/core'];
-    const mainVersion = ngCoreVersion.substring(1).split('.').shift();
+    // const mainVersion = ngCoreVersion.substring(1).split('.').shift();
     const res = packageJSON as Record<string, NzSafeAny>;
-    [
-      'ng-zorro-antd',
-      'date-fns',
-      '@yelon/theme',
-      '@yelon/abc',
-      '@yelon/chart',
-      '@yelon/acl',
-      '@yelon/auth',
-      '@yelon/cache',
-      '@yelon/mock',
-      '@yelon/form',
-      '@yelon/util',
-      'ajv',
-      'ajv-formats',
-      ...dependencies
-    ].forEach(k => (res.dependencies[k] = '*'));
     if (includeCli) {
-      devDependencies = [
-        ...devDependencies,
-        'ng-yunzai',
-        'ng-yunzai-plugin-theme',
-        '@angular/cli',
-        '@angular/compiler-cli',
-        '@angular-devkit/build-angular'
-      ];
+      res.devDependencies = {
+        '@angular-devkit/build-angular': '^17.0.0',
+        '@angular/cli': '^17.0.0',
+        '@angular/compiler-cli': '^17.0.0',
+        '@types/node': '^18.18.0',
+        'ts-node': '~10.9.1',
+        typescript: '~5.2.2',
+        'ng-yunzai': '~17.0.3'
+      };
     }
-    devDependencies.forEach(k => (res.devDependencies[k] = '*'));
 
     const fullLibs: Record<string, string> = { ...pkg.dependencies, ...pkg.devDependencies };
     ['dependencies', 'devDependencies'].forEach(type => {
-      Object.keys(res[type]).forEach(key => {
-        res[type][key] = key.startsWith('@yelon') ? `~${pkg.version}` : fullLibs[key] || '*';
+      Object.keys(res[type] || {}).forEach(key => {
+        res[type][key] = key.startsWith('@yelon') || key === 'ng-yunzai' ? `${pkg.version}` : fullLibs[key] || '*';
       });
     });
     res.dependencies['@angular/core'] = ngCoreVersion;
-    ['@angular/cdk', '@ant-design/icons-angular', 'ngx-countdown'].forEach(type => {
-      res.dependencies[type] = mainVersion;
-    });
-    // res.dependencies['core-js'] = `~3.8.3`;
-    if (!includeCli) res;
-    console.log(res);
 
     return res;
-  }
-
-  constructor(
-    private appSrv: AppService,
-    @Inject(DOCUMENT) document: NzSafeAny
-  ) {
-    this.document = document;
   }
 
   private get genStartupService(): string {
@@ -151,7 +64,7 @@ export class CodeService {
 
   private get genMock(): { [key: string]: string } {
     return {
-      '_mock/user.ts': require('!!raw-loader!../../../../_mock/user.ts').default,
+      '_mock/user.ts': mockUser,
       '_mock/index.ts': `export * from './user';`
     };
   }
@@ -173,17 +86,64 @@ export class CodeService {
       html: [
         `<base href="/">`,
         `<${selector}>loading</${selector}>`,
-        `<div id="VERSION" style="position: fixed; bottom: 8px; right: 8px; z-index: 8888;"></div>`
+        `<div id="VERSION" style="position: fixed; bottom: 8px; right: 8px; z-index: 8888;font-size: 11px; color: #aaa;"></div>`
       ].join('\n')
     };
   }
 
-  openOnStackBlitz(title: string, appComponentCode: string): void {
+  private attachStandalone(code: string): string {
+    // standalone: true,
+    if (code.includes(`standalone: true`)) return code;
+
+    return `${code.replace(`@Component({`, `@Component({\n  standalone: true,\n`)}`;
+  }
+
+  private yarnLock?: string;
+  private async getYarnLock(): Promise<string> {
+    if (this.yarnLock != null) return this.yarnLock;
+    try {
+      const res = await lastValueFrom(this.http.get('./assets/yarn.lock.txt', { responseType: 'text' }));
+      this.yarnLock = res;
+      return res;
+    } catch (ex) {
+      console.warn(`Unable to load yarn.lock file: ${ex}`);
+    }
+    return '';
+  }
+
+  async openOnStackBlitz(title: string, appComponentCode: string, includeCli: boolean = false): Promise<void> {
+    appComponentCode = this.attachStandalone(appComponentCode);
     const res = this.parseCode(appComponentCode);
     const json = deepCopy(angularJSON);
     json.projects.demo.architect.build.options.styles.splice(0, 0, this.themePath);
-    const packageJson = this.genPackage({ dependencies: [], devDependencies: [], includeCli: false });
-    packageJson.name = title;
+    const packageJson = this.genPackage({ includeCli });
+    packageJson.description = title;
+    const files: Record<string, string> = {
+      'angular.json': `${JSON.stringify(json, null, 2)}`,
+      'tsconfig.json': `${JSON.stringify(tsconfigJSON, null, 2)}`,
+      'src/index.html': res.html,
+      'src/main.ts': mainTS(res.componentName),
+      'src/app/app.component.ts': appComponentCode,
+      'src/app/app.config.ts': appConfigTS,
+      'src/app/startup.service.ts': this.genStartupService,
+      'src/styles.css': ``,
+      ...this.genMock
+    };
+    if (includeCli) {
+      files['.stackblitzrc'] = JSON.stringify(
+        {
+          installDependencies: true,
+          startCommand: 'yarn start',
+          env: {
+            ENABLE_CJS_IMPORTS: true
+          }
+        },
+        null,
+        2
+      );
+      files['yarn.lock'] = await this.getYarnLock();
+      files['package.json'] = `${JSON.stringify(packageJson, null, 2)}`;
+    }
     sdk.openProject(
       {
         title: 'NG-YUNZAI',
@@ -193,39 +153,24 @@ export class CodeService {
           ...(packageJson.dependencies as Record<string, string>),
           ...(packageJson.devDependencies as Record<string, string>)
         },
-        files: {
-          'angular.json': `${JSON.stringify(json, null, 2)}`,
-          'tsconfig.json': `${JSON.stringify(tsconfigJSON, null, 2)}`,
-          'package.json': `${JSON.stringify(packageJson, null, 2)}`,
-          'src/environments/environment.ts': environmentTS,
-          'src/index.html': res.html,
-          'src/main.ts': mainTS,
-          'src/polyfills.ts': polyfillTS,
-          'src/app/app.component.ts': appComponentCode,
-          'src/app/app.module.ts': appModuleTS(res.componentName),
-          'src/app/global-config.module.ts': globalConfigTS,
-          'src/app/ng-zorro-antd.module.ts': nzZorroAntdModuleTS,
-          'src/app/yelon-abc.module.ts': yelonABCModuleTS,
-          'src/app/yelon-chart.module.ts': yelonChartModuleTS,
-          'src/app/startup.service.ts': this.genStartupService,
-          'src/styles.css': ``,
-          ...this.genMock
-        },
-        template: 'angular-cli'
+        files: files,
+        template: includeCli ? 'node' : 'angular-cli'
       },
       {
-        openFile: `src/app/app.component.ts`
+        openFile: `src/app/app.config.ts,src/app/app.component.ts`
       }
     );
   }
 
-  openOnCodeSandbox(title: string, appComponentCode: string, includeCli: boolean = false): void {
+  async openOnCodeSandbox(title: string, appComponentCode: string, includeCli: boolean = false): Promise<void> {
+    appComponentCode = this.attachStandalone(appComponentCode);
     const res = this.parseCode(appComponentCode);
     const mockObj = this.genMock;
     const json = deepCopy(angularJSON);
     json.projects.demo.architect.build.options.styles.splice(0, 0, this.themePath);
-    const packageJson = this.genPackage({ dependencies: [], devDependencies: [], includeCli });
-    packageJson.name = title;
+    const packageJson = this.genPackage({ includeCli });
+    // packageJson.name = 'NG-YUNZAI';
+    packageJson.description = title;
     const files: {
       [key: string]: {
         content: string;
@@ -244,44 +189,20 @@ export class CodeService {
         content: `${JSON.stringify(tsconfigJSON, null, 2)}`,
         isBinary: false
       },
-      'src/environments/environment.ts': {
-        content: environmentTS,
-        isBinary: false
-      },
       'src/index.html': {
         content: res.html,
         isBinary: false
       },
       'src/main.ts': {
-        content: includeCli ? mainCliTS : mainTS,
+        content: mainTS(res.componentName),
         isBinary: false
       },
-      'src/polyfills.ts': {
-        content: polyfillTS,
-        isBinary: false
-      },
-      'src/app/app.module.ts': {
-        content: appModuleTS(res.componentName),
-        isBinary: false
-      },
-      'src/app/global-config.module.ts': {
-        content: globalConfigTS,
+      'src/app/app.config.ts': {
+        content: appConfigTS,
         isBinary: false
       },
       'src/app/app.component.ts': {
         content: appComponentCode,
-        isBinary: false
-      },
-      'src/app/ng-zorro-antd.module.ts': {
-        content: nzZorroAntdModuleTS,
-        isBinary: false
-      },
-      'src/app/yelon-abc.module.ts': {
-        content: yelonABCModuleTS,
-        isBinary: false
-      },
-      'src/app/yelon-chart.module.ts': {
-        content: yelonChartModuleTS,
         isBinary: false
       },
       'src/app/startup.service.ts': {
@@ -299,6 +220,10 @@ export class CodeService {
       '_mock/index.ts': {
         content: mockObj['_mock/index.ts'],
         isBinary: false
+      },
+      'yarn.lock': {
+        content: await this.getYarnLock(),
+        isBinary: false
       }
     };
     if (includeCli) {
@@ -306,14 +231,17 @@ export class CodeService {
         content: readme,
         isBinary: false
       };
-      files['sandbox.config.json'] = {
-        content: `${JSON.stringify(sandboxConfigJSON, null, 2)}`,
+    }
+    Object.keys(sandboxConfigJSON).forEach(key => {
+      files[key] = {
+        content: (sandboxConfigJSON as NzSafeAny)[key],
         isBinary: false
       };
-    }
-    const parameters = getParameters({
-      files
     });
+    const parameters = getParameters({
+      files,
+      environment: 'server'
+    } as NzSafeAny);
 
     const form = this.document.createElement('form');
     const parametersInput = this.document.createElement('input');

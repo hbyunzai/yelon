@@ -80,7 +80,7 @@ describe('abc: error-collect', () => {
 
   it('should be throw [No found form element] if no form element', () => {
     expect(() => {
-      TestBed.overrideTemplate(TestComponent, `<error-collect #ec [freq]="freq"></error-collect>`)
+      TestBed.overrideTemplate(TestComponent, `<error-collect #ec [freq]="freq" />`)
         .createComponent(TestComponent)
         .detectChanges();
     }).toThrowError('No found form element');

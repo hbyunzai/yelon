@@ -16,7 +16,7 @@ NG-YUNZAI 是一套基于 Angular 技术栈的单页面应用，我们提供的�
 2. UI 组件交互操作；
 3. 使用封装的 [_HttpClient](/theme/http) 发送请求；
 4. 触发用户认证拦截器 [@yelon/auth](/auth/getting-started)，统一加入 `token` 参数；
-  - 若未存在 `token` 或已过期中断后续请求，直接跳转至登录页；
+    - 若未存在 `token` 或已过期中断后续请求，直接跳转至登录页；
 5. 触发默认拦截器，统一处理前缀等信息；
 6. 获取服务端返回；
 7. 触发默认拦截器，统一处理请求异常、业务异常等；
@@ -50,7 +50,7 @@ NG-YUNZAI 是一套基于 Angular 技术栈的单页面应用，我们提供的�
 
 ```ts
 export const USERS = {
-  'GET /users': {users: [1, 2], total: 2}
+  'GET /users': { users: [1, 2], total: 2 }
 }
 ```
 

@@ -5,10 +5,11 @@ import {
   ElementRef,
   Inject,
   Input,
-  OnInit,
   QueryList,
   Renderer2,
-  TemplateRef
+  TemplateRef,
+  booleanAttribute,
+  OnInit
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -23,50 +24,56 @@ import {
 import { filter } from 'rxjs';
 
 import { SettingsService } from '@yelon/theme';
-import { BooleanInput, InputBoolean } from '@yelon/util';
 import { updateHostClass } from '@yelon/util/browser';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import { LayoutDisplayService } from './layout-display.service';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
+import {LayoutDisplayService} from './layout-display.service';
 
 @Component({
   selector: 'layout-default',
   exportAs: 'layoutDefault',
   template: `
-    <div class="yunzai-default__progress-bar" *ngIf="showFetching"></div>
-    <layout-default-header *ngIf="!opt.hideHeader && displayNav" [items]="headerItems" />
-    <ng-container *ngIf="displayAside">
-      <div *ngIf="!opt.hideAside" class="yunzai-default__aside" [ngStyle]="asideStyle">
+    @if (showFetching) {
+      <div class="yunzai-default__progress-bar"></div>
+    }
+    @if (!opt.hideHeader) {
+      <layout-default-header [items]="headerItems" />
+    }
+    @if (!opt.hideAside) {
+      <div class="yunzai-default__aside" [ngStyle]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
             <ng-container *ngTemplateOutlet="asideUser" />
             <ng-container *ngTemplateOutlet="nav" />
-            <layout-default-nav *ngIf="!nav" />
+            @if (!nav) {
+              <layout-default-nav />
+            }
           </div>
-          <div *ngIf="opt.showSiderCollapse" class="yunzai-default__aside-link">
-            <ng-container *ngIf="asideBottom === null; else asideBottom">
-              <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
-                <span nz-icon [nzType]="collapsedIcon"></span>
-              </div>
-            </ng-container>
-          </div>
+          @if (opt.showSiderCollapse) {
+            <div class="yunzai-default__aside-link">
+              @if (asideBottom) {
+                <ng-container *ngTemplateOutlet="asideBottom" />
+              } @else {
+                <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
+                  <span nz-icon [nzType]="collapsedIcon"></span>
+                </div>
+              }
+            </div>
+          }
         </div>
       </div>
-    </ng-container>
+    }
     <section class="yunzai-default__content" [ngStyle]="contentStyle">
       <ng-container *ngTemplateOutlet="content" />
-      <ng-content></ng-content>
+      <ng-content />
     </section>
   `
 })
 export class LayoutDefaultComponent implements OnInit {
-  static ngAcceptInputType_fetchingStrictly: BooleanInput;
-  static ngAcceptInputType_fetching: BooleanInput;
-
   @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
   headerItems!: QueryList<LayoutDefaultHeaderItemComponent>;
 
@@ -84,8 +91,8 @@ export class LayoutDefaultComponent implements OnInit {
   @Input() nav: TemplateRef<void> | null = null;
   @Input() content: TemplateRef<void> | null = null;
   @Input() customError?: string | null;
-  @Input() @InputBoolean() fetchingStrictly = false;
-  @Input() @InputBoolean() fetching = false;
+  @Input({ transform: booleanAttribute }) fetchingStrictly = false;
+  @Input({ transform: booleanAttribute }) fetching = false;
   displayNav = true;
   displayAside = true;
 
@@ -96,25 +103,25 @@ export class LayoutDefaultComponent implements OnInit {
     return this.isFetching;
   }
 
-  get contentStyle(): any {
-    return {
-      'margin-top': !this.displayNav ? '0px' : '',
-      'margin-left': !this.displayAside ? '0px' : ''
-    };
-  }
-
-  get asideStyle(): any {
-    return {
-      'margin-top': !this.displayNav ? '0px' : ''
-    };
-  }
-
   get collapsed(): boolean {
     return this.settings.layout.collapsed;
   }
 
   get collapsedIcon(): string {
     return this.srv.collapsedIcon;
+  }
+
+  get contentStyle(): NzSafeAny {
+    return {
+      'margin-top': !this.displayNav ? '0px' : '',
+      'margin-left': !this.displayAside ? '0px' : ''
+    };
+  }
+
+  get asideStyle(): NzSafeAny {
+    return {
+      'margin-top': !this.displayNav ? '0px' : ''
+    };
   }
 
   toggleCollapsed(): void {

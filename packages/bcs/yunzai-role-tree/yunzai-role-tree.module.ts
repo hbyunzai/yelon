@@ -1,25 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
+import { YelonFormModule } from '@yelon/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
 
 import { YunzaiRoleTreeComponent } from './yunzai-role-tree.component';
 
+const COMPONENTS = [YunzaiRoleTreeComponent];
 @NgModule({
   imports: [
-    HttpClientModule,
     CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    YunzaiSharedZorroModule,
-    YunzaiSharedYelonModule
+    NzSpinModule,
+    YelonFormModule,
+    NzIconModule,
+    NzEmptyModule,
+    NzTreeModule,
+    NzCardModule,
+    ...COMPONENTS
   ],
-  declarations: [YunzaiRoleTreeComponent],
-  exports: [YunzaiRoleTreeComponent]
+  exports: COMPONENTS
 })
 export class YunzaiRoleTreeModule {}

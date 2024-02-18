@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 
-import { YA_SERVICE_TOKEN, ITokenModel, ITokenService } from '../token/interface';
+import { YA_SERVICE_TOKEN, ITokenModel } from '../token/interface';
 
 const OPENTYPE = '_yelonAuthSocialType';
 const HREFCALLBACK = '_yelonAuthSocialCallbackByHref';
@@ -12,15 +13,13 @@ export type SocialOpenType = 'href' | 'window';
 
 @Injectable()
 export class SocialService implements OnDestroy {
+  private readonly tokenService = inject(YA_SERVICE_TOKEN);
+  private readonly doc = inject(DOCUMENT);
+  private readonly router = inject(Router);
+
   private _win: Window | null = null;
   private _winTime: any;
   private observer!: Observer<ITokenModel | null>;
-
-  constructor(
-    @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
-    @Inject(DOCUMENT) private doc: any,
-    private router: Router
-  ) {}
 
   /**
    * 使用窗体打开授权页，返回值是 `Observable<ITokenModel>` 用于订阅授权后返回的结果
@@ -113,7 +112,7 @@ export class SocialService implements OnDestroy {
       throw new Error(`url muse contain a ?`);
     }
     // parse
-    let data: ITokenModel = { access_token: `` };
+    let data: ITokenModel = { token: `` };
     if (typeof rawData === 'string') {
       const rightUrl = rawData.split('?')[1].split('#')[0];
       data = this.router.parseUrl(`./?${rightUrl}`).queryParams as ITokenModel;

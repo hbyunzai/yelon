@@ -27,12 +27,9 @@ describe('form: component', () => {
 
   function genModule(options: { acl?: boolean; i18n?: boolean } = {}): void {
     options = { acl: false, i18n: false, ...options };
-    const imports = [NoopAnimationsModule, YelonFormModule.forRoot(), YunzaiThemeModule.forRoot()];
-    if (options.i18n) {
-      imports.push(YunzaiThemeModule.forRoot());
-    }
+    const imports: NzSafeAny[] = [NoopAnimationsModule, YelonFormModule.forRoot(), YunzaiThemeModule];
     if (options.acl) {
-      imports.push(YelonACLModule.forRoot());
+      imports.push(YelonACLModule);
     }
     TestBed.configureTestingModule({
       imports,
@@ -266,24 +263,24 @@ describe('form: component', () => {
           expect((page.getEl('.ant-btn-primary') as HTMLButtonElement).disabled).toBe(true);
           context.liveValidate = false;
           fixture.detectChanges();
-          page.submit(false).setValue('/name', 'devcui').setValue('/pwd', '1111').submit(true);
+          page.submit(false).setValue('/name', 'yunzai-bot').setValue('/pwd', '1111').submit(true);
         });
       });
 
       describe('#submit', () => {
         it('should be submit when is valid', () => {
-          page.setValue('/name', 'devcui').setValue('/pwd', '1111').isValid();
+          page.setValue('/name', 'yunzai-bot').setValue('/pwd', '1111').isValid();
         });
         it('should not be submit when is invalid', () => {
-          page.setValue('/name', 'devcui').isValid(false);
+          page.setValue('/name', 'yunzai-bot').isValid(false);
         });
       });
 
       describe('#reset', () => {
         it('should be set default value', () => {
           const schema = deepCopy(SCHEMA.user) as SFSchema;
-          schema.properties!.name.default = 'devcui';
-          page.newSchema(schema).reset().checkValue('/name', 'devcui');
+          schema.properties!.name.default = 'yunzai-bot';
+          page.newSchema(schema).reset().checkValue('/name', 'yunzai-bot');
         });
       });
 
@@ -450,27 +447,27 @@ describe('form: component', () => {
       });
 
       it('#formChange', () => {
-        page.setValue('/name', 'devcui');
+        page.setValue('/name', 'yunzai-bot');
         expect(context.formChange).toHaveBeenCalled();
       });
 
       it('#formValueChange', () => {
-        page.setValue('/name', 'devcui');
+        page.setValue('/name', 'yunzai-bot');
         expect(context.formValueChange).toHaveBeenCalled();
       });
 
       it('#formSubmit', () => {
-        page.setValue('/name', 'devcui').setValue('/pwd', 'asdf').submit();
+        page.setValue('/name', 'yunzai-bot').setValue('/pwd', 'asdf').submit();
         expect(context.formSubmit).toHaveBeenCalled();
       });
 
       it('#formReset', () => {
-        page.setValue('/name', 'devcui').setValue('/pwd', 'asdf').reset();
+        page.setValue('/name', 'yunzai-bot').setValue('/pwd', 'asdf').reset();
         expect(context.formReset).toHaveBeenCalled();
       });
 
       it('#formError', () => {
-        page.setValue('/name', 'devcui').setValue('/name', '');
+        page.setValue('/name', 'yunzai-bot').setValue('/name', '');
         expect(context.formError).toHaveBeenCalled();
       });
     });
@@ -521,6 +518,27 @@ describe('form: component', () => {
       it('#setValue, shoule be throw error when invlaid path', () => {
         expect(() => {
           context.comp.setValue('/invalid-path', 'name');
+        }).toThrow();
+      });
+      it('#setDisabled', () => {
+        context.comp.setDisabled('/name', true);
+        page.checkSchema('/name', 'readOnly', true);
+        context.comp.setDisabled('/name', false);
+        page.checkSchema('/name', 'readOnly', false);
+      });
+      it('#setDisabled, shoule be throw error when invlaid path', () => {
+        expect(() => {
+          context.comp.setDisabled('/invalid-path', true);
+        }).toThrow();
+      });
+      it('#setRequired', () => {
+        expect(context.comp.getProperty('/name')?.valid).toBe(false);
+        context.comp.setRequired('/name', false);
+        expect(context.comp.getProperty('/name')?.valid).toBe(true);
+      });
+      it('#setRequired, shoule be throw error when invlaid path', () => {
+        expect(() => {
+          context.comp.setRequired('/invalid-path', true);
         }).toThrow();
       });
       it('#updateFeedback', () => {

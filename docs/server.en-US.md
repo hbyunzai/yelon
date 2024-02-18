@@ -6,7 +6,6 @@ type: Dev
 
 NG-YUNZAI is a single-page application based on the Angular technology stack. We provide development models for front-end code and native analog data.
 Work in the form of the Restful API with the server application of any technology stack. The basics of interacting with the server are briefly described below.
-
 ## Front-end request process
 
 In NG-YUNZAI, a complete front-end UI interaction to the server-side processing flow looks like this:
@@ -50,7 +49,7 @@ Sometimes when you want to develop the front-end first, you can use [@yelon/mock
 
 ```ts
 export const USERS = {
-  'GET /users': {users: [1, 2], total: 2}
+  'GET /users': { users: [1, 2], total: 2 }
 }
 ```
 

@@ -16,15 +16,22 @@ Simplest of usage.
 ```ts
 import { Component, OnInit } from '@angular/core';
 
+import { QRModule } from '@yelon/abc/qr';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
 @Component({
   selector: 'app-demo',
   template: `
     <h3>{{ type }}</h3>
-    <qr [value]="value"></qr>
+    <qr [value]="value" />
     <div>
-      <button *ngFor="let t of types" nz-button (click)="change(t)">{{ t }}</button>
+      @for (t of types; track $index) {
+        <button nz-button (click)="change(t)">{{ t }}</button>
+      }
     </div>
   `,
+  standalone: true,
+  imports: [QRModule, NzButtonModule]
 })
 export class DemoComponent implements OnInit {
   types = ['url', 'email', 'tel', 'cn', 'vcard'];
@@ -37,7 +44,7 @@ export class DemoComponent implements OnInit {
         this.value = 'https://ng.yunzainfo.com/';
         break;
       case 'email':
-        this.value = 'mailto:devcui@outlook.com';
+        this.value = 'mailto:yunzai-bot@outlook.com';
         break;
       case 'tel':
         this.value = 'tel:15900000000';
@@ -48,14 +55,14 @@ export class DemoComponent implements OnInit {
       case 'vcard':
         this.value = `BEGIN:VCARD
 VERSION:4.0
-N:cui;dev;;Mr.;
-FN:devcui
+N:色;卡;;Mr.;
+FN:yunzai-bot
 ORG:NG-YUNZAI
 TITLE:NG-YUNZAI
 PHOTO;MEDIATYPE=image/svg:https://ng.yunzainfo.com/assets/img/logo-color.svg
 TEL;TYPE=work,voice;VALUE=uri:tel:15900000000
 ADR;TYPE=WORK;PREF=1;LABEL="中国上海":;;上海;中国
-EMAIL:devcui@qq.com
+EMAIL:yunzai-bot@outlook.com
 x-qq:94458893
 END:VCARD`;
         break;

@@ -40,7 +40,7 @@ describe('chart: tag-cloud', () => {
 });
 
 @Component({
-  template: ` <g2-tag-cloud #comp height="200" width="200" [data]="data" [delay]="delay" /> `
+  template: ` <g2-tag-cloud #comp height="200" width="200" [data]="data" [delay]="delay" />`
 })
 class TestComponent {
   @ViewChild('comp', { static: true }) comp!: G2TagCloudComponent;

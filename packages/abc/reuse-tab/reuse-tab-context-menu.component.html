@@ -1,55 +1,32 @@
 <ul nz-menu>
+  @if (item.active) {
+    <li nz-menu-item (click)="click($event, 'refresh')" data-type="refresh" [innerHTML]="i18n.refresh"></li>
+  }
   <li
-    data-event-id="_reusetab_refresh"
-    [attr.data-url]="item.url"
-    [attr.data-title]="item.title"
-    *ngIf="item.active"
-    nz-menu-item
-    (click)="click($event, 'refresh')"
-    data-type="refresh"
-    [innerHTML]="i18n.refresh"
-  ></li>
-  <li
-    data-event-id="_reusetab_close"
-    [attr.data-url]="item.url"
-    [attr.data-title]="item.title"
     nz-menu-item
     (click)="click($event, 'close')"
     data-type="close"
     [nzDisabled]="!item.closable"
     [innerHTML]="i18n.close"
   ></li>
+  <li nz-menu-item (click)="click($event, 'closeOther')" data-type="closeOther" [innerHTML]="i18n.closeOther"></li>
   <li
-    data-event-id="_reusetab_closeOther"
-    [attr.data-url]="item.url"
-    [attr.data-title]="item.title"
-    nz-menu-item
-    (click)="click($event, 'closeOther')"
-    data-type="closeOther"
-    [innerHTML]="i18n.closeOther"
-  ></li>
-  <li
-    data-event-id="_reusetab_closeRight"
-    [attr.data-url]="item.url"
-    [attr.data-title]="item.title"
     nz-menu-item
     (click)="click($event, 'closeRight')"
     data-type="closeRight"
     [nzDisabled]="item.last"
     [innerHTML]="i18n.closeRight"
   ></li>
-  <ng-container *ngIf="customContextMenu!.length > 0">
+  @if (customContextMenu!.length > 0) {
     <li nz-menu-divider></li>
-    <li
-      data-event-id="_reusetab_custom"
-      [attr.data-url]="item.url"
-      [attr.data-title]="item.title"
-      *ngFor="let i of customContextMenu"
-      nz-menu-item
-      [attr.data-type]="i.id"
-      [nzDisabled]="isDisabled(i)"
-      (click)="click($event, 'custom', i)"
-      [innerHTML]="i.title"
-    ></li>
-  </ng-container>
+    @for (i of customContextMenu; track $index) {
+      <li
+        nz-menu-item
+        [attr.data-type]="i.id"
+        [nzDisabled]="isDisabled(i)"
+        (click)="click($event, 'custom', i)"
+        [innerHTML]="i.title"
+      ></li>
+    }
+  }
 </ul>

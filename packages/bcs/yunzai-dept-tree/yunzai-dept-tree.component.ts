@@ -1,9 +1,15 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip} from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
 
 import { YunzaiGrade, YunzaiGradeService } from '@yelon/bcs/yunzai-grade';
-import { SFComponent, SFValueChange } from '@yelon/form';
-import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/tree';
+import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzFormatEmitEvent, NzTreeModule, NzTreeNode } from 'ng-zorro-antd/tree';
 
 import { generateSchema } from './yunzai-dept-tree.schema';
 import { YunzaiDeptTreeService } from './yunzai-dept-tree.service';
@@ -11,21 +17,85 @@ import { YUNZAI_DEPT_TYPES, YunzaiDeptTree, YunzaiDeptTreeProps, YunzaiDeptTreeS
 
 @Component({
   selector: `yunzai-dept-tree`,
-  templateUrl: `./yunzai-dept-tree.html`
+  template: `
+    <!-- loading-->
+    <nz-spin [nzSpinning]="state.loading">
+      <!--        wrapped-->
+      <ng-container *ngIf="isWrapped">
+        <nz-card>
+          <ng-container [ngTemplateOutlet]="content" />
+        </nz-card>
+      </ng-container>
+      <!--        end wrapped-->
+
+      <!--        unwrapped-->
+      <ng-container *ngIf="!isWrapped">
+        <ng-container [ngTemplateOutlet]="content" />
+      </ng-container>
+      <!--        end unwrapped-->
+    </nz-spin>
+    <!-- end loading-->
+
+    <!--      content-->
+    <ng-template #content>
+      <ng-container [ngTemplateOutlet]="deptForm" />
+      <nz-tree
+        *ngIf="nodes.length > 0"
+        (nzClick)="activeNode($event)"
+        [nzExpandedKeys]="state.expandKeys"
+        [nzData]="nodes"
+        [nzShowLine]="true"
+        [nzMultiple]="isMultiple"
+        [nzExpandedIcon]="blank"
+        [nzBlockNode]="true"
+        [nzHideUnMatched]="true"
+        [nzTreeTemplate]="treeTemplate"
+      />
+      <nz-empty *ngIf="nodes.length === 0" />
+    </ng-template>
+    <!--      end content-->
+
+    <!--      tree -->
+    <ng-template #treeTemplate let-node let-origin="origin">
+      <span *ngIf="!node.isLeaf" [title]="node.title">
+        <i
+          nz-icon
+          nzTheme="twotone"
+          [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
+          (click)="open(node)"
+        ></i>
+        <span class="leaf-name">{{ node.title }}</span>
+      </span>
+      <span *ngIf="node.isLeaf" [title]="node.title">
+        <span nz-icon nzType="file" nzTheme="twotone"></span>
+        <span class="leaf-name">{{ node.title }}</span>
+      </span>
+    </ng-template>
+    <!--      end tree-->
+
+    <ng-template #deptForm>
+      <sf #form layout="inline" [button]="'none'" [schema]="state.schema" />
+    </ng-template>
+    <ng-template #blank />
+  `,
+  standalone: true,
+  imports: [CommonModule, NzIconModule, NzEmptyModule, NzSpinModule, NzTreeModule, NzCardModule, YelonFormModule]
 })
-export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit,OnDestroy {
+export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('form') sf!: SFComponent;
   @Input() props?: YunzaiDeptTreeProps;
-  @Output() onQueryComplete: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
-  @Output() onSelect: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
-  private $destroy = new Subject()
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() readonly onQueryComplete: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() readonly onSelect: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
+  private $destroy = new Subject();
 
   state: YunzaiDeptTreeState = {
     loading: false,
     schema: { properties: {} },
     data: [],
     dataBackup: [],
-    expandKeys: [],
+    expandKeys: []
   };
 
   get data(): YunzaiDeptTree[] {
@@ -44,7 +114,7 @@ export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit,OnDestroy 
   }
 
   get nodes(): NzTreeNode[] {
-    return this.data as any[];
+    return this.data as NzSafeAny[];
   }
 
   get isMultiple(): boolean {
@@ -100,14 +170,17 @@ export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit,OnDestroy 
     return this.props?.gradeId;
   }
 
-  constructor(private deptTreeService: YunzaiDeptTreeService, private gradeService: YunzaiGradeService) {}
+  constructor(
+    private deptTreeService: YunzaiDeptTreeService,
+    private gradeService: YunzaiGradeService
+  ) {}
 
   ngOnInit(): void {
     if (!this.props?.data) {
       this.query();
     } else {
       this.state.dataBackup = this.data;
-      this.mapDeptTree(this.data as any);
+      this.mapDeptTree(this.data as NzSafeAny);
     }
   }
 
@@ -154,7 +227,7 @@ export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit,OnDestroy 
             depts = this.recursionSearch(search, depts);
             this.onQueryComplete.emit(depts);
           }
-          this.mapDeptTree(depts as any);
+          this.mapDeptTree(depts as NzSafeAny);
           this.data = depts;
         }),
         catchError(error => {
@@ -167,7 +240,7 @@ export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit,OnDestroy 
       });
   }
 
-  mapDeptTree(tree: NzTreeNode[]) {
+  mapDeptTree(tree: NzTreeNode[]): void {
     if (tree && tree.length && tree.length > 0) {
       tree.forEach(item => {
         if (this.isExpanded && !this.state.expandKeys.includes(item.key)) {
@@ -182,7 +255,7 @@ export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit,OnDestroy 
 
   recursionSearch(search: string, depts: YunzaiDeptTree[]): YunzaiDeptTree[] {
     const results: YunzaiDeptTree[] = [];
-    const searchInDept = (dept: YunzaiDeptTree) => {
+    const searchInDept = (dept: YunzaiDeptTree): void => {
       if (dept.title.includes(search)) {
         results.push(dept);
       }
@@ -216,7 +289,7 @@ export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit,OnDestroy 
         map((depts: YunzaiDeptTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(depts);
-          this.mapDeptTree(depts as any);
+          this.mapDeptTree(depts as NzSafeAny);
           this.data = depts;
         }),
         catchError(error => {
@@ -249,7 +322,6 @@ export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit,OnDestroy 
   }
 
   ngOnDestroy(): void {
-    this.$destroy.complete()
+    this.$destroy.complete();
   }
-
 }

@@ -14,19 +14,24 @@ order: 0
 Simplest of usage.
 
 ```ts
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { delay, finalize, of, take } from 'rxjs';
 
 import { subDays } from 'date-fns';
 
-import { CellBadge, CellFuValue, CellOptions, CellRenderType } from '@yelon/abc/cell';
+import { CellBadge, CellFuValue, CellModule, CellOptions, CellRenderType } from '@yelon/abc/cell';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
   selector: 'app-demo',
   template: `
     <div nz-row nzGutter="16" class="mt-md">
-      <div *ngFor="let i of baseList" nz-col nzSpan="8"> {{ i | json }} => <cell [value]="i" /> </div>
+      @for (i of baseList; track $index) {
+        <div nz-col nzSpan="8"> {{ i | json }} => <cell [value]="i" /> </div>
+      }
       <div nz-col nzSpan="8"> date-fn => <cell [value]="day3" [options]="{ date: { format: 'fn' } }" /> </div>
       <div nz-col nzSpan="8"> mega => <cell value="15900000000" size="large" [options]="{ type: 'mega' }" /> </div>
       <div nz-col nzSpan="8"> mask => <cell value="15900000000" [options]="{ mask: '999****9999' }" /> </div>
@@ -107,10 +112,12 @@ import { CellBadge, CellFuValue, CellOptions, CellRenderType } from '@yelon/abc/
         default =>
         <cell [value]="null" />
       </div>
-      <div *ngFor="let i of typeList" nz-col nzSpan="8">
-        {{ i }} =>
-        <cell [value]="i" [options]="{ renderType: i }" />
-      </div>
+      @for (i of typeList; track $index) {
+        <div nz-col nzSpan="8">
+          {{ i }} =>
+          <cell [value]="i" [options]="{ renderType: i }" />
+        </div>
+      }
       <div nz-col nzSpan="8">
         size =>
         <cell value="small" size="small" />, <cell value="default" />,
@@ -128,7 +135,9 @@ import { CellBadge, CellFuValue, CellOptions, CellRenderType } from '@yelon/abc/
       <div nz-col nzSpan="8">
         Async =>
         <cell [value]="async" [loading]="asyncLoading" />
-        <a *ngIf="!asyncLoading" (click)="again()" class="ml-md">Again</a>
+        @if (!asyncLoading) {
+          <a (click)="again()" class="ml-md">Again</a>
+        }
       </div>
       <div nz-col nzSpan="8"> Unit => <cell value="3" [options]="{ unit: '人' }" /> </div>
       <div nz-col nzSpan="8"> Text Unit => <cell [value]="{ text: '100', unit: '元' }" /> </div>
@@ -148,9 +157,13 @@ import { CellBadge, CellFuValue, CellOptions, CellRenderType } from '@yelon/abc/
       }
     `
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CellModule, FormsModule, JsonPipe, NzGridModule]
 })
 export class DemoComponent implements OnInit {
+  private readonly ds = inject(DomSanitizer);
+  private readonly cdr = inject(ChangeDetectorRef);
   value: unknown = 'string';
   checkbox = false;
   radio = true;
@@ -180,11 +193,6 @@ export class DemoComponent implements OnInit {
       big: true // 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
     }
   };
-
-  constructor(
-    private ds: DomSanitizer,
-    private cdr: ChangeDetectorRef
-  ) {}
 
   ngOnInit(): void {
     this.again();

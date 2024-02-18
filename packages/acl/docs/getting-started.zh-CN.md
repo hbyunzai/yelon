@@ -4,7 +4,7 @@ title: 开始使用
 type: Documents
 ---
 
-ACL 全称叫访问控制列表（Access Control List），是一种非常简单的基于角色权限控制方式。一个完全独立 `@yelon/acl` 模块（[DEMO](//ng-yunzai.github.io/ng-yunzai/#/logics/acl)）。
+ACL 全称叫访问控制列表（Access Control List），是一种非常简单的基于角色权限控制方式。一个完全独立 `@yelon/acl` 模块（[DEMO](//hbyunzai.github.io/ng-yunzai/#/logics/acl)）。
 
 ## 如何运行
 
@@ -15,17 +15,17 @@ ACL 全称叫访问控制列表（Access Control List），是一种非常简单
 安装 `@yelon/acl` 依赖包：
 
 ```bash
-yarn add @yelon/acl
+npm i -S @yelon/acl
 ```
 
-导入 `YelonACLModule` 模块：
+若使用 Standalone 无需要额外导入 `YelonACLModule` 模块，否则：
 
 ```typescript
 import { YelonACLModule } from '@yelon/acl';
 
 @NgModule({
   imports: [
-    YelonACLModule.forRoot()
+    YelonACLModule
   ]
 })
 export class AppModule { }

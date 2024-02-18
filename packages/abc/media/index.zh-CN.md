@@ -39,7 +39,7 @@ const yunzaiConfig: YunzaiConfig = {
 
 ## API
 
-### media
+### [media]:standalone
 
 | 成员 | 说明 | 类型 | 默认值 | 全局配置 |
 |----|----|----|-----|------|

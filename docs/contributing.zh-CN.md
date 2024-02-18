@@ -18,7 +18,7 @@ type: Other
 
 我们使用 [GitHub Issues](https://github.com/hbyunzai/ng-yunzai/issues) 来做 bug 追踪。如果你想要你发现的 bug 被快速解决，最好的办法就是按照 issues 呈现的模板认真填写每一项；并且能使用这个 [模板](https://stackblitz.com/edit/ng-yunzai-setup) 来提供重现。
 
-在你报告一个 bug 之前，请先确保已经搜索过已有的 issue 和阅读了 [文档站](https://ng.yunzainfo.com/)。
+在你报告一个 bug 之前，请先确保已经搜索过已有的 issue 和阅读了 [文档站](https://ng-yunzai.com/)。
 
 ## 新增功能
 
@@ -38,7 +38,7 @@ type: Other
 
 ## Pull Request
 
-Ng Yunzai 会关注所有的 pull request，我们会 review 以及合并你的代码，也有可能要求你做一些修改或者告诉你我们为什么不能接受这样的修改。
+NG-YUNZAI 会关注所有的 pull request，我们会 review 以及合并你的代码，也有可能要求你做一些修改或者告诉你我们为什么不能接受这样的修改。
 
 **在你发送 Pull Request 之前**，请确认你是按照下面的步骤来做的：
 

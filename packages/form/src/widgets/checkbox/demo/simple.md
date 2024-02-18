@@ -14,16 +14,21 @@ order: 0
 Simplest of usage.
 
 ```ts
-import { Component } from '@angular/core';
-import { SFCascaderWidgetSchema, SFCheckboxWidgetSchema, SFSchema } from '@yelon/form';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import { Component, inject } from '@angular/core';
 import { of, delay } from 'rxjs';
+
+import { YelonFormModule, SFCheckboxWidgetSchema, SFSchema } from '@yelon/form';
+import type { SFCascaderWidgetSchema } from '@yelon/form/widgets/cascader';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-demo',
-  template: ` <sf [schema]="schema" (formSubmit)="submit($event)"></sf> `,
+  template: ` <sf [schema]="schema" (formSubmit)="submit($event)" /> `,
+  standalone: true,
+  imports: [YelonFormModule]
 })
 export class DemoComponent {
+  private readonly msg = inject(NzMessageService);
   schema: SFSchema = {
     properties: {
       // 单个多选框
@@ -32,9 +37,9 @@ export class DemoComponent {
         title: '同意本协议',
         description: '《用户协议》',
         ui: {
-          widget: 'checkbox',
+          widget: 'checkbox'
         } as SFCascaderWidgetSchema,
-        default: true,
+        default: true
       },
       // 多选框组
       mulit: {
@@ -44,9 +49,9 @@ export class DemoComponent {
         ui: {
           widget: 'checkbox',
           span: 8, // 指定每一项 8 个单元的布局
-          checkAll: true,
+          checkAll: true
         } as SFCheckboxWidgetSchema,
-        default: ['Apple'],
+        default: ['Apple']
       },
       // 异步数据
       async: {
@@ -58,15 +63,13 @@ export class DemoComponent {
             of([
               { label: 'Apple', value: 'Apple' },
               { label: 'Pear', value: 'Pear' },
-              { label: 'Orange', value: 'Orange' },
-            ]).pipe(delay(200)),
+              { label: 'Orange', value: 'Orange' }
+            ]).pipe(delay(200))
         } as SFCheckboxWidgetSchema,
-        default: ['Apple'],
-      },
-    },
+        default: ['Apple']
+      }
+    }
   };
-
-  constructor(private msg: NzMessageService) {}
 
   submit(value: {}): void {
     this.msg.success(JSON.stringify(value));

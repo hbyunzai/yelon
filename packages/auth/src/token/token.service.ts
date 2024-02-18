@@ -1,14 +1,14 @@
-import { inject, Inject, Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subject, Subscription, filter, map, share } from 'rxjs';
 
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 
 import { AuthReferrer, ITokenModel, ITokenService } from './interface';
 import { mergeConfig } from '../auth.config';
-import { YA_STORE_TOKEN, IStore } from '../store/interface';
+import { YA_STORE_TOKEN } from '../store/interface';
 
 export function YA_SERVICE_TOKEN_FACTORY(): ITokenService {
-  return new TokenService(inject(YunzaiConfigService), inject(YA_STORE_TOKEN));
+  return new TokenService(inject(YunzaiConfigService));
 }
 
 /**
@@ -16,16 +16,14 @@ export function YA_SERVICE_TOKEN_FACTORY(): ITokenService {
  */
 @Injectable()
 export class TokenService implements ITokenService, OnDestroy {
+  private readonly store = inject(YA_STORE_TOKEN);
   private refresh$ = new Subject<ITokenModel>();
   private change$ = new BehaviorSubject<ITokenModel | null>(null);
   private interval$?: Subscription;
   private _referrer: AuthReferrer = {};
   private _options: YunzaiAuthConfig;
 
-  constructor(
-    configSrv: YunzaiConfigService,
-    @Inject(YA_STORE_TOKEN) private store: IStore
-  ) {
+  constructor(configSrv: YunzaiConfigService) {
     this._options = mergeConfig(configSrv);
   }
 
@@ -47,14 +45,12 @@ export class TokenService implements ITokenService, OnDestroy {
   }
 
   set(data: ITokenModel): boolean {
-    if (data.expires_in) {
-      data.expires_in = data.expires_in * 60;
-    }
     const res = this.store.set(this._options.store_key!, data);
     this.change$.next(data);
     return res;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get(type?: any): any;
   get<T extends ITokenModel>(type?: new () => T): T;
   get<T extends ITokenModel>(type?: new () => T): T {

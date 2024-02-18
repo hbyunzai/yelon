@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -13,12 +14,13 @@ export const YA_SERVICE_TOKEN = new InjectionToken<ITokenService>('YA_SERVICE_TO
 export interface ITokenModel {
   [key: string]: any;
 
-  access_token: string | null | undefined;
-  // 秒
-  expires_in?: number;
-  refresh_token?: string;
-  scope?: string;
-  token_type?: string;
+  token: string | null | undefined;
+
+  /**
+   * 过期时间，单位：ms
+   * - 不管Simple、JWT模式都必须指定
+   */
+  expired?: number;
 }
 
 export interface AuthReferrer {

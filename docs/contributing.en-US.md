@@ -18,7 +18,7 @@ All work on [ng-yunzai](https://github.com/hbyunzai/ng-yunzai)、[yelon](https:/
 
 We are using [GitHub Issues](https://github.com/hbyunzai/ng-yunzai/issues) for bug tracing. The best way to get your bug fixed via [GitHub Issues](https://github.com/hbyunzai/ng-yunzai/issues) and provide a reprduction with this [template](https://stackblitz.com/edit/ng-yunzai-setup).
 
-Before you reporting a bug, please make sure you've searched exists issues, and read our [FAQ](https://ng.yunzainfo.com/).
+Before you reporting a bug, please make sure you've searched exists issues, and read our [FAQ](https://ng-yunzai.com/).
 
 ## Proposing a Change
 

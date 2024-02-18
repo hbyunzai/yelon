@@ -15,8 +15,7 @@ ng-yunzai 提供诸多生成模块、页模板，但实际上继承了原生 Ang
 {
   "schematics": {
     "ng-yunzai:module": {
-      "routing": true,
-      "skipTests": false
+      "routing": true
     },
     "ng-yunzai:list": {
       "skipTests": false
@@ -33,8 +32,7 @@ ng-yunzai 提供诸多生成模块、页模板，但实际上继承了原生 Ang
       "skipTests": false
     },
     "@schematics/angular:module": {
-      "routing": true,
-      "skipTests": false
+      "routing": true
     },
     "@schematics/angular:component": {
       "skipTests": false,

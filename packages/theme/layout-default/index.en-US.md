@@ -41,14 +41,14 @@ import { environment } from '@env/environment';
         </div>
       </layout-default-header-item>
       <layout-default-header-item direction="middle">
-        <header-search class="yunzai-default__search" [toggleChange]="searchToggleStatus"></header-search>
+        <header-search class="yunzai-default__search" [toggleChange]="searchToggleStatus" />
       </layout-default-header-item>
       <layout-default-header-item direction="right" hidden="mobile">
-        <header-task></header-task>
+        <header-task />
       </layout-default-header-item>
       <ng-template #asideUserTpl>
         <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="yunzai-default__aside-user">
-          <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="user.avatar"></nz-avatar>
+          <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="user.avatar" />
           <div class="yunzai-default__aside-user-info">
             <strong>{{ user.name }}</strong>
             <p class="mb0">{{ user.email }}</p>
@@ -62,15 +62,17 @@ import { environment } from '@env/environment';
         </nz-dropdown-menu>
       </ng-template>
       <ng-template #navTpl>
-        <layout-default-nav class="d-block py-lg"></layout-default-nav>
+        <layout-default-nav class="d-block py-lg" />
       </ng-template>
       <ng-template #contentTpl>
-        <router-outlet></router-outlet>
+        <router-outlet />
       </ng-template>
     </layout-default>
 
-    <setting-drawer *ngIf="showSettingDrawer"></setting-drawer>
-    <theme-btn></theme-btn>
+    @if (showSettingDrawer) {
+      <setting-drawer />
+    }
+    <theme-btn />
   `,
 })
 export class LayoutBasicComponent {
@@ -105,7 +107,6 @@ The layout can be dynamically managed at runtime through the `LayoutDefaultServi
 | `[fetchingStrictly]` | Precise check top loading animation state | `boolean` | `false` |
 | `[fetching]` | Top loading animation state | `boolean` | `false` |
 
-
 ### LayoutDefaultOptions
 
 | Property | Description | Type | Default |
@@ -127,6 +128,7 @@ The layout can be dynamically managed at runtime through the `LayoutDefaultServi
 | `[disabledAcl]` | Displayed `disabled` state when `acl` check fails. | `boolean` | `false` |
 | `[autoCloseUnderPad]` | When the route width is less than the Pad width, the sidebar is automatically closed. | `boolean` | `true` |
 | `[recursivePath]` | Automatic up recursive lookup, menu data source contains `/ware`, then `/ware/1` is also treated as `/ware` | `boolean` | `true` |
+| `[hideEmptyChildren]` | When all children are hidden, whether to hide the parent as well | `boolean` | `true` |
 | `[openStrictly]` | Precise check open status, does not auto closed other open item | `boolean` | `false` |
 | `[maxLevelIcon]` | Icon displays up to which level | `number` | `3` |
 | `(select)` | Callback when clicking menu (including `disabled`) | `EventEmitter<Menu>` | - |

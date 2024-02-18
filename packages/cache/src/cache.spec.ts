@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom, Observable, of, filter } from 'rxjs';
 
-import { YunzaiCacheConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { YunzaiCacheConfig, provideYunzaiConfig } from '@yelon/util/config';
 
-import { YelonCacheModule } from './cache.module';
 import { CacheService } from './cache.service';
 import { ICache } from './interface';
 
@@ -38,10 +38,10 @@ describe('cache: service', () => {
   function genModule(options?: YunzaiCacheConfig): void {
     const providers: any[] = [];
     if (options) {
-      providers.push({ provide: YUNZAI_CONFIG, useValue: { cache: options } });
+      providers.push(provideYunzaiConfig({ cache: options }));
     }
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, YelonCacheModule],
+      imports: [HttpClientTestingModule],
       providers
     });
 

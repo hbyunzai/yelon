@@ -162,7 +162,7 @@ class RestService extends BaseApi {
 
 ```ts
 this.http.post(`login`, {
- name: 'devcui', pwd: '123456'
+ name: 'yunzai-bot', pwd: '123456'
 }, {
  context: new HttpContext()
              .set(ALLOW_ANONYMOUS, true)

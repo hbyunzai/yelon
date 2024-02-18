@@ -2,7 +2,7 @@
   "name": "ng-yunzai",
   "version": "0.0.0-PLACEHOLDER",
   "description": "Schematics specific to ng-yunzai",
-  "author": "devcui<devcui@outlook.com>",
+  "author": "yunzai-bot<yunzai-bot@outlook.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -24,7 +24,8 @@
   "dependencies": {
     "swagger-typescript-api": "@LIB-PLACEHOLDER",
     "ng-yunzai-sts": "@LIB-PLACEHOLDER",
-    "ng-yunzai-plugin-theme": "@LIB-PLACEHOLDER"
+    "ng-yunzai-plugin-theme": "@LIB-PLACEHOLDER",
+    "@angular/cdk": "@LIB-PLACEHOLDER"
   },
   "ng-update": {
     "migrations": "./migration.json",

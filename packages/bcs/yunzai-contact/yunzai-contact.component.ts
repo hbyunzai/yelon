@@ -1,10 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import { YunzaiDeptTree, YunzaiDeptTreeProps } from '@yelon/bcs/yunzai-dept-tree';
-import { YunzaiDormitoryTree, YunzaiDormitoryTreeProps } from '@yelon/bcs/yunzai-dormitory-tree';
-import { YunzaiFriendGroup, YunzaiFriendGroupProps } from '@yelon/bcs/yunzai-friend-group';
-import { YunzaiRoleTree, YunzaiRoleTreeProps } from '@yelon/bcs/yunzai-role-tree';
-import { YunzaiTableUser, YunzaiTableUserComponent, YunzaiTableUserProps } from '@yelon/bcs/yunzai-table-user';
+import { YunzaiDeptTreeModule, YunzaiDeptTree, YunzaiDeptTreeProps } from '@yelon/bcs/yunzai-dept-tree';
+import {
+  YunzaiDormitoryTreeModule,
+  YunzaiDormitoryTree,
+  YunzaiDormitoryTreeProps
+} from '@yelon/bcs/yunzai-dormitory-tree';
+import { YunzaiFriendGroupModule, YunzaiFriendGroup, YunzaiFriendGroupProps } from '@yelon/bcs/yunzai-friend-group';
+import { YunzaiRoleTree, YunzaiRoleTreeModule, YunzaiRoleTreeProps } from '@yelon/bcs/yunzai-role-tree';
+import {
+  YunzaiTableUserComponent,
+  YunzaiTableUserModule,
+  YunzaiTableUser,
+  YunzaiTableUserProps
+} from '@yelon/bcs/yunzai-table-user';
+import { YunzaiThemeModule } from '@yelon/theme';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 import { YunzaiContactProps, YunzaiContactState } from './yunzai-contact.types';
 
@@ -12,48 +27,64 @@ import { YunzaiContactProps, YunzaiContactState } from './yunzai-contact.types';
   selector: `yunzai-contact`,
   template: `
     <nz-card *ngIf="isWarp">
-      <ng-container [ngTemplateOutlet]="content"></ng-container>
+      <ng-container [ngTemplateOutlet]="content" />
     </nz-card>
 
-    <ng-container *ngIf="!isWarp" [ngTemplateOutlet]="content"></ng-container>
+    <ng-container *ngIf="!isWarp" [ngTemplateOutlet]="content" />
 
     <ng-template #content>
       <nz-row>
         <nz-col [nzSpan]="6">
-
           <div class="yz-select-contacts-modal-type">
             <nz-radio-group [(ngModel)]="state.cursor">
-              <label *ngIf="!disableDeptTree" nz-radio-button
-                     nzValue="deptTree">{{'deptTree'|i18n}}</label>
-              <label *ngIf="!disableRoleTree" nz-radio-button
-                     nzValue="roleTree">{{'roleTree'|i18n}}</label>
-              <label *ngIf="!disableDormitoryTree" nz-radio-button
-                     nzValue="dormitoryTree">{{'dormitoryTree'|i18n}}</label>
-              <label *ngIf="!disableFriendGroup" nz-radio-button
-                     nzValue="friendGroup">{{'friendGroup'|i18n}}</label>
+              <label *ngIf="!disableDeptTree" nz-radio-button nzValue="deptTree">{{ 'deptTree' | i18n }}</label>
+              <label *ngIf="!disableRoleTree" nz-radio-button nzValue="roleTree">{{ 'roleTree' | i18n }}</label>
+              <label *ngIf="!disableDormitoryTree" nz-radio-button nzValue="dormitoryTree">{{
+                'dormitoryTree' | i18n
+              }}</label>
+              <label *ngIf="!disableFriendGroup" nz-radio-button nzValue="friendGroup">{{
+                'friendGroup' | i18n
+              }}</label>
             </nz-radio-group>
           </div>
 
           <nz-row class="yz-select-contacts-modal-tree">
             <nz-col [nzSpan]="24" [ngSwitch]="state.cursor">
-              <yunzai-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree"
-                             (onSelect)="onDeptSelect($event)"></yunzai-dept-tree>
-              <yunzai-dormitory-tree *ngSwitchCase="'dormitoryTree'" [props]="dormitoryTree"
-                                  (onSelect)="onDormTreeSelect($event)"></yunzai-dormitory-tree>
-              <yunzai-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree"
-                             (onSelect)="onRoleTreeSelect($event)"></yunzai-role-tree>
-              <yunzai-friend-group *ngSwitchCase="'friendGroup'" [props]="friendGroup"
-                                (onSelect)="onFriendSelect($event)"></yunzai-friend-group>
+              <yunzai-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree" (onSelect)="onDeptSelect($event)" />
+              <yunzai-dormitory-tree
+                *ngSwitchCase="'dormitoryTree'"
+                [props]="dormitoryTree"
+                (onSelect)="onDormTreeSelect($event)"
+              />
+              <yunzai-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree" (onSelect)="onRoleTreeSelect($event)" />
+              <yunzai-friend-group
+                *ngSwitchCase="'friendGroup'"
+                [props]="friendGroup"
+                (onSelect)="onFriendSelect($event)"
+              />
             </nz-col>
           </nz-row>
         </nz-col>
         <nz-col [nzSpan]="18">
-          <yunzai-table-user #table [props]="tableUserProps"
-                          (onChecked)="onTableUserChecked($event)"></yunzai-table-user>
+          <yunzai-table-user #table [props]="tableUserProps" (onChecked)="onTableUserChecked($event)" />
         </nz-col>
       </nz-row>
     </ng-template>
-  `
+  `,
+  standalone: true,
+  imports: [
+    YunzaiThemeModule,
+    YunzaiDeptTreeModule,
+    YunzaiDormitoryTreeModule,
+    YunzaiFriendGroupModule,
+    YunzaiRoleTreeModule,
+    YunzaiTableUserModule,
+    CommonModule,
+    NzCardModule,
+    NzGridModule,
+    NzRadioModule,
+    FormsModule
+  ]
 })
 export class YunzaiContactComponent {
   @Input() deptTree?: YunzaiDeptTreeProps;
@@ -63,11 +94,16 @@ export class YunzaiContactComponent {
   @Input() tableUser?: YunzaiTableUserProps;
   @Input() props?: YunzaiContactProps;
 
-  @Output() onSelect: EventEmitter<YunzaiTableUser[]> = new EventEmitter<YunzaiTableUser[]>();
-  @Output() onSelectDept: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
-  @Output() onSelectRole: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
-  @Output() onSelectDormitory: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
-  @Output() onSelectGroup: EventEmitter<YunzaiFriendGroup> = new EventEmitter<YunzaiFriendGroup>();
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() readonly onSelect: EventEmitter<YunzaiTableUser[]> = new EventEmitter<YunzaiTableUser[]>();
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() readonly onSelectDept: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() readonly onSelectRole: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() readonly onSelectDormitory: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  @Output() readonly onSelectGroup: EventEmitter<YunzaiFriendGroup> = new EventEmitter<YunzaiFriendGroup>();
 
   @ViewChild('table') table!: YunzaiTableUserComponent;
 
@@ -85,7 +121,7 @@ export class YunzaiContactComponent {
         pageNum: 1,
         pageSize: 20
       },
-      userIds:[],
+      userIds: [],
       list: true,
       check: {
         pageCheck: true,

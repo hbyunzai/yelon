@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import { YunzaiChartConfig, YunzaiConfigService } from '@yelon/util/config';
@@ -6,6 +6,8 @@ import { LazyService } from '@yelon/util/other';
 
 @Injectable({ providedIn: 'root' })
 export class ChartEChartsService implements OnDestroy {
+  private readonly cogSrv = inject(YunzaiConfigService);
+  private readonly lazySrv = inject(LazyService);
   private _cog!: YunzaiChartConfig;
   private loading = false;
   private loaded = false;
@@ -25,10 +27,7 @@ export class ChartEChartsService implements OnDestroy {
     )!;
   }
 
-  constructor(
-    private cogSrv: YunzaiConfigService,
-    private lazySrv: LazyService
-  ) {
+  constructor() {
     this.cog = { theme: '' };
   }
 

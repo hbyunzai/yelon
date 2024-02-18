@@ -22,7 +22,7 @@ omit({ a: 1, b: 2 }, key => key === 'a') // { a: 1 }
 const obj = {
   id: 1,
   user: {
-    name: 'devcui',
+    name: 'yunzai-bot',
     age: 18
   }
 };
@@ -36,7 +36,7 @@ deepGet(obj, 'user.age'); // 18
 基于 [extend](https://github.com/justmoon/node-extend) 的深度拷贝。
 
 ```ts
-const source = { a: 1, user: { name: 'devcui' } };
+const source = { a: 1, user: { name: 'yunzai-bot' } };
 const obj = deepCopy(source);
 ```
 

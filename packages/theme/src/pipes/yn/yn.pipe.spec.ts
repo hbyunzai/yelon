@@ -10,7 +10,7 @@ describe('Pipe: yn', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [YunzaiThemeModule.forRoot()],
+      imports: [YunzaiThemeModule],
       declarations: [TestComponent]
     });
   });

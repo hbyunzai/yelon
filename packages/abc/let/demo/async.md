@@ -15,23 +15,27 @@ One subscription and multiple use.
 
 ```ts
 import { Platform } from '@angular/cdk/platform';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { interval, startWith } from 'rxjs';
 
+import { LetDirective } from '@yelon/abc/let';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'app-demo',
   template: `
-    <ng-container *ngIf="timer$ !== null">
+    @if (timer$ !== null) {
       <ng-container *let="timer$ | async as time">
         <p>Timer value: {{ time }}</p>
         <p>Timer value: {{ time }}</p>
         <p>Timer value: {{ time }}</p>
       </ng-container>
-    </ng-container>
+    }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [LetDirective, AsyncPipe]
 })
 export class DemoComponent {
   timer$: NzSafeAny | null = null;

@@ -11,8 +11,7 @@ import { ExceptionComponent } from './exception.component';
 const COMPONENTS = [ExceptionComponent];
 
 @NgModule({
-  imports: [CommonModule, ObserversModule, RouterModule, YelonLocaleModule, NzButtonModule],
-  declarations: COMPONENTS,
+  imports: [CommonModule, ObserversModule, RouterModule, YelonLocaleModule, NzButtonModule, ...COMPONENTS],
   exports: COMPONENTS
 })
 export class ExceptionModule {}

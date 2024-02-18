@@ -1,5 +1,5 @@
 import { Platform } from '@angular/cdk/platform';
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Injectable, InjectionToken, Provider, inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -16,18 +16,24 @@ export interface SettingsKeys {
 }
 
 export const YUNZAI_SETTING_KEYS = new InjectionToken<SettingsKeys>('YUNZAI_SETTING_KEYS');
+export const YUNZAI_SETTING_DEFAULT: Provider = {
+  provide: YUNZAI_SETTING_KEYS,
+  useValue: {
+    layout: 'layout',
+    user: 'user',
+    app: 'app'
+  }
+};
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService<L extends Layout = Layout, U extends User = User, A extends App = App> {
+  private readonly KEYS = inject(YUNZAI_SETTING_KEYS);
+  private readonly platform = inject(Platform);
+
   private notify$ = new Subject<SettingsNotify>();
   private _app: A | null = null;
   private _user: U | null = null;
   private _layout: L | null = null;
-
-  constructor(
-    private platform: Platform,
-    @Inject(YUNZAI_SETTING_KEYS) private KEYS: SettingsKeys
-  ) {}
 
   getData(key: string): NzSafeAny {
     if (!this.platform.isBrowser) {

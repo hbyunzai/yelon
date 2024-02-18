@@ -36,7 +36,6 @@ NG-ZORRO、@yelon/abc、@yelon/chart 等从版本11开始由一次性导入改�
 
 + Angular 模块：`BrowserModule`、`BrowserAnimationsModule`、`HttpClientModule`
 + `YunzaiThemeModule` 主题系统
-+ `YelonMockModule` Mock数据
 + `YunzaiAuthModule` 用户认证模块
 + `YunzaiACLModule` 权限模块
 + 国际化模块

@@ -20,8 +20,8 @@ PACKAGES=(
   chart
   mock
   form
-  socket
   bcs
+  socket
   bis
 )
 NODE_PACKAGES=(cli)
@@ -107,7 +107,7 @@ build
 
 echo 'FINISHED!'
 
-# TODO: just only cipchk
+# TODO: just only yunzai-bot
 # clear | bash ./scripts/ci/build-yelon.sh -debug
 # clear | bash ./scripts/ci/build-yelon.sh -n chart -nocss
 if [[ ${DEBUG} == true ]]; then

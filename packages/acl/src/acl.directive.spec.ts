@@ -14,7 +14,7 @@ describe('acl: directive', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [YelonACLModule.forRoot()],
+      imports: [YelonACLModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
     });
     fixture = TestBed.createComponent(TestComponent);

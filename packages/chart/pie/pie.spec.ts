@@ -136,7 +136,7 @@ class TestMiniComponent {
       [select]="select"
       [colors]="colors"
       [delay]="delay"
-    />>
+    />
   `
 })
 class TestFullComponent {

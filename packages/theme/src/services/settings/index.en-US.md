@@ -54,7 +54,7 @@ Support add the configuration of `YUNZAI_SETTING_KEYS` via the `global-config.mo
 
 ```diff
  const yunzaiProvides = [
-  { provide: YUNZAI_CONFIG, useValue: yunzaiConfig },
+  provideYunzaiConfig(yunzaiConfig),
 + {
 +   provide: YUNZAI_SETTING_KEYS,
 +   useValue: {

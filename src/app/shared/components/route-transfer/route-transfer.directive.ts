@@ -1,21 +1,18 @@
-import { Directive, HostListener, Inject } from '@angular/core';
+import { Directive, HostListener, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import { I18NService } from '@core';
-
 @Directive({
-  selector: '[routeTransfer]'
+  selector: '[routeTransfer]',
+  standalone: true
 })
 export class RouteTransferDirective {
-  constructor(
-    private router: Router,
-    private msg: NzMessageService,
-    @Inject(YUNZAI_I18N_TOKEN) private i18n: I18NService
-  ) {}
+  private readonly router = inject(Router);
+  private readonly msg = inject(NzMessageService);
+  private readonly i18n = inject(YUNZAI_I18N_TOKEN);
 
   private clickToc(id: string): void {
     const link = `#${id}`;

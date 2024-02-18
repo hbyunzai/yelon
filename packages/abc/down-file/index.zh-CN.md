@@ -10,7 +10,7 @@ module: import { DownFileModule } from '@yelon/abc/down-file';
 
 ## API
 
-### [down-file]
+### [down-file]:standalone
 
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|

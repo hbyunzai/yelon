@@ -30,7 +30,7 @@ Yelon
 
 + [Document](https://ng.yunzainfo.com) ([Surge Mirror](https://ng-yunzai-doc.surge.sh))
 + [@yelon Source](https://github.com/hbyunzai/yelon)
-+ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
++ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng.yunzainfo.com/))
 
 
 ## License

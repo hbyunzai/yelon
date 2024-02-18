@@ -7,6 +7,9 @@ i18n: need-update
 
 NG-YUNZAI scaffold is a front-end solution to support middleware and back-end application. It is based on [Angular](https://angular.io/) and [ng-zorro-antd](https://ng.ant.design/docs/introduce/en)(Angular implementation of Ant Design). The scaffold includes a set of common functionalities and business component libraries. It reduces lots of infrastructure development overwhelmingly and let you focus on business logic development.
 
+## Architecture Diagram
+
+![](https://github.com/hbyunzai/yelon/raw/master/_screenshot/architecture.png | width=700)
 
 **@yelon/theme**
 
@@ -46,14 +49,6 @@ Reduce the Http request by storing [cache](/cache) of the dictionary, city data,
 
 [Daily Utilities](/util)。
 
-**@yelon/bis**
-
-[Bis](/bis)
-
-**@yelon/socket**
-
-[Socket](/socket)
-
 **@yelon/testing**
 
 Commonly used testing suite.
@@ -70,25 +65,22 @@ Schematic diagram of directory structure：
 ├── _mock                                       # Mock Data rule
 ├── src
 │   ├── app
-│   │   ├── core                                # Core module
+│   │   ├── core                                # Core
 │   │   │   ├── i18n
 │   │   │   ├── net
 │   │   │   │   └── default.interceptor.ts      # Default HTTP interceptor
 │   │   │   ├── services
 │   │   │   │   └── startup.service.ts          # Initialize project configuration
-│   │   │   └── core.module.ts                  # Core module file
+│   │   │   └── index.ts                        # Core index.ts
 │   │   ├── layout                              # Core layout
 │   │   ├── routes
 │   │   │   ├── **                              # Business directory
-│   │   │   ├── routes.module.ts                # Service routing module
-│   │   │   └── routes-routing.module.ts        # Service routes registration
+│   │   │   └── routes.ts                       # Service routes registration
 │   │   ├── shared                              # Shared module
-│   │   │   ├── shared-yelon.module.ts          # @Yelon/* import of secondary shared modules
-│   │   │   ├── shared-zorro.module.ts          # NG-ZORRO import of secondary shared modules
-│   │   │   └── shared.module.ts                # Shared module file
+│   │   │   ├── shared-imports.ts               # A collection of frequently shared components
+│   │   │   └── index.ts                        # Shared index.ts
 │   │   ├── app.component.ts                    # Root component
-│   │   └── app.module.ts                       # Root module
-│   │   └── global-config.module.ts             # @yelon & ng-zorro global config
+│   │   └── app.config.ts                       # Global config
 │   ├── assets                                  # Local static resource
 │   ├── environments                            # Environment variable configuration
 │   ├── styles                                  # Style directory
@@ -101,9 +93,9 @@ The following is a description and use of each directory and file.
 
 The Mock data rules directory, if you create a project via [Command Line Tools](/cli), you can specify the `--mock` parameter to determine if the Mock function is required.
 
-**src/app/core/core.module.ts**
+**src/app/core/index.ts**
 
-The core module will only be imported once. Therefore, core service classes (eg, messages, data access, etc.) that are required for the entire ** business module should exist here.
+Some core business services (for example: messaging, data access, etc.)
 
 **src/app/core/i18n**
 
@@ -113,7 +105,7 @@ The core module will only be imported once. Therefore, core service classes (eg,
 
 The default interceptor, where you can handle request parameters, request exceptions, business exceptions, and so on.
 
-**src/app/core/services/startup.service.ts**
+**src/app/core/startup/startup.service.ts**
 
 Useful when you need to execute some remote data (eg application information, user information, etc.) before Angular launches.
 
@@ -127,13 +119,13 @@ Layout file code, refer to the page structure section.
 
 Business module, all your business code will be here.
 
-**src/app/shared/shared.module.ts**
+**src/app/shared/index.ts**
 
-The shared module means that some third-party modules, custom components, and custom instructions that you need to use for the entire business module should exist here. In addition, for @yelon & NG-ZORRO, two shared secondary module imports, `shared-yelon.module.ts` and` shared-zorro.module.ts`.
+A collection of some frequently shared components, The means that some third-party modules, custom components, and custom instructions that you need to use for the entire business module should exist here. In addition, for @yelon & NG-ZORRO, two shared secondary module imports, `shared-yelon.module.ts` and` shared-zorro.module.ts`.
 
-**src/app/global-config.module.ts**
+**src/app/app.config.ts**
 
-Global configuration for @yelon & NG-ZORRO.
+Global configuration for project.
 
 **src/environments**
 

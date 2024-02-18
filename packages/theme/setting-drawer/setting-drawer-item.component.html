@@ -2,20 +2,14 @@
   {{ i.label }}
   <span class="pl-sm text-grey">{{ i.tip }}</span>
 </span>
-<div [ngSwitch]="i.type">
-  <ng-container *ngSwitchCase="'color'">
-    <input
-      nz-input
-      type="color"
-      style="min-width: 88px"
-      [(ngModel)]="i.value"
-      [ngModelOptions]="{ standalone: true }"
-    />
-  </ng-container>
-  <ng-container *ngSwitchCase="'input'">
-    <input nz-input style="min-width: 88px" [(ngModel)]="i.value" [ngModelOptions]="{ standalone: true }" />
-  </ng-container>
-  <ng-container *ngSwitchCase="'px'">
+@switch (i.type) {
+  @case ('color') {
+    <input nz-input type="color" style="width: 88px" [(ngModel)]="i.value" [ngModelOptions]="{ standalone: true }" />
+  }
+  @case ('input') {
+    <input nz-input style="width: 88px" [(ngModel)]="i.value" [ngModelOptions]="{ standalone: true }" />
+  }
+  @case ('px') {
     <nz-input-number
       [(ngModel)]="pxVal"
       (ngModelChange)="pxChange($event)"
@@ -24,11 +18,11 @@
       [nzStep]="i.step || 2"
       [nzFormatter]="format"
     />
-  </ng-container>
-  <ng-container *ngSwitchCase="'switch'">
+  }
+  @case ('switch') {
     <nz-switch nzSize="small" [(ngModel)]="i.value" [ngModelOptions]="{ standalone: true }" />
-  </ng-container>
-  <ng-container *ngSwitchDefault>
-    <ng-template nzDrawerContent></ng-template>
-  </ng-container>
-</div>
+  }
+  @default {
+    <ng-template nzDrawerContent />
+  }
+}

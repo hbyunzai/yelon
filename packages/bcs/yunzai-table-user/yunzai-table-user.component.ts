@@ -1,9 +1,20 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {debounceTime, Subject, takeUntil,} from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
 
-import {STColumn, STComponent, STData, STRequestOptions} from '@yelon/abc/st';
-import {SFComponent, SFSchema, SFValue} from '@yelon/form';
+import { STColumn, STComponent, STData, STModule, STRequestOptions } from '@yelon/abc/st';
+import { SFComponent, SFSchema, SFValue, YelonFormModule } from '@yelon/form';
+import { YunzaiThemeModule } from '@yelon/theme';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
+import { YunzaiTableUserService } from './yunzai-table-user.service';
 import {
   YunzaiTableUser,
   YunzaiTableUserParam,
@@ -11,28 +22,104 @@ import {
   YunzaiTableUserRole,
   YunzaiTableUserState
 } from './yunzai-table-user.types';
-import {YunzaiTableUserService} from "./yunzai-table-user.service";
 
 @Component({
   selector: `yunzai-table-user`,
-  templateUrl: `./yunzai-table-user.html`
+  template: `
+    <nz-card *ngIf="wrapped">
+      <ng-container [ngTemplateOutlet]="tableTpl" />
+    </nz-card>
+
+    <ng-container *ngIf="!wrapped" [ngTemplateOutlet]="tableTpl" />
+
+    <ng-template #tableTpl>
+      <div class="yz-select-contacts-modal-right" style="width:67%">
+        <ng-container [ngTemplateOutlet]="form" />
+        <st #st [scroll]="scroll" [size]="'small'" [bordered]="true">
+          <ng-template st-row="checkbox_all" let-item type="title">
+            <label
+              *ngIf="!disableCheck"
+              nz-checkbox
+              (change)="onCheckedAll($event)"
+              [nzChecked]="isAllChecked()"
+            ></label>
+          </ng-template>
+          <ng-template st-row="checkbox" let-item let-index="index">
+            <label
+              *ngIf="!disableCheck"
+              nz-checkbox
+              (change)="onCheckedItem(item)"
+              [nzChecked]="isChecked(item)"
+            ></label>
+          </ng-template>
+          <ng-template st-row="rolesName" let-item let-index="index">{{ renderRoles(item.roles) }}</ng-template>
+        </st>
+      </div>
+      <div class="yz-select-contacts-modal-right" style="width:33%">
+        <ng-container *ngIf="list" [ngTemplateOutlet]="listTpl" />
+      </div>
+    </ng-template>
+
+    <ng-template #listTpl>
+      <div class="right-list-title">
+        <h3>{{ 'table-user.checked' | i18n }}</h3>
+        <div *ngIf="hasCheck">
+          <a style="cursor: default;">{{ checked.length }} </a>
+          <nz-divider nzType="vertical" />
+          <a style="cursor: pointer" href="javascript:;" (click)="unCheckAll()">{{ 'table-user.clear' | i18n }}</a>
+        </div>
+      </div>
+
+      <div class="yz-selected-contacts">
+        <nz-empty *ngIf="!hasCheck" style="margin: 90px auto;" />
+        <ul nz-menu nzMode="inline" class="yz-role-contacts">
+          <li nz-menu-item *ngFor="let item of checked; let i = index" class="people-item">
+            <div class="people-item-right">{{ item?.realName || '--' }}</div>
+            <span class="del-btn" (click)="unCheck(item)">
+              <i nz-icon nzType="close" nzTheme="outline"></i>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </ng-template>
+
+    <ng-template #form>
+      <sf layout="inline" #sf [schema]="schema" button="none" />
+      <button nz-button nzType="primary" (click)="onReset()">{{ 'reset' | i18n }}</button>
+    </ng-template>
+  `,
+  standalone: true,
+  imports: [
+    CommonModule,
+    YelonFormModule,
+    NzEmptyModule,
+    NzDividerModule,
+    NzMenuModule,
+    NzIconModule,
+    NzButtonModule,
+    NzCheckboxModule,
+    STModule,
+    YunzaiThemeModule,
+    NzCardModule
+  ]
 })
 export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   @ViewChild('st') st!: STComponent;
   @ViewChild('sf') sf!: SFComponent;
   @Input() props?: YunzaiTableUserProps;
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onChecked: EventEmitter<YunzaiTableUser[]> = new EventEmitter<YunzaiTableUser[]>();
-  private $destroy = new Subject()
+  private $destroy = new Subject();
 
   state: YunzaiTableUserState = {
     columns: [
-      {index: "checkbox", render: "checkbox", renderTitle: 'checkbox_all', width: 20, fixed: 'left'},
-      {index: 'no', type: 'no', title: {i18n: 'table-user.no'}, width: 50},
-      {index: 'realName', title: {i18n: 'table-user.realName'}, width: 100},
-      {index: 'userCode', title: {i18n: 'table-user.usercode'}, width: 100},
-      {index: 'dept.deptName', title: {i18n: 'table-user.deptName'}, width: 100},
-      {index: 'rolesName', render: 'rolesName', title: {i18n: 'table-user.roleName'}, width: 100},
-      {index: 'idCard', title: {i18n: 'table-user.idcard'}, width: 100}
+      { index: 'checkbox', render: 'checkbox', renderTitle: 'checkbox_all', width: 20, fixed: 'left' },
+      { index: 'no', type: 'no', title: { i18n: 'table-user.no' }, width: 50 },
+      { index: 'realName', title: { i18n: 'table-user.realName' }, width: 100 },
+      { index: 'userCode', title: { i18n: 'table-user.usercode' }, width: 100 },
+      { index: 'dept.deptName', title: { i18n: 'table-user.deptName' }, width: 100 },
+      { index: 'rolesName', render: 'rolesName', title: { i18n: 'table-user.roleName' }, width: 100 },
+      { index: 'idCard', title: { i18n: 'table-user.idcard' }, width: 100 }
     ],
     data: [],
     dataBackup: [],
@@ -102,7 +189,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     y?: string | null;
   } {
     if (this.props && this.props.scroll) return this.props.scroll;
-    return {x: '1200px', y: '600px'};
+    return { x: '1200px', y: '600px' };
   }
 
   get inSearch(): boolean {
@@ -111,11 +198,10 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   }
 
   get userIds(): string[] {
-    return this.props?.userIds || []
+    return this.props?.userIds || [];
   }
 
-  constructor(private service: YunzaiTableUserService) {
-  }
+  constructor(private service: YunzaiTableUserService) {}
 
   ngOnInit(): void {
     this.setupPropsToState();
@@ -193,15 +279,14 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   setupPropsChecked(): void {
     if (!this.props || !this.props.check || !this.props.check.data) return;
-    this.state.check.data = this.props.check.data
+    this.state.check.data = this.props.check.data;
     if (this.userIds.length > 0) {
-      this.service.usersByIds(this.userIds)
-        .subscribe((users) => {
-          this.state.check.data = this.state.check.data.concat(users)
-          this.onChecked.emit(this.state.check.data as any)
-        })
+      this.service.usersByIds(this.userIds).subscribe(users => {
+        this.state.check.data = this.state.check.data.concat(users);
+        this.onChecked.emit(this.state.check.data as NzSafeAny);
+      });
     } else {
-      this.onChecked.emit(this.state.check.data as any)
+      this.onChecked.emit(this.state.check.data as NzSafeAny);
     }
   }
 
@@ -218,7 +303,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   setupTableColumn(): void {
     if (!this.st) return;
-    this.st.resetColumns({columns: this.state.columns});
+    this.st.resetColumns({ columns: this.state.columns });
   }
 
   setupTableRequest(): void {
@@ -254,7 +339,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   resetChecked(): void {
     if (!this.props || !this.props.check || !this.props.check.data) return;
     this.state.check.data = this.props.check.data.map(id => {
-      return {userId: id};
+      return { userId: id };
     });
   }
 
@@ -270,7 +355,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     this.onChecked.emit(this.state.check.data as YunzaiTableUser[]);
   }
 
-  onCheckedAll(e: any): void {
+  onCheckedAll(e: NzSafeAny): void {
     const checkedAll = e.target.labels[0].innerHTML.includes('checked');
     if (checkedAll) {
       const data = this.st._data.filter(
@@ -299,7 +384,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     return false;
   }
 
-  isArraySubset(subset: any[], superset: any[]): boolean {
+  isArraySubset(subset: NzSafeAny[], superset: NzSafeAny[]): boolean {
     return subset.every(item => superset.some(superItem => superItem.userId === item.userId));
   }
 
@@ -319,7 +404,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   hookSearch(): void {
     this.sf.formValueChange.pipe(takeUntil(this.$destroy), debounceTime(1000)).subscribe(event => {
-      const {value} = event;
+      const { value } = event;
       this.onSearch(value);
     });
   }
@@ -335,7 +420,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
       this.st.reload();
     }
     if (typeof this.state.data === 'string') {
-      this.state.page.pageParam = {...this.state.page.pageParam, ...value};
+      this.state.page.pageParam = { ...this.state.page.pageParam, ...value };
       this.onQuery();
     }
   }
@@ -356,7 +441,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
 
   public setTableParam(param: YunzaiTableUserParam): void {
     if (this.inSearch) {
-      this.state.page.pageParam = {...param, ...this.sf.value};
+      this.state.page.pageParam = { ...param, ...this.sf.value };
       this.onSearch(this.sf.value);
     }
     if (!this.inSearch) {
@@ -364,5 +449,4 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
       this.setupTable();
     }
   }
-
 }

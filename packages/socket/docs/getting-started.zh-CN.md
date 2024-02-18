@@ -4,9 +4,7 @@ title: 开始使用
 type: Documents
 ---
 
-
 # env
-
 
 ```ts
 import { YelonMockModule } from '@yelon/mock';

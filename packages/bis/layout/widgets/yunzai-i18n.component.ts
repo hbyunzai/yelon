@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy } from '@a
 import { Subject, takeUntil } from 'rxjs';
 
 import { YUNZAI_I18N_TOKEN, SettingsService, YunzaiI18NType } from '@yelon/theme';
-import { BooleanInput, InputBoolean } from '@yelon/util/decorator';
+import { BooleanInput } from '@yelon/util/decorator';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { YunzaiI18NService } from '../yunzai-i18n.service';
 
@@ -39,7 +40,7 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
             style="margin-right:4px"
             width="50px"
             height="30px"
-            [src]="'data:image/png;base64,' + item.icon"
+            ngSrc="'data:image/png;base64,' + item.icon"
             [alt]="item.abbr"
             class="pr-xs"
           />
@@ -53,7 +54,7 @@ import { YunzaiI18NService } from '../yunzai-i18n.service';
 export class YunzaiI18NComponent implements OnDestroy {
   static ngAcceptInputType_showLangText: BooleanInput;
   /** Whether to display language text */
-  @Input() @InputBoolean() showLangText = true;
+  @Input() showLangText: boolean = true;
   private $destroy = new Subject();
 
   langs: YunzaiI18NType[] = [];
@@ -65,7 +66,7 @@ export class YunzaiI18NComponent implements OnDestroy {
   constructor(
     private settings: SettingsService,
     @Inject(YUNZAI_I18N_TOKEN) private i18n: YunzaiI18NService,
-    @Inject(DOCUMENT) private doc: any
+    @Inject(DOCUMENT) private doc: NzSafeAny
   ) {
     this.i18n
       .getLangs()

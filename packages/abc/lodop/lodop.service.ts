@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiLodopConfig } from '@yelon/util/config';
@@ -9,6 +9,8 @@ import { Lodop, LodopPrintResult, LodopResult } from './lodop.types';
 
 @Injectable({ providedIn: 'root' })
 export class LodopService implements OnDestroy {
+  private readonly scriptSrv = inject(LazyService);
+
   private defaultConfig: YunzaiLodopConfig;
   private _cog!: YunzaiLodopConfig;
   private pending = false;
@@ -17,10 +19,7 @@ export class LodopService implements OnDestroy {
   private _events = new Subject<LodopPrintResult>();
   private printBuffer: NzSafeAny[] = [];
 
-  constructor(
-    private scriptSrv: LazyService,
-    configSrv: YunzaiConfigService
-  ) {
+  constructor(configSrv: YunzaiConfigService) {
     this.defaultConfig = configSrv.merge('lodop', {
       url: '//localhost:8443/CLodopfuncs.js',
       name: 'CLODOP',

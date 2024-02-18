@@ -10,7 +10,7 @@ module: import { ErrorCollectModule } from '@yelon/abc/error-collect';
 
 ## API
 
-### error-collect
+### error-collect:standalone
 
 | 成员 | 说明 | 类型 | 默认值 | 全局配置 |
 |----|----|----|-----|------|

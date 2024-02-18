@@ -31,7 +31,7 @@ cacheService.set('/data/unit', [ '个', '件' ]);
 **安装**
 
 ```bash
-yarn add @yelon/cache
+npm i -S @yelon/cache
 ```
 
 **注册**

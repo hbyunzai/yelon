@@ -1,107 +1,37 @@
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-  HTTP_INTERCEPTORS,
-  HttpParams
-} from '@angular/common/http';
-import { Injectable, Injector, Optional } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpErrorResponse, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 
-import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
+import { YunzaiAuthConfig } from '@yelon/util/config';
 
 import { ToLogin } from './helper';
-import { ITokenModel } from './interface';
-import { mergeConfig } from '../auth.config';
 import { ALLOW_ANONYMOUS } from '../token';
 
-class HttpAuthInterceptorHandler implements HttpHandler {
-  constructor(
-    private next: HttpHandler,
-    private interceptor: HttpInterceptor
-  ) {}
-
-  handle(req: HttpRequest<any>): Observable<HttpEvent<any>> {
-    return this.interceptor.intercept(req, this.next);
+export function isAnonymous(req: HttpRequest<unknown>, options: YunzaiAuthConfig): boolean {
+  if (req.context.get(ALLOW_ANONYMOUS)) return true;
+  if (Array.isArray(options.ignores)) {
+    for (const item of options.ignores) {
+      if (item.test(req.url)) return true;
+    }
   }
+  return false;
 }
 
-@Injectable()
-export abstract class BaseInterceptor implements HttpInterceptor {
-  constructor(@Optional() protected injector: Injector) {}
+export function throwErr(req: HttpRequest<unknown>, options: YunzaiAuthConfig): Observable<HttpEvent<unknown>> {
+  ToLogin(options);
 
-  protected model!: ITokenModel;
-
-  abstract isAuth(options: YunzaiAuthConfig): boolean;
-
-  abstract setReq(req: HttpRequest<any>, options: YunzaiAuthConfig): HttpRequest<any>;
-
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.context.get(ALLOW_ANONYMOUS)) return next.handle(req);
-
-    const options = mergeConfig(this.injector.get(YunzaiConfigService));
-    if (Array.isArray(options.ignores)) {
-      for (const item of options.ignores) {
-        if (item.test(req.url)) return next.handle(req);
-      }
+  // Interrupt Http request, so need to generate a new Observable
+  return new Observable((observer: Observer<HttpEvent<any>>) => {
+    let statusText = '';
+    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+      statusText = `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 new HttpContext().set(ALLOW_ANONYMOUS, true) 来表示忽略校验，更多方法请参考： https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add new HttpContext().set(ALLOW_ANONYMOUS, true) to ignore the check, please refer to: https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig`;
     }
-
-    const ignoreKey = options.allow_anonymous_key!;
-    let ignored = false;
-    let params = req.params;
-    let url = req.url;
-    if (req.params.has(ignoreKey)) {
-      params = req.params.delete(ignoreKey);
-      ignored = true;
-    }
-    const urlArr = req.url.split('?');
-    if (urlArr.length > 1) {
-      const queryStringParams = new HttpParams({ fromString: urlArr[1] });
-      if (queryStringParams.has(ignoreKey)) {
-        const queryString = queryStringParams.delete(ignoreKey).toString();
-        url = queryString.length > 0 ? `${urlArr[0]}?${queryString}` : urlArr[0];
-        ignored = true;
-      }
-    }
-    if (ignored) {
-      return next.handle(req.clone({ params, url }));
-    }
-
-    if (this.isAuth(options)) {
-      req = this.setReq(req, options);
-    } else {
-      ToLogin(options, this.injector);
-      // Interrupt Http request, so need to generate a new Observable
-      const err$ = new Observable((observer: Observer<HttpEvent<any>>) => {
-        let statusText = '';
-        if (typeof ngDevMode === 'undefined' || ngDevMode) {
-          statusText = `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 [url?_allow_anonymous=true] 来表示忽略校验，更多方法请参考： https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add [url?_allow_anonymous=true] to ignore the check, please refer to: https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig`;
-        }
-        const res = new HttpErrorResponse({
-          url: req.url,
-          headers: req.headers,
-          status: 401,
-          statusText
-        });
-        observer.error(res);
-      });
-      if (options.executeOtherInterceptors) {
-        const interceptors = this.injector.get(HTTP_INTERCEPTORS, []);
-        const lastInterceptors = interceptors.slice(interceptors.indexOf(this) + 1);
-        if (lastInterceptors.length > 0) {
-          const chain = lastInterceptors.reduceRight(
-            (_next, _interceptor) => new HttpAuthInterceptorHandler(_next, _interceptor),
-            {
-              handle: (_: HttpRequest<any>) => err$
-            }
-          );
-          return chain.handle(req);
-        }
-      }
-      return err$;
-    }
-    return next.handle(req);
-  }
+    const res = new HttpErrorResponse({
+      url: req.url,
+      headers: req.headers,
+      status: 401,
+      statusText
+    });
+    observer.error(res);
+  });
 }

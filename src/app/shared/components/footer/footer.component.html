@@ -2,7 +2,7 @@
   <div nz-row>
     <div nz-col nzXs="24" nzSm="24" nzLg="6">
       <div class="footer__center">
-        <h2>NG-YUNZAI</h2>
+        <h2>ng-yunzai</h2>
         <div><a href="https://github.com/hbyunzai/ng-yunzai" target="_blank">Github</a></div>
         <div><a href="https://github.com/hbyunzai/yelon" target="_blank">&#64;yelon</a></div>
         <div><a href="https://github.com/ng-alain/ng-zorro-vscode" target="_blank">ng-zorro-vscode</a></div>
@@ -56,29 +56,15 @@
     <div nz-col nzXs="24" nzSm="24" nzLg="6">
       <div class="footer__center">
         <h2>{{ 'app.footer.thanks' | i18n }}</h2>
-        <div
-          ><a href="https://github.com/cipchk">{{ 'app.footer.thanks.user' | i18n }}</a></div
-        >
+        <div><a href="https://github.com/cipchk">{{ 'app.footer.thanks.user' | i18n }}</a></div>
         <div><a href="https://ng-alain.com/">NG-ALAIN</a></div>
         <div><a href="https://github.com/ng-alain/delon">&#64;Delon</a></div>
-
-        Copyright &copy; 2021 <a href="https://github.com/cipchk" target="_blank">&copy;河北云在</a>
+        Copyright &copy; 2024 <a href="https://github.com/hbyunzai" target="_blank">&copy;河北云在</a>
         <p class="mt-sm">
-          <a href="https://beian.miit.gov.cn/" target="_blank" class="text-grey">冀ICP备16001917号 </a>
+          <a href="https://beian.miit.gov.cn/" target="_blank" class="text-grey">冀ICP备16001917号</a>
         </p>
         <div class="mt-lg">
-          <div
-            class="theme-color"
-            nz-popover
-            [nzPopoverContent]="colorTpl"
-            nzPopoverTrigger="click"
-            nzPopoverOverlayClassName="theme-color-content"
-          >
-            <div class="theme-color-value" [ngStyle]="{ background: color }"></div>
-          </div>
-          <ng-template #colorTpl>
-            <color-sketch [color]="color" (onChangeComplete)="changeColor($event)" />
-          </ng-template>
+          <nz-color-picker class="theme-color" [nzValue]="color" (nzOnChange)="changeColor($event)" />
         </div>
       </div>
     </div>

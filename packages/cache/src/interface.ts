@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export interface ICache {
   v: any;
   /** 过期时间戳，`0` 表示不过期 */

@@ -8,9 +8,13 @@ title: 通知图标
 ```ts
 import { Component } from '@angular/core';
 
+import { NoticeIconComponent } from '@yelon/abc/notice-icon';
+
 @Component({
   selector: 'app-demo',
-  template: ` <notice-icon count="5"></notice-icon> `,
+  template: ` <notice-icon count="5" /> `,
+  standalone: true,
+  imports: [NoticeIconComponent]
 })
 export class DemoComponent {}
 ```

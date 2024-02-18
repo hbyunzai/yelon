@@ -16,7 +16,7 @@ pdf.js libary is lazy loading by default，you can change the default root CDN p
 **Use local path**
 
 ```bash
-yarn add pdfjs-dist
+npm i -S pdfjs-dist
 ```
 
 ```json
@@ -40,7 +40,7 @@ const yunzaiConfig: YunzaiConfig = {
 
 ## API
 
-### pdf
+### pdf:standalone
 
 | Property | Description | Type | Default | Global Config |
 |----------|-------------|------|---------|---------------|

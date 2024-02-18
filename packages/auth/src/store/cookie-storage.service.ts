@@ -1,3 +1,5 @@
+import { inject } from '@angular/core';
+
 import { CookieService } from '@yelon/util/browser';
 
 import { IStore } from './interface';
@@ -7,12 +9,11 @@ import { ITokenModel } from '../token/interface';
  * `cookie` storage
  *
  * ```ts
- * // global-config.module.ts
- * { provide: YA_STORE_TOKEN, useClass: CookieStorageStore, deps: [CookieService] }
+ * provideAuth(withJWT(), withCookie())
  * ```
  */
 export class CookieStorageStore implements IStore {
-  constructor(private srv: CookieService) {}
+  private readonly srv = inject(CookieService);
 
   get(key: string): ITokenModel {
     try {

@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpParams } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -26,6 +29,7 @@ import {
 
 @BaseUrl('/user')
 @BaseHeaders({ bh: 'a' })
+@Injectable()
 class MockService extends BaseApi {
   @GET()
   query(@Query('pi') _pi: number, @Query('ps') _ps: number, @Headers('mh') _mh: string): Observable<any> {
@@ -123,6 +127,7 @@ class MockService extends BaseApi {
   }
 }
 
+@Injectable()
 class MockEmptyService extends BaseApi {
   @GET()
   GET(): Observable<any> {
@@ -137,7 +142,6 @@ class MockEmptyService extends BaseApi {
 describe('theme: http.decorator', () => {
   let request: jasmine.Spy;
   let srv: MockService;
-  let injector: MockInjector;
   let tokens: any;
 
   class MockInjector {
@@ -161,8 +165,10 @@ describe('theme: http.decorator', () => {
     jasmine.createSpyObj('http', {
       request
     });
-    injector = new MockInjector();
-    srv = new MockService(injector as any);
+    TestBed.configureTestingModule({
+      providers: [{ provide: Injector, useClass: MockInjector }, MockService, MockEmptyService]
+    });
+    srv = TestBed.inject(MockService);
   });
 
   it('should working', () => {
@@ -192,7 +198,7 @@ describe('theme: http.decorator', () => {
     });
 
     it('should be ignore url & base url', () => {
-      const srvEmpty = new MockEmptyService(injector as any);
+      const srvEmpty = TestBed.inject(MockEmptyService);
       srvEmpty.GET();
 
       expect(request).toHaveBeenCalled();
@@ -208,7 +214,7 @@ describe('theme: http.decorator', () => {
 
     describe('should be join baseUrl & url of method', () => {
       it('when without baseUrl', () => {
-        const srv2 = new MockEmptyService(injector as any);
+        const srv2 = TestBed.inject(MockEmptyService);
         srv2.A();
 
         expect(request).toHaveBeenCalled();
@@ -239,9 +245,9 @@ describe('theme: http.decorator', () => {
   });
 
   it('should construct a POST request', () => {
-    srv.save(1, { name: 'devcui' });
+    srv.save(1, { name: 'yunzai-bot' });
     expect(request).toHaveBeenCalled();
-    expect(request.calls.mostRecent().args[2].body.name).toBe('devcui');
+    expect(request.calls.mostRecent().args[2].body.name).toBe('yunzai-bot');
   });
 
   it('should construct a POST request via array body', () => {

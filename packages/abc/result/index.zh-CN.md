@@ -10,7 +10,7 @@ module: import { ResultModule } from '@yelon/abc/result';
 
 ## API
 
-### result
+### result:standalone
 
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|

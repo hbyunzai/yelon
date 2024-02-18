@@ -1,34 +1,35 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, numberAttribute } from '@angular/core';
 
 import type { Chart } from '@antv/g2';
 
 import { G2BaseComponent } from '@yelon/chart/core';
-import { InputNumber, NumberInput } from '@yelon/util/decorator';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 @Component({
   selector: 'g2-gauge',
   exportAs: 'g2Gauge',
-  template: `<nz-skeleton *ngIf="!loaded" />`,
+  template: `@if (!loaded) {
+    <nz-skeleton />
+  }`,
   host: {
     '[class.g2-gauge]': 'true'
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [NzSkeletonComponent]
 })
 export class G2GaugeComponent extends G2BaseComponent {
-  static ngAcceptInputType_height: NumberInput;
-  static ngAcceptInputType_percent: NumberInput;
-
   // #region fields
 
   @Input() title?: string;
-  @Input() @InputNumber() height?: number;
+  @Input({ transform: numberAttribute }) height?: number;
   @Input() color = '#2f9cff';
   @Input() bgColor?: string; // = '#f0f2f5';
   @Input() format?: (text: string, item: NzSafeAny, index: number) => string;
-  @Input() @InputNumber() percent?: number;
+  @Input({ transform: numberAttribute }) percent?: number;
   @Input() padding: number | number[] | 'auto' = [10, 10, 30, 10];
 
   // #endregion

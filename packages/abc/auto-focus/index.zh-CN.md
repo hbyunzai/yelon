@@ -10,7 +10,7 @@ module: import { AutoFocusModule } from '@yelon/abc/auto-focus';
 
 ## API
 
-### [auto-focus]
+### [auto-focus]:standalone
 
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|

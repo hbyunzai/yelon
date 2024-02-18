@@ -20,7 +20,7 @@ describe('Pipe: _date', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [YunzaiThemeModule.forRoot()],
+      imports: [YunzaiThemeModule],
       declarations: [TestComponent],
       providers: [{ provide: NZ_DATE_LOCALE, useValue: dateFnsLang }]
     });

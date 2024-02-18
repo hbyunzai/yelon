@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, inject } from '@angular/core';
 
 import isUtf8 from 'isutf8';
 
@@ -15,18 +15,18 @@ declare var cptable: NzSafeAny;
 
 @Injectable({ providedIn: 'root' })
 export class XlsxService {
-  constructor(
-    private http: HttpClient,
-    private lazy: LazyService,
-    configSrv: YunzaiConfigService,
-    private ngZone: NgZone
-  ) {
+  private readonly http = inject(HttpClient);
+  private readonly lazy = inject(LazyService);
+  private readonly ngZone = inject(NgZone);
+
+  private cog: YunzaiXlsxConfig;
+
+  constructor(configSrv: YunzaiConfigService) {
     this.cog = configSrv.merge('xlsx', {
       url: 'https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js',
       modules: [`https://cdn.jsdelivr.net/npm/xlsx/dist/cpexcel.js`]
     })!;
   }
-  private cog: YunzaiXlsxConfig;
 
   private init(): Promise<LazyResult[]> {
     return typeof XLSX !== 'undefined'

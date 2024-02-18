@@ -1,16 +1,26 @@
 import { Platform } from '@angular/cdk/platform';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, NgZone, OnInit } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  NgZone,
+  OnInit,
+  booleanAttribute,
+  inject
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { LoadingService } from '@yelon/abc/loading';
-import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, I18nPipe } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
-import { BooleanInput, InputBoolean } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
+import { NzColor, NzColorPickerModule } from 'ng-zorro-antd/color-picker';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
-
-import { I18NService } from '@core';
 
 @Component({
   selector: 'app-footer',
@@ -20,26 +30,24 @@ import { I18NService } from '@core';
     '[class.footer__dark]': 'true',
     '[class.footer__small]': 'small'
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzGridModule, NzColorPickerModule, NgStyle, I18nPipe, RouterLink]
 })
 export class FooterComponent implements OnInit {
-  static ngAcceptInputType_small: BooleanInput;
+  readonly i18n = inject(YUNZAI_I18N_TOKEN);
+  private readonly msg = inject(NzMessageService);
+  private readonly loading = inject(LoadingService);
+  private readonly lazy = inject(LazyService);
+  private readonly iconSrv = inject(NzIconService);
+  private readonly ngZone = inject(NgZone);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly platform = inject(Platform);
 
   color = `#1890ff`;
   lessLoaded = false;
 
-  @Input() @InputBoolean() small = false;
-
-  constructor(
-    @Inject(YUNZAI_I18N_TOKEN) public i18n: I18NService,
-    private msg: NzMessageService,
-    private loading: LoadingService,
-    private lazy: LazyService,
-    private iconSrv: NzIconService,
-    private ngZone: NgZone,
-    private cdr: ChangeDetectorRef,
-    private platform: Platform
-  ) {}
+  @Input({ transform: booleanAttribute }) small = false;
 
   onCopy(value: string): void {
     copy(value).then(() => this.msg.success(this.i18n.fanyi('app.demo.copied')));
@@ -61,17 +69,18 @@ export class FooterComponent implements OnInit {
     document.getElementsByTagName('head')[0].appendChild(node);
   }
 
-  changeColor(res: NzSafeAny): void {
+  changeColor(res: { color: NzColor; format: string }): void {
     const changeColor = (): void => {
       this.ngZone.runOutsideAngular(() => {
+        const hex = res.color.toHexString();
         (window as NzSafeAny).less
           .modifyVars({
-            '@primary-color': res.color.hex
+            '@primary-color': hex
           })
           .then(() => {
             window.scrollTo(0, 0);
             this.ngZone.run(() => {
-              this.color = res.color.hex;
+              this.color = hex;
               this.iconSrv.twoToneColor.primaryColor = this.color;
               this.msg.success(this.i18n.fanyi('app.footer.primary-color-changed'));
               this.cdr.detectChanges();
@@ -87,12 +96,9 @@ export class FooterComponent implements OnInit {
     if (this.lessLoaded) {
       changeColor();
     } else {
-      (window as NzSafeAny).less = {
-        async: true,
-        javascriptEnabled: true
-      };
       this.lazy.loadScript(lessUrl).then(() => {
         this.lessLoaded = true;
+        (window as NzSafeAny).less.options.javascriptEnabled = true;
         changeColor();
       });
     }

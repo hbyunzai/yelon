@@ -13,10 +13,13 @@ NG-YUNZAI 技术栈基于 Typescript、Angular、图表G2 和 NG-ZORRO，在开�
   - [TypeScript中文文档](https://www.tslang.cn/)，虽然 TypeScript 跟 Java、C# 语法很像，这是语法基础需要认真阅读
   - [Angular中文文档](https://angular.cn/docs)，建议一定要花时间阅读文档部分，透过它基本上就可以学会 Angular；同时，也是 Angular API 接口文档
   - [NG-ZORRO中文文档](https://ng.ant.design/docs/introduce/zh)，NG-ZORRO 作为 NG-YUNZAI 的基础组件库，当你不懂某个组件时，它就是最好的文档，包含组件用法及API说明
-  - [NG-YUNZAI中文文档](https://ng.yunzainfo.com/)，包含所有 `@yelon/*` 类型的用法及API说明
+  - [NG-YUNZAI中文文档](https://ng-yunzai.com/)，包含所有 `@yelon/*` 类型的用法及API说明
   - [G2图表中文文档](https://g2.antv.vision/zh)，如果需要图表开发，则这份文档是必备
 - 辅助类
   - [Ant Design 指引文章](https://ant.design/docs/spec/introduce-cn)，学习 Ant Design 的设计理念，非常值得阅读的部分
+  - [NG-ZORRO 社区推荐](https://ng.ant.design/docs/recommendation/zh)，一份非常值得学习的清单
+  - NG-YUNZAI 入门视频（[YouTube](https://www.youtube.com/watch?v=lPnNKPuULVw&list=PLhWkvn5F8uyJRimbVZ944unzRrHeujngw)、[腾讯视频](http://v.qq.com/vplus/2c1dd5c6db4feeeea25e9827b38c171e/foldervideos/870001501oy1ijf)、[B站](https://space.bilibili.com/12207877/#/channel/detail?cid=50229)）
+  - [NG-YUNZAI 知乎专栏](https://zhuanlan.zhihu.com/ng-yunzai)
 
 ## 写在前面
 
@@ -28,48 +31,16 @@ NG-YUNZAI 技术栈基于 Typescript、Angular、图表G2 和 NG-ZORRO，在开�
 
 ### 初始化项目数据
 
-Angular 提供一个DI（依赖注入）令牌 `APP_INITIALIZER` 让应用启动时可以做一些会影响渲染结果的数据，比如：语言数据、菜单数据、用户信息数据、字典数据等，并且必须返回一个 `Promise` 异步函数，异步意味者可以做很多有趣的事，比如数据来自远程。`APP_INITIALIZER` 只会执行一次，只需要在 `AppModule` 模块注册它就行了。
+Angular 提供一个DI（依赖注入）令牌 `APP_INITIALIZER` 让应用启动时可以做一些会影响渲染结果的数据，比如：语言数据、菜单数据、用户信息数据、字典数据等，并且必须返回一个 `Observable` 异步，异步意味者可以做很多有趣的事，比如数据来自远程。`APP_INITIALIZER` 只会执行一次，只需要在 `ApplicationConfig` 模块注册它就行了。
 
-```ts
-export function StartupServiceFactory(startupService: StartupService): () => Promise<void> {
-  return () => startupService.load();
-}
+NG-YUNZAI 脚手架提供了一个如何在启动 Angular 后先加载基础数据以后才会开始渲染的样板代码 [startup.service.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/core/startup/startup.service.ts)。
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule]
-  providers: [{
-    StartupService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: StartupServiceFactory,
-      deps: [StartupService],
-      multi: true,
-    },
-  }],
-  bootstrap: [AppComponent],
-})
-export class AppModule {}
-```
+1. 提供统一注册 `provideStartup` 函数，只需要在 `app.config.ts` 注册就能生效
+2. 提供 `load()` 函数，并确保**无论请求是否成功**都必须返回一个 `Observable<void>` 以供Angular正常渲染，否则会导致Angular无法启动
 
-而 `StartupService` 如下：
+> 注：NG-YUNZAI 提供授权服务，若在请求数据接口无法授权时，可加 `ALLOW_ANONYMOUS` 来标记
 
-```ts
-@Injectable()
-export class StartupService {
-  constructor(private httpClient: HttpClient) {}
-
-  load(): Promise<void> { 
-    return new Promise((resolve) => {
-      this.httpClient.get(``).subscribe(() => {
-        resolve();
-      });
-    });
-  }
-}
-```
-
-哪怕 Http 请求失败，这里也必须执行 `resolve()`，否则应用就无法启动。而 NG-YUNZAI 提供的 [startup.service.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/core/startup/startup.service.ts) 内容更加丰富一点，对于完整的中后台而言，大多数项目中以下这些信息都可以必备的：
+ NG-YUNZAI 提供的 [startup.service.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/core/startup/startup.service.ts) 内容更加丰富一点，对于完整的中后台而言，大多数项目中以下这些信息都可以必备的：
 
 | 数据类型 | 描述 |
 |------|----|
@@ -83,7 +54,7 @@ export class StartupService {
 
 ### 业务路由
 
-当 Angular 项目正式启动后会进入渲染动作，根据当前的路由地址来决定一个页面如何渲染，从最顶层路由 [routes-routing.module.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts) 开始一层层寻找，其结构如下：
+当 Angular 项目正式启动后会进入渲染动作，根据当前的路由地址来决定一个页面如何渲染，从最顶层路由 [routes.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes.ts) 开始一层层寻找，其结构如下：
 
 ```ts
 const routes: Routes = [
@@ -92,9 +63,12 @@ const routes: Routes = [
     component: LayoutBasicComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘' } },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/routes').then(m => m.routes)
+      },
       // 业务子模块
-      // { path: 'trade', loadChildren: './trade/trade.module#TradeModule' }
+      // { path: 'trade', loadChildren: () => import('./trade/routes').then(m => m.routes) },
     ]
   },
   // 空白布局
@@ -104,17 +78,8 @@ const routes: Routes = [
     children: [
     ]
   },
-  // passport
-  {
-    path: 'passport',
-    component: LayoutPassportComponent,
-    children: [
-      { path: 'login', component: UserLoginComponent },
-    ]
-  },
-  // 单页不包裹Layout
-  { path: 'passport/callback/:type', component: CallbackComponent },
-  { path: 'exception', loadChildren: () => import('./exception/exception.module').then((m) => m.ExceptionModule) },
+  { path: '', loadChildren: () => import('./passport/routes').then(m => m.routes) },
+  { path: 'exception', loadChildren: () => import('./exception/routes').then(m => m.routes) },
   // 未命中路由全部跳转至 `exception/404` 页面上
   { path: '**', redirectTo: 'exception/404' },
 ];
@@ -122,11 +87,9 @@ const routes: Routes = [
 
 > 上述在业务模块中使用了 `LayoutBasicComponent` 基础布局、用户授权使用了 `LayoutPassportComponent` 用户授权布局以及 `LayoutBlankComponent` 空白布局，以上三种布局都可以在 [layout](https://github.com/hbyunzai/ng-yunzai/tree/master/src/app/layout) 目录下找得到。
 
+> NG-YUNZAI 也提供一些[商用主题](https://e.ng-yunzai.com/)可供选择。
+
 例如当用户访问 `/dashboard` 路由时，会先经过 `LayoutBasicComponent` -> `DashboardComponent`，最终换形成一个庞大的组件树来表示一个具体的页面。NG-YUNZAI 脚手架帮助你完成大多数工作，而一个新入门的人更多只需要关心 `DashboardComponent` 业务组件该如何实现。
-
-**什么情况下不使用懒加载？**
-
-Angular 启动是从顶层组件开始向下渲染，当遇到懒模块时会先发起脚本请求，此时会因为网络请求导致仪表盘或登录页短暂的空白，这对体验并不好。
 
 ### 用户认证与授权
 
@@ -177,10 +140,9 @@ const routes: Routes = [
 
 ### 拦截网络请求
 
-网络请求是一项非常频繁的工作，如果想优雅的在业务组件内使用网络请求动作的话，那么将服务端URL前缀、异常处理、Token 刷新等操作集中处理是必不可少的，NG-YUNZAI 脚手架提供一个 [default.interceptor.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/core/net/default.interceptor.ts) 文件。它会利用令牌 `HTTP_INTERCEPTORS` 起到一种拦截器的效果。
+网络请求是一项非常频繁的工作，如果想优雅的在业务组件内使用网络请求动作的话，那么将服务端URL前缀、异常处理、Token 刷新等操作集中处理是必不可少的，NG-YUNZAI 脚手架提供一个 [net](https://github.com/hbyunzai/ng-yunzai/tree/master/src/app/core/net) 文件。它会利用令牌 `HttpInterceptorFn` 起到一种拦截器的效果。
 
-有关以上集中处理的动作细节，请参考 [default.interceptor.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/core/net/default.interceptor.ts) 文件。
-
+有关更多细节，请参考 [default.interceptor.ts](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/core/net/default.interceptor.ts) 文件。
 
 ## IDE
 

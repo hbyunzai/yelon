@@ -7,6 +7,7 @@ DEPENDENCIES=$(node -p "
   const dvs = require('./package.json').devDependencies;
   [
     '@stomp/rx-stomp',
+    '@stomp/stompjs',
     'extend',
     'isutf8',
     'file-saver',
@@ -27,6 +28,7 @@ DEPENDENCIES=$(node -p "
     '@antv/g2',
     'echarts',
     'ng-zorro-antd',
+    '@angular/cdk',
     'ngx-tinymce',
     'ngx-countdown',
     'ng-yunzai-sts',
@@ -54,7 +56,8 @@ DEPENDENCIES=$(node -p "
     'swagger-typescript-api',
     '@github/hotkey',
     'ng-yunzai-sts',
-    'ng-yunzai-plugin-theme'
+    'ng-yunzai-plugin-theme',
+    '@ng-util/monaco-editor'
   ].map(key => key.replace(/\@/g, '\\\\@').replace(/\//g, '\\\\/').replace(/-/g, '\\\\-') + '|' + (vs[key] || dvs[key])).join('\n\t');
 ")
 VERSION=$(node -p "require('./package.json').version")

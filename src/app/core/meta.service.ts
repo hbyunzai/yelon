@@ -1,13 +1,11 @@
-import { Inject, Injectable } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Injectable, inject } from '@angular/core';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 
-import { I18NService } from './i18n/service';
 import { Meta, MetaList, MetaSearchGroup, MetaSearchGroupItem } from '../interfaces';
 import { META as ACLMeta } from '../routes/gen/acl/meta';
 import { META as AuthMeta } from '../routes/gen/auth/meta';
-import { META as BcsMeta } from '../routes/gen/bcs/meta';
-import { META as BisMeta } from '../routes/gen/bis/meta';
 import { META as CacheMeta } from '../routes/gen/cache/meta';
 import { META as ChartMeta } from '../routes/gen/chart/meta';
 import { META as CliMeta } from '../routes/gen/cli/meta';
@@ -15,7 +13,6 @@ import { META as ComponentsMeta } from '../routes/gen/components/meta';
 import { META as DocsMeta } from '../routes/gen/docs/meta';
 import { META as FormMeta } from '../routes/gen/form/meta';
 import { META as MockMeta } from '../routes/gen/mock/meta';
-import { META as SocketMeta } from '../routes/gen/socket/meta';
 import { META as ThemeMeta } from '../routes/gen/theme/meta';
 import { META as UtilMeta } from '../routes/gen/util/meta';
 
@@ -30,14 +27,12 @@ const FULLMETAS = [
   UtilMeta,
   FormMeta,
   CliMeta,
-  ThemeMeta,
-  BisMeta,
-  BcsMeta,
-  SocketMeta
+  ThemeMeta
 ] as Meta[];
 
 @Injectable({ providedIn: 'root' })
 export class MetaService {
+  private readonly i18n = inject(YUNZAI_I18N_TOKEN);
   private _platMenus!: any[];
   private _menus: any[] | null = null;
   private _type!: string;
@@ -46,11 +41,11 @@ export class MetaService {
   next: any;
   prev: any;
 
-  constructor(@Inject(YUNZAI_I18N_TOKEN) private i18n: I18NService) {
+  constructor() {
     // plat titles
     for (const g of FULLMETAS) {
       for (const item of g.list!) {
-        const curTitle = item.meta![i18n.defaultLang].title;
+        const curTitle = item.meta![this.i18n.defaultLang].title;
         item._t =
           typeof curTitle !== 'string'
             ? Object.values(curTitle!)
@@ -218,6 +213,7 @@ export class MetaService {
     });
     return ret;
   }
+
   private refPage(url: string): void {
     this.next = null;
     this.prev = null;

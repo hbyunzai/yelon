@@ -13,7 +13,7 @@ However, parameters can be preset via `angular.json`.
 {
   "schematics": {
     "ng-yunzai:module": {
-      "routing": true,
+      "routing": true
     },
     "ng-yunzai:list": {
       "skipTests": false
@@ -30,8 +30,7 @@ However, parameters can be preset via `angular.json`.
       "skipTests": false
     },
     "@schematics/angular:module": {
-      "routing": true,
-      "skipTests": false
+      "routing": true
     },
     "@schematics/angular:component": {
       "skipTests": false,

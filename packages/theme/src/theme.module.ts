@@ -31,24 +31,14 @@ const PIPES = [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe];
 
 import { DrawerHelper } from './services/drawer/drawer.helper';
 import { ModalHelper } from './services/modal/modal.helper';
-import { YUNZAI_SETTING_KEYS } from './services/settings/settings.service';
+import { YUNZAI_SETTING_DEFAULT } from './services/settings/settings.service';
 const ICONS = [BellOutline, DeleteOutline, PlusOutline, InboxOutline];
 
 // #endregion
 
 @NgModule({
-  imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule],
-  declarations: PIPES,
-  providers: [
-    {
-      provide: YUNZAI_SETTING_KEYS,
-      useValue: {
-        layout: 'layout',
-        user: 'user',
-        app: 'app'
-      }
-    }
-  ],
+  imports: [CommonModule, RouterModule, OverlayModule, NzI18nModule, ...PIPES],
+  providers: [YUNZAI_SETTING_DEFAULT],
   exports: [...PIPES, YelonLocaleModule]
 })
 export class YunzaiThemeModule {

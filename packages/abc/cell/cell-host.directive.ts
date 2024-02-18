@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, Type, ViewContainerRef } from '@angular/core';
+import { Directive, Input, OnInit, Type, ViewContainerRef, inject } from '@angular/core';
 
 import { warn } from '@yelon/util/other';
 
@@ -6,15 +6,14 @@ import { CellService } from './cell.service';
 import { CellWidgetData } from './cell.types';
 
 @Directive({
-  selector: '[cell-widget-host]'
+  selector: '[cell-widget-host]',
+  standalone: true
 })
 export class CellHostDirective implements OnInit {
-  @Input() data!: CellWidgetData;
+  private readonly srv = inject(CellService);
+  private readonly viewContainerRef = inject(ViewContainerRef);
 
-  constructor(
-    private srv: CellService,
-    private viewContainerRef: ViewContainerRef
-  ) {}
+  @Input() data!: CellWidgetData;
 
   ngOnInit(): void {
     const widget = this.data.options!.widget!;

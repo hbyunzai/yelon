@@ -10,22 +10,31 @@ type: Dev
 
 ## 如何使用
 
-想要为某些组件提供默认配置项，请在根注入器中根据注入令牌 `YUNZAI_CONFIG` 提供一个符合 `YunzaiConfig` 接口的对象，例如：
+想要为某些组件提供默认配置项，可以使用 `provideYunzai` 函数，转入一个符合 `YunzaiProvideOptions` 接口的对象，例如：
 
 ```typescript
 // global-config.module.ts
-import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { YunzaiConfig, YunzaiProvideLang } from '@yelon/util/config';
+import { ICONS } from '../style-icons';
+import { ICONS_AUTO } from '../style-icons-auto';
+
+const defaultLang: YunzaiProvideLang = {
+  abbr: 'zh-CN',
+  ng: ngLang,
+  zorro: zorroLang,
+  date: dateLang,
+  yelon: yelonLang
+};
 
 const yunzaiConfig: YunzaiConfig = {
   st: { ps: 3 },
 };
 
-@NgModule({
+export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: YUNZAI_CONFIG, useValue: yunzaiConfig },
-  ],
-})
-export class GlobalConfigModule {}
+    provideYunzai({ config: yunzaiConfig, defaultLang, icons: [...ICONS_AUTO, ...ICONS] })
+  ]
+};
 ```
 
 这些全局配置项将会被注入 `YunzaiConfigService` 当中并保存。

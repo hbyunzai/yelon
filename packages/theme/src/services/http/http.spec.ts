@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpParams, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { of, catchError } from 'rxjs';
 
-import { YunzaiThemeHttpClientConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { YunzaiThemeHttpClientConfig, provideYunzaiConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -23,7 +24,7 @@ describe('theme: http.client', () => {
   function createModule(config?: YunzaiThemeHttpClientConfig): void {
     const providers: any[] = [_HttpClient];
     if (config) {
-      providers.push({ provide: YUNZAI_CONFIG, useValue: { themeHttp: config } });
+      providers.push(provideYunzaiConfig({ themeHttp: config }));
     }
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -686,6 +687,14 @@ describe('theme: http.client', () => {
       tick();
       const ret = backend.expectOne(() => true) as TestRequest;
       expect(ret.request.urlWithParams.length).toBeGreaterThan(URL.length + 15);
+    }));
+    it('should be working second-level timestamps', fakeAsync(() => {
+      createModule({ dateValueHandling: 'timestampSecond' });
+      const now = new Date();
+      http.get(URL, { a: now }).subscribe();
+      tick();
+      const ret = backend.expectOne(() => true) as TestRequest;
+      expect(ret.request.urlWithParams).toContain(`${Math.trunc(+now / 1000)}`);
     }));
     it('should be ignore null values', fakeAsync(() => {
       createModule({ nullValueHandling: 'ignore' });

@@ -15,6 +15,8 @@ import {YunzaiFriendGroupProps,YunzaiFriendGroup} from "@yelon/bcs/yunzai-friend
 import {YunzaiRoleTreeProps,YunzaiRoleTree} from "@yelon/bcs/yunzai-role-tree";
 import {YunzaiTableUserProps,YunzaiTableUser} from "@yelon/bcs/yunzai-table-user";
 import {YunzaiContactProps} from "@yelon/bcs/yunzai-contact";
+import {YunzaiContactModule} from "@yelon/bcs/yunzai-contact";
+
 
 @Component({
     selector: `app-demo`,
@@ -34,6 +36,8 @@ import {YunzaiContactProps} from "@yelon/bcs/yunzai-contact";
     >
     </yunzai-contact>
     `,
+  standalone:true,
+  imports:[YunzaiContactModule]
 })
 export class DemoComponent {
     deptTree: YunzaiDeptTreeProps = {

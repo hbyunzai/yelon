@@ -40,7 +40,7 @@ describe('acl: guard', () => {
             data: { guard: { role: ['admin'] } } as ACLGuardData
           }
         ]),
-        YelonACLModule.forRoot()
+        YelonACLModule
       ]
     });
     srv = TestBed.inject<ACLGuardService>(ACLGuardService);

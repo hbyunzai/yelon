@@ -1,6 +1,6 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
+import {  DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -66,9 +66,10 @@ export interface YunzaiThemeBtnType extends ThemeBtnType {
       <!--      </div>-->
     </nz-dropdown-menu>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // eslint-disable-next-line prettier/prettier
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class YunzaiThemBtnComponent implements OnInit, OnDestroy {
+export class YunzaiThemeBtnComponent implements OnInit, OnDestroy {
   private theme = 'default';
   @Input() types: YunzaiThemeBtnType[] = [
     { key: 'default', text: 'theme.default', color: '#2163ff' },

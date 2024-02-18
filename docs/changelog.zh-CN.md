@@ -13,311 +13,98 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
-## [16.4.6](https://github.com/hbyunzai/yelon/compare/16.4.5...16.4.6) (2023-11-29)
 
+# [17.2.0](https://github.com/hbyunzai/yelon/compare/17.1.0...17.2.0) (2024-02-02)
+
+### Bug Fixes
+
+* 修复Chrome 121色块 ([#1761](https://github.com/hbyunzai/yelon/issues/1761)) ([6861343](https://github.com/hbyunzai/yelon/commit/6861343bbe3219dd588cb7ffc062984fa8a3a64e))
+* **form:widget:array:** 修复移除时导致重复性通知 ([#1758](https://github.com/hbyunzai/yelon/issues/1758)) ([4957399](https://github.com/hbyunzai/yelon/commit/49573999a63796a93a63eae63f392ff4da994e3d))
 
 ### Features
 
-* **bcs:** fix iframe components  ([21d22d9](https://github.com/hbyunzai/yelon/commit/21d22d92d7703e357f7ae20ac49a033eebdbedab))
+* **abc:st:** 新增 `trackBy` 属性 ([#1760](https://github.com/hbyunzai/yelon/issues/1760)) ([f4b2fec](https://github.com/hbyunzai/yelon/commit/f4b2feca272139ad70b7814e3ce5f407e07ef931))
+* **cache:** 新增 `CacheInterceptor` 本地缓存拦截器 ([#1576](https://github.com/hbyunzai/yelon/issues/1576)) ([837f4f0](https://github.com/hbyunzai/yelon/commit/837f4f0f7ac90da9912be8c6b3a1d7aa0c22b220))
 
 
-## [16.4.5](https://github.com/hbyunzai/yelon/compare/16.4.4...16.4.5) (2023-11-29)
-
+# [17.1.0](https://github.com/hbyunzai/yelon/compare/17.0.5...17.1.0) (2024-01-20)
 
 ### Bug Fixes
 
-* fix ghpage ([318729d](https://github.com/hbyunzai/yelon/commit/318729de5ee073f7d754262ec9e550fbadba02ed))
-
+* **abc:reuse-tab:** 修复保持打开顺序 ([#1743](https://github.com/hbyunzai/yelon/issues/1743)) ([e17f5e7](https://github.com/hbyunzai/yelon/commit/e17f5e7813ff1da26ce4bada81c5b098bc190b8c))
+* **abc:st:** 纠正空值语法错误 ([#1744](https://github.com/hbyunzai/yelon/issues/1744)) ([69bb0bb](https://github.com/hbyunzai/yelon/commit/69bb0bb432b100cf8a6c5ec87e0fd28dd2923d7d))
 
 ### Features
 
-* **bcs:** 增加“外部链接页面”组件 ([3fb4ccb](https://github.com/hbyunzai/yelon/commit/3fb4ccb3ff800b09b85a72d0b3ebe27ffb533a8a))
+* 新增越南语 ([#1751](https://github.com/hbyunzai/yelon/issues/1751)) ([385dc1c](https://github.com/hbyunzai/yelon/commit/385dc1c716327e899f5e61d9823c3deba26ee4bf))
+* **cli:** 新增 `withViewTransitions` ([#1736](https://github.com/hbyunzai/yelon/issues/1736)) ([c03a797](https://github.com/hbyunzai/yelon/commit/c03a797c9fb2405acb8455e9c236f23296577c0e))
+* **form:** 新增 `setDisabled`, `setRequired` 方法 ([#1733](https://github.com/hbyunzai/yelon/issues/1733)) ([581f197](https://github.com/hbyunzai/yelon/commit/581f197be67e33189aee44b31465fb8b6d21c640))
+* **theme:layout-default:** 新增 `hideEmptyChildren` ([#1746](https://github.com/hbyunzai/yelon/issues/1746)) ([b6ab5f0](https://github.com/hbyunzai/yelon/commit/b6ab5f01c18d1668989925377da84b467aa8ee27))
+* **abc:auto-focus:** 优化代码 ([#1753](https://github.com/hbyunzai/yelon/issues/1753)) ([7032139](https://github.com/hbyunzai/yelon/commit/7032139472381e5f4619dc0b71c31e43a986965b))
+* **auth:** 移除 `ignores` 默认值 ([#1745](https://github.com/hbyunzai/yelon/issues/1745)) ([e473ff4](https://github.com/hbyunzai/yelon/commit/e473ff4efc4299a7f2cb2e96dd44fdefedae8e82))
+* 支持 Standalone ([#1750](https://github.com/hbyunzai/yelon/issues/1750)) ([7940464](https://github.com/hbyunzai/yelon/commit/7940464f69f93f3a1c3013a916d29f73146516d9))
 
 
-## 16.4.4 (2023-11-20)
+## <small>17.0.5 (2023-12-25)</small>
 
-* fix(docs): fix package ([52d70d2](https://github.com/hbyunzai/yelon/commit/52d70d2))
-
-
-## 16.4.3 (2023-11-20)
-
-* fix(ci): fix github workflow ([dc51831](https://github.com/hbyunzai/yelon/commit/dc51831))
+* fix(abc:st): 修复导出Excel不匹配 (#1740) ([a46f2ee](https://github.com/hbyunzai/yelon/commit/a46f2ee)), closes [#1740](https://github.com/hbyunzai/yelon/issues/1740)
+* fix(form:array): 修复无效 `trackBy` (#1741) ([3e55228](https://github.com/hbyunzai/yelon/commit/3e55228)), closes [#1741](https://github.com/hbyunzai/yelon/issues/1741)
 
 
-## 16.4.2 (2023-11-20)
+## <small>17.0.4 (2023-12-20)</small>
 
-* chore: remove plugin-default-language.spec ([7a6810e](https://github.com/hbyunzai/yelon/commit/7a6810e))
-* chore: upgrade ng-zorro-antd ([2377713](https://github.com/hbyunzai/yelon/commit/2377713))
-* feat(abc:qr): will be removed in 18.0.0 ([8f4977f](https://github.com/hbyunzai/yelon/commit/8f4977f))
-* perf(theme:modal): perf code ([c79b808](https://github.com/hbyunzai/yelon/commit/c79b808))
-* docs: update demo ([fc4994d](https://github.com/hbyunzai/yelon/commit/fc4994d))
-* docs: update demo ([936bfa5](https://github.com/hbyunzai/yelon/commit/936bfa5))
-* docs: update qa ([7d3d352](https://github.com/hbyunzai/yelon/commit/7d3d352))
-* fix(abc): fix reuse-tab spec ([5f22f80](https://github.com/hbyunzai/yelon/commit/5f22f80))
-* fix(scripts): fix npm mirror sync ([7e9e3ca](https://github.com/hbyunzai/yelon/commit/7e9e3ca))
-* feat(bis): add analysis field ([1416c16](https://github.com/hbyunzai/yelon/commit/1416c16))
+* fix(abc:se): 修复响应式表单无法自动识别必填项 (#1737) ([a2ca109](https://github.com/hbyunzai/yelon/commit/a2ca109)), closes [#1737](https://github.com/hbyunzai/yelon/issues/1737)
+* fix(abc:sv): 修复有边框时底部间距问题 (#1732) ([b5bea4e](https://github.com/hbyunzai/yelon/commit/b5bea4e)), closes [#1732](https://github.com/hbyunzai/yelon/issues/1732)
+* fix(util:pipe:filter): 修复应该使用 `pure` (#1735) ([f374209](https://github.com/hbyunzai/yelon/commit/f374209)), closes [#1735](https://github.com/hbyunzai/yelon/issues/1735)
+* fix(cli): 修复拼写错误 'providers' (#1731) ([5eafa8f](https://github.com/hbyunzai/yelon/commit/5eafa8f)), closes [#1731](https://github.com/hbyunzai/yelon/issues/1731)
 
 
+## <small>17.0.3 (2023-12-08)</small>
 
-## 16.4.0 (2023-11-16)
-
-* fix(all): fix layout EOF ([33184c3](https://github.com/hbyunzai/yelon/commit/33184c3))
-* fix(bis): fix layour tag ([346df96](https://github.com/hbyunzai/yelon/commit/346df96))
-* fix(bis): fix tile template ([aebc946](https://github.com/hbyunzai/yelon/commit/aebc946))
-* fix(cli): missing `fileReplacements` in Angular16 ([d99464c](https://github.com/hbyunzai/yelon/commit/d99464c))
-* fix(form): fix `visibleIf` to correctly trigger `reset` ([2e2f505](https://github.com/hbyunzai/yelon/commit/2e2f505))
-* fix(form): fix render UI can't be inherit ([7073027](https://github.com/hbyunzai/yelon/commit/7073027))
-* fix(guard): update gurad version to angular16 ([61554a2](https://github.com/hbyunzai/yelon/commit/61554a2))
-* fix(token): fix @ token to &#64; ([3c0cc74](https://github.com/hbyunzai/yelon/commit/3c0cc74)), closes [#64](https://github.com/hbyunzai/yelon/issues/64)
-* chore: add `defaultProject` in `schema.json` ([c6526fc](https://github.com/hbyunzai/yelon/commit/c6526fc))
-* chore: chore deploy-site.yml ([2d9ad02](https://github.com/hbyunzai/yelon/commit/2d9ad02))
-* chore: chore eslint rules ([118331e](https://github.com/hbyunzai/yelon/commit/118331e))
-* chore: correct Docker configuration ([22f2c4c](https://github.com/hbyunzai/yelon/commit/22f2c4c))
-* chore: correct mirror gitee ([be5b9ca](https://github.com/hbyunzai/yelon/commit/be5b9ca))
-* chore: correctly use local language in document site ([d2d40b0](https://github.com/hbyunzai/yelon/commit/d2d40b0))
-* chore: fix shallow update not allowed ([4b1b4a8](https://github.com/hbyunzai/yelon/commit/4b1b4a8))
-* chore: lint code ([adbfa5b](https://github.com/hbyunzai/yelon/commit/adbfa5b))
-* feat: add provide function ([fc06ef9](https://github.com/hbyunzai/yelon/commit/fc06ef9))
-* feat(abc:onboarding): add `key` ([c48dcf3](https://github.com/hbyunzai/yelon/commit/c48dcf3))
-* feat(abc:theme): add `.tag-wrap-list-spacing` class ([dedf854](https://github.com/hbyunzai/yelon/commit/dedf854))
-* fix(abc:onboarding): correct dark style ([97d983a](https://github.com/hbyunzai/yelon/commit/97d983a))
-* fix(abc:st): correct width misalignment in export excel ([c13ff9c](https://github.com/hbyunzai/yelon/commit/c13ff9c))
-* fix(form:array): fix invalid ui in `ui` schema ([00097a4](https://github.com/hbyunzai/yelon/commit/00097a4))
-* fix(form:select): correct trigger onSearch in reset when set value ([7806d1a](https://github.com/hbyunzai/yelon/commit/7806d1a))
-* style: fix `declaration-block-no-redundant-longhand-properties` ([f1ea558](https://github.com/hbyunzai/yelon/commit/f1ea558))
-
-## [16.3.9](https://github.com/hbyunzai/yelon/compare/16.3.8...16.3.9) (2023-11-09)
+* fix(theme:i18n): 纠正 `i18n` 管道参数类型不匹配 (#1723) ([bdf0e62](https://github.com/hbyunzai/yelon/commit/bdf0e62)), closes [#1723](https://github.com/hbyunzai/yelon/issues/1723)
+* fix(cli): 纠正生成NG-YUNZAI存在空值问题 (#1724) ([c88c9f2](https://github.com/hbyunzai/yelon/commit/c88c9f2)), closes [#1724](https://github.com/hbyunzai/yelon/issues/1724)
 
 
-### Bug Fixes
+## <small>17.0.2 (2023-11-27)</small>
 
-* **bis:analysis:** fix guard ([a22c4e7](https://github.com/hbyunzai/yelon/commit/a22c4e7fb75a831fdc5b386a203ffcd6920a9a81))
+* fix(cli): fix cannot find module `@angular/cdk/schematics` (#1721) ([49a84a1](https://github.com/hbyunzai/yelon/commit/49a84a1)), closes [#1721](https://github.com/hbyunzai/yelon/issues/1721)
 
+## <small>17.0.1 (2023-11-26)</small>
 
-## [16.3.8](https://github.com/hbyunzai/yelon/compare/16.3.7...16.3.8) (2023-11-08)
-
-## [16.3.7](https://github.com/hbyunzai/yelon/compare/16.3.6...16.3.7) (2023-11-08)
-
-* **fix(guard):**: fix link guard ([10b5cb7](https://github.com/hbyunzai/yelon/commit/10b5cb7))
+* fix(cli): 修复不支持 node 20 版本 (#1719) ([df40bb3](https://github.com/hbyunzai/yelon/commit/df40bb3)), closes [#1719](https://github.com/hbyunzai/yelon/issues/1719)
 
 
-## [16.3.6](https://github.com/hbyunzai/yelon/compare/16.3.5...16.3.6) (2023-11-06)
+## 17.0.0 (2023-11-26)
 
+### Breaking Changes
 
-### Bug Fixes
-
-* **bis:** guard wasn't exported ([23e6644](https://github.com/hbyunzai/yelon/commit/23e664475a7e4502bb83d6d8ff23b55a87ff8e3a))
-
-
-## [16.3.5](https://github.com/hbyunzai/yelon/compare/16.3.4...16.3.5) (2023-11-06)
-
+* refactor(form): 重构低频率小部件为可选导入 (#1668) ([8ab0e82](https://github.com/hbyunzai/yelon/commit/8ab0e82)), closes [#1668](https://github.com/hbyunzai/yelon/issues/1668)
+* build: 移除 `networkEnv` 插件，使用 [nnrm](https://github.com/YunYouJun/nnrm/blob/main/README.zh-CN.md) 替代 (#1680) ([b7dbc68](https://github.com/hbyunzai/yelon/commit/b7dbc68)), closes [#1680](https://github.com/hbyunzai/yelon/issues/1680)
+* feat(acl): 移除 `forRoot` (#1690) ([4472d48](https://github.com/hbyunzai/yelon/commit/4472d48)), closes [#1690](https://github.com/hbyunzai/yelon/issues/1690)
 
 ### Features
 
-* **bis:** add analysis plugins ([4ceddf8](https://github.com/hbyunzai/yelon/commit/4ceddf8788f6a822ab9b70386a7048d9e602ecbf))
-* **bis:** add analysis plugins ([52e9631](https://github.com/hbyunzai/yelon/commit/52e9631d06dd87be2488f60374b1cb344edb4e90))
-
-## [16.3.4](https://github.com/hbyunzai/yelon/compare/16.3.3...16.3.4) (2023-10-16)
-
-
-### Bug Fixes
-
-* **auth:** fix i18n service queryList when haven't token ([e3eeb62](https://github.com/hbyunzai/yelon/commit/e3eeb6240ca7a0fff8f947a2a22b75d274dced8d))
-* **interceptor:** fix logger ([7916e84](https://github.com/hbyunzai/yelon/commit/7916e84ac8f3d65e438c40e89b2fef9c1e3ff5eb))
-
-
-## [16.3.3](https://github.com/hbyunzai/yelon/compare/16.3.2...16.3.3) (2023-10-12)
-
-
-### Bug Fixes
-
-* **i18n:** remove ?_allow_anonymous ([9d3a707](https://github.com/hbyunzai/yelon/commit/9d3a70750fbc58e9f0ccaa6aeff5f14a069843be))
-
-
-## [16.3.2](https://github.com/hbyunzai/yelon/compare/16.3.1...16.3.2) (2023-10-12)
-
+* feat(cli): 支持多重项目下使用 `ng add ng-yunzai` (#1664) ([e5476e2](https://github.com/hbyunzai/yelon/commit/e5476e2)), closes [#1664](https://github.com/hbyunzai/yelon/issues/1664)
+* feat(theme): 新增 `provideYunzai` (#1697) ([4311426](https://github.com/hbyunzai/yelon/commit/4311426)), closes [#1697](https://github.com/hbyunzai/yelon/issues/1697)
+* feat(abc:cell): 新增 `provideCellWidgets` (#1700) ([7ea0daf](https://github.com/hbyunzai/yelon/commit/7ea0daf)), closes [#1700](https://github.com/hbyunzai/yelon/issues/1700)
+* feat(abc:reuse-tab): 新增 `provideReuseTabConfig` (#1707) ([2f85357](https://github.com/hbyunzai/yelon/commit/2f85357)), closes [#1707](https://github.com/hbyunzai/yelon/issues/1707)
+* feat(abc:st): 新增 `provideSTWidgets` (#1701) ([065316a](https://github.com/hbyunzai/yelon/commit/065316a)), closes [#1701](https://github.com/hbyunzai/yelon/issues/1701)
+* feat(theme:_httpclient): 新增 `timestampSecond` 支持 10 位时间戳 (#1670) ([051b087](https://github.com/hbyunzai/yelon/commit/051b087)), closes [#1670](https://github.com/hbyunzai/yelon/issues/1670)
+* feat(theme:pipe:date): 支持全局配置格式化字符串 (#1711) ([b3b93fa](https://github.com/hbyunzai/yelon/commit/b3b93fa)), closes [#1711](https://github.com/hbyunzai/yelon/issues/1711)
+* feat: 新增 `provideYunzaiConfig` (#1689) ([b9e0fad](https://github.com/hbyunzai/yelon/commit/b9e0fad)), closes [#1689](https://github.com/hbyunzai/yelon/issues/1689)
+* feat(auth): 新增 `provideAuth` (#1704) ([c0c731b](https://github.com/hbyunzai/yelon/commit/c0c731b)), closes [#1704](https://github.com/hbyunzai/yelon/issues/1704)
+* feat(form): 新增 `provideSFConfig` (#1702) ([2404802](https://github.com/hbyunzai/yelon/commit/2404802)), closes [#1702](https://github.com/hbyunzai/yelon/issues/1702)
+* feat(mock): 新增 `mockInterceptor` (#1698) ([da051b2](https://github.com/hbyunzai/yelon/commit/da051b2)), closes [#1698](https://github.com/hbyunzai/yelon/issues/1698)
+* feat(mock): 支持异步返回，例如 `Promise`、`Observable` (#1686) ([d7980db](https://github.com/hbyunzai/yelon/commit/d7980db)), closes [#1686](https://github.com/hbyunzai/yelon/issues/1686)
+* feat(mock): 新增 `provideYelonMockConfig` (#1695) ([683ab23](https://github.com/hbyunzai/yelon/commit/683ab23)), closes [#1695](https://github.com/hbyunzai/yelon/issues/1695)
+* feat(testing): 新增 `delay` function (#1682) ([f83ea57](https://github.com/hbyunzai/yelon/commit/f83ea57)), closes [#1682](https://github.com/hbyunzai/yelon/issues/1682)
+* build: support pnpm and update yarn to `4` (#1678) ([b904b9a](https://github.com/hbyunzai/yelon/commit/b904b9a)), closes [#1678](https://github.com/hbyunzai/yelon/issues/1678)
 
 ### Bug Fixes
 
-* **i18n:** fix i18n prefix url ([1a7d3dd](https://github.com/hbyunzai/yelon/commit/1a7d3dd5fdd97b6d3c85ad879da6dac8829f2986))
+* fix(theme:preloader): 修复启动动画存在懒加载时空白问题 (#1691) ([f09c324](https://github.com/hbyunzai/yelon/commit/f09c324)), closes [#1691](https://github.com/hbyunzai/yelon/issues/1691)
+* fix(cli:update): 修复自动追加 `@_mock` 路径 (#1675) ([d014b54](https://github.com/hbyunzai/yelon/commit/d014b54)), closes [#1675](https://github.com/hbyunzai/yelon/issues/1675)
 
+## 历史版本
 
-## [16.3.1](https://github.com/hbyunzai/yelon/compare/16.3.0...16.3.1) (2023-10-11)
-
-
-### Bug Fixes
-
-* **interceptor:** intercept i18n request ([880dc5a](https://github.com/hbyunzai/yelon/commit/880dc5a3356ae02e74c8438c6aa6e08702ae5312))
-
-
-# [16.3.0](https://github.com/hbyunzai/yelon/compare/16.2.5...16.3.0) (2023-09-28)
-
-
-### Bug Fixes
-
-* **abc:pdf:** fix ignore dependency `pdfjs-dist` ([b804bb1](https://github.com/hbyunzai/yelon/commit/b804bb17a6176e7ad168aaa412cada8b6be52abc))
-* **form:select:** fix ignore reset option data when set `onSearch` ([68d194e](https://github.com/hbyunzai/yelon/commit/68d194ec81a587a32af7b246d31947834e6b141b))
-* **scripts:** fix version script ([d0e6b69](https://github.com/hbyunzai/yelon/commit/d0e6b69e25ccc8ebe0b3c883d9ffd3bb288bfac8))
-* **theme:http:** fix missing `content` of `HttpOptions` ([e0592bd](https://github.com/hbyunzai/yelon/commit/e0592bdad298e5fb1d5230e600875d15fc157ffe))
-
-
-### Features
-
-* **abc:cell:** add `cell` component ([#1530](https://github.com/hbyunzai/yelon/issues/1530)) ([e3da675](https://github.com/hbyunzai/yelon/commit/e3da675917abb5ba50b70b8b778d31d770a4df04))
-* **abc:page-header:** add `titleSub` property ([8fec9d7](https://github.com/hbyunzai/yelon/commit/8fec9d7a890a01f5fbd822c12f279beec297b1c2))
-* **abc:st:** add `tooltip` in tag or badge ([92a7032](https://github.com/hbyunzai/yelon/commit/92a70320745dc003794a94ca2d765d318ac8ab73))
-* **abc:sv:** add `bordered` property ([360083c](https://github.com/hbyunzai/yelon/commit/360083c9faf04052e18a74d3f1da7f4adb9dbece))
-* **cli:** add `bindToComponentInputs` of `ng add` ([5cf8c87](https://github.com/hbyunzai/yelon/commit/5cf8c870c1a40d9b5c65b62f9c0e4a4b3abee01d))
-* **theme:drawer:** add `closeAll`, `openDrawers` method ([937cf39](https://github.com/hbyunzai/yelon/commit/937cf3914f79cdd0dd56e828bd4e3608b40b6f67))
-* **theme:modal:** add size support percentage ([514e6c2](https://github.com/hbyunzai/yelon/commit/514e6c24e8215ec1edf244bdead2492bab81668a))
-
-
-## [16.2.5](https://github.com/hbyunzai/yelon/compare/16.2.4...16.2.5) (2023-08-28)
-
-
-### Bug Fixes
-
-* **i18n:** remove i18n data from cache ([56fc04d](https://github.com/hbyunzai/yelon/commit/56fc04d8fbb18a025b802eeb2345af0287b5c8c0))
-
-
-## [16.2.4](https://github.com/hbyunzai/yelon/compare/16.2.3...16.2.4) (2023-08-25)
-
-
-### Bug Fixes
-
-* **bcs:** contact not emit ([be30cbe](https://github.com/hbyunzai/yelon/commit/be30cbee96e079d93762592c09e8a3709a0f5a1c))
-* **i18n:** nullObject is {} ([2202e26](https://github.com/hbyunzai/yelon/commit/2202e266a994d59ad4ccdc37c8b3971428e58a98))
-* **i18n:** nullObject is {} ([e1c54e2](https://github.com/hbyunzai/yelon/commit/e1c54e25061aae3de72205d6ae0342a3763b1a79))
-
-
-## [16.2.3](https://github.com/hbyunzai/yelon/compare/16.2.2...16.2.3) (2023-08-24)
-
-
-### Bug Fixes
-
-* **bis:** fix destroy ([9e7dabc](https://github.com/hbyunzai/yelon/commit/9e7dabc88d1d719008d8b3261a0a8cd24ff7cc7b))
-* **bis:** fix error import ([ccdc0f5](https://github.com/hbyunzai/yelon/commit/ccdc0f5ea323f07adb15b0f6872be4021b3bd1a2))
-
-
-## [16.2.2](https://github.com/hbyunzai/yelon/compare/16.2.1...16.2.2) (2023-08-24)
-
-blank version
-
-## [16.2.1](https://github.com/hbyunzai/yelon/compare/16.2.0...16.2.1) (2023-08-24)
-
-
-### Bug Fixes
-
-* **all:** fix destroy subject ([dda3f3d](https://github.com/hbyunzai/yelon/commit/dda3f3d86e5c2c1eefff0b302e0ca07e0052a0dc))
-* **layout:** unuse bug ([4eb15f2](https://github.com/hbyunzai/yelon/commit/4eb15f2b4cccddaac579e6a54feae506c2e39086))
-
-
-# [16.2.0](https://github.com/hbyunzai/yelon/compare/16.0.5...16.2.0) (2023-08-24)
-
-
-### Bug Fixes
-
-* **abc:onboarding:** fix `ComponentFactoryResolver` ([76e3b09](https://github.com/hbyunzai/yelon/commit/76e3b09f4ba5a41ea598eae9401dbb07095f490d))
-* **abc:reuse-tab:** fix cache ([ac4632f](https://github.com/hbyunzai/yelon/commit/ac4632f5158b23f7381eb38096c2a3d53491e4e5))
-* **abc:reuse-tab:** fix missing export cache ([9baeb77](https://github.com/hbyunzai/yelon/commit/9baeb77f9199dada6ac113d3f7eee0e000e50c3f))
-* **auth:cookie:** fix cookie expires ([ddc8fb6](https://github.com/hbyunzai/yelon/commit/ddc8fb69fb69b6c9c6dce073b79003b84c5408e8))
-* **bcs:contact:** fix style ([a5f6bc5](https://github.com/hbyunzai/yelon/commit/a5f6bc5541cbecbd2c14ad04c8607d302767646e))
-* **bcs:** fix tag name ([bd895ee](https://github.com/hbyunzai/yelon/commit/bd895ee3f3c83ed7021adce99c470983f757a81c))
-* **chat:timeline:** fix `y2` to be optional ([e6c0d4e](https://github.com/hbyunzai/yelon/commit/e6c0d4e546054436b16f8c14a6f7b96151259f47))
-* **cli:** remove `skipTests` from generating module ([825ac78](https://github.com/hbyunzai/yelon/commit/825ac7832caae31852eb8a6c0973f8b58f9fcea8))
-* **cli:** remove `stylelint-config-prettier` ([571fa7f](https://github.com/hbyunzai/yelon/commit/571fa7f35ba1c20ee1d37ec8ac1c9414a7766f90))
-* fix misalignment of `col` placeholders in `se`, `sv`, `sg` ([62bc221](https://github.com/hbyunzai/yelon/commit/62bc22170c3de08d6dabfac38a10a14f22edbf3d))
-* **layoout:** fix layout-display.service.ts channel ([e32fab9](https://github.com/hbyunzai/yelon/commit/e32fab913354d6099b1cabba32fd2d6058398ebe))
-* **layout:** fix destroy can't find ([c4f189e](https://github.com/hbyunzai/yelon/commit/c4f189ec1f6e133b4a85ceade01585b911e4fea4))
-* **se:** fix spell ([ecfb7b0](https://github.com/hbyunzai/yelon/commit/ecfb7b0ec492f903fd7ce7089192e6c663f96f3a))
-* **theme:modal:** removed `nzComponentParams ([6507ead](https://github.com/hbyunzai/yelon/commit/6507ead349cfaf6f4184dc601a5e8b0609d2483a))
-* **theme:table:** fix table image spacing ([dadeddc](https://github.com/hbyunzai/yelon/commit/dadeddcb9c1b5ec7aaf02c6898498b46b8d98fcc))
-* **theme:title:** fix ignore empty title ([f3d35d8](https://github.com/hbyunzai/yelon/commit/f3d35d8c35a4fea77b45cbc5623c13bc75bae0b1))
-* **theme:** fix ant-btn preserve white spaces when is link type ([6249f0e](https://github.com/hbyunzai/yelon/commit/6249f0e205f7f1f8cd3df49d40d52e57856554a8))
-
-
-### Features
-
-* **abc:reuse-tab:** support custom cache data ([4e4171b](https://github.com/hbyunzai/yelon/commit/4e4171b3a72a14407243d33eca340ef5558a6db3))
-* **abc:st:** add `onCell`, support colSpan and rowSpan merging ([c219e8c](https://github.com/hbyunzai/yelon/commit/c219e8cc5e0ff04f91768e3ce5f84865a9cee0de))
-* **abc:st:** button support function method of `icon`, `className` ([486a077](https://github.com/hbyunzai/yelon/commit/486a07760b22de7064a37e886c55980e34319962))
-* **bcs:table:** add ids params ([e71e344](https://github.com/hbyunzai/yelon/commit/e71e3440d5aad453972476e7806a3fa94fdc9fa5))
-* **bis:** add show all/mine menu config ([b6073ae](https://github.com/hbyunzai/yelon/commit/b6073aea60ec9a7fc8b86ee7cdd837434dcd870e))
-* **theme:layout-default:** add `fetching` property ([0acbfdf](https://github.com/hbyunzai/yelon/commit/0acbfdffbb6f33f9e7f776d3d47764a30e4bfc69))
-* **theme:modal:** support drag ([4cb5065](https://github.com/hbyunzai/yelon/commit/4cb5065fc1a4054ce3717865dbdbaa6bcd219b7d))
-
-
-## [16.0.5](https://github.com/hbyunzai/yelon/compare/16.0.4...16.0.5) (2023-08-16)
-
-
-### Bug Fixes
-
-* **bis:** fix hide menu children and header type key ([7c21452](https://github.com/hbyunzai/yelon/commit/7c214528eabaa80b2fccadc8fddf165e54e81c72))
-
-
-## [16.0.4](https://github.com/hbyunzai/yelon/compare/16.0.3...16.0.4) (2023-08-16)
-
-
-### Bug Fixes
-
-* **bis:** fix hide menu children and header type key ([c6595ad](https://github.com/hbyunzai/yelon/commit/c6595ad510f7e9730658c57d1a967c9e3b7ab55a))
-
-
-## [16.0.3](https://github.com/hbyunzai/yelon/compare/16.0.2...16.0.3) (2023-08-15)
-
-
-### Bug Fixes
-
-* **auth:** fix auth cache sort ([150aad4](https://github.com/hbyunzai/yelon/commit/150aad460810fad104a8d2fe9ed608d4d8bbab3d))
-* **bis:** fix token key to access_token,remove all cache ([a520ae1](https://github.com/hbyunzai/yelon/commit/a520ae159511e832121a1740bec60eeaa196af51))
-
-
-### Features
-
-* **bcd:** add markdown doc ([e8de48d](https://github.com/hbyunzai/yelon/commit/e8de48d2d90f977e8472257c2d52ca86b48c15e9))
-* **bcs:** add contact comp ([e722890](https://github.com/hbyunzai/yelon/commit/e722890bcde219fc5c261942e2d200fed80cccb8))
-* **bcs:** add contact comp ([ea5e83f](https://github.com/hbyunzai/yelon/commit/ea5e83f0545a4052092972e2ee419ed08183b6a4))
-* **bcs:** add dept tree comp ([03b14bb](https://github.com/hbyunzai/yelon/commit/03b14bbf73e393f55f59ac47f8669d3be80948f8))
-* **bcs:** add table user and friend comps ([38c53e5](https://github.com/hbyunzai/yelon/commit/38c53e50946d4b574a12c2470c9c5ca95278a8d6))
-* **bcs:** add yunzai table user comp ([0839cf4](https://github.com/hbyunzai/yelon/commit/0839cf47d76930b5bb425369694763a45834c261))
-* **bcs:** add yunzai-dormitory-tree ([1dc9fdf](https://github.com/hbyunzai/yelon/commit/1dc9fdff01063c22d8a7803c421b87b3b5e9a08c))
-* **bcs:** add yunzai-role-tree ([7bb5f3f](https://github.com/hbyunzai/yelon/commit/7bb5f3fb25cd7ea21d844ff7eb45d33e04fa27b6))
-* **bis:** add utils ([eb88288](https://github.com/hbyunzai/yelon/commit/eb88288a7fbf425eff3250884d64a3f76c512614))
-
-
-### Reverts
-
-* Revert "merge" ([eae9b01](https://github.com/hbyunzai/yelon/commit/eae9b016f39fa03b32eac35accd5cd9a207e93b1))
-
-
-## [16.0.2](https://github.com/hbyunzai/yelon/compare/16.0.1...16.0.2) (2023-06-28)
-
-
-### Bug Fixes
-
-* **stylelint:** downgrade dependency ([be448b0](https://github.com/hbyunzai/yelon/commit/be448b0c92229a80bd1b7f79e5e0ec97b953cbde))
-
-
-## [16.0.1](https://github.com/hbyunzai/yelon/compare/15.2.6...16.0.1) (2023-06-28)
-
-
-### Bug Fixes
-
-* **stylelint:** fix stylelint version ([ac69beb](https://github.com/hbyunzai/yelon/commit/ac69beb3ae6dc373f9c670de57ffa7191ebadef6))
-
-
-
-# [16.0.0](https://github.com/hbyunzai/yelon/compare/15.2.6...16.0.0) (2023-06-27)
-
-
-### Bug Fixes
-
-* **abc:st:** fix error row class in fixed column title cell ([861af0d](https://github.com/hbyunzai/yelon/commit/861af0d9a9d0e39879eab797e5fcdc63198cb306))
-* **example:** fix entry comp ([31ec14d](https://github.com/hbyunzai/yelon/commit/31ec14d64cf6b2892b6d89f54b71a98624be3dd6))
-* **form:** fix interiting references to other of ui ([4d116db](https://github.com/hbyunzai/yelon/commit/4d116dbfe88dc8f1474cccdac98b78eef16ce638))
-
-
-### Features
-
-* **scripts:** add package upversion js ([f02abe0](https://github.com/hbyunzai/yelon/commit/f02abe0049675a02f82dd59c4f47084a7d0d20c7))
-
+历史版本的更新记录可以在 [Github](https://github.com/hbyunzai/ng-yunzai/releases) 查看。

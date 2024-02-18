@@ -9,30 +9,32 @@ title:
 
 ```ts
 import {Component} from "@angular/core";
-import {YunzaiContactService} from "@yelon/bcs/yunzai-contact";
 import {of} from "rxjs"
+import {YunzaiContactService,YunzaiContactModule} from "@yelon/bcs/yunzai-contact";
 
 @Component({
-    selector: `app-demo`,
-    template: `
+  selector: `app-demo`,
+  template: `
       <button nz-button nzType="primary" (click)="show()">show</button>
     `,
+  standalone: true,
+  imports: [YunzaiContactModule]
 })
 export class DemoComponent {
-    constructor(private yunzaiContactService: YunzaiContactService) {
+  constructor(private yunzaiContactService: YunzaiContactService) {
 
-    }
+  }
 
 
-    ngOnInit(): void {
-    }
+  ngOnInit(): void {
+  }
 
-    show(): void {
-        this.yunzaiContactService.create((users) => {
-            console.log(users)
-            return of(true)
-        });
-    }
+  show(): void {
+    this.yunzaiContactService.create((users) => {
+      console.log(users)
+      return of(true)
+    });
+  }
 
 }
 ```

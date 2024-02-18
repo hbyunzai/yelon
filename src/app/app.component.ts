@@ -1,15 +1,17 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, ElementRef, HostBinding, Inject, Renderer2 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
-import { YUNZAI_I18N_TOKEN, DrawerHelper, TitleService, VERSION as VERSION_ALAIN } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, DrawerHelper, TitleService, VERSION as VERSION_YUNZAI, stepPreloader } from '@yelon/theme';
 import { VERSION as VERSION_ZORRO } from 'ng-zorro-antd/version';
 
 import { I18NService, MetaService, MobileService } from '@core';
 
 @Component({
   selector: 'app-root',
-  template: ` <router-outlet />`
+  template: ` <router-outlet />`,
+  standalone: true,
+  imports: [RouterOutlet]
 })
 export class AppComponent {
   @HostBinding('class.mobile')
@@ -29,7 +31,7 @@ export class AppComponent {
     breakpointObserver: BreakpointObserver,
     dh: DrawerHelper
   ) {
-    renderer.setAttribute(el.nativeElement, 'ng-yunzai-version', VERSION_ALAIN.full);
+    renderer.setAttribute(el.nativeElement, 'ng-yunzai-version', VERSION_YUNZAI.full);
     renderer.setAttribute(el.nativeElement, 'ng-zorro-version', VERSION_ZORRO.full);
 
     breakpointObserver.observe(this.query).subscribe(res => {
@@ -37,8 +39,12 @@ export class AppComponent {
       mobileSrv.next(this.isMobile);
     });
 
+    const done = stepPreloader();
+
     router.events.subscribe(evt => {
       if (!(evt instanceof NavigationEnd)) return;
+
+      done();
 
       dh.closeAll();
 

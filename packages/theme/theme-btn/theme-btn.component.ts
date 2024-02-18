@@ -5,21 +5,23 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   EventEmitter,
-  Inject,
+  inject,
   InjectionToken,
   Input,
   isDevMode,
   OnDestroy,
   OnInit,
-  Optional,
   Output,
   Renderer2
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDropDownDirective, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
+import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
+import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 export interface ThemeBtnType {
   key: string;
@@ -35,9 +37,19 @@ export const YUNZAI_THEME_BTN_KEYS = new InjectionToken<string>('YUNZAI_THEME_BT
     '[class.theme-btn]': `true`,
     '[class.theme-btn-rtl]': `dir === 'rtl'`
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzDropDownDirective, NzDropdownMenuComponent, NzMenuDirective, NzMenuItemComponent, NzTooltipDirective]
 })
 export class ThemeBtnComponent implements OnInit, OnDestroy {
+  private readonly doc = inject(DOCUMENT);
+  private readonly platform = inject(Platform);
+  private readonly renderer = inject(Renderer2);
+  private readonly configSrv = inject(YunzaiConfigService);
+  private readonly directionality = inject(Directionality, { optional: true });
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroy$ = inject(DestroyRef);
+
   private theme = 'default';
   isDev = isDevMode();
   @Input() types: ThemeBtnType[] = [
@@ -48,22 +60,12 @@ export class ThemeBtnComponent implements OnInit, OnDestroy {
   @Input() devTips = `When the dark.css file can't be found, you need to run it once: npm run theme`;
   @Input() deployUrl = '';
   @Output() readonly themeChange = new EventEmitter<string>();
-  private dir$ = this.directionality.change?.pipe(takeUntilDestroyed());
-  dir: Direction = 'ltr';
-
-  constructor(
-    private renderer: Renderer2,
-    private configSrv: YunzaiConfigService,
-    private platform: Platform,
-    @Inject(DOCUMENT) private doc: NzSafeAny,
-    @Optional() private directionality: Directionality,
-    @Inject(YUNZAI_THEME_BTN_KEYS) private KEYS: string,
-    private cdr: ChangeDetectorRef
-  ) {}
+  dir?: Direction = 'ltr';
+  private key = inject(YUNZAI_THEME_BTN_KEYS, { optional: true }) ?? 'site-theme';
 
   ngOnInit(): void {
-    this.dir = this.directionality.value;
-    this.dir$.subscribe((direction: Direction) => {
+    this.dir = this.directionality?.value;
+    this.directionality?.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe((direction: Direction) => {
       this.dir = direction;
       this.cdr.detectChanges();
     });
@@ -74,7 +76,7 @@ export class ThemeBtnComponent implements OnInit, OnDestroy {
     if (!this.platform.isBrowser) {
       return;
     }
-    this.theme = localStorage.getItem(this.KEYS) || 'default';
+    this.theme = localStorage.getItem(this.key) || 'default';
     this.updateChartTheme();
     this.onThemeChange(this.theme);
   }
@@ -90,26 +92,26 @@ export class ThemeBtnComponent implements OnInit, OnDestroy {
     this.theme = theme;
     this.themeChange.emit(theme);
     this.renderer.setAttribute(this.doc.body, 'data-theme', theme);
-    const dom = this.doc.getElementById(this.KEYS);
+    const dom = this.doc.getElementById(this.key);
     if (dom) {
       dom.remove();
     }
-    localStorage.removeItem(this.KEYS);
+    localStorage.removeItem(this.key);
     if (theme !== 'default') {
       const el = this.doc.createElement('link');
       el.type = 'text/css';
       el.rel = 'stylesheet';
-      el.id = this.KEYS;
+      el.id = this.key;
       el.href = `${this.deployUrl}assets/style.${theme}.css`;
 
-      localStorage.setItem(this.KEYS, theme);
+      localStorage.setItem(this.key, theme);
       this.doc.body.append(el);
     }
     this.updateChartTheme();
   }
 
   ngOnDestroy(): void {
-    const el = this.doc.getElementById(this.KEYS);
+    const el = this.doc.getElementById(this.key);
     if (el != null) {
       this.doc.body.removeChild(el);
     }

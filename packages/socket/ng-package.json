@@ -9,6 +9,7 @@
   "allowedNonPeerDependencies": [
     "ng-zorro-antd",
     "@stomp/rx-stomp",
+    "@stomp/stompjs",
     "@yelon/util"
   ]
 }

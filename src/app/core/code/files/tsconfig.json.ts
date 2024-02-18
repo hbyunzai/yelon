@@ -1,7 +1,6 @@
 export default {
   compileOnSave: false,
   compilerOptions: {
-    baseUrl: './',
     outDir: './dist/out-tsc',
     forceConsistentCasingInFileNames: true,
     strict: true,
@@ -9,19 +8,19 @@ export default {
     noPropertyAccessFromIndexSignature: true,
     noImplicitReturns: true,
     noFallthroughCasesInSwitch: true,
+    esModuleInterop: true,
     sourceMap: true,
     declaration: false,
     downlevelIteration: true,
     experimentalDecorators: true,
     moduleResolution: 'node',
     importHelpers: true,
-    target: 'es2017',
-    module: 'es2020',
-    lib: ['es2020', 'dom'],
-    allowSyntheticDefaultImports: true
+    target: 'ES2015',
+    module: 'ES2022',
+    useDefineForClassFields: false,
+    lib: ['ES2022', 'dom']
   },
   angularCompilerOptions: {
-    enableIvy: true,
     enableI18nLegacyMessageIdFormat: false,
     strictInjectionParameters: true,
     strictInputAccessModifiers: true,

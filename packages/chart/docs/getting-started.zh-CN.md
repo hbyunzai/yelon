@@ -41,7 +41,7 @@ export class YelonModule {
     return {
       ngModule: YelonModule,
       providers: [
-        { provide: YUNZAI_CONFIG, useValue: yunzaiConfig }
+        provideYunzaiConfig(yunzaiConfig)
       ]
     };
   }
@@ -117,7 +117,7 @@ export class YelonModule {
     return {
       ngModule: YelonModule,
       providers: [
-        { provide: YUNZAI_CONFIG, useValue: yunzaiConfig }
+        provideYunzaiConfig(yunzaiConfig)
       ]
     };
   }

@@ -2,7 +2,7 @@ import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/te
 
 import { createYunzaiApp } from '../utils/testing';
 
-const testCases = {
+const testCases: Record<string, string> = {
   'style-icons.ts': `
   import { NzFilterOutline, StepBackwardFill } from '@ant-design/icons-angular/icons';
   export const ICONS = [ NzFilterOutline, StepBackwardFill ];
@@ -48,7 +48,14 @@ describe('NgYunzaiSchematic: plugin: icon', () => {
 
   beforeEach(async () => {
     ({ runner, tree } = await createYunzaiApp());
-    Object.keys(testCases).forEach(name => tree.create(`/projects/foo/src/${name}`, testCases[name]));
+    Object.keys(testCases).forEach(name => {
+      const filePath = `/projects/foo/src/${name}`;
+      if (tree.exists(filePath)) {
+        tree.overwrite(filePath, testCases[name]);
+      } else {
+        tree.create(filePath, testCases[name]);
+      }
+    });
     tree = await runner.runSchematic('plugin', { name: 'icon', type: 'add' }, tree);
   });
 
@@ -56,7 +63,7 @@ describe('NgYunzaiSchematic: plugin: icon', () => {
     const path = `/projects/foo/src/style-icons-auto.ts`;
     expect(tree.exists(path)).toBe(true);
     const content = tree.readContent(path);
-    // ignore custom icons
+    // ingore custom icons
     expect(content).not.toContain(`NzFilterOutline`);
     expect(content).not.toContain(`StepBackwardFill`);
     // white icons

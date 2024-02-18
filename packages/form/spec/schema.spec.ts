@@ -189,7 +189,6 @@ describe('form: schema', () => {
         discardPeriodicTasks();
       }));
     });
-
     describe('#inherit', () => {
       it('should be inherit all properties with * for ui schema', () => {
         const schema: SFSchema = {

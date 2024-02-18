@@ -1,34 +1,37 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   DestroyRef,
   EventEmitter,
-  Inject,
   Input,
   OnChanges,
   OnInit,
-  Optional,
   Output,
   SimpleChange,
   SimpleChanges,
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
-  inject
+  booleanAttribute,
+  inject,
+  numberAttribute
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, filter, of } from 'rxjs';
 
-import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
-import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzTabSetComponent } from 'ng-zorro-antd/tabs';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
+import { NzTabComponent, NzTabSetComponent } from 'ng-zorro-antd/tabs';
 
+import { ReuseTabContextMenuComponent } from './reuse-tab-context-menu.component';
+import { ReuseTabContextComponent } from './reuse-tab-context.component';
+import { ReuseTabContextDirective } from './reuse-tab-context.directive';
 import { ReuseTabContextService } from './reuse-tab-context.service';
 import {
   ReuseCanClose,
@@ -43,7 +46,7 @@ import {
   ReuseTitle
 } from './reuse-tab.interfaces';
 import { ReuseTabService } from './reuse-tab.service';
-import { ReuseTabStorageState, REUSE_TAB_STORAGE_KEY, REUSE_TAB_STORAGE_STATE } from './reuse-tab.state';
+import { REUSE_TAB_STORAGE_KEY, REUSE_TAB_STORAGE_STATE } from './reuse-tab.state';
 
 @Component({
   selector: 'reuse-tab, [reuse-tab]',
@@ -59,36 +62,49 @@ import { ReuseTabStorageState, REUSE_TAB_STORAGE_KEY, REUSE_TAB_STORAGE_STATE } 
   providers: [ReuseTabContextService],
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    NgTemplateOutlet,
+    NzTabSetComponent,
+    NzTabComponent,
+    ReuseTabContextMenuComponent,
+    ReuseTabContextDirective,
+    ReuseTabContextComponent,
+    NzIconDirective
+  ]
 })
 export class ReuseTabComponent implements OnInit, OnChanges {
-  static ngAcceptInputType_debug: BooleanInput;
-  static ngAcceptInputType_max: NumberInput;
-  static ngAcceptInputType_tabMaxWidth: NumberInput;
-  static ngAcceptInputType_allowClose: BooleanInput;
-  static ngAcceptInputType_keepingScroll: BooleanInput;
-  static ngAcceptInputType_disabled: BooleanInput;
-  static ngAcceptInputType_storageState: BooleanInput;
+  private readonly srv = inject(ReuseTabService, { optional: true })!;
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
+  private readonly doc = inject(DOCUMENT);
+  private readonly platform = inject(Platform);
+  private readonly directionality = inject(Directionality, { optional: true });
+  private readonly stateKey = inject(REUSE_TAB_STORAGE_KEY);
+  private readonly stateSrv = inject(REUSE_TAB_STORAGE_STATE);
 
   @ViewChild('tabset') private tabset!: NzTabSetComponent;
   private destroy$ = inject(DestroyRef);
-  private _keepingScrollContainer?: Element;
+  private _keepingScrollContainer?: Element | null;
   list: ReuseItem[] = [];
   item?: ReuseItem;
   pos = 0;
-  dir: Direction = 'ltr';
+  dir?: Direction = 'ltr';
 
   // #region fields
 
   @Input() mode: ReuseTabMatchMode = ReuseTabMatchMode.Menu;
   @Input() i18n?: ReuseContextI18n;
-  @Input() @InputBoolean() debug = false;
-  @Input() @InputNumber() max?: number;
-  @Input() @InputNumber() tabMaxWidth?: number;
+  @Input({ transform: booleanAttribute }) debug = false;
+  @Input({ transform: numberAttribute }) max?: number;
+  @Input({ transform: numberAttribute }) tabMaxWidth?: number;
   @Input() excludes?: RegExp[];
-  @Input() @InputBoolean() allowClose = true;
-  @Input() @InputBoolean() keepingScroll = false;
-  @Input() @InputBoolean() storageState = false;
+  @Input({ transform: booleanAttribute }) allowClose = true;
+  @Input({ transform: booleanAttribute }) keepingScroll = false;
+  @Input({ transform: booleanAttribute }) storageState = false;
   @Input()
   set keepingScrollContainer(value: string | Element) {
     this._keepingScrollContainer = typeof value === 'string' ? this.doc.querySelector(value) : value;
@@ -99,26 +115,13 @@ export class ReuseTabComponent implements OnInit, OnChanges {
   @Input() tabBarStyle: { [key: string]: string } | null = null;
   @Input() tabType: 'line' | 'card' = 'line';
   @Input() routeParamMatchMode: ReuseTabRouteParamMatchMode = 'strict';
-  @Input() @InputBoolean() disabled = false;
+  @Input({ transform: booleanAttribute }) disabled = false;
   @Input() titleRender?: TemplateRef<{ $implicit: ReuseItem }>;
   @Input() canClose?: ReuseCanClose;
   @Output() readonly change = new EventEmitter<ReuseItem>();
   @Output() readonly close = new EventEmitter<ReuseItem | null>();
 
   // #endregion
-
-  constructor(
-    private srv: ReuseTabService,
-    private cdr: ChangeDetectorRef,
-    private router: Router,
-    private route: ActivatedRoute,
-    @Optional() @Inject(YUNZAI_I18N_TOKEN) private i18nSrv: YunzaiI18NService,
-    @Inject(DOCUMENT) private doc: NzSafeAny,
-    private platform: Platform,
-    @Optional() private directionality: Directionality,
-    @Optional() @Inject(REUSE_TAB_STORAGE_KEY) private stateKey: string,
-    @Optional() @Inject(REUSE_TAB_STORAGE_STATE) private stateSrv: ReuseTabStorageState
-  ) {}
 
   private genTit(title: ReuseTitle): string {
     return title.i18n && this.i18nSrv ? this.i18nSrv.fanyi(title.i18n) : title.text!;
@@ -147,14 +150,13 @@ export class ReuseTabComponent implements OnInit, OnChanges {
         ({
           url: item.url,
           title: this.genTit(item.title),
-          closable: this.allowClose && item.closable && this.srv.count > 0,
+          closable: this.allowClose && this.srv.count > 0 && this.srv.getClosable(item.url, item._snapshot),
           position: item.position,
           index,
           active: false,
           last: false
         }) as ReuseItem
     );
-    // debugger;
 
     const url = this.curUrl;
     let addCurrent = ls.findIndex(w => w.url === url) === -1;
@@ -173,7 +175,10 @@ export class ReuseTabComponent implements OnInit, OnChanges {
     }
 
     if (addCurrent) {
-      ls.splice(this.pos + 1, 0, this.genCurItem());
+      const addPos = this.pos + 1;
+      ls.splice(addPos, 0, this.genCurItem());
+      // Attach to cache
+      this.srv.saveCache(this.route.snapshot, null, addPos);
     }
 
     ls.forEach((item, index) => (item.index = index));
@@ -199,7 +204,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
   private saveState(): void {
     if (!this.srv.inited || !this.storageState) return;
 
-    this.stateSrv.update(this.stateKey, this.list);
+    this.stateSrv?.update(this.stateKey!, this.list);
   }
 
   // #region UI
@@ -243,9 +248,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
       if (!res) return;
       this.item = item;
       this.change.emit(item);
-      if (cb) {
-        cb();
-      }
+      cb?.();
     });
   }
 
@@ -271,6 +274,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
    * <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
    */
   activate(instance: NzSafeAny): void {
+    if (this.srv == null) return;
     this.srv.componentRef = { instance };
   }
 
@@ -298,13 +302,13 @@ export class ReuseTabComponent implements OnInit, OnChanges {
   // #endregion
 
   ngOnInit(): void {
-    this.dir = this.directionality.value;
-    this.directionality.change?.pipe(takeUntilDestroyed(this.destroy$)).subscribe((direction: Direction) => {
+    this.dir = this.directionality?.value;
+    this.directionality?.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
       this.dir = direction;
       this.cdr.detectChanges();
     });
 
-    if (!this.platform.isBrowser) {
+    if (!this.platform.isBrowser || this.srv == null) {
       return;
     }
 
@@ -323,7 +327,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
       this.genList(res);
     });
 
-    this.i18nSrv.change
+    this.i18nSrv?.change
       .pipe(
         filter(() => this.srv.inited),
         takeUntilDestroyed(this.destroy$),
@@ -335,7 +339,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
-    if (!this.platform.isBrowser) {
+    if (!this.platform.isBrowser || this.srv == null) {
       return;
     }
 

@@ -1,14 +1,19 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 import type { NzTSType } from 'ng-zorro-antd/core/types';
+import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'sv-value, [sv-value]',
   exportAs: 'svValue',
   template: `
-    <em *ngIf="prefix" class="sv__value-prefix" [innerHTML]="prefix"></em>
-    <span nz-tooltip [nzTooltipTitle]="tooltip" class="sv__value-text"><ng-content></ng-content></span>
-    <em *ngIf="unit" class="sv__value-unit" [innerHTML]="unit"></em>
+    @if (prefix) {
+      <em class="sv__value-prefix" [innerHTML]="prefix"></em>
+    }
+    <span nz-tooltip [nzTooltipTitle]="tooltip" class="sv__value-text"><ng-content /></span>
+    @if (unit) {
+      <em class="sv__value-unit" [innerHTML]="unit"></em>
+    }
   `,
   host: {
     '[class.sv__value]': 'true',
@@ -17,7 +22,9 @@ import type { NzTSType } from 'ng-zorro-antd/core/types';
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [NzTooltipDirective]
 })
 export class SVValueComponent {
   @Input() prefix?: string;

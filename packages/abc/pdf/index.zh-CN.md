@@ -16,7 +16,7 @@ module: import { PdfModule } from '@yelon/abc/pdf';
 **使用本地路径**
 
 ```bash
-yarn add pdfjs-dist
+npm i -S pdfjs-dist
 ```
 
 ```json
@@ -40,7 +40,7 @@ const yunzaiConfig: YunzaiConfig = {
 
 ## API
 
-### pdf
+### pdf:standalone
 
 | 成员 | 说明 | 类型 | 默认值 | 全局配置 |
 |----|----|----|-----|------|

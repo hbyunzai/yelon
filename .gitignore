@@ -9,7 +9,6 @@ pnpm-lock.yaml
 
 .eslintcache
 
-.tmp
 .lib
 *.iml
 /dist
@@ -33,7 +32,7 @@ scripts/build/var.less
 /schematics/plugin/files/rtl
 
 # Yarn
-yarn.lock
+# yarn.lock
 yarn-error.log
 .yarn/*
 !.yarn/patches

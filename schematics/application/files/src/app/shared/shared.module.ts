@@ -28,7 +28,7 @@ const DIRECTIVES: Array<Type<void>> = [];
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    YunzaiThemeModule.forChild(),
+    YunzaiThemeModule,
     YelonACLModule,<% if (form) { %>
     YelonFormModule,<% } %>
     ...SHARED_YELON_MODULES,

@@ -1,7 +1,7 @@
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 
-import { createYunzaiAndModuleApp } from './testing';
 import { addValueToVariable, CommonSchema } from './yunzai';
+import { createYunzaiAndModuleApp } from '../utils/testing';
 
 describe('Schematic: yunzai', () => {
   let runner: SchematicTestRunner;

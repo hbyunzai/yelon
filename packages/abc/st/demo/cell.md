@@ -15,15 +15,19 @@ Use the `cell` component for richer rendering.
 
 ```ts
 import { Component, ViewChild } from '@angular/core';
-import { STColumn, STComponent } from '@yelon/abc/st';
+
 import type { CellOptions } from '@yelon/abc/cell';
+import { STColumn, STComponent, STModule } from '@yelon/abc/st';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-demo',
   template: `
     <button nz-button nzType="primary" (click)="setRow()">setRow Method</button>
-    <st #st [widthMode]="{ type: 'strict' }" [data]="url" [req]="{ params: params }" [columns]="columns"></st>
+    <st #st [widthMode]="{ type: 'strict' }" [data]="url" [req]="{ params: params }" [columns]="columns" />
   `,
+  standalone: true,
+  imports: [STModule, NzButtonModule]
 })
 export class DemoComponent {
   url = `/users?total=2&field=list`;

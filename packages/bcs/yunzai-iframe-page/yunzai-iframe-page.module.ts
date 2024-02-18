@@ -1,22 +1,12 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {YunzaiIframePageComponent} from './yunzai-iframe-page.component';
-import {YunzaiSharedZorroModule} from "@yelon/bcs/yunzai-shared-zorro";
-import {YunzaiSharedYelonModule} from "@yelon/bcs/yunzai-shared-yelon";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
+import { YunzaiIframePageComponent } from './yunzai-iframe-page.component';
+
+const COMPONENTS = [YunzaiIframePageComponent];
 
 @NgModule({
-  declarations: [
-    YunzaiIframePageComponent
-  ],
-  imports: [
-    CommonModule,
-    YunzaiSharedZorroModule,
-    YunzaiSharedYelonModule
-  ],
-  exports: [
-    YunzaiIframePageComponent
-  ]
+  imports: [CommonModule, ...COMPONENTS],
+  exports: COMPONENTS
 })
-export class YunzaiIframePageModule {
-}
+export class YunzaiIframePageModule {}

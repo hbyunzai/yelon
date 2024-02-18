@@ -1,86 +1,78 @@
-import { Injectable, Inject } from '@angular/core';
+import { APP_INITIALIZER, Injectable, Provider, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { YA_SERVICE_TOKEN, ITokenService } from '@yelon/auth';
+import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN, MenuService, SettingsService, TitleService } from '@yelon/theme';
 import { ACLService } from '@yelon/acl';<% if (i18n) { %>
 import { I18NService } from '../i18n/i18n.service';<% } %>
 import { Observable, zip, of, catchError, map } from 'rxjs';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzIconService } from 'ng-zorro-antd/icon';
-
-import { ICONS } from '../../../style-icons';
-import { ICONS_AUTO } from '../../../style-icons-auto';
 
 /**
  * Used for application startup
  * Generally used to get the basic data of the application, like: Menu Data, User Data, etc.
  */
+export function provideStartup(): Provider[] {
+  return [
+    StartupService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (startupService: StartupService) => () => startupService.load(),
+      deps: [StartupService],
+      multi: true
+    }
+  ];
+}
+
 @Injectable()
 export class StartupService {
-  constructor(
-    iconSrv: NzIconService,
-    private menuService: MenuService,<% if (i18n) { %>
-    @Inject(YUNZAI_I18N_TOKEN) private i18n: I18NService,<% } %>
-    private settingService: SettingsService,
-    private aclService: ACLService,
-    private titleService: TitleService,
-    @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
-    private httpClient: HttpClient,
-    private router: Router
-  ) {
-    iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
+  private menuService = inject(MenuService);
+  private settingService = inject(SettingsService);
+  private tokenService = inject(YA_SERVICE_TOKEN);
+  private aclService = inject(ACLService);
+  private titleService = inject(TitleService);
+  private httpClient = inject(HttpClient);
+  private router = inject(Router);<% if (i18n) { %>
+  private i18n = inject<I18NService>(YUNZAI_I18N_TOKEN);<% } %>
+  // If http request allows anonymous access, you need to add `ALLOW_ANONYMOUS`:
+  // this.httpClient.get('assets/tmp/app-data.json', { context: new HttpContext().set(ALLOW_ANONYMOUS, true) })
+  private appData$ = this.httpClient.get('assets/tmp/app-data.json').pipe(
+    catchError((res: NzSafeAny) => {
+      console.warn(`StartupService.load: Network request failed`, res);
+      setTimeout(() => this.router.navigateByUrl(`/exception/500`));
+      return of({});
+    })
+  );
+
+  private handleAppData(res: NzSafeAny): void {
+    // Application information: including site name, description, year
+    this.settingService.setApp(res.app);
+    // User information: including name, avatar, email address
+    this.settingService.setUser(res.user);
+    // ACL: Set the permissions to full, https://ng.yunzainfo.com/acl/getting-started
+    this.aclService.setFull(true);
+    // Menu data, https://ng.yunzainfo.com/theme/menu
+    this.menuService.add(res.menu ?? []);
+    // Can be set page suffix title, https://ng.yunzainfo.com/theme/title
+    this.titleService.suffix = res.app?.name;
   }
 
   <% if (i18n) { %>
-    private viaHttp(): Observable<void> {
-      const defaultLang = this.i18n.defaultLang;
-      return zip(this.i18n.loadLangData(defaultLang), this.httpClient.get('assets/tmp/app-data.json')).pipe(
-        catchError((res: NzSafeAny) => {
-          console.warn(`StartupService.load: Network request failed`, res);
-          setTimeout(() => this.router.navigateByUrl(`/exception/500`));
-          return [];
-        }),
-        map(([langData, appData]: [Record<string, string>, NzSafeAny]) => {
-          // setting language data
-          this.i18n.use(defaultLang, langData);
+  private viaHttp(): Observable<void> {
+    const defaultLang = this.i18n.defaultLang;
+    return zip(this.i18n.loadLangData(defaultLang), this.appData$).pipe(
+      map(([langData, appData]: [Record<string, string>, NzSafeAny]) => {
+        // setting language data
+        this.i18n.use(defaultLang, langData);
 
-          // Application data
-          // Application information: including site name, description, year
-          this.settingService.setApp(appData.app);
-          // User information: including name, avatar, email address
-          this.settingService.setUser(appData.user);
-          // ACL: Set the permissions to full, https://ng.yunzainfo.com/acl/getting-started
-          this.aclService.setFull(true);
-          // Menu data, https://ng.yunzainfo.com/theme/menu
-          this.menuService.add(appData.menu);
-          // Can be set page suffix title, https://ng.yunzainfo.com/theme/title
-          this.titleService.suffix = appData.app.name;
-        })
-      );
-    }
+        this.handleAppData(appData);
+      })
+    );
+  }
   <% } else { %>
-    private viaHttp(): Observable<void> {
-      return this.httpClient.get('assets/tmp/app-data.json').pipe(
-        catchError((res: NzSafeAny) => {
-          console.warn(`StartupService.load: Network request failed`, res);
-          setTimeout(() => this.router.navigateByUrl(`/exception/500`));
-          return of({});
-        }),
-        map((res: NzSafeAny) => {
-          // Application information: including site name, description, year
-          this.settingService.setApp(res.app);
-          // User information: including name, avatar, email address
-          this.settingService.setUser(res.user);
-          // ACL: Set the permissions to full, https://ng.yunzainfo.com/acl/getting-started
-          this.aclService.setFull(true);
-          // Menu data, https://ng.yunzainfo.com/theme/menu
-          this.menuService.add(res.menu);
-          // Can be set page suffix title, https://ng.yunzainfo.com/theme/title
-          this.titleService.suffix = res.app.name;
-        })
-      );
-    }
+  private viaHttp(): Observable<void> {
+    return this.appData$.pipe(map((res: NzSafeAny) => this.handleAppData(res)));
+  }
   <% } %>
 
   <% if (i18n) { %>
@@ -103,13 +95,13 @@ export class StartupService {
     // }
     // mock
     const app: any = {
-      name: `ng-yunzai`,
-      description: `Ng-zorro admin panel front-end framework`
+      name: `NG-YUNZAI`,
+      description: `NG-ZORRO admin panel front-end framework`
     };
     const user: any = {
       name: 'Admin',
       avatar: './assets/tmp/img/avatar.jpg',
-      email: 'devcui@outlook.com',
+      email: 'yunzai-bot@outlook.com',
       token: '123456789'
     };
     // Application information: including site name, description, year

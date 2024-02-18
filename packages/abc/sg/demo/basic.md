@@ -16,12 +16,16 @@ title:
 ```ts
 import { Component } from '@angular/core';
 
+import { SGModule } from '@yelon/abc/sg';
+
 @Component({
   selector: 'app-demo',
   template: ` <div sg-container="4">
-    <sg *ngFor="let i of ls; let idx = index" [col]="idx === 5 ? 2 : null">
-      <div class="item">{{ idx + 1 }}</div>
-    </sg>
+    @for (i of ls; track $index) {
+      <sg [col]="$index === 5 ? 2 : null">
+        <div class="item">{{ $index + 1 }}</div>
+      </sg>
+    }
   </div>`,
   styles: [
     `
@@ -41,7 +45,9 @@ import { Component } from '@angular/core';
         font-size: 13px;
       }
     `
-  ]
+  ],
+  standalone: true,
+  imports: [SGModule]
 })
 export class DemoComponent {
   ls = Array(11).fill(0);

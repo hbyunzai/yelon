@@ -1,6 +1,6 @@
 import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
-import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { provideYunzaiConfig } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { PageObject, TestComponent, genModule } from './base.spec';
@@ -100,12 +100,7 @@ describe('abc: st-sort', () => {
     it('should default is mulit sorting', () => {
       page = genModule(TestComponent, {
         minColumn: true,
-        providers: [
-          {
-            provide: YUNZAI_CONFIG,
-            useValue: { st: { multiSort: { global: true } } } as YunzaiConfig
-          }
-        ],
+        providers: [provideYunzaiConfig({ st: { multiSort: { global: true } } })],
         createComp: true
       })!;
       expect(page.comp.multiSort).not.toBeUndefined();
@@ -113,12 +108,7 @@ describe('abc: st-sort', () => {
     it('should default non-mulit sorting', () => {
       page = genModule(TestComponent, {
         minColumn: true,
-        providers: [
-          {
-            provide: YUNZAI_CONFIG,
-            useValue: { st: { multiSort: { global: false } } } as YunzaiConfig
-          }
-        ],
+        providers: [provideYunzaiConfig({ st: { multiSort: { global: false } } })],
         createComp: true
       })!;
       expect(page.comp.multiSort).toBeUndefined();

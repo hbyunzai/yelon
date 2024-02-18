@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { urlBase64Decode } from './jwt.helper';
 import { ITokenModel } from '../interface';
 
@@ -38,15 +39,15 @@ export interface JWT {
 export class JWTTokenModel implements ITokenModel {
   [key: string]: any;
 
-  access_token: string | null | undefined;
+  token: string | null | undefined;
 
-  expires_in?: number;
+  expired?: number;
 
   /**
    * 获取载荷信息
    */
   get payload(): JWT {
-    const parts = (this.access_token || '').split('.');
+    const parts = (this.token || '').split('.');
     if (parts.length !== 3) throw new Error('JWT must have 3 parts');
 
     const decoded = urlBase64Decode(parts[1]);

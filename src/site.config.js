@@ -31,19 +31,13 @@ module.exports = {
       ],
       defaultRoute: 'getting-started',
       metaIncludeAttributes: ['name', 'types', 'github'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'components',
@@ -220,20 +214,15 @@ module.exports = {
       module: '@yelon/abc',
       defaultRoute: 'sv',
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/abc'],
           ignores: ['README.md'],
-          template: {
-            content: './src/templates/content.ts'
-          },
+
           hasSubDir: true
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'auth',
@@ -249,19 +238,13 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/auth/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'acl',
@@ -277,19 +260,13 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/acl/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'cache',
@@ -305,19 +282,13 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/cache/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'mock',
@@ -333,19 +304,13 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/mock/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'util',
@@ -369,27 +334,18 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/util/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         },
         {
           src: ['./packages/util'],
           ignores: ['docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: true
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'form',
@@ -409,6 +365,10 @@ module.exports = {
           'en-US': 'Widgets'
         },
         {
+          'zh-CN': '非内置小部件',
+          'en-US': 'Non-built-in widgets'
+        },
+        {
           'zh-CN': '第三方小部件',
           'en-US': 'Third Widgets'
         }
@@ -424,40 +384,34 @@ module.exports = {
         }
       ],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/form/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
+
           hasSubDir: false
         },
         {
           src: ['./packages/form/examples'],
-          template: {
-            content: './src/templates/content.ts'
-          },
+
           hasSubDir: true
         },
         {
           src: ['./packages/form/src/widgets'],
-          template: {
-            content: './src/templates/content.ts'
-          },
+
+          hasSubDir: true
+        },
+        {
+          src: ['./packages/form/widgets'],
+
           hasSubDir: true
         },
         {
           src: ['./packages/form/widgets-third'],
-          template: {
-            content: './src/templates/content.ts'
-          },
+
           hasSubDir: true
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'chart',
@@ -481,27 +435,18 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/chart/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         },
         {
           src: ['./packages/chart'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           ignores: ['docs'],
           hasSubDir: true
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'cli',
@@ -517,16 +462,10 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
+      standalone: true,
       dir: [
         {
           src: ['./schematics/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
       ]
@@ -561,69 +500,46 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/theme/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         },
         {
           src: ['./packages/theme/layout-default'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           reName: 'layout-default',
           hasSubDir: false
         },
         {
           src: ['./packages/theme/layout-blank'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           reName: 'layout-blank',
           hasSubDir: false
         },
         {
           src: ['./packages/theme/theme-btn'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           reName: 'theme-btn',
           hasSubDir: false
         },
         {
           src: ['./packages/theme/src/router'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         },
         {
           src: ['./packages/theme/src/pipes'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: true
         },
         {
           src: ['./packages/theme/src/services'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: true
         }
-      ]
+      ],
+      standalone: true
     },
     {
       name: 'bis',
       github: 'https://github.com/hbyunzai/yelon',
       dist: './src/app/routes/gen/bis',
+      standalone: true,
       types: [
         {
           'zh-CN': '文档',
@@ -634,31 +550,18 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/bis'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           ignores: ['docs'],
           hasSubDir: true
         },
         {
           src: ['./packages/bis/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         },
         {
           src: ['./packages/bis/layout'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
       ]
@@ -667,6 +570,7 @@ module.exports = {
       name: 'bcs',
       github: 'https://github.com/hbyunzai/yelon',
       dist: './src/app/routes/gen/bcs',
+      standalone: true,
       types: [
         {
           'zh-CN': '文档',
@@ -685,24 +589,14 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/bcs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           ignores: ['docs'],
           hasSubDir: true
         },
         {
           src: ['./packages/bcs/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
       ]
@@ -711,6 +605,7 @@ module.exports = {
       name: 'socket',
       github: 'https://github.com/hbyunzai/yelon',
       dist: './src/app/routes/gen/socket',
+      standalone: true,
       types: [
         {
           'zh-CN': '文档',
@@ -721,24 +616,14 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      template: {
-        meta: './src/templates/meta.ts',
-        module: './src/templates/module.ts'
-      },
       dir: [
         {
           src: ['./packages/socket'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           ignores: ['docs'],
           hasSubDir: true
         },
         {
           src: ['./packages/socket/docs'],
-          template: {
-            content: './src/templates/content.ts'
-          },
           hasSubDir: false
         }
       ]

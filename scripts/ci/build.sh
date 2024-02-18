@@ -20,7 +20,7 @@ DIST="$(pwd)/dist"
 cloneScaffold() {
   if [[ ! -d ng-yunzai ]]; then
     echo ">>> Not found scaffold source files, must be clone ng-yunzai ..."
-    git clone --depth 1 http://github.com/hbyunzai/ng-yunzai.git
+    git clone --depth 1 https://github.com/hbyunzai/ng-yunzai.git
   else
     echo ">>> Found scaffold source files"
   fi

@@ -1,21 +1,18 @@
-import { Inject, Injectable, Injector, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CanActivateChildFn, CanActivateFn, CanMatchFn } from '@angular/router';
 
 import { SimpleTokenModel } from './simple.model';
 import { CheckSimple, ToLogin } from '../helper';
-import { YA_SERVICE_TOKEN, ITokenService } from '../interface';
+import { YA_SERVICE_TOKEN } from '../interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthSimpleGuardService {
-  constructor(
-    @Inject(YA_SERVICE_TOKEN) private srv: ITokenService,
-    private injector: Injector
-  ) {}
+  private readonly srv = inject(YA_SERVICE_TOKEN);
 
   process(url?: string): boolean {
     const res = CheckSimple(this.srv.get() as SimpleTokenModel);
     if (!res) {
-      ToLogin(this.srv.options, this.injector, url);
+      ToLogin(this.srv.options, url);
     }
     return res;
   }

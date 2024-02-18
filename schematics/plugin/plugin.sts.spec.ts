@@ -12,7 +12,7 @@ describe('NgYunzaiSchematic: plugin: sts', () => {
   });
 
   describe('when add', () => {
-    it(`should add files`, () => {
+    it(`should add fiels`, () => {
       const json = JSON.parse(tree.readContent('package.json'));
       expect(json.devDependencies['ng-yunzai-sts']).toBeDefined();
       expect(tree.exists(`/_cli-tpl/_fix.js`)).toBe(true);
@@ -31,7 +31,7 @@ describe('NgYunzaiSchematic: plugin: sts', () => {
 
   describe('when remove', () => {
     beforeEach(async () => (tree = await runner.runSchematic('plugin', { name: 'sts', type: 'remove' }, tree)));
-    it(`should add files`, () => {
+    it(`should add fiels`, () => {
       const json = JSON.parse(tree.readContent('package.json'));
       expect(json.devDependencies['ng-yunzai-sts']).not.toBeDefined();
     });

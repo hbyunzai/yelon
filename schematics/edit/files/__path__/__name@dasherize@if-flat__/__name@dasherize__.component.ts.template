@@ -1,19 +1,28 @@
-import { Component, OnInit<% if(!!viewEncapsulation) { %>, ViewEncapsulation<% }%><% if(changeDetection !== 'Default') { %>, ChangeDetectionStrategy<% }%> } from '@angular/core';<% if(!modal) { %>
+import { Component, OnInit<% if(!!viewEncapsulation) { %>, ViewEncapsulation<% }%><% if(changeDetection !== 'Default') { %>, ChangeDetectionStrategy<% }%>, inject } from '@angular/core';<% if(!modal) { %>
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';<% } %>
 import { SFSchema, SFUISchema } from '@yelon/form';
 import { _HttpClient } from '@yelon/theme';
 import { NzMessageService } from 'ng-zorro-antd/message';<% if(modal) { %>
-import { NzModalRef } from 'ng-zorro-antd/modal';<% } %>
+import { NzModalRef } from 'ng-zorro-antd/modal';<% } %><% if(standalone) {%>
+import { SHARED_IMPORTS } from '@shared';<%}%>
 
 @Component({
-  selector: '<%= selector %>',
+  selector: '<%= selector %>',<% if(standalone) {%>
+  standalone: true,
+  imports: [...SHARED_IMPORTS],<%}%>
   templateUrl: './<%= dasherize(name) %>.component.html',<% if(!inlineStyle) { %><% } else { %>
     styleUrls: ['./<%= dasherize(name) %>.component.<%= style %>']<% } %><% if(!!viewEncapsulation) { %>,
   encapsulation: ViewEncapsulation.<%= viewEncapsulation %><% } if (changeDetection !== 'Default') { %>,
   changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>
 })
 export class <%= componentName %> implements OnInit {
+  private readonly http = inject(_HttpClient);
+  private readonly msgSrv = inject(NzMessageService);<% if(modal) { %>
+  private readonly modal = inject(NzModalRef);<% } else { %>
+  private readonly route = inject(ActivatedRoute);
+  readonly location = inject(Location);<% } %>
+
   <% if(modal) { %>record: any = {};<% } else { %>
   id = this.route.snapshot.params.id;<% } %>
   i: any;
@@ -43,14 +52,6 @@ export class <%= componentName %> implements OnInit {
       grid: { span: 24 },
     },
   };
-
-  constructor(<% if(modal) { %>
-    private modal: NzModalRef,<% } else { %>
-    private route: ActivatedRoute,
-    public location: Location,<% } %>
-    private msgSrv: NzMessageService,
-    public http: _HttpClient,
-  ) {}
 
   ngOnInit(): void {
     <% if(modal) { %>if (this.record.id > 0)<% } else { %>if (this.id > 0)<% } %>

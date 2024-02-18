@@ -9,8 +9,7 @@ import { G2MiniProgressComponent } from './mini-progress.component';
 const COMPONENTS = [G2MiniProgressComponent];
 
 @NgModule({
-  imports: [CommonModule, YelonLocaleModule, NzToolTipModule],
-  declarations: COMPONENTS,
+  imports: [CommonModule, YelonLocaleModule, NzToolTipModule, ...COMPONENTS],
   exports: COMPONENTS
 })
 export class G2MiniProgressModule {}

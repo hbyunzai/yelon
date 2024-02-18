@@ -1,4 +1,3 @@
-export * from '@yelon/util/analysis';
 export * from '@yelon/util/array';
 export * from '@yelon/util/browser';
 export * from '@yelon/util/config';

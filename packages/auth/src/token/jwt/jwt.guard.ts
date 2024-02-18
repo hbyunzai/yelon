@@ -1,22 +1,19 @@
-import { Inject, Injectable, Injector, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CanActivateChildFn, CanActivateFn, CanMatchFn } from '@angular/router';
 
 import { JWTTokenModel } from './jwt.model';
 import { CheckJwt, ToLogin } from '../helper';
-import { YA_SERVICE_TOKEN, ITokenService } from '../interface';
+import { YA_SERVICE_TOKEN } from '../interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthJWTGuardService {
-  constructor(
-    @Inject(YA_SERVICE_TOKEN) private srv: ITokenService,
-    private injector: Injector
-  ) {}
+  private readonly srv = inject(YA_SERVICE_TOKEN);
 
   process(url?: string): boolean {
     const cog = this.srv.options;
     const res = CheckJwt(this.srv.get<JWTTokenModel>(JWTTokenModel), cog.token_exp_offset!);
     if (!res) {
-      ToLogin(cog, this.injector, url);
+      ToLogin(cog, url);
     }
     return res;
   }

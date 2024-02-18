@@ -10,7 +10,7 @@ describe('NgYunzaiSchematic: plugin: codeStyle', () => {
   beforeEach(async () => ({ runner, tree } = await createYunzaiApp({ codeStyle: true })));
 
   describe('when add', () => {
-    it(`should add pre-commit`, () => {
+    it(`should add precommit`, () => {
       const json = JSON.parse(tree.readContent('package.json'));
       expect(json[LINT_STAGED]).not.toBeUndefined();
     });
@@ -19,7 +19,7 @@ describe('NgYunzaiSchematic: plugin: codeStyle', () => {
   describe('when remove', () => {
     beforeEach(async () => runner.runSchematic('plugin', { name: 'codeStyle', type: 'remove' }, tree));
 
-    it(`should remove pre-commit`, () => {
+    it(`should remove precommit`, () => {
       const json = JSON.parse(tree.readContent('package.json'));
       expect(json[LINT_STAGED]).toBeUndefined();
     });

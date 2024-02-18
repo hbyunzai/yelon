@@ -6,6 +6,7 @@
   "dependencies": {
     "ng-zorro-antd": "@LIB-PLACEHOLDER",
     "@stomp/rx-stomp":"@LIB-PLACEHOLDER",
+    "@stomp/stompjs":"@LIB-PLACEHOLDER",
     "@yelon/util":"PEER-0.0.0-PLACEHOLDER"
   }
 }

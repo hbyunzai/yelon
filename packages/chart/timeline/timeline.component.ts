@@ -6,7 +6,9 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  booleanAttribute,
+  numberAttribute
 } from '@angular/core';
 
 import type { Chart, Event, Types } from '@antv/g2';
@@ -14,8 +16,9 @@ import { format } from 'date-fns';
 
 import { G2BaseComponent, G2Time } from '@yelon/chart/core';
 import { toDate } from '@yelon/util/date-time';
-import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@yelon/util/decorator';
+import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 /**
  * 数据
@@ -67,33 +70,32 @@ export interface G2TimelineClickItem {
     <ng-container *nzStringTemplateOutlet="title">
       <h4>{{ title }}</h4>
     </ng-container>
-    <nz-skeleton *ngIf="!loaded" />
+    @if (!loaded) {
+      <nz-skeleton />
+    }
     <div #container></div>
   `,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [NzStringTemplateOutletDirective, NzSkeletonComponent]
 })
 export class G2TimelineComponent extends G2BaseComponent {
-  static ngAcceptInputType_height: NumberInput;
-  static ngAcceptInputType_maxAxis: NumberInput;
-  static ngAcceptInputType_borderWidth: NumberInput;
-  static ngAcceptInputType_slider: BooleanInput;
-
   // #region fields
 
   @Input() title?: string | TemplateRef<void> | null;
-  @Input() @InputNumber() maxAxis = 2;
+  @Input({ transform: numberAttribute }) maxAxis = 2;
   @Input() data: G2TimelineData[] = [];
   @Input() titleMap?: G2TimelineMap | null;
   @Input() colorMap: G2TimelineMap = { y1: '#5B8FF9', y2: '#5AD8A6', y3: '#5D7092', y4: '#F6BD16', y5: '#E86452' };
   @Input() mask: string = 'HH:mm';
   @Input() maskSlider: string = 'HH:mm';
   @Input() position: 'top' | 'right' | 'bottom' | 'left' = 'top';
-  @Input() @InputNumber() height = 450;
+  @Input({ transform: numberAttribute }) height = 450;
   @Input() padding: number[] = [40, 8, 64, 40];
-  @Input() @InputNumber() borderWidth = 2;
-  @Input() @InputBoolean() slider = true;
+  @Input({ transform: numberAttribute }) borderWidth = 2;
+  @Input({ transform: booleanAttribute }) slider = true;
   @Output() readonly clickItem = new EventEmitter<G2TimelineClickItem>();
 
   // #endregion

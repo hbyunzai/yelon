@@ -14,28 +14,31 @@ order: 0
 Simplest of usage.
 
 ```ts
-import { Component } from '@angular/core';
-import { SFSchema } from '@yelon/form';
+import { Component, inject } from '@angular/core';
+
+import { YelonFormModule, SFSchema } from '@yelon/form';
+import type { TinymceWidgetSchema } from '@yelon/form/widgets-third/tinymce';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-demo',
-  template: `<sf [schema]="schema" (formSubmit)="submit($event)"></sf>`,
+  template: `<sf [schema]="schema" (formSubmit)="submit($event)" />`,
+  standalone: true,
+  imports: [YelonFormModule]
 })
 export class DemoComponent {
+  private readonly msg = inject(NzMessageService);
   schema: SFSchema = {
     properties: {
       remark: {
         type: 'string',
         title: '描述',
         ui: {
-          widget: 'tinymce',
-        },
-      },
-    },
+          widget: 'tinymce'
+        } as TinymceWidgetSchema
+      }
+    }
   };
-
-  constructor(private msg: NzMessageService) {}
 
   submit(value: {}): void {
     this.msg.success(JSON.stringify(value));

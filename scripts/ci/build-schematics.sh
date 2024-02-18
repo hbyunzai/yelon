@@ -63,6 +63,7 @@ copyFiles() {
     "${1}.prettierignore|${2}application/files/root/.prettierignore"
     "${1}.prettierrc.js|${2}application/files/root/.prettierrc.js"
     "${1}.stylelintrc.js|${2}application/files/root/.stylelintrc.js"
+    "${1}.npmrc|${2}application/files/root"
     "${1}.nvmrc|${2}application/files/root"
     "${1}proxy.conf.js|${2}application/files/root"
     "${1}.husky|${2}application/files/root/.husky"
@@ -77,13 +78,14 @@ copyFiles() {
     # mock
     "${1}_mock/_user.ts|${2}application/files/root/_mock/"
     # src
+    "${1}src/favicon.ico|${2}application/files/src/"
     "${1}src/typings.d.ts|${2}application/files/src/"
     "${1}src/environments|${2}application/files/src/"
     "${1}src/styles|${2}application/files/src/"
     "${1}src/main.ts|${2}application/files/src/"
     "${1}src/styles.less|${2}application/files/src/"
-    "${1}src/style-icons-auto.ts|${2}application/files/src/"
-    "${1}src/style-icons.ts|${2}application/files/src/"
+    # "${1}src/style-icons-auto.ts|${2}application/files/src/"
+    # "${1}src/style-icons.ts|${2}application/files/src/"
     # assets
     "${1}src/assets/color.less|${2}application/files/src/assets/"
     "${1}src/assets/style.compact.css|${2}application/files/src/assets/"
@@ -92,30 +94,24 @@ copyFiles() {
     "${1}src/assets/tmp/img/avatar.jpg|${2}application/files/src/assets/tmp/img/"
     "${1}src/assets/tmp/i18n/*|${2}application/files/src/assets/tmp/i18n/"
     "${1}src/assets/tmp/app-data.json|${2}application/files/src/assets/tmp/"
-    "${1}src/assets/tmp/img/message.svg|${2}application/files/src/assets/tmp/img/"
-    "${1}src/assets/tmp/img/notice.svg|${2}application/files/src/assets/tmp/img/"
-    "${1}src/assets/tmp/img/todo.svg|${2}application/files/src/assets/tmp/img/"
-    "${1}src/assets/tmp/img/message.png|${2}application/files/src/assets/tmp/img/"
-    "${1}src/assets/tmp/img/todo.png|${2}application/files/src/assets/tmp/img/"
-    "${1}src/favicon.ico|${2}application/files/src/assets/"
     # core
     "${1}src/app/core/i18n|${2}application/files/src/app/core/"
     "${1}src/app/core/net|${2}application/files/src/app/core/"
     "${1}src/app/core/start-page.guard.ts|${2}application/files/src/app/core/"
-    "${1}src/app/core/module-import-guard.ts|${2}application/files/src/app/core/"
     "${1}src/app/core/README.md|${2}application/files/src/app/core/"
     # shared
     "${1}src/app/shared/utils/*|${2}application/files/src/app/shared/utils/"
     "${1}src/app/shared/json-schema/*|${2}application/files/src/app/shared/json-schema/"
+    "${1}src/app/shared/cell-widget/*|${2}application/files/src/app/shared/cell-widget/"
     "${1}src/app/shared/st-widget/*|${2}application/files/src/app/shared/st-widget/"
-    # "${1}src/app/shared/index.ts|${2}application/files/src/app/shared/"
+    "${1}src/app/shared/shared-imports.ts|${2}application/files/src/app/shared/"
+    "${1}src/app/shared/index.ts|${2}application/files/src/app/shared/"
     # app.component
-    "${1}src/app/global-config.module.ts|${2}application/files/src/app/"
     "${1}src/app/app.component.ts|${2}application/files/src/app/"
     # layout
+    "${1}src/app/layout/index.ts|${2}application/files/src/app/layout/"
     "${1}src/app/layout/blank|${2}application/files/src/app/layout/"
     "${1}src/app/layout/passport/passport.component.less|${2}application/files/src/app/layout/passport/"
-    "${1}src/app/layout/passport/passport.component.ts|${2}application/files/src/app/layout/passport/"
     "${1}src/app/layout/basic/README.md|${2}application/files/src/app/layout/basic/"
     "${1}src/app/layout/basic/widgets/i18n.component.ts|${2}application/files/src/app/layout/basic/widgets/"
     "${1}src/app/layout/basic/widgets/search.component.ts|${2}application/files/src/app/layout/basic/widgets/"
@@ -147,10 +143,6 @@ copyFiles() {
       cp -fr $from $to
     fi
   done
-
-  # remove passport-routing & passport.module.ts
-  rm ${2}application/files/src/app/routes/passport/passport-routing.module.ts
-  rm ${2}application/files/src/app/routes/passport/passport.module.ts
 }
 
 cloneScaffold() {
@@ -253,14 +245,14 @@ fi
 
 echo "Finished!!"
 
-# TODO: just only devcui
+# TODO: just only yunzai-bot
 # clear | bash ./scripts/ci/build-schematics.sh -b -t
 # clear | bash ./scripts/ci/build-schematics.sh -b -copy
 # clear | bash ./scripts/ci/build-schematics.sh -b -copy -debug
 if [[ ${DEBUG} == true ]]; then
   cd ../../
   DEBUG_FROM=${PWD}/work/yelon/dist/ng-yunzai/*
-  DEBUG_TO=${PWD}/work/ng-yunzai/node_modules/ng-yunzai/
+  DEBUG_TO=${PWD}/work/ng17/node_modules/ng-yunzai/
   echo "DEBUG_FROM:${DEBUG_FROM}"
   echo "DEBUG_TO:${DEBUG_TO}"
   rm -rf ${DEBUG_TO}

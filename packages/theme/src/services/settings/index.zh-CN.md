@@ -54,7 +54,7 @@ type: Service
 
 ```diff
  const yunzaiProvides = [
-  { provide: YUNZAI_CONFIG, useValue: yunzaiConfig },
+  provideYunzaiConfig(yunzaiConfig),
 + {
 +   provide: YUNZAI_SETTING_KEYS,
 +   useValue: {

@@ -70,7 +70,7 @@ const ATTRIBUTES = {
 };
 
 const ATTRIBUTE_NAMES = Object.keys(ATTRIBUTES);
-// fix parse5 auto ignore lower case all properies
+// fix parse5 auto ingore lower case all properies
 ATTRIBUTE_NAMES.forEach(key => {
   const res: string[] = [];
   (ATTRIBUTES[key] as string[]).forEach(prop => {
@@ -166,7 +166,7 @@ function getNgValue(attr: Attribute): string[] | null {
     return [str];
   }
 
-  // ignore {{ }}
+  // ingore {{ }}
   if (templatVarIndex !== -1) return null;
 
   return fixValue(str, '');
@@ -274,7 +274,7 @@ export const ICONS = [ ];
     return;
   }
   const source = getSourceFile(tree, path);
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const allImports = findNodes(source as any, ts.SyntaxKind.ImportDeclaration);
   const iconImport = allImports.find((w: ts.ImportDeclaration) =>
     w.moduleSpecifier.getText().includes('@ant-design/icons-angular/icons')

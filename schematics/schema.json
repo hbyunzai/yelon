@@ -9,7 +9,7 @@
     },
     "defaultProject": {
       "type": "string",
-      "description": "Default project name"
+      "description": "Default project name, generally used for https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode plug-in"
     },
     "theme": {
       "$ref": "#/definitions/theme"

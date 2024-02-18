@@ -14,16 +14,19 @@ order: 0
 Simplest of usage.
 
 ```ts
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
-import { SFSchema, SFStringWidgetSchema, SFValueChange } from '@yelon/form';
+import { YelonFormModule, SFSchema, SFStringWidgetSchema, SFValueChange } from '@yelon/form';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-demo',
-  template: `<sf [schema]="schema" (formValueChange)="valueChange($event)" (formSubmit)="submit($event)"></sf>`
+  template: `<sf [schema]="schema" (formValueChange)="valueChange($event)" (formSubmit)="submit($event)" />`,
+  standalone: true,
+  imports: [YelonFormModule]
 })
 export class DemoComponent {
+  private readonly msg = inject(NzMessageService);
   schema: SFSchema = {
     properties: {
       name: {
@@ -70,8 +73,6 @@ export class DemoComponent {
     },
     required: ['name']
   };
-
-  constructor(private msg: NzMessageService) {}
 
   submit(value: {}): void {
     this.msg.success(JSON.stringify(value));

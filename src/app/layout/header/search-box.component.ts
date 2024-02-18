@@ -1,33 +1,34 @@
 import { Platform } from '@angular/cdk/platform';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, I18nPipe } from '@yelon/theme';
 import { LazyService } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
-import { I18NService } from '@core';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 declare const docsearch: NzSafeAny;
 
 @Component({
   selector: 'header-search',
-  templateUrl: './search-box.component.html',
+  template: `<i nz-icon nzType="search"></i>
+    <input nz-input #searchInput [placeholder]="'app.header.search' | i18n" /> `,
   host: {
     '[attr.id]': '"search-box"'
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzIconModule, NzInputModule, I18nPipe]
 })
 export class HeaderSearchComponent implements AfterViewInit {
+  private readonly i18n = inject(YUNZAI_I18N_TOKEN);
+  private readonly platform = inject(Platform);
+  private readonly router = inject(Router);
+  private readonly lazySrv = inject(LazyService);
+
   @ViewChild('searchInput', { static: false })
   searchInput!: ElementRef<HTMLInputElement>;
-
-  constructor(
-    @Inject(YUNZAI_I18N_TOKEN) private i18n: I18NService,
-    private platform: Platform,
-    private router: Router,
-    private lazySrv: LazyService
-  ) {}
 
   ngAfterViewInit(): void {
     this.initDocSearch();
@@ -44,8 +45,8 @@ export class HeaderSearchComponent implements AfterViewInit {
       const curHost = location.hostname;
       const isLocal = curHost.includes('localhost');
       docsearch({
-        appId: 'KNI4PDQPLT',
-        apiKey: 'f77b841e2a1f87742bef959fe09cc80e',
+        appId: 'a',
+        apiKey: 'b',
         indexName: `ng-yunzai`,
         inputSelector: '#search-box input',
         algoliaOptions: {

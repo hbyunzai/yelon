@@ -5,32 +5,14 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { of, Subject, throwError } from 'rxjs';
 
-import {
-  DatePipe,
-  YelonLocaleService,
-  DrawerHelper,
-  en_US,
-  ModalHelper,
-  _HttpClient,
-  YunzaiI18NService
-} from '@yelon/theme';
+import { YelonLocaleService, DrawerHelper, en_US, ModalHelper, _HttpClient, YunzaiI18NService } from '@yelon/theme';
+import { formatDate } from '@yelon/util/date-time';
 import { deepCopy } from '@yelon/util/other';
 import { NzPaginationComponent } from 'ng-zorro-antd/pagination';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 import { STWidgetRegistry } from './../st-widget';
-import {
-  PS,
-  DEFAULTCOUNT,
-  USERS,
-  MOCKDATE,
-  MOCKIMG,
-  genData,
-  MockNzI18nService,
-  PageObject,
-  TestComponent,
-  genModule
-} from './base.spec';
+import { PS, DEFAULTCOUNT, USERS, MOCKDATE, MOCKIMG, genData, PageObject, TestComponent, genModule } from './base.spec';
 import { STDataSource } from '../st-data-source';
 import { STExport } from '../st-export';
 import { STComponent } from '../st.component';
@@ -269,7 +251,7 @@ describe('abc: st', () => {
           it(`should be render date`, fakeAsync(() => {
             page
               .updateColumn([{ title: '', index: 'date', type: 'date' }])
-              .expectCell(new DatePipe(new MockNzI18nService() as any).transform(MOCKDATE, 'yyyy-MM-dd HH:mm'))
+              .expectCell(formatDate(MOCKDATE, 'yyyy-MM-dd HH:mm'))
               .asyncEnd();
           }));
           it(`should be custom render date format`, fakeAsync(() => {
@@ -282,7 +264,7 @@ describe('abc: st', () => {
                   dateFormat: 'yyyy-MM'
                 }
               ])
-              .expectCell(new DatePipe(new MockNzI18nService() as any).transform(MOCKDATE, 'yyyy-MM'))
+              .expectCell(formatDate(MOCKDATE, 'yyyy-MM'))
               .asyncEnd();
           }));
           it(`should be text center`, fakeAsync(() => {
@@ -1456,7 +1438,7 @@ describe('abc: st', () => {
     describe('#export', () => {
       let exportSrv: STExport;
       beforeEach(() => {
-        exportSrv = comp['exportSrv'] = {
+        exportSrv = (comp as any)['exportSrv'] = {
           export: jasmine.createSpy('export')
         } as any;
       });

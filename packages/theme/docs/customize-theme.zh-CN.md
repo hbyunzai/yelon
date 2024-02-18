@@ -70,7 +70,7 @@ Ant Design 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，�
 1. 安装依赖
 
 ```bash
-yarn add ng-yunzai-plugin-theme -D
+npm i --save-dev ng-yunzai-plugin-theme
 ```
 
 > [ng-yunzai-plugin-theme](https://github.com/hbyunzai/plugin-theme) 是专门针对 NG-YUNZAI 生成 `color.less` 及主题CSS文件。

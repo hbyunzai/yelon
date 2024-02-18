@@ -57,7 +57,7 @@ function setDockerfile(tree: Tree, options: PluginOptions): void {
       `# STEP 1: Build
 FROM node:10 as builder
 
-LABEL authors="devcui <devcui@outlook.com>"
+LABEL authors="yunzai-bot <yunzai-bot@outlook.com>"
 
 COPY package.json package-lock.json ./
 

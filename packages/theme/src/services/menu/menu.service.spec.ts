@@ -42,7 +42,7 @@ describe('Service: Menu', () => {
       badgeDot: true,
       badgeStatus: 'success'
     },
-    { text: 'text', externalLink: '//ng-yunzai.com' },
+    { text: 'text', externalLink: '//ng.yunzainfo.com' },
     { text: 'text', link: '/demo2', i18n: 'text' },
     { text: 'sub', children: [] },
     { text: 'hide', link: '/hide', hide: true }
@@ -306,7 +306,7 @@ describe('Service: Menu', () => {
           {
             text: 'dashboard',
             link: '/dashboard',
-            icon: `http://ng-yunzai.com/1.jpg`
+            icon: `http://ng.yunzainfo.com/1.jpg`
           }
         ]);
         const icon: NzSafeAny = srv.menus[0].icon;
@@ -333,6 +333,14 @@ describe('Service: Menu', () => {
       });
       it('recursive up find include querystring', () => {
         expect(srv.find({ url: `/dashboard/v1/1?a=1`, recursive: true }) != null).toBe(true);
+      });
+      it('ignore hidden', () => {
+        expect(srv.find({ url: `/hide`, ignoreHide: true })).toBe(null);
+        expect(srv.find({ url: `/hide`, ignoreHide: false })).not.toBe(null);
+      });
+      it('custom result via cb', () => {
+        const res = srv.find({ url: `/always-first-item`, cb: _ => true });
+        expect(res).toBe(srv.menus[0]);
       });
     });
 

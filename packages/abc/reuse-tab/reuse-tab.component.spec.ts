@@ -9,6 +9,7 @@ import { YUNZAI_I18N_TOKEN, YelonLocaleModule, YelonLocaleService, en_US, MenuSe
 import { ScrollService } from '@yelon/util/browser';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+import { provideReuseTabConfig } from './provide';
 import { ReuseTabComponent } from './reuse-tab.component';
 import {
   ReuseCanClose,
@@ -17,7 +18,6 @@ import {
   ReuseTabMatchMode,
   ReuseTabRouteParamMatchMode
 } from './reuse-tab.interfaces';
-import { ReuseTabModule } from './reuse-tab.module';
 import { ReuseTabService } from './reuse-tab.service';
 import { REUSE_TAB_STORAGE_STATE } from './reuse-tab.state';
 import { ReuseTabStrategy } from './reuse-tab.strategy';
@@ -44,7 +44,7 @@ describe('abc: reuse-tab', () => {
       declarations: [AppComponent, LayoutComponent, AComponent, BComponent, CComponent, DComponent, EComponent],
       imports: [
         YelonLocaleModule,
-        ReuseTabModule,
+        ReuseTabComponent,
         RouterTestingModule.withRoutes(
           [
             {
@@ -71,11 +71,7 @@ describe('abc: reuse-tab', () => {
       providers: [
         { provide: RouteReuseStrategy, useClass: ReuseTabStrategy, deps: [ReuseTabService] },
         MenuService,
-        {
-          provide: RouteReuseStrategy,
-          useClass: ReuseTabStrategy,
-          deps: [ReuseTabService]
-        },
+        provideReuseTabConfig(),
         {
           provide: 'CanDeactivate',
           useValue: () => {
@@ -143,6 +139,26 @@ describe('abc: reuse-tab', () => {
           .expectCount(3)
           .end();
       }));
+      it('should be keep open order', fakeAsync(() => {
+        srv.max = 10;
+        page
+          .to('#b')
+          .expectUrl(0, '/a')
+          .expectUrl(1, '/b/1')
+          .to('#a')
+          .expectUrl(0, '/a')
+          .expectUrl(1, '/b/1')
+          .to('#c')
+          .expectUrl(0, '/a')
+          .expectUrl(1, '/c')
+          .expectUrl(2, '/b/1')
+          .to('#d')
+          .expectUrl(0, '/a')
+          .expectUrl(1, '/c')
+          .expectUrl(2, '/d')
+          .expectUrl(3, '/b/1')
+          .end();
+      }));
     });
 
     describe('#close', () => {
@@ -153,7 +169,6 @@ describe('abc: reuse-tab', () => {
       }));
       it('should show next tab when closed a has next tab', fakeAsync(() => {
         srv.max = 10;
-        // debugger;
         page.to('#b');
         page.to('#c');
         page.go(1);
@@ -214,14 +229,7 @@ describe('abc: reuse-tab', () => {
           fixture.detectChanges();
         });
         it('should working', fakeAsync(() => {
-          page
-            .to('#b')
-            .expectCount(MAX)
-            .to('#c')
-            .expectCount(MAX + 1) // +1 => current page
-            .to('#d')
-            .expectCount(MAX + 1)
-            .end();
+          page.to('#b').expectCount(MAX).to('#c').expectCount(MAX).to('#d').expectCount(MAX).end();
         }));
       });
       describe('#allowClose', () => {
@@ -802,7 +810,7 @@ describe('abc: reuse-tab', () => {
       this.cd();
       return this;
     }
-    openContextMenu(pos: number, eventArgs?: NzSafeAny): this {
+    openContextMenu(pos: number, eventArgs?: MouseEventInit): this {
       const ls = document.querySelectorAll('.reuse-tab__name');
       if (pos > ls.length) {
         expect(false).withContext(`the pos muse be 0-${ls.length}`).toBe(true);
@@ -866,7 +874,7 @@ class AppComponent {}
       [canClose]="canClose"
       (change)="change($event)"
       (close)="close($event)"
-    />>
+    />
     <div id="children"><router-outlet /></div>
     <ng-template #titleRender let-i>{{ i.url }}</ng-template>
   `

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { NgClass, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -13,12 +14,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer } from '@angular/platform-browser';
 import { filter } from 'rxjs';
 
-import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, I18nPipe } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { deepCopy } from '@yelon/util/other';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 import { AppService, CodeService, I18NService } from '@core';
+
+import { EditButtonComponent } from '../edit-button/edit-button.component';
 
 @Component({
   selector: 'code-box',
@@ -27,7 +32,9 @@ import { AppService, CodeService, I18NService } from '@core';
     '[class.code-box]': 'true',
     '[class.expand]': 'expand'
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgStyle, NgClass, I18nPipe, NzToolTipModule, NzIconModule, EditButtonComponent]
 })
 export class CodeBoxComponent implements OnInit {
   private _item: any;
@@ -95,7 +102,7 @@ export class CodeBoxComponent implements OnInit {
 
   openOnlineIDE(ide: 'StackBlitz' | 'CodeSandbox' = 'StackBlitz', includeCli: boolean = false): void {
     if (ide === 'StackBlitz') {
-      this.codeSrv.openOnStackBlitz(this.item.title, this.item.code);
+      this.codeSrv.openOnStackBlitz(this.item.title, this.item.code, includeCli);
     } else {
       // this.msg.warning(`CodeSandbox does not support Angular 13, pls use StackBlitz!`);
       this.codeSrv.openOnCodeSandbox(this.item.title, this.item.code, includeCli);

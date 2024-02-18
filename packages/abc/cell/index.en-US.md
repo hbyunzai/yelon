@@ -11,7 +11,7 @@ Cell formatting is supported for multiple data types, and supports widget mode.
 
 ## API
 
-### cell
+### cell:standalone
 
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
@@ -21,27 +21,27 @@ Cell formatting is supported for multiple data types, and supports widget mode.
 
 ### CellOptions
 
-| Property | Description                                                                          | Type | Default |
-|----------|--------------------------------------------------------------------------------------|------|---------|
-| `[type]` | Render type of the cell                                                              | - | - |
-| `[tooltip]` | Text popup tip                                                                       | `string` | - |
-| `[renderType]` | Render type of the cell                                                              | `primary,success,danger,warning` | - |
-| `[size]` | Size of the cell                                                                     | `large,small` | - |
-| `[unit]` | Unit, can also be specified by `value: {text: 100, unit: 'RMB'}`                     | `string` | `-` |
-| `[default]` | Default text                                                                         | `string | CellDefaultText` | - |
-| `[mask]` | Format mask, [Document](https://ng.yunzainfo.com/util/format/en#formatMask)          | `string, FormatMaskOption` | - |
-| `[widget]` | Widget config                                                                        | `{key?: string, data?: string}` | - |
-| `[date]` | Date config, supports `minutes ago` formatting                                       | `{format?: string}` | - |
+| Property | Description | Type | Default |
+|----------|-------------|------|---------|
+| `[type]` | Render type of the cell | - | - |
+| `[tooltip]` | Text popup tip  | `string` | - |
+| `[renderType]` | Render type of the cell | `primary,success,danger,warning` | - |
+| `[size]` | Size of the cell | `large,small` | - |
+| `[unit]` | Unit, can also be specified by `value: {text: 100, unit: 'RMB'}` | `string` | `-` |
+| `[default]` | Default text | `string | CellDefaultText` | - |
+| `[mask]` | Format mask, [Document](https://ng.yunzainfo.com/util/format/en#formatMask) | `string, FormatMaskOption` | - |
+| `[widget]` | Widget config | `{key?: string, data?: string}` | - |
+| `[date]` | Date config, supports `minutes ago` formatting | `{format?: string}` | - |
 | `[mega]` | Large number format filter, [Document](https://ng.yunzainfo.com/util/format/en#mega) | `CurrencyMegaOptions` | - |
-| `[currency]` | Currency config                                                                      | `CurrencyFormatOptions` | - |
-| `[boolean]` | Boolean config                                                                       | `YNOptions` | - |
-| `[img]` | Image config, support large image preview                                            | `{ size?: number; big?: boolean }` | - |
-| `[link]` | Link config                                                                          | `{ url?: string; target?: string }` | - |
-| `[html]` | HTML config                                                                          | `{ safe?: string }` | - |
-| `[badge]` | Badge config                                                                         | `{ data?: CellBadge }` | - |
-| `[tag]` | Tag config                                                                           | `{ data?: CellTag }` | - |
-| `[checkbox]` | Checkbox config                                                                      | `{ label?: string }` | - |
-| `[radio]` | Radio config                                                                         | `{ label?: string }` | - |
+| `[currency]` | Currency config | `CurrencyFormatOptions` | - |
+| `[boolean]` | Boolean config | `YNOptions` | - |
+| `[img]` | Image config, support large image preview | `{ size?: number; big?: boolean }` | - |
+| `[link]` | Link config | `{ url?: string; target?: string }` | - |
+| `[html]` | HTML config | `{ safe?: string }` | - |
+| `[badge]` | Badge config | `{ data?: CellBadge }` | - |
+| `[tag]` | Tag config | `{ data?: CellTag }` | - |
+| `[checkbox]` | Checkbox config | `{ label?: string }` | - |
+| `[radio]` | Radio config | `{ label?: string }` | - |
 
 **Type**
 
@@ -62,7 +62,7 @@ Cell formatting is supported for multiple data types, and supports widget mode.
 - `enum` Enum
 - `widget` Custom widget
 
-**Custom widget**
+## Custom widget
 
 Just implement the `CellWidgetInstance` interface, for example:
 
@@ -95,28 +95,14 @@ export class CellTestWidget implements CellWidgetInstance {
 
 `data` is a fixed parameter, including `value`, `options` configuration items.
 
-Secondly, you also need to call `CellService.registerWidget` to register the widget; usually a new module will be built separately, for example:
+Finally, register the widget through `provideCellWidgets` under `app.config.ts`, for example:
 
 ```ts
-import { NgModule } from '@angular/core';
-
-import { CellService } from '@yelon/abc/cell';
-
-import { CellTestWidget } from './test';
-import { SharedModule } from '../shared.module';
-
-export const CELL_WIDGET_COMPONENTS = [CellTestWidget];
-
-@NgModule({
-  declarations: CELL_WIDGET_COMPONENTS,
-  imports: [SharedModule],
-  exports: CELL_WIDGET_COMPONENTS
-})
-export class CellWidgetModule {
-  constructor(srv: CellService) {
-    srv.registerWidget(CellTestWidget.KEY, CellTestWidget);
-  }
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideCellWidgets(
+      { KEY: CellTestWidget.KEY, type: CellTestWidget }
+    ),
+  ]
 }
 ```
-
-Finally, just register `CellWidgetModule` under the root module.

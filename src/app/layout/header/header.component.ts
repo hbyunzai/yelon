@@ -1,20 +1,33 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet, UpperCasePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 
-import { YUNZAI_I18N_TOKEN, RTLService } from '@yelon/theme';
+import { MatchRouterDirective } from '@shared';
+import { GithubButtonComponent } from 'ng-github-button';
+
+import { YUNZAI_I18N_TOKEN, RTLService, I18nPipe } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 import { I18NService, LangType, MobileService } from '@core';
 
+import { HeaderSearchComponent } from './search-box.component';
 import { MetaSearchGroupItem } from '../../interfaces';
 import { LayoutComponent } from '../layout.component';
 
 const pkg = require('../../../../package.json');
-const minimumVersion = 13;
+const minimumVersion = +pkg.version.split('.')[0] - 2;
 
 @Component({
   selector: 'app-header',
@@ -23,12 +36,32 @@ const minimumVersion = 13;
     '[attr.id]': '"header"',
     '[class.clearfix]': `true`
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    FormsModule,
+    RouterLink,
+    NgTemplateOutlet,
+    UpperCasePipe,
+    I18nPipe,
+    HeaderSearchComponent,
+    MatchRouterDirective,
+    GithubButtonComponent,
+    NzMenuModule,
+    NzButtonModule,
+    NzSelectModule,
+    NzIconModule,
+    NzPopoverModule,
+    NzToolTipModule,
+    NzDropDownModule,
+    NzMenuModule,
+    NzGridModule
+  ]
 })
 export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile!: boolean;
-  oldVersionList = [15, 14, 13, 12];
+  oldVersionList = [16];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string; selected?: boolean }> = [
     { name: 'theme' },
@@ -99,7 +132,7 @@ export class HeaderComponent implements AfterViewInit {
       this.win.location.href = `https://ng.yunzainfo.com/version/${version}.x/`;
       return;
     }
-    this.win.open(`https://github.com/hbyunzai/archive-docs/blob/master/README.md`);
+    this.win.open(`https://github.com/ng-yunzai/archive-docs/blob/full/README.md`);
   }
 
   langChange(language: 'en' | 'zh'): void {

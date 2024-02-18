@@ -64,7 +64,6 @@ body {
         }
       }
     }
-
     // fix width
     nz-input-group {
       width: auto;
@@ -90,7 +89,6 @@ body {
   @{yunzai-default-prefix}__content {
     margin-left: (@yunzai-default-aside-wd + @yunzai-default-content-padding);
   }
-
   @{yunzai-default-prefix}__collapsed {
     @{yunzai-default-prefix} {
       &__sidebar {
@@ -104,14 +102,13 @@ body {
   }
 }
 
-.layout-default-rtl-mixin(@enabled) when (@enabled=true) {
+.layout-default-rtl-mixin(@enabled) when(@enabled=true) {
   [dir='rtl'] {
     @media (min-width: @mobile-min) {
       @{yunzai-default-prefix}__content {
         margin-right: (@yunzai-default-aside-wd + @yunzai-default-content-padding);
         margin-left: 0;
       }
-
       @{yunzai-default-prefix}__collapsed {
         @{yunzai-default-prefix} {
           &__content {
@@ -123,5 +120,4 @@ body {
     }
   }
 }
-
 .layout-default-rtl-mixin(@rtl-enabled);

@@ -1,5 +1,6 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 import {
   AppstoreOutline,
@@ -22,11 +23,15 @@ import {
 
 // #region icons
 
-import { ReuseCustomContextMenu } from '@yelon/abc/reuse-tab';
+import { ReuseCustomContextMenu, ReuseTabComponent } from '@yelon/abc/reuse-tab';
 import { YUNZAI_I18N_TOKEN, Menu, MenuService, RTLService, SettingsService, User } from '@yelon/theme';
-import { LayoutDefaultOptions } from '@yelon/theme/layout-default';
+import { LayoutDefaultModule, LayoutDefaultOptions } from '@yelon/theme/layout-default';
+import { SettingDrawerModule } from '@yelon/theme/setting-drawer';
 import { deepCopy } from '@yelon/util/other';
-import { NzIconService } from 'ng-zorro-antd/icon';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { I18NService, LangType } from '@core';
@@ -62,14 +67,11 @@ const ICONS = [
         </a>
       </layout-default-header-item>
       <layout-default-header-item direction="middle">
-        <layout-default-top-menu-item
-          *ngFor="let m of topMenus"
-          (click)="changeMenu(m.key)"
-          [selected]="m.selected"
-          [disabled]="m.disabled"
-        >
-          <i nz-icon nzType="github"></i> {{ m.label }}
-        </layout-default-top-menu-item>
+        @for (m of topMenus; track $index) {
+          <layout-default-top-menu-item (click)="changeMenu(m.key)" [selected]="m.selected" [disabled]="m.disabled">
+            <i nz-icon nzType="github"></i> {{ m.label }}
+          </layout-default-top-menu-item>
+        }
       </layout-default-header-item>
       <layout-default-header-item direction="right">
         <a class="yunzai-default__nav-item" (click)="rtl.toggle()">{{ rtl.nextDir | uppercase }}</a>
@@ -100,7 +102,18 @@ const ICONS = [
   host: {
     '[class.yunzai-default]': 'true'
   },
-  preserveWhitespaces: false
+  standalone: true,
+  imports: [
+    UpperCasePipe,
+    LayoutDefaultModule,
+    NzIconModule,
+    NzDropDownModule,
+    NzAvatarModule,
+    NzMenuModule,
+    ReuseTabComponent,
+    RouterOutlet,
+    SettingDrawerModule
+  ]
 })
 export class DevLayoutComponent implements OnInit {
   options: LayoutDefaultOptions = {

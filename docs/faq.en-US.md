@@ -10,10 +10,6 @@ Please check the FAQ below before asking questions.
 
 ## Basic
 
-### Can't Bind to since it isn't a known property of
-
-When you have multiple lazy modules, you want each submodule to use the component library (for example: `NgZorroAntdModule`, `NgxTinymceModule`) should be exported in `ShareModule`, please refer to [module registration guidelines](/docs/Module).
-
 ### Expression Changed After It Has Been Checked Error
 
 Common mistakes under Angular, [this article](https://blog.angularindepth.com/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error-e3fd9ce7dbb4) will help you understand why.
@@ -61,18 +57,15 @@ Two situations:
 - Using `cnpm` to install dependencies, you will not be able to find style files. This is because `cnpm` is in the form of a soft link path, which causes the `ng-zorro-antd` folder name to change, so it is recommended to use the `yarn` install dependency package instead.
 - The `ng-zorro-antd` version is too old to cause some components to fail to load into the appropriate style
 
-### How to use Taobao source correctly?
+### How to use other mirror?
 
-The simplest is to use the [networkEnv](/cli/plugin#networkEnv) plugin.
-
-Or manually repair:
+Install the [nnrm](https://github.com/YunYouJun/nnrm/blob/main/README.zh-CN.md) plugin.
 
 ```bash
-yarn config set registry https://registry.npmmirror.com
-yarn config set sass_binary_site https://npmmirror.com/mirrors/node-sass
-# restore
-yarn config delete registry
-yarn config delete sass_binary_site
+# Install nnrm
+npm install -g nnrm
+# Switch Npm to Taobao mirror
+nnrm use taobao
 ```
 
 ## Configuration
@@ -98,10 +91,10 @@ For missing language imports, refer to [app.module.ts](https://github.com/hbyunz
 Online documents will only retain the data of the last three major version numbers. If the version is low, you can view it through local deployment:
 
 ```bash
-git clone --depth 1 -b full https://github.com/hbyunzai/archive-docs.git ng-yunzai-doc
+git clone --depth 1 -b full https://github.com/ng-yunzai/archive-docs.git ng-yunzai-doc
 cd ng-yunzai-doc
-yarn
-yarn start
+npm install
+npm start
 ```
 
 ### Fix the abnormal display of the lower part of the 360 browser

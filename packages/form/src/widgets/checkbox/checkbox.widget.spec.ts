@@ -51,7 +51,7 @@ describe('form: widget: checkbox', () => {
       .checkCount(chekcWrapCls, 2);
   }));
 
-  it('should be ingore title when not array data', () => {
+  it('should be ignore title when not array data', () => {
     const title = 'test';
     page
       .newSchema({

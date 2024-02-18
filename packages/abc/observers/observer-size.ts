@@ -7,7 +7,8 @@ import {
   NgModule,
   NgZone,
   OnDestroy,
-  Output
+  Output,
+  inject
 } from '@angular/core';
 import { Observable, Observer, Subject, Subscription } from 'rxjs';
 
@@ -80,17 +81,16 @@ export class SizeObserver implements OnDestroy {
 
 @Directive({
   selector: '[observeSize]',
-  exportAs: 'observeSize'
+  exportAs: 'observeSize',
+  standalone: true
 })
 export class ObserverSize implements AfterViewInit, OnDestroy {
+  private readonly _obs = inject(SizeObserver);
+  private readonly el: HTMLElement = inject(ElementRef).nativeElement;
+  private readonly ngZone = inject(NgZone);
+
   private _sub$: Subscription | null = null;
   @Output('observeSize') readonly event = new EventEmitter<MutationRecord[]>();
-
-  constructor(
-    private _obs: SizeObserver,
-    private el: ElementRef<HTMLElement>,
-    private ngZone: NgZone
-  ) {}
 
   ngAfterViewInit(): void {
     if (!this._sub$) {
@@ -100,7 +100,7 @@ export class ObserverSize implements AfterViewInit, OnDestroy {
 
   private _sub(): void {
     this._unsub();
-    const stream = this._obs.observe(this.el.nativeElement);
+    const stream = this._obs.observe(this.el);
     this.ngZone.runOutsideAngular(() => {
       this._sub$ = stream.subscribe(this.event);
     });
@@ -117,6 +117,6 @@ export class ObserverSize implements AfterViewInit, OnDestroy {
 
 @NgModule({
   exports: [ObserverSize],
-  declarations: [ObserverSize]
+  imports: [ObserverSize]
 })
 export class ObserversModule {}

@@ -9,7 +9,7 @@ describe('Pipe: url', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [YunzaiThemeModule.forRoot()],
+      imports: [YunzaiThemeModule],
       declarations: [TestComponent]
     });
     fixture = TestBed.createComponent(TestComponent);

@@ -10,7 +10,7 @@ module: import { TrendModule } from '@yelon/chart/trend';
 
 ## API
 
-### trend
+### trend:standalone
 
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|

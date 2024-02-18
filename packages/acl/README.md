@@ -1,4 +1,4 @@
-# @yelon/acl [![Build Status](https://dev.azure.com/ng-yunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/ng-yunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/acl.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/acl)
+# @yelon/acl [![Build Status](https://dev.azure.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/acl.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/acl)
 
 A simple role-based access control.
 
@@ -6,8 +6,11 @@ A simple role-based access control.
 
 + [Document](https://ng.yunzainfo.com/acl) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/acl)
 + [@yelon Source](https://github.com/hbyunzai/yelon)
-+ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
++ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng.yunzainfo.com/))
 
+## Architecture
+
+![Architecture](https://raw.githubusercontent.com/hbyunzai/yelon/master/_screenshot/architecture.png)
 
 ## Troubleshooting
 

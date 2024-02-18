@@ -1,54 +1,49 @@
-import { HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
 
-import { YunzaiAuthConfig } from '@yelon/util/config';
-import { log } from '@yelon/util/other';
+import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 
 import { SimpleTokenModel } from './simple.model';
-import { BaseInterceptor } from '../base.interceptor';
+import { mergeConfig } from '../../auth.config';
+import { isAnonymous, throwErr } from '../base.interceptor';
 import { CheckSimple } from '../helper';
 import { YA_SERVICE_TOKEN } from '../interface';
 
-/**
- * Simple 拦截器
- *
- * ```
- * // app.module.ts
- * { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true}
- * ```
- */
-@Injectable()
-export class SimpleInterceptor extends BaseInterceptor {
-  isAuth(_options: YunzaiAuthConfig): boolean {
-    this.model = this.injector.get(YA_SERVICE_TOKEN).get() as SimpleTokenModel;
-    return CheckSimple(this.model as SimpleTokenModel);
+function newReq(req: HttpRequest<unknown>, model: SimpleTokenModel, options: YunzaiAuthConfig): HttpRequest<unknown> {
+  const { token_send_template, token_send_key } = options;
+  const token = token_send_template!.replace(/\$\{([\w]+)\}/g, (_: string, g) => model[g]);
+  switch (options.token_send_place) {
+    case 'header':
+      const obj: any = {};
+      obj[token_send_key!] = token;
+      req = req.clone({
+        setHeaders: obj
+      });
+      break;
+    case 'body':
+      const body: any = req.body || {};
+      body[token_send_key!] = token;
+      req = req.clone({
+        body
+      });
+      break;
+    case 'url':
+      req = req.clone({
+        params: req.params.append(token_send_key!, token)
+      });
+      break;
   }
-
-  setReq(req: HttpRequest<any>, options: YunzaiAuthConfig): HttpRequest<any> {
-    const { token_send_template, token_send_key } = options;
-    const access_token = token_send_template!.replace(/\$\{([\w]+)\}/g, (_: string, g) => this.model[g]);
-    log('simple.interceptor.ts: release', token_send_template, token_send_key, access_token);
-    switch (options.token_send_place) {
-      case 'header':
-        const obj: any = {};
-        obj[token_send_key!] = access_token;
-        req = req.clone({
-          setHeaders: obj
-        });
-        break;
-      case 'body':
-        const body = req.body || {};
-        body[token_send_key!] = access_token;
-        req = req.clone({
-          body
-        });
-        break;
-      case 'url':
-        req = req.clone({
-          params: req.params.append(token_send_key!, access_token)
-        });
-        break;
-    }
-    return req;
-  }
+  return req;
 }
+
+export const authSimpleInterceptor: HttpInterceptorFn = (req, next) => {
+  const options = mergeConfig(inject(YunzaiConfigService));
+
+  if (isAnonymous(req, options)) return next(req);
+
+  const model = inject(YA_SERVICE_TOKEN).get() as SimpleTokenModel;
+  if (CheckSimple(model)) return next(newReq(req, model, options));
+
+  return throwErr(req, options);
+};

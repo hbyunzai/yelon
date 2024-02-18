@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Platform } from '@angular/cdk/platform';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { BehaviorSubject, Observable, of, map, tap } from 'rxjs';
 
 import { addSeconds } from 'date-fns';
@@ -8,11 +9,15 @@ import { addSeconds } from 'date-fns';
 import { YunzaiCacheConfig, YunzaiConfigService } from '@yelon/util/config';
 import { deepGet } from '@yelon/util/other';
 
-import { CacheNotifyResult, CacheNotifyType, ICache, ICacheStore } from './interface';
+import { CacheNotifyResult, CacheNotifyType, ICache } from './interface';
 import { DC_STORE_STORAGE_TOKEN } from './local-storage-cache.service';
 
 @Injectable({ providedIn: 'root' })
 export class CacheService implements OnDestroy {
+  private readonly store = inject(DC_STORE_STORAGE_TOKEN);
+  private readonly http = inject(HttpClient);
+  private readonly platform = inject(Platform);
+
   private readonly memory: Map<string, ICache> = new Map<string, ICache>();
   private readonly notifyBuffer: Map<string, BehaviorSubject<CacheNotifyResult>> = new Map<
     string,
@@ -21,21 +26,15 @@ export class CacheService implements OnDestroy {
   private meta: Set<string> = new Set<string>();
   private freqTick = 3000;
   private freqTime: any;
-  private cog: YunzaiCacheConfig;
+  private cog: YunzaiCacheConfig = inject(YunzaiConfigService).merge('cache', {
+    mode: 'promise',
+    reName: '',
+    prefix: '',
+    meta_key: '__cache_meta'
+  })!;
 
-  constructor(
-    cogSrv: YunzaiConfigService,
-    @Inject(DC_STORE_STORAGE_TOKEN) private store: ICacheStore,
-    private http: HttpClient,
-    private platform: Platform
-  ) {
-    this.cog = cogSrv.merge('cache', {
-      mode: 'promise',
-      reName: '',
-      prefix: '',
-      meta_key: '__cache_meta'
-    })!;
-    if (!platform.isBrowser) return;
+  constructor() {
+    if (!this.platform.isBrowser) return;
     this.loadMeta();
     this.startExpireNotify();
   }

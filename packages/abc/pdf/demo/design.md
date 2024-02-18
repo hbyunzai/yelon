@@ -15,11 +15,22 @@ Provide rich interfaces for customization.
 
 ```ts
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
 
 import { PdfChangeEvent, PdfComponent, PdfZoomScale } from '@yelon/abc/pdf';
+import { SEModule } from '@yelon/abc/se';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'components-pdf-design',
@@ -36,60 +47,76 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
             </nz-upload>
           </se>
           <se label="Render Text">
-            <nz-switch [(ngModel)]="renderText"></nz-switch>
+            <nz-switch [(ngModel)]="renderText" />
           </se>
           <se label="Original size">
-            <nz-switch [(ngModel)]="originalSize"></nz-switch>
+            <nz-switch [(ngModel)]="originalSize" />
           </se>
-          <se *ngIf="originalSize" label="Fit to page">
-            <nz-switch [(ngModel)]="fitToPage"></nz-switch>
-          </se>
+          @if (originalSize) {
+            <se label="Fit to page">
+              <nz-switch [(ngModel)]="fitToPage" />
+            </se>
+          }
           <se label="Auto size">
-            <nz-switch [(ngModel)]="autoReSize"></nz-switch>
+            <nz-switch [(ngModel)]="autoReSize" />
           </se>
           <se label="Show All Pages">
-            <nz-switch [(ngModel)]="showAll" (ngModelChange)="changeShowAllPages($event)"></nz-switch>
+            <nz-switch [(ngModel)]="showAll" (ngModelChange)="changeShowAllPages($event)" />
           </se>
-          <se *ngIf="!originalSize" label="Zoom Scale">
-            <nz-select [(ngModel)]="zoomScale">
-              <nz-option nzValue="page-height" nzLabel="Page Height"></nz-option>
-              <nz-option nzValue="page-fit" nzLabel="Page Fit"></nz-option>
-              <nz-option nzValue="page-width" nzLabel="Page Width"></nz-option>
-            </nz-select>
-          </se>
+          @if (!originalSize) {
+            <se label="Zoom Scale">
+              <nz-select [(ngModel)]="zoomScale">
+                <nz-option nzValue="page-height" nzLabel="Page Height" />
+                <nz-option nzValue="page-fit" nzLabel="Page Fit" />
+                <nz-option nzValue="page-width" nzLabel="Page Width" />
+              </nz-select>
+            </se>
+          }
           <se label="Zoom">
-            <nz-input-number [(ngModel)]="zoom" [nzStep]="0.1"></nz-input-number>
+            <nz-input-number [(ngModel)]="zoom" [nzStep]="0.1" />
           </se>
-          <se *ngIf="showAll" label="Stick to page ">
-            <nz-switch [(ngModel)]="stickToPage"></nz-switch>
-          </se>
-          <se *ngIf="stickToPage" label="Page">
-            <nz-pagination [(nzPageIndex)]="pi" [nzPageSize]="1" [nzTotal]="total" nzSimple></nz-pagination>
-          </se>
+          @if (showAll) {
+            <se label="Stick to page ">
+              <nz-switch [(ngModel)]="stickToPage" />
+            </se>
+          }
+          @if (stickToPage) {
+            <se label="Page">
+              <nz-pagination [(nzPageIndex)]="pi" [nzPageSize]="1" [nzTotal]="total" nzSimple />
+            </se>
+          }
           <se label="Rotation">
-            <nz-input-number [(ngModel)]="rotation" [nzStep]="90"></nz-input-number>
+            <nz-input-number [(ngModel)]="rotation" [nzStep]="90" />
           </se>
           <se label="Outline">
-            <nz-switch [(ngModel)]="outline"></nz-switch>
+            <nz-switch [(ngModel)]="outline" />
           </se>
-          <se *ngIf="outline" [label]="null">
-            <nz-empty *ngIf="outlineList === null"></nz-empty>
-            <ng-template #outlineTpl let-ls let-level="level">
-              <li *ngFor="let i of ls" [style.paddingLeft.px]="level * 16">
-                <a (click)="navigateTo(i.dest)">{{ i.title }}</a>
-                <ul *ngIf="i.items && i.items.length > 0">
-                  <ng-container
-                    *ngTemplateOutlet="outlineTpl; context: { $implicit: i.items, level: level + 1 }"
-                  ></ng-container>
+          @if (outline) {
+            <se [label]="null">
+              @if (outlineList === null) {
+                <nz-empty />
+              }
+              <ng-template #outlineTpl let-ls let-level="level">
+                @for (i of ls; track $index) {
+                  <li [style.paddingLeft.px]="level * 16">
+                    <a (click)="navigateTo(i.dest)">{{ i.title }}</a>
+                    @if (i.items && i.items.length > 0) {
+                      <ul>
+                        <ng-container
+                          *ngTemplateOutlet="outlineTpl; context: { $implicit: i.items, level: level + 1 }"
+                        />
+                      </ul>
+                    }
+                  </li>
+                }
+              </ng-template>
+              @if (outlineList) {
+                <ul>
+                  <ng-container *ngTemplateOutlet="outlineTpl; context: { $implicit: outlineList, level: 0 }" />
                 </ul>
-              </li>
-            </ng-template>
-            <ul *ngIf="outlineList">
-              <ng-container
-                *ngTemplateOutlet="outlineTpl; context: { $implicit: outlineList, level: 0 }"
-              ></ng-container>
-            </ul>
-          </se>
+              }
+            </se>
+          }
           <se label="Search pdf">
             <input
               #qIpt
@@ -117,10 +144,26 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
           [autoReSize]="autoReSize"
           (change)="change($event)"
           style="height: 600px"
-        ></pdf>
+        />
       </div>
     </div>
-  `
+  `,
+  standalone: true,
+  imports: [
+    NzButtonModule,
+    PdfComponent,
+    NzGridModule,
+    NzInputModule,
+    FormsModule,
+    NzUploadModule,
+    SEModule,
+    NzIconModule,
+    NzSwitchModule,
+    NzSelectModule,
+    NzInputNumberModule,
+    NzPaginationModule,
+    NzEmptyModule
+  ]
 })
 export class DemoComponent implements OnInit {
   @ViewChild('pdf') private comp!: PdfComponent;

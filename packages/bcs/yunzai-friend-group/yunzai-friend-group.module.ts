@@ -1,25 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
-import { YunzaiSharedYelonModule } from '@yelon/bcs/yunzai-shared-yelon';
-import { YunzaiSharedZorroModule } from '@yelon/bcs/yunzai-shared-zorro';
+import { YelonFormModule } from '@yelon/form';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { YunzaiFriendGroupComponent } from './yunzai-friend-group.component';
 
+const COMPONENTS = [YunzaiFriendGroupComponent];
+
 @NgModule({
-  imports: [
-    HttpClientModule,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    YunzaiSharedZorroModule,
-    YunzaiSharedYelonModule
-  ],
-  declarations: [YunzaiFriendGroupComponent],
-  exports: [YunzaiFriendGroupComponent]
+  imports: [YelonFormModule, CommonModule, NzListModule, NzCardModule, NzSpinModule, NzEmptyModule, ...COMPONENTS],
+  exports: COMPONENTS
 })
 export class YunzaiFriendGroupModule {}

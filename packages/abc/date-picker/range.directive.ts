@@ -3,21 +3,16 @@ import {
   ComponentRef,
   Directive,
   EventEmitter,
-  Host,
   Input,
   OnDestroy,
-  Optional,
   Output,
   TemplateRef,
-  ViewContainerRef
+  ViewContainerRef,
+  inject
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import {
-  YunzaiConfigService,
-  YunzaiDateRangePickerShortcut,
-  YunzaiDateRangePickerShortcutItem
-} from '@yelon/util/config';
+import { YunzaiConfigService, YunzaiDateRangePickerShortcut, YunzaiDateRangePickerShortcutItem } from '@yelon/util/config';
 import { fixEndTimeOfRange, getTimeDistance } from '@yelon/util/date-time';
 import { assert, deepMergeKey } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -28,10 +23,15 @@ import { RangePickerShortcutTplComponent } from './range-shortcut.component';
 
 @Directive({
   selector: 'nz-range-picker[extend]',
-  exportAs: 'extendRangePicker'
+  exportAs: 'extendRangePicker',
+  standalone: true
 })
 export class RangePickerDirective implements OnDestroy, AfterViewInit {
   static ngAcceptInputType_shortcut: YunzaiDateRangePickerShortcut | string | null;
+
+  private readonly dom = inject(DomSanitizer);
+  private readonly vcr = inject(ViewContainerRef);
+  private readonly nativeComp = inject(NzRangePickerComponent, { host: true, optional: true });
 
   private defaultShortcuts: YunzaiDateRangePickerShortcut;
   private _shortcut: YunzaiDateRangePickerShortcut | null = null;
@@ -63,23 +63,20 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
   @Output() readonly ngModelEndChange = new EventEmitter<NzSafeAny>();
 
   private get dp(): NzDatePickerComponent {
-    return this.nativeComp.datePicker;
+    return this.nativeComp!.datePicker;
   }
 
   private get srv(): DatePickerService {
     return this.dp.datePickerService;
   }
 
-  constructor(
-    private dom: DomSanitizer,
-    configSrv: YunzaiConfigService,
-    @Host() @Optional() private nativeComp: NzRangePickerComponent,
-    private vcr: ViewContainerRef
-  ) {
-    assert(
-      !!nativeComp,
-      `It should be attached to nz-range-picker component, for example: '<nz-range-picker [(ngModel)]="i.start" extend [(ngModelEnd)]="i.end" shortcut></nz-range-picker>'`
-    );
+  constructor(configSrv: YunzaiConfigService) {
+    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+      assert(
+        !!this.nativeComp,
+        `It should be attached to nz-range-picker component, for example: '<nz-range-picker [(ngModel)]="i.start" extend [(ngModelEnd)]="i.end" shortcut></nz-range-picker>'`
+      );
+    }
     const cog = configSrv.merge('dataRange', {
       nzFormat: 'yyyy-MM-dd',
       nzAllowClear: true,
@@ -176,7 +173,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
       };
       extraFooter = instance.tpl;
     }
-    this.nativeComp.datePicker.extraFooter = extraFooter;
+    this.nativeComp!.datePicker.extraFooter = extraFooter;
     Promise.resolve().then(() => this.cd());
   }
 

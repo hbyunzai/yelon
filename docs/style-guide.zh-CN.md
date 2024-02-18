@@ -77,4 +77,4 @@ vscode 是编写 Angular 最佳的选择，你可以在项目的任何目录里�
 
 ### vscode snippets
 
-vscode 是编写 Angular 最佳的选择，自然 NG-YUNZAI 也制作了相应 snippets 扩展插件：[ng-zorro-vscode](//marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode) 和 [ng-yunzai-vscode](//marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode)。
+vscode 是编写 Angular 最佳的选择，自然 NG-YUNZAI 也制作了相应 snippets 扩展插件：[ng-zorro-vscode](//marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode) 和 [ng-yunzai-vscode](//marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode)。

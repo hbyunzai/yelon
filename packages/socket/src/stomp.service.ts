@@ -10,6 +10,7 @@ import { YunzaiConfigService, YunzaiSocketConfig, log, WINDOW, useLocalStorageUs
 
 import { NotificationService } from './notification.service';
 import { mergeSocketConfig, SOCKET_DEFAULT_CONFIG } from './socket.config';
+import {NzSafeAny} from "ng-zorro-antd/core/types";
 
 @Injectable({ providedIn: 'root' })
 export class StompService implements OnDestroy {
@@ -22,7 +23,7 @@ export class StompService implements OnDestroy {
     private configService: YunzaiConfigService,
     private injector: Injector,
     private notifyService: NotificationService,
-    @Inject(WINDOW) private win: any
+    @Inject(WINDOW) private win: NzSafeAny
   ) {
     const [, getUser] = useLocalStorageUser();
     if (!this.user) {

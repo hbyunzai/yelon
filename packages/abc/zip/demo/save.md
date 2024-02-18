@@ -13,16 +13,20 @@ Use `pushUrl` to quickly write URL resources to a Zip instance.
 
 ```ts
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import type jsZipType from 'jszip';
 
 import { ZipService } from '@yelon/abc/zip';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
   selector: 'app-demo',
   template: `
-    <div *ngIf="instance">
+    @if (instance) {
       <button nz-button (click)="add()" [nzType]="'primary'">new</button>
       <button nz-button (click)="download()" class="ml-sm">download</button>
       <nz-table [nzData]="data" [nzFrontPagination]="false" [nzShowPagination]="false" class="mt-sm">
@@ -33,14 +37,18 @@ import { NzMessageService } from 'ng-zorro-antd/message';
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let i of data; let index = index">
-            <td><input nz-input [(ngModel)]="i.path" name="path{{ index }}" /></td>
-            <td><input nz-input [(ngModel)]="i.url" name="url{{ index }}" /></td>
-          </tr>
+          @for (i of data; track $index) {
+            <tr>
+              <td><input nz-input [(ngModel)]="i.path" name="path{{ $index }}" /></td>
+              <td><input nz-input [(ngModel)]="i.url" name="url{{ $index }}" /></td>
+            </tr>
+          }
         </tbody>
       </nz-table>
-    </div>
-  `
+    }
+  `,
+  standalone: true,
+  imports: [NzButtonModule, NzTableModule, FormsModule, NzInputModule]
 })
 export class DemoComponent {
   instance: jsZipType | null = null;
@@ -48,7 +56,11 @@ export class DemoComponent {
     { path: '小程序标志.zip', url: 'https://wximg.gtimg.com/shake_tv/mina/standard_logo.zip' }
   ];
 
-  constructor(private zip: ZipService, private msg: NzMessageService, cdr: ChangeDetectorRef) {
+  constructor(
+    private zip: ZipService,
+    private msg: NzMessageService,
+    cdr: ChangeDetectorRef
+  ) {
     this.zip.create().then(ret => {
       this.instance = ret;
       cdr.detectChanges();

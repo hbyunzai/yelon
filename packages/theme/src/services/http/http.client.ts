@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpContext, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of, delay, finalize, switchMap, tap } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiThemeHttpClientConfig } from '@yelon/util/config';
@@ -16,11 +17,9 @@ export type HttpObserve = 'body' | 'events' | 'response';
  */
 @Injectable({ providedIn: 'root' })
 export class _HttpClient {
+  private readonly http = inject(HttpClient);
   private cog: YunzaiThemeHttpClientConfig;
-  constructor(
-    private http: HttpClient,
-    cogSrv: YunzaiConfigService
-  ) {
+  constructor(cogSrv: YunzaiConfigService) {
     this.cog = cogSrv.merge('themeHttp', {
       nullValueHandling: 'include',
       dateValueHandling: 'timestamp'
@@ -53,15 +52,19 @@ export class _HttpClient {
       return params;
     }
 
+    const { nullValueHandling, dateValueHandling } = this.cog;
     Object.keys(params).forEach(key => {
-      let _data = params[key];
+      let paramValue = params[key];
       // 忽略空值
-      if (this.cog.nullValueHandling === 'ignore' && _data == null) return;
+      if (nullValueHandling === 'ignore' && paramValue == null) return;
       // 将时间转化为：时间戳 (秒)
-      if (this.cog.dateValueHandling === 'timestamp' && _data instanceof Date) {
-        _data = _data.valueOf();
+      if (
+        paramValue instanceof Date &&
+        (dateValueHandling === 'timestamp' || dateValueHandling === 'timestampSecond')
+      ) {
+        paramValue = dateValueHandling === 'timestamp' ? paramValue.valueOf() : Math.trunc(paramValue.valueOf() / 1000);
       }
-      newParams[key] = _data;
+      newParams[key] = paramValue;
     });
     return new HttpParams({ fromObject: newParams });
   }

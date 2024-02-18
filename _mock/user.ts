@@ -1,8 +1,6 @@
-import { MockStatusError, MockRequest } from '@yelon/mock';
+import { MockStatusError, MockRequest, r } from '@yelon/mock';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 // import * as Mock from 'mockjs';
-
-const r = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1) + min);
 
 export const USERS = {
   // 支持值为 Object 和 Array
@@ -15,6 +13,7 @@ export const USERS = {
     for (let i = 0; i < +req.queryString.ps; i++) {
       res.list.push({
         id: i + 1,
+        type: r(1, 3),
         picture: {
           thumbnail: `https://randomuser.me/api/portraits/thumb/${r(0, 1) === 0 ? 'men' : 'women'}/${r(1, 50)}.jpg`
         },
@@ -36,7 +35,7 @@ export const USERS = {
     return res;
   },
   'GET /user/check/': () => false,
-  'GET /user/check/:name': (req: MockRequest) => req.params.name === 'devcui',
+  'GET /user/check/:name': (req: MockRequest) => req.params.name === 'yunzai-bot',
   // GET POST 可省略
   // '/users/1': Mock.mock({ id: 1, 'rank|3': '★★★' }),
   // 发送 Status 错误

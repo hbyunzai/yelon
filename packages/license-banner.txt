@@ -1,5 +1,5 @@
 /**
- * @license ng-yunzai(devcui@outlook.com) v0.0.0-PLACEHOLDER
- * (c) 2020 devcui https://github.com/hbyunzai/yelon/
+ * @license ng-yunzai(yunzai-bot@outlook.com) v0.0.0-PLACEHOLDER
+ * (c) 2020 yunzai-bot https://ng.yunzainfo.com/
  * License: MIT
  */

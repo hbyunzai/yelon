@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Renderer2, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
 
@@ -8,9 +8,14 @@ export interface MatchRouterOptions {
 }
 
 @Directive({
-  selector: '[matchRouter]'
+  selector: '[matchRouter]',
+  standalone: true
 })
 export class MatchRouterDirective implements AfterViewInit, OnDestroy {
+  private readonly router = inject(Router);
+  private readonly element = inject(ElementRef);
+  private readonly renderer = inject(Renderer2);
+
   private _options!: MatchRouterOptions;
   private url$?: Subscription;
 
@@ -18,12 +23,6 @@ export class MatchRouterDirective implements AfterViewInit, OnDestroy {
   set options(val: MatchRouterOptions) {
     this._options = { cls: 'ant-menu-item-selected', ...val };
   }
-
-  constructor(
-    private router: Router,
-    private element: ElementRef<HTMLElement>,
-    private renderer: Renderer2
-  ) {}
 
   private setCls(): void {
     if (!this.router.navigated) {

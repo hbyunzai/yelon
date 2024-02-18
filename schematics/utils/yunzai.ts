@@ -1,4 +1,4 @@
-import { strings } from '@angular-devkit/core';
+import { strings, normalize } from '@angular-devkit/core';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import {
   apply,
@@ -28,12 +28,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ts from 'typescript';
 
-import { getSourceFile } from './ast';
+import { addServiceToModuleOrStandalone, findRoutesPath, getSourceFile, ROUTINS_FILENAME } from './ast';
+import { isStandalone } from './standalone';
 import { getProject, NgYunzaiProjectDefinition } from './workspace';
 
 const TEMPLATE_FILENAME_RE = /\.template$/;
 
 export interface CommonSchema extends ComponentSchema {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
   _filesPath?: string;
   schematicName?: string;
@@ -120,7 +122,12 @@ function resolveSchema(
   if (fs.existsSync(fullPath) && fs.readdirSync(fullPath).length > 0) {
     throw new SchematicsException(`The directory (${fullPath}) already exists`);
   }
-  schema.importModulePath = findModuleFromOptions(tree, schema as unknown as ModuleOptions);
+
+  if (schema.standalone) {
+    schema.importModulePath = normalize(`${schema.path}/${schema.name}/${schema.name}.component.ts`);
+  } else {
+    schema.importModulePath = findModuleFromOptions(tree, schema as unknown as ModuleOptions);
+  }
 
   if (!schema._filesPath) {
     // 若基础页尝试从 `_cli-tpl/_${schema.schematicName!}` 下查找该目录，若存在则优先使用
@@ -139,7 +146,14 @@ function resolveSchema(
     schema.path += strings.dasherize(`/${schema.target}`);
   }
 
-  schema.routerModulePath = schema.importModulePath!.replace('.module.ts', '-routing.module.ts');
+  if (schema.standalone) {
+    schema.routerModulePath = findRoutesPath(tree, schema.path);
+    if (schema.routerModulePath.length <= 0) {
+      throw new SchematicsException(`Could not find a non Routing file: ${ROUTINS_FILENAME}`);
+    }
+  } else {
+    schema.routerModulePath = schema.importModulePath!.replace('.module.ts', '-routing.module.ts');
+  }
 
   // html selector
   schema.selector = schema.selector || buildSelector(schema, project.prefix);
@@ -156,19 +170,6 @@ export function addImportToModule(tree: Tree, filePath: string, symbolName: stri
   tree.commitUpdate(declarationRecorder);
 }
 
-export function addProviderToModule(tree: Tree, filePath: string, serviceName: string, importPath: string): void {
-  const source = getSourceFile(tree, filePath);
-  const changes = _addProviderToModule(source, filePath, serviceName, importPath);
-  const declarationRecorder = tree.beginUpdate(filePath);
-  changes.forEach(change => {
-    if (change.path == null) return;
-    if (change instanceof InsertChange) {
-      declarationRecorder.insertLeft(change.pos, change.toAdd);
-    }
-  });
-  tree.commitUpdate(declarationRecorder);
-}
-
 export function addValueToVariable(
   tree: Tree,
   filePath: string,
@@ -181,7 +182,7 @@ export function addValueToVariable(
   if (!node) {
     throw new SchematicsException(`Could not find any [${variableName}] variable in path '${filePath}'.`);
   }
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const arr = (node.parent as any).initializer as ts.ArrayLiteralExpression;
 
   const change = new InsertChange(
@@ -196,9 +197,11 @@ export function addValueToVariable(
 }
 
 function getRelativePath(filePath: string, schema: CommonSchema, prefix: 'component' | 'service'): string {
-  const importPath = `/${schema.path}/${schema.flat ? '' : `${strings.dasherize(schema.name!)}/`}${strings.dasherize(
-    schema.name!
-  )}.${prefix}`;
+  const importPath = normalize(
+    `/${schema.path}/${schema.flat ? '' : `${strings.dasherize(schema.name!)}/`}${strings.dasherize(
+      schema.name!
+    )}.${prefix}`
+  );
   return buildRelativePath(filePath, importPath);
 }
 
@@ -209,13 +212,15 @@ function addDeclaration(schema: CommonSchema): Rule {
     }
 
     // imports
-    addImportToModule(
-      tree,
-      schema.importModulePath!,
-      schema.componentName!,
-      getRelativePath(schema.importModulePath!, schema, 'component')
-    );
-    addValueToVariable(tree, schema.importModulePath!, 'COMPONENTS', schema.componentName!);
+    if (!schema.standalone) {
+      addImportToModule(
+        tree,
+        schema.importModulePath!,
+        schema.componentName!,
+        getRelativePath(schema.importModulePath!, schema, 'component')
+      );
+      addValueToVariable(tree, schema.importModulePath!, 'COMPONENTS', schema.componentName!);
+    }
 
     // component
     if (schema.modal !== true) {
@@ -236,8 +241,9 @@ function addDeclaration(schema: CommonSchema): Rule {
 
     // service
     if (schema.service === 'none') {
-      addProviderToModule(
+      addServiceToModuleOrStandalone(
         tree,
+        schema.standalone,
         schema.importModulePath!,
         schema.serviceName!,
         getRelativePath(schema.importModulePath!, schema, 'service')
@@ -255,6 +261,10 @@ export function buildYunzai(schema: CommonSchema): Rule {
       throw new SchematicsException(`The specified project does not match '${schema.project}', current: ${res.name}`);
     }
     const project = res.project;
+
+    // standalone
+    schema.standalone = await isStandalone(tree, schema.standalone, res.name);
+
     resolveSchema(tree, project, schema, res.yunzaiProject);
 
     schema.componentName = buildName(schema, 'Component');
@@ -280,6 +290,6 @@ export function buildYunzai(schema: CommonSchema): Rule {
       move(null!, `${schema.path}/`)
     ]);
 
-    return chain([branchAndMerge(chain([addDeclaration(schema), mergeWith(templateSource)]))]);
+    return chain([branchAndMerge(chain([mergeWith(templateSource), addDeclaration(schema)]))]);
   };
 }

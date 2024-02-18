@@ -14,10 +14,15 @@ order: 0
 Use the `sf-template` directive to custom complex widget in the current form.
 
 ```ts
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import { SFComponent, SFSchema } from '@yelon/form';
+import { YelonFormModule, SFComponent, SFSchema } from '@yelon/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzQRCodeModule } from 'ng-zorro-antd/qr-code';
 
 @Component({
   selector: 'app-demo',
@@ -42,12 +47,15 @@ import { NzMessageService } from 'ng-zorro-antd/message';
         </div>
       </ng-template>
       <ng-template sf-template="qr" let-i let-ui="ui" let-schema="schema">
-        <qr [value]="i.value"></qr>
+        <nz-qrcode [nzValue]="i.value" />
       </ng-template>
     </sf>
-  `
+  `,
+  standalone: true,
+  imports: [YelonFormModule, FormsModule, NzGridModule, NzInputModule, NzButtonModule, NzQRCodeModule]
 })
 export class DemoComponent {
+  private readonly msg = inject(NzMessageService);
   @ViewChild('sf') readonly sf!: SFComponent;
   schema: SFSchema = {
     properties: {
@@ -69,8 +77,6 @@ export class DemoComponent {
       }
     }
   };
-
-  constructor(private msg: NzMessageService) {}
 
   updateQr(): void {
     const formNameValue = this.sf.getProperty('/formName')?.value;

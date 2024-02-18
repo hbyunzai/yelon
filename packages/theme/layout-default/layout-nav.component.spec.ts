@@ -30,12 +30,12 @@ const MOCKMENUS = [
           { text: 'v3' },
           {
             text: 'externalLink-blank',
-            externalLink: '//ng-yunzai.com/blank',
+            externalLink: '//ng.yunzainfo.com/blank',
             target: '_blank'
           },
           {
             text: 'externalLink-top',
-            externalLink: '//ng-yunzai.com/top',
+            externalLink: '//ng.yunzainfo.com/top',
             target: '_top'
           }
         ]
@@ -163,7 +163,7 @@ describe('theme: layout-default-nav', () => {
           const win = TestBed.inject(WINDOW);
           const itemEl = page.getEl<HTMLElement>('.sidebar-nav__item [data-id="7"]');
           itemEl!.click();
-          expect(win.location.href).toBe(`//ng-yunzai.com/top`);
+          expect(win.location.href).toBe(`//ng.yunzainfo.com/top`);
         });
       });
 
@@ -223,28 +223,55 @@ describe('theme: layout-default-nav', () => {
         page.checkText('.sidebar-nav__item', `i18n 1`);
       });
 
-      it('should be hide when children are hide', () => {
-        createComp();
-        menuSrv.add([
-          {
-            text: 'parent',
-            children: [
-              { text: 'l1', hide: true },
-              { text: 'l2', hide: false }
-            ]
-          }
-        ]);
-        page.checkCount('.sidebar-nav__group-title', 1);
-        menuSrv.add([
-          {
-            text: 'parent',
-            children: [
-              { text: 'l1', hide: true },
-              { text: 'l2', hide: true }
-            ]
-          }
-        ]);
-        page.checkCount('.sidebar-nav__group-title', 0);
+      describe('#hideEmptyChildren', () => {
+        it('with true', () => {
+          createComp();
+          menuSrv.add([
+            {
+              text: 'parent',
+              children: [
+                { text: 'l1', hide: true },
+                { text: 'l2', hide: false }
+              ]
+            }
+          ]);
+          page.checkCount('.sidebar-nav__group-title', 1);
+          menuSrv.add([
+            {
+              text: 'parent',
+              children: [
+                { text: 'l1', hide: true },
+                { text: 'l2', hide: true }
+              ]
+            }
+          ]);
+          page.checkCount('.sidebar-nav__group-title', 0);
+        });
+        it('with false', () => {
+          createComp();
+          context.hideEmptyChildren = false;
+          fixture.detectChanges();
+          menuSrv.add([
+            {
+              text: 'parent',
+              children: [
+                { text: 'l1', hide: true },
+                { text: 'l2', hide: false }
+              ]
+            }
+          ]);
+          page.checkCount('.sidebar-nav__group-title', 1);
+          menuSrv.add([
+            {
+              text: 'parent',
+              children: [
+                { text: 'l1', hide: true },
+                { text: 'l2', hide: true }
+              ]
+            }
+          ]);
+          page.checkCount('.sidebar-nav__group-title', 1);
+        });
       });
     });
 
@@ -327,18 +354,18 @@ describe('theme: layout-default-nav', () => {
           page.showSubMenu();
           expect(page.getEl('.sidebar-nav__floating-container .sidebar-nav__item', true) != null).toBe(true);
         });
-        // it('should be ignore children title trigger event', () => {
-        //   spyOn(context, 'select');
-        //   expect(context.select).not.toHaveBeenCalled();
-        //   const mockMenu = deepCopy(MOCKMENUS) as Nav[];
-        //   mockMenu[0].children![0].children = [{ text: 'a', children: [{ text: 'b' }] }];
-        //   menuSrv.add(mockMenu);
-        //   fixture.detectChanges();
-        //   page.showSubMenu();
-        //   const containerEl = page.getEl<HTMLElement>(floatingShowCls, true)!;
-        //   (containerEl.querySelector('.sidebar-nav__item-link') as HTMLElement).click();
-        //   expect(context.select).not.toHaveBeenCalled();
-        // });
+        it('should be ignore children title trigger event', () => {
+          spyOn(context, 'select');
+          expect(context.select).not.toHaveBeenCalled();
+          const mockMenu = deepCopy(MOCKMENUS) as Nav[];
+          mockMenu[0].children![0].children = [{ text: 'a', children: [{ text: 'b' }] }];
+          menuSrv.add(mockMenu);
+          fixture.detectChanges();
+          page.showSubMenu();
+          const containerEl = page.getEl<HTMLElement>(floatingShowCls, true)!;
+          (containerEl.querySelector('.sidebar-nav__item-link') as HTMLElement).click();
+          expect(context.select).not.toHaveBeenCalled();
+        });
       });
       describe('should be hide sub-menu in floating container', () => {
         it('muse be hide via click menu link', () => {
@@ -639,6 +666,7 @@ describe('theme: layout-default-nav', () => {
       [disabledAcl]="disabledAcl"
       [autoCloseUnderPad]="autoCloseUnderPad"
       [recursivePath]="recursivePath"
+      [hideEmptyChildren]="hideEmptyChildren"
       [openStrictly]="openStrictly"
       (select)="select()"
     />
@@ -650,6 +678,7 @@ class TestComponent {
   disabledAcl = false;
   autoCloseUnderPad = false;
   recursivePath = false;
+  hideEmptyChildren = true;
   openStrictly = false;
   select(): void {}
 }

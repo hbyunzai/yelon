@@ -14,7 +14,7 @@ describe('Service: RTL', () => {
 
   beforeEach(() => {
     @NgModule({
-      imports: [CommonModule, YunzaiThemeModule.forChild()]
+      imports: [CommonModule, YunzaiThemeModule]
     })
     class TestModule {}
     const injector = TestBed.configureTestingModule({ imports: [TestModule] });

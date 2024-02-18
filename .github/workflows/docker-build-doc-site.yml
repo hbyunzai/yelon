@@ -1,5 +1,6 @@
 name: docker-build-doc-site
 
+# on: push
 on:
   push:
     branches:
@@ -33,5 +34,5 @@ jobs:
           file: ./Dockerfile.docs
           push: true
           tags:
-            yunzaibot/ng-yunzai-docs:latest
-          # registry.gitlab.com/ng-yunzai/images:docs
+            yunzai-bot/ng-yunzai-docs:latest
+            # registry.gitlab.com/ng-yunzai/images:docs

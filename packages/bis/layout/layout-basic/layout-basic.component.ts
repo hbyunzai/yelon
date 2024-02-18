@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-
 import { StompService } from '@yelon/socket';
-import { LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
+import {  LayoutDefaultOptions, LayoutDisplayService } from '@yelon/theme/layout-default';
 import {
   WINDOW,
   hasFavicon,
@@ -15,6 +14,7 @@ import {
   useLocalStorageHeaderType,
   useLocalStorageDefaultRoute
 } from '@yelon/util';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { LayoutBasicState } from './interface';
 
@@ -161,7 +161,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
     return this.state.display.reusetab;
   }
 
-  get reusetabCSS(): any {
+  get reusetabCSS(): NzSafeAny {
     let cascadingStyleSheet = {};
     if (!this.state.display.nav) {
       cascadingStyleSheet = {
@@ -230,7 +230,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
       this.state.navType = navType;
       return;
     }
-    let fetchedNavType: any;
+    let fetchedNavType: NzSafeAny;
     if (projectInfo.headerStyle && projectInfo.headerStyle.length > 0) {
       fetchedNavType = projectInfo.headerStyle.pop()?.value;
     }

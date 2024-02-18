@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 
 import * as Mock from 'mockjs';
 
-import { YunzaiMockConfig, YUNZAI_CONFIG } from '@yelon/util/config';
+import { YunzaiMockConfig, provideYunzaiConfig } from '@yelon/util/config';
 
 import { MockOptions, MockRequest, MockRule } from './interface';
 import { MockService } from './mock.service';
-import { YelonMockModule } from '../index';
+import { provideMockConfig } from './provide';
 
 const DATA = {
   USERS: {
@@ -30,8 +31,7 @@ describe('mock: service', () => {
 
   function genModule(options: YunzaiMockConfig, mockOptions?: MockOptions): void {
     TestBed.configureTestingModule({
-      imports: [YelonMockModule.forRoot(mockOptions)],
-      providers: [{ provide: YUNZAI_CONFIG, useValue: { mock: options } }]
+      providers: [provideYunzaiConfig({ mock: options }), provideMockConfig(mockOptions)]
     });
     srv = TestBed.inject<MockService>(MockService);
     spyOn(console, 'log');

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, booleanAttribute } from '@angular/core';
 
-import { InputBoolean } from '@yelon/util/decorator';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'nz-icon',
@@ -13,7 +13,9 @@ import { InputBoolean } from '@yelon/util/decorator';
       [nzTwotoneColor]="twoToneColor"
       [nzIconfont]="iconfont"
     ></i>
-  `
+  `,
+  standalone: true,
+  imports: [NzIconModule]
 })
 export class IconComponent {
   @Input()
@@ -22,8 +24,7 @@ export class IconComponent {
   @Input()
   theme: 'fill' | 'outline' | 'twotone' = 'outline';
 
-  @Input()
-  @InputBoolean()
+  @Input({ transform: booleanAttribute })
   spin = false;
 
   @Input()

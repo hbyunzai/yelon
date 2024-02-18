@@ -16,6 +16,8 @@ title:
 ```ts
 import { Component } from '@angular/core';
 
+import { EllipsisComponent } from '@yelon/abc/ellipsis';
+
 @Component({
   selector: 'app-demo',
   template: `
@@ -23,6 +25,8 @@ import { Component } from '@angular/core';
     <h4 class="mt-lg">Show Tooltip</h4>
     <ellipsis length="100" tooltip>{{ article }}</ellipsis>
   `,
+  standalone: true,
+  imports: [EllipsisComponent]
 })
 export class DemoComponent {
   article =

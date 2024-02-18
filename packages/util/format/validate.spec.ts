@@ -45,10 +45,10 @@ export const TEST_DATA = {
     { k: '+8615900000000', v: true }
   ],
   url: [
-    { k: 'http://ng-yunzai.com', v: true },
+    { k: 'http://ng.yunzainfo.com', v: true },
     { k: 'https://ng.yunzainfo.com', v: true },
-    { k: '//ng-yunzai.com', v: false },
-    { k: 'ng-yunzai.com', v: false },
+    { k: '//ng.yunzainfo.com', v: false },
+    { k: 'ng.yunzainfo.com', v: false },
     { k: '中国.com', v: false }
   ],
   ip: [

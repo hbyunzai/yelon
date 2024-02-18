@@ -4,10 +4,10 @@ import {
   ChangeDetectorRef,
   Component,
   DestroyRef,
-  inject,
   Input,
   QueryList,
-  TemplateRef
+  TemplateRef,
+  inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -28,36 +28,40 @@ interface LayoutDefaultHeaderItem {
   selector: 'layout-default-header',
   template: `
     <ng-template #render let-ls>
-      <li *ngFor="let i of ls" [class.hidden-mobile]="i.hidden === 'mobile'" [class.hidden-pc]="i.hidden === 'pc'">
-        <ng-container *ngTemplateOutlet="i.host" />
-      </li>
+      @for (i of ls; track $index) {
+        <li [class.hidden-mobile]="i.hidden === 'mobile'" [class.hidden-pc]="i.hidden === 'pc'">
+          <ng-container *ngTemplateOutlet="i.host" />
+        </li>
+      }
     </ng-template>
     <div class="yunzai-default__header-logo" [style.width.px]="opt.logoFixWidth">
-      <ng-container *ngIf="!opt.logo; else opt.logo!">
-        <a data-event-id="_nav_logo" [routerLink]="opt.logoLink" class="yunzai-default__header-logo-link">
+      @if (opt.logo) {
+        <ng-container *ngTemplateOutlet="opt.logo" />
+      } @else {
+        <a [routerLink]="opt.logoLink" class="yunzai-default__header-logo-link">
           <img class="yunzai-default__header-logo-expanded" [attr.src]="opt.logoExpanded" [attr.alt]="app.name" />
           <img class="yunzai-default__header-logo-collapsed" [attr.src]="opt.logoCollapsed" [attr.alt]="app.name" />
         </a>
-      </ng-container>
+      }
     </div>
     <div class="yunzai-default__nav-wrap">
       <ul class="yunzai-default__nav">
-        <li *ngIf="!opt.hideAside && opt.showHeaderCollapse">
-          <div
-            data-event-id="_nav_toggle"
-            class="yunzai-default__nav-item yunzai-default__nav-item--collapse"
-            (click)="toggleCollapsed()"
-          >
-            <span nz-icon [nzType]="collapsedIcon"></span>
-          </div>
-        </li>
-        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: left }"></ng-template>
+        @if (!opt.hideAside && opt.showHeaderCollapse) {
+          <li>
+            <div class="yunzai-default__nav-item yunzai-default__nav-item--collapse" (click)="toggleCollapsed()">
+              <span nz-icon [nzType]="collapsedIcon"></span>
+            </div>
+          </li>
+        }
+        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: left }" />
       </ul>
-      <div *ngIf="middle.length > 0" class="yunzai-default__nav yunzai-default__nav-middle">
-        <ng-container *ngTemplateOutlet="middle[0].host" />
-      </div>
+      @if (middle.length > 0) {
+        <div class="yunzai-default__nav yunzai-default__nav-middle">
+          <ng-container *ngTemplateOutlet="middle[0].host" />
+        </div>
+      }
       <ul class="yunzai-default__nav">
-        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: right }"></ng-template>
+        <ng-template [ngTemplateOutlet]="render" [ngTemplateOutletContext]="{ $implicit: right }" />
       </ul>
     </div>
   `,
@@ -67,7 +71,10 @@ interface LayoutDefaultHeaderItem {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutDefaultHeaderComponent implements AfterViewInit {
-  private destroy$ = inject(DestroyRef);
+  private readonly settings = inject(SettingsService);
+  private readonly srv = inject(LayoutDefaultService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly destroy$ = inject(DestroyRef);
 
   @Input() items!: QueryList<LayoutDefaultHeaderItemComponent>;
 
@@ -90,12 +97,6 @@ export class LayoutDefaultHeaderComponent implements AfterViewInit {
   get collapsedIcon(): string {
     return this.srv.collapsedIcon;
   }
-
-  constructor(
-    private srv: LayoutDefaultService,
-    private settings: SettingsService,
-    private cdr: ChangeDetectorRef
-  ) {}
 
   private refresh(): void {
     const arr = this.items.toArray();

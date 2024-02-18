@@ -1,14 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {MenuService} from "@yelon/theme";
-import {LayoutDefaultService} from "@yelon/theme/layout-default";
+import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+import { MenuService } from '@yelon/theme';
+import { LayoutDefaultService } from '@yelon/theme/layout-default';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'yunzai-iframe-page',
-  templateUrl: './yunzai-iframe-page.component.html',
+  template: `
+    <div class="yunzai-iframe-page" *ngIf="hasIframe" [style.height]="iframePageHeight">
+      <iframe [src]="iframeSafeSrc">
+        <p>您的浏览器不支持 iframe 标签。</p>
+      </iframe> </div
+    >,
+  `,
+  imports: [CommonModule],
+  standalone: true
 })
 export class YunzaiIframePageComponent implements OnInit, OnDestroy {
-
   // iframe转换后的安全路径
   iframeSafeSrc!: SafeResourceUrl;
 
@@ -17,26 +27,29 @@ export class YunzaiIframePageComponent implements OnInit, OnDestroy {
 
   iframePageHeight!: string;
 
-  resizeHandle: any;
-  constructor(private sanitizer: DomSanitizer,
-              private menuSrv: MenuService,
-              private layoutDefaultService: LayoutDefaultService) {
-  }
+  resizeHandle: NzSafeAny;
+  constructor(
+    private sanitizer: DomSanitizer,
+    private menuSrv: MenuService,
+    private layoutDefaultService: LayoutDefaultService
+  ) {}
 
-  ngOnInit() {
-    this.iframePageHeight = this.layoutDefaultService.options.hideHeader ? (window.innerHeight - 55 + 'px') : (window.innerHeight - 64 - 55 + 'px');
+  ngOnInit(): void {
+    this.iframePageHeight = this.layoutDefaultService.options.hideHeader
+      ? `${window.innerHeight - 55}px`
+      : `${window.innerHeight - 64 - 55}px`;
 
     this.resizeHandle = () => {
-      this.iframePageHeight = this.layoutDefaultService.options.hideHeader ? (window.innerHeight - 55 + 'px') : (window.innerHeight - 64 - 55 + 'px');
-    }
-    window.addEventListener("resize", this.resizeHandle);
-
+      this.iframePageHeight = this.layoutDefaultService.options.hideHeader
+        ? `${window.innerHeight - 55}px`
+        : `${window.innerHeight - 64 - 55}px`;
+    };
+    window.addEventListener('resize', this.resizeHandle);
     this.getIframeUrl();
   }
 
-
   getIframeUrl(): void {
-    this.menuSrv.getRouterLink().subscribe((url: any) => {
+    this.menuSrv.getRouterLink().subscribe((url: NzSafeAny) => {
       if (url) {
         this.hasIframe = true;
         this.iframeSafeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -53,7 +66,6 @@ export class YunzaiIframePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    window.removeEventListener('resize', this.resizeHandle)
+    window.removeEventListener('resize', this.resizeHandle);
   }
-
 }

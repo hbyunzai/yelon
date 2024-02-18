@@ -9,6 +9,9 @@ browser: 400
 ```ts
 import { Component } from '@angular/core';
 
+import { GlobalFooterModule } from '@yelon/abc/global-footer';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 @Component({
   selector: 'components-global-footer-basic',
   template: `
@@ -19,7 +22,9 @@ import { Component } from '@angular/core';
         <i nz-icon nzType="github"></i>
       </global-footer-item>
       <global-footer-item href="https://ng-yunzai.surge.sh/" blankTarget>预览</global-footer-item>
-      Copyright<i nz-icon nzType="copyright" class="mx-sm"></i>2019<a href="//github.com/devcui" target="_blank" class="mx-sm">devcui</a>出品
+      Copyright<i nz-icon nzType="copyright" class="mx-sm"></i>
+      2023
+      <a href="//github.com/yunzai-bot" target="_blank" class="mx-sm">yunzai-bot</a>出品
     </global-footer>
   `,
   styles: [
@@ -27,8 +32,10 @@ import { Component } from '@angular/core';
       :host {
         display: block;
       }
-    `,
+    `
   ],
+  standalone: true,
+  imports: [GlobalFooterModule, NzIconModule]
 })
 export class DemoComponent {}
 ```

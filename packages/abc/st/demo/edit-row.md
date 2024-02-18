@@ -14,30 +14,47 @@ title:
 Table with editable rows.
 
 ```ts
-import { Component, ViewChild } from '@angular/core';
-import { STColumn, STComponent, STData } from '@yelon/abc/st';
+import { Component, ViewChild, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { STColumn, STComponent, STData, STModule } from '@yelon/abc/st';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @Component({
   selector: 'app-demo',
   template: `
     <st #st [data]="users" [columns]="columns">
       <ng-template st-row="nameTpl" let-item let-index="index">
-        <input *ngIf="item.edit" nz-input [ngModel]="item.name" (ngModelChange)="st.setRow(index, { name: $event })" />
-        <ng-container *ngIf="!item.edit">{{ item.name }}</ng-container>
+        @if (item.edit) {
+          <input nz-input [ngModel]="item.name" (ngModelChange)="st.setRow(index, { name: $event })" />
+        } @else {
+          {{ item.name }}
+        }
       </ng-template>
       <ng-template st-row="ageTpl" let-item let-index="index">
-        <nz-input-number *ngIf="item.edit" [ngModel]="item.age" (ngModelChange)="st.setRow(index, { age: $event })"></nz-input-number>
-        <ng-container *ngIf="!item.edit">{{ item.age }}</ng-container>
+        @if (item.edit) {
+          <nz-input-number [ngModel]="item.age" (ngModelChange)="st.setRow(index, { age: $event })" />
+        } @else {
+          {{ item.age }}
+        }
       </ng-template>
       <ng-template st-row="enabledTpl" let-item let-index="index">
-        <nz-switch *ngIf="item.edit" [ngModel]="item.enabled" (ngModelChange)="st.setRow(index, { enabled: $event })"></nz-switch>
-        <ng-container *ngIf="!item.edit">{{ item.enabled ? 'Y' : 'N' }}</ng-container>
+        @if (item.edit) {
+          <nz-switch [ngModel]="item.enabled" (ngModelChange)="st.setRow(index, { enabled: $event })" />
+        } @else {
+          {{ item.enabled ? 'Y' : 'N' }}
+        }
       </ng-template>
     </st>
   `,
+  standalone: true,
+  imports: [STModule, NzInputModule, FormsModule, NzInputNumberModule, NzSwitchModule]
 })
 export class DemoComponent {
+  private readonly msg = inject(NzMessageService);
   @ViewChild('st') private st!: STComponent;
   users: STData[] = Array(10)
     .fill({})
@@ -46,7 +63,7 @@ export class DemoComponent {
         id: idx + 1,
         name: `name ${idx + 1}`,
         age: Math.ceil(Math.random() * 10) + 20,
-        enabled: idx % 2 === 0,
+        enabled: idx % 2 === 0
       };
     });
   columns: STColumn[] = [
@@ -60,25 +77,23 @@ export class DemoComponent {
         {
           text: `Edit`,
           iif: i => !i.edit,
-          click: i => this.updateEdit(i, true),
+          click: i => this.updateEdit(i, true)
         },
         {
           text: `Save`,
           iif: i => i.edit,
           click: i => {
             this.submit(i);
-          },
+          }
         },
         {
           text: `Cancel`,
           iif: i => i.edit,
-          click: i => this.updateEdit(i, false),
-        },
-      ],
-    },
+          click: i => this.updateEdit(i, false)
+        }
+      ]
+    }
   ];
-
-  constructor(private msg: NzMessageService) {}
 
   private submit(i: STData): void {
     this.msg.success(JSON.stringify(this.st.pureItem(i)));

@@ -1,6 +1,6 @@
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Injector } from '@angular/core';
+import { APP_INITIALIZER, Injectable, Injector, Provider, inject } from '@angular/core';
 
 import { TitleService } from '@yelon/theme';
 import { LazyService } from '@yelon/util/other';
@@ -9,15 +9,25 @@ import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { ICONS } from '../../style-icons';
 
+export function provideStartup(): Provider[] {
+  return [
+    StartupService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (startupService: StartupService) => () => startupService.load(),
+      deps: [StartupService],
+      multi: true
+    }
+  ];
+}
+
 @Injectable()
 export class StartupService {
-  constructor(
-    private injector: Injector,
-    iconSrv: NzIconService,
-    @Inject(DOCUMENT) private doc: NzSafeAny,
-    private lazy: LazyService,
-    private platform: Platform
-  ) {
+  private readonly injector = inject(Injector);
+  private readonly doc = inject(DOCUMENT);
+  private readonly platform = inject(Platform);
+  private readonly lazy = inject(LazyService);
+  constructor(iconSrv: NzIconService) {
     iconSrv.addIcon(...ICONS);
   }
 
@@ -43,17 +53,17 @@ export class StartupService {
         (win.hj.q = win.hj.q || []).push(arguments);
       };
     win._hjSettings = {
-      hjid: 2549939,
+      hjid: 920546,
       hjsv: 6
     };
     Promise.all([
       this.lazy.loadScript(`./assets/highlight.pack.js`),
-      this.lazy.loadScript(`https://www.googletagmanager.com/gtag/js?id=GTM-PH2TJFJ`),
-      this.lazy.loadScript(`https://static.hotjar.com/c/hotjar-${win._hjSettings.hjid}.js?sv=${win._hjSettings.hjsv}`)
+      // this.lazy.loadScript(`https://www.googletagmanager.com/gtag/js?id=`)
+      // this.lazy.loadScript(`https://static.hotjar.com/c/hotjar-${win._hjSettings.hjid}.js?sv=${win._hjSettings.hjsv}`)
     ]).then(() => {
       const dataLayer: NzSafeAny[] = win.dataLayer || [];
       dataLayer.push(['js', new Date()]);
-      dataLayer.push(['config', 'GTM-PH2TJFJ']);
+      dataLayer.push(['config', 'UA-120202005-1']);
     });
   }
 }

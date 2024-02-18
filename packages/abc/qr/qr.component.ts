@@ -9,12 +9,12 @@ import {
   OnChanges,
   OnDestroy,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
+  numberAttribute
 } from '@angular/core';
 import { Subscription, filter } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiQRConfig } from '@yelon/util/config';
-import { InputNumber, NumberInput } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -27,7 +27,9 @@ import { QROptions } from './qr.types';
 @Component({
   selector: 'qr',
   exportAs: 'qr',
-  template: ` <img *ngIf="dataURL" style="max-width: 100%; max-height: 100%;" [src]="dataURL" /> `,
+  template: `@if (dataURL) {
+    <img style="max-width: 100%; max-height: 100%;" [src]="dataURL" />
+  }`,
   host: {
     '[style.display]': `'inline-block'`,
     '[style.height.px]': 'size',
@@ -38,10 +40,6 @@ import { QROptions } from './qr.types';
   encapsulation: ViewEncapsulation.None
 })
 export class QRComponent implements OnChanges, AfterViewInit, OnDestroy {
-  static ngAcceptInputType_padding: NumberInput;
-  static ngAcceptInputType_size: NumberInput;
-  static ngAcceptInputType_delay: NumberInput;
-
   private lazy$?: Subscription;
   private qr: NzSafeAny;
   private cog: YunzaiQRConfig;
@@ -56,10 +54,10 @@ export class QRComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() foregroundAlpha?: number;
   @Input() level?: string;
   @Input() mime?: string;
-  @Input() @InputNumber(null) padding?: number;
-  @Input() @InputNumber() size?: number;
+  @Input({ transform: (v: unknown) => (v == null ? null : numberAttribute(v)) }) padding?: number;
+  @Input({ transform: numberAttribute }) size?: number;
   @Input() value: string | (() => string) = '';
-  @Input() @InputNumber() delay?: number;
+  @Input({ transform: numberAttribute }) delay?: number;
   @Output() readonly change = new EventEmitter<string>();
 
   constructor(

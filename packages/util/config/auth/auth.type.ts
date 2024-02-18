@@ -18,9 +18,9 @@ export interface YunzaiAuthConfig {
    */
   token_send_key?: string;
   /**
-   * 发送token模板（默认为：`'${access_token}'`），使用 `${access_token}` 表示token点位符（**注意：**请务必使用 \`\` 包裹），例如：
+   * 发送token模板（默认为：`'${token}'`），使用 `${token}` 表示token点位符（**注意：**请务必使用 \`\` 包裹），例如：
    *
-   * - `Bearer ${access_token}`
+   * - `Bearer ${token}`
    */
   token_send_template?: string;
   /**
@@ -35,14 +35,6 @@ export interface YunzaiAuthConfig {
    * 忽略TOKEN的URL地址列表，默认值为：`[/\/login/, /assets\//, /passport\//]`
    */
   ignores?: RegExp[];
-  /**
-   * 允许匿名登录KEY，若请求参数中带有该KEY表示忽略TOKEN，默认：`_allow_anonymous`
-   */
-  allow_anonymous_key?: string;
-  /**
-   * 是否校验失效时命中后继续调用后续拦截器的 `intercept` 方法，默认：`true`
-   */
-  executeOtherInterceptors?: boolean;
   /**
    * 刷新间隔时长（单位：ms），默认：`3000`
    */

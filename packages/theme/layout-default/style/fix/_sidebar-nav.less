@@ -20,7 +20,7 @@
       overflow: hidden;
       display: block;
       padding: @yunzai-default-aside-nav-padding-top-bottom @yunzai-default-aside-nav-padding-left-right * 2
-      @yunzai-default-aside-nav-padding-top-bottom @yunzai-default-aside-nav-padding-left-right;
+        @yunzai-default-aside-nav-padding-top-bottom @yunzai-default-aside-nav-padding-left-right;
       color: @yunzai-default-aside-nav-text-color;
       text-decoration: none !important;
       text-overflow: ellipsis;
@@ -270,7 +270,7 @@
   }
 }
 
-.layout-default-sidebarnav-rtl-mixin(@enabled) when (@enabled=true) {
+.layout-default-sidebarnav-rtl-mixin(@enabled) when(@enabled=true) {
   [dir='rtl'] {
     @{sidebar-nav-prefix} {
       &__item {
@@ -301,5 +301,4 @@
     }
   }
 }
-
 .layout-default-sidebarnav-rtl-mixin(@rtl-enabled);
