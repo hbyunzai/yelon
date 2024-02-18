@@ -98,22 +98,8 @@ npm start
 
 > 强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)(本指南不提供此项目的实际支持服务！)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
 
-## 社区互助
-
-如果您在使用的过程中碰到问题，可以通过下面几个途径寻求帮助，同时我们也鼓励资深用户通过下面的途径给新人提供帮助。
-
-通过 Stack Overflow 或者 Segment Fault 提问时，建议加上 `ng-yunzai` 标签。
-
-1. QQ 群
-    - [316911865](//shang.qq.com/wpa/qunwpa?idkey=f5102185e4ecf8b641a176596aca3037a45d3452329f69cf3bc496877cd087ff)
-    - [428749721](//shang.qq.com/wpa/qunwpa?idkey=06823e225199af79b0c5ba3bbc89756ee57c2b0cc2115e3f44cc19230db2b0c3)
-2. [![Segment Fault](https://gw.alipayobjects.com/zos/rmsportal/hfYFfCvHTQTUKntlJbMF.svg | width=140)](https://segmentfault.com/t/ng-yunzai)（中文）
-3. 加入 NG-YUNZAI 自助服务群（中文）
-
-![](./assets/qq-group.png)
-
 ## 捐助
 
-如果你觉得 NG-YUNZAI 不错，可以考虑自愿为本站打赏或捐助。
+如果你觉得 NG-YUNZAI 不错，可以考虑自愿为原作者(NG-ALAIN cipchk)打赏或捐助。
 
 ![](./assets/donate.png)

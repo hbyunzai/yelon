@@ -169,10 +169,6 @@
 /docs/architecture/zh
 /docs/auth/en
 /docs/auth/zh
-/docs/bcs/en
-/docs/bcs/zh
-/docs/bis/en
-/docs/bis/zh
 /docs/cache/en
 /docs/cache/zh
 /docs/changelog/en
@@ -209,8 +205,6 @@
 /docs/performance/zh
 /docs/server/en
 /docs/server/zh
-/docs/socket/en
-/docs/socket/zh
 /docs/ssr/en
 /docs/ssr/zh
 /docs/style-guide/en
