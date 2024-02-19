@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1708309851010,
+  "timestamp": 1708310347891,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -391,6 +391,30 @@
     {
       "positive": false,
       "regex": "^\\/util\\/[^/][^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/bis\\/(?:.+\\/)?[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/bis\\/[^/][^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/bcs\\/(?:.+\\/)?[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/bcs\\/[^/][^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/socket\\/(?:.+\\/)?[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/socket\\/[^/][^/]*$"
     }
   ],
   "navigationRequestStrategy": "performance"
