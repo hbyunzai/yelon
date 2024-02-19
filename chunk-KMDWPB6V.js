@@ -1,0 +1,1 @@
+import{C as i,Q as m,V as c,X as f,ic as n,qa as t,w as e,wa as r}from"./chunk-4LVFALOC.js";var a=new t("WINDOW",{factory:()=>{let{defaultView:o}=r(n);if(!o)throw new Error("Window is not available");return o}});var E=new t("PAGE_VISIBILITY`",{factory:()=>{let o=r(n);return i(o,"visibilitychange").pipe(f(0),e(()=>!o.hidden),m(),c())}});export{a};
