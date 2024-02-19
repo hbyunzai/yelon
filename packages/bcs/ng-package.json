@@ -3,23 +3,13 @@
   "dest": "../../dist/@yelon/bcs",
   "lib": {
     "flatModuleFile": "bcs",
-    "entryFile": "index.ts"
+    "entryFile": "public_api.ts"
   },
   "allowedNonPeerDependencies": [
-    "date-fns",
     "ng-zorro-antd",
-    "@ant-design/icons-angular",
-    "@yelon/socket",
     "@yelon/theme",
-    "@yelon/acl",
-    "@yelon/cache",
-    "@yelon/abc",
-    "@yelon/auth",
-    "@yelon/chart",
     "@yelon/form",
-    "@yelon/mock",
-    "@yelon/testing",
-    "@yelon/util",
-    "@yelon/bis"
+    "@yelon/abc",
+    "@yelon/util"
   ]
 }

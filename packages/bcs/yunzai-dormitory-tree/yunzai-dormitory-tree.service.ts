@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { _HttpClient } from '@yelon/theme';
@@ -6,9 +6,9 @@ import { YunzaiResponse } from '@yelon/util';
 
 import { YunzaiDormitoryTree, YunzaiDormitoryTreeParam, YunzaiDormitoryTreeType } from './yunzai-dormitory-tree.types';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class YunzaiDormitoryTreeService {
-  constructor(private http: _HttpClient) {}
+  private http: _HttpClient = inject(_HttpClient);
 
   tree(
     param: YunzaiDormitoryTreeParam = {

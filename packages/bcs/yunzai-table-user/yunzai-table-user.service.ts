@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { _HttpClient } from '@yelon/theme';
@@ -6,9 +6,9 @@ import { Page, YunzaiPageResponse, YunzaiResponse } from '@yelon/util';
 
 import { YunzaiTableUser, YunzaiTableUserParam } from './yunzai-table-user.types';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class YunzaiTableUserService {
-  constructor(private http: _HttpClient) {}
+  private readonly http: _HttpClient = inject(_HttpClient);
 
   users(page: Page<YunzaiTableUserParam>): Observable<YunzaiPageResponse<YunzaiTableUser>> {
     return this.http.post(`/auth/baseUser/queryListForPage`, page).pipe(

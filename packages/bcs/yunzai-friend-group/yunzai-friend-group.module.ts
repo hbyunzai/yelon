@@ -12,7 +12,7 @@ import { YunzaiFriendGroupComponent } from './yunzai-friend-group.component';
 const COMPONENTS = [YunzaiFriendGroupComponent];
 
 @NgModule({
-  imports: [YelonFormModule, CommonModule, NzListModule, NzCardModule, NzSpinModule, NzEmptyModule, ...COMPONENTS],
+  imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule, ...COMPONENTS],
   exports: COMPONENTS
 })
 export class YunzaiFriendGroupModule {}

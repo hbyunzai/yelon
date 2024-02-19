@@ -1,12 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { YunzaiIframePageComponent } from './yunzai-iframe-page.component';
 
-const COMPONENTS = [YunzaiIframePageComponent];
+export const COMPONENTS = [YunzaiIframePageComponent];
 
 @NgModule({
-  imports: [CommonModule, ...COMPONENTS],
+  imports: [NzSpinModule, ...COMPONENTS],
   exports: COMPONENTS
 })
 export class YunzaiIframePageModule {}

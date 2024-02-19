@@ -1,6 +1,6 @@
 {
   "lib": {
     "flatModuleFile": "yunzai-iframe-page",
-    "entryFile": "index.ts"
+    "entryFile": "public_api.ts"
   }
 }

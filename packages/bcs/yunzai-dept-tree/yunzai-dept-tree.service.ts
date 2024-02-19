@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { _HttpClient } from '@yelon/theme';
@@ -6,9 +6,9 @@ import { YunzaiResponse } from '@yelon/util';
 
 import { YUNZAI_DEPT_TYPES, YunzaiDeptTree } from './yunzai-dept-tree.types';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class YunzaiDeptTreeService {
-  constructor(private http: _HttpClient) {}
+  private http: _HttpClient = inject(_HttpClient);
 
   /**
    * @param includeClass include class

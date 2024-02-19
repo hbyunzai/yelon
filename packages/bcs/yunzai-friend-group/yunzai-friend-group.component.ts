@@ -1,5 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+  inject
+} from '@angular/core';
 import { catchError, debounceTime, map, Subject, takeUntil, throwError } from 'rxjs';
 
 import { SFComponent, YelonFormModule } from '@yelon/form';
@@ -16,23 +26,26 @@ import { YunzaiFriendGroup, YunzaiFriendGroupProps, YunzaiFriendGroupState } fro
   selector: `yunzai-friend-group`,
   template: `
     <nz-spin [nzSpinning]="state.loading">
-      <ng-container *ngIf="isWrapped">
+      @if (isWrapped) {
         <nz-card>
           <ng-container [ngTemplateOutlet]="content" />
         </nz-card>
-      </ng-container>
-
-      <ng-container *ngIf="!isWrapped">
+      } @else {
         <ng-container [ngTemplateOutlet]="content" />
-      </ng-container>
+      }
     </nz-spin>
 
     <ng-template #content>
       <ng-container [ngTemplateOutlet]="friendForm" />
-      <nz-list nzSize="small" *ngIf="data.length > 0">
-        <nz-list-item *ngFor="let item of data" (click)="onItemClick(item)">{{ item.name }}</nz-list-item>
-      </nz-list>
-      <nz-empty *ngIf="data.length === 0" />
+      @if (data.length > 0) {
+        <nz-list nzSize="small">
+          @for (item of data; track item) {
+            <nz-list-item (click)="onItemClick(item)">{{ item.name }}</nz-list-item>
+          }
+        </nz-list>
+      } @else {
+        <nz-empty />
+      }
     </ng-template>
 
     <ng-template #friendForm>
@@ -40,9 +53,10 @@ import { YunzaiFriendGroup, YunzaiFriendGroupProps, YunzaiFriendGroupState } fro
     </ng-template>
   `,
   standalone: true,
-  imports: [YelonFormModule, CommonModule, NzListModule, NzCardModule, NzSpinModule, NzEmptyModule]
+  imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule],
+  providers: [YunzaiFriendGroupService]
 })
-export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit, OnDestroy {
+export class YunzaiFriendGroupComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() props?: YunzaiFriendGroupProps;
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onQueryComplete: EventEmitter<YunzaiFriendGroup[]> = new EventEmitter<YunzaiFriendGroup[]>();
@@ -50,6 +64,7 @@ export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit, OnDest
   @Output() readonly onSelect: EventEmitter<YunzaiFriendGroup> = new EventEmitter<YunzaiFriendGroup>();
   @ViewChild('form') sf!: SFComponent;
   private $destroy = new Subject();
+  private service: YunzaiFriendGroupService = inject(YunzaiFriendGroupService);
 
   state: YunzaiFriendGroupState = {
     loading: false,
@@ -68,8 +83,6 @@ export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit, OnDest
     }
     return this.state.data;
   }
-
-  constructor(private friendsService: YunzaiFriendGroupService) {}
 
   ngOnInit(): void {
     if (this.props?.data) {
@@ -103,7 +116,7 @@ export class YunzaiFriendGroupComponent implements OnInit, AfterViewInit, OnDest
 
   query(): void {
     this.state.loading = true;
-    this.friendsService
+    this.service
       .groups()
       .pipe(
         takeUntil(this.$destroy),

@@ -2,21 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { YunzaiDeptTreeModule, YunzaiDeptTree, YunzaiDeptTreeProps } from '@yelon/bcs/yunzai-dept-tree';
+import { YunzaiDeptTree, YunzaiDeptTreeModule, YunzaiDeptTreeProps } from '@yelon/bcs/yunzai-dept-tree';
 import {
-  YunzaiDormitoryTreeModule,
   YunzaiDormitoryTree,
+  YunzaiDormitoryTreeModule,
   YunzaiDormitoryTreeProps
 } from '@yelon/bcs/yunzai-dormitory-tree';
-import { YunzaiFriendGroupModule, YunzaiFriendGroup, YunzaiFriendGroupProps } from '@yelon/bcs/yunzai-friend-group';
+import { YunzaiFriendGroup, YunzaiFriendGroupModule, YunzaiFriendGroupProps } from '@yelon/bcs/yunzai-friend-group';
 import { YunzaiRoleTree, YunzaiRoleTreeModule, YunzaiRoleTreeProps } from '@yelon/bcs/yunzai-role-tree';
 import {
+  YunzaiTableUser,
   YunzaiTableUserComponent,
   YunzaiTableUserModule,
-  YunzaiTableUser,
   YunzaiTableUserProps
 } from '@yelon/bcs/yunzai-table-user';
-import { YunzaiThemeModule } from '@yelon/theme';
+import { I18nPipe } from '@yelon/theme';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
@@ -26,42 +26,50 @@ import { YunzaiContactProps, YunzaiContactState } from './yunzai-contact.types';
 @Component({
   selector: `yunzai-contact`,
   template: `
-    <nz-card *ngIf="isWarp">
+    @if (isWarp) {
+      <nz-card>
+        <ng-container [ngTemplateOutlet]="content" />
+      </nz-card>
+    } @else {
       <ng-container [ngTemplateOutlet]="content" />
-    </nz-card>
-
-    <ng-container *ngIf="!isWarp" [ngTemplateOutlet]="content" />
+    }
 
     <ng-template #content>
       <nz-row>
         <nz-col [nzSpan]="6">
           <div class="yz-select-contacts-modal-type">
             <nz-radio-group [(ngModel)]="state.cursor">
-              <label *ngIf="!disableDeptTree" nz-radio-button nzValue="deptTree">{{ 'deptTree' | i18n }}</label>
-              <label *ngIf="!disableRoleTree" nz-radio-button nzValue="roleTree">{{ 'roleTree' | i18n }}</label>
-              <label *ngIf="!disableDormitoryTree" nz-radio-button nzValue="dormitoryTree">{{
-                'dormitoryTree' | i18n
-              }}</label>
-              <label *ngIf="!disableFriendGroup" nz-radio-button nzValue="friendGroup">{{
-                'friendGroup' | i18n
-              }}</label>
+              @if (!disableDeptTree) {
+                <label nz-radio-button nzValue="deptTree">{{ 'deptTree' | i18n }}</label>
+              }
+              @if (!disableRoleTree) {
+                <label nz-radio-button nzValue="roleTree">{{ 'roleTree' | i18n }}</label>
+              }
+              @if (!disableDormitoryTree) {
+                <label nz-radio-button nzValue="dormitoryTree">{{ 'dormitoryTree' | i18n }}</label>
+              }
+              @if (!disableFriendGroup) {
+                <label nz-radio-button nzValue="friendGroup">{{ 'friendGroup' | i18n }}</label>
+              }
             </nz-radio-group>
           </div>
 
           <nz-row class="yz-select-contacts-modal-tree">
-            <nz-col [nzSpan]="24" [ngSwitch]="state.cursor">
-              <yunzai-dept-tree *ngSwitchCase="'deptTree'" [props]="deptTree" (onSelect)="onDeptSelect($event)" />
-              <yunzai-dormitory-tree
-                *ngSwitchCase="'dormitoryTree'"
-                [props]="dormitoryTree"
-                (onSelect)="onDormTreeSelect($event)"
-              />
-              <yunzai-role-tree *ngSwitchCase="'roleTree'" [props]="roleTree" (onSelect)="onRoleTreeSelect($event)" />
-              <yunzai-friend-group
-                *ngSwitchCase="'friendGroup'"
-                [props]="friendGroup"
-                (onSelect)="onFriendSelect($event)"
-              />
+            <nz-col [nzSpan]="24">
+              @switch (state.cursor) {
+                @case ('deptTree') {
+                  <yunzai-dept-tree [props]="deptTree" (onSelect)="onDeptSelect($event)" />
+                }
+                @case ('dormitoryTree') {
+                  <yunzai-dormitory-tree [props]="dormitoryTree" (onSelect)="onDormTreeSelect($event)" />
+                }
+                @case ('roleTree') {
+                  <yunzai-role-tree [props]="roleTree" (onSelect)="onRoleTreeSelect($event)" />
+                }
+                @case ('friendGroup') {
+                  <yunzai-friend-group [props]="friendGroup" (onSelect)="onFriendSelect($event)" />
+                }
+              }
             </nz-col>
           </nz-row>
         </nz-col>
@@ -73,17 +81,17 @@ import { YunzaiContactProps, YunzaiContactState } from './yunzai-contact.types';
   `,
   standalone: true,
   imports: [
-    YunzaiThemeModule,
+    FormsModule,
+    CommonModule,
+    I18nPipe,
+    NzRadioModule,
+    NzGridModule,
+    NzCardModule,
+    YunzaiRoleTreeModule,
     YunzaiDeptTreeModule,
     YunzaiDormitoryTreeModule,
     YunzaiFriendGroupModule,
-    YunzaiRoleTreeModule,
-    YunzaiTableUserModule,
-    CommonModule,
-    NzCardModule,
-    NzGridModule,
-    NzRadioModule,
-    FormsModule
+    YunzaiTableUserModule
   ]
 })
 export class YunzaiContactComponent {
@@ -150,8 +158,6 @@ export class YunzaiContactComponent {
   get isWarp(): boolean {
     return !!this.props?.wrap;
   }
-
-  constructor() {}
 
   onDeptSelect(depts: YunzaiDeptTree[]): void {
     this.table.setTableParam({ deptId: depts[0].key });
