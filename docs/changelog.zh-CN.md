@@ -13,6 +13,18 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## [17.2.1](https://github.com/hbyunzai/yelon/compare/17.2.0...17.2.1) (2024-02-19)
+
+
+### Bug Fixes
+
+* **ci:** add CNAME copy ([362a580](https://github.com/hbyunzai/yelon/commit/362a58033c6724f05c6a4e48108d0d6f1585c3c0))
+* **ci:** add yarn lock ([cbd9915](https://github.com/hbyunzai/yelon/commit/cbd9915c325af11b57d7bb209a37f14e98dbb539))
+* **ci:** fix docker name ([a67a0c3](https://github.com/hbyunzai/yelon/commit/a67a0c36c74c2eb3d3c199bedfd15256f0075e2a))
+* **schematics:** add missing images ([ed959c5](https://github.com/hbyunzai/yelon/commit/ed959c5f804da8f0e1bb73bbbf678ba42f06d4ba))
+* **schematics:** fix module name ([0e0a376](https://github.com/hbyunzai/yelon/commit/0e0a376c31188ea0ffa25ccaea5b730dfd615f81))
+
+
 
 # [17.2.0](https://github.com/hbyunzai/yelon/compare/17.1.0...17.2.0) (2024-02-02)
 
