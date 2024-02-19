@@ -34,5 +34,5 @@ jobs:
           file: ./Dockerfile.docs
           push: true
           tags:
-            yunzai-bot/ng-yunzai-docs:latest
+            yunzaibot/ng-yunzai-docs:latest
             # registry.gitlab.com/ng-yunzai/images:docs
