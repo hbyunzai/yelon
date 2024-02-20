@@ -28,9 +28,9 @@ So, @yelon/auth is not limited to ng-yunzai scaffolding, can be used with any An
 
 ### Token
 
-@yelon/auth thinks that the encrypted string that needs to be sent when requesting is called the Token value, whether it is JWT `Authorization` parameter or OAuth2 `access_token` value, which is also the value carried by each HTTP request. Therefore, the `ITokenModel` interface is used to represent authentication information and has only one `token` attribute.
+@yelon/auth thinks that the encrypted string that needs to be sent when requesting is called the Token value, whether it is JWT `Authorization` parameter or OAuth2 `access_token` value, which is also the value carried by each HTTP request. Therefore, the `ITokenModel` interface is used to represent authentication information and has only one `access_token` attribute.
 
-> Note: The token value must be a string type.
+> Note: The access_token value must be a string type.
 
 ### Authentication Style
 

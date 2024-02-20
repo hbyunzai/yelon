@@ -5,7 +5,7 @@ describe('auth: local-storage', () => {
   const store = new LocalStorageStore();
   const KEY = 'token';
   const VALUE: ITokenModel = {
-    token: 'token data'
+    access_token: 'token data'
   } as ITokenModel;
 
   beforeEach(() => {

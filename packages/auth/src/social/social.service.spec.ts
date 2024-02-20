@@ -43,7 +43,7 @@ const MockAuth0 = {
     'http://localhost:4200/#/login/callback'
   )}`,
   be: { client: '8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5' },
-  model: { client: '8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5', token: '123' }
+  model: { client: '8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5', access_token: '123' }
 };
 
 describe('auth: social.service', () => {
@@ -91,7 +91,7 @@ describe('auth: social.service', () => {
         expect(window.open).toHaveBeenCalled();
         const token = TestBed.inject(YA_SERVICE_TOKEN).get()!;
         Object.keys(item.be).forEach(key => {
-          expect(token[key]).toContain(item.be[key]);
+          expect((token as any)[key]).toContain(item.be[key]);
         });
         discardPeriodicTasks();
       }));
@@ -125,9 +125,9 @@ describe('auth: social.service', () => {
   });
 
   describe('#callback', () => {
-    const jwtToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6ImNpcGNoayIsImFkbWluIjp0cnVlLCJleHAiOjE1MTQ2NDk2MDB9.nocpzY3UnRLJXg6I7unzvH4JUzcBRYBtf_xQ41xCcTw`;
+    const jwtToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdG9rZW4iOiIxMjM0NTY3ODkwLTM0NTY3ODkwIiwidXNlciI6Inl1bnphaS1ib3QiLCJ1aWQiOjEsInJvbGUiOiJhZG1pbiIsInBlcm1pc3Npb24iOlsxLDIsMyw0XX0.okVgOIadKQBFy6CC-TsRfr7203lSBTO-m5ZgJ0__BjI`;
     const swtData: ITokenModel = {
-      token: '1234567890-34567890',
+      access_token: '1234567890-34567890',
       user: 'yunzai-bot',
       uid: 1,
       role: 'admin',
@@ -136,13 +136,13 @@ describe('auth: social.service', () => {
     [
       {
         summary: 'swt via url',
-        url: 'http://localhost:4200/login/callback?token=40SOJV-L8oOwwUIs&name=yunzai-bot&uid=1',
-        be: { token: '40SOJV-L8oOwwUIs', name: 'yunzai-bot', uid: '1' }
+        url: 'http://localhost:4200/login/callback?access_token=40SOJV-L8oOwwUIs&name=yunzai-bot&uid=1',
+        be: { access_token: '40SOJV-L8oOwwUIs', name: 'yunzai-bot', uid: '1' }
       },
       {
         summary: 'jwt via url',
-        url: `http://localhost:4200/login/callback?token=${jwtToken}`,
-        be: { token: jwtToken }
+        url: `http://localhost:4200/login/callback?access_token=${jwtToken}`,
+        be: { access_token: jwtToken }
       },
       {
         summary: 'url muse contain a ?',
@@ -167,7 +167,7 @@ describe('auth: social.service', () => {
         }
         const ret = srv.callback(item.url);
         Object.keys(item.be).forEach(key => {
-          expect(ret[key]).toBe(item.be[key]);
+          expect((ret as any)[key]).toBe(item.be[key]);
         });
       });
     });

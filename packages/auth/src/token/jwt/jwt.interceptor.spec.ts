@@ -15,11 +15,11 @@ import { YA_SERVICE_TOKEN } from '../interface';
 function genModel(
   token:
     | string
-    | null = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6ImNpcGNoayIsImFkbWluIjp0cnVlLCJleHAiOjQ2NzA0MDk2MDB9.IINuMTwqwCQP63fSQ-ZPgOEaE8lilrUceUX9Wy47PBk`
+    | null = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6Inl1bnphaS1ib3QiLCJhZG1pbiI6dHJ1ZSwiZXhwIjo0NjcwNDA5NjAwfQ.VfRGUDLkemgGmbWFg5ofZzhM4mxHnFiYaxsztbPDICQ`
 ): JWTTokenModel {
   const model = new JWTTokenModel();
   // from: https://jwt.io/
-  model.access_token = token;
+  model.access_token = token!;
   return model;
 }
 

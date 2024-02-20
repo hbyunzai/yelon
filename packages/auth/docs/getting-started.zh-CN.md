@@ -28,7 +28,7 @@ type: Documents
 
 ### Token
 
-@yelon/auth 认为请求时需要发送的加密字符串称它为 Token 值，不管是采用 JWT 的 `Authorization` 参数，还是 OAuth2 的 `access_token`，这也是每个 HTTP 请求时所携带的值。 因此，`ITokenModel` 接口用于表述认证信息，且只有一个 `token` 属性。
+@yelon/auth 认为请求时需要发送的加密字符串称它为 Token 值，不管是采用 JWT 的 `Authorization` 参数，还是 OAuth2 的 `access_token`，这也是每个 HTTP 请求时所携带的值。 因此，`ITokenModel` 接口用于表述认证信息，且只有一个 `access_token` 属性。
 
 > 注意：Token 值务必是一个字符串值。
 

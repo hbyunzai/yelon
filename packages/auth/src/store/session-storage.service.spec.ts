@@ -5,7 +5,7 @@ describe('auth: session-storage', () => {
   const store = new SessionStorageStore();
   const KEY = 'token';
   const VALUE: ITokenModel = {
-    token: 'token data'
+    access_token: 'token data'
   } as ITokenModel;
 
   beforeEach(() => {

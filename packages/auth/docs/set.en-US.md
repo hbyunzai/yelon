@@ -20,9 +20,9 @@ Therefore, when the backend returns the corresponding authentication information
 
 ```ts
 constructor(@Inject(YA_SERVICE_TOKEN) service: ITokenService) {
-  service.set({ token: `asdf` });
+  service.set({ access_token: `asdf` });
 
-  service.get().token; // output: asdf
+  service.get().access_token; // output: asdf
 }
 ```
 
