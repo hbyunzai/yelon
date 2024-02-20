@@ -9,10 +9,10 @@ import { JWTTokenModel } from './jwt/jwt.model';
 describe('auth: token.service', () => {
   let service: ITokenService;
   const VALUE: ITokenModel = {
-    token: 'token data'
+    access_token: 'token data'
   } as ITokenModel;
   const JWTVALUE: ITokenModel = {
-    token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ`
+    access_token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ`
   } as ITokenModel;
 
   beforeEach(() => {
@@ -66,7 +66,7 @@ describe('auth: token.service', () => {
       expect(service.get()!.access_token).toBeUndefined();
     });
     it('should be only clear token data', () => {
-      service.set({ token: '1', a: 2 });
+      service.set({ access_token: '1', a: 2 });
       expect(service.get()).not.toBeNull();
       expect(service.get()!.access_token).toBe(`1`);
       expect(service.get()!.a).toBe(2);
@@ -104,8 +104,8 @@ describe('auth: token.service', () => {
         expect(true).toBe(true);
         done();
       });
-      const expired = +new Date() + 20;
-      service.set({ token: 'a', expired });
+      const expires_in = +new Date() + 20;
+      service.set({ access_token: 'a', expires_in });
     });
 
     it('should be working of jwt', done => {
@@ -115,7 +115,7 @@ describe('auth: token.service', () => {
         done();
       });
       const exp = +new Date() + 20;
-      service.set({ token: 'a', exp } as JWTTokenModel);
+      service.set({ access_token: 'a', exp } as JWTTokenModel);
     });
 
     it('should be can not trigger refresh when expired is not present', done => {
@@ -124,7 +124,7 @@ describe('auth: token.service', () => {
         expect(true).toBe(false);
         done();
       });
-      service.set({ token: 'a', expired: 0 });
+      service.set({ access_token: 'a', expires_in: 0 });
       setTimeout(() => {
         expect(true).toBe(true);
         done();

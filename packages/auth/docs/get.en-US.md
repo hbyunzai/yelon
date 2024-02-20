@@ -58,12 +58,12 @@ You need to create a page for the callback, and the only thing the page has to d
 // 1, default based on the current URL address
 this.socialService.callback();
 // 2, without `{ useHash: true }` routing
-this.socialService.callback(`/callback?token=40SOJV-L8oOwwUIs&name=yunzai-bot&uid=1`);
+this.socialService.callback(`/callback?access_token=40SOJV-L8oOwwUIs&name=yunzai-bot&uid=1`);
 // 3, with `{ useHash: true }` route
-this.socialService.callback(`/?token=40SOJV-L8oOwwUIs&name=yunzai-bot&uid=1#/callback`);
+this.socialService.callback(`/?access_token=40SOJV-L8oOwwUIs&name=yunzai-bot&uid=1#/callback`);
 // 4, specify the `ITokenModel` object
 this.socialService.callback(<ITokenModel>{
-  token: '123456789',
+  access_token: '123456789',
   name: 'yunzai-bot',
   id: 10000,
   time: +new Date

@@ -10,15 +10,15 @@ type: Documents
 
 ### withSimple
 
-透过 `YelonAuthConfig` 可以指定参数名以及其发送位置，例如：
+透过 `DelonAuthConfig` 可以指定参数名以及其发送位置，例如：
 
 ```ts
-token_send_key = 'token';
-token_send_template = 'Bearer ${token}';
+token_send_key = 'Authorization';
+token_send_template = 'Bearer ${access_token}';
 token_send_place = 'header';
 ```
 
-表示在每一个请求的 `header` 加上 `{ token: 'Bearer token_string' }` 数据。
+表示在每一个请求的 `header` 加上 `{ Authorization: 'Bearer token_string' }` 数据。
 
 ### withJWT
 
@@ -26,7 +26,7 @@ token_send_place = 'header';
 
 ### 如何选择？
 
-`withSimple` 是一种自由度非常高的风格，你可以将 `token` 放在请求体、请求头等当中。
+`withSimple` 是一种自由度非常高的风格，你可以将 `access_token` 放在请求体、请求头等当中。
 
 `withJWT` 是一个 JWT 标准，这需要确保后端也采用这类标准。
 

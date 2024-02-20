@@ -7,6 +7,20 @@
     "entryFile": "public_api.ts"
   },
   "allowedNonPeerDependencies": [
-    "ng-zorro-antd"
+    "date-fns",
+    "ng-zorro-antd",
+    "@ant-design/icons-angular",
+    "@yelon/socket",
+    "@yelon/theme",
+    "@yelon/acl",
+    "@yelon/cache",
+    "@yelon/abc",
+    "@yelon/auth",
+    "@yelon/chart",
+    "@yelon/form",
+    "@yelon/mock",
+    "@yelon/testing",
+    "@yelon/util",
+    "@yelon/bcs"
   ]
 }

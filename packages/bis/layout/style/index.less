@@ -1,0 +1,154 @@
+@import '../../../theme/theme-default.less';
+
+.yz-application {
+  position: fixed;
+  top: @yz-application-top;
+  left: 0;
+  width: @yz-application-width;
+  height: @yz-application-height;
+  overflow: hidden;
+  background-color: @yz-application-bgColor;
+  box-shadow: 10px 10px 10px 0 @yz-application-border-shadow;
+}
+
+.yz-application-topic {
+  background-color: @yz-application-topic-bgColor;
+}
+
+.yz-application-text {
+  display: block;
+  margin-left: -12px;
+  padding: 3px 40px;
+  overflow: hidden;
+  color: @yz-application-topic-text-color;
+  font-weight: @yz-application-topic-text-font-weight;
+  line-height: @yz-application-topic-text-line-height;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: 0.2s 0.2s 0.2s 0.2s;
+}
+
+.yz-application-text:hover {
+  color: @yz-application-topic-text-hover-color;
+  font-weight: bold;
+  background: @yz-application-topic-text-hover-bgColor;
+}
+
+.yz-application-container {
+  height: @yz-application-height;
+  overflow: auto;
+}
+
+.yz-application-list {
+  padding: @yz-application-list-padding;
+
+  ul {
+    width: @yz-application-list-ul-width;
+    padding: @yz-application-list-ul-padding;
+    overflow: hidden;
+    column-count: 4;
+
+    li {
+      float: left;
+      width: @yz-application-list-ul-li-width;
+      margin-bottom: @yz-application-list-ul-li-margin-bottom;
+      padding: @yz-application-list-ul-li-padding;
+      list-style: none;
+      -webkit-column-break-inside: avoid;
+      break-inside: avoid;
+
+      h5 {
+        margin-top: @yz-application-list-ul-h5-margin-top;
+        color: @yz-application-list-ul-h5-color;
+        font-weight: @yz-application-list-ul-h5-font-weight;
+        font-size: @yz-application-list-ul-h5-font-size;
+        line-height: @yz-application-list-ul-h5-line-height;
+      }
+
+      a {
+        display: @yz-application-list-ul-a-display;
+        padding: @yz-application-list-ul-a-padding;
+        overflow: @yz-application-list-ul-a-overflow;
+        color: @yz-application-list-ul-a-color;
+        font-size: @yz-application-list-ul-a-font-size;
+        line-height: @yz-application-list-ul-a-line-height;
+        white-space: @yz-application-list-ul-a-white-space;
+        text-overflow: @yz-application-list-ul-a-text-overflow;
+      }
+
+      a:hover {
+        color: @yz-application-list-ul-a-hover-color;
+        background: @yz-application-list-ul-a-hover-bgColor;
+      }
+    }
+  }
+}
+
+.yz-application-list-search {
+  margin: @yz-application-list-search-margin;
+  padding: @yz-application-list-search-padding;
+}
+
+.yz-application-list-item {
+  h4,
+  p {
+    margin: @yz-application-list-item-h4p-margin;
+    overflow: @yz-application-list-item-h4p-overflow;
+    color: @yz-application-list-item-h4p-color;
+    white-space: @yz-application-list-item-h4p-white-space;
+    text-overflow: @yz-application-list-item-h4p-text-overflow;
+  }
+
+  h4 {
+    font-weight: @yz-application-list-item-h4-font-weight;
+    line-height: @yz-application-list-item-h4-line-height;
+  }
+
+  p {
+    line-height: @yz-application-list-item-p-line-height;
+  }
+
+  li:hover {
+    p {
+      color: @yz-application-list-item-li-hover-color;
+    }
+
+    h4 {
+      color: @yz-application-list-item-li-hover-color;
+    }
+
+    background: @yz-application-list-item-li-hover-bgColor;
+  }
+}
+
+.yz-application-group {
+  .ant-dropdown-link {
+    color: @yz-application-topic-text-color;
+  }
+
+  .ant-tabs-nav-operations {
+    color: @yz-application-topic-text-color;
+  }
+
+  .ant-tabs-top > .ant-tabs-nav::before {
+    border: none;
+  }
+
+  .ant-tabs-top > .ant-tabs-nav {
+    margin: 0;
+  }
+
+  padding: 0 10px;
+}
+
+.yz-application-dropdown {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.yz-user-name {
+  width: 92px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

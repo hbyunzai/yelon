@@ -12,7 +12,7 @@ describe('auth: cookie-storage', () => {
   let store: CookieStorageStore;
   const KEY = 'token';
   const VALUE: ITokenModel = {
-    token: 'token data'
+    access_token: 'token data'
   } as ITokenModel;
 
   beforeEach(() => {
@@ -73,7 +73,7 @@ describe('auth: cookie-storage', () => {
       expect(Object.keys(ret).length).toBe(0);
     });
     it('should be set expired', () => {
-      store.set(KEY, { ...VALUE, expired: 1000 * 3 });
+      store.set(KEY, { ...VALUE, expires_in: 1000 * 3 });
       const args = putSpy.calls.first().args;
       expect(args.length).toBe(3);
       const options = args[2] as CookieOptions;

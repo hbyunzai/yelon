@@ -11,9 +11,6 @@ export function YA_SERVICE_TOKEN_FACTORY(): ITokenService {
   return new TokenService(inject(YunzaiConfigService));
 }
 
-/**
- * 维护Token信息服务，[在线文档](https://ng.yunzainfo.com/auth)
- */
 @Injectable()
 export class TokenService implements ITokenService, OnDestroy {
   private readonly store = inject(YA_STORE_TOKEN);
@@ -81,7 +78,7 @@ export class TokenService implements ITokenService, OnDestroy {
       .pipe(
         map(() => {
           const item = this.get() as ITokenModel;
-          const expired = item.expires_in || 0;
+          const expired = item.expires_in || item.exp || 0;
           if (expired <= 0) {
             return null;
           }

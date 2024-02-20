@@ -36,6 +36,10 @@ export interface YunzaiAuthConfig {
    */
   ignores?: RegExp[];
   /**
+   * 允许匿名登录KEY，若请求参数中带有该KEY表示忽略TOKEN，默认：`_allow_anonymous`
+   */
+  allow_anonymous_key?: string;
+  /**
    * 刷新间隔时长（单位：ms），默认：`3000`
    */
   refreshTime?: number;

@@ -40,7 +40,7 @@ describe('auth: JWTGuard', () => {
     srv = TestBed.inject(YA_SERVICE_TOKEN);
     router = TestBed.inject<Router>(Router);
     srv.set({
-      token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6ImNpcGNoayIsImFkbWluIjp0cnVlLCJleHAiOjQ2NzA0MDk2MDB9.IINuMTwqwCQP63fSQ-ZPgOEaE8lilrUceUX9Wy47PBk`
+      access_token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6Inl1bnphaS1ib3QiLCJhZG1pbiI6dHJ1ZSwiZXhwIjo0NjcwNDA5NjAwfQ.VfRGUDLkemgGmbWFg5ofZzhM4mxHnFiYaxsztbPDICQ`
     });
   });
 
@@ -52,7 +52,7 @@ describe('auth: JWTGuard', () => {
   });
 
   it(`should be activated when not guard route`, (done: () => void) => {
-    srv.set({ token: `` });
+    srv.set({ access_token: `` });
     router.navigateByUrl('/login').then(res => {
       expect(res).toBe(true);
       done();
@@ -60,7 +60,7 @@ describe('auth: JWTGuard', () => {
   });
 
   it(`should be go to login when token invalid`, (done: () => void) => {
-    srv.set({ token: `` });
+    srv.set({ access_token: `` });
     router.navigateByUrl('/home').then(res => {
       expect(res).toBe(false);
       spyOn(router, 'navigateByUrl');

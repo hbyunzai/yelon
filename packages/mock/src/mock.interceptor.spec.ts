@@ -25,7 +25,7 @@ const DATA = {
     '/array': [1, 2],
     '/fn/queryString': (req: MockRequest) => req.queryString,
     '/fn/header': (req: MockRequest) => req.headers,
-    '/HttpResponse': () => new HttpResponse({ body: 'Body', headers: new HttpHeaders({ token: '1' }) }),
+    '/HttpResponse': () => new HttpResponse({ body: 'Body', headers: new HttpHeaders({ access_token: '1' }) }),
     'POST /fn/body': (req: MockRequest) => req.body,
     'POST /users/1': { uid: 1, action: 'add' },
     '/404': () => {
@@ -112,17 +112,17 @@ describe('mock: interceptor', () => {
     });
     it('should return body', (done: () => void) => {
       const key = '/fn/body';
-      http.post(key, { token: 'asdf' }).subscribe((res: any) => {
+      http.post(key, { access_token: 'asdf' }).subscribe((res: any) => {
         expect(res).not.toBeNull();
-        expect(res.token).toBe('asdf');
+        expect(res.access_token).toBe('asdf');
         done();
       });
     });
     it('should return header', (done: () => void) => {
       const key = '/fn/header';
-      http.get(key, { headers: { token: 'asdf' } }).subscribe((res: any) => {
+      http.get(key, { headers: { access_token: 'asdf' } }).subscribe((res: any) => {
         expect(res).not.toBeNull();
-        expect(res.token).toBe('asdf');
+        expect(res.access_token).toBe('asdf');
         done();
       });
     });
@@ -131,7 +131,7 @@ describe('mock: interceptor', () => {
       http.get(key, { observe: 'response' }).subscribe((res: HttpResponse<any>) => {
         expect(res).not.toBeNull();
         expect(res.body).toBe('Body');
-        expect(res.headers.get('token')).toBe('1');
+        expect(res.headers.get('access_token')).toBe('1');
         done();
       });
     });
