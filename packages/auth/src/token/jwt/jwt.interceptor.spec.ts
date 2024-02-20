@@ -19,7 +19,7 @@ function genModel(
 ): JWTTokenModel {
   const model = new JWTTokenModel();
   // from: https://jwt.io/
-  model.token = token;
+  model.access_token = token;
   return model;
 }
 
@@ -57,7 +57,7 @@ describe('auth: jwt.interceptor', () => {
       done();
     });
     const req = httpBed.expectOne('/test') as TestRequest;
-    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${basicModel.token}`);
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${basicModel.access_token}`);
     req.flush('ok!');
   });
 

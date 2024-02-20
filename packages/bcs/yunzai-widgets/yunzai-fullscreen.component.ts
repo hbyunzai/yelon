@@ -2,18 +2,23 @@ import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core'
 
 import screenfull from 'screenfull';
 
+import { I18nPipe } from '@yelon/theme';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 @Component({
-  selector: 'yunzai-fullscreen',
+  selector: 'yunzai-header-fullscreen',
   template: `
     <i nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></i>
-    {{ (status ? 'exitFullscreen' : 'fullscreen') | i18n }}
+    {{ (status ? 'menu.fullscreen.exit' : 'menu.fullscreen') | i18n }}
   `,
   host: {
-    '[class.d-block]': 'true'
+    '[class.flex-1]': 'true'
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NzIconModule, I18nPipe]
 })
-export class YunzaiFullScreenComponent {
+export class YunzaiHeaderFullScreenComponent {
   status = false;
 
   @HostListener('window:resize')

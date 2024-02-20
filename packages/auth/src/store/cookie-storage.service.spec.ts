@@ -52,11 +52,11 @@ describe('auth: cookie-storage', () => {
     store.set(KEY, VALUE);
     const ret = store.get(KEY);
     expect(ret).not.toBeNull();
-    expect(ret.token).toBe(VALUE.token);
+    expect(ret.access_token).toBe(VALUE.access_token);
 
     const invalidRet = store.get('asdf');
     expect(invalidRet).not.toBeNull();
-    expect(invalidRet.token).toBeUndefined();
+    expect(invalidRet.access_token).toBeUndefined();
   });
 
   describe('#set', () => {
@@ -64,7 +64,7 @@ describe('auth: cookie-storage', () => {
       store.set(KEY, VALUE);
       let ret = store.get(KEY);
       expect(ret).not.toBeNull();
-      expect(ret.token).toBe(VALUE.token);
+      expect(ret.access_token).toBe(VALUE.access_token);
 
       // when is null or undefined
       store.set(KEY, undefined);
@@ -86,6 +86,6 @@ describe('auth: cookie-storage', () => {
     store.remove(KEY);
     const ret = store.get(KEY);
     expect(ret).not.toBeNull();
-    expect(ret.token).toBeUndefined();
+    expect(ret.access_token).toBeUndefined();
   });
 });

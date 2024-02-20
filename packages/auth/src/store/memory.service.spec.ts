@@ -12,17 +12,17 @@ describe('auth: memory', () => {
     store.set(KEY, VALUE);
     const ret = store.get(KEY);
     expect(ret).not.toBeNull();
-    expect(ret.token).toBe(VALUE.token);
+    expect(ret.access_token).toBe(VALUE.access_token);
     const invalidRet = store.get('asdf');
     expect(invalidRet).not.toBeNull();
-    expect(invalidRet.token).toBeUndefined();
+    expect(invalidRet.access_token).toBeUndefined();
   });
 
   it('#set', () => {
     store.set(KEY, VALUE);
     const ret = store.get(KEY);
     expect(ret).not.toBeNull();
-    expect(ret.token).toBe(VALUE.token);
+    expect(ret.access_token).toBe(VALUE.access_token);
   });
 
   it('#remove', () => {
@@ -30,6 +30,6 @@ describe('auth: memory', () => {
     store.remove(KEY);
     const ret = store.get(KEY);
     expect(ret).not.toBeNull();
-    expect(ret.token).toBeUndefined();
+    expect(ret.access_token).toBeUndefined();
   });
 });

@@ -12,15 +12,11 @@ export const YA_SERVICE_TOKEN = new InjectionToken<ITokenService>('YA_SERVICE_TO
 });
 
 export interface ITokenModel {
-  [key: string]: any;
-
-  token: string | null | undefined;
-
-  /**
-   * 过期时间，单位：ms
-   * - 不管Simple、JWT模式都必须指定
-   */
-  expired?: number;
+  access_token: string | null | undefined;
+  expires_in?: number;
+  refresh_token?: string;
+  scope?: string;
+  token_type?: string;
 }
 
 export interface AuthReferrer {

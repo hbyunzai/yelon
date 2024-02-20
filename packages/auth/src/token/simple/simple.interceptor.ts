@@ -13,7 +13,7 @@ import { YA_SERVICE_TOKEN } from '../interface';
 function newReq(req: HttpRequest<unknown>, model: SimpleTokenModel, options: YunzaiAuthConfig): HttpRequest<unknown> {
   const { token_send_template, token_send_key } = options;
   const token = token_send_template!.replace(/\$\{([\w]+)\}/g, (_: string, g) => model[g]);
-  switch (options.token_send_place) {
+  switch (options.token_send_template) {
     case 'header':
       const obj: any = {};
       obj[token_send_key!] = token;

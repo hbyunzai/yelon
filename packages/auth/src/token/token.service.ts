@@ -62,7 +62,7 @@ export class TokenService implements ITokenService, OnDestroy {
     let data: ITokenModel | null = null;
     if (options.onlyToken === true) {
       data = this.get() as ITokenModel;
-      data.token = ``;
+      data.access_token = ``;
       this.set(data);
     } else {
       this.store.remove(this._options.store_key!);
@@ -81,7 +81,7 @@ export class TokenService implements ITokenService, OnDestroy {
       .pipe(
         map(() => {
           const item = this.get() as ITokenModel;
-          const expired = item.expired || item.exp || 0;
+          const expired = item.expires_in || 0;
           if (expired <= 0) {
             return null;
           }

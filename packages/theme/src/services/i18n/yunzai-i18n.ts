@@ -8,26 +8,29 @@ import { enUS as dfEn } from 'date-fns/locale';
 import { map } from 'rxjs/operators';
 
 import { ITokenService, YA_SERVICE_TOKEN } from '@yelon/auth';
-import {
-  YelonLocaleService,
-  SettingsService,
-  _HttpClient,
-  YunzaiI18nBaseService,
-  YunzaiI18NType,
-  en_US as yelonEnUS
-} from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzI18nService, en_US as zorroEnUS } from 'ng-zorro-antd/i18n';
 
-import { YUNZAI_LANGS } from './yunzai-lang';
+import { YunzaiI18nBaseService } from './i18n';
+import { YUNZAI_LANGS } from './lang';
+import yelonEnUS from '../../locale/languages/en-US';
+import { YelonLocaleService } from '../../locale/locale.service';
+import { _HttpClient } from '../http/http.client';
+import { SettingsService } from '../settings/settings.service';
 
 declare const ngDevMode: boolean;
 
 const DEFAULT = 'zh-CN';
 
+export interface YunzaiI18NType {
+  code: string;
+  text: string;
+  abbr: string;
+  icon?: string;
+}
 @Injectable({ providedIn: 'root' })
-export class YunzaiI18NService extends YunzaiI18nBaseService implements OnDestroy {
+export class YunzaiHttpI18NService extends YunzaiI18nBaseService implements OnDestroy {
   protected override _defaultLang = DEFAULT;
   private $destroy = new Subject();
 

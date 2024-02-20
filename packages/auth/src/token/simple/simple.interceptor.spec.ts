@@ -16,7 +16,7 @@ import { YA_SERVICE_TOKEN, ITokenModel, ITokenService } from '../interface';
 
 function genModel(token: string = `123`): SimpleTokenModel {
   const model = new SimpleTokenModel();
-  model.token = token;
+  model.access_token = token;
   model.uid = 1;
   return model;
 }
@@ -80,7 +80,7 @@ describe('auth: simple.interceptor', () => {
         done();
       });
       const req = httpBed.expectOne('/test') as TestRequest;
-      expect(req.request.headers.get('token')).toBe(basicModel.token!);
+      expect(req.request.headers.get('token')).toBe(basicModel.access_token!);
       req.flush('ok!');
     });
     it(`in body`, (done: () => void) => {
@@ -94,7 +94,7 @@ describe('auth: simple.interceptor', () => {
         done();
       });
       const req = httpBed.expectOne('/test') as TestRequest;
-      expect(req.request.body.token).toBe('123');
+      expect(req.request.body.access_token).toBe('123');
       req.flush('ok!');
     });
     it(`in url`, (done: () => void) => {
@@ -146,7 +146,7 @@ describe('auth: simple.interceptor', () => {
         done();
       });
       const ret = httpBed.expectOne(r => r.method === 'GET' && (r.url as string).startsWith('/test')) as TestRequest;
-      expect(ret.request.headers.get('Authorization')).toBe(`Bearer ${basicModel.token}`);
+      expect(ret.request.headers.get('Authorization')).toBe(`Bearer ${basicModel.access_token}`);
       ret.flush('ok!');
     });
 
@@ -164,7 +164,7 @@ describe('auth: simple.interceptor', () => {
         done();
       });
       const ret = httpBed.expectOne(r => r.method === 'GET' && (r.url as string).startsWith('/test')) as TestRequest;
-      expect(ret.request.headers.get('Authorization')).toBe(`Bearer ${basicModel.uid}-${basicModel.token}`);
+      expect(ret.request.headers.get('Authorization')).toBe(`Bearer ${basicModel.uid}-${basicModel.access_token}`);
       ret.flush('ok!');
     });
   });

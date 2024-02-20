@@ -43,13 +43,13 @@ describe('auth: token.service', () => {
   it('#set', () => {
     service.set(VALUE);
     expect(service.get()).not.toBeNull();
-    expect(service.get()!.token).toBe(VALUE.token);
+    expect(service.get()!.access_token).toBe(VALUE.access_token);
   });
 
   it('#get', () => {
     service.set(VALUE);
     expect(service.get()).not.toBeNull();
-    expect(service.get()!.token).toBe(VALUE.token);
+    expect(service.get()!.access_token).toBe(VALUE.access_token);
   });
 
   it('#get, should be return JWTTokenModel', () => {
@@ -63,16 +63,16 @@ describe('auth: token.service', () => {
     it('should be working', () => {
       service.clear();
       expect(service.get()).not.toBeNull();
-      expect(service.get()!.token).toBeUndefined();
+      expect(service.get()!.access_token).toBeUndefined();
     });
     it('should be only clear token data', () => {
       service.set({ token: '1', a: 2 });
       expect(service.get()).not.toBeNull();
-      expect(service.get()!.token).toBe(`1`);
+      expect(service.get()!.access_token).toBe(`1`);
       expect(service.get()!.a).toBe(2);
       service.clear({ onlyToken: true });
       expect(service.get()).not.toBeNull();
-      expect(service.get()!.token).toBe(``);
+      expect(service.get()!.access_token).toBe(``);
       expect(service.get()!.a).toBe(2);
     });
   });
@@ -81,8 +81,8 @@ describe('auth: token.service', () => {
     service.change().subscribe(res => {
       if (!res) return;
       expect(res).not.toBeNull();
-      expect(res.token).toBe(VALUE.token);
-      expect(service.get()?.token).toBe(VALUE.token);
+      expect(res.access_token).toBe(VALUE.access_token);
+      expect(service.get()?.access_token).toBe(VALUE.access_token);
       done();
     });
     service.set(VALUE);

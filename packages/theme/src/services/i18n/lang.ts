@@ -26,20 +26,6 @@ import {
   tr as dfTr
 } from 'date-fns/locale';
 
-import {
-  el_GR as yelonElGR,
-  en_US as yelonEnUS,
-  es_ES as yelonEsES,
-  fr_FR as yelonFrFR,
-  hr_HR as yelonHrHR,
-  it_IT as yelonItIT,
-  ko_KR as yelonKoKR,
-  pl_PL as yelonPlPL,
-  sl_SI as yelonSlSI,
-  tr_TR as yelonTrTR,
-  zh_CN as yelonZhCn,
-  zh_TW as yelonZhTw
-} from '@yelon/theme';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import {
   el_GR as zorroElGR,
@@ -56,6 +42,18 @@ import {
   zh_TW as zorroZhTW
 } from 'ng-zorro-antd/i18n';
 
+import yelonElGR from '../../locale/languages/el-GR';
+import yelonEnUS from '../../locale/languages/en-US';
+import yelonEsES from '../../locale/languages/es-ES';
+import yelonFrFR from '../../locale/languages/fr-FR';
+import yelonHrHR from '../../locale/languages/hr-HR';
+import yelonItIT from '../../locale/languages/it-IT';
+import yelonKoKR from '../../locale/languages/ko-KR';
+import yelonPlPL from '../../locale/languages/pl-PL';
+import yelonSlSI from '../../locale/languages/sl-SI';
+import yelonTrTR from '../../locale/languages/tr-TR';
+import yelonZhCn from '../../locale/languages/zh-CN';
+import yelonZhTw from '../../locale/languages/zh-TW';
 export interface LangConfigData {
   abbr: string;
   text: string;

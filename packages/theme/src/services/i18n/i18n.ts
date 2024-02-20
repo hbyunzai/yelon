@@ -1,15 +1,8 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
-import { BehaviorSubject, Observable, filter, of } from 'rxjs';
+import { BehaviorSubject, Observable, filter } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiThemeI18nConfig } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-
-export interface YunzaiI18NType {
-  code: string;
-  text: string;
-  abbr: string;
-  icon?: string;
-}
 
 export interface YunzaiI18NService {
   [key: string]: NzSafeAny;
@@ -49,7 +42,7 @@ export interface YunzaiI18NService {
    *
    * 返回当前语言列表
    */
-  getLangs(): Observable<YunzaiI18NType[]>;
+  getLangs(): NzSafeAny[];
 
   /**
    * Translate 翻译
@@ -57,7 +50,7 @@ export interface YunzaiI18NService {
    * @param params 模板所需要的参数对象
    * @param isSafe 是否返回安全字符，自动调用 `bypassSecurityTrustHtml`; Should be removed, If you need SafeHtml support, please use `| html` pipe instead.
    */
-  fanyi(path: string, params?: unknown): string;
+  fanyi(path: string, params?: unknown | unknown[]): string;
 }
 
 export const YUNZAI_I18N_TOKEN = new InjectionToken<YunzaiI18NService>('yunzaiI18nToken', {
@@ -125,22 +118,29 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
 
   abstract use(lang: string, data?: Record<string, unknown>): void;
 
-  abstract getLangs(): Observable<YunzaiI18NType[]>;
+  abstract getLangs(): NzSafeAny;
 
-  fanyi(path: string, params?: Record<string, unknown>): string {
+  fanyi(path: string, params?: unknown | unknown[]): string {
     let content = this._data[path] || '';
     if (!content) return path;
 
-    if (params) {
+    if (!params) return content;
+
+    if (typeof params === 'object') {
       const interpolation = this.cog.interpolation!!;
-      Object.keys(params).forEach(
+      const objParams = params as Record<string, unknown>;
+      Object.keys(objParams).forEach(
         key =>
           (content = content.replace(
-            new RegExp(`${interpolation[0]}\s?${key}\s?${interpolation[1]}`, 'g'),
-            `${params[key]}`
+            new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'),
+            `${objParams[key]}`
           ))
       );
     }
+
+    (Array.isArray(params) ? params : [params]).forEach(
+      (item, index) => (content = content.replace(new RegExp(`\\{\\s?${index}\\s?\\}`, 'g'), `${item}`))
+    );
     return content;
   }
 }
@@ -153,7 +153,7 @@ export class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     this._change$.next(lang);
   }
 
-  getLangs(): Observable<YunzaiI18NType[]> {
-    return of([]);
+  getLangs(): NzSafeAny[] {
+    return [];
   }
 }

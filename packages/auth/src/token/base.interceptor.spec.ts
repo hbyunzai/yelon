@@ -23,7 +23,7 @@ import { ALLOW_ANONYMOUS } from '../token';
 
 function genModel<T extends ITokenModel>(modelType: new () => T, token: string | null = `123`): any {
   const model: any = new modelType();
-  model.token = token;
+  model.access_token = token;
   model.uid = 1;
   return model;
 }
