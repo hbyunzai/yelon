@@ -27,7 +27,8 @@ const COMPONENTS = [YunzaiContactComponent];
     YunzaiDeptTreeModule,
     YunzaiDormitoryTreeModule,
     YunzaiFriendGroupModule,
-    YunzaiTableUserModule
+    YunzaiTableUserModule,
+    ...COMPONENTS
   ],
   exports: COMPONENTS
 })
