@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 
 import { STColumn, STComponent, STData, STModule, STRequestOptions } from '@yelon/abc/st';
 import { SFComponent, SFSchema, SFValue, YelonFormModule } from '@yelon/form';
-import { YunzaiThemeModule } from '@yelon/theme';
+import { I18nPipe } from '@yelon/theme';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -24,61 +24,65 @@ import {
 } from './yunzai-table-user.types';
 
 @Component({
-  selector: `yunzai-table-user`,
+  selector: 'yunzai-table-user',
   template: `
-    <nz-card *ngIf="wrapped">
+    @if (wrapped) {
+      <nz-card>
+        <ng-container [ngTemplateOutlet]="tableTpl" />
+      </nz-card>
+    } @else {
       <ng-container [ngTemplateOutlet]="tableTpl" />
-    </nz-card>
-
-    <ng-container *ngIf="!wrapped" [ngTemplateOutlet]="tableTpl" />
+    }
 
     <ng-template #tableTpl>
       <div class="yz-select-contacts-modal-right" style="width:67%">
         <ng-container [ngTemplateOutlet]="form" />
         <st #st [scroll]="scroll" [size]="'small'" [bordered]="true">
           <ng-template st-row="checkbox_all" let-item type="title">
-            <label
-              *ngIf="!disableCheck"
-              nz-checkbox
-              (change)="onCheckedAll($event)"
-              [nzChecked]="isAllChecked()"
-            ></label>
+            @if (!disableCheck) {
+              <label nz-checkbox (change)="onCheckedAll($event)" [nzChecked]="isAllChecked()"></label>
+            }
           </ng-template>
           <ng-template st-row="checkbox" let-item let-index="index">
-            <label
-              *ngIf="!disableCheck"
-              nz-checkbox
-              (change)="onCheckedItem(item)"
-              [nzChecked]="isChecked(item)"
-            ></label>
+            @if (!disableCheck) {
+              <label nz-checkbox (change)="onCheckedItem(item)" [nzChecked]="isChecked(item)"></label>
+            }
           </ng-template>
           <ng-template st-row="rolesName" let-item let-index="index">{{ renderRoles(item.roles) }}</ng-template>
         </st>
       </div>
       <div class="yz-select-contacts-modal-right" style="width:33%">
-        <ng-container *ngIf="list" [ngTemplateOutlet]="listTpl" />
+        @if (list) {
+          <ng-container [ngTemplateOutlet]="listTpl" />
+        }
       </div>
     </ng-template>
 
     <ng-template #listTpl>
       <div class="right-list-title">
         <h3>{{ 'table-user.checked' | i18n }}</h3>
-        <div *ngIf="hasCheck">
-          <a style="cursor: default;">{{ checked.length }} </a>
-          <nz-divider nzType="vertical" />
-          <a style="cursor: pointer" href="javascript:;" (click)="unCheckAll()">{{ 'table-user.clear' | i18n }}</a>
-        </div>
+        @if (hasCheck) {
+          <div>
+            <a style="cursor: default;">{{ checked.length }} </a>
+            <nz-divider nzType="vertical" />
+            <a style="cursor: pointer" href="javascript:;" (click)="unCheckAll()">{{ 'table-user.clear' | i18n }}</a>
+          </div>
+        }
       </div>
 
       <div class="yz-selected-contacts">
-        <nz-empty *ngIf="!hasCheck" style="margin: 90px auto;" />
+        @if (!hasCheck) {
+          <nz-empty style="margin: 90px auto;" />
+        }
         <ul nz-menu nzMode="inline" class="yz-role-contacts">
-          <li nz-menu-item *ngFor="let item of checked; let i = index" class="people-item">
-            <div class="people-item-right">{{ item?.realName || '--' }}</div>
-            <span class="del-btn" (click)="unCheck(item)">
-              <i nz-icon nzType="close" nzTheme="outline"></i>
-            </span>
-          </li>
+          @for (item of checked; track checked) {
+            <li nz-menu-item class="people-item">
+              <div class="people-item-right">{{ item?.realName || '--' }}</div>
+              <span class="del-btn" (click)="unCheck(item)">
+                <i nz-icon nzType="close" nzTheme="outline"></i>
+              </span>
+            </li>
+          }
         </ul>
       </div>
     </ng-template>
@@ -89,17 +93,18 @@ import {
     </ng-template>
   `,
   standalone: true,
+  providers: [YunzaiTableUserService],
   imports: [
     CommonModule,
     YelonFormModule,
-    NzEmptyModule,
-    NzDividerModule,
-    NzMenuModule,
-    NzIconModule,
-    NzButtonModule,
-    NzCheckboxModule,
     STModule,
-    YunzaiThemeModule,
+    I18nPipe,
+    NzCheckboxModule,
+    NzDividerModule,
+    NzButtonModule,
+    NzEmptyModule,
+    NzIconModule,
+    NzMenuModule,
     NzCardModule
   ]
 })
@@ -109,6 +114,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   @Input() props?: YunzaiTableUserProps;
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onChecked: EventEmitter<YunzaiTableUser[]> = new EventEmitter<YunzaiTableUser[]>();
+  private readonly service: YunzaiTableUserService = inject(YunzaiTableUserService);
   private $destroy = new Subject();
 
   state: YunzaiTableUserState = {
@@ -200,8 +206,6 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   get userIds(): string[] {
     return this.props?.userIds || [];
   }
-
-  constructor(private service: YunzaiTableUserService) {}
 
   ngOnInit(): void {
     this.setupPropsToState();

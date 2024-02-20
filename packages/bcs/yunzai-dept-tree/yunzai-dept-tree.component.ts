@@ -1,5 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
 
 import { YunzaiGrade, YunzaiGradeService } from '@yelon/bcs/yunzai-grade';
@@ -18,60 +28,53 @@ import { YUNZAI_DEPT_TYPES, YunzaiDeptTree, YunzaiDeptTreeProps, YunzaiDeptTreeS
 @Component({
   selector: `yunzai-dept-tree`,
   template: `
-    <!-- loading-->
     <nz-spin [nzSpinning]="state.loading">
-      <!--        wrapped-->
-      <ng-container *ngIf="isWrapped">
+      @if (isWrapped) {
         <nz-card>
           <ng-container [ngTemplateOutlet]="content" />
         </nz-card>
-      </ng-container>
-      <!--        end wrapped-->
-
-      <!--        unwrapped-->
-      <ng-container *ngIf="!isWrapped">
+      } @else {
         <ng-container [ngTemplateOutlet]="content" />
-      </ng-container>
-      <!--        end unwrapped-->
+      }
     </nz-spin>
-    <!-- end loading-->
 
-    <!--      content-->
     <ng-template #content>
       <ng-container [ngTemplateOutlet]="deptForm" />
-      <nz-tree
-        *ngIf="nodes.length > 0"
-        (nzClick)="activeNode($event)"
-        [nzExpandedKeys]="state.expandKeys"
-        [nzData]="nodes"
-        [nzShowLine]="true"
-        [nzMultiple]="isMultiple"
-        [nzExpandedIcon]="blank"
-        [nzBlockNode]="true"
-        [nzHideUnMatched]="true"
-        [nzTreeTemplate]="treeTemplate"
-      />
-      <nz-empty *ngIf="nodes.length === 0" />
+      @if (nodes.length > 0) {
+        <nz-tree
+          (nzClick)="activeNode($event)"
+          [nzExpandedKeys]="state.expandKeys"
+          [nzData]="nodes"
+          [nzShowLine]="true"
+          [nzMultiple]="isMultiple"
+          [nzExpandedIcon]="blank"
+          [nzBlockNode]="true"
+          [nzHideUnMatched]="true"
+          [nzTreeTemplate]="treeTemplate"
+        />
+      } @else {
+        <nz-empty />
+      }
     </ng-template>
-    <!--      end content-->
 
-    <!--      tree -->
     <ng-template #treeTemplate let-node let-origin="origin">
-      <span *ngIf="!node.isLeaf" [title]="node.title">
-        <i
-          nz-icon
-          nzTheme="twotone"
-          [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
-          (click)="open(node)"
-        ></i>
-        <span class="leaf-name">{{ node.title }}</span>
-      </span>
-      <span *ngIf="node.isLeaf" [title]="node.title">
-        <span nz-icon nzType="file" nzTheme="twotone"></span>
-        <span class="leaf-name">{{ node.title }}</span>
-      </span>
+      @if (!node.isLeaf) {
+        <span [title]="node.title">
+          <i
+            nz-icon
+            nzTheme="twotone"
+            [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
+            (click)="open(node)"
+          ></i>
+          <span class="leaf-name">{{ node.title }}</span>
+        </span>
+      } @else {
+        <span [title]="node.title">
+          <span nz-icon nzType="file" nzTheme="twotone"></span>
+          <span class="leaf-name">{{ node.title }}</span>
+        </span>
+      }
     </ng-template>
-    <!--      end tree-->
 
     <ng-template #deptForm>
       <sf #form layout="inline" [button]="'none'" [schema]="state.schema" />
@@ -79,15 +82,18 @@ import { YUNZAI_DEPT_TYPES, YunzaiDeptTree, YunzaiDeptTreeProps, YunzaiDeptTreeS
     <ng-template #blank />
   `,
   standalone: true,
-  imports: [CommonModule, NzIconModule, NzEmptyModule, NzSpinModule, NzTreeModule, NzCardModule, YelonFormModule]
+  imports: [NzSpinModule, NzCardModule, CommonModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule],
+  providers: [YunzaiDeptTreeService, YunzaiGradeService]
 })
-export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('form') sf!: SFComponent;
   @Input() props?: YunzaiDeptTreeProps;
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onQueryComplete: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelect: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
+  private deptTreeService: YunzaiDeptTreeService = inject(YunzaiDeptTreeService);
+  private gradeService: YunzaiGradeService = inject(YunzaiGradeService);
   private $destroy = new Subject();
 
   state: YunzaiDeptTreeState = {
@@ -169,11 +175,6 @@ export class YunzaiDeptTreeComponent implements OnInit, AfterViewInit, OnDestroy
   get gradeId(): string | undefined {
     return this.props?.gradeId;
   }
-
-  constructor(
-    private deptTreeService: YunzaiDeptTreeService,
-    private gradeService: YunzaiGradeService
-  ) {}
 
   ngOnInit(): void {
     if (!this.props?.data) {

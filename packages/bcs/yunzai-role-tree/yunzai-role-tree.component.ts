@@ -1,8 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
 
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
@@ -17,60 +28,53 @@ import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunz
 @Component({
   selector: `yunzai-role-tree`,
   template: `
-    <!-- loading-->
     <nz-spin [nzSpinning]="state.loading">
-      <!--        wrapped-->
-      <ng-container *ngIf="isWrapped">
+      @if (isWrapped) {
         <nz-card>
           <ng-container [ngTemplateOutlet]="content" />
         </nz-card>
-      </ng-container>
-      <!--        end wrapped-->
-
-      <!--        unwrapped-->
-      <ng-container *ngIf="!isWrapped">
+      } @else {
         <ng-container [ngTemplateOutlet]="content" />
-      </ng-container>
-      <!--        end unwrapped-->
+      }
     </nz-spin>
-    <!-- end loading-->
 
-    <!--      content-->
     <ng-template #content>
       <ng-container [ngTemplateOutlet]="roleForm" />
-      <nz-tree
-        *ngIf="nodes.length > 0"
-        (nzClick)="activeNode($event)"
-        [nzExpandedKeys]="state.expandKeys"
-        [nzData]="nodes"
-        [nzShowLine]="true"
-        [nzMultiple]="isMultiple"
-        [nzExpandedIcon]="blank"
-        [nzBlockNode]="true"
-        [nzHideUnMatched]="true"
-        [nzTreeTemplate]="treeTemplate"
-      />
-      <nz-empty *ngIf="nodes.length === 0" />
+      @if (nodes.length > 0) {
+        <nz-tree
+          (nzClick)="activeNode($event)"
+          [nzExpandedKeys]="state.expandKeys"
+          [nzData]="nodes"
+          [nzShowLine]="true"
+          [nzMultiple]="isMultiple"
+          [nzExpandedIcon]="blank"
+          [nzBlockNode]="true"
+          [nzHideUnMatched]="true"
+          [nzTreeTemplate]="treeTemplate"
+        />
+      } @else {
+        <nz-empty />
+      }
     </ng-template>
-    <!--      end content-->
 
-    <!--      tree -->
     <ng-template #treeTemplate let-node let-origin="origin">
-      <span *ngIf="!node.isLeaf" [title]="node.title">
-        <i
-          nz-icon
-          nzTheme="twotone"
-          [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
-          (click)="open(node)"
-        ></i>
-        <span class="leaf-name">{{ node.title }}</span>
-      </span>
-      <span *ngIf="node.isLeaf" [title]="node.title">
-        <span nz-icon nzType="file" nzTheme="twotone"></span>
-        <span class="leaf-name">{{ node.title }}</span>
-      </span>
+      @if (!node.isLeaf) {
+        <span [title]="node.title">
+          <i
+            nz-icon
+            nzTheme="twotone"
+            [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
+            (click)="open(node)"
+          ></i>
+          <span class="leaf-name">{{ node.title }}</span>
+        </span>
+      } @else {
+        <span [title]="node.title">
+          <span nz-icon nzType="file" nzTheme="twotone"></span>
+          <span class="leaf-name">{{ node.title }}</span>
+        </span>
+      }
     </ng-template>
-    <!--      end tree-->
 
     <ng-template #roleForm>
       <sf #form layout="inline" [button]="'none'" [schema]="state.schema" />
@@ -78,16 +82,26 @@ import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunz
     <ng-template #blank />
   `,
   standalone: true,
-  imports: [CommonModule, NzSpinModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule, NzCardModule]
+  imports: [
+    NzSpinModule,
+    YelonFormModule,
+    NzButtonModule,
+    NzIconModule,
+    NzEmptyModule,
+    NzTreeModule,
+    CommonModule,
+    NzCardModule
+  ],
+  providers: [YunzaiRoleTreeService]
 })
 export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('form') sf!: SFComponent;
-
   @Input() props?: YunzaiRoleTreeProps;
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onQueryComplete: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelect: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
+  private readonly service: YunzaiRoleTreeService = inject(YunzaiRoleTreeService);
   private $destroy = new Subject();
 
   state: YunzaiRoleTreeState = {
@@ -145,8 +159,6 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy
     return false;
   }
 
-  constructor(private roleTreeService: YunzaiRoleTreeService) {}
-
   ngOnInit(): void {
     if (!this.props?.data) {
       this.query(this.roleGroupCode);
@@ -176,7 +188,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy
           if (this.props && this.props.data) {
             return zip(of(search), of(this.state.dataBackup));
           }
-          return zip(of(search), this.roleTreeService.tree(this.roleGroupCode));
+          return zip(of(search), this.service.tree(this.roleGroupCode));
         }),
         map(([search, depts]) => {
           this.state.expandKeys = [];
@@ -217,7 +229,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy
 
   query(roleGroupCode?: string): void {
     this.load();
-    this.roleTreeService
+    this.service
       .tree(roleGroupCode)
       .pipe(
         takeUntil(this.$destroy),

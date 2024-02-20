@@ -1,6 +1,6 @@
 {
   "lib": {
     "flatModuleFile": "yunzai-friend-group",
-    "entryFile": "index.ts"
+    "entryFile": "public_api.ts"
   }
 }

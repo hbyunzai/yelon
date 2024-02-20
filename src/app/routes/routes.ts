@@ -23,9 +23,6 @@ export const routes: Routes = [
       { path: 'mock', loadChildren: () => import('./gen/mock/routes').then(m => m.routes) },
       { path: 'util', loadChildren: () => import('./gen/util/routes').then(m => m.routes) },
       { path: 'chart', loadChildren: () => import('./gen/chart/routes').then(m => m.routes) },
-      { path: 'bis', loadChildren: () => import('./gen/bis/routes').then(m => m.routes) },
-      { path: 'bcs', loadChildren: () => import('./gen/bcs/routes').then(m => m.routes) },
-      { path: 'socket', loadChildren: () => import('./gen/socket/routes').then(m => m.routes) },
       { path: 'form', loadChildren: () => import('./gen/form/routes').then(m => m.routes) },
       {
         path: 'form-pages',

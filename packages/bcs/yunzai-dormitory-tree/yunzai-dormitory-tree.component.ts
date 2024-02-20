@@ -1,5 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
 
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
@@ -19,64 +29,56 @@ import {
   YunzaiDormitoryTreeState,
   YunzaiDormitoryTreeType
 } from './yunzai-dormitory-tree.types';
-
 @Component({
   selector: `yunzai-dormitory-tree`,
   template: `
-    <!-- loading-->
     <nz-spin [nzSpinning]="state.loading">
-      <!--        wrapped-->
-      <ng-container *ngIf="isWrapped">
+      @if (isWrapped) {
         <nz-card>
           <ng-container [ngTemplateOutlet]="content" />
         </nz-card>
-      </ng-container>
-      <!--        end wrapped-->
-
-      <!--        unwrapped-->
-      <ng-container *ngIf="!isWrapped">
+      } @else {
         <ng-container [ngTemplateOutlet]="content" />
-      </ng-container>
-      <!--        end unwrapped-->
+      }
     </nz-spin>
-    <!-- end loading-->
 
-    <!--      content-->
     <ng-template #content>
       <ng-container [ngTemplateOutlet]="dormitoryForm" />
-      <nz-tree
-        *ngIf="nodes.length > 0"
-        (nzClick)="activeNode($event)"
-        [nzExpandedKeys]="state.expandKeys"
-        [nzData]="nodes"
-        [nzShowLine]="true"
-        [nzMultiple]="isMultiple"
-        [nzExpandedIcon]="blank"
-        [nzBlockNode]="true"
-        [nzHideUnMatched]="true"
-        [nzTreeTemplate]="treeTemplate"
-      />
-      <nz-empty *ngIf="nodes.length === 0" />
+      @if (nodes.length > 0) {
+        <nz-tree
+          (nzClick)="activeNode($event)"
+          [nzExpandedKeys]="state.expandKeys"
+          [nzData]="nodes"
+          [nzShowLine]="true"
+          [nzMultiple]="isMultiple"
+          [nzExpandedIcon]="blank"
+          [nzBlockNode]="true"
+          [nzHideUnMatched]="true"
+          [nzTreeTemplate]="treeTemplate"
+        />
+      } @else {
+        <nz-empty />
+      }
     </ng-template>
-    <!--      end content-->
 
-    <!--      tree -->
     <ng-template #treeTemplate let-node let-origin="origin">
-      <span *ngIf="!node.isLeaf" [title]="node.title">
-        <i
-          nz-icon
-          nzTheme="twotone"
-          [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
-          (click)="open(node)"
-        ></i>
-        <span class="leaf-name">{{ node.title }}</span>
-      </span>
-      <span *ngIf="node.isLeaf" [title]="node.title">
-        <span nz-icon nzType="file" nzTheme="twotone"></span>
-        <span class="leaf-name">{{ node.title }}</span>
-      </span>
+      @if (!node.isLeaf) {
+        <span [title]="node.title">
+          <i
+            nz-icon
+            nzTheme="twotone"
+            [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
+            (click)="open(node)"
+          ></i>
+          <span class="leaf-name">{{ node.title }}</span>
+        </span>
+      } @else {
+        <span [title]="node.title">
+          <span nz-icon nzType="file" nzTheme="twotone"></span>
+          <span class="leaf-name">{{ node.title }}</span>
+        </span>
+      }
     </ng-template>
-    <!--      end tree-->
 
     <ng-template #dormitoryForm>
       <sf #form layout="inline" [button]="'none'" [schema]="state.schema" />
@@ -84,9 +86,10 @@ import {
     <ng-template #blank />
   `,
   standalone: true,
-  imports: [CommonModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule, NzSpinModule, NzCardModule]
+  providers: [YunzaiDormitoryTreeService],
+  imports: [NzSpinModule, YelonFormModule, NzCardModule, NzIconModule, NzEmptyModule, NzTreeModule, CommonModule]
 })
-export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class YunzaiDormitoryTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('form') sf!: SFComponent;
 
   @Input() props?: YunzaiDormitoryTreeProps;
@@ -94,6 +97,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit, OnDe
   @Output() readonly onQueryComplete: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelect: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
+  private readonly service: YunzaiDormitoryTreeService = inject(YunzaiDormitoryTreeService);
   private $destroy = new Subject();
 
   state: YunzaiDormitoryTreeState = {
@@ -151,8 +155,6 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit, OnDe
     return false;
   }
 
-  constructor(private dormitoryService: YunzaiDormitoryTreeService) {}
-
   ngOnInit(): void {
     if (!this.props?.data) {
       this.query(this.param);
@@ -182,7 +184,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit, OnDe
           if (this.props && this.props.data) {
             return zip(of(search), of(this.state.dataBackup));
           }
-          return zip(of(search), this.dormitoryService.tree(this.param));
+          return zip(of(search), this.service.tree(this.param));
         }),
         map(([search, dorms]) => {
           this.state.expandKeys = [];
@@ -223,7 +225,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, AfterViewInit, OnDe
 
   query(param: YunzaiDormitoryTreeParam): void {
     this.load();
-    this.dormitoryService
+    this.service
       .tree(param)
       .pipe(
         takeUntil(this.$destroy),
