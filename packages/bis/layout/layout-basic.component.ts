@@ -3,9 +3,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ReuseTabModule } from '@yelon/abc/reuse-tab';
-import { YunzaiNavApplicationComponent } from '@yelon/bis/layout/layout-nav-application.component';
-import { YunzaiLayoutNavGroupComponent } from '@yelon/bis/layout/layout-nav-group.component';
-import { YunzaiLayoutNavTileComponent } from '@yelon/bis/layout/layout-nav-tile.component';
 import { YunzaiWidgetsModule } from '@yelon/bis/yunzai-widgets';
 import { StompService } from '@yelon/socket';
 import { I18nPipe } from '@yelon/theme';
@@ -29,6 +26,10 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+
+import { YunzaiNavApplicationComponent } from './layout-nav-application.component';
+import { YunzaiLayoutNavGroupComponent } from './layout-nav-group.component';
+import { YunzaiLayoutNavTileComponent } from './layout-nav-tile.component';
 
 export interface LayoutBasicState {
   options: LayoutDefaultOptions;
