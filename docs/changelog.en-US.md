@@ -13,6 +13,14 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## [17.2.3](https://github.com/hbyunzai/yelon/compare/17.2.2...17.2.3) (2024-02-22)
+
+
+### Bug Fixes
+
+* fix inject bugs ([9344fc2](https://github.com/hbyunzai/yelon/commit/9344fc2683100a1bd747be52616b9a9c5fb9312f))
+
+
 ## [17.2.2](https://github.com/hbyunzai/yelon/compare/17.2.1...17.2.2) (2024-02-22)
 
 
