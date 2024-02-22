@@ -92,8 +92,8 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
   @Output() readonly onQueryComplete: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelect: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
-  private deptTreeService: YunzaiDeptTreeService = inject(YunzaiDeptTreeService);
-  private gradeService: YunzaiGradeService = inject(YunzaiGradeService);
+  private readonly deptTreeService: YunzaiDeptTreeService = inject(YunzaiDeptTreeService);
+  private readonly gradeService: YunzaiGradeService = inject(YunzaiGradeService);
   private $destroy = new Subject();
 
   state: YunzaiDeptTreeState = {

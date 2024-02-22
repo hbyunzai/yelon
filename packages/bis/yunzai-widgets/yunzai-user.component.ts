@@ -62,6 +62,7 @@ export class YunzaiHeaderUserComponent implements OnInit {
   private readonly tokenService = inject(YA_SERVICE_TOKEN);
   private readonly configService = inject(YunzaiConfigService);
   private readonly config: YunzaiBusinessConfig = mergeBisConfig(this.configService);
+  private readonly win = inject(WINDOW);
 
   icon: string = '';
   username: string = '';
@@ -82,12 +83,12 @@ export class YunzaiHeaderUserComponent implements OnInit {
   logout(): void {
     localStorage.clear();
     this.tokenService.clear();
-    inject(WINDOW).location.href = `${this.config.baseUrl}/cas-proxy/app/logout`;
+    this.win.location.href = `${this.config.baseUrl}/cas-proxy/app/logout`;
   }
 
   to(href: string): void {
     if (href) {
-      inject(WINDOW).open(href);
+      this.win.open(href);
     } else {
       this.msg.error('该菜单没有配置链接!');
     }

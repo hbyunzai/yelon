@@ -8,7 +8,7 @@ import { YUNZAI_DEPT_TYPES, YunzaiDeptTree } from './yunzai-dept-tree.types';
 
 @Injectable()
 export class YunzaiDeptTreeService {
-  private http: _HttpClient = inject(_HttpClient);
+  private readonly http: _HttpClient = inject(_HttpClient);
 
   /**
    * @param includeClass include class

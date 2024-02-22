@@ -33,6 +33,7 @@ export class YunzaiHeaderNotifyComponent implements OnInit, OnDestroy {
   private readonly nzI18n = inject(NzI18nService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly http = inject(_HttpClient);
+  private readonly win = inject(WINDOW);
   loading = false;
   count = 0;
   subs: Subscription[] = [];
@@ -167,7 +168,7 @@ export class YunzaiHeaderNotifyComponent implements OnInit, OnDestroy {
   }
 
   select(res: NoticeIconSelect): void {
-    inject(WINDOW).open(res.item.url);
+    this.win.open(res.item.url);
     this.loadData();
   }
 

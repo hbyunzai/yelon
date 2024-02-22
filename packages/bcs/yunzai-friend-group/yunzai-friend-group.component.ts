@@ -63,8 +63,8 @@ export class YunzaiFriendGroupComponent implements OnInit, OnDestroy, AfterViewI
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelect: EventEmitter<YunzaiFriendGroup> = new EventEmitter<YunzaiFriendGroup>();
   @ViewChild('form') sf!: SFComponent;
-  private $destroy = new Subject();
-  private service: YunzaiFriendGroupService = inject(YunzaiFriendGroupService);
+  private readonly $destroy = new Subject();
+  private readonly service: YunzaiFriendGroupService = inject(YunzaiFriendGroupService);
 
   state: YunzaiFriendGroupState = {
     loading: false,

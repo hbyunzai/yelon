@@ -63,7 +63,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 export class YunzaiLayoutNavGroupComponent implements OnInit, OnDestroy {
   private readonly http = inject(_HttpClient);
   private destroy$ = new Subject();
-
+  private readonly win = inject(WINDOW);
   state: LayoutNavGroupState = {
     topics: []
   };
@@ -85,16 +85,16 @@ export class YunzaiLayoutNavGroupComponent implements OnInit, OnDestroy {
     }
     switch (topic.target) {
       case 'href':
-        inject(WINDOW).location.href = topic.url;
+        this.win.location.href = topic.url;
         break;
       case 'blank':
-        inject(WINDOW).location.href = topic.url;
+        this.win.location.href = topic.url;
         break;
       case 'target':
-        inject(WINDOW).location.href = topic.url;
+        this.win.location.href = topic.url;
         break;
       default:
-        inject(WINDOW).location.href = topic.url;
+        this.win.location.href = topic.url;
         break;
     }
   }
