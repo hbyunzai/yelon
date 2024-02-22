@@ -1,3 +1,18 @@
+## [17.2.2](https://github.com/hbyunzai/yelon/compare/17.2.1...17.2.2) (2024-02-22)
+
+
+### Bug Fixes
+
+* **bcs:iframe:** add missing styles ([0612238](https://github.com/hbyunzai/yelon/commit/0612238af0e49b68102f0b10b8695b325889e520))
+* **bcs:** add missing COMPONENT ([58c51c7](https://github.com/hbyunzai/yelon/commit/58c51c7d2dcde98f5d3d5268c2b15c7070721acd))
+* **bcs:** add missing module ([40e36e1](https://github.com/hbyunzai/yelon/commit/40e36e1bd6ad6dabbb4bf9a39f2cc6eb5dff467e))
+* **bcs:** add missing styles ([db858b6](https://github.com/hbyunzai/yelon/commit/db858b6d75ce74ef38e336fcc69ef8324fac3f4d))
+* **bcs:** fix contact component import path ([35df484](https://github.com/hbyunzai/yelon/commit/35df484d464ece2d5e30287d71a65dabf314dff8))
+* **bis:** fix layout import ([b0aeb4c](https://github.com/hbyunzai/yelon/commit/b0aeb4c8aef16d9612e94714ce861ed36c8446d5))
+* **theme:** fix missing less ([7d1fd6c](https://github.com/hbyunzai/yelon/commit/7d1fd6cfbffc2d841a84e79ae9810b45c3397f88))
+
+
+
 ## [17.2.1](https://github.com/hbyunzai/yelon/compare/17.2.0...17.2.1) (2024-02-19)
 
 
