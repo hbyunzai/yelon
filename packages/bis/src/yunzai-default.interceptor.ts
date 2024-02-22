@@ -8,8 +8,9 @@ import {
 import { Injector, inject } from '@angular/core';
 import { Observable, of, throwError, mergeMap, catchError } from 'rxjs';
 
+import { mergeBisConfig } from '@yelon/bis/config';
 import { IGNORE_BASE_URL } from '@yelon/theme';
-import { YUNZAI_CONFIG } from '@yelon/util';
+import { YUNZAI_CONFIG, YunzaiConfigService } from '@yelon/util';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { checkStatus, getAdditionalHeaders, goTo, ReThrowHttpError, toLogin } from './helper';
@@ -58,7 +59,7 @@ function handleData(
 }
 
 export const yunzaiDefaultInterceptor: HttpInterceptorFn = (req, next) => {
-  const config = inject(YUNZAI_CONFIG).bis!;
+  const config = mergeBisConfig(inject(YunzaiConfigService));
   const { baseUrl } = config;
   let url = req.url;
   if (!req.context.get(IGNORE_BASE_URL) && !url.startsWith('https://') && !url.startsWith('http://')) {
