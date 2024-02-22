@@ -12,10 +12,10 @@ NOCSS=false
 PACKAGES=(
   util
   testing
+  auth
   acl
   theme
   abc
-  auth
   cache
   chart
   mock

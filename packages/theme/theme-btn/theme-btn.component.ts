@@ -53,9 +53,18 @@ export class ThemeBtnComponent implements OnInit, OnDestroy {
   private theme = 'default';
   isDev = isDevMode();
   @Input() types: ThemeBtnType[] = [
-    { key: 'default', text: 'Default Theme' },
-    { key: 'dark', text: 'Dark Theme' },
-    { key: 'compact', text: 'Compact Theme' }
+    { key: 'default', text: 'theme.default' },
+    { key: 'compact', text: 'theme.compact' },
+    { key: 'dark', text: 'theme.dark' },
+    { key: 'yuhong', text: 'theme.yuhong' },
+    { key: 'danjuhuang', text: 'theme.danjuhuang' },
+    { key: 'xinghuang', text: 'theme.xinghuang' },
+    { key: 'shilv', text: 'theme.shilv' },
+    { key: 'zhulv', text: 'theme.zhulv' },
+    { key: 'youlan', text: 'theme.youlan' },
+    { key: 'dianqing', text: 'theme.dianqing' },
+    { key: 'shangengzi', text: 'theme.shangengzi' },
+    { key: 'shuiniuhui', text: 'theme.shuiniuhui' }
   ];
   @Input() devTips = `When the dark.css file can't be found, you need to run it once: npm run theme`;
   @Input() deployUrl = '';

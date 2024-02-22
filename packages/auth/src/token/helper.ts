@@ -9,12 +9,12 @@ import { JWTTokenModel } from './jwt/jwt.model';
 import { SimpleTokenModel } from './simple/simple.model';
 
 export function CheckSimple(model: SimpleTokenModel | null): boolean {
-  return model != null && typeof model.token === 'string' && model.token.length > 0;
+  return model != null && typeof model.access_token === 'string' && model.access_token.length > 0;
 }
 
 export function CheckJwt(model: JWTTokenModel, offset: number): boolean {
   try {
-    return model != null && !!model.token && !model.isExpired(offset);
+    return model != null && !!model.access_token && !model.isExpired(offset);
   } catch (err: unknown) {
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
       console.warn(`${(err as { message: string }).message}, jump to login_url`);

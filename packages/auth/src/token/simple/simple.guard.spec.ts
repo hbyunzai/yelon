@@ -39,7 +39,7 @@ describe('auth: SimpleGuard', () => {
     });
     srv = TestBed.inject(YA_SERVICE_TOKEN);
     router = TestBed.inject<Router>(Router);
-    srv.set({ token: `11` });
+    srv.set({ access_token: `11` });
   });
 
   it(`should be activated when token valid`, (done: () => void) => {
@@ -50,7 +50,7 @@ describe('auth: SimpleGuard', () => {
   });
 
   it(`should be activated when not guard route`, (done: () => void) => {
-    srv.set({ token: `` });
+    srv.set({ access_token: `` });
     router.navigateByUrl('/login').then(res => {
       expect(res).toBe(true);
       done();
@@ -58,7 +58,7 @@ describe('auth: SimpleGuard', () => {
   });
 
   it(`should be go to login when token invalid`, (done: () => void) => {
-    srv.set({ token: `` });
+    srv.set({ access_token: `` });
     router.navigateByUrl('/home').then(res => {
       expect(res).toBe(false);
       spyOn(router, 'navigateByUrl');

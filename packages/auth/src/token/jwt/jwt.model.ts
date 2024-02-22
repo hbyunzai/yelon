@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { urlBase64Decode } from './jwt.helper';
 import { ITokenModel } from '../interface';
 
@@ -32,22 +33,23 @@ export interface JWT {
    */
   jti: string;
 
-  [key: string]: any;
-  [key: number]: any;
+  [key: string]: NzSafeAny;
+  [key: number]: NzSafeAny;
 }
 
 export class JWTTokenModel implements ITokenModel {
-  [key: string]: any;
-
-  token: string | null | undefined;
-
-  expired?: number;
+  [key: string]: NzSafeAny;
+  access_token?: string | null;
+  expires_in?: number;
+  refresh_token?: string;
+  scope?: string;
+  token_type?: string;
 
   /**
    * 获取载荷信息
    */
   get payload(): JWT {
-    const parts = (this.token || '').split('.');
+    const parts = (this.access_token || '').split('.');
     if (parts.length !== 3) throw new Error('JWT must have 3 parts');
 
     const decoded = urlBase64Decode(parts[1]);

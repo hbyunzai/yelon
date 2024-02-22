@@ -12,15 +12,15 @@ It is better to add the corresponding authentication information to each request
 
 ### withSimple
 
-The parameter name and its sending location can be specified via `YelonAuthConfig`, for example:
+The parameter name and its sending location can be specified via `DelonAuthConfig`, for example:
 
 ```ts
-token_send_key = 'token';
-token_send_template = 'Bearer ${token}';
+token_send_key = 'Authorization';
+token_send_template = 'Bearer ${access_token}';
 token_send_place = 'header';
 ```
 
-Indicates the `{ token: 'Bearer token_string' }` data in the `header` of each request.
+Indicates the `{ Authorization: 'Bearer token_string' }` data in the `header` of each request.
 
 ### withJWT
 

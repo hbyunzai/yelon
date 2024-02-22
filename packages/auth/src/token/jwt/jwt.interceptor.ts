@@ -13,7 +13,7 @@ import { YA_SERVICE_TOKEN } from '../interface';
 function newReq(req: HttpRequest<unknown>, model: JWTTokenModel): HttpRequest<unknown> {
   return req.clone({
     setHeaders: {
-      Authorization: `Bearer ${model.token}`
+      Authorization: `Bearer ${model.access_token}`
     }
   });
 }

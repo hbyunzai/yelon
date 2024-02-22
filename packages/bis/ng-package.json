@@ -4,7 +4,7 @@
   "deleteDestPath": true,
   "lib": {
     "flatModuleFile": "bis",
-    "entryFile": "index.ts"
+    "entryFile": "public_api.ts"
   },
   "allowedNonPeerDependencies": [
     "date-fns",

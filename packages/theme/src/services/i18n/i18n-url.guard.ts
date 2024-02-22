@@ -1,20 +1,24 @@
-import { Injectable, inject } from '@angular/core';
+import { Inject, Injectable, Optional, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
 
-import { YUNZAI_I18N_TOKEN } from './i18n';
+import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from './i18n';
 
 @Injectable({ providedIn: 'root' })
 export class YunzaiI18NGuardService {
-  private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
-  private readonly cogSrv = inject(YunzaiConfigService);
+  constructor(
+    @Optional()
+    @Inject(YUNZAI_I18N_TOKEN)
+    private i18nSrv: YunzaiI18NService,
+    private cogSrv: YunzaiConfigService
+  ) {}
 
   process(route: ActivatedRouteSnapshot): Observable<boolean> {
     const lang = route.params && route.params[this.cogSrv.get('themeI18n')?.paramNameOfUrlGuard ?? 'i18n'];
     if (lang != null) {
-      this.i18nSrv?.use(lang);
+      this.i18nSrv.use(lang);
     }
     return of(true);
   }

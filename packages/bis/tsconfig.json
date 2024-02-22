@@ -1,15 +1,14 @@
+// Configuration for IDEs only.
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "rootDir": "..",
+    "baseUrl": ".",
     "paths": {
-      "@yelon/bcs/*": ["./*"],
-      "@yelon/*": [ "../*" ]
+      "@yelon/bis/*": ["./*"],
+      "@yelon/*": ["../*"]
     }
   },
-  "files": [
-    "public_api.ts"
-  ],
+  "files": ["public_api.ts"],
   "include": ["./**/*.ts", "../dev-mode-types.d.ts"]
 }

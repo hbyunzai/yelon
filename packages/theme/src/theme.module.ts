@@ -9,7 +9,6 @@ import { RouterModule } from '@angular/router';
 const HELPERS = [ModalHelper, DrawerHelper];
 
 // pipes
-import { BellOutline, DeleteOutline, InboxOutline, PlusOutline } from '@ant-design/icons-angular/icons';
 
 import { NzI18nModule } from 'ng-zorro-antd/i18n';
 import { NzIconService } from 'ng-zorro-antd/icon';
@@ -32,8 +31,7 @@ const PIPES = [DatePipe, KeysPipe, YNPipe, I18nPipe, HTMLPipe, URLPipe];
 import { DrawerHelper } from './services/drawer/drawer.helper';
 import { ModalHelper } from './services/modal/modal.helper';
 import { YUNZAI_SETTING_DEFAULT } from './services/settings/settings.service';
-const ICONS = [BellOutline, DeleteOutline, PlusOutline, InboxOutline];
-
+import { ICONS } from './icons';
 // #endregion
 
 @NgModule({

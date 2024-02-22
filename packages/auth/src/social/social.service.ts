@@ -6,8 +6,8 @@ import { Observable, Observer } from 'rxjs';
 
 import { YA_SERVICE_TOKEN, ITokenModel } from '../token/interface';
 
-const OPENTYPE = '_yelonAuthSocialType';
-const HREFCALLBACK = '_yelonAuthSocialCallbackByHref';
+const OPENTYPE = '_delonAuthSocialType';
+const HREFCALLBACK = '_delonAuthSocialCallbackByHref';
 
 export type SocialOpenType = 'href' | 'window';
 
@@ -85,7 +85,7 @@ export class SocialService implements OnDestroy {
         this.ngOnDestroy();
 
         let model = this.tokenService.get();
-        if (model && !model.token) model = null;
+        if (model && !model.access_token) model = null;
 
         // 触发变更通知
         if (model) {
@@ -112,7 +112,7 @@ export class SocialService implements OnDestroy {
       throw new Error(`url muse contain a ?`);
     }
     // parse
-    let data: ITokenModel = { token: `` };
+    let data: ITokenModel = { access_token: `` };
     if (typeof rawData === 'string') {
       const rightUrl = rawData.split('?')[1].split('#')[0];
       data = this.router.parseUrl(`./?${rightUrl}`).queryParams as ITokenModel;
@@ -120,7 +120,7 @@ export class SocialService implements OnDestroy {
       data = rawData as ITokenModel;
     }
 
-    if (!data || !data.token) throw new Error(`invalide token data`);
+    if (!data || !data.access_token) throw new Error(`invalide token data`);
     this.tokenService.set(data);
 
     const url = localStorage.getItem(HREFCALLBACK) || '/';

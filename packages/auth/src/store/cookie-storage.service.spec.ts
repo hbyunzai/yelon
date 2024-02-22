@@ -12,7 +12,7 @@ describe('auth: cookie-storage', () => {
   let store: CookieStorageStore;
   const KEY = 'token';
   const VALUE: ITokenModel = {
-    token: 'token data'
+    access_token: 'token data'
   } as ITokenModel;
 
   beforeEach(() => {
@@ -52,11 +52,11 @@ describe('auth: cookie-storage', () => {
     store.set(KEY, VALUE);
     const ret = store.get(KEY);
     expect(ret).not.toBeNull();
-    expect(ret.token).toBe(VALUE.token);
+    expect(ret.access_token).toBe(VALUE.access_token);
 
     const invalidRet = store.get('asdf');
     expect(invalidRet).not.toBeNull();
-    expect(invalidRet.token).toBeUndefined();
+    expect(invalidRet.access_token).toBeUndefined();
   });
 
   describe('#set', () => {
@@ -64,7 +64,7 @@ describe('auth: cookie-storage', () => {
       store.set(KEY, VALUE);
       let ret = store.get(KEY);
       expect(ret).not.toBeNull();
-      expect(ret.token).toBe(VALUE.token);
+      expect(ret.access_token).toBe(VALUE.access_token);
 
       // when is null or undefined
       store.set(KEY, undefined);
@@ -73,7 +73,7 @@ describe('auth: cookie-storage', () => {
       expect(Object.keys(ret).length).toBe(0);
     });
     it('should be set expired', () => {
-      store.set(KEY, { ...VALUE, expired: 1000 * 3 });
+      store.set(KEY, { ...VALUE, expires_in: 1000 * 3 });
       const args = putSpy.calls.first().args;
       expect(args.length).toBe(3);
       const options = args[2] as CookieOptions;
@@ -86,6 +86,6 @@ describe('auth: cookie-storage', () => {
     store.remove(KEY);
     const ret = store.get(KEY);
     expect(ret).not.toBeNull();
-    expect(ret.token).toBeUndefined();
+    expect(ret.access_token).toBeUndefined();
   });
 });

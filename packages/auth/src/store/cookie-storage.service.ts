@@ -27,7 +27,7 @@ export class CookieStorageStore implements IStore {
   }
 
   set(key: string, value: ITokenModel | null | undefined): boolean {
-    const expires = (value?.expired ?? 0) / 1e3;
+    const expires = (value?.expires_in ?? 0) / 1e3;
     this.srv.put(key, JSON.stringify(value ?? {}), { expires });
     return true;
   }

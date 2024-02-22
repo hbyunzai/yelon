@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "yunzai-widgets",
+    "entryFile": "public_api.ts"
+  }
+}

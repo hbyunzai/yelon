@@ -4,7 +4,7 @@ describe('auth: jwt.model', () => {
   const model = new JWTTokenModel();
   beforeEach(() => {
     // from: https://jwt.io/
-    model.token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6Inl1bnphaS1ib3QiLCJhZG1pbiI6dHJ1ZSwiZXhwIjo0NjcwNDA5NjAwfQ.VfRGUDLkemgGmbWFg5ofZzhM4mxHnFiYaxsztbPDICQ`;
+    model.access_token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6Inl1bnphaS1ib3QiLCJhZG1pbiI6dHJ1ZSwiZXhwIjo0NjcwNDA5NjAwfQ.VfRGUDLkemgGmbWFg5ofZzhM4mxHnFiYaxsztbPDICQ`;
   });
   const payloadDATA = {
     sub: '1',
@@ -23,38 +23,38 @@ describe('auth: jwt.model', () => {
     });
     it('should be throw error when token is null or undefined', () => {
       expect(() => {
-        model.token = null;
+        model.access_token = null;
         const payload = model.payload;
         console.log(payload);
       }).toThrowError();
       expect(() => {
-        model.token = undefined;
+        model.access_token = undefined;
         const payload = model.payload;
         console.log(payload);
       }).toThrowError();
     });
     it('should be throw error when invalid token length', () => {
       expect(() => {
-        model.token = `a`;
+        model.access_token = `a`;
         const payload = model.payload;
         console.log(payload);
       }).toThrowError();
       expect(() => {
-        model.token = `a.a.a`;
+        model.access_token = `a.a.a`;
         const payload = model.payload;
         console.log(payload);
       }).toThrowError();
     });
     it('should be throw error when invalid token', () => {
       expect(() => {
-        model.token = `a.aa.a`;
+        model.access_token = `a.aa.a`;
         const payload = model.payload;
         console.log(payload);
       }).toThrowError();
     });
     it(`should be throw error when can't decode the token`, () => {
       expect(() => {
-        model.token = `a.aaa.a`;
+        model.access_token = `a.aaa.a`;
         const payload = model.payload;
         console.log(payload);
       }).toThrowError();
@@ -69,7 +69,7 @@ describe('auth: jwt.model', () => {
       expect(model.isExpired()).toBe(date.getTime() > MAXTIME.getTime());
     });
     it('should be return null when not exp property', () => {
-      model.token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o`;
+      model.access_token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o`;
       expect(model.isExpired(0)).toBeNull();
     });
   });
