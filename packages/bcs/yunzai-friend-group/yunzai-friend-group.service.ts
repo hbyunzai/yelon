@@ -8,7 +8,7 @@ import { YunzaiFriendGroup } from './yunzai-friend-group.types';
 
 @Injectable()
 export class YunzaiFriendGroupService {
-  private http: _HttpClient = inject(_HttpClient);
+  private readonly http: _HttpClient = inject(_HttpClient);
 
   groups(): Observable<YunzaiFriendGroup[]> {
     return this.http.post('/contact/appcontact/findGroup', {}).pipe(

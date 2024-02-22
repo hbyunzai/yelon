@@ -1,7 +1,6 @@
 import { HttpHeaders, HttpResponseBase } from '@angular/common/http';
 import { inject, Injector } from '@angular/core';
-
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';

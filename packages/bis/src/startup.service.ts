@@ -3,7 +3,7 @@ import { APP_INITIALIZER, inject, Injectable, Provider } from '@angular/core';
 import { combineLatest, map, mergeMap, Observable, of } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
-import { ITokenModel, TokenService } from '@yelon/auth';
+import { ITokenModel, YA_SERVICE_TOKEN } from '@yelon/auth';
 import { mergeBisConfig } from '@yelon/bis/config';
 import {
   Menu,
@@ -41,14 +41,16 @@ export function provideYunzaiStartup(): Provider[] {
 }
 @Injectable()
 export class YunzaiStartupService {
-  private config = mergeBisConfig(inject(YunzaiConfigService));
-  private menuService = inject(MenuService);
-  private aclService = inject(ACLService);
-  private titleService = inject(TitleService);
-  private tokenService = inject(TokenService);
-  private httpClient = inject(HttpClient);
-  private settingService = inject(SettingsService);
-  private i18n = inject<YunzaiHttpI18NService>(YUNZAI_I18N_TOKEN);
+  private readonly config = mergeBisConfig(inject(YunzaiConfigService));
+  private readonly menuService = inject(MenuService);
+  private readonly aclService = inject(ACLService);
+  private readonly titleService = inject(TitleService);
+  private readonly tokenService = inject(YA_SERVICE_TOKEN);
+  private readonly httpClient = inject(HttpClient);
+  private readonly settingService = inject(SettingsService);
+  private readonly i18n = inject<YunzaiHttpI18NService>(YUNZAI_I18N_TOKEN);
+  private readonly win = inject(WINDOW);
+  private readonly configService = inject(YunzaiConfigService);
 
   load(): Observable<void> {
     let defaultLang: string = this.settingService.layout.lang || this.i18n.defaultLang;
@@ -60,7 +62,7 @@ export class YunzaiStartupService {
     const [setCurrent] = useLocalStorageCurrent();
     return this.token().pipe(
       mergeMap((token: ITokenModel) => {
-        inject(YunzaiConfigService).set('auth', {
+        this.configService.set('auth', {
           token_send_key: 'Authorization',
           token_send_template: `${token.token_type} \${access_token}`,
           token_send_place: 'header'
@@ -147,7 +149,7 @@ export class YunzaiStartupService {
         })
       );
     } else {
-      const uri = encodeURIComponent(inject(WINDOW).location.href);
+      const uri = encodeURIComponent(this.win.location.href);
       return this.httpClient
         .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
         .pipe(
@@ -156,7 +158,7 @@ export class YunzaiStartupService {
               case 2000:
                 return response.data;
               case 2001:
-                inject(WINDOW).location.href = response.msg;
+                this.win.location.href = response.msg;
                 throw Error("Cookie Error: Can't find Cas Cookie,So jump to login!");
               default:
                 if (response.data) {

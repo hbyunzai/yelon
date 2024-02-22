@@ -8,7 +8,7 @@ import { YunzaiDormitoryTree, YunzaiDormitoryTreeParam, YunzaiDormitoryTreeType 
 
 @Injectable()
 export class YunzaiDormitoryTreeService {
-  private http: _HttpClient = inject(_HttpClient);
+  private readonly http: _HttpClient = inject(_HttpClient);
 
   tree(
     param: YunzaiDormitoryTreeParam = {

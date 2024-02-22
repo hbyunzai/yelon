@@ -5,4 +5,5 @@ export * from './src/config';
 export * from './src/theme.module';
 export * from './src/provide';
 export * from './src/router/optional-preloader';
+export * from './src/icons';
 export { VERSION } from './src/version';
