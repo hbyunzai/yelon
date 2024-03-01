@@ -20,4 +20,5 @@ export interface YunzaiProjectInfo {
   projectName: string;
   showAllMenu: boolean;
   tucaoUrl: string;
+  pageTitlePattern: string;
 }

@@ -5,6 +5,17 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, map, delay, isObservable, switchMap, Subscription } from 'rxjs';
 
+import {
+  deepCopy,
+  useLocalStorageProjectInfo,
+  useLocalStorageUser,
+  YUNZAI_CONFIG,
+  YunzaiBusinessConfig,
+  YunzaiConfig,
+  YunzaiMenu,
+  YunzaiProjectInfo
+} from '@yelon/util';
+
 import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { MenuService } from '../menu/menu.service';
 
@@ -21,6 +32,7 @@ export class TitleService implements OnDestroy {
   private _separator: string = ' - ';
   private _reverse: boolean = false;
   private tit$?: Subscription;
+  private config!: YunzaiBusinessConfig;
 
   readonly DELAY_TIME = 25;
 
@@ -30,8 +42,11 @@ export class TitleService implements OnDestroy {
   private readonly menuSrv = inject(MenuService);
   private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
 
+  private readonly conf: YunzaiConfig = inject(YUNZAI_CONFIG);
+
   constructor() {
     this.i18nSrv?.change.pipe(takeUntilDestroyed()).subscribe(() => this.setTitle());
+    this.config = this.conf.bis!;
   }
 
   /**
@@ -123,6 +138,29 @@ export class TitleService implements OnDestroy {
     return of(title || item.text!);
   }
 
+  private getBySystemSet(): Observable<string> {
+    let title = '';
+    const [, getUser] = useLocalStorageUser();
+    const yunzaiUser = getUser()!;
+    const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(
+      m => m.systemCode && m.systemCode === this.config.systemCode
+    );
+    let systemName = '';
+    const currentMenu = yunzaiMenus.pop();
+    if (currentMenu) {
+      systemName = currentMenu.text;
+    }
+    const [, getProjectInfo] = useLocalStorageProjectInfo();
+    const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
+    const pageTitlePattern = projectInfo.pageTitlePattern;
+    if (pageTitlePattern) {
+      title = pageTitlePattern.replace(`$\{systemName}`, systemName);
+    } else {
+      title = systemName;
+    }
+    return of(title);
+  }
+
   /**
    * Set the document title
    */
@@ -131,6 +169,7 @@ export class TitleService implements OnDestroy {
     this.tit$ = of(title)
       .pipe(
         switchMap(tit => (tit ? of(tit) : this.getByRoute())),
+        switchMap(tit => (tit ? of(tit) : this.getBySystemSet())),
         switchMap(tit => (tit ? of(tit) : this.getByMenu())),
         switchMap(tit => (tit ? of(tit) : this.getByElement())),
         map(tit => tit || this.default),

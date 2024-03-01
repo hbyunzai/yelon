@@ -14,6 +14,7 @@ Used to set page title, generally listen for route changed and refresh title, fo
 Get the `title` value according to the following order:
 
 1. Routing configuration `{ data: { title: 'page name', titleI18n: 'page-name' } }
+2. Display according to the rules configured in the unified portal backend
 2. Parse the menu data based on the current URL
 3. Get `h1` content in page `yunzai-default__content-title` or `page-header__title`
 4. Default title

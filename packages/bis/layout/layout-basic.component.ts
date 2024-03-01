@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -20,12 +21,19 @@ import {
   useLocalStorageHeaderType,
   useLocalStorageProjectInfo,
   WINDOW,
+  YUNZAI_CONFIG,
+  YunzaiBusinessConfig,
+  YunzaiConfig,
+  YunzaiHeaderStyle,
   YunzaiProjectInfo
 } from '@yelon/util';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 import { YunzaiNavApplicationComponent } from './layout-nav-application.component';
 import { YunzaiLayoutNavGroupComponent } from './layout-nav-group.component';
@@ -36,6 +44,18 @@ export interface LayoutBasicState {
   aside: LayoutBasicAside;
   display: LayoutBasicDisplay;
   navType: NavType;
+}
+
+export interface ApplicationInfoInterface {
+  id?: string;
+  name?: string;
+  showName?: string;
+  lastVersion?: string;
+  versionNum?: string;
+  currentVersion?: string;
+  firstDeploymentDate?: string;
+  currentDeploymentDate?: string;
+  lastPushDate?: string;
 }
 
 @Component({
@@ -53,6 +73,8 @@ export interface LayoutBasicState {
           <ng-container *ngSwitchCase="NavType.TILE">
             <yunzai-layout-nav-tile />
           </ng-container>
+          <ng-container *ngSwitchCase="NavType.BLANK" />
+          <ng-container *ngSwitchCase="NavType.TABS" />
           <ng-container *ngSwitchDefault>
             <yunzai-layout-nav-application />
           </ng-container>
@@ -80,23 +102,40 @@ export interface LayoutBasicState {
             <div data-event-id="_nav_mode" nz-menu-item>
               {{ 'mode.nav' | i18n }}
             </div>
-            <div
-              data-event-id="_nav_mode"
-              data-type="application"
-              nz-menu-item
-              (click)="onNavTypeChange(NavType.APPLICATION)"
-            >
-              <i nz-icon nzType="appstore" class="mr-sm"></i>
-              {{ 'mode.nav.application' | i18n }}
-            </div>
-            <div data-event-id="_nav_mode" data-type="group" nz-menu-item (click)="onNavTypeChange(NavType.GROUP)">
-              <i nz-icon nzType="group" class="mr-sm"></i>
-              {{ 'mode.nav.group' | i18n }}
-            </div>
-            <div data-event-id="_nav_mode" data-type="tile" nz-menu-item (click)="onNavTypeChange(NavType.TILE)">
-              <i nz-icon nzType="appstore" class="mr-sm"></i>
-              {{ 'mode.nav.tile' | i18n }}
-            </div>
+
+            @if (headerStyleList.length > 1) {
+              @for (i of headerStyleList; track $index) {
+                <div
+                  data-event-id="_nav_mode"
+                  nz-menu-item
+                  [attr.data-type]="i.value"
+                  (click)="onNavTypeChange(i.value)"
+                >
+                  <ng-container [ngSwitch]="i.value">
+                    <ng-container *ngSwitchCase="NavType.APPLICATION">
+                      <i nz-icon nzType="appstore" class="mr-sm"></i>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="NavType.GROUP">
+                      <i nz-icon nzType="group" class="mr-sm"></i>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="NavType.TILE">
+                      <i nz-icon nzType="dash" class="mr-sm"></i>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="NavType.BLANK">
+                      <i nz-icon nzType="border" class="mr-sm"></i>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="NavType.TABS">
+                      <i nz-icon nzType="insert-row-above" class="mr-sm"></i>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                      <i nz-icon nzType="appstore" class="mr-sm"></i>
+                    </ng-container>
+                    {{ 'mode.nav.' + i.value | i18n }}
+                  </ng-container>
+                </div>
+              }
+            }
+
             <div data-event-id="_nav_fullscreen" nz-menu-item>
               <yunzai-header-fullscreen />
             </div>
@@ -114,15 +153,9 @@ export interface LayoutBasicState {
       </layout-default-header-item>
     </layout-default>
     <ng-template #asideUserTpl>
-      <div
-        data-event-id="_route_user"
-        nz-dropdown
-        nzTrigger="click"
-        [nzDropdownMenu]="userMenu"
-        class="yunzai-default__aside-user"
-      >
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon" />
-        <div class="yunzai-default__aside-user-info">
+      <div data-event-id="_route_user" class="yunzai-default__aside-user">
+        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon" (click)="aboutApplication()" />
+        <div class="yunzai-default__aside-user-info" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu">
           <strong>{{ aside.name | i18n }}</strong>
           <p class="mb0">{{ aside.intro | i18n }}</p>
         </div>
@@ -137,7 +170,39 @@ export interface LayoutBasicState {
       <reuse-tab #reuseTab [ngStyle]="reusetabCSS" />
       <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)" />
     </ng-template>
-    <ng-template #noneTpl> <router-outlet /> </ng-template>
+    <ng-template #noneTpl>
+      <router-outlet />
+    </ng-template>
+
+    <nz-modal
+      nzTitle="关于本应用"
+      [(nzVisible)]="applicationModal.isVisible"
+      [nzOkText]="null"
+      [nzCancelText]="'关闭'"
+      [nzWidth]="700"
+      (nzOnCancel)="applicationModal.isVisible = false"
+    >
+      <ng-container *nzModalContent>
+        <nz-skeleton [nzLoading]="applicationModal.loading" [nzActive]="true">
+          <nz-descriptions nzBordered [nzSize]="'middle'" [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }">
+            <nz-descriptions-item nzTitle="应用名称">{{ applicationInfo?.showName }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="应用标识">{{ applicationInfo?.name }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="版本总数">{{ applicationInfo?.versionNum }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="应用首次部署时间">{{
+              applicationInfo?.firstDeploymentDate | date: 'yyyy-MM-dd HH:mm:ss'
+            }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="当前版本">{{ applicationInfo?.currentVersion }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="当前版本部署时间">{{
+              applicationInfo?.currentDeploymentDate | date: 'yyyy-MM-dd HH:mm:ss'
+            }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="最新版本">{{ applicationInfo?.lastVersion }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="最新版本发布时间">{{
+              applicationInfo?.lastPushDate | date: 'yyyy-MM-dd HH:mm:ss'
+            }}</nz-descriptions-item>
+          </nz-descriptions>
+        </nz-skeleton>
+      </ng-container>
+    </nz-modal>
   `,
   standalone: true,
   imports: [
@@ -149,6 +214,9 @@ export interface LayoutBasicState {
     NzDropDownModule,
     NzAvatarModule,
     NzIconModule,
+    NzModalModule,
+    NzSkeletonModule,
+    NzDescriptionsModule,
     ThemeBtnModule,
     YunzaiWidgetsModule,
     YunzaiNavApplicationComponent,
@@ -160,6 +228,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
   private readonly stomp = inject(StompService);
   private readonly win = inject(WINDOW);
   private readonly layoutDisplayService = inject(LayoutDisplayService);
+  private readonly conf: YunzaiConfig = inject(YUNZAI_CONFIG);
 
   public NavType = NavType;
   private state: LayoutBasicState = {
@@ -179,6 +248,18 @@ export class YunzaiLayoutBasicComponent implements OnInit {
     },
     navType: NavType.APPLICATION
   };
+
+  headerStyleList: YunzaiHeaderStyle[] = [];
+
+  applicationInfo!: ApplicationInfoInterface;
+
+  applicationModal = {
+    isVisible: false,
+    loading: false
+  };
+
+  private readonly httpClient = inject(HttpClient);
+  private config!: YunzaiBusinessConfig;
 
   get options(): LayoutDefaultOptions {
     return this.state.options;
@@ -214,6 +295,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.config = this.conf.bis!;
     this.initLogo();
     this.initFavicon();
     this.initNavType();
@@ -257,17 +339,18 @@ export class YunzaiLayoutBasicComponent implements OnInit {
     const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
     if (navType !== null) {
       this.state.navType = navType;
-      return;
+    } else {
+      this.state.navType = NavType.APPLICATION;
     }
-    let fetchedNavType: NzSafeAny;
     if (projectInfo.headerStyle && projectInfo.headerStyle.length > 0) {
-      fetchedNavType = projectInfo.headerStyle.pop()?.value;
+      this.headerStyleList = projectInfo.headerStyle;
+      const hasThis = this.headerStyleList.some(item => item.value === this.state.navType);
+      if (!hasThis) {
+        this.state.navType = <NavType>projectInfo.headerStyle[0].value;
+        const [setHeaderType] = useLocalStorageHeaderType();
+        setHeaderType(this.state.navType);
+      }
     }
-    // default value
-    if (!fetchedNavType) {
-      fetchedNavType = NavType.APPLICATION;
-    }
-    this.state.navType = fetchedNavType;
   }
 
   toIndex(): void {
@@ -276,9 +359,9 @@ export class YunzaiLayoutBasicComponent implements OnInit {
     log('YunzaiLayoutBasicComponent: ', `todo: the default route was ${defaultRoute}, 但是还没想好如何实现.`);
   }
 
-  onNavTypeChange(type: NavType): void {
+  onNavTypeChange(type: NavType | string): void {
     const [setHeaderType] = useLocalStorageHeaderType();
-    setHeaderType(type);
+    setHeaderType(<NavType>type);
     this.win.location.reload();
   }
 
@@ -293,5 +376,30 @@ export class YunzaiLayoutBasicComponent implements OnInit {
     this.layoutDisplayService.listen('aside', (display: boolean) => {
       this.state.display.aside = display;
     });
+  }
+
+  // 关于本应用
+  aboutApplication(): void {
+    const urlArr = window.location.pathname.split(`${this.config.baseUrl}/`);
+    if (urlArr.length > 1) {
+      // 应用标识，截取路径中 /backstage/后第一个字符串
+      // 例: http://222.30.194.61/backstage/auth/page/oafportal/#/base/menu  中 auth
+      const name = urlArr[1].split('/')[0];
+      this.applicationModal.isVisible = true;
+      this.applicationModal.loading = true;
+      // eslint-disable-next-line deprecation/deprecation
+      this.httpClient.get(`/basic/api/app/aboutApp?name=${name}`).subscribe(
+        // @ts-ignore
+        (response: any) => {
+          this.applicationModal.loading = false;
+          if (response.data) {
+            this.applicationInfo = response.data;
+          }
+        },
+        () => {
+          this.applicationModal.loading = false;
+        }
+      );
+    }
   }
 }

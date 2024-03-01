@@ -1,7 +1,8 @@
 <div
-  class="ant-avatar ant-avatar-circle ant-avatar-icon"
+  class="ant-avatar ant-avatar-circle ant-avatar-icon yunzai-default__nav-item"
   nz-dropdown
-  nzPlacement="topCenter"
+  nzPlacement="bottomRight"
+  nzTrigger="click"
   [nzDropdownMenu]="types.length > 0 ? menu : null"
 >
   <svg
@@ -23,9 +24,11 @@
     </g>
   </svg>
   <nz-dropdown-menu #menu="nzDropdownMenu">
-    <ul nz-menu nzSelectable>
+    <ul nz-menu nzSelectable class="theme-list">
       @for (i of types; track $index) {
-        <li nz-menu-item (click)="onThemeChange(i.key)">{{ i.text }}</li>
+        <li nz-menu-item [attr.data-text]="i.text | i18n" (click)="onThemeChange(i.key)" [style]="{ color: i.color }">
+          <i nz-icon nzType="bg-colors"></i> {{ i.text | i18n }}
+        </li>
       }
     </ul>
   </nz-dropdown-menu>

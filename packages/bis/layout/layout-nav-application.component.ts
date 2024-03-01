@@ -65,6 +65,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 
     <div class="yz-application" id="navDropdown" nz-row *ngIf="state.active">
       <div nz-col [nzSpan]="3" class="yz-application-topic">
+        <div class="yz-application-topic-list">
         @if (showAllMenu) {
           <div data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')"
             >{{ 'mode.nav.all' | i18n }}
@@ -84,6 +85,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
             >{{ nav.name | i18n }}
           </div>
         }
+        </div>
       </div>
       <div nz-col [nzSpan]="21" class="yz-application-container">
         @switch (state.type) {
@@ -100,7 +102,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
             </div>
           }
           @case ('other') {
-            <div class="yz-application-list">
+            <div class="yz-application-list yz-application-list-other">
               <div class="yz-application-list-item">
                 <ul>
                   @for (nav of state.list; track nav) {

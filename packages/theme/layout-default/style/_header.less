@@ -89,6 +89,14 @@
         transform: none !important;
         font-size: @yunzai-default-header-icon-fs !important;
       }
+
+      &.ant-avatar {
+        height: @yunzai-default-header-icon-fs + 16px;
+
+        svg {
+          width: @yunzai-default-header-icon-fs !important;
+        }
+      }
     }
   }
 
@@ -112,13 +120,14 @@
 }
 
 // Search
-.header-search-mixin(@enabled) when(@enabled =true) {
+.header-search-mixin(@enabled) when (@enabled =true) {
   @{yunzai-default-prefix}__search {
     position: relative;
     display: flex;
     flex: 1;
     align-items: center;
     margin: 0 @layout-gutter * 3;
+
     .@{ant-prefix}-input {
       padding-left: 0;
 
@@ -126,6 +135,7 @@
         box-shadow: none;
       }
     }
+
     .@{ant-prefix}-input,
     .@{ant-prefix}-input-group-addon,
     .@{ant-prefix}-input-affix-wrapper {
@@ -138,11 +148,13 @@
         opacity: 1;
       }
     }
+
     .@{ant-prefix}-input-affix-wrapper {
       .@{ant-prefix}-input {
         background-color: transparent;
       }
     }
+
     .@{ant-prefix}-input-group-addon,
     .@{ant-prefix}-input-affix-wrapper {
       i {
@@ -163,6 +175,7 @@
           opacity: 1;
         }
       }
+
       .@{ant-prefix}-input-group-addon,
       .@{ant-prefix}-input-affix-wrapper {
         i {
@@ -236,7 +249,7 @@
   }
 }
 
-.layout-default-header-rtl-mixin(@enabled) when(@enabled=true) {
+.layout-default-header-rtl-mixin(@enabled) when (@enabled=true) {
   [dir='rtl'] {
     @{yunzai-default-prefix} {
       &__header {
@@ -248,4 +261,5 @@
     }
   }
 }
+
 .layout-default-header-rtl-mixin(@rtl-enabled);
