@@ -390,7 +390,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
       // eslint-disable-next-line deprecation/deprecation
       this.httpClient.get(`/basic/api/app/aboutApp?name=${name}`).subscribe(
         // @ts-ignore
-        (response: any) => {
+        (response: NzSafeAny) => {
           this.applicationModal.loading = false;
           if (response.data) {
             this.applicationInfo = response.data;

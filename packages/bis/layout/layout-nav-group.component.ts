@@ -45,7 +45,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
                           @if (item.icon) {
                             <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
                           }
-                        {{ item.name | i18n }}
+                          {{ item.name | i18n }}
                         </li>
                       </ng-container>
                     }
