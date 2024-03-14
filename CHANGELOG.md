@@ -1,3 +1,20 @@
+# [17.3.0](https://github.com/hbyunzai/yelon/compare/17.2.3...17.3.0) (2024-03-14)
+
+
+### Bug Fixes
+
+* **abc:reuse-tab:** fix can't cache when component is not used ([110c44a](https://github.com/hbyunzai/yelon/commit/110c44acbef03884b482c3668626bd4161276406))
+* **all:** 1.修改header模式；2.修改浏览器title设置规则；3.修改主题按钮位置；4.左侧系统图标点击弹出“关于本应用”弹窗； ([a3aedf4](https://github.com/hbyunzai/yelon/commit/a3aedf48334e990f999fe3cf94607fb5b37ece3b))
+* **cli:** add `./` current fold in `startup.service` ([978d926](https://github.com/hbyunzai/yelon/commit/978d9264a24a7f3a0c0536a77cd933013cf90784))
+* **theme:** fix theme title service ([e672ea7](https://github.com/hbyunzai/yelon/commit/e672ea75d6b6c76164fed399a0646639822b9efd))
+
+
+### Features
+
+* **auth:** ignore all local resource ([f542903](https://github.com/hbyunzai/yelon/commit/f542903d29052a4ccac620a6fe0346265b3adb01))
+
+
+
 ## [17.2.3](https://github.com/hbyunzai/yelon/compare/17.2.2...17.2.3) (2024-02-22)
 
 
