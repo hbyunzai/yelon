@@ -36,7 +36,7 @@ export class StartupService {
   private i18n = inject<I18NService>(YUNZAI_I18N_TOKEN);<% } %>
   // If http request allows anonymous access, you need to add `ALLOW_ANONYMOUS`:
   // this.httpClient.get('assets/tmp/app-data.json', { context: new HttpContext().set(ALLOW_ANONYMOUS, true) })
-  private appData$ = this.httpClient.get('assets/tmp/app-data.json').pipe(
+  private appData$ = this.httpClient.get('./assets/tmp/app-data.json').pipe(
     catchError((res: NzSafeAny) => {
       console.warn(`StartupService.load: Network request failed`, res);
       setTimeout(() => this.router.navigateByUrl(`/exception/500`));
