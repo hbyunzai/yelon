@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { createTestContext } from '@yelon/testing';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzIconTestModule } from 'ng-zorro-antd/icon/testing';
 import { NzImageModule, NzImageService } from 'ng-zorro-antd/image';
 import { NzUploadComponent } from 'ng-zorro-antd/upload';
 
@@ -18,7 +19,7 @@ describe('form: widget: upload', () => {
   let dl: DebugElement;
   const widget = 'upload';
 
-  configureSFTestSuite({ widgets: [withUploadWidget()], imports: [NzImageModule] });
+  configureSFTestSuite({ widgets: [withUploadWidget()], imports: [NzImageModule, NzIconTestModule] });
 
   beforeEach(() => {
     ({ fixture, dl, context } = createTestContext(TestFormComponent));
@@ -34,7 +35,7 @@ describe('form: widget: upload', () => {
     return dl.query(By.directive(NzUploadComponent)).injector.get<NzUploadComponent>(NzUploadComponent);
   }
 
-  it('should be ignore update value when status is not success', () => {
+  it('should be ingore update value when status is not success', () => {
     page.newSchema({
       properties: { a: { type: 'string', ui: { widget } } }
     });
