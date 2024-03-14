@@ -1,4 +1,4 @@
-# @yelon/acl [![CI](https://github.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/acl.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/acl)
+# @yelon/acl [![CI](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/hbyunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon) [![NPM version](https://img.shields.io/npm/v/@yelon/acl.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/acl)
 
 A simple role-based access control.
 
