@@ -139,12 +139,14 @@ export class TitleService implements OnDestroy {
   }
 
   private getBySystemSet(): Observable<string> {
+    if (!this.config || !this.config.systemCode) return of('');
     let title = '';
     const [, getUser] = useLocalStorageUser();
     const yunzaiUser = getUser()!;
     const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(
       m => m.systemCode && m.systemCode === this.config.systemCode
     );
+    if (!yunzaiMenus || yunzaiMenus.length === 0) return of('');
     let systemName = '';
     const currentMenu = yunzaiMenus.pop();
     if (currentMenu) {
@@ -152,7 +154,9 @@ export class TitleService implements OnDestroy {
     }
     const [, getProjectInfo] = useLocalStorageProjectInfo();
     const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
+    if (!projectInfo) return of('');
     const pageTitlePattern = projectInfo.pageTitlePattern;
+    if (!pageTitlePattern) return of('');
     if (pageTitlePattern) {
       title = pageTitlePattern.replace(`$\{systemName}`, systemName);
     } else {
