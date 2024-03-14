@@ -1,4 +1,5 @@
-# ng-yunzai [![CI](https://github.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/ng-yunzai.svg?style=flat-square)](https://www.npmjs.com/package/ng-yunzai)
+# ng-yunzai [![CI](https://github.com/hbyunzai/ng-yunzai/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/ng-yunzai/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/hbyunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/ng-yunzai) [![NPM version](https://img.shields.io/npm/v/ng-yunzai.svg?style=flat-square)](https://www.npmjs.com/package/ng-yunzai)
+
 
 Angular CLI Schematics of ng-yunzai.
 
