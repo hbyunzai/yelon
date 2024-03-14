@@ -1,4 +1,4 @@
-# @yelon/testing [![Build Status](https://dev.azure.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/testing.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/testing)
+# @yelon/testing [![CI](https://github.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/testing.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/testing)
 
 Test suite for ng-yunzai.
 

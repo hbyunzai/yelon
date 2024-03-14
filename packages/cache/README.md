@@ -1,4 +1,4 @@
-# @yelon/cache [![Build Status](https://dev.azure.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/cache.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/cache)
+# @yelon/cache [![CI](https://github.com/hbyunzai/yelon/_apis/build/status/yelon-CI?branchName=master)](https://dev.azure.com/hbyunzai/yelon/_build/latest?definitionId=1&branchName=master) [![NPM version](https://img.shields.io/npm/v/@yelon/cache.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/cache)
 
 Cache the dictionary, city data etc.
 
