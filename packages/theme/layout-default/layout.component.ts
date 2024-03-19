@@ -40,10 +40,10 @@ import { LayoutDefaultOptions } from './types';
     @if (showFetching) {
       <div class="yunzai-default__progress-bar"></div>
     }
-    @if (!opt.hideHeader) {
+    @if (!opt.hideHeader && displayNav) {
       <layout-default-header [items]="headerItems" />
     }
-    @if (!opt.hideAside) {
+    @if (!opt.hideAside && displayAside) {
       <div class="yunzai-default__aside" [ngStyle]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
