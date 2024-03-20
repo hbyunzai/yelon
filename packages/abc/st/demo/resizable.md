@@ -11,6 +11,7 @@ title:
 
 > - 注意：不要忘记在 `src/styles` 下导入 `nz-resizable` Less 样式文件（`@import 'ng-zorro-antd/resizable/style/entry.less';`）
 > - **不支持多表头**
+> - 当与过滤、排序一同存在时调整手柄会变小
 
 ## en-US
 
