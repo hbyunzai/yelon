@@ -2,6 +2,13 @@
 
 set -e
 
+
+if [ -z ${ACCESS_TOKEN} ]; then
+  echo "Error: No access token for GitHub could be found." \
+       "Please set the environment variable 'ACCESS_TOKEN'."
+  exit 0
+fi
+
 readonly thisDir=$(cd $(dirname $0); pwd)
 
 commitSha=$(git rev-parse --short HEAD)
