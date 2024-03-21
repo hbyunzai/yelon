@@ -22,7 +22,7 @@ import type { SFMentionWidgetSchema } from '@yelon/form/widgets/mention';
 import { MentionOnSearchTypes } from 'ng-zorro-antd/mention';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-const DATA = ['asdf', 'yunzai-bot', '中文', 'にほんご'];
+const DATA = ['asdf', 'cipchk', '中文', 'にほんご'];
 
 @Component({
   selector: 'app-demo',

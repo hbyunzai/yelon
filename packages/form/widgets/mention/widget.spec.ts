@@ -10,7 +10,7 @@ import { withMentionWidget } from './index';
 import { MentionWidget } from './widget';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 
-const DATA = ['asdf', 'yunzai-bot', '中文', 'にほんご'];
+const DATA = ['asdf', 'cipchk', '中文', 'にほんご'];
 
 describe('form: widget: mention', () => {
   let fixture: ComponentFixture<TestFormComponent>;

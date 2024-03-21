@@ -9,9 +9,10 @@
   "allowedNonPeerDependencies": [
     "date-fns",
     "ng-zorro-antd",
-    "@ant-design/icons-angular",
     "@yelon/acl",
+    "@yelon/abc",
+    "@yelon/form",
     "@yelon/util",
-    "@yelon/auth"
+    "@ant-design/icons-angular"
   ]
 }

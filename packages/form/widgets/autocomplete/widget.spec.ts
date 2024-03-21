@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 
 import { mergeConfig, SFSchema, SFSchemaEnum } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
-import { YunzaiConfigService } from '@yelon/util/config';
+import { AlainConfigService } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { withAutoCompleteWidget } from './index';
@@ -118,7 +118,7 @@ describe('form: widget: autocomplete', () => {
       page.asyncEnd();
     }));
     xit('with email of format', fakeAsync(() => {
-      const config = mergeConfig(TestBed.inject(YunzaiConfigService));
+      const config = mergeConfig(TestBed.inject(AlainConfigService));
       const typeValue = 'a';
       page
         .newSchema({
@@ -177,7 +177,7 @@ describe('form: widget: autocomplete', () => {
         .asyncEnd();
     }));
     it('should be show default value via schema.default', fakeAsync(() => {
-      const email = 'yunzai-bot@outlook.com';
+      const email = 'cipchk@qq.com';
       page
         .newSchema({
           properties: {
