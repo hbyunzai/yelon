@@ -315,9 +315,9 @@ export function pluginIcon(options: PluginOptions): Rule {
     const icons = getIcons(options, tree);
     genIconFile(options, tree, icons);
     console.log(`\n\n`);
-    console.log(`生成成功，如果是首次运行，需要手动引用，参考：https://ng.yunzainfo.com/theme/icon/zh`);
+    console.log(`生成成功，如果是首次运行，需要手动引用，参考：https://ng-alain.com/theme/icon/zh`);
     console.log(
-      `Finished, if it's first run, you need manually reference it, refer to: https://ng.yunzainfo.com/theme/icon/en`
+      `Finished, if it's first run, you need manually reference it, refer to: https://ng-alain.com/theme/icon/en`
     );
     console.log(`\n\n`);
   };

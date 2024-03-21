@@ -2,7 +2,6 @@
 
 set -e
 
-
 if [ -z ${ACCESS_TOKEN} ]; then
   echo "Error: No access token for GitHub could be found." \
        "Please set the environment variable 'ACCESS_TOKEN'."
@@ -24,19 +23,6 @@ cd $(dirname $0)/../..
 
 DIST="$(pwd)/dist"
 
-# if [[ ${commitAuthorName} != 'yunzai-bot' && ${commitAuthorName} != 'yunzai-bot' ]]; then
-#   echo "Warning: Just only yunzai-bot or yunzai-bot user"
-#   exit 0
-# fi
-
-# echo "ACCESS_TOKEN: ${ACCESS_TOKEN}.."
-
-if [ -z ${ACCESS_TOKEN} ]; then
-  echo "Error: No access token for GitHub could be found." \
-       "Please set the environment variable 'ACCESS_TOKEN'."
-  exit 0
-fi
-
 buildDir=${DIST}/publish
 rm -rf ${buildDir}
 mkdir -p ${buildDir}
@@ -45,7 +31,7 @@ cp -r ${DIST}/ng-yunzai ${buildDir}/ng-yunzai
 
 packageRepo=yelon-builds
 buildVersion=$(node -pe "require('./package.json').version")
-branchName=${TRAVIS_BRANCH:-'master'}
+branchName=${BRANCH:-'master'}
 
 buildVersionName="${buildVersion}-${commitSha}"
 buildTagName=${TAG_NAME:-"${branchName}-${commitSha}"}
@@ -54,12 +40,10 @@ if [[ -n "${GITHUB_HEAD_REF}" ]]; then
 fi
 buildCommitMessage="${branchName} - ${MESSAGE}"
 
-
 repoUrl="https://github.com/hbyunzai/${packageRepo}.git"
 repoDir="${DIST}/${packageRepo}"
 
 echo "Starting publish process ${buildVersionName} into ${branchName}(tag:${buildTagName}).."
-
 
 rm -rf ${repoDir}
 mkdir -p ${repoDir}
@@ -108,6 +92,7 @@ echo "https://${ACCESS_TOKEN}:@github.com" > .git/credentials
 
 if [[ $(git ls-remote origin "refs/tags/${buildTagName}") ]]; then
   echo "removed tag because tag is already published"
+  # git push origin :refs/tags/${buildTagName}
   git push --delete origin ${buildTagName}
 fi
 

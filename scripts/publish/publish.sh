@@ -27,11 +27,11 @@ clone() {
   cd ${DIST}
   echo ">>> Clone yelon & cli dist..."
   git clone --depth 1 https://github.com/hbyunzai/yelon-builds.git
-    BUILD_VERSION=$(node -p "require('${ROOT}/ng-yunzai/package.json').version")
-    if [[ $VERSION != $BUILD_VERSION ]]; then
-      echo "待发布版本[${VERSION}]与远程版本[${BUILD_VERSION}]不一致"
-      exit 1
-    fi
+  BUILD_VERSION=$(node -p "require('${ROOT}/ng-yunzai/package.json').version")
+  if [[ $VERSION != $BUILD_VERSION ]]; then
+    echo "待发布版本[${VERSION}]与远程版本[${BUILD_VERSION}]不一致"
+    exit 1
+  fi
 }
 
 publishToMaster() {
