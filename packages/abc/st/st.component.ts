@@ -384,7 +384,6 @@ export class STComponent implements AfterViewInit, OnChanges {
         this._data = result.list ?? [];
         this._statistical = result.statistical as STStatisticalResults;
         // Should be re-render in next tike when using virtual scroll
-        // https://github.com/ng-alain/ng-alain/issues/1836
         if (this.cdkVirtualScrollViewport != null) {
           Promise.resolve().then(() => this.cdkVirtualScrollViewport?.checkViewportSize());
         }
