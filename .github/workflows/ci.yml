@@ -20,6 +20,7 @@ jobs:
           cache: 'yarn'
       - name: Comment on github
         run: node ./scripts/github/comment.js "[Preview Preparing...](https://github.com/hbyunzai/yelon/actions/runs/${{ github.run_id }})"
+        if: github.event.number
         env:
           ACCESS_REPO: ${{ github.repository }}
           ACCESS_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
