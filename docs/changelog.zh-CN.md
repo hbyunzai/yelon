@@ -13,7 +13,20 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
-## [17.3.1](https://github.com/hbyunzai/yelon/compare/17.3.0...17.3.1) (2024-03-14)
+
+## [17.3.2](https://github.com/hbyunzai/yelon/compare/17.3.1...17.3.2) (2024-03-21)
+
+### Bug Fixes
+
+* **abc:cell:** fix can't change detection of widget ([931f613](https://github.com/hbyunzai/yelon/commit/931f6130302df86aa9003b56aa4f94eb023ad431))
+* **abc:st:** fix resizeable will trigger sorting or filter ([#1788](https://github.com/hbyunzai/yelon/issues/1788)) ([8c43573](https://github.com/hbyunzai/yelon/commit/8c435736e9490bc60ef1ccb0c40a7bc4fb323004))
+* **abc:st:** fix sorting trigger misalignment in mulit-column ([#1767](https://github.com/hbyunzai/yelon/issues/1767)) ([a09ccb0](https://github.com/hbyunzai/yelon/commit/a09ccb0f9ddfcbe38ab0514273f62d0c567ad937))
+* daily fix ([1a91dd8](https://github.com/hbyunzai/yelon/commit/1a91dd867dc4608f41562e03c30ab7b8f6698592))
+* **from:** fix test ([cdf6ed7](https://github.com/hbyunzai/yelon/commit/cdf6ed7d94fd112d99e716663160396ebe6e1eb8))
+* **layout:** 修改layoutDisplayService无法隐藏头部及左侧bug ([1b67259](https://github.com/hbyunzai/yelon/commit/1b67259b903f827531804a172ba114d69f16e643))
+* **theme:** correct `.no-data` text color in dark ([9515974](https://github.com/hbyunzai/yelon/commit/9515974394c6af9bef4e9b490a5838318bea523e))
+* **theme:** fix ng-package.json ([ad3d4b9](https://github.com/hbyunzai/yelon/commit/ad3d4b924b42fce5c1eac80821abde7f4a0fbe24))
+
 
 
 # [17.3.0](https://github.com/hbyunzai/yelon/compare/17.2.3...17.3.0) (2024-03-14)
