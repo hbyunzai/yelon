@@ -11,7 +11,7 @@ When calling the request, add `ALLOW_ANONYMOUS`.
 ```ts
 this.http.post(`login`, {
   name: 'yunzai-bot', pwd: '123456'
-}, {
+},null, {
   context: new HttpContext().set(ALLOW_ANONYMOUS, true)
 });
 ```

@@ -85,7 +85,7 @@
               (nzResizeEnd)="colResize($event, _c)"
             >
               @if ($any(!last && !$any(_c).resizable.disabled)) {
-                <nz-resize-handle nzDirection="right">
+                <nz-resize-handle nzDirection="right" (click)="_stopPropagation($event)">
                   <i></i>
                 </nz-resize-handle>
               }
@@ -98,10 +98,10 @@
                 @switch (_c.type) {
                   @case ('checkbox') {
                     @if (_c.selections!.length === 0) {
-                      <ng-template [ngTemplateOutlet]="chkAllTpl" [ngTemplateOutletContext]="{ $implicit: false }" />
+                      <ng-template [ngTemplateOutlet]="chkAllTpl" [ngTemplateOutletContext]="{ $implicit: false }"/>
                     } @else {
                       <div class="ant-table-selection">
-                        <ng-template [ngTemplateOutlet]="chkAllTpl" [ngTemplateOutletContext]="{ $implicit: true }" />
+                        <ng-template [ngTemplateOutlet]="chkAllTpl" [ngTemplateOutletContext]="{ $implicit: true }"/>
                         @if (_c.selections!.length) {
                           <div class="ant-table-selection-extra">
                             <div
@@ -125,7 +125,7 @@
                     }
                   }
                   @default {
-                    <ng-template [ngTemplateOutlet]="titleTpl" [ngTemplateOutletContext]="{ $implicit: _c.title }" />
+                    <ng-template [ngTemplateOutlet]="titleTpl" [ngTemplateOutletContext]="{ $implicit: _c.title }"/>
                   }
                 }
               }
@@ -147,59 +147,59 @@
   }
   <tbody class="st__body">
     @if (!_loading) {
-      <ng-template [ngTemplateOutlet]="bodyHeader!" [ngTemplateOutletContext]="{ $implicit: _statistical }" />
+      <ng-template [ngTemplateOutlet]="bodyHeader!" [ngTemplateOutletContext]="{ $implicit: _statistical }"/>
     }
-    <ng-template #bodyTpl let-i let-index="index">
-      <tr
-        [attr.data-index]="index"
-        (click)="_rowClick($event, i, index, false)"
-        (dblclick)="_rowClick($event, i, index, true)"
-        [ngClass]="i._rowClassName"
-      >
-        @if (expand) {
+  <ng-template #bodyTpl let-i let-index="index">
+    <tr
+      [attr.data-index]="index"
+      (click)="_rowClick($event, i, index, false)"
+      (dblclick)="_rowClick($event, i, index, true)"
+      [ngClass]="i._rowClassName"
+    >
+      @if (expand) {
+        <td
+          [nzShowExpand]="expand && i.showExpand !== false"
+          [nzExpand]="i.expand"
+          (nzExpandChange)="_expandChange(i, $event)"
+          (click)="_stopPropagation($event)"
+          nzWidth="50px"
+        ></td>
+      }
+      @for (c of _columns; track cIdx; let cIdx = $index) {
+        @if (i._values[cIdx].props?.colSpan > 0 && i._values[cIdx].props?.rowSpan > 0) {
           <td
-            [nzShowExpand]="expand && i.showExpand !== false"
-            [nzExpand]="i.expand"
-            (nzExpandChange)="_expandChange(i, $event)"
-            (click)="_stopPropagation($event)"
-            nzWidth="50px"
-          ></td>
-        }
-        @for (c of _columns; track cIdx; let cIdx = $index) {
-          @if (i._values[cIdx].props?.colSpan > 0 && i._values[cIdx].props?.rowSpan > 0) {
-            <td
-              [nzLeft]="!!c._left"
-              [nzRight]="!!c._right"
-              [attr.data-col-index]="cIdx"
-              [ngClass]="c._className"
-              [attr.colspan]="i._values[cIdx].props?.colSpan === 1 ? null : i._values[cIdx].props?.colSpan"
-              [attr.rowspan]="i._values[cIdx].props?.rowSpan === 1 ? null : i._values[cIdx].props?.rowSpan"
-            >
-              @if (responsive) {
-                <span class="ant-table-rep__title">
-                  <ng-template [ngTemplateOutlet]="titleTpl" [ngTemplateOutletContext]="{ $implicit: c.title }" />
+            [nzLeft]="!!c._left"
+            [nzRight]="!!c._right"
+            [attr.data-col-index]="cIdx"
+            [ngClass]="c._className"
+            [attr.colspan]="i._values[cIdx].props?.colSpan === 1 ? null : i._values[cIdx].props?.colSpan"
+            [attr.rowspan]="i._values[cIdx].props?.rowSpan === 1 ? null : i._values[cIdx].props?.rowSpan"
+          >
+            @if (responsive) {
+              <span class="ant-table-rep__title">
+                  <ng-template [ngTemplateOutlet]="titleTpl" [ngTemplateOutletContext]="{ $implicit: c.title }"/>
                 </span>
-              }
-              <st-td [data]="_data" [i]="i" [index]="index" [c]="c" [cIdx]="cIdx" (n)="_handleTd($event)" />
-            </td>
-          }
+            }
+            <st-td [data]="_data" [i]="i" [index]="index" [c]="c" [cIdx]="cIdx" (n)="_handleTd($event)"/>
+          </td>
         }
-      </tr>
-      <tr [nzExpand]="i.expand">
-        <ng-template [ngTemplateOutlet]="expand" [ngTemplateOutletContext]="{ $implicit: i, index: index }" />
-      </tr>
-    </ng-template>
+      }
+    </tr>
+    <tr [nzExpand]="i.expand">
+      <ng-template [ngTemplateOutlet]="expand" [ngTemplateOutletContext]="{ $implicit: i, index: index }"/>
+    </tr>
+  </ng-template>
     @if (virtualScroll) {
       <ng-template nz-virtual-scroll let-i let-index="index">
-        <ng-template [ngTemplateOutlet]="bodyTpl" [ngTemplateOutletContext]="{ $implicit: i, index: index }" />
+        <ng-template [ngTemplateOutlet]="bodyTpl" [ngTemplateOutletContext]="{ $implicit: i, index: index }"/>
       </ng-template>
     } @else {
       @for (i of _data; track trackBy($index, i)) {
-        <ng-template [ngTemplateOutlet]="bodyTpl" [ngTemplateOutletContext]="{ $implicit: i, index: $index }" />
+        <ng-template [ngTemplateOutlet]="bodyTpl" [ngTemplateOutletContext]="{ $implicit: i, index: $index }"/>
       }
     }
     @if (!_loading) {
-      <ng-template [ngTemplateOutlet]="body!" [ngTemplateOutletContext]="{ $implicit: _statistical }" />
+      <ng-template [ngTemplateOutlet]="body!" [ngTemplateOutletContext]="{ $implicit: _statistical }"/>
     }
   </tbody>
   <ng-template #totalTpl let-range="range" let-total>{{ renderTotal(total, range) }}</ng-template>
