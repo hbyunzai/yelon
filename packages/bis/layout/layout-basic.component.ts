@@ -154,10 +154,10 @@ export interface ApplicationInfoInterface {
     </layout-default>
     <ng-template #asideUserTpl>
       <div data-event-id="_route_user" class="yunzai-default__aside-user">
-        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSrc]="aside.icon" (click)="aboutApplication()" />
+        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSize]="40" [nzSrc]="aside.icon" (click)="aboutApplication()" />
         <div class="yunzai-default__aside-user-info" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu">
           <strong>{{ aside.name | i18n }}</strong>
-          <p class="mb0">{{ aside.intro | i18n }}</p>
+          <p>{{ aside.intro | i18n }}</p>
         </div>
       </div>
       <nz-dropdown-menu #userMenu="nzDropdownMenu">

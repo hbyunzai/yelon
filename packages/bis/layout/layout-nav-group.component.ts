@@ -36,17 +36,19 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
                   <ul nz-menu nzSelectable>
                     @for (item of menu.children; track item) {
                       <ng-container>
-                        <li
-                          data-event-id="_nav_item"
-                          [attr.data-name]="item.name | i18n"
-                          nz-menu-item
-                          (click)="open(item)"
-                        >
-                          @if (item.icon) {
-                            <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
-                          }
-                          {{ item.name | i18n }}
-                        </li>
+                        @if (item.auth) {
+                            <li
+                              data-event-id="_nav_item"
+                              [attr.data-name]="item.name | i18n"
+                              nz-menu-item
+                              (click)="open(item)"
+                            >
+                              @if (item.icon) {
+                                 <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                              }
+                              {{ item.name | i18n }}
+                            </li>
+                        }
                       </ng-container>
                     }
                   </ul>
@@ -89,10 +91,10 @@ export class YunzaiLayoutNavGroupComponent implements OnInit, OnDestroy {
         this.win.location.href = topic.url;
         break;
       case 'blank':
-        this.win.location.href = topic.url;
+        this.win.open(topic.url);
         break;
       case 'target':
-        this.win.location.href = topic.url;
+        this.win.open(topic.url);
         break;
       default:
         this.win.location.href = topic.url;
