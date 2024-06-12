@@ -235,10 +235,10 @@ export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
         this.win.location.href = topic.url;
         break;
       case 'blank':
-        this.win.location.href = topic.url;
+        this.win.open(topic.url);
         break;
       case 'target':
-        this.win.location.href = topic.url;
+        this.win.open(topic.url);
         break;
       default:
         this.win.location.href = topic.url;
