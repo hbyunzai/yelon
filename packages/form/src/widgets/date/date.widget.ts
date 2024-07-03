@@ -106,7 +106,7 @@ import { ControlUIWidget } from '../../widget';
           [nzShowTime]="ui.showTime"
           [nzSeparator]="ui.separator"
           [nzShowWeekNumber]="ui.showWeekNumber || false"
-          [nzMode]="ui.rangeMode"
+          [nzMode]="$any(ui.rangeMode)"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
           (nzOnOk)="_ok($event)"

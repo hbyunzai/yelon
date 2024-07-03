@@ -1,4 +1,5 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, discardPeriodicTasks, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -13,7 +14,7 @@ import { SFWidgetProvideConfig, provideSFConfig } from '../src';
 import { SF_SEQ } from '../src/const';
 import { SFButton } from '../src/interface';
 import { FormProperty } from '../src/model/form.property';
-import { YelonFormModule } from '../src/module';
+import { DelonFormModule } from '../src/module';
 import { SFSchema } from '../src/schema';
 import { SFUISchema } from '../src/schema/ui';
 import { SFComponent } from '../src/sf.component';
@@ -38,7 +39,7 @@ let context: TestFormComponent;
 export function builder(options?: {
   detectChanges?: boolean;
   template?: string;
-  ignoreAntd?: boolean;
+  ingoreAntd?: boolean;
   imports?: NzSafeAny[];
 }): {
   fixture: ComponentFixture<TestFormComponent>;
@@ -48,7 +49,7 @@ export function builder(options?: {
 } {
   options = { detectChanges: true, ...options };
   TestBed.configureTestingModule({
-    imports: [NoopAnimationsModule, YunzaiThemeModule, YelonFormModule.forRoot()].concat(options.imports || []),
+    imports: [NoopAnimationsModule, YunzaiThemeModule, DelonFormModule.forRoot()].concat(options.imports || []),
     declarations: [TestFormComponent]
   });
   if (options.template) {
@@ -77,15 +78,9 @@ export function builder(options?: {
 export function configureSFTestSuite(options?: { imports?: NzSafeAny[]; widgets?: SFWidgetProvideConfig[] }): void {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        NoopAnimationsModule,
-        YunzaiThemeModule,
-        YelonFormModule,
-        HttpClientTestingModule,
-        ...(options?.imports ?? [])
-      ],
+      imports: [NoopAnimationsModule, YunzaiThemeModule, DelonFormModule, ...(options?.imports ?? [])],
       declarations: [TestFormComponent],
-      providers: [provideSFConfig({ widgets: options?.widgets })]
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideSFConfig({ widgets: options?.widgets })]
     });
   });
 }
