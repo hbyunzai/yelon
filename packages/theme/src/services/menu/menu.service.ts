@@ -22,6 +22,8 @@ export class MenuService implements OnDestroy {
    */
   openStrictly = false;
 
+  private $routerLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   constructor() {
     this.i18n$ = this.i18nSrv.change.subscribe(() => this.resume());
   }
@@ -346,5 +348,13 @@ export class MenuService implements OnDestroy {
   ngOnDestroy(): void {
     this._change$.unsubscribe();
     this.i18n$?.unsubscribe();
+  }
+
+  setRouterLink(url: string): void {
+    this.$routerLink.next(url);
+  }
+
+  getRouterLink(): Observable<string> {
+    return this.$routerLink.asObservable();
   }
 }

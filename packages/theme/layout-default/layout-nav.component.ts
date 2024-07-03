@@ -186,18 +186,18 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   to(item: Menu): void {
     this.select.emit(item);
     if (item.disabled) return;
-
     if (item.externalLink) {
       if (item.target === '_blank') {
         this.win.open(item.externalLink);
       } else {
-        this.win.location.href = item.externalLink;
+        localStorage.setItem('iframeSrc', item.externalLink);
+        this.menuSrv.setRouterLink(item.externalLink);
+        this.router.navigate(['iframePage']);
       }
       return;
     }
     this.ngZone.run(() => this.router.navigateByUrl(item.link!));
   }
-
   toggleOpen(item: Nav): void {
     this.menuSrv.toggleOpen(item);
   }

@@ -22,6 +22,8 @@ import { YunzaiConfigService } from '@yelon/util/config';
 import { NzDropDownDirective, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
 import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {I18nPipe} from "@yelon/theme";
 
 export interface ThemeBtnType {
   key: string;
@@ -40,7 +42,15 @@ export const YUNZAI_THEME_BTN_KEYS = new InjectionToken<string>('YUNZAI_THEME_BT
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NzDropDownDirective, NzDropdownMenuComponent, NzMenuDirective, NzMenuItemComponent, NzTooltipDirective]
+  imports: [
+    NzDropDownDirective,
+    NzDropdownMenuComponent,
+    NzMenuDirective,
+    NzMenuItemComponent,
+    NzTooltipDirective,
+    NzIconModule,
+    I18nPipe
+  ]
 })
 export class ThemeBtnComponent implements OnInit, OnDestroy {
   private readonly doc = inject(DOCUMENT);
