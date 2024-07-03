@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { CanActivateChildFn, CanActivateFn, CanMatchFn } from '@angular/router';
 
-import { SimpleTokenModel } from './simple.model';
 import { CheckSimple, ToLogin } from '../helper';
 import { YA_SERVICE_TOKEN } from '../interface';
+import { SimpleTokenModel } from './simple.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthSimpleGuardService {

@@ -6,8 +6,8 @@ import { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { withTransferWidget } from './index';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
+import { withTransferWidget } from './index';
 
 describe('form: widget: transfer', () => {
   let fixture: ComponentFixture<TestFormComponent>;

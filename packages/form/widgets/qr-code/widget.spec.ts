@@ -4,8 +4,8 @@ import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 import { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
 
-import { SFQrCodeWidgetSchema, withQrCodeWidget } from './index';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
+import { SFQrCodeWidgetSchema, withQrCodeWidget } from './index';
 
 describe('form: widget: qr-code', () => {
   let fixture: ComponentFixture<TestFormComponent>;

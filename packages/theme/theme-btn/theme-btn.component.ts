@@ -18,17 +18,17 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { I18nPipe } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzDropDownDirective, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
-import {NzIconModule} from "ng-zorro-antd/icon";
-import {I18nPipe} from "@yelon/theme";
 
 export interface ThemeBtnType {
   key: string;
   text: string;
-  color:string;
+  color: string;
 }
 
 export const YUNZAI_THEME_BTN_KEYS = new InjectionToken<string>('YUNZAI_THEME_BTN_KEYS');

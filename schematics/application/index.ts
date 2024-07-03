@@ -49,7 +49,6 @@ import {
 import { addESLintRule, UpgradeMainVersions } from '../utils/versions';
 import { Schema as ApplicationOptions } from './schema';
 
-
 let project: ProjectDefinition;
 let projectName: string;
 let mulitProject = false;

@@ -4,8 +4,8 @@ import { Observable, Observer } from 'rxjs';
 import { YunzaiAuthConfig } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { ToLogin } from './helper';
 import { ALLOW_ANONYMOUS } from '../token';
+import { ToLogin } from './helper';
 
 export function isAnonymous(req: HttpRequest<unknown>, options: YunzaiAuthConfig): boolean {
   if (req.context.get(ALLOW_ANONYMOUS)) return true;

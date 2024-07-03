@@ -12,12 +12,12 @@ import { YunzaiConfigService } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzI18nService, en_US as zorroEnUS } from 'ng-zorro-antd/i18n';
 
-import { YunzaiI18nBaseService } from './i18n';
-import { YUNZAI_LANGS } from './lang';
 import yelonEnUS from '../../locale/languages/en-US';
 import { YelonLocaleService } from '../../locale/locale.service';
 import { _HttpClient } from '../http/http.client';
 import { SettingsService } from '../settings/settings.service';
+import { YunzaiI18nBaseService } from './i18n';
+import { YUNZAI_LANGS } from './lang';
 
 declare const ngDevMode: boolean;
 

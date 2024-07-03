@@ -43,7 +43,7 @@
     "site:helper": "bash scripts/ci/helper.sh",
     "site:minify": "node scripts/build/minify.js",
     "site:sitemap": "node scripts/build/sitemap.js",
-    "site:ngsw": "node scripts/build/ngsw.js",
+    "site:ngsw": "ngsw-config src/dist/browser ngsw-config.json && node scripts/build/ngsw.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --pkg package.json",
     "pre-publish": "node scripts/publish/publish.js && node scripts/publish/publish-scaffold.js",
     "publish:next": "bash scripts/publish/publish.sh -next",

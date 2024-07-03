@@ -1,7 +1,7 @@
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { urlBase64Decode } from './jwt.helper';
 import { ITokenModel } from '../interface';
+import { urlBase64Decode } from './jwt.helper';
 
 export interface JWT {
   /**

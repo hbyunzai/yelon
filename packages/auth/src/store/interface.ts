@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 
-import { YA_STORE_TOKEN_LOCAL_FACTORY } from './local-storage.service';
 import { ITokenModel } from '../token/interface';
+import { YA_STORE_TOKEN_LOCAL_FACTORY } from './local-storage.service';
 
 export const YA_STORE_TOKEN = new InjectionToken<IStore>('AUTH_STORE_TOKEN', {
   providedIn: 'root',
