@@ -5,17 +5,6 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, map, delay, isObservable, switchMap, Subscription } from 'rxjs';
 
-import {
-  deepCopy,
-  useLocalStorageProjectInfo,
-  useLocalStorageUser,
-  YUNZAI_CONFIG,
-  YunzaiBusinessConfig,
-  YunzaiConfig,
-  YunzaiMenu,
-  YunzaiProjectInfo
-} from '@yelon/util';
-
 import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { MenuService } from '../menu/menu.service';
 
@@ -32,7 +21,6 @@ export class TitleService implements OnDestroy {
   private _separator: string = ' - ';
   private _reverse: boolean = false;
   private tit$?: Subscription;
-  private config!: YunzaiBusinessConfig;
 
   readonly DELAY_TIME = 25;
 
@@ -40,13 +28,10 @@ export class TitleService implements OnDestroy {
   private readonly injector = inject(Injector);
   private readonly title = inject(Title);
   private readonly menuSrv = inject(MenuService);
-  private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
-
-  private readonly conf: YunzaiConfig = inject(YUNZAI_CONFIG);
+  private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN);
 
   constructor() {
-    this.i18nSrv?.change.pipe(takeUntilDestroyed()).subscribe(() => this.setTitle());
-    this.config = this.conf.bis!;
+    this.i18nSrv.change.pipe(takeUntilDestroyed()).subscribe(() => this.setTitle());
   }
 
   /**
@@ -124,7 +109,7 @@ export class TitleService implements OnDestroy {
     let next = this.injector.get(ActivatedRoute);
     while (next.firstChild) next = next.firstChild;
     const data: RouteTitle = (next.snapshot && next.snapshot.data) || {};
-    if (data.titleI18n && this.i18nSrv) data.title = this.i18nSrv.fanyi(data.titleI18n);
+    if (data.titleI18n) data.title = this.i18nSrv.fanyi(data.titleI18n);
     return isObservable(data.title) ? data.title : of(data.title!);
   }
 
@@ -134,35 +119,8 @@ export class TitleService implements OnDestroy {
 
     const item = menus[menus.length - 1];
     let title;
-    if (item.i18n && this.i18nSrv) title = this.i18nSrv.fanyi(item.i18n);
+    if (item.i18n) title = this.i18nSrv.fanyi(item.i18n);
     return of(title || item.text!);
-  }
-
-  private getBySystemSet(): Observable<string> {
-    if (!this.config || !this.config.systemCode) return of('');
-    let title = '';
-    const [, getUser] = useLocalStorageUser();
-    const yunzaiUser = getUser()!;
-    const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(
-      m => m.systemCode && m.systemCode === this.config.systemCode
-    );
-    if (!yunzaiMenus || yunzaiMenus.length === 0) return of('');
-    let systemName = '';
-    const currentMenu = yunzaiMenus.pop();
-    if (currentMenu) {
-      systemName = currentMenu.text;
-    }
-    const [, getProjectInfo] = useLocalStorageProjectInfo();
-    const projectInfo: YunzaiProjectInfo = getProjectInfo()!;
-    if (!projectInfo) return of('');
-    const pageTitlePattern = projectInfo.pageTitlePattern;
-    if (!pageTitlePattern) return of('');
-    if (pageTitlePattern) {
-      title = pageTitlePattern.replace(`$\{systemName}`, systemName);
-    } else {
-      title = systemName;
-    }
-    return of(title);
   }
 
   /**
@@ -173,7 +131,6 @@ export class TitleService implements OnDestroy {
     this.tit$ = of(title)
       .pipe(
         switchMap(tit => (tit ? of(tit) : this.getByRoute())),
-        switchMap(tit => (tit ? of(tit) : this.getBySystemSet())),
         switchMap(tit => (tit ? of(tit) : this.getByMenu())),
         switchMap(tit => (tit ? of(tit) : this.getByElement())),
         map(tit => tit || this.default),
@@ -200,7 +157,7 @@ export class TitleService implements OnDestroy {
    * Set i18n key of the document title
    */
   setTitleByI18n(key: string, params?: unknown): void {
-    this.setTitle(this.i18nSrv?.fanyi(key, params));
+    this.setTitle(this.i18nSrv.fanyi(key, params));
   }
 
   ngOnDestroy(): void {

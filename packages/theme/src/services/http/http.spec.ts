@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpParams, HttpResponse } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
+import { HttpParams, HttpResponse, provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, TestRequest, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { of, catchError } from 'rxjs';
@@ -22,12 +22,11 @@ describe('theme: http.client', () => {
   const BODY = 'body data';
 
   function createModule(config?: YunzaiThemeHttpClientConfig): void {
-    const providers: any[] = [_HttpClient];
+    const providers: any[] = [provideHttpClient(), provideHttpClientTesting(), _HttpClient];
     if (config) {
       providers.push(provideYunzaiConfig({ themeHttp: config }));
     }
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
       providers
     });
 
@@ -101,7 +100,7 @@ describe('theme: http.client', () => {
         ret.flush(OK);
         expect(res).toBe(OK);
       }));
-      it('should be ignore process when params is HttpParams', fakeAsync(() => {
+      it('should be ingore process when params is HttpParams', fakeAsync(() => {
         http.get(URL, new HttpParams({ fromObject: { a: 'aa' } })).subscribe(_ => (res = _));
         tick();
         const ret = backend.expectOne(() => true) as TestRequest;
@@ -696,7 +695,7 @@ describe('theme: http.client', () => {
       const ret = backend.expectOne(() => true) as TestRequest;
       expect(ret.request.urlWithParams).toContain(`${Math.trunc(+now / 1000)}`);
     }));
-    it('should be ignore null values', fakeAsync(() => {
+    it('should be ingore null values', fakeAsync(() => {
       createModule({ nullValueHandling: 'ignore' });
       http.get(URL, { a: 1, b: null, c: undefined }).subscribe();
       tick();

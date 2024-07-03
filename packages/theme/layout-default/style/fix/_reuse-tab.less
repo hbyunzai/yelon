@@ -2,7 +2,7 @@
 @yunzai-default-aside-collapsed-width: @yunzai-default-aside-collapsed-wd + @yunzai-default-content-padding;
 
 @{reuse-tab-prefix} {
-  margin: 0 -@yunzai-default-content-padding 0 -@yunzai-default-content-padding;
+  margin: 0 -@yunzai-default-content-padding;
 }
 
 @{yunzai-default-prefix}__fixed {
@@ -36,7 +36,7 @@
 @media (min-width: @mobile-min) {
   @{yunzai-default-prefix}__fixed {
     @{reuse-tab-prefix} {
-      + router-outlet {
+      +router-outlet {
         display: block;
         height: @reuse-tab-height;
       }
@@ -71,4 +71,5 @@
     }
   }
 }
+
 .layout-default-reuse-tab-rtl-mixin(@rtl-enabled);

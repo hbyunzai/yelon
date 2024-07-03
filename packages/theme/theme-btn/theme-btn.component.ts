@@ -18,17 +18,15 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { I18nPipe } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzDropDownDirective, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 export interface ThemeBtnType {
   key: string;
   text: string;
-  color?: string;
+  color:string;
 }
 
 export const YUNZAI_THEME_BTN_KEYS = new InjectionToken<string>('YUNZAI_THEME_BTN_KEYS');
@@ -42,22 +40,14 @@ export const YUNZAI_THEME_BTN_KEYS = new InjectionToken<string>('YUNZAI_THEME_BT
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    NzDropDownDirective,
-    NzDropdownMenuComponent,
-    NzMenuDirective,
-    NzMenuItemComponent,
-    NzTooltipDirective,
-    NzIconModule,
-    I18nPipe
-  ]
+  imports: [NzDropDownDirective, NzDropdownMenuComponent, NzMenuDirective, NzMenuItemComponent, NzTooltipDirective]
 })
 export class ThemeBtnComponent implements OnInit, OnDestroy {
   private readonly doc = inject(DOCUMENT);
   private readonly platform = inject(Platform);
   private readonly renderer = inject(Renderer2);
   private readonly configSrv = inject(YunzaiConfigService);
-  private readonly directionality = inject(Directionality, { optional: true });
+  private readonly directionality = inject(Directionality);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly destroy$ = inject(DestroyRef);
 
@@ -81,12 +71,11 @@ export class ThemeBtnComponent implements OnInit, OnDestroy {
   @Input() deployUrl = '';
   @Output() readonly themeChange = new EventEmitter<string>();
   dir?: Direction = 'ltr';
-
   private key = inject(YUNZAI_THEME_BTN_KEYS, { optional: true }) ?? 'site-theme';
 
   ngOnInit(): void {
-    this.dir = this.directionality?.value;
-    this.directionality?.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe((direction: Direction) => {
+    this.dir = this.directionality.value;
+    this.directionality.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe((direction: Direction) => {
       this.dir = direction;
       this.cdr.detectChanges();
     });

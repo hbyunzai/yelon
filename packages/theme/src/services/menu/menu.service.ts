@@ -4,16 +4,16 @@ import { BehaviorSubject, Observable, Subscription, share } from 'rxjs';
 import { ACLService } from '@yelon/acl';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { Menu, MenuIcon, MenuInner } from './interface';
 import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
+import { Menu, MenuIcon, MenuInner } from './interface';
 
 /**
- * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
+ * 菜单服务
  */
 @Injectable({ providedIn: 'root' })
 export class MenuService implements OnDestroy {
-  private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
-  private readonly aclService = inject(ACLService, { optional: true });
+  private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN);
+  private readonly aclService = inject(ACLService);
   private _change$: BehaviorSubject<Menu[]> = new BehaviorSubject<Menu[]>([]);
   private i18n$?: Subscription;
   private data: Menu[] = [];
@@ -22,10 +22,8 @@ export class MenuService implements OnDestroy {
    */
   openStrictly = false;
 
-  private $routerLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
   constructor() {
-    this.i18n$ = this.i18nSrv?.change.subscribe(() => this.resume());
+    this.i18n$ = this.i18nSrv.change.subscribe(() => this.resume());
   }
 
   get change(): Observable<Menu[]> {
@@ -95,7 +93,7 @@ export class MenuService implements OnDestroy {
       item.icon = { theme: 'outline', spin: false, ...(item.icon as MenuIcon) };
     }
 
-    item.text = item.i18n && this.i18nSrv ? this.i18nSrv.fanyi(item.i18n) : item.text;
+    item.text = item.i18n ? this.i18nSrv.fanyi(item.i18n) : item.text;
 
     // group
     item.group = item.group !== false;
@@ -107,7 +105,7 @@ export class MenuService implements OnDestroy {
     item.disabled = typeof item.disabled === 'undefined' ? false : item.disabled;
 
     // acl
-    item._aclResult = item.acl && this.aclService ? this.aclService.can(item.acl) : true;
+    item._aclResult = item.acl ? this.aclService.can(item.acl) : true;
 
     item.open = item.open != null ? item.open : false;
   }
@@ -164,7 +162,7 @@ export class MenuService implements OnDestroy {
       this.data[0].children!.splice(pos, 0, shortcutMenu);
     }
     let _data = this.data[0].children![pos];
-    if (_data.i18n && this.i18nSrv) _data.text = this.i18nSrv.fanyi(_data.i18n);
+    if (_data.i18n) _data.text = this.i18nSrv.fanyi(_data.i18n);
     _data = Object.assign(_data, {
       shortcutRoot: true,
       _id: -1,
@@ -348,13 +346,5 @@ export class MenuService implements OnDestroy {
   ngOnDestroy(): void {
     this._change$.unsubscribe();
     this.i18n$?.unsubscribe();
-  }
-
-  setRouterLink(url: string): void {
-    this.$routerLink.next(url);
-  }
-
-  getRouterLink(): Observable<string> {
-    return this.$routerLink.asObservable();
   }
 }

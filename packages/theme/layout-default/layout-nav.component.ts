@@ -56,7 +56,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly ngZone = inject(NgZone);
   private readonly sanitizer = inject(DomSanitizer);
-  private readonly directionality = inject(Directionality, { optional: true });
+  private readonly directionality = inject(Directionality);
 
   private bodyEl!: HTMLBodyElement;
   private destroy$ = inject(DestroyRef);
@@ -91,7 +91,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
       return false;
     }
     const id = +linkNode.dataset!.id!;
-    // Should be ignore children title trigger event
+    // Should be ingore children title trigger event
     if (isNaN(id)) {
       return false;
     }
@@ -111,7 +111,6 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   private clearFloating(): void {
     if (!this.floatingEl) return;
     this.floatingEl.removeEventListener('click', this.floatingClickHandle.bind(this));
-    // fix ie: https://github.com/hbyunzai/yelon/issues/52
     if (this.floatingEl.hasOwnProperty('remove')) {
       this.floatingEl.remove();
     } else if (this.floatingEl.parentNode) {
@@ -192,12 +191,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
       if (item.target === '_blank') {
         this.win.open(item.externalLink);
       } else {
-        // this.win.location.href = item.externalLink;
-
-        // 浏览器缓存iframe路径
-        localStorage.setItem('iframeSrc', item.externalLink);
-        this.menuSrv.setRouterLink(item.externalLink);
-        this.router.navigate(['iframePage']);
+        this.win.location.href = item.externalLink;
       }
       return;
     }
@@ -264,8 +258,8 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
       .subscribe(() => this.clearFloating());
     this.underPad();
 
-    this.dir = this.directionality?.value;
-    this.directionality?.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
+    this.dir = this.directionality.value;
+    this.directionality.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
       this.dir = direction;
       this.cdr.detectChanges();
     });

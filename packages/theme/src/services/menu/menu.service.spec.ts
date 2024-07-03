@@ -5,9 +5,9 @@ import { ACLService } from '@yelon/acl';
 import { deepCopy } from '@yelon/util/other';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+import { YunzaiI18NServiceFake, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { Menu, MenuInner } from './interface';
 import { MenuService } from './menu.service';
-import { YunzaiI18NServiceFake, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 
 class MockACLService {
   can(val: string): boolean {
@@ -222,7 +222,7 @@ describe('Service: Menu', () => {
         srv.setItem(newMenus[0], { text: 'obj' });
         expect(srv.getItem('a')!.text).toBe('obj');
       });
-      it('should be ignore update when not found key', () => {
+      it('should be ingore update when not found key', () => {
         const newMenus = [{ text: 'a', key: 'a' }];
         srv.add(newMenus);
         srv.setItem('invalid-key', { text: 'b' });
