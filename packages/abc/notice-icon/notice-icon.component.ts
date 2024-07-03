@@ -52,7 +52,7 @@ import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
 export class NoticeIconComponent implements OnInit, OnChanges, OnDestroy {
   private readonly i18n = inject(YelonLocaleService);
   private readonly cdr = inject(ChangeDetectorRef);
-  private i18n$!: Subscription;
+  private i18n$?: Subscription;
   locale: LocaleData = {};
 
   @Input() data: NoticeItem[] = [];
@@ -70,8 +70,14 @@ export class NoticeIconComponent implements OnInit, OnChanges, OnDestroy {
     return `header-dropdown notice-icon${!this.centered ? ' notice-icon__tab-left' : ''}`;
   }
 
+  delayShow = false;
   onVisibleChange(result: boolean): void {
+    this.delayShow = result;
     this.popoverVisibleChange.emit(result);
+    if (result) {
+      // Next tick run
+      Promise.resolve().then(() => this.cdr.detectChanges());
+    }
   }
 
   onSelect(i: NoticeIconSelect): void {
@@ -94,6 +100,6 @@ export class NoticeIconComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.i18n$.unsubscribe();
+    this.i18n$?.unsubscribe();
   }
 }

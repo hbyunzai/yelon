@@ -94,9 +94,9 @@ export interface CellOptions {
   unit?: string;
 
   /**
-   * Format mask, [Document](https://ng-alain.com/util/format/en#formatMask)
+   * Format mask, [Document](https://ng.yunzainfo.com/util/format/en#formatMask)
    *
-   * 格式化掩码, 参考[文档](https://ng-alain.com/util/format/zh#formatMask)
+   * 格式化掩码, 参考[文档](https://ng.yunzainfo.com/util/format/zh#formatMask)
    */
   mask?: string | FormatMaskOption;
 
@@ -119,9 +119,9 @@ export interface CellOptions {
   };
 
   /**
-   * Large number format filter, [Document](https://ng-alain.com/util/format/en#mega)
+   * Large number format filter, [Document](https://ng.yunzainfo.com/util/format/en#mega)
    *
-   * 大数据格式化，[文档](https://ng-alain.com/util/format/en#mega)
+   * 大数据格式化，[文档](https://ng.yunzainfo.com/util/format/en#mega)
    */
   mega?: CurrencyMegaOptions;
 

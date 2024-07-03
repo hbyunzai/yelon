@@ -84,7 +84,7 @@ describe('abc: view', () => {
             page.expect(`${prefixCls}item-fixed`);
             expect(page.getEl(`${prefixCls}label`).style.width).toBe(`${context.parent_labelWidth}px`);
           });
-          it('should be ignore width when layout not horizontal', () => {
+          it('should be ingore width when layout not horizontal', () => {
             context.parent_layout = 'vertical';
             context.parent_labelWidth = 20;
             context.label = 'aa';

@@ -113,7 +113,7 @@ export class SEContainerComponent {
 
   @Input() size!: 'default' | 'compact';
   @Input({ transform: booleanAttribute }) firstVisual!: boolean;
-  @Input({ transform: booleanAttribute }) ignoreDirty!: boolean;
+  @Input({ transform: booleanAttribute }) ingoreDirty!: boolean;
   @Input({ transform: booleanAttribute }) line = false;
   @Input()
   set errors(val: SEErrorRefresh[]) {
@@ -136,7 +136,7 @@ export class SEContainerComponent {
       col: 2,
       labelWidth: 150,
       firstVisual: false,
-      ignoreDirty: false
+      ingoreDirty: false
     });
   }
 

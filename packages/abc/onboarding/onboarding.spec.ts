@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 
 import { createTestContext } from '@yelon/testing';
@@ -20,7 +19,8 @@ describe('abc: onboarding', () => {
 
   function genModule(): void {
     TestBed.configureTestingModule({
-      imports: [OnboardingModule, NoopAnimationsModule, RouterTestingModule],
+      imports: [OnboardingModule, NoopAnimationsModule],
+      providers: [provideRouter([])],
       declarations: [TestComponent]
     });
     ({ fixture } = createTestContext(TestComponent));
@@ -77,7 +77,7 @@ describe('abc: onboarding', () => {
     it('should working in service', fakeAsync(() => {
       page.start().next().prev().checkActive(0);
     }));
-    it('should be ignore when prev is first', fakeAsync(() => {
+    it('should be ingore when prev is first', fakeAsync(() => {
       page.start().prev().checkActive(0);
     }));
   });
@@ -127,7 +127,7 @@ describe('abc: onboarding', () => {
     expect(srv.done).toHaveBeenCalled();
   }));
 
-  it('should ignore start when current is running', fakeAsync(() => {
+  it('should ingore start when current is running', fakeAsync(() => {
     page.start();
     spyOnProperty(srv, 'running').and.returnValue(true);
     const srvAny = srv as NzSafeAny;

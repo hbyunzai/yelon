@@ -194,7 +194,7 @@ export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit {
       return;
     }
     this.invalid =
-      !this.onceFlag && invalid && this.parentComp.ignoreDirty === false && !this.ngControl?.dirty ? false : invalid;
+      !this.onceFlag && invalid && this.parentComp.ingoreDirty === false && !this.ngControl?.dirty ? false : invalid;
     const errors = this.ngControl?.errors;
     if (errors != null && Object.keys(errors).length > 0) {
       const key = Object.keys(errors)[0] || '';
