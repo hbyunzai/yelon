@@ -77,7 +77,7 @@ describe('abc: onboarding', () => {
     it('should working in service', fakeAsync(() => {
       page.start().next().prev().checkActive(0);
     }));
-    it('should be ingore when prev is first', fakeAsync(() => {
+    it('should be ignore when prev is first', fakeAsync(() => {
       page.start().prev().checkActive(0);
     }));
   });
@@ -127,7 +127,7 @@ describe('abc: onboarding', () => {
     expect(srv.done).toHaveBeenCalled();
   }));
 
-  it('should ingore start when current is running', fakeAsync(() => {
+  it('should ignore start when current is running', fakeAsync(() => {
     page.start();
     spyOnProperty(srv, 'running').and.returnValue(true);
     const srvAny = srv as NzSafeAny;

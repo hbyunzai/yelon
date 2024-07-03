@@ -22,7 +22,9 @@
       @case ('svg') {
         <span class="sidebar-nav__item-icon sidebar-nav__item-svg" [innerHTML]="i.value"></span>
       }
-      @default {}
+      @default {
+        <i class="sidebar-nav__item-icon {{ i.value }}"></i>
+      }
     }
   }
 </ng-template>

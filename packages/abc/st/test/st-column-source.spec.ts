@@ -396,7 +396,7 @@ describe('st: column-source', () => {
       });
       describe('#type', () => {
         describe('with keyword', () => {
-          it('should be ingore specify menus values', () => {
+          it('should be ignore specify menus values', () => {
             const res = srv.process([{ title: '', filter: { type: 'keyword' } }], options).columns[0].filter;
             expect(res!.menus!.length).toBe(1);
           });
@@ -609,7 +609,7 @@ describe('st: column-source', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [{ index: 'id' }] }], options);
         expect(res.headers.length).toBe(2);
       });
-      it('should be ingored grouping columns when children when is empty', () => {
+      it('should be ignored grouping columns when children when is empty', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [] }], options);
         expect(res.headers.length).toBe(1);
       });

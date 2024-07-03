@@ -22,7 +22,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { merge, filter } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
-import { ALAIN_I18N_TOKEN, DelonLocaleService, LocaleData } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, YelonLocaleService, LocaleData } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -81,9 +81,9 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   private readonly terminator = inject(TerminatorService);
   private readonly dom = inject(DomSanitizer);
   private readonly cdr = inject(ChangeDetectorRef);
-  private readonly localeSrv = inject(DelonLocaleService);
+  private readonly localeSrv = inject(YelonLocaleService);
   private readonly aclSrv = inject(ACLService);
-  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
+  private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN);
   private readonly platform = inject(Platform);
 
   private _renders = new Map<string, TemplateRef<void>>();
@@ -559,8 +559,8 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.platform.isBrowser) {
       return;
     }
-    const ingoreRender = ['disabled', 'loading'];
-    if (Object.keys(changes).every(key => ingoreRender.includes(key))) {
+    const ignoreRender = ['disabled', 'loading'];
+    if (Object.keys(changes).every(key => ignoreRender.includes(key))) {
       this.cdr.detectChanges();
       return;
     }

@@ -222,7 +222,7 @@ describe('Service: Menu', () => {
         srv.setItem(newMenus[0], { text: 'obj' });
         expect(srv.getItem('a')!.text).toBe('obj');
       });
-      it('should be ingore update when not found key', () => {
+      it('should be ignore update when not found key', () => {
         const newMenus = [{ text: 'a', key: 'a' }];
         srv.add(newMenus);
         srv.setItem('invalid-key', { text: 'b' });

@@ -120,7 +120,7 @@ describe('abc: global-footer', () => {
     expect(router.navigateByUrl).toHaveBeenCalled();
   });
 
-  it('should be ingore navigate when href is empty', () => {
+  it('should be ignore navigate when href is empty', () => {
     createComp();
     const router = TestBed.inject<Router>(Router);
     spyOn(router, 'navigateByUrl');
