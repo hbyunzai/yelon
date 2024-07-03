@@ -60,7 +60,6 @@ copyFiles() {
     "${1}src/assets/tmp/img/todo.svg|${2}application/files/src/assets/tmp/img/"
     "${1}src/assets/tmp/img/message.png|${2}application/files/src/assets/tmp/img/"
     "${1}src/assets/tmp/img/todo.png|${2}application/files/src/assets/tmp/img/"
-    "${1}src/favicon.ico|${2}application/files/src/assets/"
     # i18n data
     "${1}src/assets/tmp/i18n|${2}application/files/i18n"
     # code styles
