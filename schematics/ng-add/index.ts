@@ -7,7 +7,7 @@ import { Schema as ApplicationOptions } from '../application/schema';
 import { DEFAULT_WORKSPACE_PATH, readJSON, readPackage } from '../utils';
 import { getNodeMajorVersion } from '../utils/node';
 
-const V = 17;
+const V = 18;
 
 function genRules(options: NgAddOptions): Rule {
   return () => {
