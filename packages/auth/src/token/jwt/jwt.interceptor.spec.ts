@@ -2,15 +2,15 @@ import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common
 import { HttpTestingController, TestRequest, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { of, catchError } from 'rxjs';
 
 import { YunzaiAuthConfig, provideYunzaiConfig } from '@yelon/util/config';
 
-import { authJWTInterceptor } from './jwt.interceptor';
-import { JWTTokenModel } from './jwt.model';
 import { provideAuth } from '../../provide';
 import { YA_SERVICE_TOKEN } from '../interface';
+import { authJWTInterceptor } from './jwt.interceptor';
+import { JWTTokenModel } from './jwt.model';
 
 function genModel(
   token:
@@ -30,15 +30,13 @@ describe('auth: jwt.interceptor', () => {
   function genModule(options: YunzaiAuthConfig, tokenData?: JWTTokenModel): void {
     TestBed.configureTestingModule({
       declarations: [MockComponent],
-      imports: [
-        RouterTestingModule.withRoutes([
+      providers: [
+        provideRouter([
           {
             path: 'login',
             component: MockComponent
           }
-        ])
-      ],
-      providers: [
+        ]),
         provideHttpClient(withInterceptors([authJWTInterceptor])),
         provideHttpClientTesting(),
         provideYunzaiConfig({ auth: options }),
