@@ -13,6 +13,24 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## 18.0.0 (2024-07-03)
+
+* chore: chore abc ([ae77969](https://github.com/hbyunzai/yelon/commit/ae77969))
+* chore: chore acl,auth,cache,chart ([5d54170](https://github.com/hbyunzai/yelon/commit/5d54170))
+* chore: chore form ([f117443](https://github.com/hbyunzai/yelon/commit/f117443))
+* chore: chore package.json ([472fca0](https://github.com/hbyunzai/yelon/commit/472fca0))
+* chore: chore schematics ([5a8c071](https://github.com/hbyunzai/yelon/commit/5a8c071))
+* chore: chore schematics ([4fe0677](https://github.com/hbyunzai/yelon/commit/4fe0677))
+* chore: chore theme ([3c74551](https://github.com/hbyunzai/yelon/commit/3c74551))
+* chore: chore utils ([2090ea5](https://github.com/hbyunzai/yelon/commit/2090ea5))
+* chore: project ci utils ([9a092c5](https://github.com/hbyunzai/yelon/commit/9a092c5))
+* chore: project dependencies ([f60ae25](https://github.com/hbyunzai/yelon/commit/f60ae25))
+* fix: fix build-schematics.sh ([4551b34](https://github.com/hbyunzai/yelon/commit/4551b34))
+* fix: fix some bugs ([f5c4d96](https://github.com/hbyunzai/yelon/commit/f5c4d96))
+* fix(layout): 项目副标题折行，图标间距调大、group模式中菜单增加权限控制，链接在新窗口中打开 ([c9e44fa](https://github.com/hbyunzai/yelon/commit/c9e44fa))
+* fix(layout): application模式中菜单链接在新窗口中打开,左侧菜单图标错误后不显示，防止产生对齐问题 ([2b11775](https://github.com/hbyunzai/yelon/commit/2b11775))
+
+
 
 ## [17.3.2](https://github.com/hbyunzai/yelon/compare/17.3.1...17.3.2) (2024-03-21)
 
