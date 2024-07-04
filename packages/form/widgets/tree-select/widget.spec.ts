@@ -6,8 +6,8 @@ import { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { withTreeSelectWidget } from './index';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
+import { withTreeSelectWidget } from './index';
 
 describe('form: widget: tree-select', () => {
   let fixture: ComponentFixture<TestFormComponent>;

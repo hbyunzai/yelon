@@ -7,4 +7,4 @@
 @yunzai-default-aside-nav-selected-bg: @component-background;
 @yunzai-default-content-heading-bg: @component-background;
 @yunzai-default-content-heading-border: @border-color-split;
-@yunzai-default-content-bg: @body-background;
+@yunzai-default-content-bg: ~'var(--@{yunzai-default-name}-content-bg, @{body-background})';

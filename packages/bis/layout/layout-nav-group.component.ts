@@ -37,17 +37,17 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
                     @for (item of menu.children; track item) {
                       <ng-container>
                         @if (item.auth) {
-                            <li
-                              data-event-id="_nav_item"
-                              [attr.data-name]="item.name | i18n"
-                              nz-menu-item
-                              (click)="open(item)"
-                            >
-                              @if (item.icon) {
-                                 <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
-                              }
-                              {{ item.name | i18n }}
-                            </li>
+                          <li
+                            data-event-id="_nav_item"
+                            [attr.data-name]="item.name | i18n"
+                            nz-menu-item
+                            (click)="open(item)"
+                          >
+                            @if (item.icon) {
+                              <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                            }
+                            {{ item.name | i18n }}
+                          </li>
                         }
                       </ng-container>
                     }

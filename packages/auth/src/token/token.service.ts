@@ -3,9 +3,9 @@ import { BehaviorSubject, interval, Observable, Subject, Subscription, filter, m
 
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 
-import { AuthReferrer, ITokenModel, ITokenService } from './interface';
 import { mergeConfig } from '../auth.config';
 import { YA_STORE_TOKEN } from '../store/interface';
+import { AuthReferrer, ITokenModel, ITokenService } from './interface';
 
 export function YA_SERVICE_TOKEN_FACTORY(): ITokenService {
   return new TokenService(inject(YunzaiConfigService));

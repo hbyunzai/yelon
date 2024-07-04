@@ -39,7 +39,6 @@ export default {
     'ng-zorro-antd': '^17.1.0',
     '@stomp/rx-stomp': '^2.0.0',
     '@stomp/stompjs': '^7.0.0',
-    'ng-antd-color-picker': '^0.0.2',
     ajv: '^8.12.0',
     'ajv-formats': '^2.1.1',
     'date-fns': '^2.16.1',

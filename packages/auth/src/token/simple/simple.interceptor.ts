@@ -4,11 +4,11 @@ import { inject } from '@angular/core';
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { SimpleTokenModel } from './simple.model';
 import { mergeConfig } from '../../auth.config';
 import { isAnonymous, throwErr } from '../base.interceptor';
 import { CheckSimple } from '../helper';
 import { YA_SERVICE_TOKEN } from '../interface';
+import { SimpleTokenModel } from './simple.model';
 
 function newReq(req: HttpRequest<unknown>, model: SimpleTokenModel, options: YunzaiAuthConfig): HttpRequest<unknown> {
   const { token_send_template, token_send_key } = options;

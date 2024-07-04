@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DOCUMENT } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { DefaultUrlSerializer, Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { DefaultUrlSerializer, Router, provideRouter } from '@angular/router';
 
-import { SocialService } from './social.service';
 import { YA_SERVICE_TOKEN, ITokenModel } from '../token/interface';
 import { SimpleTokenModel } from '../token/simple/simple.model';
+import { SocialService } from './social.service';
 
 const mockRouter = {
   url: '',
@@ -51,8 +51,10 @@ describe('auth: social.service', () => {
 
   function genModule(tokenData?: SimpleTokenModel): void {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([])],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
         SocialService,
         { provide: DOCUMENT, useClass: MockDocument },
         { provide: Router, useValue: mockRouter }
@@ -91,7 +93,7 @@ describe('auth: social.service', () => {
         expect(window.open).toHaveBeenCalled();
         const token = TestBed.inject(YA_SERVICE_TOKEN).get()!;
         Object.keys(item.be).forEach(key => {
-          expect((token as any)[key]).toContain(item.be[key]);
+          expect(token[key]).toContain(item.be[key]);
         });
         discardPeriodicTasks();
       }));
@@ -167,7 +169,7 @@ describe('auth: social.service', () => {
         }
         const ret = srv.callback(item.url);
         Object.keys(item.be).forEach(key => {
-          expect((ret as any)[key]).toBe(item.be[key]);
+          expect(ret[key]).toBe(item.be[key]);
         });
       });
     });

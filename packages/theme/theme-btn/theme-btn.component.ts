@@ -28,7 +28,7 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 export interface ThemeBtnType {
   key: string;
   text: string;
-  color?: string;
+  color: string;
 }
 
 export const YUNZAI_THEME_BTN_KEYS = new InjectionToken<string>('YUNZAI_THEME_BTN_KEYS');
@@ -57,7 +57,7 @@ export class ThemeBtnComponent implements OnInit, OnDestroy {
   private readonly platform = inject(Platform);
   private readonly renderer = inject(Renderer2);
   private readonly configSrv = inject(YunzaiConfigService);
-  private readonly directionality = inject(Directionality, { optional: true });
+  private readonly directionality = inject(Directionality);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly destroy$ = inject(DestroyRef);
 
@@ -81,12 +81,11 @@ export class ThemeBtnComponent implements OnInit, OnDestroy {
   @Input() deployUrl = '';
   @Output() readonly themeChange = new EventEmitter<string>();
   dir?: Direction = 'ltr';
-
   private key = inject(YUNZAI_THEME_BTN_KEYS, { optional: true }) ?? 'site-theme';
 
   ngOnInit(): void {
-    this.dir = this.directionality?.value;
-    this.directionality?.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe((direction: Direction) => {
+    this.dir = this.directionality.value;
+    this.directionality.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe((direction: Direction) => {
       this.dir = direction;
       this.cdr.detectChanges();
     });

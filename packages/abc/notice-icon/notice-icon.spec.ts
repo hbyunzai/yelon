@@ -1,4 +1,5 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -20,8 +21,9 @@ describe('abc: notice-icon', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, NoticeIconModule, HttpClientTestingModule, YelonLocaleModule],
-      declarations: [TestComponent]
+      imports: [NoopAnimationsModule, NoticeIconModule, YelonLocaleModule],
+      declarations: [TestComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting()]
     });
     ({ fixture, dl, context } = createTestContext(TestComponent));
   });
@@ -66,7 +68,7 @@ describe('abc: notice-icon', () => {
     });
     it('should be control loading in visible popover', done => {
       context.loading = true;
-      context.popoverVisible = true;
+      context.comp.onVisibleChange(true);
       fixture.detectChanges();
       setTimeout(() => {
         const el = document.querySelector('.ant-spin-container') as HTMLElement;
@@ -76,7 +78,7 @@ describe('abc: notice-icon', () => {
     });
     it('should be select item', done => {
       spyOn(context, 'select');
-      context.popoverVisible = true;
+      context.comp.onVisibleChange(true);
       fixture.detectChanges();
       setTimeout(() => {
         expect(context.select).not.toHaveBeenCalled();
@@ -88,7 +90,7 @@ describe('abc: notice-icon', () => {
     });
     it('should be clear', done => {
       spyOn(context, 'clear');
-      context.popoverVisible = true;
+      context.comp.onVisibleChange(true);
       fixture.detectChanges();
       setTimeout(() => {
         expect(context.clear).not.toHaveBeenCalled();
@@ -100,7 +102,7 @@ describe('abc: notice-icon', () => {
     });
     it('#centered', done => {
       context.centered = true;
-      context.popoverVisible = true;
+      context.comp.onVisibleChange(true);
       fixture.detectChanges();
       setTimeout(() => {
         expect(document.querySelectorAll('.notice-icon__tab-left').length).toBe(0);
@@ -110,7 +112,7 @@ describe('abc: notice-icon', () => {
   });
 
   it('#i18n', done => {
-    context.popoverVisible = true;
+    context.comp.onVisibleChange(true);
     context.data = [{ title: 'a1', list: [] }];
     fixture.detectChanges();
     setTimeout(() => {

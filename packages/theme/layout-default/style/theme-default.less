@@ -1,7 +1,8 @@
-@yunzai-default-prefix: ~'.yunzai-default';
+@yunzai-default-name: 'yunzai-default';
+@yunzai-default-prefix: ~'.@{yunzai-default-name}';
 @yunzai-default-zindex: @zindex-base;
 @yunzai-default-ease: cubic-bezier(0.25, 0, 0.15, 1);
-@yunzai-default-header-hg: 64px;
+@yunzai-default-header-hg: ~'var(--@{yunzai-default-name}-header-hg, 64px)';
 @yunzai-default-header-bg: @primary-color;
 @yunzai-default-header-padding: @layout-gutter * 2;
 @yunzai-default-header-search-enabled: true;
@@ -13,7 +14,7 @@
 @yunzai-default-header-top-menu-item-padding: 0 16px;
 
 @yunzai-default-aside-wd: 200px;
-@yunzai-default-aside-bg: #fff;
+@yunzai-default-aside-bg: ~'var(--@{yunzai-default-name}-aside-bg, #fff)';
 @yunzai-default-aside-scrollbar-width: 0;
 @yunzai-default-aside-scrollbar-height: 0;
 @yunzai-default-aside-scrollbar-track-color: transparent;
@@ -28,7 +29,7 @@
 @yunzai-default-aside-nav-text-hover-color: @primary-color;
 @yunzai-default-aside-nav-group-text-color: @text-color-secondary;
 @yunzai-default-aside-nav-selected-text-color: @primary-color;
-@yunzai-default-aside-nav-selected-bg: #fcfcfc;
+@yunzai-default-aside-nav-selected-bg: ~'var(--@{yunzai-default-name}-aside-nav-selected-bg, #fcfcfc)';
 @yunzai-default-aside-nav-depth1-padding-left: @layout-gutter * 3;
 @yunzai-default-aside-nav-depth2-padding-left: @layout-gutter * 4;
 @yunzai-default-aside-nav-depth3-padding-left: @layout-gutter * 5;
@@ -40,10 +41,10 @@
 @yunzai-default-aside-collapsed-nav-img-wh: 24px;
 @yunzai-default-aside-collapsed-padding: (@layout-gutter * 2) 0;
 
-@yunzai-default-content-heading-bg: #fafbfc;
-@yunzai-default-content-heading-border: #efe3e5;
+@yunzai-default-content-heading-bg: ~'var(--@{yunzai-default-name}-heading-bg, #fafbfc)';
+@yunzai-default-content-heading-border: ~'var(--@{yunzai-default-name}-heading-border, #efe3e5)';
 @yunzai-default-content-padding: @layout-gutter * 3;
-@yunzai-default-content-bg: #f5f7fa;
+@yunzai-default-content-bg: ~'var(--@{yunzai-default-name}-content-bg, #f5f7fa)';
 
 @yunzai-default-widget-app-icons-enabled: true;
 @yunzai-default-aside-user-enabled: true;

@@ -64,8 +64,8 @@ describe('abc: ellipsis', () => {
 
       it('#fullWidthRecognition', fakeAsync(() => {
         context.fullWidthRecognition = true;
-        context.text = 'yunzai-bot,你好吗';
-        page.tick().check('yunzai-bot...');
+        context.text = 'cipchk,你好吗';
+        page.tick().check('cipchk,你...');
       }));
     });
 

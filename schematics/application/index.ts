@@ -16,7 +16,6 @@ import {
 } from '@angular-devkit/schematics';
 import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
-import { Schema as ApplicationOptions } from './schema';
 import { getLangData } from '../core/lang.config';
 import {
   addAllowedCommonJsDependencies,
@@ -28,6 +27,7 @@ import {
   addPackage,
   addSchematicCollections,
   addStylePreprocessorOptions,
+  addStyleResources,
   BUILD_TARGET_BUILD,
   BUILD_TARGET_SERVE,
   DEFAULT_WORKSPACE_PATH,
@@ -47,6 +47,7 @@ import {
   ZORROVERSION
 } from '../utils';
 import { addESLintRule, UpgradeMainVersions } from '../utils/versions';
+import { Schema as ApplicationOptions } from './schema';
 
 let project: ProjectDefinition;
 let projectName: string;
@@ -59,7 +60,7 @@ function removeOrginalFiles(): Rule {
       `${project.root}/README.md`,
       `${project.sourceRoot}/main.ts`,
       `${project.sourceRoot}/styles.less`,
-      `${project.sourceRoot}/favicon.ico`,
+      `${project.sourceRoot}/public/favicon.ico`,
       `${project.sourceRoot}/app/app.component.spec.ts`,
       `${project.sourceRoot}/app/app.component.ts`,
       `${project.sourceRoot}/app/app.component.html`,
@@ -80,6 +81,7 @@ function fixAngularJson(): Rule {
     if (serveTarget.options == null) serveTarget.options = {};
     serveTarget.options.proxyConfig = 'proxy.conf.js';
 
+    addStyleResources(workspace, projectName);
     addStylePreprocessorOptions(workspace, projectName);
     addSchematicCollections(workspace);
     addFileReplacements(workspace, projectName);

@@ -2,8 +2,8 @@ import { Rule, SchematicsException } from '@angular-devkit/schematics';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { Schema } from './schema';
 import { buildYunzai } from '../utils';
+import { Schema } from './schema';
 
 const REFER = `, please refer to: https://ng.yunzainfo.com/cli/generate#Customtemplatepage`;
 

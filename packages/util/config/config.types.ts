@@ -12,7 +12,6 @@ import {
   YunzaiOnboardingConfig,
   YunzaiPageHeaderConfig,
   YunzaiPdfConfig,
-  YunzaiQRConfig,
   YunzaiSEConfig,
   YunzaiSGConfig,
   YunzaiSTConfig,
@@ -44,7 +43,6 @@ export interface YunzaiConfig {
   onboarding?: YunzaiOnboardingConfig;
   lodop?: YunzaiLodopConfig;
   pageHeader?: YunzaiPageHeaderConfig;
-  qr?: YunzaiQRConfig;
   se?: YunzaiSEConfig;
   sg?: YunzaiSGConfig;
   sv?: YunzaiSVConfig;

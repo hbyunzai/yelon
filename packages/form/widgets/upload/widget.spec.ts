@@ -8,9 +8,9 @@ import { NzIconTestModule } from 'ng-zorro-antd/icon/testing';
 import { NzImageModule, NzImageService } from 'ng-zorro-antd/image';
 import { NzUploadComponent } from 'ng-zorro-antd/upload';
 
+import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 import { withUploadWidget } from './index';
 import { UploadWidget } from './widget';
-import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 
 describe('form: widget: upload', () => {
   let fixture: ComponentFixture<TestFormComponent>;
@@ -35,7 +35,7 @@ describe('form: widget: upload', () => {
     return dl.query(By.directive(NzUploadComponent)).injector.get<NzUploadComponent>(NzUploadComponent);
   }
 
-  it('should be ingore update value when status is not success', () => {
+  it('should be ignore update value when status is not success', () => {
     page.newSchema({
       properties: { a: { type: 'string', ui: { widget } } }
     });

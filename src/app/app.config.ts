@@ -12,6 +12,8 @@ import { provideTinymce } from 'ngx-tinymce';
 import { provideCellWidgets } from '@yelon/abc/cell';
 import { provideSTWidgets } from '@yelon/abc/st';
 import { provideSFConfig } from '@yelon/form';
+import { withMonacoEditorWidget } from '@yelon/form/widgets-third/monaco-editor';
+import { withTinymceWidget } from '@yelon/form/widgets-third/tinymce';
 import { withAutoCompleteWidget } from '@yelon/form/widgets/autocomplete';
 import { withCascaderWidget } from '@yelon/form/widgets/cascader';
 import { withColorWidget } from '@yelon/form/widgets/color';
@@ -25,8 +27,6 @@ import { withTimeWidget } from '@yelon/form/widgets/time';
 import { withTransferWidget } from '@yelon/form/widgets/transfer';
 import { withTreeSelectWidget } from '@yelon/form/widgets/tree-select';
 import { withUploadWidget } from '@yelon/form/widgets/upload';
-import { withMonacoEditorWidget } from '@yelon/form/widgets-third/monaco-editor';
-import { withTinymceWidget } from '@yelon/form/widgets-third/tinymce';
 import { mockInterceptor, provideMockConfig } from '@yelon/mock';
 import { zh_CN as yelonLang, YunzaiProvideLang, provideYunzai } from '@yelon/theme';
 import { YunzaiConfig } from '@yelon/util/config';
@@ -35,13 +35,13 @@ import { zh_CN as zorroLang } from 'ng-zorro-antd/i18n';
 
 import { I18NService, provideStartup } from '@core';
 
+import * as MOCKDATA from '../../_mock';
+import { environment } from '../environments/environment';
 import { provideElements } from './core/elements';
 import { CustomErrorHandler } from './core/error-handler';
 import { routes } from './routes/routes';
 import { CELL_WIDGETS } from './shared/cell-widget';
 import { ST_WIDGETS } from './shared/st-widget';
-import * as MOCKDATA from '../../_mock';
-import { environment } from '../environments/environment';
 
 const defaultLang: YunzaiProvideLang = {
   abbr: 'zh-CN',
@@ -69,9 +69,6 @@ const yunzaiConfig: YunzaiConfig = {
   },
   zip: {
     url: '/assets/jszip/jszip.min.js'
-  },
-  qr: {
-    lib: '/assets/qrious/qrious.min.js'
   },
   // pdf: {
   //   lib: '/assets/pdfjs/'
