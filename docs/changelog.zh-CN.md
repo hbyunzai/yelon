@@ -13,6 +13,11 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## <small>18.0.1 (2024-07-05)</small>
+
+* fix: fix css theme generate ([13e78f2](https://github.com/hbyunzai/yelon/commit/13e78f2))
+
+
 ## 18.0.0 (2024-07-03)
 
 * chore: chore abc ([ae77969](https://github.com/hbyunzai/yelon/commit/ae77969))
