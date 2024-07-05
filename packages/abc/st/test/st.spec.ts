@@ -750,31 +750,6 @@ describe('abc: st', () => {
             .asyncEnd();
         }));
       });
-      // TODO: 当前版本自动设置，无须参与计算
-      xdescribe('[fixed]', () => {
-        it('should be fixed left column', fakeAsync(() => {
-          page.updateColumn([
-            { title: '1', index: 'id', fixed: 'left', width: '100px' },
-            { title: '2', index: 'id', fixed: 'left', width: '100px' },
-            { title: '3', index: 'id', fixed: 'left', width: '100px' }
-          ]);
-          expect(page.getCell(1, 1).style.left).toBe('0px');
-          expect(page.getCell(1, 2).style.left).toBe('100px');
-          expect(page.getCell(1, 3).style.left).toBe('200px');
-          page.asyncEnd();
-        }));
-        it('should be fixed right column', fakeAsync(() => {
-          page.updateColumn([
-            { title: '1', index: 'id', fixed: 'right', width: '100px' },
-            { title: '2', index: 'id', fixed: 'right', width: '100px' },
-            { title: '3', index: 'id', fixed: 'right', width: '100px' }
-          ]);
-          expect(page.getCell(1, 1).style.right).toBe('200px');
-          expect(page.getCell(1, 2).style.right).toBe('100px');
-          expect(page.getCell(1, 3).style.right).toBe('0px');
-          page.asyncEnd();
-        }));
-      });
       describe('[Mulit Headers]', () => {
         it('should be working', fakeAsync(() => {
           page.updateColumn([
@@ -847,7 +822,7 @@ describe('abc: st', () => {
           expect(page.spyErrorData?.error).toBe('cancel');
           TestBed.resetTestingModule();
         });
-        it('should be ignored incomplete request when has new request', fakeAsync(() => {
+        it('should be ingored incomplete request when has new request', fakeAsync(() => {
           let mockData = [{}];
           spyOn(_http, 'request').and.callFake(() => of(mockData) as any);
           context.data = '/mock1';
@@ -879,7 +854,7 @@ describe('abc: st', () => {
         expect(comp.req.reName!.pi).toBe('PI');
         expect(comp.req.reName!.ps).toBe('ps');
       });
-      it('should be ignore request when lazyLoad is true', () => {
+      it('should be ingore request when lazyLoad is true', () => {
         const anyComp = comp as any;
         spyOn(anyComp, 'loadPageData');
         context.req = { lazyLoad: true };
@@ -918,7 +893,7 @@ describe('abc: st', () => {
         expect(comp.page.placement).toBe(`right`);
         expect(comp.page.total).toBe(`TO:{{total}}`);
       });
-      it('should be ignore pi event trigger when change size in last page', fakeAsync(() => {
+      it('should be ingore pi event trigger when change size in last page', fakeAsync(() => {
         context.page = { showSize: true, pageSizes: [10, 20] };
         page.cd().go(2);
         let load = 0;
@@ -1087,7 +1062,7 @@ describe('abc: st', () => {
         page.cd();
         expect(page._changeData.type).toBe('dblClick');
       }));
-      it('should be ignore input', fakeAsync(() => {
+      it('should be ingore input', fakeAsync(() => {
         const el = page.getCell() as HTMLElement;
         // mock input nodeName
         spyOnProperty(el, 'nodeName', 'get').and.returnValue('INPUT');
@@ -1287,7 +1262,7 @@ describe('abc: st', () => {
           comp.removeRow(comp._data[0]);
           comp._data.forEach((_v, idx) => page.expectCell(`${idx + 1}`, idx + 1));
         }));
-        it('shoule be ignored invalid data', fakeAsync(() => {
+        it('shoule be ingored invalid data', fakeAsync(() => {
           page.cd().expectCurrentPageTotal(PS);
           comp.removeRow([null]);
           page.expectCurrentPageTotal(PS);
@@ -1378,7 +1353,7 @@ describe('abc: st', () => {
           expect(comp.ps).toBe(2);
           page.asyncEnd();
         }));
-        it('should be ignore data reload', fakeAsync(() => {
+        it('should be ingore data reload', fakeAsync(() => {
           page.updateColumn([{ title: '1', index: 'name' }]);
           expect(comp.ps).toBe(PS);
           const compAny = comp as any;
@@ -1487,7 +1462,7 @@ describe('abc: st', () => {
             .expectElCount(`td.text-truncate`, context.comp._data.length)
             .asyncEnd();
         }));
-        it('should be ignore add text-truncate class when className is non-empty', fakeAsync(() => {
+        it('should be ingore add text-truncate class when className is non-empty', fakeAsync(() => {
           context.widthMode = { type: 'strict', strictBehavior: 'truncate' };
           page
             .cd()
@@ -1497,7 +1472,7 @@ describe('abc: st', () => {
             .expectElCount(`td.aaaa`, context.comp._data.length)
             .asyncEnd();
         }));
-        it('should be ignore add text-truncate class when type is img', fakeAsync(() => {
+        it('should be ingore add text-truncate class when type is img', fakeAsync(() => {
           context.widthMode = { type: 'strict', strictBehavior: 'truncate' };
           page
             .cd()
@@ -1563,7 +1538,7 @@ describe('abc: st', () => {
         expect(page._changeData.type).toBe('resize');
         page.asyncEnd();
       }));
-      it('should be ignore resize hanle of last column', fakeAsync(() => {
+      it('should be ingore resize hanle of last column', fakeAsync(() => {
         page
           .updateColumn([
             { index: 'id', resizable: true },
@@ -1597,13 +1572,13 @@ describe('abc: st', () => {
           .clickContentMenu(1)
           .asyncEnd();
       }));
-      it('should be ignore invalid target', fakeAsync(() => {
+      it('should be ingore invalid target', fakeAsync(() => {
         context.contextmenu = jasmine.createSpy();
         page.updateColumn([{ title: 'a', index: 'id' }]).openContextMenu(1, 1, { target: { closest: () => null } });
         expect(context.contextmenu).not.toHaveBeenCalled();
         page.asyncEnd();
       }));
-      it('should be ignore unspecified contextmenu property', fakeAsync(() => {
+      it('should be ingore unspecified contextmenu property', fakeAsync(() => {
         context.contextmenu = null;
         const event = { preventDefault: jasmine.createSpy() };
         page.updateColumn([{ title: 'a', index: 'id' }]).openContextMenu(1, 1, event);

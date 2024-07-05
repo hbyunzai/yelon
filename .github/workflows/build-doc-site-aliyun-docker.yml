@@ -30,4 +30,4 @@ jobs:
           context: .
           file: ./Dockerfile.docs
           push: true
-          tags: registry.cn-hangzhou.aliyuncs.com/alain/docs:latest
+          tags: registry.cn-hangzhou.aliyuncs.com/ngyunzai/docs:latest

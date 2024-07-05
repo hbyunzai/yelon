@@ -257,7 +257,7 @@ echo "Finished!!"
 if [[ ${DEBUG} == true ]]; then
   cd ../../
   DEBUG_FROM=${PWD}/work/yelon/dist/ng-yunzai/*
-  DEBUG_TO=${PWD}/work/ng17/node_modules/ng-yunzai/
+  DEBUG_TO=${PWD}/work/ng-yunzai/node_modules/ng-yunzai/
   echo "DEBUG_FROM:${DEBUG_FROM}"
   echo "DEBUG_TO:${DEBUG_TO}"
   rm -rf ${DEBUG_TO}
