@@ -13,6 +13,22 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## 18.1.0 (2024-08-21)
+
+* chore: bump angular to 18.1 ([a23aa77](https://github.com/hbyunzai/yelon/commit/a23aa77))
+* feat(abc:let): will be removed in v19 (#1814) ([81dab23](https://github.com/hbyunzai/yelon/commit/81dab23)), closes [#1814](https://github.com/hbyunzai/yelon/issues/1814)
+* feat(abc:result): will be removed in v20 (#1818) ([67ed7f2](https://github.com/hbyunzai/yelon/commit/67ed7f2)), closes [#1818](https://github.com/hbyunzai/yelon/issues/1818)
+* feat(abc:st): add `expandIcon` property (#1812) ([d7ba151](https://github.com/hbyunzai/yelon/commit/d7ba151)), closes [#1812](https://github.com/hbyunzai/yelon/issues/1812)
+* fix(abc:lodop): support URL with parameters (#1824) ([3769102](https://github.com/hbyunzai/yelon/commit/3769102)), closes [#1824](https://github.com/hbyunzai/yelon/issues/1824)
+* fix(abc:st): correct default value of `date` type (#1823) ([ff47176](https://github.com/hbyunzai/yelon/commit/ff47176)), closes [#1823](https://github.com/hbyunzai/yelon/issues/1823)
+* fix(form:select): fix `maxTagCount` default value is `Infinity` (#1815) ([f928585](https://github.com/hbyunzai/yelon/commit/f928585)), closes [#1815](https://github.com/hbyunzai/yelon/issues/1815)
+* fix(form:select): fix incorrect default value of `showArrow` (#1816) ([098989c](https://github.com/hbyunzai/yelon/commit/098989c)), closes [#1816](https://github.com/hbyunzai/yelon/issues/1816)
+* feat(theme): support custom process of `_date` pipe (#1822) ([2f62723](https://github.com/hbyunzai/yelon/commit/2f62723)), closes [#1822](https://github.com/hbyunzai/yelon/issues/1822)
+* fix: fix theme ([40e834f](https://github.com/hbyunzai/yelon/commit/40e834f))
+* fix(theme): fix dark style color (#1819) ([8cbf163](https://github.com/hbyunzai/yelon/commit/8cbf163)), closes [#1819](https://github.com/hbyunzai/yelon/issues/1819)
+* docs: typo (#1817) ([5a7fac2](https://github.com/hbyunzai/yelon/commit/5a7fac2)), closes [#1817](https://github.com/hbyunzai/yelon/issues/1817)
+
+
 ## <small>18.0.1 (2024-07-05)</small>
 
 * fix: fix css theme generate ([13e78f2](https://github.com/hbyunzai/yelon/commit/13e78f2))
