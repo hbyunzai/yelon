@@ -15,11 +15,7 @@ import {
   url
 } from '@angular-devkit/schematics';
 import { Schema as ComponentSchema } from '@schematics/angular/component/schema';
-import {
-  findNode,
-  insertImport,
-  addProviderToModule as _addProviderToModule
-} from '@schematics/angular/utility/ast-utils';
+import { insertImport, getSourceNodes } from '@schematics/angular/utility/ast-utils';
 import { InsertChange } from '@schematics/angular/utility/change';
 import { buildRelativePath, findModuleFromOptions, ModuleOptions } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
@@ -32,11 +28,10 @@ import { addServiceToModuleOrStandalone, findRoutesPath, getSourceFile, ROUTINS_
 import { isStandalone } from './standalone';
 import { getProject, NgYunzaiProjectDefinition } from './workspace';
 
-const TEMPLATE_FILENAME_RE = /\.template$/;
-
 export interface CommonSchema extends ComponentSchema {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
+
   _filesPath?: string;
   schematicName?: string;
   target?: string;
@@ -178,7 +173,9 @@ export function addValueToVariable(
   needWrap: boolean = true
 ): void {
   const source = getSourceFile(tree, filePath);
-  const node = findNode(source, ts.SyntaxKind.Identifier, variableName);
+  const node = getSourceNodes(source).find(
+    node => node.kind == ts.SyntaxKind.Identifier && node.getText() === variableName
+  );
   if (!node) {
     throw new SchematicsException(`Could not find any [${variableName}] variable in path '${filePath}'.`);
   }
