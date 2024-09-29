@@ -6,11 +6,11 @@ type: Documents
 
 ## 认证风格
 
-通过HTTP拦截器在每一个请求中加入相应的认证信息，这是再好不过。`@delonn/auth` 根据两种不同认证风格，实现两种各自的HTTP拦截器。
+通过HTTP拦截器在每一个请求中加入相应的认证信息，这是再好不过。`@yelon/auth` 根据两种不同认证风格，实现两种各自的HTTP拦截器。
 
 ### authSimpleInterceptor
 
-透过 `DelonAuthConfig` 可以指定参数名以及其发送位置，例如：
+透过 `YelonAuthConfig` 可以指定参数名以及其发送位置，例如：
 
 ```ts
 token_send_key = 'token';

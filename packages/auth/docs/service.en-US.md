@@ -24,10 +24,10 @@ After subscribing to `refresh`, the access_token will be automatically triggered
 
 ### Property
 
-| Name | Type | Description |
-|------|------|-------------|
-| `[login_url]` | `string` | Get the login address of `DelonAuthConfig` configuration |
-| `[referrer]` | `AuthReferrer` | Get routing before authorization failure |
+| Name | Type | Description                                                                                                                            |
+|------|------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `[login_url]` | `string` | Get the login address of `YelonAuthConfig` configuration                                                                               |
+| `[referrer]` | `AuthReferrer` | Get routing before authorization failure                                                                                               |
 | `[refresh]` | `Observable<ITokenModel>` | Subscription refresh, automatically triggered when expired; **Note** It will be triggered multiple times, please make business process |
 
 ### Method

@@ -8,11 +8,11 @@ type: Documents
 
 ## Authentication style
 
-It is better to add the corresponding authentication information to each request through the HTTP interceptor. `@delonn/auth` implements two separate HTTP interceptors based on two different authentication styles.
+It is better to add the corresponding authentication information to each request through the HTTP interceptor. `@yelon/auth` implements two separate HTTP interceptors based on two different authentication styles.
 
 ### authSimpleInterceptor
 
-The parameter name and its sending location can be specified via `DelonAuthConfig`, for example:
+The parameter name and its sending location can be specified via `YelonAuthConfig`, for example:
 
 ```ts
 token_send_key = 'token';

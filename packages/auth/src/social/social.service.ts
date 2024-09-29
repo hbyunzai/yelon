@@ -6,8 +6,8 @@ import { Observable, Observer } from 'rxjs';
 
 import { YA_SERVICE_TOKEN, ITokenModel } from '../token/interface';
 
-const OPENTYPE = '_delonAuthSocialType';
-const HREFCALLBACK = '_delonAuthSocialCallbackByHref';
+const OPENTYPE = '_yelonAuthSocialType';
+const HREFCALLBACK = '_yelonAuthSocialCallbackByHref';
 
 export type SocialOpenType = 'href' | 'window';
 
