@@ -18,6 +18,7 @@ import {
   useLocalStorageCurrent,
   useLocalStorageDefaultRoute,
   useLocalStorageHeader,
+  useLocalStorageNeedAuth,
   useLocalStorageProjectInfo,
   useLocalStorageTenant,
   useLocalStorageUser,
@@ -39,6 +40,7 @@ export function provideYunzaiStartup(): Provider[] {
     }
   ];
 }
+
 @Injectable()
 export class YunzaiStartupService {
   private readonly config = mergeBisConfig(inject(YunzaiConfigService));
@@ -52,6 +54,12 @@ export class YunzaiStartupService {
   private readonly win = inject(WINDOW);
   private readonly configService = inject(YunzaiConfigService);
 
+  casLogin(): Observable<void> {
+    const [setNeedAuth] = useLocalStorageNeedAuth();
+    setNeedAuth(true);
+    return this.load();
+  }
+
   load(): Observable<void> {
     let defaultLang: string = this.settingService.layout.lang || this.i18n.defaultLang;
     const [setTenant] = useLocalStorageTenant();
@@ -60,6 +68,18 @@ export class YunzaiStartupService {
     const [setProject] = useLocalStorageProjectInfo();
     const [setDefaultRoute] = useLocalStorageDefaultRoute();
     const [setCurrent] = useLocalStorageCurrent();
+    const [setNeedAuth, getNeedAuth] = useLocalStorageNeedAuth();
+
+    // 如果不需要认证 且 跳过自动认证, 加载静态国际化文件结束流程
+    if (!getNeedAuth() && !this.configService.get('auth')?.auto) {
+      return this.i18n.loadLocaleData(defaultLang).pipe(
+        map((langData: NzSafeAny) => {
+          this.i18n.use(defaultLang, langData);
+          return void 0;
+        })
+      );
+    }
+
     return this.token().pipe(
       mergeMap((token: ITokenModel) => {
         this.configService.set('auth', {
@@ -136,6 +156,7 @@ export class YunzaiStartupService {
             setDefaultRoute('/displayIndex');
           }
         }
+        setNeedAuth(false);
         return of(void 0);
       })
     );

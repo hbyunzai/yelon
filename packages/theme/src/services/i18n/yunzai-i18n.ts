@@ -76,6 +76,10 @@ export class YunzaiHttpI18NService extends YunzaiI18nBaseService implements OnDe
     }
   }
 
+  loadLocaleData(lang: string): Observable<NzSafeAny> {
+    return this.http.get(`./assets/tmp/i18n/${lang}.json`);
+  }
+
   use(lang: string, data: Record<string, unknown>): void {
     if (this._currentLang === lang) return;
     this._data = this.flatData(data, []);

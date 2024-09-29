@@ -8,6 +8,7 @@ export const YZ_HEADER_KEY = '_yz_header';
 export const YZ_HEADER_TYPE_KEY = '_yz_header_type';
 export const YZ_DEFAULT_ROUTE_KEY = '_yz_default_route';
 export const YZ_TENANT_KEY = '_yz_tenant';
+export const YZ_NEED_AUTH_KEY = '_yz_need_auth';
 // export const YZ_LANGS_KEY = '_yz_langs';
 // export const YZ_LANG_KEY = '_yz_lang';
 
@@ -69,5 +70,11 @@ export function useLocalStorageDefaultRoute(): [returnSet<string>, returnGet<str
 export function useLocalStorageTenant(): [returnSet<string>, returnGet<string>] {
   const setFn: returnSet<string> = data => set(YZ_TENANT_KEY, data);
   const getFn: returnGet<string> = () => get<string>(YZ_TENANT_KEY);
+  return [setFn, getFn];
+}
+
+export function useLocalStorageNeedAuth(): [returnSet<boolean>, returnGet<boolean>] {
+  const setFn: returnSet<boolean> = data => set(YZ_NEED_AUTH_KEY, data);
+  const getFn: returnGet<boolean> = () => get<boolean>(YZ_NEED_AUTH_KEY);
   return [setFn, getFn];
 }

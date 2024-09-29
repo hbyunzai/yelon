@@ -1,5 +1,9 @@
 export interface YunzaiAuthConfig {
   /**
+   * 是否自动完成认证流程
+   */
+  auto?: boolean;
+  /**
    * 存储KEY值，默认：`_token`
    */
   store_key?: string;
