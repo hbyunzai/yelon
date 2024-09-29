@@ -13382,36 +13382,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ng-alain-plugin-theme@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "ng-alain-plugin-theme@npm:18.0.0"
-  dependencies:
-    jsonc-parser: "npm:^3.2.0"
-    less: "npm:^4.1.3"
-    less-plugin-clean-css: "npm:^1.5.1"
-    less-vars-to-js: "npm:^1.3.0"
-    meow: "npm:^9.0.0"
-    postcss: "npm:^8.4.18"
-    postcss-less: "npm:^6.0.0"
-  bin:
-    ng-alain-plugin-theme: lib/index.js
-  checksum: 10c0/278700a1bc07b1e8f00cdd02b5e96644d345e394ac35367a8a735c3e8af98dc44616a13f9149e1a61e8bd0da9f7ff5a47ac868980fad175768bfe388241d15b4
-  languageName: node
-  linkType: hard
-
-"ng-alain-sts@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "ng-alain-sts@npm:0.0.2"
-  dependencies:
-    "@types/swagger-schema-official": "npm:^2.0.15"
-    extend: "npm:^3.0.2"
-    meow: "npm:^5.0.0"
-  bin:
-    ng-alain-sts: src/index.js
-  checksum: 10c0/42098a3979aa943f0a8ff5cb2d32a0a11d902a5460cd6a1e1ede8f024178e2e003988ea66b96e69028c5706e74895d4a93c6c99b83927e1776d33cc3865b7862
-  languageName: node
-  linkType: hard
-
 "ng-github-button@npm:^18.0.0":
   version: 18.0.0
   resolution: "ng-github-button@npm:18.0.0"
@@ -19170,8 +19140,6 @@ __metadata:
     mark-twain: "npm:^2.0.3"
     mockjs: "npm:^1.1.0"
     mustache: "npm:^4.2.0"
-    ng-alain-plugin-theme: "npm:^18.0.0"
-    ng-alain-sts: "npm:^0.0.2"
     ng-github-button: "npm:^18.0.0"
     ng-packagr: "npm:^18.2.1"
     ng-yunzai-plugin-theme: "npm:latest"
