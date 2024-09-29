@@ -61,7 +61,7 @@ const minimumVersion = +pkg.version.split('.')[0] - 2;
 export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile!: boolean;
-  oldVersionList = [16];
+  oldVersionList = [17];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string; selected?: boolean }> = [
     { name: 'theme' },
