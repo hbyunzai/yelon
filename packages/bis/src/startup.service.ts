@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, inject, Injectable, Provider } from '@angular/core';
-import { combineLatest, map, mergeMap, Observable, of } from 'rxjs';
+import { catchError, combineLatest, map, mergeMap, Observable, of } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
 import { ITokenModel, YA_SERVICE_TOKEN } from '@yelon/auth';
@@ -70,7 +70,6 @@ export class YunzaiStartupService {
     const [setCurrent] = useLocalStorageCurrent();
     const [setNeedAuth, getNeedAuth] = useLocalStorageNeedAuth();
 
-    // 如果不需要认证 且 跳过自动认证, 加载静态国际化文件结束流程
     if (!getNeedAuth() && !this.configService.get('auth')?.auto) {
       return this.i18n.loadLocaleData(defaultLang).pipe(
         map((langData: NzSafeAny) => {
@@ -156,6 +155,11 @@ export class YunzaiStartupService {
             setDefaultRoute('/displayIndex');
           }
         }
+        setNeedAuth(false);
+        return of(void 0);
+      }),
+      catchError((error: NzSafeAny) => {
+        console.error('Error occurred:', error);
         setNeedAuth(false);
         return of(void 0);
       })
