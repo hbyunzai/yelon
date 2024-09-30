@@ -70,7 +70,7 @@ export class YunzaiStartupService {
     const [setCurrent] = useLocalStorageCurrent();
     const [setNeedAuth, getNeedAuth] = useLocalStorageNeedAuth();
 
-    if (!getNeedAuth() && !this.configService.get('auth')?.auto) {
+    if (!getNeedAuth() && !this.configService.get('auth')?.auto && !this.tokenService.get()?.access_token) {
       return this.i18n.loadLocaleData(defaultLang).pipe(
         map((langData: NzSafeAny) => {
           this.i18n.use(defaultLang, langData);
