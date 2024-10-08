@@ -177,6 +177,10 @@ export class YunzaiStartupService {
                 return response.data;
               case 2001:
                 if (!force && !auto) {
+                  // 自动认证为false情况下会出现: 后台已经下线,但是用户进入网页存储了上次的cookie,Token，所以网页还是登录状态
+                  // 在这里如果2001时自动清理客户端过时的token以保证页面显示登录状态正常
+                  localStorage.clear();
+                  this.tokenService.clear();
                   return false;
                 }
                 this.win.location.href = response.msg;
