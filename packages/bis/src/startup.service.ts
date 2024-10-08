@@ -53,7 +53,7 @@ export class YunzaiStartupService {
   private readonly win = inject(WINDOW);
   private readonly configService = inject(YunzaiConfigService);
 
-  load(): Observable<void> {
+  load(param?: LoadParam): Observable<void> {
     let defaultLang: string = this.settingService.layout.lang || this.i18n.defaultLang;
     const [setTenant] = useLocalStorageTenant();
     const [setUser, getUser] = useLocalStorageUser();
@@ -62,7 +62,7 @@ export class YunzaiStartupService {
     const [setDefaultRoute] = useLocalStorageDefaultRoute();
     const [setCurrent] = useLocalStorageCurrent();
 
-    return this.token().pipe(
+    return this.token(param).pipe(
       mergeMap((token: NzSafeAny) => {
         if (token === false) {
           return this.i18n.loadLocaleData(defaultLang).pipe(mergeMap(() => EMPTY));
@@ -100,9 +100,7 @@ export class YunzaiStartupService {
       }),
       mergeMap(() => {
         const yunzaiUser = getUser()!;
-        const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(
-          m => m.systemCode && m.systemCode === this.config.systemCode
-        );
+        const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(m => m.systemCode && m.systemCode === this.config.systemCode);
         const currentMenu = yunzaiMenus.pop();
         if (currentMenu) {
           this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
@@ -150,27 +148,31 @@ export class YunzaiStartupService {
     );
   }
 
-  token(): Observable<ITokenModel | boolean> {
+  token(param?: LoadParam): Observable<ITokenModel | boolean> {
+    const auto = this.configService.get('auth')?.auto;
+    const force = param?.force || undefined;
     if (this.config.loginForm) {
-      return this.httpClient.post(`/auth/oauth/token?_allow_anonymous=true`, this.config.loginForm).pipe(
-        map((response: NzSafeAny) => {
-          return response;
-        })
-      );
+      if (this.tokenService.get()?.access_token || force || auto) {
+        return this.httpClient.post(`/auth/oauth/token?_allow_anonymous=true`, this.config.loginForm).pipe(
+          map((response: NzSafeAny) => {
+            return response;
+          })
+        );
+      }
+      return of(false);
     } else {
       const uri = encodeURIComponent(this.win.location.href);
       return this.httpClient
         .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
         .pipe(
           map((response: NzSafeAny) => {
-            const auto = this.configService.get('auth')?.auto;
-            if ((!response && !auto) || (!response.data && !auto) || (!response.data.access_token && !auto)) {
-              return false;
-            }
             switch (response.errcode) {
               case 2000:
                 return response.data;
               case 2001:
+                if (!force && !auto) {
+                  return false;
+                }
                 this.win.location.href = response.msg;
                 throw Error("Cookie Error: Can't find Cas Cookie,So jump to login!");
               default:
@@ -192,9 +194,9 @@ export class YunzaiStartupService {
 }
 
 export function mapYzSideToYelonMenu(menus: YunzaiMenu[]): void {
-  menus.forEach(menu => {
+  menus.forEach((menu: NzSafeAny) => {
     if (menu.children && menu.hideChildren) {
-      menu.children.forEach(c => (c.hide = true));
+      menu.children.forEach((c: NzSafeAny) => (c.hide = true));
     }
     menu.badgeDot = menu.badge_dot || null;
     menu.badgeStatus = menu.badge_status || null;
