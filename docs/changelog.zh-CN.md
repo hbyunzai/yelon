@@ -13,6 +13,9 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## <small>18.1.2 (2024-10-08)</small>
+
+* fix: 修复token的暂存状态 ([062c889](https://github.com/hbyunzai/yelon/commit/062c889))
 ## <small>18.1.1 (2024-10-08)</small>
 
 * fix: fix auto login validate ([5047596](https://github.com/hbyunzai/yelon/commit/5047596))

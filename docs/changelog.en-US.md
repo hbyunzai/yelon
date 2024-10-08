@@ -14,6 +14,10 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 
 ---
 
+## <small>18.1.2 (2024-10-08)</small>
+
+* fix: 修复token的暂存状态 ([062c889](https://github.com/hbyunzai/yelon/commit/062c889))
+
 ## <small>18.1.1 (2024-10-08)</small>
 
 * fix: fix auto login validate ([5047596](https://github.com/hbyunzai/yelon/commit/5047596))
