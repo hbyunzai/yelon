@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, inject, Injectable, Provider } from '@angular/core';
-import { catchError, combineLatest, map, mergeMap, Observable, of } from 'rxjs';
+import { catchError, combineLatest, EMPTY, map, mergeMap, Observable, of } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
 import { ITokenModel, YA_SERVICE_TOKEN } from '@yelon/auth';
@@ -18,7 +18,6 @@ import {
   useLocalStorageCurrent,
   useLocalStorageDefaultRoute,
   useLocalStorageHeader,
-  useLocalStorageNeedAuth,
   useLocalStorageProjectInfo,
   useLocalStorageTenant,
   useLocalStorageUser,
@@ -54,12 +53,6 @@ export class YunzaiStartupService {
   private readonly win = inject(WINDOW);
   private readonly configService = inject(YunzaiConfigService);
 
-  casLogin(): Observable<void> {
-    const [setNeedAuth] = useLocalStorageNeedAuth();
-    setNeedAuth(true);
-    return this.load();
-  }
-
   load(): Observable<void> {
     let defaultLang: string = this.settingService.layout.lang || this.i18n.defaultLang;
     const [setTenant] = useLocalStorageTenant();
@@ -68,19 +61,12 @@ export class YunzaiStartupService {
     const [setProject] = useLocalStorageProjectInfo();
     const [setDefaultRoute] = useLocalStorageDefaultRoute();
     const [setCurrent] = useLocalStorageCurrent();
-    const [setNeedAuth, getNeedAuth] = useLocalStorageNeedAuth();
-
-    if (!getNeedAuth() && !this.configService.get('auth')?.auto && !this.tokenService.get()?.access_token) {
-      return this.i18n.loadLocaleData(defaultLang).pipe(
-        map((langData: NzSafeAny) => {
-          this.i18n.use(defaultLang, langData);
-          return void 0;
-        })
-      );
-    }
 
     return this.token().pipe(
-      mergeMap((token: ITokenModel) => {
+      mergeMap((token: NzSafeAny) => {
+        if (token === false) {
+          return this.i18n.loadLocaleData(defaultLang).pipe(mergeMap(() => EMPTY));
+        }
         this.configService.set('auth', {
           token_send_key: 'Authorization',
           token_send_template: `${token.token_type} \${access_token}`,
@@ -155,18 +141,16 @@ export class YunzaiStartupService {
             setDefaultRoute('/displayIndex');
           }
         }
-        setNeedAuth(false);
         return of(void 0);
       }),
       catchError((error: NzSafeAny) => {
         console.error('Error occurred:', error);
-        setNeedAuth(false);
         return of(void 0);
       })
     );
   }
 
-  token(): Observable<ITokenModel> {
+  token(): Observable<ITokenModel | boolean> {
     if (this.config.loginForm) {
       return this.httpClient.post(`/auth/oauth/token?_allow_anonymous=true`, this.config.loginForm).pipe(
         map((response: NzSafeAny) => {
@@ -179,6 +163,10 @@ export class YunzaiStartupService {
         .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
         .pipe(
           map((response: NzSafeAny) => {
+            const auto = this.configService.get('auth')?.auto;
+            if ((!response && !auto) || (!response.data && !auto) || (!response.data.access_token && !auto)) {
+              return false;
+            }
             switch (response.errcode) {
               case 2000:
                 return response.data;

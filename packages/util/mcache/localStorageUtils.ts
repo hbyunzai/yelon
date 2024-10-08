@@ -73,8 +73,3 @@ export function useLocalStorageTenant(): [returnSet<string>, returnGet<string>] 
   return [setFn, getFn];
 }
 
-export function useLocalStorageNeedAuth(): [returnSet<boolean>, returnGet<boolean>] {
-  const setFn: returnSet<boolean> = data => set(YZ_NEED_AUTH_KEY, data);
-  const getFn: returnGet<boolean> = () => get<boolean>(YZ_NEED_AUTH_KEY);
-  return [setFn, getFn];
-}
