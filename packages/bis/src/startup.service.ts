@@ -28,6 +28,8 @@ import {
 } from '@yelon/util';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+export type LoadParam = { force?: boolean };
+
 export function provideYunzaiStartup(): Provider[] {
   return [
     YunzaiStartupService,
