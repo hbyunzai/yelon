@@ -13,6 +13,30 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+
+## <small>18.1.1 (2024-10-08)</small>
+
+* fix: fix auto login validate ([5047596](https://github.com/hbyunzai/yelon/commit/5047596))
+* fix: fix missing type ([45dd404](https://github.com/hbyunzai/yelon/commit/45dd404))
+* fix: fix style ([e539cf5](https://github.com/hbyunzai/yelon/commit/e539cf5))
+* fix: fix typedef ([31049f6](https://github.com/hbyunzai/yelon/commit/31049f6))
+* fix: lock yarn ([c59bfff](https://github.com/hbyunzai/yelon/commit/c59bfff))
+* fix: 修复auth状态判断不足的问题 ([3ff719f](https://github.com/hbyunzai/yelon/commit/3ff719f))
+* fix: 修改startup逻辑 ([c2e2463](https://github.com/hbyunzai/yelon/commit/c2e2463))
+* fix(cli): fix could not find any [routes] variable (#1832) ([38daae1](https://github.com/hbyunzai/yelon/commit/38daae1)), closes [#1832](https://github.com/hbyunzai/yelon/issues/1832)
+* chore: bump angualr to `18.2` (#1831) ([43e8583](https://github.com/hbyunzai/yelon/commit/43e8583)), closes [#1831](https://github.com/hbyunzai/yelon/issues/1831)
+* chore: docs ([6f9beff](https://github.com/hbyunzai/yelon/commit/6f9beff))
+* chore: lint fix ([3ea3643](https://github.com/hbyunzai/yelon/commit/3ea3643))
+* chore: rm codecov test upload ([a26551c](https://github.com/hbyunzai/yelon/commit/a26551c))
+* feat: 添加新的认证模式 ([d7db0d5](https://github.com/hbyunzai/yelon/commit/d7db0d5))
+* feat(theme): add `.hide-scrollbar` style (#1835) ([2fd6e7b](https://github.com/hbyunzai/yelon/commit/2fd6e7b)), closes [#1835](https://github.com/hbyunzai/yelon/issues/1835)
+* feat(form:tree-select): add `change` of schema (#1827) ([42ca17b](https://github.com/hbyunzai/yelon/commit/42ca17b)), closes [#1827](https://github.com/hbyunzai/yelon/issues/1827)
+* feat(theme:menu): add `last` argument of `find` (#1834) ([8cacab3](https://github.com/hbyunzai/yelon/commit/8cacab3)), closes [#1834](https://github.com/hbyunzai/yelon/issues/1834)
+* feat(theme:modal): support build-in and focus button (#1828 ([a6c537f](https://github.com/hbyunzai/yelon/commit/a6c537f)), closes [#1828](https://github.com/hbyunzai/yelon/issues/1828)
+* fix(abc:st): fix submenu blank area to be clickable (#1833) ([9ef589f](https://github.com/hbyunzai/yelon/commit/9ef589f)), closes [#1833](https://github.com/hbyunzai/yelon/issues/1833)
+* docs: missing 17 doc link (#1829) ([c8afb0f](https://github.com/hbyunzai/yelon/commit/c8afb0f)), closes [#1829](https://github.com/hbyunzai/yelon/issues/1829)
+* docs(auth): typo (#1830) ([3fe22c7](https://github.com/hbyunzai/yelon/commit/3fe22c7)), closes [#1830](https://github.com/hbyunzai/yelon/issues/1830)
+
 ## 18.1.0 (2024-08-21)
 
 * chore: bump angular to 18.1 ([a23aa77](https://github.com/hbyunzai/yelon/commit/a23aa77))
