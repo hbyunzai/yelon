@@ -72,4 +72,3 @@ export function useLocalStorageTenant(): [returnSet<string>, returnGet<string>] 
   const getFn: returnGet<string> = () => get<string>(YZ_TENANT_KEY);
   return [setFn, getFn];
 }
-
