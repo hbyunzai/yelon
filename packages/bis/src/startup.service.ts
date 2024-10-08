@@ -28,7 +28,9 @@ import {
 } from '@yelon/util';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-export type LoadParam = { force?: boolean };
+export interface LoadParam {
+  force?: boolean;
+}
 
 export function provideYunzaiStartup(): Provider[] {
   return [
@@ -102,7 +104,9 @@ export class YunzaiStartupService {
       }),
       mergeMap(() => {
         const yunzaiUser = getUser()!;
-        const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(m => m.systemCode && m.systemCode === this.config.systemCode);
+        const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(
+          m => m.systemCode && m.systemCode === this.config.systemCode
+        );
         const currentMenu = yunzaiMenus.pop();
         if (currentMenu) {
           this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
