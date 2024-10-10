@@ -58,7 +58,7 @@ export class YunzaiStartupService {
   private readonly configService = inject(YunzaiConfigService);
 
   load(param?: LoadParam): Observable<void> {
-    let defaultLang: string = this.settingService.layout.lang || this.i18n.defaultLang;
+    let defaultLang: string = this.settingService.layout.lang || this.i18n.defaultLang || 'zh-CN';
     const [setTenant] = useLocalStorageTenant();
     const [setUser, getUser] = useLocalStorageUser();
     const [setHeader] = useLocalStorageHeader();
@@ -69,7 +69,13 @@ export class YunzaiStartupService {
     return this.token(param).pipe(
       mergeMap((token: NzSafeAny) => {
         if (token === false) {
-          return this.i18n.loadLocaleData(defaultLang).pipe(mergeMap(() => EMPTY));
+          return this.i18n.loadLocaleData(defaultLang).pipe(
+            map((langData: NzSafeAny) => {
+              this.i18n.use(defaultLang, langData);
+              this.settingService.setLayout('lang', defaultLang);
+            }),
+            mergeMap(() => EMPTY)
+          );
         }
         this.configService.set('auth', {
           token_send_key: 'Authorization',
