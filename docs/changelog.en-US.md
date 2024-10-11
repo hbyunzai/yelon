@@ -14,6 +14,11 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 
 ---
 
+## <small>18.1.3 (2024-10-11)</small>
+
+* feat: add website layout 01 ([4e172a1](https://github.com/hbyunzai/yelon/commit/4e172a1))
+* fix: fix i18n load and not over stream when autoAuth equals false ([992cbd8](https://github.com/hbyunzai/yelon/commit/992cbd8))
+
 ## <small>18.1.2 (2024-10-08)</small>
 
 * fix: 修复token的暂存状态 ([062c889](https://github.com/hbyunzai/yelon/commit/062c889))
