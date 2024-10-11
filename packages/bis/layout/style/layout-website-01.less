@@ -1,0 +1,85 @@
+.yz-layout-website-01 {
+  min-height: 100%;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: @yz-layout-website-01-linear-min-height;
+    background: linear-gradient(to bottom, @yz-layout-website-01-linear-bg @yz-layout-website-01-linear-bg-percent, @yunzai-default-content-bg 100%);
+    z-index: -1;
+  }
+
+  &-nav{
+    padding: 30px 24px 40px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    &__logo{
+      max-height: @yz-layout-website-01-nav-logo-max-height;
+      max-width: @yz-layout-website-01-nav-logo-max-width;
+
+      &__full{
+        color: @yz-layout-website-01-nav-logo-full-color;
+        font-size: @yz-layout-website-01-nav-logo-full-font-size;
+        font-weight: @yz-layout-website-01-nav-logo-full-font-weight;
+        line-height: @yz-layout-website-01-nav-logo-full-line-height;
+      }
+    }
+
+    &__user{
+      color: @yz-layout-website-01-nav-user-color;
+      background: @yz-layout-website-01-nav-user-bg;
+      padding: 6px 24px;
+      width: 100%;
+      text-align: right;
+    }
+
+    &__slogan{
+      color: @yz-layout-website-01-nav-slogan-color;
+      font-size: @yz-layout-website-01-nav-slogan-font-size;
+      font-weight: @yz-layout-website-01-nav-slogan-font-weight;
+      margin-right: @yz-layout-website-01-nav-slogan-margin-right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &-link{
+    color: @yz-layout-website-01-nav-link-color;
+    font-size: @yz-layout-website-01-nav-link-font-size;
+    span {
+      margin: 0 5px;
+    }
+
+    &:hover {
+      color: @yz-layout-website-01-nav-link-hover-color;
+    }
+
+    &__li{
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}
+
+
+@media screen and (max-width: 1200px) {
+  .yz-layout-website-01-nav__slogan {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .yz-layout-website-nav__slogan {
+    display: none;
+  }
+}
