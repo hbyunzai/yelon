@@ -1,7 +1,6 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Input, TemplateRef } from '@angular/core';
+import { Component, inject, Input, TemplateRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { YunzaiStartupService } from '../startup.service';
 import { I18nPipe } from '@yelon/theme';
@@ -67,7 +66,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
       </main>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [RouterOutlet, I18nPipe, NzI18nModule, NgFor, NgIf, NzDropDownModule, NzIconModule, NgTemplateOutlet]
 })

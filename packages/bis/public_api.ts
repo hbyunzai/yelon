@@ -7,3 +7,4 @@ export * from './src/startup.service';
 export * from './src/yunzai-analysis-addon.guard';
 export * from './src/yunzai-act.guard';
 export * from './src/website/layout-website-01.component';
+export * from './src/website/layout-website-02.component';
