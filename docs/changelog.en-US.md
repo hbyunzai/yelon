@@ -13,6 +13,9 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## <small>18.1.4 (2024-10-15)</small>
+
+* feat(bis): add layout ([b8203d7](https://github.com/hbyunzai/yelon/commit/b8203d7))
 
 ## <small>18.1.3 (2024-10-11)</small>
 

@@ -1,3 +1,9 @@
+## <small>18.1.4 (2024-10-15)</small>
+
+* feat(bis): add layout ([b8203d7](https://github.com/hbyunzai/yelon/commit/b8203d7))
+
+
+
 ## <small>18.1.3 (2024-10-11)</small>
 
 * feat: add website layout 01 ([4e172a1](https://github.com/hbyunzai/yelon/commit/4e172a1))

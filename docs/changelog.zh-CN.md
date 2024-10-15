@@ -13,6 +13,9 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## <small>18.1.4 (2024-10-15)</small>
+
+* feat(bis): add layout ([b8203d7](https://github.com/hbyunzai/yelon/commit/b8203d7))
 
 ## <small>18.1.3 (2024-10-11)</small>
 
