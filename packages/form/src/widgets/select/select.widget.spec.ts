@@ -140,7 +140,8 @@ describe('form: widget: select', () => {
           default: 1,
           ui: {
             widget,
-            allowClear: true
+            allowClear: true,
+            clearValue: 2
           }
         }
       }
@@ -151,7 +152,7 @@ describe('form: widget: select', () => {
       .time()
       .typeEvent('click', '.ant-select-close-icon')
       .time()
-      .checkValue('/a', undefined)
+      .checkValue('/a', 2)
       .asyncEnd();
   }));
 
