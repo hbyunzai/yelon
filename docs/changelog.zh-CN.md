@@ -13,6 +13,14 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+
+## 18.2.0 (2024-11-07)
+
+* feat(form:select,cascader,tree-select): default value when cleared ([d1e9817](https://github.com/hbyunzai/yelon/commit/d1e9817))
+* fix(abc:st): a more friendly expandIcon (#1842) ([6e28ff5](https://github.com/hbyunzai/yelon/commit/6e28ff5)), closes [#1842](https://github.com/hbyunzai/yelon/issues/1842)
+* fix(theme:default): fix inconsistency of top icon size (#1841) ([f9792e6](https://github.com/hbyunzai/yelon/commit/f9792e6)), closes [#1841](https://github.com/hbyunzai/yelon/issues/1841)
+* fix(theme): fix `lg` size of modal style (#1845) ([e964622](https://github.com/hbyunzai/yelon/commit/e964622)), closes [#1845](https://github.com/hbyunzai/yelon/issues/1845)
+
 ## <small>18.1.4 (2024-10-15)</small>
 
 * feat(bis): add layout ([b8203d7](https://github.com/hbyunzai/yelon/commit/b8203d7))
