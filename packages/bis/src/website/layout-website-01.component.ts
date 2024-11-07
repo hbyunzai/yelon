@@ -1,8 +1,8 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, inject, Input, TemplateRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
-import { YunzaiStartupService } from '../startup.service';
 import { I18nPipe } from '@yelon/theme';
 import {
   YunzaiProfile,
@@ -15,6 +15,8 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzI18nModule } from 'ng-zorro-antd/i18n';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+
+import { YunzaiStartupService } from '../startup.service';
 
 @Component({
   selector: 'yunzai-layout-website-01',
