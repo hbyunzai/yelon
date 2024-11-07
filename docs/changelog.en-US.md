@@ -14,6 +14,19 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 
 ---
 
+## 18.3.0 (2024-11-07)
+
+* feat: yarn 4.5.0 ([ffbedf1](https://github.com/hbyunzai/yelon/commit/ffbedf1))
+* chore: bump angular to 18.2 (#1839) ([157f3ab](https://github.com/hbyunzai/yelon/commit/157f3ab)), closes [#1839](https://github.com/hbyunzai/yelon/issues/1839)
+* chore: relock ([e43daa3](https://github.com/hbyunzai/yelon/commit/e43daa3))
+* docs: typo (#1838) ([96f4506](https://github.com/hbyunzai/yelon/commit/96f4506)), closes [#1838](https://github.com/hbyunzai/yelon/issues/1838)
+* docs(mock): 修复Mock组件文档中MockOptions配置表格中的表 ([6098276](https://github.com/hbyunzai/yelon/commit/6098276))
+* fix: lint ([21941f7](https://github.com/hbyunzai/yelon/commit/21941f7))
+
+
+
+
+
 ## 18.2.0 (2024-11-07)
 
 * feat(form:select,cascader,tree-select): default value when cleared ([d1e9817](https://github.com/hbyunzai/yelon/commit/d1e9817))
