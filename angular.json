@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "cli": {
     "packageManager": "yarn",
-    "analytics": "81b25adc-24c1-4296-977a-1cd0bb845a76"
+    "analytics": false
   },
   "projects": {
     "site": {
