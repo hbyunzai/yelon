@@ -10,7 +10,7 @@ module: import { G2TimelineModule } from '@yelon/chart/timeline';
 
 ## API
 
-### g2-timeline:standalone
+### g2-timeline
 
 | 参数 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|

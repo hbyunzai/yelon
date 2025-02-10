@@ -1,12 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { EnvironmentInjector, Injector, PLATFORM_ID, runInInjectionContext } from '@angular/core';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { stepPreloader } from './preloader';
 
 describe('theme: preloader', () => {
-  let cached: NzSafeAny = {};
+  let cached: any = {};
 
   beforeEach(() => {
     cached = {};
@@ -20,7 +20,7 @@ describe('theme: preloader', () => {
         style: {
           overflow: ''
         },
-        addEventListener: (_key: string, fn: NzSafeAny) => {
+        addEventListener: (_key: string, fn: any) => {
           fn();
         }
       };
@@ -56,7 +56,7 @@ describe('theme: preloader', () => {
         style: {
           overflow: ''
         },
-        addEventListener: (_key: string, fn: NzSafeAny) => {
+        addEventListener: (_key: string, fn: any) => {
           fn();
         }
       };
@@ -89,7 +89,7 @@ describe('theme: preloader', () => {
         style: {
           overflow: ''
         },
-        addEventListener: (_key: string, fn: NzSafeAny) => {
+        addEventListener: (_key: string, fn: any) => {
           fn();
         }
       };

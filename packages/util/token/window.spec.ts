@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { WINDOW } from './window';
 
@@ -17,7 +17,7 @@ describe('util: WINDOW', () => {
         {
           provide: DOCUMENT,
           useValue: {
-            querySelectorAll(): NzSafeAny {
+            querySelectorAll(): any {
               return {};
             }
           }

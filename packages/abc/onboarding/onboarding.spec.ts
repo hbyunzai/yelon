@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 
 import { createTestContext } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { YelonLocaleModule } from '@yelon/theme';
 
-import { OnboardingModule } from './onboarding.module';
+
 import { OnboardingService } from './onboarding.service';
 import { ONBOARDING_STORE_TOKEN } from './onboarding.storage';
 import { OnboardingConfig, OnboardingOpType } from './onboarding.types';
@@ -19,9 +19,8 @@ describe('abc: onboarding', () => {
 
   function genModule(): void {
     TestBed.configureTestingModule({
-      imports: [OnboardingModule, NoopAnimationsModule],
-      providers: [provideRouter([])],
-      declarations: [TestComponent]
+      imports: [YelonLocaleModule],
+      providers: [provideRouter([]), provideNoopAnimations()]
     });
     ({ fixture } = createTestContext(TestComponent));
     srv = TestBed.inject<OnboardingService>(OnboardingService);
@@ -130,8 +129,8 @@ describe('abc: onboarding', () => {
   it('should ignore start when current is running', fakeAsync(() => {
     page.start();
     spyOnProperty(srv, 'running').and.returnValue(true);
-    const srvAny = srv as NzSafeAny;
-    spyOn(srvAny as NzSafeAny, 'attach');
+    const srvAny = srv as any;
+    spyOn(srvAny as any, 'attach');
     page.start();
     expect(srvAny.attach).not.toHaveBeenCalled();
   }));
@@ -146,7 +145,7 @@ describe('abc: onboarding', () => {
     }
 
     checkActive(active: number = 0): this {
-      expect(parseInt(this.el.dataset.onboardingActive?.toString()!, 10)).toBe(active);
+      expect(parseInt(this.el.dataset.onboardingActive!.toString(), 10)).toBe(active);
       return this;
     }
 

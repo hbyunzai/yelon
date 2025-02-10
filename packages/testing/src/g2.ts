@@ -3,7 +3,7 @@ import { ComponentFixture, discardPeriodicTasks, flush, TestBed, tick } from '@a
 
 import { Chart } from '@antv/g2';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export type PageG2Type = 'geometries' | 'views';
 
@@ -21,20 +21,12 @@ export class PageG2<T> {
     return this.fixture!.componentInstance;
   }
 
-  get comp(): NzSafeAny {
-    return (this.context as NzSafeAny)['comp'];
+  get comp(): any {
+    return (this.context as any)['comp'];
   }
 
   get chart(): Chart {
     return this.comp.chart;
-  }
-
-  genModule<M>(module: M, comp: Type<T>): this {
-    TestBed.configureTestingModule({
-      imports: [module],
-      declarations: [comp]
-    });
-    return this;
   }
 
   genComp(comp: Type<T>, dc: boolean = false): this {
@@ -42,11 +34,6 @@ export class PageG2<T> {
     if (dc) {
       this.dcFirst();
     }
-    return this;
-  }
-
-  makeModule<M>(module: M, comp: Type<T>, options: { dc: boolean } = { dc: true }): PageG2<T> {
-    this.genModule(module, comp).genComp(comp, options.dc);
     return this;
   }
 
@@ -79,8 +66,8 @@ export class PageG2<T> {
     this.comp.ngOnDestroy();
   }
 
-  newData(data: NzSafeAny): this {
-    (this.context as NzSafeAny)['data'] = data;
+  newData(data: any): this {
+    (this.context as any)['data'] = data;
     this.dc();
     return this;
   }
@@ -93,8 +80,8 @@ export class PageG2<T> {
     return (this.dl.nativeElement as HTMLElement).querySelector(cls) as HTMLElement;
   }
 
-  getController(type: 'axis' | 'legend'): NzSafeAny {
-    return this.chart.getController(type) as NzSafeAny;
+  getController(type: 'axis' | 'legend'): any {
+    return this.chart.getController(type) as any;
   }
 
   isCanvas(stauts: boolean = true): this {
@@ -113,13 +100,13 @@ export class PageG2<T> {
     return this;
   }
 
-  checkOptions(key: string, value: NzSafeAny): this {
-    expect((this.chart as NzSafeAny)[key]).toBe(value);
+  checkOptions(key: string, value: any): this {
+    expect((this.chart as any)[key]).toBe(value);
     return this;
   }
 
-  checkAttrOptions(type: PageG2Type, key: string, value: NzSafeAny): this {
-    const x = (this.chart[type][0] as NzSafeAny).attributeOption[key];
+  checkAttrOptions(type: PageG2Type, key: string, value: any): this {
+    const x = (this.chart[type][0] as any).attributeOption[key];
     expect(x.field).toBe(value);
     return this;
   }
@@ -145,7 +132,7 @@ export class PageG2<T> {
   }
 
   get firstDataPoint(): { x: number; y: number } {
-    return this.chart.getXY((this.context as NzSafeAny)['data'][0]);
+    return this.chart.getXY((this.context as any)['data'][0]);
   }
 
   checkTooltip(_includeText: string | null, point?: { x: number; y: number }): this {
@@ -169,11 +156,11 @@ export class PageG2<T> {
   }
 }
 
-export function checkDelay<M, T>(module: M, comp: Type<T>, page: PageG2<T> | null = null): void {
+export function checkDelay<T>(comp: Type<T>, page: PageG2<T> | null = null): void {
   if (page == null) {
-    page = new PageG2<T>().makeModule(module, comp, { dc: false });
+    page = new PageG2<T>().genComp(comp, false);
   }
-  const context = page.context as NzSafeAny;
+  const context = page.context as any;
   if (typeof context.delay === 'undefined') {
     console.warn(`You muse be dinfed "delay" property in test component`);
     return;

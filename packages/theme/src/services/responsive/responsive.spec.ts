@@ -1,4 +1,4 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { ResponsiveService } from './responsive';
 
@@ -8,16 +8,16 @@ describe('theme: responsive', () => {
   it('should be throw error when invalid range', () => {
     expect(() => {
       srv = new ResponsiveService({
-        merge: (_key: string, def: NzSafeAny) => ({ ...def, ...{ rules: { 10: {} } } })
-      } as NzSafeAny);
+        merge: (_key: string, def: any) => ({ ...def, ...{ rules: { 10: {} } } })
+      } as any);
     }).toThrow();
   });
 
   describe('#genCls', () => {
     beforeEach(() => {
       srv = new ResponsiveService({
-        merge: (_key: string, def: NzSafeAny) => ({ ...def })
-      } as NzSafeAny);
+        merge: (_key: string, def: any) => ({ ...def })
+      } as any);
     });
     it('rule 1', () => {
       const res = srv.genCls(1);

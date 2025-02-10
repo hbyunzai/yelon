@@ -1,4 +1,4 @@
-# @yelon/acl [![CI](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/hbyunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon) [![NPM version](https://img.shields.io/npm/v/@yelon/acl.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/acl)
+# @yelon/acl [![CI](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/ng-yunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon) [![NPM version](https://img.shields.io/npm/v/@yelon/acl.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/acl)
 
 A simple role-based access control.
 
@@ -6,7 +6,7 @@ A simple role-based access control.
 
 + [Document](https://ng.yunzainfo.com/acl) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/acl)
 + [@yelon Source](https://github.com/hbyunzai/yelon)
-+ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng.yunzainfo.com/))
++ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 
 ## Architecture
 

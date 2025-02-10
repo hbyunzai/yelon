@@ -3,7 +3,7 @@ import { Observable, of, Subject } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiLodopConfig } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { Lodop, LodopPrintResult, LodopResult } from './lodop.types';
 
@@ -17,7 +17,7 @@ export class LodopService implements OnDestroy {
   private _lodop: Lodop | null = null;
   private _init = new Subject<LodopResult>();
   private _events = new Subject<LodopPrintResult>();
-  private printBuffer: NzSafeAny[] = [];
+  private printBuffer: any[] = [];
 
   constructor(configSrv: YunzaiConfigService) {
     this.defaultConfig = configSrv.merge('lodop', {
@@ -93,7 +93,7 @@ export class LodopService implements OnDestroy {
     const url = urlObj.toString();
 
     let checkMaxCount = this.cog.checkMaxCount as number;
-    const onResolve = (status: NzSafeAny, error?: NzSafeAny): void => {
+    const onResolve = (status: any, error?: any): void => {
       this._init.next({
         ok: status === 'ok',
         status,
@@ -114,14 +114,14 @@ export class LodopService implements OnDestroy {
       }
     };
 
-    this.scriptSrv.loadScript(url).then((res: NzSafeAny) => {
+    this.scriptSrv.loadScript(url).then((res: any) => {
       if (res.status !== 'ok') {
         this.pending = false;
         onResolve('script-load-error', res[0]);
         return;
       }
-      const win = window as NzSafeAny;
-      if (win.hasOwnProperty(this.cog.name!)) {
+      const win = window as any;
+      if (Object.prototype.hasOwnProperty.call(win, this.cog.name!)) {
         this._lodop = win[this.cog.name!] as Lodop;
       }
       if (this._lodop === null) {
@@ -150,7 +150,7 @@ export class LodopService implements OnDestroy {
    *
    * 附加代码至 `lodop` 对象上，字符串类支持 `{{key}}` 的动态参数，**注：** 代码是指打印设计所产生字符串数据
    */
-  attachCode(code: string, contextObj?: NzSafeAny, parser?: RegExp): void {
+  attachCode(code: string, contextObj?: any, parser?: RegExp): void {
     this.check();
     if (!parser) parser = /LODOP\.([^(]+)\(([^\n]+)?\);/i;
     code.split('\n').forEach(line => {
@@ -158,7 +158,7 @@ export class LodopService implements OnDestroy {
       if (!res) return;
       const fn = this._lodop![res[1]];
       if (fn) {
-        let arr: NzSafeAny[] | null = null;
+        let arr: any[] | null = null;
         try {
           const fakeFn = new Function(`return [${res[2]}]`);
           arr = fakeFn();
@@ -215,7 +215,7 @@ export class LodopService implements OnDestroy {
    *
    * 立即打印，一般用于批量套打
    */
-  print(code: string, contextObj: NzSafeAny, parser?: RegExp): void {
+  print(code: string, contextObj: any, parser?: RegExp): void {
     this.check();
     if (contextObj) {
       this.printBuffer.push(

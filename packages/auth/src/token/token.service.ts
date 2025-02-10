@@ -4,13 +4,16 @@ import { BehaviorSubject, interval, Observable, Subject, Subscription, filter, m
 import { YunzaiAuthConfig, YunzaiConfigService } from '@yelon/util/config';
 
 import { mergeConfig } from '../auth.config';
-import { YA_STORE_TOKEN } from '../store/interface';
 import { AuthReferrer, ITokenModel, ITokenService } from './interface';
+import { YA_STORE_TOKEN } from '../store/interface';
 
 export function YA_SERVICE_TOKEN_FACTORY(): ITokenService {
   return new TokenService(inject(YunzaiConfigService));
 }
 
+/**
+ * 维护Token信息服务，[在线文档](https://ng.yunzainfo.com/auth)
+ */
 @Injectable()
 export class TokenService implements ITokenService, OnDestroy {
   private readonly store = inject(YA_STORE_TOKEN);
@@ -47,7 +50,6 @@ export class TokenService implements ITokenService, OnDestroy {
     return res;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   get(type?: any): any;
   get<T extends ITokenModel>(type?: new () => T): T;
   get<T extends ITokenModel>(type?: new () => T): T {

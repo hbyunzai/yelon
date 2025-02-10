@@ -3,12 +3,13 @@ import { Component, DebugElement, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputDirective } from 'ng-zorro-antd/input';
 
 import { ErrorCollectComponent } from './error-collect.component';
-import { ErrorCollectModule } from './error-collect.module';
 
 describe('abc: error-collect', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -17,8 +18,7 @@ describe('abc: error-collect', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ErrorCollectModule, ReactiveFormsModule, NzFormModule],
-      declarations: [TestComponent]
+      providers: [provideNoopAnimations()]
     });
   });
 
@@ -40,14 +40,14 @@ describe('abc: error-collect', () => {
     beforeEach(() => getPropertiesAndCreate());
     it('should be collect error', (done: () => void) => {
       setTimeout(() => {
-        expect(context.comp.count).toBe(1);
+        expect(context.comp.count()).toBe(1);
         done();
       }, 21);
     });
 
     it('should be click go to first error element', (done: () => void) => {
       setTimeout(() => {
-        expect(context.comp.count).toBe(1);
+        expect(context.comp.count()).toBe(1);
         const el = dl.query(By.css('.ant-form-item-has-error')).nativeElement as HTMLElement;
         spyOn(el, 'scrollIntoView');
         expect(el.scrollIntoView).not.toHaveBeenCalled();
@@ -72,7 +72,7 @@ describe('abc: error-collect', () => {
       `<form nz-form [formGroup]="validateForm"><error-collect #ec [freq]="freq"></error-collect></form>`
     );
     getPropertiesAndCreate();
-    const safeComp = context.comp as NzSafeAny;
+    const safeComp = context.comp as any;
     spyOn(safeComp, 'findParent');
     (dl.query(By.css('error-collect')).nativeElement as HTMLElement).click();
     expect(safeComp.findParent).not.toHaveBeenCalled();
@@ -97,7 +97,8 @@ describe('abc: error-collect', () => {
       </nz-form-item>
       <error-collect #ec [freq]="freq" [offsetTop]="offsetTop" />
     </form>
-  `
+  `,
+  imports: [NzFormModule, NzInputDirective, ErrorCollectComponent, ReactiveFormsModule]
 })
 class TestComponent implements OnInit {
   freq = 20;

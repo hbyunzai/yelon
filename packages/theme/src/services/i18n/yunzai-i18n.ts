@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 
 import { ITokenService, YA_SERVICE_TOKEN } from '@yelon/auth';
 import { YunzaiConfigService } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzI18nService, en_US as zorroEnUS } from 'ng-zorro-antd/i18n';
 
 import yelonEnUS from '../../locale/languages/en-US';
@@ -66,7 +66,7 @@ export class YunzaiHttpI18NService extends YunzaiI18nBaseService implements OnDe
     return arr.length <= 1 ? res : `${arr[0]}-${arr[1].toUpperCase()}`;
   }
 
-  loadLangData(lang: string): Observable<NzSafeAny> {
+  loadLangData(lang: string): Observable<any> {
     if (ngDevMode) {
       return this.http.get(`./assets/tmp/i18n/${lang}.json`);
     } else {
@@ -76,7 +76,7 @@ export class YunzaiHttpI18NService extends YunzaiI18nBaseService implements OnDe
     }
   }
 
-  loadLocaleData(lang: string): Observable<NzSafeAny> {
+  loadLocaleData(lang: string): Observable<any> {
     return this.http.get(`./assets/tmp/i18n/${lang}.json`);
   }
 
@@ -110,7 +110,7 @@ export class YunzaiHttpI18NService extends YunzaiI18nBaseService implements OnDe
       return of(langs);
     } else {
       return this.http.get(`/i18n/api/v2/language`).pipe(
-        map((response: NzSafeAny) => {
+        map((response: any) => {
           return response.data;
         }),
         catchError(() => of(langs))

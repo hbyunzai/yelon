@@ -1,4 +1,4 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 /**
  * @license
  * Copyright Google LLC All Rights Reserved.
@@ -39,7 +39,7 @@ export function createTouchEvent(type: string, pageX: number = 0, pageY: number 
   const event = document.createEvent('UIEvent');
   const touchDetails = { pageX, pageY };
 
-  (event as NzSafeAny).initUIEvent(type, true, true, window, 0);
+  (event as any).initUIEvent(type, true, true, window, 0);
 
   // Most of the browsers don't have a "initTouchEvent" method that can be used to define
   // the touch details.
@@ -51,8 +51,8 @@ export function createTouchEvent(type: string, pageX: number = 0, pageY: number 
 }
 
 /** Dispatches a keydown event from an element. */
-export function createKeyboardEvent(type: string, keyCode: number, target?: Element, key?: string): NzSafeAny {
-  const event = document.createEvent('KeyboardEvent') as NzSafeAny;
+export function createKeyboardEvent(type: string, keyCode: number, target?: Element, key?: string): any {
+  const event = document.createEvent('KeyboardEvent') as any;
   // Firefox does not support `initKeyboardEvent`, but supports `initKeyEvent`.
   const initEventFn = (event.initKeyEvent || event.initKeyboardEvent).bind(event);
   const originalPreventDefault = event.preventDefault;
@@ -68,8 +68,9 @@ export function createKeyboardEvent(type: string, keyCode: number, target?: Elem
   });
 
   // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
-  event.preventDefault = function (): NzSafeAny {
+  event.preventDefault = function (): any {
     Object.defineProperty(event, 'defaultPrevented', { get: () => true });
+    // eslint-disable-next-line prefer-rest-params
     return originalPreventDefault.apply(this, arguments);
   };
 

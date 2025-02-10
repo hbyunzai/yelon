@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, RouteReuseStrategy } from '@angular/router';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { ReuseTabService } from './reuse-tab.service';
 
@@ -17,7 +17,7 @@ export class ReuseTabStrategy implements RouteReuseStrategy {
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
     return this.srv.shouldAttach(route);
   }
-  retrieve(route: ActivatedRouteSnapshot): NzSafeAny | null {
+  retrieve(route: ActivatedRouteSnapshot): any | null {
     return this.srv.retrieve(route);
   }
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {

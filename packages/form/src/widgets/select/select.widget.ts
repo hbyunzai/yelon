@@ -2,13 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject, catchError, debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs';
 
 import { ArrayService } from '@yelon/util/array';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+
+import { SFSelectWidgetSchema } from './schema';
 import { SFValue } from '../../interface';
 import { SFSchemaEnum } from '../../schema';
 import { getData, toBool } from '../../utils';
 import { ControlUIWidget } from '../../widget';
-import { SFSelectWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-select',
@@ -72,20 +72,22 @@ import { SFSelectWidgetSchema } from './schema';
       }
       @if (loading) {
         <nz-option nzDisabled nzCustomContent>
-          <i nz-icon nzType="loading"></i>
+          <nz-icon nzType="loading" />
           {{ ui.searchLoadingText }}
         </nz-option>
       }
     </nz-select>
   </sf-item-wrap>`,
   preserveWhitespaces: false,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class SelectWidget extends ControlUIWidget<SFSelectWidgetSchema> implements OnInit {
   private search$ = new Subject<string>();
   i!: SFSelectWidgetSchema;
   data: SFSchemaEnum[] = [];
-  _value: NzSafeAny;
+  _value: any;
   hasGroup = false;
   loading = false;
 
@@ -124,7 +126,7 @@ export class SelectWidget extends ControlUIWidget<SFSelectWidgetSchema> implemen
       optionHeightPx: optionHeightPx || 32,
       optionOverflowSize: optionOverflowSize || 8,
       showArrow: toBool(showArrow, true),
-      compareWith: compareWith || ((o1: NzSafeAny, o2: NzSafeAny) => o1 === o2)
+      compareWith: compareWith || ((o1: any, o2: any) => o1 === o2)
     };
 
     const onSearch = this.ui.onSearch!;

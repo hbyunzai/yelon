@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 
 import { ErrorCollectComponent } from '@yelon/abc/error-collect';
+
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 
 const CLSBODY = 'footer-toolbar__body';
@@ -25,7 +26,6 @@ const CLSBODY = 'footer-toolbar__body';
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [NzStringTemplateOutletDirective, ErrorCollectComponent]
 })
 export class FooterToolbarComponent implements OnInit, OnDestroy {

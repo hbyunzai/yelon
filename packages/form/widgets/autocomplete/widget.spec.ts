@@ -5,12 +5,12 @@ import { of } from 'rxjs';
 import { mergeConfig, SFSchema, SFSchemaEnum } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
 import { YunzaiConfigService } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
+
 import { withAutoCompleteWidget } from './index';
 import { SFAutoCompleteWidgetSchema } from './schema';
 import { AutoCompleteWidget } from './widget';
+import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 
 describe('form: widget: autocomplete', () => {
   let fixture: ComponentFixture<TestFormComponent>;
@@ -60,7 +60,7 @@ describe('form: widget: autocomplete', () => {
     };
     page.newSchema(s);
     const selectWidget = page.getWidget<AutoCompleteWidget>(`sf-${widget}`);
-    selectWidget.updateValue({ nzLabel: 'aaa', nzValue: { value: 'aaa', label: 'aaa' } } as NzSafeAny);
+    selectWidget.updateValue({ nzLabel: 'aaa', nzValue: { value: 'aaa', label: 'aaa' } } as any);
     const item = s.properties!.a.ui as SFAutoCompleteWidgetSchema;
     expect(item.change).toHaveBeenCalled();
   });

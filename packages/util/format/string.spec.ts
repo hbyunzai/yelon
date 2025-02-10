@@ -1,4 +1,4 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { format, formatMask, FormatMaskOption } from './string';
 
@@ -58,7 +58,7 @@ describe('util: string', () => {
     });
 
     it('should be return empty when is invalid string', () => {
-      expect(formatMask(null as NzSafeAny, '#')).toBe('');
+      expect(formatMask(null as any, '#')).toBe('');
     });
   });
 });

@@ -22,7 +22,7 @@ jobs:
           ACCESS_REPO: ${{ github.repository }}
           ACCESS_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           PR_NUMBER: ${{ github.event.number }}
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ./node_modules
           key:  ${{ runner.os }}-${{ hashFiles('**/yarn.lock', '**/*.patch') }}
@@ -40,7 +40,8 @@ jobs:
         run: |
           export DEPLOY_DOMAIN=https://preview-${{ github.event.number }}-ng-yunzai-yelon.surge.sh
           echo "Deploy to $DEPLOY_DOMAIN"
-          cp ./src/dist/browser/index.html ./src/dist/browser/404.html
+          cp ./src/dist/browser/index.csr.html ./src/dist/browser/index.html
+          cp ./src/dist/browser/index.csr.html ./src/dist/browser/404.html
           npx surge --project ./src/dist/browser --domain $DEPLOY_DOMAIN
         env:
           ACCESS_REPO: ${{ github.repository }}
@@ -72,7 +73,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ./node_modules
           key:  ${{ runner.os }}-${{ hashFiles('**/yarn.lock', '**/*.patch') }}
@@ -80,13 +81,13 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Test
         run: yarn run test
-#      - uses: codecov/codecov-action@v3
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          directory: ./coverage/
-#          files: cobertura-coverage.xml
-#          fail_ci_if_error: true
-#          verbose: true
+      - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/
+          files: cobertura-coverage.xml
+          fail_ci_if_error: true
+          verbose: true
 
   test-cli:
     runs-on: ubuntu-latest
@@ -96,7 +97,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ./node_modules
           key:  ${{ runner.os }}-${{ hashFiles('**/yarn.lock', '**/*.patch') }}
@@ -113,7 +114,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ./node_modules
           key:  ${{ runner.os }}-${{ hashFiles('**/yarn.lock', '**/*.patch') }}

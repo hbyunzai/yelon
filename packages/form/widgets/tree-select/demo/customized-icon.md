@@ -30,11 +30,10 @@ import { NzTreeNode } from 'ng-zorro-antd/tree';
     }
     <ng-template #customTpl let-node>
       <span class="ant-tree-node-content-wrapper" [class.ant-tree-node-selected]="node.isSelected">
-        <span> <i nz-icon [nzType]="node.isExpanded ? 'folder-open' : 'folder'"></i> {{ node.title }} </span>
+        <span> <nz-icon [nzType]="node.isExpanded ? 'folder-open' : 'folder'"/> {{ node.title }} </span>
       </span>
     </ng-template>
   `,
-  standalone: true,
   imports: [YelonFormModule, NzIconModule]
 })
 export class DemoComponent implements OnInit {

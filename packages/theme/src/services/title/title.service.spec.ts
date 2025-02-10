@@ -4,16 +4,16 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+
+import { RouteTitle, TitleService } from './title.service';
 import { YunzaiThemeModule } from '../../theme.module';
 import { YunzaiI18NService, YunzaiI18NServiceFake, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { Menu } from '../menu/interface';
 import { MenuService } from '../menu/menu.service';
-import { RouteTitle, TitleService } from './title.service';
 
 describe('Service: Title', () => {
-  let getPathByUrlData: NzSafeAny;
+  let getPathByUrlData: any;
   class TestTitleService {
     setTitle = jasmine.createSpy('reset');
   }
@@ -30,15 +30,15 @@ describe('Service: Title', () => {
   const yunzai = 'Yunzai';
   const notPageName = 'Not Page Name';
 
-  function genModule(providers: NzSafeAny[] = [], loadI18n: boolean = true): void {
-    const i18nProvider: NzSafeAny[] = loadI18n ? [{ provide: YUNZAI_I18N_TOKEN, useClass: YunzaiI18NServiceFake }] : [];
+  function genModule(providers: any[] = [], loadI18n: boolean = true): void {
+    const i18nProvider: any[] = loadI18n ? [{ provide: YUNZAI_I18N_TOKEN, useClass: YunzaiI18NServiceFake }] : [];
     TestBed.configureTestingModule({
       imports: [YunzaiThemeModule, RouterModule.forRoot([])],
       providers: [TitleService, MenuService, { provide: Title, useClass: TestTitleService }, ...i18nProvider].concat(
         providers
       )
     });
-    title = TestBed.inject<Title>(Title) as NzSafeAny;
+    title = TestBed.inject<Title>(Title) as any;
     srv = TestBed.inject<TitleService>(TitleService);
     i18n = TestBed.inject(YUNZAI_I18N_TOKEN);
   }
@@ -208,7 +208,7 @@ describe('Service: Title', () => {
     describe('should be hava title via element', () => {
       it('with element', fakeAsync(() => {
         class TestDocument {
-          querySelector(): NzSafeAny {
+          querySelector(): any {
             return {
               childNodes: [],
               firstChild: {
@@ -216,7 +216,7 @@ describe('Service: Title', () => {
               }
             };
           }
-          querySelectorAll(): NzSafeAny {
+          querySelectorAll(): any {
             return {
               childNodes: [],
               firstChild: {
@@ -232,7 +232,7 @@ describe('Service: Title', () => {
       }));
       it('with element and has children', fakeAsync(() => {
         class TestDocument {
-          querySelector(): NzSafeAny {
+          querySelector(): any {
             return {
               childNodes: [
                 {

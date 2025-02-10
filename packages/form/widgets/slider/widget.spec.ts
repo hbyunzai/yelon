@@ -3,12 +3,12 @@ import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 
-import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 import { withSliderWidget } from './index';
 import { SliderWidget } from './widget';
+import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 
 describe('form: widget: slider', () => {
   let fixture: ComponentFixture<TestFormComponent>;
@@ -94,7 +94,7 @@ describe('form: widget: slider', () => {
     spyOn(comp, '_formatter');
     page.time();
     expect(comp._formatter).toHaveBeenCalled();
-    expect((s.properties!.a.ui as NzSafeAny).formatter).toHaveBeenCalled();
+    expect((s.properties!.a.ui as any).formatter).toHaveBeenCalled();
   }));
 
   it('#afterChange', fakeAsync(() => {
@@ -113,6 +113,6 @@ describe('form: widget: slider', () => {
     };
     page.newSchema(s).time();
     getWidget()._afterChange(1);
-    expect((s.properties!.a.ui as NzSafeAny).afterChange).toHaveBeenCalled();
+    expect((s.properties!.a.ui as any).afterChange).toHaveBeenCalled();
   }));
 });

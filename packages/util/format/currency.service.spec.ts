@@ -1,7 +1,7 @@
 import { DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { CurrencyService } from './currency.service';
 
@@ -65,7 +65,7 @@ describe('util: FormatCurrencyService', () => {
     });
 
     it('should be powerI18n', () => {
-      expect(srv.mega(10100, { precision: 1, unitI18n: { K: 'Qiang' } as NzSafeAny }).unitI18n).toBe('Qiang');
+      expect(srv.mega(10100, { precision: 1, unitI18n: { K: 'Qiang' } as any }).unitI18n).toBe('Qiang');
     });
 
     it('should be / 100 when staring unit is cent', () => {
@@ -110,7 +110,7 @@ describe('util: FormatCurrencyService', () => {
         value: '一',
         options: { startingUnit: 'cent' }
       }
-    ].forEach((item: NzSafeAny) => {
+    ].forEach((item: any) => {
       it(`${typeof item.num === 'string' ? '[string]' : ''}${item.inWords ? 'RMB:' : ''}${item.num} muse be ${
         item.value
       }`, () => {

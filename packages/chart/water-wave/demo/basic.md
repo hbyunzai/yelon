@@ -18,7 +18,6 @@ import { G2WaterWaveModule } from '@yelon/chart/water-wave';
   host: {
     '[class.d-block]': 'true'
   },
-  standalone: true,
   imports: [G2WaterWaveModule]
 })
 export class DemoComponent {}

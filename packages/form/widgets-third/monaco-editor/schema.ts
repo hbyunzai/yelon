@@ -2,8 +2,9 @@ import type { NuMonacoEditorEvent, NuMonacoEditorModel } from '@ng-util/monaco-e
 
 import type { SFUISchemaItem } from '@yelon/form';
 
+
 export interface MonacoEditorWidgetSchema extends SFUISchemaItem {
-  options?: monaco.editor.IStandaloneEditorConstructionOptions;
+  options?: any;
   delay?: number;
   change?: (value: string) => void;
   model?: NuMonacoEditorModel;

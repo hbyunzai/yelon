@@ -11,27 +11,23 @@ import { BUILD_TARGET_LINT, getProjectFromWorkspace } from './workspace';
 export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void {
   addPackage(
     tree,
-    ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart', 'bcs', 'bis', 'socket'].map(
-      name => `@yelon/${name}@${version}`
-    )
+    ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart'].map(name => `@yelon/${name}@${version}`)
   );
   addPackage(
     tree,
     [
-      `@angular-eslint/builder@DEP-0.0.0-PLACEHOLDER`,
-      `@angular-eslint/eslint-plugin@DEP-0.0.0-PLACEHOLDER`,
-      `@angular-eslint/eslint-plugin-template@DEP-0.0.0-PLACEHOLDER`,
-      `@angular-eslint/schematics@DEP-0.0.0-PLACEHOLDER`,
-      `@angular-eslint/template-parser@DEP-0.0.0-PLACEHOLDER`,
+      `angular-eslint@DEP-0.0.0-PLACEHOLDER`,
       `@typescript-eslint/eslint-plugin@DEP-0.0.0-PLACEHOLDER`,
       `@typescript-eslint/parser@DEP-0.0.0-PLACEHOLDER`,
+      `@typescript-eslint/utils@DEP-0.0.0-PLACEHOLDER`,
       `eslint@DEP-0.0.0-PLACEHOLDER`,
       `eslint-config-prettier@DEP-0.0.0-PLACEHOLDER`,
       `eslint-plugin-import@DEP-0.0.0-PLACEHOLDER`,
       `eslint-plugin-jsdoc@DEP-0.0.0-PLACEHOLDER`,
       `eslint-plugin-prefer-arrow@DEP-0.0.0-PLACEHOLDER`,
       `eslint-plugin-prettier@DEP-0.0.0-PLACEHOLDER`,
-      `eslint-plugin-deprecation@DEP-0.0.0-PLACEHOLDER`,
+      `eslint-plugin-unused-imports@DEP-0.0.0-PLACEHOLDER`,
+      `typescript-eslint@DEP-0.0.0-PLACEHOLDER`,
       `prettier@DEP-0.0.0-PLACEHOLDER`,
       `husky@DEP-0.0.0-PLACEHOLDER`,
       `ng-yunzai@${version}`,
@@ -39,8 +35,6 @@ export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void
       `source-map-explorer@DEP-0.0.0-PLACEHOLDER`,
       `@angular/language-service@DEP-0.0.0-PLACEHOLDER`,
       `ngx-tinymce@DEP-0.0.0-PLACEHOLDER`,
-      `@stomp/rx-stomp@DEP-0.0.0-PLACEHOLDER`,
-      `@stomp/stompjs@DEP-0.0.0-PLACEHOLDER`,
       `@ng-util/monaco-editor@DEP-0.0.0-PLACEHOLDER`,
       `@yelon/testing@${version}`
     ],

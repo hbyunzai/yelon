@@ -2,11 +2,10 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 import { EllipsisComponent } from './ellipsis.component';
-import { EllipsisModule } from './ellipsis.module';
 
 describe('abc: ellipsis', () => {
   let fixture: ComponentFixture<TestBaseComponent>;
@@ -14,16 +13,7 @@ describe('abc: ellipsis', () => {
   let context: TestBaseComponent;
   let page: PageObject;
 
-  function genModule(): void {
-    TestBed.configureTestingModule({
-      imports: [EllipsisModule],
-      declarations: [TestLengthComponent, TestLineComponent]
-    });
-  }
-
   describe('', () => {
-    beforeEach(() => genModule());
-
     it('should be not length & line', () => {
       fixture = TestBed.createComponent(TestLengthComponent);
       dl = fixture.debugElement;
@@ -88,7 +78,7 @@ describe('abc: ellipsis', () => {
       });
       describe('when not support line clamp', () => {
         beforeEach(fakeAsync(() => {
-          spyOn(window, 'getComputedStyle').and.returnValue({ lineHeight: 20 } as NzSafeAny);
+          spyOn(window, 'getComputedStyle').and.returnValue({ lineHeight: 20 } as any);
           page.comp['isSupportLineClamp'] = false;
           context.lines = 1;
           page.tick();
@@ -100,7 +90,7 @@ describe('abc: ellipsis', () => {
         }));
         it('should be not innerText', fakeAsync(() => {
           const el = page.getEl('.ellipsis__shadow');
-          spyOnProperty(el!, 'innerText').and.returnValue(null as NzSafeAny);
+          spyOnProperty(el!, 'innerText').and.returnValue(null as any);
           context.lines = 2;
           page.tick();
           expect((dl.nativeElement as HTMLElement).innerHTML).toContain('...');
@@ -118,7 +108,6 @@ describe('abc: ellipsis', () => {
   describe('**slow**', () => {
     it('should be throw error when include html element', fakeAsync(() => {
       expect(() => {
-        genModule();
         TestBed.overrideTemplate(TestLengthComponent, `<ellipsis length="1"><p>asdf</p></ellipsis>`);
         fixture = TestBed.createComponent(TestLengthComponent);
         dl = fixture.debugElement;
@@ -203,7 +192,8 @@ class TestBaseComponent {
     <ellipsis #comp [tooltip]="tooltip" [length]="length" [fullWidthRecognition]="fullWidthRecognition" [tail]="tail">{{
       text
     }}</ellipsis>
-  `
+  `,
+  imports: [EllipsisComponent]
 })
 class TestLengthComponent extends TestBaseComponent {}
 
@@ -218,6 +208,7 @@ class TestLengthComponent extends TestBaseComponent {}
       style="width: 1px; display: block;"
       ><div [innerHTML]="html"></div
     ></ellipsis>
-  `
+  `,
+  imports: [EllipsisComponent]
 })
 class TestLineComponent extends TestBaseComponent {}

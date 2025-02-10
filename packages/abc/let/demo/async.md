@@ -20,7 +20,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { interval, startWith } from 'rxjs';
 
 import { LetDirective } from '@yelon/abc/let';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 @Component({
   selector: 'app-demo',
@@ -38,7 +38,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   imports: [LetDirective, AsyncPipe]
 })
 export class DemoComponent {
-  timer$: NzSafeAny | null = null;
+  timer$: any | null = null;
 
   constructor(platform: Platform) {
     if (!platform.isBrowser) return;

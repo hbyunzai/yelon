@@ -9,8 +9,7 @@ import { I18NService, MetaService, MobileService } from '@core';
 
 @Component({
   selector: 'app-root',
-  template: ` <router-outlet />`,
-  standalone: true,
+  template: `<router-outlet />`,
   imports: [RouterOutlet]
 })
 export class AppComponent {
@@ -82,6 +81,6 @@ export class AppComponent {
       title.setTitle(item ? item.title || item.subtitle : '');
     });
 
-    i18n.change.subscribe(_ => meta.clearMenu());
+    i18n.change.subscribe(() => meta.clearMenu());
   }
 }

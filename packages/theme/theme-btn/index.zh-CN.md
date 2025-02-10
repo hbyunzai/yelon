@@ -13,9 +13,9 @@ module: import { ThemeBtnModule } from '@yelon/theme/theme-btn';
 
 ### layout-default
 
-| 成员 | 说明 | 类型 | 默认值                                                                                                                                      |
-|----|----|----|------------------------------------------------------------------------------------------------------------------------------------------|
-| `[types]` | 类型列表 | `ThemeBtnType[]` | `[ { key: 'default', text: 'Default Theme', color: '#2163ff' }, { key: 'dark', text: 'Dark Theme', color: '#020202' }, { key: 'compact', text: 'Compact Theme', color: '#2163ff' } ]` |
-| `[devTips]` | 开发提示 | `String` | `When the dark.css file can't be found, you need to run it once: npm run theme`                                                          |
-| `[deployUrl]` | 文件将部署到的 URL，一般到使用 `ng b --deploy-url` 时需要 | `String` | `-`                                                                                                                                      |
-| `(themeChange)` | 主题变更通知 | `EventEmitter<string>` | `-`                                                                                                                                      |
+| 成员 | 说明 | 类型 | 默认值 |
+|----|----|----|-----|
+| `[types]` | 类型列表 | `ThemeBtnType[]` | `[ { key: 'default', text: 'Default Theme' }, { key: 'dark', text: 'Dark Theme' }, { key: 'compact', text: 'Compact Theme' }, ]` |
+| `[devTips]` | 开发提示 | `String` | `When the dark.css file can't be found, you need to run it once: npm run theme` |
+| `[deployUrl]` | 文件将部署到的 URL，一般到使用 `ng b --deploy-url` 时需要 | `String` | `-` |
+| `(themeChange)` | 主题变更通知 | `EventEmitter<string>` | `-` |

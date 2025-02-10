@@ -26,7 +26,7 @@ import {
   YunzaiMenu,
   YunzaiMenuAttribute
 } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface LoadParam {
   force?: boolean;
@@ -67,10 +67,10 @@ export class YunzaiStartupService {
     const [setCurrent] = useLocalStorageCurrent();
 
     return this.token(param).pipe(
-      mergeMap((token: NzSafeAny) => {
+      mergeMap((token: any) => {
         if (token === false) {
           return this.i18n.loadLocaleData(defaultLang).pipe(
-            map((langData: NzSafeAny) => {
+            map((langData: any) => {
               this.i18n.use(defaultLang, langData);
               this.settingService.setLayout('lang', defaultLang);
             }),
@@ -91,7 +91,7 @@ export class YunzaiStartupService {
           this.httpClient.get(`/auth/allheader/v2`),
           this.httpClient.get(`/app-manager/project/info`)
         ]).pipe(
-          map(([user, header, project]: NzSafeAny) => {
+          map(([user, header, project]: any) => {
             setUser(user.principal);
             setTenant(user.tenantId);
             setHeader(header.data);
@@ -102,7 +102,7 @@ export class YunzaiStartupService {
       }),
       mergeMap(() => {
         return this.i18n.loadLangData(defaultLang).pipe(
-          map((langData: NzSafeAny) => {
+          map((langData: any) => {
             this.i18n.use(defaultLang, langData);
             return void 0;
           })
@@ -127,10 +127,10 @@ export class YunzaiStartupService {
           generateAbility([currentMenu], abilities, '');
           this.aclService.attachRole(
             yunzaiUser?.roles
-              .map((role: NzSafeAny) => {
+              .map((role: any) => {
                 return role.roleValue;
               })
-              .filter((a: NzSafeAny) => !!a) || []
+              .filter((a: any) => !!a) || []
           );
           this.aclService.attachAbility(abilities);
           this.menuService.add([currentMenu as Menu]);
@@ -153,7 +153,7 @@ export class YunzaiStartupService {
         }
         return of(void 0);
       }),
-      catchError((error: NzSafeAny) => {
+      catchError((error: any) => {
         console.error('Error occurred:', error);
         return of(void 0);
       })
@@ -166,7 +166,7 @@ export class YunzaiStartupService {
     if (this.config.loginForm) {
       if (this.tokenService.get()?.access_token || force || auto) {
         return this.httpClient.post(`/auth/oauth/token?_allow_anonymous=true`, this.config.loginForm).pipe(
-          map((response: NzSafeAny) => {
+          map((response: any) => {
             return response;
           })
         );
@@ -177,7 +177,7 @@ export class YunzaiStartupService {
       return this.httpClient
         .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
         .pipe(
-          map((response: NzSafeAny) => {
+          map((response: any) => {
             switch (response.errcode) {
               case 2000:
                 return response.data;
@@ -210,9 +210,9 @@ export class YunzaiStartupService {
 }
 
 export function mapYzSideToYelonMenu(menus: YunzaiMenu[]): void {
-  menus.forEach((menu: NzSafeAny) => {
+  menus.forEach((menu: any) => {
     if (menu.children && menu.hideChildren) {
-      menu.children.forEach((c: NzSafeAny) => (c.hide = true));
+      menu.children.forEach((c: any) => (c.hide = true));
     }
     menu.badgeDot = menu.badge_dot || null;
     menu.badgeStatus = menu.badge_status || null;

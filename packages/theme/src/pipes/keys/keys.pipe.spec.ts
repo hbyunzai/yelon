@@ -1,19 +1,16 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YunzaiThemeModule } from '../../theme.module';
+
+import { KeysPipe } from './keys.pipe';
 
 describe('Pipe: keys', () => {
   let fixture: ComponentFixture<TestComponent>;
 
   function genModule(template?: string): void {
-    TestBed.configureTestingModule({
-      imports: [YunzaiThemeModule],
-      declarations: [TestComponent]
-    });
     if (template) TestBed.overrideTemplate(TestComponent, template);
     fixture = TestBed.createComponent(TestComponent);
     fixture.detectChanges();
@@ -49,11 +46,12 @@ describe('Pipe: keys', () => {
         <li>{{ item.key }}</li>
       }
     </ul>
-  `
+  `,
+  imports: [KeysPipe, JsonPipe]
 })
 class TestComponent {
-  data: NzSafeAny = {
-    name: 'yunzai-bot',
+  data: any = {
+    name: 'cipchk',
     address: { city: 'shanghai', district: 'changning' }
   };
   dist = { 1: '正常', 2: '删除' };

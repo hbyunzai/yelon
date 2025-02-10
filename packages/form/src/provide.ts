@@ -1,14 +1,14 @@
 import {
-  ENVIRONMENT_INITIALIZER,
   EnvironmentProviders,
   NgZone,
   Provider,
   inject,
-  makeEnvironmentProviders
+  makeEnvironmentProviders,
+  provideEnvironmentInitializer
 } from '@angular/core';
 
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { AjvSchemaValidatorFactory, SchemaValidatorFactory } from './validator.factory';
 import { WidgetRegistry } from './widget.factory';
@@ -16,7 +16,7 @@ import { NzWidgetRegistry } from './widgets/nz-widget.registry';
 
 export interface SFWidgetProvideConfig {
   KEY: string;
-  type: NzSafeAny;
+  type: any;
 }
 
 /**
@@ -32,14 +32,12 @@ export function provideSFConfig(options?: { widgets?: SFWidgetProvideConfig[] })
     { provide: WidgetRegistry, useClass: NzWidgetRegistry }
   ];
   if (options?.widgets) {
-    provides.push({
-      provide: ENVIRONMENT_INITIALIZER,
-      multi: true,
-      useValue: () => {
+    provides.push(
+      provideEnvironmentInitializer(() => {
         const srv = inject(WidgetRegistry);
         options?.widgets?.forEach(widget => srv.register(widget.KEY, widget.type));
-      }
-    });
+      })
+    );
   }
   return makeEnvironmentProviders(provides);
 }

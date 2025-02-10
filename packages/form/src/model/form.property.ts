@@ -3,7 +3,7 @@ import { BehaviorSubject, combineLatest, Observable, distinctUntilChanged, map, 
 
 import { YunzaiSFConfig } from '@yelon/util/config';
 import { NzFormStatusService } from 'ng-zorro-antd/core/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 
 import { SF_SEQ } from '../const';
@@ -23,7 +23,7 @@ export abstract class FormProperty {
   private _visibilityChanges = new BehaviorSubject<boolean>(true);
   private _root: PropertyGroup;
   private _parent: PropertyGroup | null;
-  _objErrors: { [key: string]: ErrorData[] } = {};
+  _objErrors: Record<string, ErrorData[]> = {};
   schemaValidator: (value: SFValue) => ErrorData[];
   schema: SFSchema;
   ui: SFUISchema | SFUISchemaItemRun;
@@ -54,7 +54,7 @@ export abstract class FormProperty {
     if (parent) {
       this._root = parent.root;
     } else {
-      this._root = this as NzSafeAny;
+      this._root = this as any;
     }
     this.path = path;
   }
@@ -275,7 +275,7 @@ export abstract class FormProperty {
 
         if (message) {
           if (~message.indexOf('{') && err.params) {
-            message = message.replace(/{([\.a-zA-Z0-9]+)}/g, (_v: string, key: string) => err.params![key] || '');
+            message = message.replace(/{([.a-zA-Z0-9]+)}/g, (_v: string, key: string) => err.params![key] || '');
           }
           err.message = message;
         }
@@ -331,7 +331,7 @@ export abstract class FormProperty {
     } else if (visibleIf != null) {
       const propertiesBinding: Array<Observable<boolean>> = [];
       for (const dependencyPath in visibleIf) {
-        if (visibleIf.hasOwnProperty(dependencyPath)) {
+        if (Object.prototype.hasOwnProperty.call(visibleIf, dependencyPath)) {
           const property = this.searchProperty(dependencyPath);
           if (property) {
             const valueCheck = property.valueChanges.pipe(
@@ -393,13 +393,13 @@ export abstract class FormProperty {
 }
 
 export abstract class PropertyGroup extends FormProperty {
-  properties: { [key: string]: FormProperty } | FormProperty[] | null = null;
+  properties: Record<string, FormProperty> | FormProperty[] | null = null;
 
   getProperty(path: string): FormProperty | undefined {
     const subPathIdx = path.indexOf(SF_SEQ);
     const propertyId = subPathIdx !== -1 ? path.substring(0, subPathIdx) : path;
 
-    let property = (this.properties as { [key: string]: FormProperty })[propertyId];
+    let property = (this.properties as Record<string, FormProperty>)[propertyId];
     if (property !== null && subPathIdx !== -1 && property instanceof PropertyGroup) {
       const subPath = path.substring(subPathIdx + 1);
       property = (property as PropertyGroup).getProperty(subPath)!;
@@ -408,9 +408,10 @@ export abstract class PropertyGroup extends FormProperty {
   }
 
   forEachChild(fn: (formProperty: FormProperty, str: string) => void): void {
+    // eslint-disable-next-line @typescript-eslint/no-for-in-array
     for (const propertyId in this.properties) {
-      if (this.properties.hasOwnProperty(propertyId)) {
-        const property = (this.properties as { [key: string]: FormProperty })[propertyId];
+      if (Object.prototype.hasOwnProperty.call(this.properties, propertyId)) {
+        const property = (this.properties as Record<string, FormProperty>)[propertyId];
         fn(property, propertyId);
       }
     }

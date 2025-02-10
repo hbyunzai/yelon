@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,14 +14,14 @@ import type { Chart, Event } from '@antv/g2';
 
 import { G2BaseComponent, G2InteractionType } from '@yelon/chart/core';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDividerComponent } from 'ng-zorro-antd/divider';
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 export interface G2PieData {
-  x: NzSafeAny;
+  x: any;
   y: number;
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 }
 
 export interface G2PieClickItem {
@@ -54,12 +53,11 @@ export interface G2PieRatio {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [NzSkeletonComponent, NzStringTemplateOutletDirective, NzDividerComponent, NgStyle]
+  imports: [NzSkeletonComponent, NzStringTemplateOutletDirective, NzDividerComponent]
 })
 export class G2PieComponent extends G2BaseComponent {
   private percentColor!: (value: string) => string;
-  legendData: NzSafeAny[] = [];
+  legendData: any[] = [];
   isPercent = false;
 
   // #region fields
@@ -158,7 +156,7 @@ export class G2PieComponent extends G2BaseComponent {
       chart.interaction(interaction);
     }
     chart.axis(false).legend(false).coordinate('theta', { innerRadius: inner });
-    chart.filter('x', (_val: NzSafeAny, item: NzSafeAny) => item.checked !== false);
+    chart.filter('x', (_val: any, item: any) => item.checked !== false);
     chart
       .interval()
       .adjust('stack')
@@ -210,7 +208,7 @@ export class G2PieComponent extends G2BaseComponent {
     const { hasLegend, isPercent, cdr, _chart } = this;
     if (!hasLegend || isPercent) return;
 
-    this.legendData = _chart.geometries[0].dataArray.map((item: NzSafeAny) => {
+    this.legendData = _chart.geometries[0].dataArray.map((item: any) => {
       const origin = item[0]._origin;
       origin.color = item[0].color;
       origin.checked = true;

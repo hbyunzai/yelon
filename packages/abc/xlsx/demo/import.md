@@ -19,7 +19,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 
 import { XlsxService } from '@yelon/abc/xlsx';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 @Component({
   selector: 'app-demo',
@@ -29,11 +29,10 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
     <p class="mt-sm">result: {{ data | json }}</p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzButtonModule, JsonPipe]
 })
 export class DemoComponent {
-  data: NzSafeAny;
+  data: any;
 
   constructor(
     private xlsx: XlsxService,

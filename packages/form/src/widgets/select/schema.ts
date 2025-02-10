@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzOptionComponent, NzSelectModeType } from 'ng-zorro-antd/select';
 
 import { SFValue } from '../../interface';
@@ -24,7 +24,7 @@ export interface SFSelectWidgetSchema extends SFUISchemaItem {
   /**
    * 与 [SelectControlValueAccessor](https://angular.io/api/forms/SelectControlValueAccessor#caveat-option-selection) 相同
    */
-  compareWith?: (o1: NzSafeAny, o2: NzSafeAny) => boolean;
+  compareWith?: (o1: any, o2: any) => boolean;
 
   /**
    * 是否在选中项后清空搜索框，只在 `mode` 为 `multiple` 或 `tags` 时有效，默认：`true`
@@ -59,7 +59,7 @@ export interface SFSelectWidgetSchema extends SFUISchemaItem {
   /**
    * 下拉菜单的 style 属性
    */
-  dropdownStyle?: { [key: string]: string } | null;
+  dropdownStyle?: Record<string, string> | null;
 
   /**
    * 是否使用服务端搜索，当为 `true` 时，将不再在前端对 `nz-option` 进行过滤，默认：`false`
@@ -120,32 +120,32 @@ export interface SFSelectWidgetSchema extends SFUISchemaItem {
   /**
    * 自定义的选择框后缀图标
    */
-  suffixIcon?: TemplateRef<NzSafeAny> | string;
+  suffixIcon?: TemplateRef<any> | string;
 
   /**
    * 自定义的多选框清除图标
    */
-  removeIcon?: TemplateRef<NzSafeAny>;
+  removeIcon?: TemplateRef<any>;
 
   /**
    * 自定义的多选框清空图标
    */
-  clearIcon?: TemplateRef<NzSafeAny>;
+  clearIcon?: TemplateRef<any>;
 
   /**
    * 清空时默认值，默认：`undefined`
    */
-  clearValue?: NzSafeAny;
+  clearValue?: any;
 
   /**
    * 自定义当前选中的条目图标
    */
-  menuItemSelectedIcon?: TemplateRef<NzSafeAny>;
+  menuItemSelectedIcon?: TemplateRef<any>;
 
   /**
    * 隐藏 tag 时显示的内容
    */
-  maxTagPlaceholder?: TemplateRef<{ $implicit: NzSafeAny[] }>;
+  maxTagPlaceholder?: TemplateRef<{ $implicit: any[] }>;
 
   /**
    * 下拉菜单中每个 Option 的高度，默认：`32`
@@ -160,7 +160,7 @@ export interface SFSelectWidgetSchema extends SFUISchemaItem {
   /**
    * 自由扩展
    */
-  dropdownRender?: TemplateRef<NzSafeAny>;
+  dropdownRender?: TemplateRef<any>;
 
   /**
    * 选中的 `nz-option` 发生变化时，调用此函数

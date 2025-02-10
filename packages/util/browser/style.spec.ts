@@ -1,4 +1,4 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { updateHostClass } from './style';
 
@@ -34,14 +34,14 @@ describe('util: style', () => {
   });
 
   class PageObject {
-    fakeEl: NzSafeAny = {};
-    fakeRender: NzSafeAny = {
-      removeClass: (_el: NzSafeAny, value: NzSafeAny) => delete this.fakeEl[value],
-      addClass: (_el: NzSafeAny, value: NzSafeAny) => (this.fakeEl[value] = ''),
+    fakeEl: any = {};
+    fakeRender: any = {
+      removeClass: (_el: any, value: any) => delete this.fakeEl[value],
+      addClass: (_el: any, value: any) => (this.fakeEl[value] = ''),
       removeAttribute: () => (this.fakeEl = {})
     };
 
-    run(obj: { [klass: string]: unknown }, cleanAll?: boolean): this {
+    run(obj: Record<string, unknown>, cleanAll?: boolean): this {
       if (typeof cleanAll === 'undefined') {
         updateHostClass(this.fakeEl, this.fakeRender, obj);
       } else {
@@ -51,7 +51,7 @@ describe('util: style', () => {
     }
 
     has(clsName: string, result: boolean = true): this {
-      expect(this.fakeEl.hasOwnProperty(clsName)).toBe(result);
+      expect(Object.prototype.hasOwnProperty.call(this.fakeEl, clsName)).toBe(result);
       return this;
     }
   }

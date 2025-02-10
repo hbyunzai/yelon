@@ -5,9 +5,9 @@ import { Router, RouterModule } from '@angular/router';
 
 import { provideYunzaiConfig } from '@yelon/util/config';
 
-import { YunzaiThemeModule } from '../../theme.module';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from './i18n';
 import { yunzaiI18nCanActivate, yunzaiI18nCanActivateChild } from './i18n-url.guard';
+import { I18nPipe } from './i18n.pipe';
 
 describe('theme: i18n', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -21,10 +21,6 @@ describe('theme: i18n', () => {
 
   describe('', () => {
     beforeEach(() => {
-      TestBed.configureTestingModule({
-        imports: [YunzaiThemeModule],
-        declarations: [TestComponent]
-      });
       fixture = TestBed.createComponent(TestComponent);
       srv = fixture.debugElement.injector.get(YUNZAI_I18N_TOKEN);
       srv.use('en', {
@@ -88,8 +84,6 @@ describe('theme: i18n', () => {
 
   it('#interpolation', () => {
     TestBed.configureTestingModule({
-      imports: [YunzaiThemeModule],
-      declarations: [TestComponent],
       providers: [provideYunzaiConfig({ themeI18n: { interpolation: ['#', '#'] } })]
     });
     fixture = TestBed.createComponent(TestComponent);
@@ -108,7 +102,6 @@ describe('theme: i18n', () => {
     it('should be working', fakeAsync(() => {
       TestBed.configureTestingModule({
         imports: [
-          YunzaiThemeModule,
           RouterModule.forRoot([
             {
               path: ':i18n',
@@ -117,8 +110,7 @@ describe('theme: i18n', () => {
               canActivateChild: [yunzaiI18nCanActivateChild]
             }
           ])
-        ],
-        declarations: [TestComponent]
+        ]
       });
       fixture = TestBed.createComponent(TestComponent);
       srv = fixture.debugElement.injector.get(YUNZAI_I18N_TOKEN);
@@ -132,10 +124,8 @@ describe('theme: i18n', () => {
     it('should be can not work', fakeAsync(() => {
       TestBed.configureTestingModule({
         imports: [
-          YunzaiThemeModule,
           RouterModule.forRoot([{ path: ':invalid', component: TestComponent, canActivate: [yunzaiI18nCanActivate] }])
-        ],
-        declarations: [TestComponent]
+        ]
       });
       fixture = TestBed.createComponent(TestComponent);
       srv = fixture.debugElement.injector.get(YUNZAI_I18N_TOKEN);
@@ -149,10 +139,8 @@ describe('theme: i18n', () => {
     it('should be working', fakeAsync(() => {
       TestBed.configureTestingModule({
         imports: [
-          YunzaiThemeModule,
           RouterModule.forRoot([{ path: ':lang', component: TestComponent, canActivate: [yunzaiI18nCanActivate] }])
         ],
-        declarations: [TestComponent],
         providers: [provideYunzaiConfig({ themeI18n: { paramNameOfUrlGuard: 'lang' } })]
       });
       fixture = TestBed.createComponent(TestComponent);
@@ -170,7 +158,8 @@ describe('theme: i18n', () => {
   template: `
     <div id="simple">{{ key | i18n }}</div>
     <div id="param">{{ key | i18n: params }}</div>
-  `
+  `,
+  imports: [I18nPipe]
 })
 class TestComponent {
   key = 'simple';

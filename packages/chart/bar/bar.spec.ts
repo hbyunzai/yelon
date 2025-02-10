@@ -2,17 +2,16 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2, PageG2DataCount, PageG2Height } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { G2BarComponent, G2BarData } from './bar.component';
-import { G2BarModule } from './bar.module';
 
 describe('chart: bar', () => {
   let page: PageG2<TestComponent>;
 
   describe('', () => {
     beforeEach(fakeAsync(() => {
-      page = new PageG2<TestComponent>().makeModule(G2BarModule, TestComponent);
+      page = new PageG2<TestComponent>().genComp(TestComponent, true);
     }));
 
     it('should be working', () => {
@@ -44,7 +43,7 @@ describe('chart: bar', () => {
       const color = '#f50';
       page.context.color = color;
       page.dc();
-      expect((page.chart.geometries[0] as NzSafeAny).attributeOption.color.callback(1, 1)).toBe(color);
+      expect((page.chart.geometries[0] as any).attributeOption.color.callback(1, 1)).toBe(color);
     });
 
     it('#padding', () => {
@@ -66,7 +65,7 @@ describe('chart: bar', () => {
     it('tooltip', () => page.checkTooltip('1月'));
   });
 
-  it('#delay', fakeAsync(() => checkDelay(G2BarModule, TestComponent)));
+  it('#delay', fakeAsync(() => checkDelay(TestComponent)));
 });
 
 @Component({
@@ -81,10 +80,11 @@ describe('chart: bar', () => {
       [padding]="padding"
       [data]="data"
       [autoLabel]="autoLabel"
-      (clickItem)="clickItem($event)"
+      (clickItem)="clickItem()"
     />
     <ng-template #titleTpl><p id="titleTpl">titleTpl</p></ng-template>
-  `
+  `,
+  imports: [G2BarComponent]
 })
 class TestComponent implements OnInit {
   @ViewChild('comp', { static: true }) comp!: G2BarComponent;

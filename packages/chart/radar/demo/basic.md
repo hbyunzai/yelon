@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 
 import { G2RadarClickItem, G2RadarData, G2RadarModule } from '@yelon/chart/radar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
@@ -21,7 +21,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     <button nz-button (click)="refresh()" nzType="primary">Refresh</button>
     <g2-radar [hasLegend]="true" [data]="radarData" height="286" (clickItem)="handleClick($event)" />
   `,
-  standalone: true,
   imports: [NzButtonModule, G2RadarModule]
 })
 export class DemoComponent {
@@ -52,7 +51,7 @@ export class DemoComponent {
       delete radarTitleMap.hot;
     }
     const res: G2RadarData[] = [];
-    radarOriginData.forEach((item: { [key: string]: NzSafeAny }) => {
+    radarOriginData.forEach((item: { [key: string]: any }) => {
       Object.keys(item).forEach(key => {
         if (key !== 'name') {
           res.push({

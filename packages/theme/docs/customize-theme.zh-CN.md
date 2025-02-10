@@ -73,7 +73,7 @@ Ant Design 的样式使用了 [Less](http://lesscss.org/) 作为开发语言，�
 npm i --save-dev ng-yunzai-plugin-theme
 ```
 
-> [ng-yunzai-plugin-theme](https://github.com/hbyunzai/plugin-theme) 是专门针对 NG-YUNZAI 生成 `color.less` 及主题CSS文件。
+> [ng-yunzai-plugin-theme](https://github.com/ng-yunzai/plugin-theme) 是专门针对 NG-YUNZAI 生成 `color.less` 及主题CSS文件。
 
 在 `ng-yunzai.json` 内新增 `theme` 节点：
 
@@ -127,8 +127,6 @@ changeTheme(theme: 'default' | 'dark'): void {
   }
 }
 ```
-
-
 
 > 注意：如果你使用 `@yelon/chart` 或第三方组件，可能需要手动修改组件来支持相应的主题。
 

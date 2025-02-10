@@ -19,6 +19,7 @@ Resize the table header base on [nz-resizable](https://ng.ant.design/experimenta
 
 > - Note: Don't forget to import the `nz-resizable` Less style (`@import 'ng-zorro-antd/resizable/style/entry.less';`) file in `src/styles`.
 > - **Multiple headers not supported**
+> - Adjustment handles will become smaller when present with filtering and sorting
 
 ```ts
 import { Component } from '@angular/core';
@@ -30,7 +31,6 @@ import { STChange, STColumn, STModule } from '@yelon/abc/st';
   template: `
     <st [data]="url" [columns]="columns" [widthMode]="{ type: 'strict' }" resizable (change)="onChange($event)" />
   `,
-  standalone: true,
   imports: [STModule]
 })
 export class DemoComponent {

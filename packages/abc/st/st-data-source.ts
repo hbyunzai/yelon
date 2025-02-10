@@ -9,7 +9,7 @@ import { DatePipe, YNPipe, _HttpClient } from '@yelon/theme';
 import type { YunzaiSTConfig } from '@yelon/util/config';
 import { CurrencyService } from '@yelon/util/format';
 import { deepCopy, deepGet } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import type {
   STColumn,
@@ -51,7 +51,7 @@ export interface STDataSourceOptions {
   singleSort?: STSingleSort | null;
   multiSort?: STMultiSort;
   rowClassName?: STRowClassName | null;
-  customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
+  customRequest?: (options: STCustomRequestOptions) => Observable<any>;
 }
 
 export interface STDataSourceResult {
@@ -95,7 +95,7 @@ export class STDataSource {
     let retPs: number;
     let retList: STData[];
     let retPi: number;
-    let rawData: NzSafeAny;
+    let rawData: any;
     let showPage = page.show;
 
     if (typeof data === 'string') {
@@ -251,7 +251,7 @@ export class STDataSource {
           text = col.enum![value];
           break;
         case 'tag':
-        case 'badge':
+        case 'badge': {
           const data = col.type === 'tag' ? col.tag : col.badge;
           if (data && data[text]) {
             const dataItem = data[text];
@@ -262,6 +262,7 @@ export class STDataSource {
             text = '';
           }
           break;
+        }
       }
       if (text == null) text = '';
       return {
@@ -283,8 +284,8 @@ export class STDataSource {
   private getByRemote(url: string, options: STDataSourceOptions): Observable<unknown> {
     const { req, page, paginator, pi, ps, singleSort, multiSort, columns, headers } = options;
     const method = (req.method || 'GET').toUpperCase();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let params: { [param: string]: any } = {};
+
+    let params: Record<string, any> = {};
     const reName = req.reName as STReqReNameType;
     if (paginator) {
       if (req.type === 'page') {
@@ -508,14 +509,14 @@ export class STDataSource {
     return filter.type === 'default' ? filter.menus!.filter(f => f.checked === true) : filter.menus!.slice(0, 1);
   }
 
-  private getReqFilterMap(columns: _STColumn[]): { [key: string]: string } {
+  private getReqFilterMap(columns: _STColumn[]): Record<string, string> {
     let ret = {};
     columns
       .filter(w => w.filter && w.filter.default === true)
       .forEach(col => {
         const filter = col.filter!;
         const values = this.getFilteredData(filter);
-        let obj: { [key: string]: NzSafeAny } = {};
+        let obj: Record<string, any> = {};
         if (filter.reName) {
           obj = filter.reName!(filter.menus!, col);
         } else {
@@ -530,8 +531,8 @@ export class STDataSource {
 
   // #region statistical
 
-  private genStatistical(columns: _STColumn[], list: STData[], rawData: NzSafeAny): STStatisticalResults {
-    const res: { [key: string]: NzSafeAny } = {};
+  private genStatistical(columns: _STColumn[], list: STData[], rawData: any): STStatisticalResults {
+    const res: Record<string, any> = {};
     columns.forEach((col, index) => {
       res[col.key || col.indexKey || index] =
         col.statistical == null ? {} : this.getStatistical(col, index, list, rawData);
@@ -539,7 +540,7 @@ export class STDataSource {
     return res;
   }
 
-  private getStatistical(col: _STColumn, index: number, list: STData[], rawData: NzSafeAny): STStatisticalResult {
+  private getStatistical(col: _STColumn, index: number, list: STData[], rawData: any): STStatisticalResult {
     const val = col.statistical;
     const item: STStatistical = {
       digits: 2,

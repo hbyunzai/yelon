@@ -3,14 +3,14 @@ import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { createTestContext } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzIconTestModule } from 'ng-zorro-antd/icon/testing';
+
+import { provideNzIconsTesting } from 'ng-zorro-antd/icon/testing';
 import { NzImageModule, NzImageService } from 'ng-zorro-antd/image';
 import { NzUploadComponent } from 'ng-zorro-antd/upload';
 
-import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 import { withUploadWidget } from './index';
 import { UploadWidget } from './widget';
+import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 
 describe('form: widget: upload', () => {
   let fixture: ComponentFixture<TestFormComponent>;
@@ -19,7 +19,11 @@ describe('form: widget: upload', () => {
   let dl: DebugElement;
   const widget = 'upload';
 
-  configureSFTestSuite({ widgets: [withUploadWidget()], imports: [NzImageModule, NzIconTestModule] });
+  configureSFTestSuite({
+    providers: [provideNzIconsTesting()],
+    widgets: [withUploadWidget()],
+    imports: [NzImageModule]
+  });
 
   beforeEach(() => {
     ({ fixture, dl, context } = createTestContext(TestFormComponent));
@@ -41,7 +45,7 @@ describe('form: widget: upload', () => {
     });
     const comp = getComp();
     spyOn(comp.formProperty, 'setValue');
-    comp.change({ type: 'error', fileList: [] } as NzSafeAny);
+    comp.change({ type: 'error', fileList: [] } as any);
     expect(comp.formProperty.setValue).not.toHaveBeenCalled();
   });
 
@@ -109,7 +113,7 @@ describe('form: widget: upload', () => {
         }
       });
       const comp = page.getWidget<UploadWidget>('sf-upload');
-      comp.change({ type: 'success', fileList: [] } as NzSafeAny);
+      comp.change({ type: 'success', fileList: [] } as any);
       page.checkCalled('a', 'change');
     });
 
@@ -177,7 +181,7 @@ describe('form: widget: upload', () => {
         const comp = page.getWidget<UploadWidget>('sf-upload');
         const imgSrv = TestBed.inject(NzImageService);
         spyOn(imgSrv, 'preview');
-        comp.handlePreview({ url: 'a' } as NzSafeAny);
+        comp.handlePreview({ url: 'a' } as any);
         expect(imgSrv.preview).toHaveBeenCalled();
       });
       it(`should be won't preview image when not found url property`, () => {
@@ -192,7 +196,7 @@ describe('form: widget: upload', () => {
         const comp = page.getWidget<UploadWidget>('sf-upload');
         const imgSrv = TestBed.inject(NzImageService);
         spyOn(imgSrv, 'preview');
-        comp.handlePreview({} as NzSafeAny);
+        comp.handlePreview({} as any);
         expect(imgSrv.preview).not.toHaveBeenCalled();
       });
     });

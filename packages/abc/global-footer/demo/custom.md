@@ -18,13 +18,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     <div style="height: 280px;"></div>
     <global-footer>
       <global-footer-item href="https://ng.yunzainfo.com/" blankTarget>帮助</global-footer-item>
-      <global-footer-item href="https://github.com/hbyunzai" blankTarget>
-        <i nz-icon nzType="github"></i>
+      <global-footer-item href="https://github.com/ng-yunzai" blankTarget>
+        <nz-icon nzType="github" />
       </global-footer-item>
       <global-footer-item href="https://ng-yunzai.surge.sh/" blankTarget>预览</global-footer-item>
-      Copyright<i nz-icon nzType="copyright" class="mx-sm"></i>
-      2023
-      <a href="//github.com/yunzai-bot" target="_blank" class="mx-sm">yunzai-bot</a>出品
+      Copyright<nz-icon nzType="copyright" class="mx-sm" />
+      2025
+      <a href="//github.com/cipchk" target="_blank" class="mx-sm">卡色</a>出品
     </global-footer>
   `,
   styles: [
@@ -34,7 +34,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
       }
     `
   ],
-  standalone: true,
   imports: [GlobalFooterModule, NzIconModule]
 })
 export class DemoComponent {}

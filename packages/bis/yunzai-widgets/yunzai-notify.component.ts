@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, map, Observable, Subscription } from 'rxjs';
 
-import { formatDistanceToNow } from 'date-fns';
-
 import { NoticeIconModule, NoticeIconSelect, NoticeItem } from '@yelon/abc/notice-icon';
 import { _HttpClient, YUNZAI_I18N_TOKEN, YunzaiHttpI18NService } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { formatDistanceToNow } from 'date-fns';
+
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -23,7 +22,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
       (clear)="clear($event)"
     />
   `,
-  standalone: true,
   imports: [NoticeIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -72,16 +70,22 @@ export class YunzaiHeaderNotifyComponent implements OnInit, OnDestroy {
     this.count = 0;
     this.loading = true;
     this.subs.push(
-      // @ts-ignore
-      forkJoin(this.loadTodo(), this.loadMessage()).subscribe(() => {
-        this.loading = false;
-        this.cdr.detectChanges();
+      forkJoin([this.loadTodo(), this.loadMessage()]).subscribe({
+        next: () => {
+          this.loading = false;
+          this.cdr.detectChanges();
+        },
+        error: err => {
+          console.error('Error loading data', err);
+          this.loading = false;
+          this.cdr.detectChanges();
+        }
       })
     );
   }
 
   loadMessage(): Observable<void> {
-    const formatMessageStatus = (status: string): NzSafeAny => {
+    const formatMessageStatus = (status: string): any => {
       switch (status) {
         case '0':
           return { extra: this.i18n.fanyi('notify.unread'), color: 'red' };
@@ -98,9 +102,9 @@ export class YunzaiHeaderNotifyComponent implements OnInit, OnDestroy {
         status: '0'
       })
       .pipe(
-        map((response: NzSafeAny) => {
+        map((response: any) => {
           const viewMessage = this.data.filter(d => d.key === 'msg')[0];
-          viewMessage.list = response.data.list.map((m: NzSafeAny) => {
+          viewMessage.list = response.data.list.map((m: any) => {
             return {
               ...m,
               avatar: m?.imgUrl || './assets/tmp/img/message.png',
@@ -117,7 +121,7 @@ export class YunzaiHeaderNotifyComponent implements OnInit, OnDestroy {
   }
 
   loadTodo(): Observable<void> {
-    const formatTodoStatus = (status: string): NzSafeAny => {
+    const formatTodoStatus = (status: string): any => {
       switch (status) {
         case '0':
           return { extra: this.i18n.fanyi('notify.unstart'), color: 'red' };
@@ -134,9 +138,9 @@ export class YunzaiHeaderNotifyComponent implements OnInit, OnDestroy {
         status: '0'
       })
       .pipe(
-        map((response: NzSafeAny) => {
+        map((response: any) => {
           const viewTodo = this.data.filter(d => d.key === 'todo')[0];
-          viewTodo.list = response.data.list.map((t: NzSafeAny) => {
+          viewTodo.list = response.data.list.map((t: any) => {
             return {
               ...t,
               avatar: t?.imgUrl || './assets/tmp/img/todo.png',
@@ -156,7 +160,7 @@ export class YunzaiHeaderNotifyComponent implements OnInit, OnDestroy {
     const t = this.data.filter(d => d.title === type)[0];
     if (t.key == 'msg' || t.key == 'notice') {
       this.subs.push(
-        this.http.post(`/message-center-3/my-msg-and-todo/msg-clear`, {}).subscribe(_ => {
+        this.http.post(`/message-center-3/my-msg-and-todo/msg-clear`, {}).subscribe(() => {
           this.msg.success(`${this.i18n.fanyi('notify.clear')} ${type}`);
           this.loadData();
         })

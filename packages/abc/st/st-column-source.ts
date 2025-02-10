@@ -5,7 +5,7 @@ import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, warn } from '@yelon/util/other';
-import type { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NgClassInterface } from 'ng-zorro-antd/core/types';
 
 import { STRowSource } from './st-row.directive';
 import { STWidgetRegistry } from './st-widget';
@@ -27,6 +27,7 @@ export interface STColumnSourceProcessOptions {
   widthMode: STWidthMode;
   resizable?: STResizable;
   safeType: STColumnSafeType;
+  expand: boolean;
 }
 
 @Injectable()
@@ -65,6 +66,12 @@ export class STColumnSource {
 
     if (typeof pop.condition !== 'function') {
       pop.condition = () => false;
+    }
+
+    if (this.i18nSrv) {
+      if (pop.titleI18n) pop.title = this.i18nSrv.fanyi(pop.titleI18n);
+      if (pop.okTextI18n) pop.okText = this.i18nSrv.fanyi(pop.okTextI18n);
+      if (pop.cancelTextI18n) pop.cancelText = this.i18nSrv.fanyi(pop.cancelTextI18n);
     }
 
     i.pop = pop;
@@ -140,12 +147,13 @@ export class STColumnSource {
     }
   }
 
-  private fixedCoerce(list: _STColumn[]): void {
+  private fixedCoerce(list: _STColumn[], expand: boolean): void {
     const countReduce = (a: number, b: _STColumn): number => a + +b.width!.toString().replace('px', '');
+    const expandWidth = expand ? 50 : 0;
     // left width
     list
       .filter(w => w.fixed && w.fixed === 'left' && w.width)
-      .forEach((item, idx) => (item._left = `${list.slice(0, idx).reduce(countReduce, 0)}px`));
+      .forEach((item, idx) => (item._left = `${list.slice(0, idx).reduce(countReduce, 0) + expandWidth}px`));
     // right width
     list
       .filter(w => w.fixed && w.fixed === 'right' && w.width)
@@ -198,7 +206,7 @@ export class STColumnSource {
     let icon = 'filter';
     let iconTheme = 'fill';
     let fixMenus = true;
-    let value: NzSafeAny = undefined;
+    let value: any = undefined;
     switch (res.type) {
       case 'keyword':
         icon = 'search';
@@ -322,7 +330,7 @@ export class STColumnSource {
 
         cell.colSpan = colSpan;
         cell.colEnd = cell.colStart + colSpan - 1;
-        rows[rowIndex].push(cell as NzSafeAny);
+        rows[rowIndex].push(cell as any);
 
         currentColIndex += colSpan;
 
@@ -377,7 +385,7 @@ export class STColumnSource {
           number: 'text-right',
           currency: 'text-right',
           date: 'text-center'
-        } as NzSafeAny
+        } as any
       )[item.type!];
       if (typeClass) {
         builtInClassNames.push(typeClass);
@@ -409,7 +417,6 @@ export class STColumnSource {
     const { noIndex } = this.cog;
     let checkboxCount = 0;
     let radioCount = 0;
-    let point = 0;
     const columns: _STColumn[] = [];
 
     const processItem = (item: _STColumn): _STColumn => {
@@ -512,8 +519,6 @@ export class STColumnSource {
         ...(typeof item.resizable === 'boolean' ? ({ disabled: !item.resizable } as STResizable) : item.resizable)
       };
 
-      item.__point = point++;
-
       return item;
     };
 
@@ -536,7 +541,7 @@ export class STColumnSource {
       throw new Error(`[st]: just only one column radio`);
     }
 
-    this.fixedCoerce(columns as _STColumn[]);
+    this.fixedCoerce(columns as _STColumn[], options.expand);
     return {
       columns: columns.filter(w => !Array.isArray(w.children) || w.children.length === 0),
       ...this.genHeaders(copyList)

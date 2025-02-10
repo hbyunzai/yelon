@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { XlsxService } from '../../xlsx/xlsx.service';
 import { XlsxExportOptions } from '../../xlsx/xlsx.types';
@@ -88,7 +88,7 @@ describe('abc: table: export', () => {
     });
 
     it('should be export a excel', async () => {
-      const ret: NzSafeAny = await srv.export({
+      const ret: any = await srv.export({
         data,
         columens: columns,
         sheetname: 'sn',
@@ -108,7 +108,7 @@ describe('abc: table: export', () => {
     });
 
     it('should auto specify sheet name [Sheet1]', async () => {
-      const ret: NzSafeAny = await srv.export({
+      const ret: any = await srv.export({
         data,
         columens: columns,
         filename: 'filename.xlsx',
@@ -119,7 +119,7 @@ describe('abc: table: export', () => {
     });
 
     it('should be generate empty sheet', async () => {
-      const ret: NzSafeAny = await srv.export({
+      const ret: any = await srv.export({
         data: [],
         columens: []
       });
@@ -128,7 +128,7 @@ describe('abc: table: export', () => {
     });
 
     it('should be _values data first', async () => {
-      const ret: NzSafeAny = await srv.export({
+      const ret: any = await srv.export({
         data: [{ i: 1, _values: [{ text: '2' }] }],
         columens: [{ title: 'i', index: 'i' }]
       });
@@ -138,7 +138,7 @@ describe('abc: table: export', () => {
 
     it('should be width', async () => {
       const width = 10;
-      const ret: NzSafeAny = await srv.export({
+      const ret: any = await srv.export({
         data: [{ i: 1, _values: [{ text: '2' }] }],
         columens: [{ title: 'i', index: 'i', _width: width } as _STColumn]
       });
@@ -150,7 +150,7 @@ describe('abc: table: export', () => {
 
     it('should be date format', async () => {
       const dateFormat = 'yyyy-MM-d';
-      const ret: NzSafeAny = await srv.export({
+      const ret: any = await srv.export({
         data: [{ date: '2021-10-10' }],
         columens: [{ index: 'date', type: 'date', dateFormat } as _STColumn]
       });

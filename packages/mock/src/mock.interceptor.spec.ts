@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpHeaders, HttpResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component, Type } from '@angular/core';
@@ -48,7 +47,6 @@ describe('mock: interceptor', () => {
 
   function genModule(data: any, options: YunzaiMockConfig, spyConsole: boolean = true): void {
     TestBed.configureTestingModule({
-      declarations: [RootComponent],
       providers: [
         provideHttpClient(withInterceptors([mockInterceptor])),
         provideHttpClientTesting(),
@@ -62,6 +60,7 @@ describe('mock: interceptor', () => {
         provideMockConfig({ data })
       ]
     });
+    TestBed.createComponent(RootComponent);
     http = TestBed.inject<HttpClient>(HttpClient);
     httpMock = TestBed.inject(HttpTestingController as Type<HttpTestingController>);
     if (spyConsole) {

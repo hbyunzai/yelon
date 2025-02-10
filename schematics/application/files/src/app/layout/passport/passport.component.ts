@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { GlobalFooterModule } from '@yelon/abc/global-footer';
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
-import { ThemeBtnComponent } from '@yelon/theme/theme-btn';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 <% if (i18n) { %>
 import { HeaderI18nComponent } from '../basic/widgets/i18n.component';<% } %>
@@ -23,15 +22,14 @@ import { HeaderI18nComponent } from '../basic/widgets/i18n.component';<% } %>
         <router-outlet />
         <global-footer [links]="links">
           Copyright
-          <i class="anticon anticon-copyright"></i> 2023
-          <a href="//github.com/yunzai-bot" target="_blank">yunzai-bot</a>出品
+          <i class="anticon anticon-copyright"></i> 2025
+          <a href="//github.com/cipchk" target="_blank">卡色</a>出品
         </global-footer>
       </div>
     </div>
   `,
   styleUrls: ['./passport.component.less'],
-  standalone: true,
-  imports: [RouterOutlet<% if (i18n) { %>, HeaderI18nComponent<% } %>, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
+  imports: [RouterOutlet<% if (i18n) { %>, HeaderI18nComponent<% } %>, GlobalFooterModule, NzIconModule]
 })
 export class LayoutPassportComponent implements OnInit {
   private tokenService = inject(YA_SERVICE_TOKEN);

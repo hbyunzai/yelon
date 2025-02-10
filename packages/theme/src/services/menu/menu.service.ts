@@ -2,13 +2,13 @@ import { Injectable, OnDestroy, inject } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, share } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
+
 import { Menu, MenuIcon, MenuInner } from './interface';
+import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 
 /**
- * 菜单服务
+ * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
  */
 @Injectable({ providedIn: 'root' })
 export class MenuService implements OnDestroy {
@@ -17,12 +17,12 @@ export class MenuService implements OnDestroy {
   private _change$: BehaviorSubject<Menu[]> = new BehaviorSubject<Menu[]>([]);
   private i18n$?: Subscription;
   private data: Menu[] = [];
+  private $routerLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   /**
    * 是否完全受控菜单打开状态，默认：`false`
    */
   openStrictly = false;
-
-  private $routerLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor() {
     this.i18n$ = this.i18nSrv.change.subscribe(() => this.resume());
@@ -34,6 +34,24 @@ export class MenuService implements OnDestroy {
 
   get menus(): Menu[] {
     return this.data;
+  }
+
+  /**
+   * Returns a default menu link
+   *
+   * 返回一个默认跳转的菜单链接
+   */
+  getDefaultRedirect(opt: { redirectUrl?: string } = {}): string | null | undefined {
+    let ret: string | null | undefined;
+    this.visit(this.menus, (item: MenuInner) => {
+      if (typeof item.link !== 'string' || item.link.length <= 0 || !item._aclResult || item._hidden === true) {
+        return;
+      }
+      if (ret == null || ret.length <= 0 || item.link == opt?.redirectUrl) {
+        ret = item.link;
+      }
+    });
+    return ret;
   }
 
   visit<T extends Menu = Menu>(data: T[], callback: (item: T, parentMenum: T | null, depth?: number) => void): void;
@@ -89,7 +107,7 @@ export class MenuService implements OnDestroy {
       } else if (/^https?:\/\//.test(item.icon)) {
         type = 'img';
       }
-      item.icon = { type, value } as NzSafeAny;
+      item.icon = { type, value } as any;
     }
     if (item.icon != null) {
       item.icon = { theme: 'outline', spin: false, ...(item.icon as MenuIcon) };

@@ -1,4 +1,4 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface YunzaiChartConfig {
   /**
@@ -10,7 +10,7 @@ export interface YunzaiChartConfig {
    */
   libs?: string[];
 
-  theme?: string | { [key: string]: NzSafeAny };
+  theme?: string | Record<string, any>;
 
   /**
    * [ECharts](https://echarts.apache.org/) library path

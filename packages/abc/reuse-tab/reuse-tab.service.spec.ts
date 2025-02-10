@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouteReuseStrategy } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { MenuService } from '@yelon/theme';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { REUSE_TAB_CACHED_MANAGER, ReuseTabCachedManagerFactory } from './reuse-tab.cache';
 import { ReuseItem, ReuseTabMatchMode, ReuseTitle } from './reuse-tab.interfaces';
@@ -18,7 +18,7 @@ class MockMenuService {
 }
 class MockRouter {
   navigateByUrl = jasmine.createSpy().and.returnValue(Promise.resolve(true));
-  get events(): NzSafeAny {
+  get events(): any {
     return {
       subscribe: () => {
         return { unsubscribe: () => {} };
@@ -34,7 +34,7 @@ describe('abc: reuse-tab(service)', () => {
 
   afterEach(() => srv.ngOnDestroy());
 
-  function genModule(providers: NzSafeAny[] = [{ provide: MenuService, useClass: MockMenuService }]): void {
+  function genModule(providers: any[] = [{ provide: MenuService, useClass: MockMenuService }]): void {
     TestBed.configureTestingModule({
       providers: [
         ReuseTabService,
@@ -61,14 +61,14 @@ describe('abc: reuse-tab(service)', () => {
     });
     srv = TestBed.inject<ReuseTabService>(ReuseTabService);
     menuSrv = TestBed.inject<MenuService>(MenuService, undefined);
-    router = TestBed.inject<Router>(Router) as NzSafeAny;
+    router = TestBed.inject<Router>(Router) as any;
   }
 
   function genCached(count: number, urlTpl: string = `a/{index}`): void {
     srv.clear();
     Array(count)
       .fill({})
-      .forEach((_item: NzSafeAny, index: number) => {
+      .forEach((_item: any, index: number) => {
         srv.saveCache(getSnapshot(index + 1, urlTpl), { a: 1 });
       });
   }
@@ -77,11 +77,11 @@ describe('abc: reuse-tab(service)', () => {
    * 模拟 Snapshot
    * - 1 => a/1
    */
-  function getSnapshot(index: number, urlTpl: string = `a/{index}`): NzSafeAny {
+  function getSnapshot(index: number, urlTpl: string = `a/{index}`): any {
     return {
       routeConfig: {},
       url: [urlTpl.replace(`{index}`, `${index}`)]
-    } as NzSafeAny;
+    } as any;
   }
 
   describe('[property]', () => {
@@ -230,7 +230,7 @@ describe('abc: reuse-tab(service)', () => {
       });
       it('should get title from route data', () => {
         const title = 'aa';
-        expect(srv.getTitle('/', { data: { title } } as NzSafeAny).text).toBe(title);
+        expect(srv.getTitle('/', { data: { title } } as any).text).toBe(title);
       });
       it('should used ReuseTitle set title via service', () => {
         genCached(1, '/');
@@ -256,7 +256,7 @@ describe('abc: reuse-tab(service)', () => {
       });
       it('should get closable from route data', () => {
         const closable = false;
-        expect(srv.getClosable('/', { data: { reuseClosable: closable } } as NzSafeAny)).toBe(closable);
+        expect(srv.getClosable('/', { data: { reuseClosable: closable } } as any)).toBe(closable);
       });
       it('should get closable from menu data', () => {
         const spy = spyOn(menuSrv, 'getPathByUrl');
@@ -399,8 +399,8 @@ describe('abc: reuse-tab(service)', () => {
         expect(srv.getKeepingScroll('')).toBe(false);
       });
       it('should get keepingScroll from route data', () => {
-        expect(srv.getKeepingScroll('/', { data: { keepingScroll: false } } as NzSafeAny)).toBe(false);
-        expect(srv.getKeepingScroll('/', { data: { keepingScroll: true } } as NzSafeAny)).toBe(true);
+        expect(srv.getKeepingScroll('/', { data: { keepingScroll: false } } as any)).toBe(false);
+        expect(srv.getKeepingScroll('/', { data: { keepingScroll: true } } as any)).toBe(true);
       });
       it('should get keepingScroll from menu data', () => {
         const spy = spyOn(menuSrv, 'getPathByUrl');
@@ -519,7 +519,7 @@ describe('abc: reuse-tab(service)', () => {
     });
     it('should be retrieve when is cached', () => {
       genCached(1);
-      const handle: NzSafeAny = srv.retrieve(getSnapshot(1));
+      const handle: any = srv.retrieve(getSnapshot(1));
       expect(handle).not.toBeNull();
       expect(handle.a).toBe(1);
     });

@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YunzaiThemeModule } from '../../theme.module';
+
 import { SettingsService } from './settings.service';
 import { App, User, Layout } from './types';
+import { YunzaiThemeModule } from '../../theme.module';
 
 describe('Service: Settings', () => {
   let srv: SettingsService;
   beforeEach(() => {
-    let data: { [key: string]: NzSafeAny } = {};
+    let data: Record<string, any> = {};
 
     spyOn(localStorage, 'getItem').and.callFake((key: string): string => {
       return data[key] || null;
@@ -36,11 +36,11 @@ describe('Service: Settings', () => {
       test: boolean;
     }
     it(`should be get`, () => {
-      srv.setLayout<TestLayout>({ test: false } as NzSafeAny);
+      srv.setLayout<TestLayout>({ test: false } as any);
       expect(srv.getLayout<TestLayout>().test).toBe(false);
     });
     it('should be reset all', () => {
-      srv.setLayout({ a: 1 } as NzSafeAny);
+      srv.setLayout({ a: 1 } as any);
       expect(srv.layout.a).toBe(1);
     });
 

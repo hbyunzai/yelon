@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TinymceComponent } from 'ngx-tinymce';
 
 import { ControlUIWidget, YelonFormModule } from '@yelon/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import type { TinymceWidgetSchema } from './schema';
 
@@ -32,7 +32,6 @@ import type { TinymceWidgetSchema } from './schema';
   `,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, TinymceComponent]
 })
 export class TinymceWidget extends ControlUIWidget<TinymceWidgetSchema> {
@@ -43,7 +42,7 @@ export class TinymceWidget extends ControlUIWidget<TinymceWidgetSchema> {
     if (this.ui.change) this.ui.change(value);
   }
 
-  _ready(instance: NzSafeAny): void {
+  _ready(instance: any): void {
     if (this.ui.ready) this.ui.ready(instance);
   }
 }

@@ -5,7 +5,7 @@ import addFormats from 'ajv-formats';
 
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { REGEX } from '@yelon/util/format';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { mergeConfig } from './config';
 import { ErrorData } from './errors';
@@ -48,7 +48,7 @@ export class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
           ...customOptions.formats
         }
       });
-      addFormats(this.ajv as NzSafeAny);
+      addFormats(this.ajv as any);
     });
   }
 

@@ -4,7 +4,7 @@ import { Injectable, TemplateRef, Type, inject } from '@angular/core';
 import { Observable, Observer, delay, filter, take, tap } from 'rxjs';
 
 import { deepMerge } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 const CLS_DRAG = 'MODAL-DRAG';
@@ -81,10 +81,10 @@ export class ModalHelper {
    * this.nzModalRef.destroy();
    */
   create(
-    comp?: TemplateRef<NzSafeAny> | Type<NzSafeAny> | 'confirm' | 'info' | 'success' | 'error' | 'warning',
-    params?: NzSafeAny | ModalHelperOptions | null,
+    comp?: TemplateRef<any> | Type<any> | 'confirm' | 'info' | 'success' | 'error' | 'warning',
+    params?: any | ModalHelperOptions | null,
     options?: ModalHelperOptions
-  ): Observable<NzSafeAny> {
+  ): Observable<any> {
     const isBuildIn = typeof comp === 'string';
     options = deepMerge(
       {
@@ -94,7 +94,7 @@ export class ModalHelper {
       },
       isBuildIn && arguments.length === 2 ? params : options
     );
-    return new Observable((observer: Observer<NzSafeAny>) => {
+    return new Observable((observer: Observer<any>) => {
       const { size, includeTabs, modalOptions, drag, useNzData, focus } = options as ModalHelperOptions;
       let cls: string[] = [];
       let width = '';
@@ -125,12 +125,13 @@ export class ModalHelper {
         cls.push(CLS_DRAG, dragWrapCls);
       }
       const mth = isBuildIn ? this.srv[comp] : this.srv.create;
-      const subject: NzModalRef<NzSafeAny, NzSafeAny> = mth.call(this.srv, {
+      const subject: NzModalRef<any, any> = mth.call(this.srv, {
         nzWrapClassName: cls.join(' '),
         nzContent: isBuildIn ? undefined : comp,
         nzWidth: width ? width : undefined,
         nzFooter: null,
         nzData: params,
+        nzDraggable: false,
         ...modalOptions
       } as ModalOptions);
       // 保留 nzComponentParams 原有风格，但依然可以通过 @Inject(NZ_MODAL_DATA) 获取
@@ -165,7 +166,7 @@ export class ModalHelper {
             el.dataset.focused = focus;
           }
         });
-      subject.afterClose.pipe(take(1)).subscribe((res: NzSafeAny) => {
+      subject.afterClose.pipe(take(1)).subscribe((res: any) => {
         if (options!.exact === true) {
           if (res != null) {
             observer.next(res);
@@ -196,10 +197,10 @@ export class ModalHelper {
    * this.nzModalRef.destroy();
    */
   createStatic(
-    comp: TemplateRef<NzSafeAny> | Type<NzSafeAny>,
-    params?: NzSafeAny,
+    comp: TemplateRef<any> | Type<any>,
+    params?: any,
     options?: ModalHelperOptions
-  ): Observable<NzSafeAny> {
+  ): Observable<any> {
     const modalOptions = {
       nzMaskClosable: false,
       ...(options && options.modalOptions)

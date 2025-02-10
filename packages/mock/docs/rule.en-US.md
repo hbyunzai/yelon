@@ -79,23 +79,21 @@ When you want to respond to a `404` http status.
 ## Demo
 
 ```ts
-import {MockStatusError} from '@yelon/mock';
+import { MockStatusError } from '@yelon/mock';
 
 export const USERS = {
   // Support object or array values
-  'GET /users': {users: [1, 2], total: 2},
+  'GET /users': { users: [1, 2], total: 2 },
   // GET: can be ignored
-  '/users/1': {users: [1, 2], total: 2},
+  '/users/1': { users: [1, 2], total: 2 },
   // POST
-  'POST /users/1': {uid: 1},
+  'POST /users/1': { uid: 1 },
   // Get request parameters: queryString、headers、body
   '/qs': (req: MockRequest) => req.queryString.pi,
   // Routing parameters
   '/users/:id': (req: MockRequest) => req.params, // /users/100, output: { id: 100 }
   // Send Status Error
-  '/404': () => {
-    throw new MockStatusError(404);
-  },
+  '/404': () => { throw new MockStatusError(404); },
   // Regular expressions need to be wrapped with `()`
   '/data/(.*)': (req: MockRequest) => req,
   // Support Observable
@@ -110,4 +108,4 @@ export const USERS = {
 
 ## Storage rule
 
-In general, Mock is required during development, so recommended to create `_mock` directory in the project root directory and create `index.ts` file to export all data rules. See [ng-yunzai/_mock]( Https://github.com/hbyunzai/ng-yunzai/tree/master/_mock).
+In general, Mock is required during development, so recommended to create `_mock` directory in the project root directory and create `index.ts` file to export all data rules. See [ng-yunzai/_mock]( Https://github.com/ng-yunzai/ng-yunzai/tree/master/_mock).

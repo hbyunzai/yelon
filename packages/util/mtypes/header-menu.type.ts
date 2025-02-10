@@ -1,10 +1,10 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface YunzaiNavTopic {
   // 扩展项
-  attribute: NzSafeAny;
+  attribute: any;
   // 图标
-  icon: NzSafeAny;
+  icon: any;
   // 子菜单
   children: YunzaiNavTopic[];
   // 描述

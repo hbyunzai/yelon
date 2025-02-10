@@ -29,9 +29,7 @@ import { isStandalone } from './standalone';
 import { getProject, NgYunzaiProjectDefinition } from './workspace';
 
 export interface CommonSchema extends ComponentSchema {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-
   _filesPath?: string;
   schematicName?: string;
   target?: string;
@@ -179,7 +177,7 @@ export function addValueToVariable(
   if (!node) {
     throw new SchematicsException(`Could not find any [${variableName}] variable in path '${filePath}'.`);
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const arr = (node.parent as any).initializer as ts.ArrayLiteralExpression;
 
   const change = new InsertChange(

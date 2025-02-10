@@ -12,19 +12,18 @@ import { Platform } from '@angular/cdk/platform';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 
 import { G2GaugeModule } from '@yelon/chart/gauge';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 @Component({
   selector: 'app-demo',
   template: ` <g2-gauge [title]="'核销率'" height="164" [percent]="percent" [color]="color" /> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [G2GaugeModule]
 })
 export class DemoComponent implements OnDestroy {
   percent = 36;
   color = '#2f9cff';
-  private time$: NzSafeAny;
+  private time$: any;
 
   constructor(platform: Platform, cdr: ChangeDetectorRef) {
     if (!platform.isBrowser) return;

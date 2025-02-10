@@ -1,7 +1,7 @@
 import { Observable, of, map } from 'rxjs';
 
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 
 import { SF_SEQ } from './const';
@@ -9,15 +9,15 @@ import type { SFValue } from './interface';
 import type { SFSchema, SFSchemaDefinition, SFSchemaEnum } from './schema';
 import type { SFUISchema, SFUISchemaItem, SFUISchemaItemRun, SFVisibleIf } from './schema/ui';
 
-export function isBlank(o: NzSafeAny): boolean {
+export function isBlank(o: any): boolean {
   return o == null;
 }
 
-export function toBool(value: NzSafeAny, defaultValue: boolean): boolean {
+export function toBool(value: any, defaultValue: boolean): boolean {
   return value == null ? defaultValue : `${value}` !== 'false';
 }
 
-export function di(ui: SFUISchema, ...args: NzSafeAny[]): void {
+export function di(ui: SFUISchema, ...args: any[]): void {
   if (typeof ngDevMode === 'undefined' || ngDevMode) {
     if (ui.debug) {
       console.warn(...args);
@@ -26,15 +26,15 @@ export function di(ui: SFUISchema, ...args: NzSafeAny[]): void {
 }
 
 /** 根据 `$ref` 查找 `definitions` */
-function findSchemaDefinition($ref: string, definitions: SFSchemaDefinition): NzSafeAny {
+function findSchemaDefinition($ref: string, definitions: SFSchemaDefinition): any {
   const match = /^#\/definitions\/(.*)$/.exec($ref);
   if (match && match[1]) {
     // parser JSON Pointer
     const parts = match[1].split(SF_SEQ);
-    let current: NzSafeAny = definitions;
+    let current: any = definitions;
     for (let part of parts) {
       part = part.replace(/~1/g, SF_SEQ).replace(/~0/g, '~');
-      if (current.hasOwnProperty(part)) {
+      if (Object.prototype.hasOwnProperty.call(current, part)) {
         current = current[part];
       } else {
         throw new Error(`Could not find a definition for ${$ref}.`);
@@ -49,9 +49,10 @@ function findSchemaDefinition($ref: string, definitions: SFSchemaDefinition): Nz
  * 取回Schema，并处理 `$ref` 的关系
  */
 export function retrieveSchema(schema: SFSchema, definitions: SFSchemaDefinition = {}): SFSchema {
-  if (schema.hasOwnProperty('$ref')) {
+  if (Object.prototype.hasOwnProperty.call(schema, '$ref')) {
     const $refSchema = findSchemaDefinition(schema.$ref!, definitions);
     // remove $ref property
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { $ref, ...localSchema } = schema;
     return retrieveSchema({ ...$refSchema, ...localSchema }, definitions);
   }
@@ -78,7 +79,8 @@ export function resolveIfSchema(_schema: SFSchema, _ui: SFUISchemaItemRun): void
 }
 
 function resolveIf(schema: SFSchema, ui: SFUISchemaItemRun): SFSchema | null {
-  if (!(schema.hasOwnProperty('if') && schema.hasOwnProperty('then'))) return null;
+  if (!(Object.prototype.hasOwnProperty.call(schema, 'if') && Object.prototype.hasOwnProperty.call(schema, 'then')))
+    return null;
   if (!schema.if!.properties) throw new Error(`if: does not contain 'properties'`);
 
   const allKeys = Object.keys(schema.properties!);
@@ -86,7 +88,7 @@ function resolveIf(schema: SFSchema, ui: SFUISchemaItemRun): SFSchema | null {
   detectKey(allKeys, ifKeys);
   detectKey(allKeys, schema.then!.required!);
   schema.required = schema.required!.concat(schema.then!.required!);
-  const hasElse = schema.hasOwnProperty('else');
+  const hasElse = Object.prototype.hasOwnProperty.call(schema, 'else');
   if (hasElse) {
     detectKey(allKeys, schema.else!.required!);
     schema.required = schema.required.concat(schema.else!.required!);
@@ -118,12 +120,12 @@ function detectKey(keys: string[], detectKeys: string[]): void {
 
 export function orderProperties(properties: string[], order: string[]): string[] {
   if (!Array.isArray(order)) return properties;
-  const arrayToHash = (arr: NzSafeAny): NzSafeAny =>
-    arr.reduce((prev: NzSafeAny, curr: NzSafeAny) => {
+  const arrayToHash = (arr: any): any =>
+    arr.reduce((prev: any, curr: any) => {
       prev[curr] = true;
       return prev;
     }, {});
-  const errorPropList = (arr: NzSafeAny): string => `property [${arr.join(`', '`)}]`;
+  const errorPropList = (arr: any): string => `property [${arr.join(`', '`)}]`;
 
   const propertyHash = arrayToHash(properties);
   const orderHash = arrayToHash(order);
@@ -147,10 +149,10 @@ export function orderProperties(properties: string[], order: string[]): string[]
   return complete;
 }
 
-export function getEnum(list: NzSafeAny[], formData: NzSafeAny, readOnly: boolean): SFSchemaEnum[] {
+export function getEnum(list: any[], formData: any, readOnly: boolean): SFSchemaEnum[] {
   if (isBlank(list) || !Array.isArray(list) || list.length === 0) return [];
   if (typeof list[0] !== 'object') {
-    list = list.map((item: NzSafeAny) => {
+    list = list.map((item: any) => {
       return { label: item, value: item } as SFSchemaEnum;
     });
   }
@@ -167,15 +169,15 @@ export function getEnum(list: NzSafeAny[], formData: NzSafeAny, readOnly: boolea
   return list;
 }
 
-export function getCopyEnum(list: NzSafeAny[], formData: NzSafeAny, readOnly: boolean): SFSchemaEnum[] {
+export function getCopyEnum(list: any[], formData: any, readOnly: boolean): SFSchemaEnum[] {
   return getEnum(deepCopy(list || []), formData, readOnly);
 }
 
 export function getData(
   schema: SFSchema,
   ui: SFUISchemaItem,
-  formData: NzSafeAny,
-  asyncArgs?: NzSafeAny
+  formData: any,
+  asyncArgs?: any
 ): Observable<SFSchemaEnum[]> {
   if (typeof ui.asyncData === 'function') {
     return ui.asyncData(asyncArgs).pipe(map((list: SFSchemaEnum[]) => getEnum(list, formData, schema.readOnly!)));

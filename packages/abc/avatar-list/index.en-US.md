@@ -4,13 +4,14 @@ title: avatar-list
 subtitle: AvatarList
 cols: 1
 module: import { AvatarListModule } from '@yelon/abc/avatar-list';
+deprecated: 20.0.0
 ---
 
 A list of user's avatar for project or group member list frequently. If a large or small avatar-list is desired, set the `size` property to either `large` or `small` and `mini` respectively. Omit the `size` property for a avatar-list with the default size.
 
 ## API
 
-### avatar-list:standalone
+### avatar-list
 
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
@@ -18,7 +19,7 @@ A list of user's avatar for project or group member list frequently. If a large 
 | `[maxLength]` | max items to show | `number` | - |
 | `[excessItemsStyle]` | the excess item style | `{ [key: string]: string }` | - |
 
-### avatar-list-item:standalone
+### avatar-list-item
 
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|

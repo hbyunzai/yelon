@@ -1,23 +1,26 @@
 import { isPlatformBrowser } from '@angular/common';
-import { ENVIRONMENT_INITIALIZER, Injector, PLATFORM_ID, Provider, inject } from '@angular/core';
+import {
+  EnvironmentProviders,
+  Injector,
+  PLATFORM_ID,
+  Provider,
+  inject,
+  provideEnvironmentInitializer
+} from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 
 import { EXAMPLE_COMPONENTS } from '../routes/gen/examples';
-import { IconComponent } from '../shared/components/icon/icon.component';
+// import { IconComponent } from '../shared/components/icon/icon.component';
 
-export function provideElements(): Provider[] {
+export function provideElements(): Array<Provider | EnvironmentProviders> {
   return [
-    {
-      provide: ENVIRONMENT_INITIALIZER,
-      multi: true,
-      useValue: () => {
-        registerElements(inject(Injector), inject(PLATFORM_ID));
-      }
-    }
+    provideEnvironmentInitializer(() => {
+      registerElements(inject(Injector), inject(PLATFORM_ID));
+    })
   ];
 }
 
-function registerElements(injector: Injector, platformId: {}): void {
+function registerElements(injector: Injector, platformId: object): void {
   // issues: https://github.com/angular/angular/issues/24551#issuecomment-397862707
   if (!isPlatformBrowser(platformId) || customElements.get('nz-icon')) {
     return;
@@ -29,5 +32,5 @@ function registerElements(injector: Injector, platformId: {}): void {
     customElements.define(key, element);
   });
   // icon
-  customElements.define('nz-icon', createCustomElement(IconComponent, { injector }));
+  // customElements.define('nz-icon', createCustomElement(IconComponent, { injector }));
 }

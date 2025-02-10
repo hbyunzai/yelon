@@ -1,12 +1,11 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { createTestContext } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { QuickMenuComponent } from './quick-menu.component';
-import { QuickMenuModule } from './quick-menu.module';
 
 describe('abc: quick-menu', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -14,11 +13,6 @@ describe('abc: quick-menu', () => {
   let context: TestComponent;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [QuickMenuModule],
-      declarations: [TestComponent]
-    });
-
     ({ fixture, dl, context } = createTestContext(TestComponent));
     fixture.detectChanges();
   });
@@ -29,7 +23,7 @@ describe('abc: quick-menu', () => {
 
   function style(name: string, value: string): void {
     const el = getEl();
-    expect((el.style as NzSafeAny)[name]).toBe(value);
+    expect((el.style as any)[name]).toBe(value);
   }
 
   describe('#width', () => {
@@ -82,7 +76,8 @@ describe('abc: quick-menu', () => {
       [expand]="expand"
       (expandChange)="expandChange()"
     />
-  `
+  `,
+  imports: [QuickMenuComponent]
 })
 class TestComponent {
   @ViewChild('comp', { static: true })

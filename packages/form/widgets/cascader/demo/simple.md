@@ -18,13 +18,12 @@ import { Component, inject } from '@angular/core';
 
 import { YelonFormModule, SFSchema } from '@yelon/form';
 import type { SFCascaderWidgetSchema } from '@yelon/form/widgets/cascader';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-demo',
   template: ` <sf [schema]="schema" (formSubmit)="submit($event)" /> `,
-  standalone: true,
   imports: [YelonFormModule]
 })
 export class DemoComponent {
@@ -73,7 +72,7 @@ export class DemoComponent {
           asyncData: (node, index) => {
             return new Promise(resolve => {
               setTimeout(() => {
-                (node as NzSafeAny).children = [
+                (node as any).children = [
                   { value: 110000, label: '北京', parent: 0 },
                   { value: 110100, label: '北京市', parent: 110000 },
                   { value: 110101, label: '东城区', parent: 110100 },
@@ -82,7 +81,7 @@ export class DemoComponent {
                   { value: 310100, label: '上海市', parent: 310000 },
                   { value: 310101, label: '黄浦区', parent: 310100 },
                   { value: 310104, label: '徐汇区', parent: 310100 }
-                ].filter((w: NzSafeAny) => {
+                ].filter((w: any) => {
                   w.isLeaf = index === 1;
                   return w.parent === (node.value || 0);
                 });

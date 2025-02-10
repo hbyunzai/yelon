@@ -15,11 +15,10 @@ import {
   TitleService
 } from '@yelon/theme';
 import { NzAffixComponent } from 'ng-zorro-antd/affix';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { ReuseTabService } from '../reuse-tab/reuse-tab.service';
+
 import { PageHeaderComponent } from './page-header.component';
-import { PageHeaderModule } from './page-header.module';
+import { ReuseTabService } from '../reuse-tab/reuse-tab.service';
 
 class MockI18NServiceFake extends YunzaiI18NServiceFake {
   fanyi(key: string): string {
@@ -34,8 +33,8 @@ describe('abc: page-header', () => {
   let context: TestComponent;
   let router: Router;
 
-  function genModule(other: { template?: string; providers?: NzSafeAny[]; created?: boolean }): void {
-    const imports = [PageHeaderModule, YunzaiThemeModule];
+  function genModule(other: { template?: string; providers?: any[]; created?: boolean }): void {
+    const imports = [YunzaiThemeModule];
     const providers = [
       provideRouter([{ path: '1-1/:name', component: TestComponent }]),
       { provide: APP_BASE_HREF, useValue: '/' },
@@ -46,7 +45,6 @@ describe('abc: page-header', () => {
     }
     TestBed.configureTestingModule({
       imports,
-      declarations: [TestComponent],
       providers
     });
     if (other.template) TestBed.overrideTemplate(TestComponent, other.template);
@@ -66,7 +64,7 @@ describe('abc: page-header', () => {
     }
   }
 
-  function checkValue(cls: string, value: NzSafeAny): void {
+  function checkValue(cls: string, value: any): void {
     const el = dl.query(By.css(cls)).nativeElement as HTMLElement;
     expect(el.textContent!.trim()).toBe(value);
   }
@@ -74,13 +72,12 @@ describe('abc: page-header', () => {
   describe('', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [PageHeaderModule, YunzaiThemeModule],
+        imports: [YunzaiThemeModule],
         providers: [
           provideRouter([{ path: '1-1/:name', component: TestComponent }]),
           { provide: APP_BASE_HREF, useValue: '/' },
           SettingsService
-        ],
-        declarations: [TestComponent, TestAutoBreadcrumbComponent, TestI18nComponent]
+        ]
       });
     });
 
@@ -239,7 +236,7 @@ describe('abc: page-header', () => {
       let i18n: YunzaiI18NService;
       beforeEach(() => {
         TestBed.overrideProvider(YUNZAI_I18N_TOKEN, {
-          useFactory: () => new MockI18NServiceFake({ merge: () => {} } as NzSafeAny)
+          useFactory: () => new MockI18NServiceFake({ merge: () => {} } as any)
         });
         ({ fixture, dl, context } = createTestContext(TestI18nComponent));
         i18n = TestBed.inject(YUNZAI_I18N_TOKEN);
@@ -459,14 +456,16 @@ class TestBaseComponent {
       <ng-template #extra><div class="extra">extra</div></ng-template>
       <ng-template #tab><div class="tab">tab</div></ng-template>
     </page-header>
-  `
+  `,
+  imports: [PageHeaderComponent]
 })
 class TestComponent extends TestBaseComponent {}
 
 @Component({
   template: `
     <page-header #comp [title]="title" [home]="home" [homeI18n]="homeI18n" [autoBreadcrumb]="autoBreadcrumb" />
-  `
+  `,
+  imports: [PageHeaderComponent]
 })
 class TestAutoBreadcrumbComponent extends TestBaseComponent {}
 
@@ -480,6 +479,7 @@ class TestAutoBreadcrumbComponent extends TestBaseComponent {}
       [homeLink]="homeLink"
       [autoBreadcrumb]="autoBreadcrumb"
     />
-  `
+  `,
+  imports: [PageHeaderComponent]
 })
 class TestI18nComponent extends TestBaseComponent {}

@@ -8,7 +8,6 @@ type: Non-built-in widgets
 
 ## 如何使用
 
-
 非内置模块，需要额外在 [json-schema](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/shared/json-schema/index.ts#L9) 注册 `withColorWidget`。
 
 

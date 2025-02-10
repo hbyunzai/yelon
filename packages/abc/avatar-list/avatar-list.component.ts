@@ -1,5 +1,4 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
-import { NgClass, NgStyle } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -22,6 +21,9 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 import { AvatarListItemComponent } from './avatar-list-item.component';
 
+/**
+ * @deprecated Will be removed in v20, Please use `nz-avatar-group` instead.
+ */
 @Component({
   selector: 'avatar-list',
   exportAs: 'avatarList',
@@ -33,8 +35,7 @@ import { AvatarListItemComponent } from './avatar-list-item.component';
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [NgStyle, NgClass, NzAvatarComponent, NzTooltipDirective]
+  imports: [NzAvatarComponent, NzTooltipDirective]
 })
 export class AvatarListComponent implements AfterViewInit, OnChanges {
   private readonly cdr = inject(ChangeDetectorRef);

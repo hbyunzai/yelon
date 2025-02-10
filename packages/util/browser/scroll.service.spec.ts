@@ -2,15 +2,15 @@ import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import { Injector, StaticProvider } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { ScrollService } from './scroll.service';
 
 describe('Util: ScrollService', () => {
   const topOfPageElem = {} as Element;
   let injector: Injector;
-  let doc: NzSafeAny;
-  let window: NzSafeAny;
+  let doc: any;
+  let window: any;
   let srv: ScrollService;
 
   class MockElement {
@@ -23,7 +23,7 @@ describe('Util: ScrollService', () => {
     body = new MockElement();
     getElementById = jasmine.createSpy('Document getElementById').and.returnValue(topOfPageElem);
     querySelector = jasmine.createSpy('Document querySelector');
-    defaultView: NzSafeAny = null;
+    defaultView: any = null;
   }
 
   describe('[default]', () => {
@@ -38,7 +38,7 @@ describe('Util: ScrollService', () => {
         { provide: DOCUMENT, useClass: MockDocument, deps: [] }
       ] as StaticProvider[];
       injector = Injector.create({ providers });
-      doc = injector.get(DOCUMENT) as NzSafeAny;
+      doc = injector.get(DOCUMENT) as any;
       doc.defaultView = new MockWindow();
       window = doc.defaultView;
       srv = injector.get(ScrollService);
@@ -49,7 +49,7 @@ describe('Util: ScrollService', () => {
 
     describe('#getScrollPosition', () => {
       it('with HTMLElement', () => {
-        const element: Element = new MockElement() as NzSafeAny;
+        const element: Element = new MockElement() as any;
         element.scrollLeft = 10;
         element.scrollTop = 11;
         const position = srv.getScrollPosition(element);
@@ -67,7 +67,7 @@ describe('Util: ScrollService', () => {
 
     describe('#scrollToPosition', () => {
       it('with HTMLElement', () => {
-        const element: Element = new MockElement() as NzSafeAny;
+        const element: Element = new MockElement() as any;
         srv.scrollToPosition(element, [10, 11]);
         expect(element.scrollTo).toHaveBeenCalledWith(10, 11);
       });
@@ -79,14 +79,14 @@ describe('Util: ScrollService', () => {
 
     describe('#scrollToElement', () => {
       it('should scroll to element', () => {
-        const element: Element = new MockElement() as NzSafeAny;
+        const element: Element = new MockElement() as any;
         srv.scrollToElement(element);
         expect(element.scrollIntoView).toHaveBeenCalled();
         expect(window.scrollBy).toHaveBeenCalledWith(0, 0);
       });
 
       it('should not scroll more than necessary (e.g. for elements close to the bottom)', () => {
-        const element: Element = new MockElement() as NzSafeAny;
+        const element: Element = new MockElement() as any;
         const getBoundingClientRect = element.getBoundingClientRect as jasmine.Spy;
         const topOffset = 0;
 
@@ -102,16 +102,16 @@ describe('Util: ScrollService', () => {
       });
 
       it('should scroll all the way to the top if close enough', () => {
-        const element: Element = new MockElement() as NzSafeAny;
+        const element: Element = new MockElement() as any;
 
-        (window as NzSafeAny).scrollY = 25;
+        (window as any).scrollY = 25;
         srv.scrollToElement(element);
 
         expect(element.scrollIntoView).toHaveBeenCalled();
         expect(window.scrollBy).toHaveBeenCalledWith(0, 0);
         (window.scrollBy as jasmine.Spy).calls.reset();
 
-        (window as NzSafeAny).scrollY = 15;
+        (window as any).scrollY = 15;
         srv.scrollToElement(element);
 
         expect(element.scrollIntoView).toHaveBeenCalled();
@@ -126,7 +126,7 @@ describe('Util: ScrollService', () => {
 
       it('should only use scrollIntoView', () => {
         doc.defaultView.scrollBy = null;
-        const element: Element = new MockElement() as NzSafeAny;
+        const element: Element = new MockElement() as any;
         srv.scrollToElement(element);
         expect(element.scrollIntoView).toHaveBeenCalled();
         expect(element.getBoundingClientRect).not.toHaveBeenCalled();

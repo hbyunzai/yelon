@@ -7,12 +7,12 @@ import { format, formatISO } from 'date-fns';
 
 import { createTestContext } from '@yelon/testing';
 import { deepCopy } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { configureSFTestSuite, SFPage, TestFormComponent } from '../../../spec/base.spec';
-import { SFSchema } from '../../../src/schema/index';
+
 import { DateWidget } from './date.widget';
 import { SFDateWidgetSchema } from './schema';
+import { configureSFTestSuite, SFPage, TestFormComponent } from '../../../spec/base.spec';
+import { SFSchema } from '../../../src/schema/index';
 
 registerLocaleData(zh);
 
@@ -241,7 +241,7 @@ describe('form: widget: date', () => {
       };
       page.newSchema(s);
       const comp = getComp();
-      const ui = s.properties!.a.ui as NzSafeAny;
+      const ui = s.properties!.a.ui as any;
       expect(ui.onOpenChange).not.toHaveBeenCalled();
       comp._openChange(true);
       expect(ui.onOpenChange).toHaveBeenCalled();
@@ -252,7 +252,7 @@ describe('form: widget: date', () => {
       };
       page.newSchema(s);
       const comp = getComp();
-      const ui = s.properties!.a.ui as NzSafeAny;
+      const ui = s.properties!.a.ui as any;
       expect(ui.onOk).not.toHaveBeenCalled();
       comp._ok(true);
       expect(ui.onOk).toHaveBeenCalled();

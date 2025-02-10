@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { ControlUIWidget, YelonFormModule, SFValue, getData, toBool } from '@yelon/form';
 import { deepGet } from '@yelon/util/other';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzImageService } from 'ng-zorro-antd/image';
 import { NzUploadChangeParam, NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
@@ -53,29 +53,28 @@ import type { SFUploadWidgetSchema } from './schema';
     >
       @switch (btnType) {
         @case ('plus') {
-          <i nz-icon nzType="plus"></i>
+          <nz-icon nzType="plus" />
           <div class="ant-upload-text" [innerHTML]="i.text"></div>
         }
         @case ('drag') {
-          <p class="ant-upload-drag-icon"><i nz-icon nzType="inbox"></i></p>
+          <p class="ant-upload-drag-icon"><nz-icon nzType="inbox" /></p>
           <p class="ant-upload-text" [innerHTML]="i.text"></p>
           <p class="ant-upload-hint" [innerHTML]="i.hint"></p>
         }
         @default {
-          <button type="button" nz-button><i nz-icon nzType="upload"></i><span [innerHTML]="i.text"></span></button>
+          <button type="button" nz-button><nz-icon nzType="upload" /><span [innerHTML]="i.text"></span></button>
         }
       }
     </nz-upload>
   </sf-item-wrap>`,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, NzUploadModule, NzIconModule, NzButtonModule]
 })
 export class UploadWidget extends ControlUIWidget<SFUploadWidgetSchema> implements OnInit {
   static readonly KEY = 'upload';
 
-  i: NzSafeAny;
+  i: any;
   fileList: NzUploadFile[] = [];
   btnType = '';
 
@@ -103,7 +102,7 @@ export class UploadWidget extends ControlUIWidget<SFUploadWidgetSchema> implemen
       openFileDialogOnClick,
       limitFileCount
     } = this.ui;
-    const res: NzSafeAny = {
+    const res: any = {
       type: type || 'select',
       text: text || '点击上传',
       action: action || '',
@@ -155,11 +154,11 @@ export class UploadWidget extends ControlUIWidget<SFUploadWidgetSchema> implemen
     );
   }
 
-  private _getValue(file: NzUploadFile): NzSafeAny {
+  private _getValue(file: NzUploadFile): any {
     return deepGet(file.response, this.i.resReName, file.response);
   }
 
-  private pureValue(fileList: NzUploadFile[]): NzSafeAny {
+  private pureValue(fileList: NzUploadFile[]): any {
     fileList
       .filter(file => !file.url)
       .forEach(file => {

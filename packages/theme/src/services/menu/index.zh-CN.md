@@ -25,6 +25,7 @@ type: Service
 | `open` | 展开某菜单 |
 | `toggleOpen` | 切换菜单的展开或关闭 |
 | `openAll` | 展开或关闭所有菜单 |
+| `getDefaultRedirect` | 返回一个默认跳转的菜单链接 |
 
 **recursive**
 
@@ -36,12 +37,12 @@ type: Service
 |----|----|----|-----|
 | `text` | 文本（支持HTML），**必填项** | `string` | - |
 | `i18n` | i18n主键（支持HTML） | `string` | - |
-| `group` | 是否显示分组名，指[示例](//hbyunzai.github.io/ng-yunzai/)中的【主导航】字样 | `boolean` | `true` |
+| `group` | 是否显示分组名，指[示例](//ng-yunzai.github.io/ng-yunzai/)中的【主导航】字样 | `boolean` | `true` |
 | `link` | 路由，`link`、`externalLink` 二选其一 | `string` | - |
 | `externalLink` | 外部链接，`link`、`externalLink` 二选其一 | `string` | - |
 | `target` | 链接 target | `_blank,_self,_parent,_top` | - |
-| `icon` | 图标，指[示例](//hbyunzai.github.io/ng-yunzai/)中的【仪表盘】前图标，只对一级菜单有效 | `string | MenuIcon` | - |
-| `badge` | 徽标数，展示的数字，指[示例](//hbyunzai.github.io/ng-yunzai/)中的【小部件】后的红色块。（注：`group:true` 时无效） | `number` | - |
+| `icon` | 图标，指[示例](//ng-yunzai.github.io/ng-yunzai/)中的【仪表盘】前图标，只对一级菜单有效 | `string | MenuIcon` | - |
+| `badge` | 徽标数，展示的数字，指[示例](//ng-yunzai.github.io/ng-yunzai/)中的【小部件】后的红色块。（注：`group:true` 时无效） | `number` | - |
 | `badgeDot` | 徽标数，显示小红点 | `boolean` | - |
 | `badgeStatus` | 徽标 Badge [颜色](https://ng.ant.design/components/badge/en#nz-badge) | `success,processing,default,error,warning` | `error` |
 | `open` | 是否打开菜单 | `boolean` | `false` |

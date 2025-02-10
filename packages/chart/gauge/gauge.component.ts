@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, numberAtt
 import type { Chart } from '@antv/g2';
 
 import { G2BaseComponent } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 @Component({
@@ -18,7 +18,6 @@ import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [NzSkeletonComponent]
 })
 export class G2GaugeComponent extends G2BaseComponent {
@@ -28,7 +27,7 @@ export class G2GaugeComponent extends G2BaseComponent {
   @Input({ transform: numberAttribute }) height?: number;
   @Input() color = '#2f9cff';
   @Input() bgColor?: string; // = '#f0f2f5';
-  @Input() format?: (text: string, item: NzSafeAny, index: number) => string;
+  @Input() format?: (text: string, item: any, index: number) => string;
   @Input({ transform: numberAttribute }) percent?: number;
   @Input() padding: number | number[] | 'auto' = [10, 10, 30, 10];
 
@@ -37,10 +36,10 @@ export class G2GaugeComponent extends G2BaseComponent {
   install(): void {
     // 自定义Shape 部分
     this.winG2.registerShape('point', 'pointer', {
-      draw(cfg: NzSafeAny, container: NzSafeAny) {
+      draw(cfg: any, container: any) {
         const group = container.addGroup({});
         // 获取极坐标系下画布中心点
-        const center = (this as NzSafeAny).parsePoint({ x: 0, y: 0 });
+        const center = (this as any).parsePoint({ x: 0, y: 0 });
         // 绘制指针
         group.addShape('line', {
           attrs: {

@@ -2,14 +2,20 @@ import { Component, DebugElement, Injectable, TemplateRef, ViewChild } from '@an
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ExtraOptions, RouteReuseStrategy, ROUTER_CONFIGURATION, RouterModule } from '@angular/router';
+import {
+  ExtraOptions,
+  RouteReuseStrategy,
+  ROUTER_CONFIGURATION,
+  RouterModule,
+  RouterOutlet,
+  RouterLink
+} from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { YUNZAI_I18N_TOKEN, YelonLocaleModule, YelonLocaleService, en_US, MenuService, zh_CN } from '@yelon/theme';
 import { ScrollService } from '@yelon/util/browser';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YunzaiI18NServiceFake } from '../../theme/src/services/i18n/i18n';
+
 import { provideReuseTabConfig } from './provide';
 import { ReuseTabComponent } from './reuse-tab.component';
 import {
@@ -22,11 +28,12 @@ import {
 import { ReuseTabService } from './reuse-tab.service';
 import { REUSE_TAB_STORAGE_STATE } from './reuse-tab.state';
 import { ReuseTabStrategy } from './reuse-tab.strategy';
+import { YunzaiI18NServiceFake } from '../../theme/src/services/i18n/i18n';
 
 let i18nResult = 'zh';
 @Injectable()
 class MockI18NServiceFake extends YunzaiI18NServiceFake {
-  fanyi(_key: string): string {
+  fanyi(): string {
     return i18nResult;
   }
 }
@@ -41,7 +48,6 @@ describe('abc: reuse-tab', () => {
 
   function genModule(needI18n: boolean = false): void {
     TestBed.configureTestingModule({
-      declarations: [AppComponent, LayoutComponent, AComponent, BComponent, CComponent, DComponent, EComponent],
       imports: [
         YelonLocaleModule,
         ReuseTabComponent,
@@ -76,7 +82,7 @@ describe('abc: reuse-tab', () => {
         {
           provide: 'CanDeactivate',
           useValue: () => {
-            return new Observable((observer: NzSafeAny) => observer.next(false));
+            return new Observable((observer: any) => observer.next(false));
           }
         }
       ].concat(
@@ -86,7 +92,7 @@ describe('abc: reuse-tab', () => {
               {
                 provide: YUNZAI_I18N_TOKEN,
                 useClass: MockI18NServiceFake
-              } as NzSafeAny
+              } as any
             ]
       )
     });
@@ -774,8 +780,8 @@ describe('abc: reuse-tab', () => {
       expect(this.list[pos].url).toBe(url);
       return this;
     }
-    expectAttr(pos: number, attrName: string, value: NzSafeAny): this {
-      expect((this.list[pos] as NzSafeAny)[attrName]).toBe(value);
+    expectAttr(pos: number, attrName: string, value: any): this {
+      expect((this.list[pos] as any)[attrName]).toBe(value);
       return this;
     }
     expectActive(pos: number, result: boolean): this {
@@ -849,7 +855,8 @@ describe('abc: reuse-tab', () => {
     <a id="e" [routerLink]="['/e']">e</a>
     <a id="leave" [routerLink]="['/leave']">leave</a>
     <router-outlet />
-  `
+  `,
+  imports: [RouterLink, RouterOutlet]
 })
 class AppComponent {}
 
@@ -873,12 +880,13 @@ class AppComponent {}
       [titleRender]="titleRender"
       [storageState]="storageState"
       [canClose]="canClose"
-      (change)="change($event)"
-      (close)="close($event)"
+      (change)="change()"
+      (close)="close()"
     />
     <div id="children"><router-outlet /></div>
     <ng-template #titleRender let-i>{{ i.url }}</ng-template>
-  `
+  `,
+  imports: [ReuseTabComponent, RouterOutlet]
 })
 class LayoutComponent {
   @ViewChild('comp', { static: true })
@@ -923,7 +931,8 @@ class AComponent {
     <div id="time">{{ time }}</div>
     <a id="b2" [routerLink]="['/b/2']">b2</a>
     <a id="b3" [routerLink]="['/b/3']">b3</a>
-  `
+  `,
+  imports: [RouterLink]
 })
 class BComponent {
   time = +new Date();
@@ -937,7 +946,8 @@ class BComponent {
     c:
     <div id="time">{{ time }}</div>
     <a id="to-d" routerLink="/d">to-d</a>
-  `
+  `,
+  imports: [RouterLink]
 })
 class CComponent {
   time = +new Date();
@@ -954,7 +964,8 @@ class CComponent {
     d:
     <div id="time">{{ time }}</div>
     <a id="to-c" routerLink="/c">to-c</a>
-  `
+  `,
+  imports: [RouterLink]
 })
 class DComponent {
   time = +new Date();

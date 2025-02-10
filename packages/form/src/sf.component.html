@@ -3,8 +3,9 @@
 </ng-template>
 <ng-template #btnTpl>
   @if (button !== 'none') {
-    @if (_btn && _btn.render) {
-      <nz-form-item [ngClass]="_btn.render!.class!" class="sf-btns" [fixed-label]="_btn.render!.spanLabelFixed!">
+    @let btnRender = _btn.render;
+    @if (btnRender) {
+      <nz-form-item [class]="btnRender.class!" class="sf-btns" [fixed-label]="btnRender.spanLabelFixed!">
         <div
           nz-col
           class="ant-form-item-control"
@@ -25,18 +26,17 @@
                   nz-button
                   data-type="submit"
                   [nzType]="_btn.submit_type!"
-                  [nzSize]="_btn.render!.size!"
+                  [nzSize]="btnRender.size!"
                   [nzLoading]="loading"
                   [disabled]="liveValidate && !valid"
                 >
                   @if (_btn.submit_icon) {
-                    <i
-                      nz-icon
+                    <nz-icon
                       [nzType]="_btn.submit_icon.type!"
                       [nzTheme]="_btn.submit_icon.theme!"
                       [nzTwotoneColor]="_btn.submit_icon.twoToneColor!"
                       [nzIconfont]="_btn.submit_icon.iconfont!"
-                    ></i>
+                    />
                   }
                   {{ _btn.submit }}
                 </button>
@@ -46,18 +46,18 @@
                     nz-button
                     data-type="reset"
                     [nzType]="_btn.reset_type!"
-                    [nzSize]="_btn.render!.size!"
+                    [nzSize]="btnRender.size!"
                     [disabled]="loading"
                     (click)="reset(true)"
                   >
-                    @if (_btn.reset_icon) {
-                      <i
-                        nz-icon
-                        [nzType]="_btn.reset_icon.type!"
-                        [nzTheme]="_btn.reset_icon.theme!"
-                        [nzTwotoneColor]="_btn.reset_icon.twoToneColor!"
-                        [nzIconfont]="_btn.reset_icon.iconfont!"
-                      ></i>
+                    @let resetIcon = _btn.reset_icon;
+                    @if (resetIcon) {
+                      <nz-icon
+                        [nzType]="resetIcon.type!"
+                        [nzTheme]="resetIcon.theme!"
+                        [nzTwotoneColor]="resetIcon.twoToneColor!"
+                        [nzIconfont]="resetIcon.iconfont!"
+                      />
                     }
                     {{ _btn.reset }}
                   </button>

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-require-imports */
 import * as fs from 'fs';
 import * as fse from 'fs-extra';
 import * as path from 'path';
@@ -24,9 +24,9 @@ function fixExample(item: any, filePath: string, config: ModuleConfig): void {
     item: JSON.stringify(item)
   } as unknown as ContentTemplateData;
   const exampleComponentName = `${genUpperName(`${config.name}-${item.name}`)}Component`;
-  obj.imports = `import { NzGridModule } from 'ng-zorro-antd/grid';\nimport { ${exampleComponentName} } from './${item.name}';`;
-  obj.standaloneImports = `,NzGridModule,${exampleComponentName}`;
-  generateDoc(obj, exampleIndexTpl!!, filePath);
+  obj.imports = `\nimport { ${exampleComponentName} } from './${item.name}';`;
+  obj.standaloneImports = `,${exampleComponentName}`;
+  generateDoc(obj, exampleIndexTpl!, filePath);
 }
 
 export function generateDemo(
@@ -59,8 +59,8 @@ export function generateDemo(
       console.error(`invalid ${filePath}`, err);
       return;
     }
-    mt!!.name = name.replace('.md', '');
-    mt!!.filePath = filePath;
+    mt!.name = name.replace('.md', '');
+    mt!.filePath = filePath;
     return mt;
   });
 

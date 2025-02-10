@@ -20,7 +20,7 @@
       <li nz-menu-item [matchRouter]="regexs.yelon">
         <div nz-dropdown nzPlacement="bottomRight" [nzDropdownMenu]="yelonMenu">
           {{ (yelonType ? 'app.header.menu.' + yelonType : 'app.header.menu.yelon') | i18n }}
-          <i nz-icon nzType="down"></i>
+          <nz-icon nzType="down" />
         </div>
         <nz-dropdown-menu #yelonMenu="nzDropdownMenu">
           <ul nz-menu>
@@ -42,8 +42,7 @@
   </ul>
 </ng-template>
 @if (isMobile) {
-  <i
-    nz-icon
+  <nz-icon
     nzType="menu"
     nz-popover
     nzTooltipOverlayClassName="popover-menu"
@@ -53,7 +52,7 @@
     [(nzPopoverVisible)]="menuVisible"
     [nzPopoverTitle]="undefined"
     class="nav-phone-icon"
-  ></i>
+  />
 }
 <div nz-row style="flex-flow: nowrap; height: 64px">
   <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="5" nzXXl="4">

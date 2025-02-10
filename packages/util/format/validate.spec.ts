@@ -1,4 +1,4 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import * as v from './validate';
 
@@ -45,10 +45,10 @@ export const TEST_DATA = {
     { k: '+8615900000000', v: true }
   ],
   url: [
-    { k: 'http://ng.yunzainfo.com', v: true },
+    { k: 'http://ng-yunzai.com', v: true },
     { k: 'https://ng.yunzainfo.com', v: true },
-    { k: '//ng.yunzainfo.com', v: false },
-    { k: 'ng.yunzainfo.com', v: false },
+    { k: '//ng-yunzai.com', v: false },
+    { k: 'ng-yunzai.com', v: false },
     { k: '中国.com', v: false }
   ],
   ip: [
@@ -87,19 +87,19 @@ export const TEST_DATA = {
 describe('utils: format-validate', () => {
   function process(methodName: keyof typeof v, data: Array<{ k: string; v: boolean }>): void {
     for (const item of data) {
-      expect((v[methodName] as NzSafeAny)(item.k))
+      expect((v[methodName] as any)(item.k))
         .withContext(`[${methodName}] ${item.k} must be ${item.v}`)
         .toBe(item.v);
     }
   }
 
-  it('#isNum', () => process('isNum', TEST_DATA.num as NzSafeAny));
-  it('#isInt', () => process('isInt', TEST_DATA.int as NzSafeAny));
-  it('#isDecimal', () => process('isDecimal', TEST_DATA.decimal as NzSafeAny));
-  it('#isIdCard', () => process('isIdCard', TEST_DATA.idCard as NzSafeAny));
-  it('#isMobile', () => process('isMobile', TEST_DATA.mobile as NzSafeAny));
-  it('#isUrl', () => process('isUrl', TEST_DATA.url as NzSafeAny));
-  it('#isIp', () => process('isIp', TEST_DATA.ip as NzSafeAny));
-  it('#isColor', () => process('isColor', TEST_DATA.color as NzSafeAny));
-  it('#isChinese', () => process('isChinese', TEST_DATA.chinese as NzSafeAny));
+  it('#isNum', () => process('isNum', TEST_DATA.num as any));
+  it('#isInt', () => process('isInt', TEST_DATA.int as any));
+  it('#isDecimal', () => process('isDecimal', TEST_DATA.decimal as any));
+  it('#isIdCard', () => process('isIdCard', TEST_DATA.idCard as any));
+  it('#isMobile', () => process('isMobile', TEST_DATA.mobile as any));
+  it('#isUrl', () => process('isUrl', TEST_DATA.url as any));
+  it('#isIp', () => process('isIp', TEST_DATA.ip as any));
+  it('#isColor', () => process('isColor', TEST_DATA.color as any));
+  it('#isChinese', () => process('isChinese', TEST_DATA.chinese as any));
 });

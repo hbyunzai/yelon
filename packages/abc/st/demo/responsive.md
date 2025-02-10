@@ -28,7 +28,6 @@ import { STColumn, STModule } from '@yelon/abc/st';
     footer="The footer"
     responsiveHideHeaderFooter
   />`,
-  standalone: true,
   imports: [STModule]
 })
 export class DemoComponent {

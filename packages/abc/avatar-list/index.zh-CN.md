@@ -4,13 +4,14 @@ title: avatar-list
 subtitle: 用户头像列表
 cols: 1
 module: import { AvatarListModule } from '@yelon/abc/avatar-list';
+deprecated: 20.0.0
 ---
 
 一组用户头像，常用在项目/团队成员列表。可通过设置 `size` 属性来指定头像大小。
 
 ## API
 
-### avatar-list:standalone
+### avatar-list
 
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|
@@ -18,7 +19,7 @@ module: import { AvatarListModule } from '@yelon/abc/avatar-list';
 | `[maxLength]` | 要显示的最大项目 | `number` | - |
 | `[excessItemsStyle]` | 多余的项目风格 | `{ [key: string]: string }` | - |
 
-### avatar-list-item:standalone
+### avatar-list-item
 
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|

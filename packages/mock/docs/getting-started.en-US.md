@@ -41,7 +41,7 @@ Please refer to [global-config.module.ts](https://github.com/hbyunzai/ng-yunzai/
 
 Mock is not real data, and most scenarios are for development local or test environments; therefore, Mock modules and rule data should not be included in the production environment.
 
-Of course, you can also put the `provideMockConfig` of `environment.ts` under `environment.prod.ts` so that the production environment also uses this rule, just like https://hbyunzai.github.io/ng-yunzai/, some mock requests are needed to ensure the environment runs.
+Of course, you can also put the `provideMockConfig` of `environment.ts` under `environment.prod.ts` so that the production environment also uses this rule, just like https://ng-yunzai.github.io/ng- Like yunzai/, some mock requests are needed to ensure the environment runs.
 
 ```ts
 import { provideMockConfig } from '@yelon/mock';

@@ -31,7 +31,7 @@ import { YunzaiConfigService } from '@yelon/util/config';
 import { NzAffixComponent } from 'ng-zorro-antd/affix';
 import { NzBreadCrumbComponent, NzBreadCrumbItemComponent } from 'ng-zorro-antd/breadcrumb';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 interface PageHeaderPath {
@@ -46,7 +46,6 @@ interface PageHeaderPath {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [
     NzAffixComponent,
     NgTemplateOutlet,
@@ -85,7 +84,7 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   // #region fields
 
   _title: string | null = null;
-  _titleTpl: TemplateRef<NzSafeAny> | null = null;
+  _titleTpl: TemplateRef<any> | null = null;
   @Input()
   set title(value: string | TemplateRef<void> | null) {
     if (value instanceof TemplateRef) {
@@ -109,7 +108,7 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   @Input({ transform: booleanAttribute }) syncTitle!: boolean;
   @Input({ transform: booleanAttribute }) fixed!: boolean;
   @Input({ transform: numberAttribute }) fixedOffsetTop!: number;
-  @Input() breadcrumb?: TemplateRef<NzSafeAny> | null = null;
+  @Input() breadcrumb?: TemplateRef<any> | null = null;
   @Input({ transform: booleanAttribute }) recursiveBreadcrumb!: boolean;
   @Input() logo?: TemplateRef<void> | null = null;
   @Input() action?: TemplateRef<void> | null = null;
@@ -136,9 +135,9 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
         takeUntilDestroyed(),
         filter(w => this.affix && w.type === 'layout' && w.name === 'collapsed')
       )
-      .subscribe(() => this.affix.updatePosition({} as NzSafeAny));
+      .subscribe(() => this.affix.updatePosition({} as any));
 
-    const obsList: Array<Observable<NzSafeAny>> = [this.router.events.pipe(filter(ev => ev instanceof NavigationEnd))];
+    const obsList: Array<Observable<any>> = [this.router.events.pipe(filter(ev => ev instanceof NavigationEnd))];
     if (this.menuSrv != null) obsList.push(this.menuSrv.change);
     obsList.push(this.i18nSrv.change);
     merge(...obsList)

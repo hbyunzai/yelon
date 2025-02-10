@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { map, tap } from 'rxjs';
 
-import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData, getEnum } from '@yelon/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { ControlUIWidget, YelonFormModule, SFSchemaEnum, getData, getEnum } from '@yelon/form';
+
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MentionOnSearchTypes, NzMentionComponent, NzMentionModule } from 'ng-zorro-antd/mention';
 
@@ -64,7 +64,6 @@ import type { SFMentionWidgetSchema } from './schema';
   </sf-item-wrap>`,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, NzInputModule, NzMentionModule]
 })
 export class MentionWidget extends ControlUIWidget<SFMentionWidgetSchema> implements OnInit {
@@ -72,7 +71,7 @@ export class MentionWidget extends ControlUIWidget<SFMentionWidgetSchema> implem
 
   @ViewChild('mentions', { static: true }) private mentionChild!: NzMentionComponent;
   data: SFSchemaEnum[] = [];
-  i: NzSafeAny;
+  i: any;
   loading = false;
 
   ngOnInit(): void {
@@ -99,18 +98,18 @@ export class MentionWidget extends ControlUIWidget<SFMentionWidgetSchema> implem
           return [{ keyword: 'mention', message: `最多提及 ${max} 次` }];
         }
         return null;
-      }) as NzSafeAny;
+      }) as any;
     }
   }
 
-  reset(_value: SFValue): void {
+  reset(): void {
     getData(this.schema, this.ui, null).subscribe(list => {
       this.data = list;
       this.detectChanges();
     });
   }
 
-  _select(options: NzSafeAny): void {
+  _select(options: any): void {
     if (this.ui.select) this.ui.select(options);
   }
 

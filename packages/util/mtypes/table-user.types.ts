@@ -1,4 +1,4 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface TableUser {
   userId: string;
@@ -43,8 +43,8 @@ export interface TableUserRole {
   roleDesc: string | null;
   displayIndex: number | null;
   landingPageUrl: string | null;
-  // @ts-ignore no-explicit-NzSafeAny
-  roleGroups: NzSafeAny;
+  // @ts-ignore no-explicit-any
+  roleGroups: any;
   thisDepartment: boolean;
   onlyOne: boolean;
   onlyDeptOne: boolean;
@@ -57,11 +57,11 @@ export interface TableUserDept {
   deptName: string;
   deptType: string;
   deptComment: string | null;
-  leaf: NzSafeAny; // Change this type based on the actual structure if available
+  leaf: any; // Change this type based on the actual structure if available
   displayIndex: number;
   deptCode: string;
   status: number;
-  deptLevel: NzSafeAny; // Change this type based on the actual structure if available
+  deptLevel: any; // Change this type based on the actual structure if available
   children: TableUserDept[];
   pid: string | null;
   expand: boolean;

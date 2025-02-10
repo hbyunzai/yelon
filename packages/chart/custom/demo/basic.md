@@ -19,12 +19,11 @@ import { Component, ElementRef, NgZone, inject } from '@angular/core';
 import type { Chart } from '@antv/g2';
 
 import { G2CustomModule } from '@yelon/chart/custom';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 @Component({
   selector: 'chart-custom-basic',
   template: ` <g2-custom delay="100" (render)="render($event)" /> `,
-  standalone: true,
   imports: [G2CustomModule]
 })
 export class DemoComponent {
@@ -45,7 +44,7 @@ export class DemoComponent {
       row.percent = row.pv / 50000;
       return row;
     });
-    const chart: Chart = new (window as NzSafeAny).G2.Chart({
+    const chart: Chart = new (window as any).G2.Chart({
       container: el,
       autoFit: true,
       height: 500,

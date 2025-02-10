@@ -41,7 +41,7 @@ npm i --save-dev @yelon/mock
 
 Mock 并非是真实数据，大部分场景是针对开发本地或测试环境；所以在生产环境中不应该包括 Mock 模块以及规则数据。
 
-当然，也可以将 `environment.ts` 的 `provideMockConfig` 放到 `environment.prod.ts` 下，使得生产环境也使用这种规则，就像 https://hbyunzai.github.io/ng-yunzai/ 一样，需要一些模拟请求来保证环境的运行。
+当然，也可以将 `environment.ts` 的 `provideMockConfig` 放到 `environment.prod.ts` 下，使得生产环境也使用这种规则，就像 https://ng-yunzai.github.io/ng-yunzai/ 一样，需要一些模拟请求来保证环境的运行。
 
 ```ts
 import { provideMockConfig } from '@yelon/mock';

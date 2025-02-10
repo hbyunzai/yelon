@@ -4,7 +4,7 @@ title: 开始使用
 type: Documents
 ---
 
-ACL 全称叫访问控制列表（Access Control List），是一种非常简单的基于角色权限控制方式。一个完全独立 `@yelon/acl` 模块（[DEMO](//hbyunzai.github.io/ng-yunzai/#/logics/acl)）。
+ACL 全称叫访问控制列表（Access Control List），是一种非常简单的基于角色权限控制方式。一个完全独立 `@yelon/acl` 模块（[DEMO](//ng-yunzai.github.io/ng-yunzai/#/logics/acl)）。
 
 ## 如何运行
 

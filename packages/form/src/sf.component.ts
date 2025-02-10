@@ -25,7 +25,7 @@ import { ACLService } from '@yelon/acl';
 import { YUNZAI_I18N_TOKEN, YelonLocaleService, LocaleData } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 
 import { mergeConfig } from './config';
@@ -74,7 +74,9 @@ export function useFactory(
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class SFComponent implements OnInit, OnChanges, OnDestroy {
   private readonly formPropertyFactory = inject(FormPropertyFactory);
@@ -99,7 +101,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   _btn!: SFButton;
   _schema!: SFSchema;
   _ui!: SFUISchema;
-  get btnGrid(): NzSafeAny {
+  get btnGrid(): any {
     return this._btn.render!.grid;
   }
 
@@ -112,7 +114,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   /** UI Schema */
   @Input() ui!: SFUISchema;
   /** 表单默认值 */
-  @Input() formData?: Record<string, NzSafeAny>;
+  @Input() formData?: Record<string, any>;
   /**
    * 按钮
    * - 值为 `null` 或 `undefined` 表示手动添加按钮，但保留容器
@@ -201,7 +203,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
    *
    * 表单值
    */
-  get value(): { [key: string]: NzSafeAny } {
+  get value(): Record<string, any> {
     return this._item;
   }
 
@@ -219,7 +221,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
    *
    * 根据[路径](https://ng.yunzainfo.com/form/qa#path)获取表单元素值
    */
-  getValue(path: string): NzSafeAny {
+  getValue(path: string): any {
     return this.getProperty(path)?.value;
   }
 
@@ -228,7 +230,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
    *
    * 根据[路径](https://ng.yunzainfo.com/form/qa#path)设置某个表单元素属性值
    */
-  setValue(path: string, value: NzSafeAny): this {
+  setValue(path: string, value: any): this {
     const item = this.getProperty(path);
     if (!item) {
       throw new Error(`Invalid path: ${path}`);
@@ -364,7 +366,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
           optional: undefined,
           optionalHelp: undefined,
           widget: property.type,
-          ...(property.format && (this.options.formatMap as NzSafeAny)[property.format]),
+          ...(property.format && (this.options.formatMap as any)[property.format]),
           ...(typeof property.ui === 'string' ? { widget: property.ui } : null),
           ...(!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
             ? { widget: 'select' }
@@ -487,7 +489,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
       size: this.options.size,
       liveValidate: this.liveValidate,
       ...this.options.ui,
-      ...(_schema as NzSafeAny).ui,
+      ...(_schema as any).ui,
       ...this.ui['*']
     };
     if (this.onlyVisual === true) {
@@ -611,9 +613,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
       if (Array.isArray(property.properties)) {
         property.properties.forEach(p => fn(p));
       } else {
-        Object.keys(property.properties).forEach(key =>
-          fn((property.properties as { [key: string]: FormProperty })[key])
-        );
+        Object.keys(property.properties).forEach(key => fn((property.properties as Record<string, FormProperty>)[key]));
       }
     };
     if (options.onlyRoot) {

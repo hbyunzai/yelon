@@ -1,5 +1,6 @@
+import { moveItemInArray, DragDropModule } from '@angular/cdk/drag-drop';
 import type { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { DecimalPipe, DOCUMENT } from '@angular/common';
+import { DecimalPipe, DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   booleanAttribute,
@@ -10,6 +11,7 @@ import {
   ElementRef,
   EventEmitter,
   inject,
+  input,
   Input,
   numberAttribute,
   OnChanges,
@@ -22,9 +24,11 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isObservable, Observable, of, filter, catchError, map, finalize, throwError, lastValueFrom } from 'rxjs';
 
+import { CellComponent } from '@yelon/abc/cell';
 import {
   YUNZAI_I18N_TOKEN,
   DatePipe,
@@ -36,15 +40,26 @@ import {
 } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, deepMergeKey } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
-import { NzResizeEvent } from 'ng-zorro-antd/resizable';
-import { NzTableComponent } from 'ng-zorro-antd/table';
+import { NzBadgeComponent } from 'ng-zorro-antd/badge';
+import { NzCheckboxComponent } from 'ng-zorro-antd/checkbox';
+
+import { NzDividerComponent } from 'ng-zorro-antd/divider';
+import { NzContextMenuService, NzDropdownMenuComponent, NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzPopconfirmDirective } from 'ng-zorro-antd/popconfirm';
+import { NzRadioComponent } from 'ng-zorro-antd/radio';
+import { NzResizableModule, NzResizeEvent } from 'ng-zorro-antd/resizable';
+import { NzTableComponent, NzTableModule } from 'ng-zorro-antd/table';
+import { NzTagComponent } from 'ng-zorro-antd/tag';
+import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 import { STColumnSource } from './st-column-source';
 import { STDataSource, STDataSourceOptions, STDataSourceResult } from './st-data-source';
 import { STExport } from './st-export';
+import { STFilterComponent } from './st-filter.component';
 import { STRowSource } from './st-row.directive';
+import { STWidgetHostDirective } from './st-widget-host.directive';
 import { ST_DEFAULT_CONFIG } from './st.config';
 import type {
   STChange,
@@ -59,6 +74,7 @@ import type {
   STContextmenuItem,
   STCustomRequestOptions,
   STData,
+  STDragOptions,
   STError,
   STExportOptions,
   STLoadOptions,
@@ -76,6 +92,141 @@ import type {
 import type { _STColumn, _STDataValue, _STHeader, _STTdNotify, _STTdNotifyType } from './st.types';
 
 @Component({
+  selector: 'st-td',
+  templateUrl: './st-td.component.html',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    FormsModule,
+    NzTooltipDirective,
+    NgTemplateOutlet,
+    NzPopconfirmDirective,
+    NzIconDirective,
+    NzCheckboxComponent,
+    NzRadioComponent,
+    NzTagComponent,
+    NzBadgeComponent,
+    CellComponent,
+    STWidgetHostDirective,
+    NzDropDownModule,
+    NzMenuModule,
+    NzDividerComponent
+  ]
+})
+export class STTdComponent {
+  private readonly stComp = inject(STComponent, { host: true });
+  private readonly router = inject(Router);
+  private readonly modalHelper = inject(ModalHelper);
+  private readonly drawerHelper = inject(DrawerHelper);
+
+  @Input() c!: _STColumn;
+  @Input() cIdx!: number;
+  @Input() data!: STData[];
+  @Input() i!: STData;
+  @Input() index!: number;
+  @Output() readonly n = new EventEmitter<_STTdNotify>();
+
+  private get routerState(): { pi: number; ps: number; total: number } {
+    const { pi, ps, total } = this.stComp;
+    return { pi, ps, total };
+  }
+
+  private report(type: _STTdNotifyType): void {
+    this.n.emit({ type, item: this.i, col: this.c });
+  }
+
+  _checkbox(value: boolean): void {
+    this.i.checked = value;
+    this.report('checkbox');
+  }
+
+  _radio(): void {
+    this.data.filter(w => !w.disabled).forEach(i => (i.checked = false));
+    this.i.checked = true;
+    this.report('radio');
+  }
+
+  _link(e: Event): boolean {
+    this._stopPropagation(e);
+    const res = this.c.click!(this.i, this.stComp);
+    if (typeof res === 'string') {
+      this.router.navigateByUrl(res, { state: this.routerState });
+    }
+    return false;
+  }
+
+  _client(): void {
+    this.c.click?.(this.i, this.stComp);
+  }
+
+  _stopPropagation(ev: Event): void {
+    ev.preventDefault();
+    ev.stopPropagation();
+  }
+
+  _btn(btn: STColumnButton, ev?: Event): void {
+    ev?.stopPropagation();
+    const cog = this.stComp.cog;
+    let record = this.i;
+    if (btn.type === 'modal' || btn.type === 'static') {
+      if (cog.modal!.pureRecoard === true) {
+        record = this.stComp.pureItem(record)!;
+      }
+      const modal = btn.modal!;
+      const obj = { [modal.paramsName!]: record };
+      (this.modalHelper[btn.type === 'modal' ? 'create' : 'createStatic'] as any)(
+        modal.component,
+        { ...obj, ...(modal.params && modal.params(record)) },
+        deepMergeKey({}, true, cog.modal, modal)
+      )
+        .pipe(filter(w => typeof w !== 'undefined'))
+        .subscribe((res: any) => this.btnCallback(record, btn, res));
+      return;
+    } else if (btn.type === 'drawer') {
+      if (cog.drawer!.pureRecoard === true) {
+        record = this.stComp.pureItem(record)!;
+      }
+      const drawer = btn.drawer!;
+      const obj = { [drawer.paramsName!]: record };
+      this.drawerHelper
+        .create(
+          drawer.title!,
+          drawer.component,
+          { ...obj, ...(drawer.params && drawer.params(record)) },
+          deepMergeKey({}, true, cog.drawer, drawer)
+        )
+        .pipe(filter(w => typeof w !== 'undefined'))
+        .subscribe(res => this.btnCallback(record, btn, res));
+      return;
+    } else if (btn.type === 'link') {
+      const clickRes = this.btnCallback(record, btn);
+      if (typeof clickRes === 'string') {
+        this.router.navigateByUrl(clickRes, { state: this.routerState });
+      }
+      return;
+    }
+    this.btnCallback(record, btn);
+  }
+
+  private btnCallback(record: STData, btn: STColumnButton, modal?: any): any {
+    if (!btn.click) return;
+    if (typeof btn.click === 'string') {
+      switch (btn.click) {
+        case 'load':
+          this.stComp.load();
+          break;
+        case 'reload':
+          this.stComp.reload();
+          break;
+      }
+    } else {
+      return btn.click(record, modal, this.stComp);
+    }
+  }
+}
+
+@Component({
   selector: 'st',
   exportAs: 'st',
   templateUrl: './st.component.html',
@@ -91,7 +242,21 @@ import type { _STColumn, _STDataValue, _STHeader, _STTdNotify, _STTdNotifyType }
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    FormsModule,
+    NzTableModule,
+    NzTooltipDirective,
+    NzCheckboxComponent,
+    NzResizableModule,
+    NgTemplateOutlet,
+    NzDropDownModule,
+    NzIconDirective,
+    NzMenuModule,
+    STFilterComponent,
+    STTdComponent,
+    DragDropModule
+  ]
 })
 export class STComponent implements AfterViewInit, OnChanges {
   private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN);
@@ -101,7 +266,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   private readonly exportSrv = inject(STExport);
   private readonly columnSource = inject(STColumnSource);
   private readonly dataSource = inject(STDataSource);
-  private readonly yelonI18n = inject(YelonLocaleService);
+  private readonly yunzaiI18n = inject(YelonLocaleService);
   private readonly cms = inject(NzContextMenuService, { optional: true });
   private readonly destroy$ = inject(DestroyRef);
 
@@ -169,13 +334,27 @@ export class STComponent implements AfterViewInit, OnChanges {
   @Input({ transform: booleanAttribute }) bordered = false;
   @Input() size!: 'small' | 'middle' | 'default';
   @Input() scroll: { x?: string | null; y?: string | null } = { x: null, y: null };
+  drag = input<STDragOptions | null, unknown>(null, {
+    transform: v => {
+      const obj: STDragOptions | null = typeof v === 'object' ? v : booleanAttribute(v) ? {} : null;
+      if (obj == null) return null;
+
+      if (typeof obj.dropped !== 'function') {
+        obj.dropped = e => {
+          moveItemInArray(this._data, e.previousIndex, e.currentIndex);
+          this.cd();
+        };
+      }
+      return obj;
+    }
+  });
   @Input() singleSort?: STSingleSort | null;
   private _multiSort?: STMultiSort;
   @Input()
-  get multiSort(): NzSafeAny {
+  get multiSort(): any {
     return this._multiSort;
   }
-  set multiSort(value: NzSafeAny) {
+  set multiSort(value: any) {
     if (
       (typeof value === 'boolean' && !booleanAttribute(value)) ||
       (typeof value === 'object' && Object.keys(value).length === 0)
@@ -224,7 +403,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   @Input({ transform: numberAttribute }) virtualItemSize = 54;
   @Input({ transform: numberAttribute }) virtualMaxBufferPx = 200;
   @Input({ transform: numberAttribute }) virtualMinBufferPx = 100;
-  @Input() customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
+  @Input() customRequest?: (options: STCustomRequestOptions) => Observable<any>;
   @Input() virtualForTrackBy: TrackByFunction<STData> = index => index;
   @Input() trackBy: TrackByFunction<STData> = (_, item) => item;
 
@@ -247,8 +426,8 @@ export class STComponent implements AfterViewInit, OnChanges {
   }
 
   constructor(configSrv: YunzaiConfigService) {
-    this.yelonI18n.change.pipe(takeUntilDestroyed()).subscribe(() => {
-      this.locale = this.yelonI18n.getData('st');
+    this.yunzaiI18n.change.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.locale = this.yunzaiI18n.getData('st');
       if (this._columns.length > 0) {
         this.updateTotalTpl();
         this.cd();
@@ -295,7 +474,7 @@ export class STComponent implements AfterViewInit, OnChanges {
       : '';
   }
 
-  private changeEmit(type: STChangeType, data?: NzSafeAny): void {
+  private changeEmit(type: STChangeType, data?: any): void {
     const res: STChange = {
       type,
       pi: this.pi,
@@ -385,6 +564,7 @@ export class STComponent implements AfterViewInit, OnChanges {
         this._data = result.list ?? [];
         this._statistical = result.statistical as STStatisticalResults;
         // Should be re-render in next tike when using virtual scroll
+        // https://github.com/hbyunzai/ng-yunzai/issues/1836
         if (this.cdkVirtualScrollViewport != null) {
           Promise.resolve().then(() => this.cdkVirtualScrollViewport?.checkViewportSize());
         }
@@ -416,7 +596,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    * @param extraParams 重新指定 `extraParams` 值
    * @param options 选项
    */
-  load(pi: number = 1, extraParams?: NzSafeAny, options?: STLoadOptions): this {
+  load(pi: number = 1, extraParams?: any, options?: STLoadOptions): this {
     if (pi !== -1) this.pi = pi;
     if (typeof extraParams !== 'undefined') {
       this.req.params = options && options.merge ? { ...this.req.params, ...extraParams } : extraParams;
@@ -430,7 +610,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    *
    * @param extraParams 重新指定 `extraParams` 值
    */
-  reload(extraParams?: NzSafeAny, options?: STLoadOptions): this {
+  reload(extraParams?: any, options?: STLoadOptions): this {
     return this.load(-1, extraParams, options);
   }
 
@@ -443,7 +623,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    *
    * @param extraParams 重新指定 `extraParams` 值
    */
-  reset(extraParams?: NzSafeAny, options?: STLoadOptions): this {
+  reset(extraParams?: any, options?: STLoadOptions): this {
     this.clearStatus().load(1, extraParams, options);
     return this;
   }
@@ -509,7 +689,7 @@ export class STComponent implements AfterViewInit, OnChanges {
     const className = config.fn(item, index);
     const trEl = el.closest('tr') as HTMLElement;
     if (config.exclusive) {
-      trEl.parentElement!!.querySelectorAll('tr').forEach((a: HTMLElement) => a.classList.remove(className));
+      trEl.parentElement!.querySelectorAll('tr').forEach((a: HTMLElement) => a.classList.remove(className));
     }
     if (trEl.classList.contains(className)) {
       trEl.classList.remove(className);
@@ -529,19 +709,19 @@ export class STComponent implements AfterViewInit, OnChanges {
   }
 
   private _refColAndData(): this {
-    this._columns.forEach(c => {
+    this._columns.forEach((c, cIdx) => {
       this._data.forEach((i, idx) => {
         const values = i._values as _STDataValue[];
         if (c.type === 'no') {
           const text = `${this.dataSource.getNoIndex(i, c, idx)}`;
-          values[c.__point!] = {
+          values[cIdx] = {
             text,
             _text: text,
             org: idx,
             safeType: 'text'
           } as _STDataValue;
         }
-        values[c.__point!].props = this.dataSource.getCell(c, i, idx);
+        values[cIdx].props = this.dataSource.getCell(c, i, idx);
       });
     });
 
@@ -582,7 +762,7 @@ export class STComponent implements AfterViewInit, OnChanges {
       }
 
       const curData = this._data;
-      for (var i = curData.length; i--; ) {
+      for (let i = curData.length; i >= 0; i--) {
         if (data.indexOf(curData[i]) !== -1) {
           curData.splice(i, 1);
         }
@@ -603,12 +783,26 @@ export class STComponent implements AfterViewInit, OnChanges {
    * this.st.setRow(item, { price: 100 })
    * ```
    */
-  setRow(index: number | STData, item: STData, options?: { refreshSchema?: boolean; emitReload?: boolean }): this {
+  setRow(
+    index: number | STData,
+    item: STData,
+    options?: {
+      refreshSchema?: boolean;
+      emitReload?: boolean;
+      /**
+       *
+       * @param arrayProcessMethod 数组处理方式
+       *  - `true` 表示替换新值，不管新值为哪种类型
+       *  - `false` 表示会合并整个数组（将旧数据与新数据合并成新数组）
+       */
+      arrayProcessMethod?: boolean;
+    }
+  ): this {
     options = { refreshSchema: false, emitReload: false, ...options };
     if (typeof index !== 'number') {
       index = this._data.indexOf(index);
     }
-    this._data[index] = deepMergeKey(this._data[index], false, item);
+    this._data[index] = deepMergeKey(this._data[index], options?.arrayProcessMethod ?? false, item);
     this.optimizeData();
     if (options.refreshSchema) {
       this.resetColumns({ emitReload: options.emitReload });
@@ -621,7 +815,7 @@ export class STComponent implements AfterViewInit, OnChanges {
 
   // #region sort
 
-  sort(col: _STColumn, value: NzSafeAny): void {
+  sort(col: _STColumn, value: any): void {
     if (this.multiSort) {
       col._sort.default = value;
       col._sort.tick = this.dataSource.nextSortTick;
@@ -804,7 +998,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   // #endregion
 
   get cdkVirtualScrollViewport(): CdkVirtualScrollViewport | undefined {
-    return this.orgTable?.cdkVirtualScrollViewport as NzSafeAny;
+    return this.orgTable?.cdkVirtualScrollViewport as any;
   }
 
   private _resetColumns(options?: STResetColumnsOption): Observable<this> {
@@ -842,7 +1036,8 @@ export class STComponent implements AfterViewInit, OnChanges {
     const res = this.columnSource.process(this.columns as _STColumn[], {
       widthMode: this.widthMode,
       resizable: this._resizable,
-      safeType: this.cog.safeType as STColumnSafeType
+      safeType: this.cog.safeType as STColumnSafeType,
+      expand: this.expand != null
     });
     this._columns = res.columns;
     this._headers = res.headers;
@@ -895,121 +1090,6 @@ export class STComponent implements AfterViewInit, OnChanges {
     }
     if (changes.data) {
       this.loadPageData().subscribe();
-    }
-  }
-}
-
-@Component({
-  selector: 'st-td',
-  templateUrl: './st-td.component.html',
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
-})
-export class STTdComponent {
-  private readonly stComp = inject(STComponent, { host: true });
-  private readonly router = inject(Router);
-  private readonly modalHelper = inject(ModalHelper);
-  private readonly drawerHelper = inject(DrawerHelper);
-
-  @Input() c!: _STColumn;
-  @Input() cIdx!: number;
-  @Input() data!: STData[];
-  @Input() i!: STData;
-  @Input() index!: number;
-  @Output() readonly n = new EventEmitter<_STTdNotify>();
-
-  private get routerState(): { pi: number; ps: number; total: number } {
-    const { pi, ps, total } = this.stComp;
-    return { pi, ps, total };
-  }
-
-  private report(type: _STTdNotifyType): void {
-    this.n.emit({ type, item: this.i, col: this.c });
-  }
-
-  _checkbox(value: boolean): void {
-    this.i.checked = value;
-    this.report('checkbox');
-  }
-
-  _radio(): void {
-    this.data.filter(w => !w.disabled).forEach(i => (i.checked = false));
-    this.i.checked = true;
-    this.report('radio');
-  }
-
-  _link(e: Event): boolean {
-    this._stopPropagation(e);
-    const res = this.c.click!(this.i, this.stComp);
-    if (typeof res === 'string') {
-      this.router.navigateByUrl(res, { state: this.routerState });
-    }
-    return false;
-  }
-
-  _stopPropagation(ev: Event): void {
-    ev.preventDefault();
-    ev.stopPropagation();
-  }
-
-  _btn(btn: STColumnButton, ev?: Event): void {
-    ev?.stopPropagation();
-    const cog = this.stComp.cog;
-    let record = this.i;
-    if (btn.type === 'modal' || btn.type === 'static') {
-      if (cog.modal!.pureRecoard === true) {
-        record = this.stComp.pureItem(record)!;
-      }
-      const modal = btn.modal!;
-      const obj = { [modal.paramsName!]: record };
-      (this.modalHelper[btn.type === 'modal' ? 'create' : 'createStatic'] as NzSafeAny)(
-        modal.component,
-        { ...obj, ...(modal.params && modal.params(record)) },
-        deepMergeKey({}, true, cog.modal, modal)
-      )
-        .pipe(filter(w => typeof w !== 'undefined'))
-        .subscribe((res: NzSafeAny) => this.btnCallback(record, btn, res));
-      return;
-    } else if (btn.type === 'drawer') {
-      if (cog.drawer!.pureRecoard === true) {
-        record = this.stComp.pureItem(record)!;
-      }
-      const drawer = btn.drawer!;
-      const obj = { [drawer.paramsName!]: record };
-      this.drawerHelper
-        .create(
-          drawer.title!,
-          drawer.component,
-          { ...obj, ...(drawer.params && drawer.params(record)) },
-          deepMergeKey({}, true, cog.drawer, drawer)
-        )
-        .pipe(filter(w => typeof w !== 'undefined'))
-        .subscribe(res => this.btnCallback(record, btn, res));
-      return;
-    } else if (btn.type === 'link') {
-      const clickRes = this.btnCallback(record, btn);
-      if (typeof clickRes === 'string') {
-        this.router.navigateByUrl(clickRes, { state: this.routerState });
-      }
-      return;
-    }
-    this.btnCallback(record, btn);
-  }
-
-  private btnCallback(record: STData, btn: STColumnButton, modal?: NzSafeAny): NzSafeAny {
-    if (!btn.click) return;
-    if (typeof btn.click === 'string') {
-      switch (btn.click) {
-        case 'load':
-          this.stComp.load();
-          break;
-        case 'reload':
-          this.stComp.reload();
-          break;
-      }
-    } else {
-      return btn.click(record, modal, this.stComp);
     }
   }
 }

@@ -15,7 +15,6 @@ import { PageHeaderModule } from '@yelon/abc/page-header';
       <router-outlet />
     </div>
   `,
-  standalone: true,
   imports: [RouterOutlet, PageHeaderModule, JsonPipe]
 })
 export class DevLazyLayoutComponent {

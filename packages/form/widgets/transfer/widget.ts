@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData } from '@yelon/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import {
   NzTransferModule,
   TransferCanMove,
@@ -44,7 +44,6 @@ import type { SFTransferWidgetSchema } from './schema';
   </sf-item-wrap> `,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, NzTransferModule]
 })
 export class TransferWidget extends ControlUIWidget<SFTransferWidgetSchema> implements OnInit {
@@ -71,7 +70,7 @@ export class TransferWidget extends ControlUIWidget<SFTransferWidgetSchema> impl
         formData = [formData];
       }
       list.forEach((item: SFSchemaEnum) => {
-        if (~(formData as NzSafeAny[]).indexOf(item.value)) {
+        if (~(formData as any[]).indexOf(item.value)) {
           item.direction = 'right';
         }
       });

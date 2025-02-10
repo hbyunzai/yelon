@@ -37,13 +37,12 @@ export class CodeService {
     const res = packageJSON as Record<string, NzSafeAny>;
     if (includeCli) {
       res.devDependencies = {
-        '@angular-devkit/build-angular': '^17.0.0',
-        '@angular/cli': '^17.0.0',
-        '@angular/compiler-cli': '^17.0.0',
-        '@types/node': '^18.18.0',
-        'ts-node': '~10.9.1',
-        typescript: '~5.2.2',
-        'ng-yunzai': '~17.0.3'
+        '@angular-devkit/build-angular': '^19.1.2',
+        '@angular/cli': '^19.1.2',
+        '@angular/compiler-cli': '^19.1.0',
+        '@types/node': '^18.19.1',
+        typescript: '~5.7.2',
+        'ng-yunzai': '^19.0.0'
       };
     }
 
@@ -62,7 +61,7 @@ export class CodeService {
     return startupServiceTS({ ajvVersion: pkg.dependencies.ajv.substring(1) });
   }
 
-  private get genMock(): { [key: string]: string } {
+  private get genMock(): Record<string, string> {
     return {
       '_mock/user.ts': mockUser,
       '_mock/index.ts': `export * from './user';`
@@ -92,10 +91,7 @@ export class CodeService {
   }
 
   private attachStandalone(code: string): string {
-    // standalone: true,
-    if (code.includes(`standalone: true`)) return code;
-
-    return `${code.replace(`@Component({`, `@Component({\n  standalone: true,\n`)}`;
+    return code;
   }
 
   private yarnLock?: string;
@@ -171,12 +167,13 @@ export class CodeService {
     const packageJson = this.genPackage({ includeCli });
     // packageJson.name = 'NG-YUNZAI';
     packageJson.description = title;
-    const files: {
-      [key: string]: {
+    const files: Record<
+      string,
+      {
         content: string;
         isBinary: boolean;
-      };
-    } = {
+      }
+    > = {
       'package.json': {
         content: JSON.stringify(packageJson, null, 2),
         isBinary: false

@@ -27,8 +27,8 @@ import {
   YunzaiHeaderStyle,
   YunzaiProjectInfo
 } from '@yelon/util';
+
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -282,7 +282,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
     return this.state.display.reusetab;
   }
 
-  get reusetabCSS(): NzSafeAny {
+  get reusetabCSS(): any {
     let cascadingStyleSheet = {};
     if (!this.state.display.nav) {
       cascadingStyleSheet = {
@@ -351,7 +351,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
       this.headerStyleList = projectInfo.headerStyle;
       const hasThis = this.headerStyleList.some(item => item.value === this.state.navType);
       if (!hasThis) {
-        this.state.navType = <NavType>projectInfo.headerStyle[0].value;
+        this.state.navType = projectInfo.headerStyle[0].value as NavType;
         const [setHeaderType] = useLocalStorageHeaderType();
         setHeaderType(this.state.navType);
       }
@@ -366,7 +366,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
 
   onNavTypeChange(type: NavType | string): void {
     const [setHeaderType] = useLocalStorageHeaderType();
-    setHeaderType(<NavType>type);
+    setHeaderType(type as NavType);
     this.win.location.reload();
   }
 
@@ -395,7 +395,7 @@ export class YunzaiLayoutBasicComponent implements OnInit {
       // eslint-disable-next-line deprecation/deprecation
       this.httpClient.get(`/basic/api/app/aboutApp?name=${name}`).subscribe(
         // @ts-ignore
-        (response: NzSafeAny) => {
+        (response: any) => {
           this.applicationModal.loading = false;
           if (response.data) {
             this.applicationInfo = response.data;

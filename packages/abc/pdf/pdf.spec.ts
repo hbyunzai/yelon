@@ -3,10 +3,9 @@ import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick
 
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types/any';
+import { any } from 'ng-zorro-antd/core/types/any';
 
 import { PdfComponent } from './pdf.component';
-import { PdfModule } from './pdf.module';
 
 describe('abc: pdf', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -14,10 +13,6 @@ describe('abc: pdf', () => {
   let lazySrv: LazyService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [PdfModule],
-      declarations: [TestComponent]
-    });
     ({ fixture } = createTestContext(TestComponent));
     page = new PageObject();
     lazySrv = TestBed.inject(LazyService);
@@ -44,11 +39,12 @@ describe('abc: pdf', () => {
 });
 
 @Component({
-  template: ` <pdf #comp [src]="src" [options]="options" [delay]="delay" (change)="change()" /> `
+  template: ` <pdf #comp [src]="src" [options]="options" [delay]="delay" (change)="change()" /> `,
+  imports: [PdfComponent]
 })
 class TestComponent {
   @ViewChild('comp') comp!: PdfComponent;
-  options: NzSafeAny;
+  options: any;
   src = '';
   delay = 0;
   change(): void {}

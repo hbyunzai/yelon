@@ -1,4 +1,4 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { deepCopy, deepGet, deepMerge, deepMergeKey } from './deep';
 
@@ -58,10 +58,10 @@ describe('abc: utils', () => {
   });
 
   describe('#deepMerge', () => {
-    let original: NzSafeAny;
+    let original: any;
     it('should working', () => {
-      const fn1 = (): NzSafeAny => {};
-      const fn2 = (): NzSafeAny => {};
+      const fn1 = (): any => {};
+      const fn2 = (): any => {};
       const time = new Date();
       original = { a: 1, b: { c: 'c' }, fn: fn1, arr2: [], str: 'str', time, bool: true };
 
