@@ -13691,9 +13691,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ng-zorro-antd@npm:^18.1.1":
-  version: 18.1.1
-  resolution: "ng-zorro-antd@npm:18.1.1"
+"ng-zorro-antd@npm:^18.2.0":
+  version: 18.2.1
+  resolution: "ng-zorro-antd@npm:18.2.1"
   dependencies:
     "@angular/cdk": "npm:^18.0.0"
     "@ant-design/icons-angular": "npm:^18.0.0"
@@ -13706,7 +13706,7 @@ __metadata:
     "@angular/forms": ^18.0.0
     "@angular/platform-browser": ^18.0.0
     "@angular/router": ^18.0.0
-  checksum: 10c0/7132cedf58b6d8162a6567ca3b283c85503d5f1d4ecbccd4f827e6ecb6e7e66e879ff9c97b9fe14cd594079bfb362222662481922c49e97dc8d5484f38a9fd68
+  checksum: 10c0/d4d75724850b06ecd8c0110befedaaa8ea7dce0fac9b172dbcb3dec6b029792e457b2f414497bcd318ef708ebcd6df004f1125683c7ac961e27115adf40c1e32
   languageName: node
   linkType: hard
 
@@ -19388,7 +19388,7 @@ __metadata:
     ng-packagr: "npm:^18.2.1"
     ng-yunzai-plugin-theme: "npm:latest"
     ng-yunzai-sts: "npm:latest"
-    ng-zorro-antd: "npm:^18.1.1"
+    ng-zorro-antd: "npm:^18.2.0"
     ngx-countdown: "npm:^18.0.0"
     ngx-highlight-js: "npm:^18.0.0"
     ngx-tinymce: "npm:^18.0.0"
