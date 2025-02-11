@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { CellModule } from '@yelon/abc/cell';
-import { LetModule } from '@yelon/abc/let';
 import { YelonACLModule } from '@yelon/acl';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -33,7 +32,6 @@ const COMPONENTS = [STComponent, STRowDirective, STWidgetHostDirective];
     CommonModule,
     FormsModule,
     YelonACLModule,
-    LetModule,
     CellModule,
     NzPopconfirmModule,
     NzTableModule,
