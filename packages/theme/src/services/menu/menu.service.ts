@@ -17,6 +17,8 @@ export class MenuService implements OnDestroy {
   private _change$: BehaviorSubject<Menu[]> = new BehaviorSubject<Menu[]>([]);
   private i18n$?: Subscription;
   private data: Menu[] = [];
+  private $routerLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   /**
    * 是否完全受控菜单打开状态，默认：`false`
    */
@@ -373,5 +375,13 @@ export class MenuService implements OnDestroy {
   ngOnDestroy(): void {
     this._change$.unsubscribe();
     this.i18n$?.unsubscribe();
+  }
+
+  setRouterLink(url: string): void {
+    this.$routerLink.next(url);
+  }
+
+  getRouterLink(): Observable<string> {
+    return this.$routerLink.asObservable();
   }
 }
