@@ -11,5 +11,3 @@ export * from './sf/sf.type';
 
 export * from './config.types';
 export * from './config.service';
-export * from './bis/bis.type';
-export * from './socket/socket.type';

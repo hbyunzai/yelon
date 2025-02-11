@@ -1,4 +1,4 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import * as v from './validate';
 
@@ -45,10 +45,10 @@ export const TEST_DATA = {
     { k: '+8615900000000', v: true }
   ],
   url: [
-    { k: 'http://ng.yunzainfo.com', v: true },
+    { k: 'http://ng-yunzai.com', v: true },
     { k: 'https://ng.yunzainfo.com', v: true },
-    { k: '//ng.yunzainfo.com', v: false },
-    { k: 'ng.yunzainfo.com', v: false },
+    { k: '//ng-yunzai.com', v: false },
+    { k: 'ng-yunzai.com', v: false },
     { k: '中国.com', v: false }
   ],
   ip: [

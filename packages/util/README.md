@@ -7,7 +7,7 @@ Universal toolset of ng-yunzai.
 
 + [Document](https://ng.yunzainfo.com/util) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/util)
 + [@yelon Source](https://github.com/hbyunzai/yelon)
-+ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng.yunzainfo.com/))
++ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 
 ## Architecture
 
