@@ -22,7 +22,7 @@ Gets the value at `path` of `object`, like `_.get` in lodash.
 const obj = {
   id: 1,
   user: {
-    name: 'cipchk',
+    name: 'yunzai-bot',
     age: 18
   }
 };
@@ -36,7 +36,7 @@ deepGet(obj, 'user.age'); // 18
 Base on [extend](https://github.com/justmoon/node-extend) deep copy.
 
 ```ts
-const source = { a: 1, user: { name: 'cipchk' } };
+const source = { a: 1, user: { name: 'yunzai-bot' } };
 const obj = deepCopy(source);
 ```
 

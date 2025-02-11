@@ -21,16 +21,20 @@ import {
 } from './abc/index';
 import { YunzaiACLConfig } from './acl/acl.type';
 import { YunzaiAuthConfig } from './auth/auth.type';
+import { YunzaiBusinessConfig } from './bis/bis.type';
 import { YunzaiCacheConfig } from './cache/cache.type';
 import { YunzaiChartConfig } from './chart/chart.type';
 import { YunzaiMockConfig } from './mock/mock.type';
 import { YunzaiSFConfig } from './sf/sf.type';
+import { YunzaiSocketConfig } from './socket/socket.type';
 import { YunzaiThemeHttpClientConfig, YunzaiThemeResponsiveConfig, YunzaiThemeI18nConfig } from './theme/index';
 import { YunzaiThemePipeConfig } from './theme/pipe.type';
 import { YunzaiUtilArrayConfig } from './util/array.type';
 import { YunzaiUtilCurrencyConfig } from './util/currency.type';
 
 export interface YunzaiConfig {
+  bis?: YunzaiBusinessConfig;
+  socket?: YunzaiSocketConfig;
   dataRange?: YunzaiDateRangePickerConfig;
   exception?: YunzaiExceptionType;
   errorCollect?: YunzaiErrorCollectConfig;
