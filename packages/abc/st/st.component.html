@@ -149,53 +149,53 @@
     @if (!_loading) {
       <ng-template [ngTemplateOutlet]="bodyHeader!" [ngTemplateOutletContext]="{ $implicit: _statistical }" />
     }
-  <ng-template #bodyTpl let-i let-index="index">
-    <tr
-      [attr.data-index]="index"
-      (click)="_rowClick($event, i, index, false)"
-      (dblclick)="_rowClick($event, i, index, true)"
-      [ngClass]="i._rowClassName"
-    >
-      @if (expand) {
-        <td
-          [nzShowExpand]="expand && i.showExpand !== false"
-          [nzExpand]="i.expand"
-          [nzExpandIcon]="expandIcon ? wrapExpandIcon : null"
-          (nzExpandChange)="_expandChange(i, $event)"
-          (click)="_stopPropagation($event)"
-          nzWidth="50px"
-        ></td>
-        <ng-template #wrapExpandIcon>
+    <ng-template #bodyTpl let-i let-index="index">
+      <tr
+        [attr.data-index]="index"
+        (click)="_rowClick($event, i, index, false)"
+        (dblclick)="_rowClick($event, i, index, true)"
+        [ngClass]="i._rowClassName"
+      >
+        @if (expand) {
+          <td
+            [nzShowExpand]="expand && i.showExpand !== false"
+            [nzExpand]="i.expand"
+            [nzExpandIcon]="expandIcon ? wrapExpandIcon : null"
+            (nzExpandChange)="_expandChange(i, $event)"
+            (click)="_stopPropagation($event)"
+            nzWidth="50px"
+          ></td>
+          <ng-template #wrapExpandIcon>
             <span (click)="_expandChange(i, !i.expand)">
               <ng-template [ngTemplateOutlet]="expandIcon" [ngTemplateOutletContext]="{ $implicit: i, index: index }" />
             </span>
-        </ng-template>
-      }
-      @for (c of _columns; track cIdx; let cIdx = $index) {
-        @let props = i._values[cIdx].props;
-        @if (props?.colSpan > 0 && props?.rowSpan > 0) {
-          <td
-            [nzLeft]="!!c._left"
-            [nzRight]="!!c._right"
-            [attr.data-col-index]="cIdx"
-            [ngClass]="c._className"
-            [attr.colspan]="props?.colSpan === 1 ? null : props?.colSpan"
-            [attr.rowspan]="props?.rowSpan === 1 ? null : props?.rowSpan"
-          >
-            @if (responsive) {
-              <span class="ant-table-rep__title">
+          </ng-template>
+        }
+        @for (c of _columns; track cIdx; let cIdx = $index) {
+          @let props = i._values[cIdx].props;
+          @if (props?.colSpan > 0 && props?.rowSpan > 0) {
+            <td
+              [nzLeft]="!!c._left"
+              [nzRight]="!!c._right"
+              [attr.data-col-index]="cIdx"
+              [ngClass]="c._className"
+              [attr.colspan]="props?.colSpan === 1 ? null : props?.colSpan"
+              [attr.rowspan]="props?.rowSpan === 1 ? null : props?.rowSpan"
+            >
+              @if (responsive) {
+                <span class="ant-table-rep__title">
                   <ng-template [ngTemplateOutlet]="titleTpl" [ngTemplateOutletContext]="{ $implicit: c.title }" />
                 </span>
-            }
-            <st-td [data]="_data" [i]="i" [index]="index" [c]="c" [cIdx]="cIdx" (n)="_handleTd($event)" />
-          </td>
+              }
+              <st-td [data]="_data" [i]="i" [index]="index" [c]="c" [cIdx]="cIdx" (n)="_handleTd($event)" />
+            </td>
+          }
         }
-      }
-    </tr>
-    <tr [nzExpand]="i.expand">
-      <ng-template [ngTemplateOutlet]="expand" [ngTemplateOutletContext]="{ $implicit: i, index: index }" />
-    </tr>
-  </ng-template>
+      </tr>
+      <tr [nzExpand]="i.expand">
+        <ng-template [ngTemplateOutlet]="expand" [ngTemplateOutletContext]="{ $implicit: i, index: index }" />
+      </tr>
+    </ng-template>
     @if (virtualScroll) {
       <ng-template nz-virtual-scroll let-i let-index="index">
         <ng-template [ngTemplateOutlet]="bodyTpl" [ngTemplateOutletContext]="{ $implicit: i, index: index }" />
