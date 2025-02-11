@@ -8,7 +8,7 @@ import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { Menu, MenuIcon, MenuInner } from './interface';
 
 /**
- * 菜单服务
+ * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
  */
 @Injectable({ providedIn: 'root' })
 export class MenuService implements OnDestroy {
@@ -22,8 +22,6 @@ export class MenuService implements OnDestroy {
    */
   openStrictly = false;
 
-  private $routerLink: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
   constructor() {
     this.i18n$ = this.i18nSrv.change.subscribe(() => this.resume());
   }
@@ -34,6 +32,24 @@ export class MenuService implements OnDestroy {
 
   get menus(): Menu[] {
     return this.data;
+  }
+
+  /**
+   * Returns a default menu link
+   *
+   * 返回一个默认跳转的菜单链接
+   */
+  getDefaultRedirect(opt: { redirectUrl?: string } = {}): string | null | undefined {
+    let ret: string | null | undefined;
+    this.visit(this.menus, (item: MenuInner) => {
+      if (typeof item.link !== 'string' || item.link.length <= 0 || !item._aclResult || item._hidden === true) {
+        return;
+      }
+      if (ret == null || ret.length <= 0 || item.link == opt?.redirectUrl) {
+        ret = item.link;
+      }
+    });
+    return ret;
   }
 
   visit<T extends Menu = Menu>(data: T[], callback: (item: T, parentMenum: T | null, depth?: number) => void): void;
@@ -357,13 +373,5 @@ export class MenuService implements OnDestroy {
   ngOnDestroy(): void {
     this._change$.unsubscribe();
     this.i18n$?.unsubscribe();
-  }
-
-  setRouterLink(url: string): void {
-    this.$routerLink.next(url);
-  }
-
-  getRouterLink(): Observable<string> {
-    return this.$routerLink.asObservable();
   }
 }
