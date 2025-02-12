@@ -73,19 +73,20 @@ ng g ng-yunzai:plugin defaultLanguage --defaultLanguage=zh-tw
 #### 支持语言列表
 
 | 名称 | 语言包名称 | 对应 [Angular](https://github.com/angular/angular/tree/master/packages/common/locales) 语言包 | 对应 [Zorro](http://ng.ant.design/docs/i18n/zh#%E6%94%AF%E6%8C%81%E8%AF%AD%E8%A8%80) 语言包 | 对应 [Yelon](/theme/locale) 语言包 |
-|----|-------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|-------------------------------|
-| 简体中文 | zh-Hans,zh-cn,zh-Hans-CN,zh | zh-Hans,zh-cn,zh-Hans-CN,zh | zh_CN | zh_CN |
-| 繁体中文 | zh-Hant,zh-tw,zh-Hant-TW | zh-Hant,zh-tw,zh-Hant-TW | zh_TW | zh_TW |
-| 英语（美式） | en | en | en_US | en_US |
-| 土耳其语 | tr | tr | tr_TR | tr_TR |
-| 波兰语 | pl | pl | pl_PL | pl_PL |
-| 希腊语 | el | el | el_GR | el_GR |
-| 朝鲜语 | ko | ko | ko_KR | ko_KR |
-| 克罗地亚 | hr | hr | hr_HR | hr_HR |
-| 斯洛文尼亚文 | sl | sl | sl_SI | sl_SI |
-| 法文 | fr | fr | fr_FR | fr_FR |
-| 西班牙语 | es | es | es_ES | es_ES |
-| 意大利语 | it | it | it_IT | it_IT |
+|----|-------|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|------------------------------|
+| 简体中文 | zh-Hans,zh-cn,zh-Hans-CN,zh | zh-Hans,zh-cn,zh-Hans-CN,zh | zh_CN                                                                                  | zh_CN                        |
+| 繁体中文 | zh-Hant,zh-tw,zh-Hant-TW | zh-Hant,zh-tw,zh-Hant-TW | zh_TW                                                                                  | zh_TW                        |
+| 英语（美式） | en | en | en_US                                                                                  | en_US                        |
+| 土耳其语 | tr | tr | tr_TR                                                                                  | tr_TR                        |
+| 波兰语 | pl | pl | pl_PL                                                                                  | pl_PL                        |
+| 希腊语 | el | el | el_GR                                                                                  | el_GR                        |
+| 朝鲜语 | ko | ko | ko_KR                                                                                  | ko_KR                        |
+| 克罗地亚 | hr | hr | hr_HR                                                                                  | hr_HR                        |
+| 斯洛文尼亚文 | sl | sl | sl_SI                                                                                  | sl_SI                        |
+| 法文 | fr | fr | fr_FR                                                                                  | fr_FR                        |
+| 西班牙语 | es | es | es_ES                                                                                  | es_ES                        |
+| 意大利语 | it | it | it_IT                                                                                  | it_IT                        |
+| 阿拉伯语 | ar | ar | ar_EG                                                                                  | ar_SA |
 
 ### sts
 
@@ -131,13 +132,13 @@ export class StartupService {
 <i class="anticon anticon-user"></i>
 <i class="anticon anticon-question-circle-o"></i>
 <i class="anticon anticon-spin anticon-loading"></i>
-<i nz-icon class="anticon anticon-user"></i>
-<i nz-icon nzType="align-{{type ? 'left' : 'right'}}"></i>
-<i nz-icon [type]="type ? 'menu-fold' : 'menu-unfold'" [theme]="theme ? 'outline' : 'fill'"></i>
-<i nz-icon [type]="type ? 'fullscreen' : 'fullscreen-exit'"></i>
-<i nz-icon [nzType]="d.status === 'NORMAL' ? 'close1' : 'close2'"></i>
-<i nz-icon nzType="{{ type ? 'arrow-left' : 'arrow-right' }}"></i>
-<i nz-icon nzType="filter" theme="outline"></i>
+<nz-icon class="anticon anticon-user" />
+<nz-icon nzType="align-{{type ? 'left' : 'right'}}" />
+<nz-icon [type]="type ? 'menu-fold' : 'menu-unfold'" [theme]="theme ? 'outline' : 'fill'" />
+<nz-icon [type]="type ? 'fullscreen' : 'fullscreen-exit'" />
+<nz-icon [nzType]="d.status === 'NORMAL' ? 'close1' : 'close2'" />
+<nz-icon nzType="{{ type ? 'arrow-left' : 'arrow-right' }}" />
+<nz-icon nzType="filter" theme="outline" />
 <nz-input-group [nzAddOnBeforeIcon]="focus ? 'anticon anticon-arrow-down' : 'anticon anticon-search'"></nz-input-group>
 ```
 

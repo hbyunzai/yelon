@@ -13,7 +13,7 @@ export const NG_YUNZAI_JSON = `ng-yunzai.json`;
 export const DEFAULT_WORKSPACE_PATH = `/angular.json`;
 
 export interface NgYunzaiDefinition {
-  projects?: { [key: string]: NgYunzaiProjectDefinition };
+  projects?: Record<string, NgYunzaiProjectDefinition>;
 }
 
 export interface NgYunzaiProjectDefinition {
@@ -34,7 +34,6 @@ export function getNgYunzaiJson(tree: Tree): NgYunzaiDefinition | undefined {
   return readJSON(tree, NG_YUNZAI_JSON);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function writeNgYunzaiJson(tree: Tree, json: any): any {
   return writeJSON(tree, NG_YUNZAI_JSON, json);
 }

@@ -71,20 +71,21 @@ ng g ng-yunzai:plugin defaultLanguage --defaultLanguage=zh-tw
 #### Supported language list
 
 | Name | Language pack name | [Angular](https://github.com/angular/angular/tree/master/packages/common/locales) pack | [Zorro](http://ng.ant.design/docs/i18n/zh#%E6%94%AF%E6%8C%81%E8%AF%AD%E8%A8%80) pack | [Yelon](/theme/locale) pack |
-|------|--------------------|----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|-----------------------------|
-| Simplified Chinese | zh-Hans,zh-cn,zh-Hans-CN,zh | zh-Hans,zh-cn,zh-Hans-CN,zh | zh_CN | zh_CN |
-| Traditional Chinese | zh-Hant,zh-tw,zh-Hant-TW | zh-Hant,zh-tw,zh-Hant-TW | zh_TW | zh_TW |
-| English (American) | en | en | en_US | en_US |
-| Turkish | tr | tr | tr_TR | tr_TR |
-| Polish | pl | pl | pl_PL | pl_PL |
-| Greek | el | el | el_GR | el_GR |
-| Korean | ko | ko | ko_KR | ko_KR |
-| Croatian | hr | hr | hr_HR | hr_HR |
-| Slovenian | sl | sl | sl_SI | sl_SI |
-| French | fr | fr | fr_FR | fr_FR |
-| Spanish | es | es | es_ES | es_ES |
-| Italian | it | it | it_IT | it_IT |
-| Vietnamese | vi | vi | vi_VI | vi_VI |
+|------|--------------------|----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|--------------------------|
+| Simplified Chinese | zh-Hans,zh-cn,zh-Hans-CN,zh | zh-Hans,zh-cn,zh-Hans-CN,zh | zh_CN                                                                               | zh_CN                    |
+| Traditional Chinese | zh-Hant,zh-tw,zh-Hant-TW | zh-Hant,zh-tw,zh-Hant-TW | zh_TW                                                                               | zh_TW                    |
+| English (American) | en | en | en_US                                                                               | en_US                    |
+| Turkish | tr | tr | tr_TR                                                                               | tr_TR                    |
+| Polish | pl | pl | pl_PL                                                                               | pl_PL                    |
+| Greek | el | el | el_GR                                                                               | el_GR                    |
+| Korean | ko | ko | ko_KR                                                                               | ko_KR                    |
+| Croatian | hr | hr | hr_HR                                                                               | hr_HR                    |
+| Slovenian | sl | sl | sl_SI                                                                               | sl_SI                    |
+| French | fr | fr | fr_FR                                                                               | fr_FR                    |
+| Spanish | es | es | es_ES                                                                               | es_ES                    |
+| Italian | it | it | it_IT                                                                               | it_IT                    |
+| Vietnamese | vi | vi | vi_VI                                                                               | vi_VI                    |
+| Arabic | ar | ar | ar_EG | ar_SA |
 
 ### sts
 
@@ -130,13 +131,13 @@ export class StartupService {
 <i class="anticon anticon-user"></i>
 <i class="anticon anticon-question-circle-o"></i>
 <i class="anticon anticon-spin anticon-loading"></i>
-<i nz-icon class="anticon anticon-user"></i>
-<i nz-icon nzType="align-{{type ? 'left' : 'right'}}"></i>
-<i nz-icon [type]="type ? 'menu-fold' : 'menu-unfold'" [theme]="theme ? 'outline' : 'fill'"></i>
-<i nz-icon [type]="type ? 'fullscreen' : 'fullscreen-exit'"></i>
-<i nz-icon [nzType]="d.status === 'NORMAL' ? 'close1' : 'close2'"></i>
-<i nz-icon nzType="{{ type ? 'arrow-left' : 'arrow-right' }}"></i>
-<i nz-icon nzType="filter" theme="outline"></i>
+<nz-icon class="anticon anticon-user" />
+<nz-icon nzType="align-{{type ? 'left' : 'right'}}" />
+<nz-icon [type]="type ? 'menu-fold' : 'menu-unfold'" [theme]="theme ? 'outline' : 'fill'" />
+<nz-icon [type]="type ? 'fullscreen' : 'fullscreen-exit'" />
+<nz-icon [nzType]="d.status === 'NORMAL' ? 'close1' : 'close2'" />
+<nz-icon nzType="{{ type ? 'arrow-left' : 'arrow-right' }}" />
+<nz-icon nzType="filter" theme="outline" />
 <nz-input-group [nzAddOnBeforeIcon]="focus ? 'anticon anticon-arrow-down' : 'anticon anticon-search'"></nz-input-group>
 ```
 

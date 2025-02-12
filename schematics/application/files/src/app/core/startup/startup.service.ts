@@ -6,7 +6,7 @@ import { YUNZAI_I18N_TOKEN, MenuService, SettingsService, TitleService } from '@
 import { ACLService } from '@yelon/acl';<% if (i18n) { %>
 import { I18NService } from '../i18n/i18n.service';<% } %>
 import { Observable, zip, of, catchError, map } from 'rxjs';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 /**
  * Used for application startup
@@ -37,14 +37,14 @@ export class StartupService {
   // If http request allows anonymous access, you need to add `ALLOW_ANONYMOUS`:
   // this.httpClient.get('/app', { context: new HttpContext().set(ALLOW_ANONYMOUS, true) })
   private appData$ = this.httpClient.get('./assets/tmp/app-data.json').pipe(
-    catchError((res: any) => {
+    catchError((res: NzSafeAny) => {
       console.warn(`StartupService.load: Network request failed`, res);
       setTimeout(() => this.router.navigateByUrl(`/exception/500`));
       return of({});
     })
   );
 
-  private handleAppData(res: any): void {
+  private handleAppData(res: NzSafeAny): void {
     // Application information: including site name, description, year
     this.settingService.setApp(res.app);
     // User information: including name, avatar, email address
@@ -61,7 +61,7 @@ export class StartupService {
   private viaHttp(): Observable<void> {
     const defaultLang = this.i18n.defaultLang;
     return zip(this.i18n.loadLangData(defaultLang), this.appData$).pipe(
-      map(([langData, appData]: [Record<string, string>, any]) => {
+      map(([langData, appData]: [Record<string, string>, NzSafeAny]) => {
         // setting language data
         this.i18n.use(defaultLang, langData);
 
@@ -71,7 +71,7 @@ export class StartupService {
   }
   <% } else { %>
   private viaHttp(): Observable<void> {
-    return this.appData$.pipe(map((res: any) => this.handleAppData(res)));
+    return this.appData$.pipe(map((res: NzSafeAny) => this.handleAppData(res)));
   }
   <% } %>
 
@@ -79,7 +79,7 @@ export class StartupService {
   private viaMockI18n(): Observable<void> {
     const defaultLang = this.i18n.defaultLang;
     return this.i18n.loadLangData(defaultLang).pipe(
-        map((langData: any) => {
+        map((langData: NzSafeAny) => {
           this.i18n.use(defaultLang, langData);
 
           this.viaMock();
@@ -101,7 +101,7 @@ export class StartupService {
     const user: any = {
       name: 'Admin',
       avatar: './assets/tmp/img/avatar.jpg',
-      email: 'yunzai-bot@outlook.com',
+      email: 'cipchk@qq.com',
       token: '123456789'
     };
     // Application information: including site name, description, year

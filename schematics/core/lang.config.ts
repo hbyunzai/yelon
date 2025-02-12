@@ -35,7 +35,8 @@ export const LANGS_CONFIG: LangConfig[] = [
   { langs: ['fr'], zorro: 'fr_FR', date: 'fr', yelon: 'fr_FR', fileName: 'fr-FR.json' },
   { langs: ['es'], zorro: 'es_ES', date: 'es', yelon: 'es_ES', fileName: 'es-ES.json' },
   { langs: ['it'], zorro: 'it_IT', date: 'it', yelon: 'it_IT', fileName: 'it-IT.json' },
-  { langs: ['vi'], zorro: 'vi_VI', date: 'vi', yelon: 'vi_VI', fileName: 'vi_VI.json' }
+  { langs: ['vi'], zorro: 'vi_VI', date: 'vi', yelon: 'vi_VI', fileName: 'vi_VI.json' },
+  { langs: ['ar'], zorro: 'ar_EG', date: 'ar', yelon: 'ar_SA', fileName: 'ar-SA.json' }
 ];
 
 export function getLangConfig(lang: string): LangConfig {

@@ -1,5 +1,4 @@
-# ng-yunzai [![CI](https://github.com/hbyunzai/ng-yunzai/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/ng-yunzai/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/hbyunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/ng-yunzai) [![NPM version](https://img.shields.io/npm/v/ng-yunzai.svg?style=flat-square)](https://www.npmjs.com/package/ng-yunzai)
-
+# ng-yunzai [![CI](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/ng-yunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/ng-yunzai/yelon) [![NPM version](https://img.shields.io/npm/v/ng-yunzai.svg?style=flat-square)](https://www.npmjs.com/package/ng-yunzai)
 
 Angular CLI Schematics of ng-yunzai.
 
@@ -11,7 +10,7 @@ Angular CLI Schematics of ng-yunzai.
 
 + [Document](https://ng.yunzainfo.com/cli) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/cli)
 + [@yelon Source](https://github.com/hbyunzai/yelon)
-+ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng.yunzainfo.io/))
++ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 
 ## Troubleshooting
 

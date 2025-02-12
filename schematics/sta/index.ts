@@ -1,18 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { normalize } from '@angular-devkit/core';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { Rule, SchematicsException, Tree, chain, SchematicContext } from '@angular-devkit/schematics';
 import * as colors from 'ansi-colors';
-import { rmdirSync, mkdirSync, existsSync, readFileSync } from 'fs';
+import { rmSync, mkdirSync, existsSync, readFileSync } from 'fs';
 import { parse } from 'jsonc-parser';
 import { resolve, join } from 'path';
 import { generateApi, GenerateApiOutput, GenerateApiParams } from 'swagger-typescript-api';
 
-import { ModifyJSONParam, modifyJSON, readJSON, writeJSON } from '../utils/json';
-import { getProject, isMulitProject } from '../utils/workspace';
 import { Schema } from './schema';
 import { STAConfig } from './types';
+import { modifyJSON } from '../utils/json';
+import { getProject, isMulitProject } from '../utils/workspace';
 
 let project: ProjectDefinition;
 let projectName: string;
@@ -47,9 +45,9 @@ function addPathInTsConfig(name: string): Rule {
 
 function cleanOutput(p: string): void {
   try {
-    rmdirSync(p, { recursive: true });
+    rmSync(p, { recursive: true });
     mkdirSync(p);
-  } catch (e) {}
+  } catch {}
 }
 
 function tagsMapping(res: GenerateApiOutput, config: STAConfig): void {
