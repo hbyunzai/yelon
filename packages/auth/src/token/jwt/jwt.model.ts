@@ -33,8 +33,8 @@ export interface JWT {
    */
   jti: string;
 
-  [key: string]: NzSafeAny;
-  [key: number]: NzSafeAny;
+  [key: string]: any;
+  [key: number]: any;
 }
 
 export class JWTTokenModel implements ITokenModel {

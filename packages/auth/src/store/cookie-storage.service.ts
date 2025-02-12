@@ -2,15 +2,15 @@ import { inject } from '@angular/core';
 
 import { CookieService } from '@yelon/util/browser';
 
-import { ITokenModel } from '../token/interface';
 import { IStore } from './interface';
+import { ITokenModel } from '../token/interface';
 
 /**
  * `cookie` storage
  *
  * ```ts
- provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
- provideAuth(withCookie()),
+  provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
+  provideAuth(withCookie()),
  * ```
  */
 export class CookieStorageStore implements IStore {

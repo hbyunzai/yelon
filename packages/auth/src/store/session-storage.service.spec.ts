@@ -1,5 +1,5 @@
-import { ITokenModel } from '../token/interface';
 import { SessionStorageStore } from './session-storage.service';
+import { ITokenModel } from '../token/interface';
 
 describe('auth: session-storage', () => {
   const store = new SessionStorageStore();
@@ -9,8 +9,7 @@ describe('auth: session-storage', () => {
   } as ITokenModel;
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let data: { [key: string]: any } = {};
+    let data: Record<string, any> = {};
 
     spyOn(sessionStorage, 'getItem').and.callFake((key: string): string => {
       return data[key] || null;
