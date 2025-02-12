@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -33,6 +32,7 @@ const isSyncSpecific = !!target && target !== 'init';
 if (!target) throw new Error(`Should specify the generation type, 'init' is all module`);
 
 const rootDir = path.resolve(__dirname, '../../');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const siteConfig = require(path.join(rootDir, 'src/site.config.js')) as SiteConfig;
 const defaultLang = siteConfig.defaultLang;
 
@@ -84,7 +84,7 @@ function generateModule(config: ModuleConfig): void {
     });
   }
 
-  function fixDemo(fileObject: any, demos: DemoData): void {
+  function fixDemo(fileObject: ContentTemplateData, demos: DemoData): void {
     const demoHTML: string[] = [];
     demoHTML.push(`<div nz-row [nzGutter]="16">`);
     if (demos.tpl.left.length > 0 && demos.tpl.right.length > 0) {
@@ -96,6 +96,9 @@ function generateModule(config: ModuleConfig): void {
 
     demoHTML.push('</div>');
     fileObject.demos = demoHTML.join('');
+    // 填充 CodeBoxComponent
+    fileObject.imports += `\nimport { CodeBoxComponent } from '@shared';`;
+    fileObject.standaloneImports += ', CodeBoxComponent';
 
     fixMDClass(fileObject);
   }
@@ -197,11 +200,11 @@ function generateModule(config: ModuleConfig): void {
       if (standaloneDemo) {
         fileObject.imports = demoList
           .map(v => `import { ${v.componentName} } from './${v.name}';`)
-          .concat(`import { NzGridModule } from 'ng-zorro-antd/grid';`)
+          .concat(`import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';`)
           .join('\n');
         fileObject.standaloneImports = `,${demoList
           .map(v => v.componentName)
-          .concat('NzGridModule')
+          .concat('NzColDirective, NzRowDirective')
           .join(', ')}`;
       }
       if (fileObject.demo) {
@@ -255,6 +258,7 @@ function generateModule(config: ModuleConfig): void {
 
 for (const m of siteConfig.modules) {
   // if (m.module !== 'docs') continue;
+  m.standalone = m.standalone ?? true;
   generateModule(m);
 }
 
