@@ -88,7 +88,7 @@ NG-YUNZAI is a standard Angular CLI project that includes common routes for admi
 │   │   ├── shared                              # Shared module
 │   │   │   ├── shared-yelon.module.ts          # @Yelon/* import of secondary shared modules
 │   │   │   ├── shared-zorro.module.ts          # NG-ZORRO import of secondary shared modules
-│   │   │   └── shared.module.ts                # Shared module file
+│   │   │   └── shared-imports.ts               # Shared module file
 │   │   ├── app.component.ts                    # Root component
 │   │   └── app.module.ts                       # Root module
 │   │   └── global-config.module.ts             # @yelon & ng-zorro global config
