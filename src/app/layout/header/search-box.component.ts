@@ -4,21 +4,22 @@ import { Router } from '@angular/router';
 
 import { YUNZAI_I18N_TOKEN, I18nPipe } from '@yelon/theme';
 import { LazyService } from '@yelon/util/other';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-declare const docsearch: any;
+declare const docsearch: NzSafeAny;
 
 @Component({
   selector: 'header-search',
-  template: `<i nz-icon nzType="search"></i>
-    <input nz-input #searchInput [placeholder]="'app.header.search' | i18n" /> `,
+  template: `
+    <nz-icon nzType="search" />
+    <input nz-input #searchInput [placeholder]="'app.header.search' | i18n" />
+  `,
   host: {
     '[attr.id]': '"search-box"'
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzIconModule, NzInputModule, I18nPipe]
 })
 export class HeaderSearchComponent implements AfterViewInit {
@@ -54,10 +55,10 @@ export class HeaderSearchComponent implements AfterViewInit {
           // queryLanguages: [this.i18n.zone]
           facetFilters: [`lang:${this.i18n.zone}`]
         },
-        handleSelected: (_input: any, _event: any, suggestion: { url: string }) => {
+        handleSelected: (_input: NzSafeAny, _event: NzSafeAny, suggestion: { url: string }) => {
           const url = suggestion?.url || '';
           if (isLocal || curHost === this.getHost(url)) {
-            const pathName = url.replace(/.*\/\/[^\/]*/, '');
+            const pathName = url.replace(/.*\/\/[^\\/]*/, '');
             this.router.navigateByUrl(pathName);
             return;
           }
@@ -69,7 +70,7 @@ export class HeaderSearchComponent implements AfterViewInit {
   }
 
   private getHost(url: string): string {
-    const m = url.match(/^https?\:\/\/([^\/:?#]+)(?:[\/:?#]|$)/i);
+    const m = url.match(/^https?\\:\/\/([^\\/:?#]+)(?:[\\/:?#]|$)/i);
     return m ? m[1] : '';
   }
 }

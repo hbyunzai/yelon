@@ -1,23 +1,24 @@
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
-import { APP_INITIALIZER, Injectable, Injector, Provider, inject } from '@angular/core';
+import { EnvironmentProviders, Injectable, Injector, Provider, inject, provideAppInitializer } from '@angular/core';
 
 import { TitleService } from '@yelon/theme';
 import { LazyService } from '@yelon/util/other';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { ICONS } from '../../style-icons';
 
-export function provideStartup(): Provider[] {
+export function provideStartup(): Array<Provider | EnvironmentProviders> {
   return [
     StartupService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (startupService: StartupService) => () => startupService.load(),
-      deps: [StartupService],
-      multi: true
-    }
+    provideAppInitializer(() => {
+      const initializerFn = (
+        (startupService: StartupService) => () =>
+          startupService.load()
+      )(inject(StartupService));
+      return initializerFn();
+    })
   ];
 }
 
@@ -46,10 +47,11 @@ export class StartupService {
   }
 
   lazyLoad(): void {
-    const win = this.doc.defaultView as any;
+    const win = this.doc.defaultView as NzSafeAny;
     win.hj =
       win.hj ||
       function () {
+        // eslint-disable-next-line prefer-rest-params
         (win.hj.q = win.hj.q || []).push(arguments);
       };
     win._hjSettings = {
@@ -61,7 +63,7 @@ export class StartupService {
       // this.lazy.loadScript(`https://www.googletagmanager.com/gtag/js?id=`)
       // this.lazy.loadScript(`https://static.hotjar.com/c/hotjar-${win._hjSettings.hjid}.js?sv=${win._hjSettings.hjsv}`)
     ]).then(() => {
-      const dataLayer: any[] = win.dataLayer || [];
+      const dataLayer: NzSafeAny[] = win.dataLayer || [];
       dataLayer.push(['js', new Date()]);
       dataLayer.push(['config', 'UA-120202005-1']);
     });

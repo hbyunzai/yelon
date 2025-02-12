@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { NgClass, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -33,8 +31,7 @@ import { EditButtonComponent } from '../edit-button/edit-button.component';
     '[class.expand]': 'expand'
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgStyle, NgClass, I18nPipe, NzToolTipModule, NzIconModule, EditButtonComponent]
+  imports: [I18nPipe, NzToolTipModule, NzIconModule, EditButtonComponent]
 })
 export class CodeBoxComponent implements OnInit {
   private _item: any;

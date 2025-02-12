@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 
 @Component({
@@ -15,13 +15,12 @@ import { NzDrawerRef } from 'ng-zorro-antd/drawer';
       <button nz-button [nzType]="'primary'" (click)="ok()"> OK </button>
     </div>
   `,
-  standalone: true,
   imports: [NzButtonModule, JsonPipe]
 })
 export class DemoDrawerComponent {
   private readonly ref = inject(NzDrawerRef);
 
-  @Input() record: any;
+  @Input() record: NzSafeAny;
 
   ok(): void {
     this.ref.close(`new time: ${+new Date()}`);

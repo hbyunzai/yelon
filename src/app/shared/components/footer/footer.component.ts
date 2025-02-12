@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -26,8 +25,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     '[class.footer__small]': 'small'
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NzGridModule, NzColorPickerModule, NgStyle, I18nPipe, RouterLink]
+  imports: [NzGridModule, NzColorPickerModule, I18nPipe, RouterLink]
 })
 export class FooterComponent {
   readonly i18n = inject(YUNZAI_I18N_TOKEN);

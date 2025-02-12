@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 
 import { YelonFormModule, SFSchema } from '@yelon/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
@@ -20,13 +20,12 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
       </div>
     </sf>
   `,
-  standalone: true,
   imports: [NzButtonModule, YelonFormModule]
 })
 export class DemoSfComponent {
   private readonly modal = inject(NzModalRef);
 
-  i: any;
+  i: NzSafeAny;
   schema: SFSchema = {
     properties: {
       name: { title: 'Name', type: 'string' }
@@ -49,7 +48,7 @@ export class DemoSfComponent {
   //   },
   // };
 
-  save(value: any): void {
+  save(value: NzSafeAny): void {
     this.modal.destroy(value);
   }
 

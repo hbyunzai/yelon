@@ -28,6 +28,7 @@ import { YUNZAI_I18N_TOKEN, Menu, MenuService, RTLService, SettingsService, User
 import { LayoutDefaultModule, LayoutDefaultOptions } from '@yelon/theme/layout-default';
 import { SettingDrawerModule } from '@yelon/theme/setting-drawer';
 import { deepCopy } from '@yelon/util/other';
+
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
@@ -63,13 +64,13 @@ const ICONS = [
     <layout-default [options]="options" [asideUser]="asideUserTpl">
       <layout-default-header-item direction="left">
         <a class="yunzai-default__nav-item" href="//github.com/hbyunzai/ng-yunzai" target="_blank">
-          <i nz-icon nzType="github"></i>
+          <nz-icon nzType="github" />
         </a>
       </layout-default-header-item>
       <layout-default-header-item direction="middle">
         @for (m of topMenus; track $index) {
           <layout-default-top-menu-item (click)="changeMenu(m.key)" [selected]="m.selected" [disabled]="m.disabled">
-            <i nz-icon nzType="github"></i> {{ m.label }}
+            <nz-icon nzType="github" /> {{ m.label }}
           </layout-default-top-menu-item>
         }
       </layout-default-header-item>
@@ -102,7 +103,6 @@ const ICONS = [
   host: {
     '[class.yunzai-default]': 'true'
   },
-  standalone: true,
   imports: [
     UpperCasePipe,
     LayoutDefaultModule,
@@ -120,7 +120,7 @@ export class DevLayoutComponent implements OnInit {
     logoExpanded: `./assets/logo-full.svg`,
     logoCollapsed: `./assets/logo.svg`,
     hideHeader: false,
-    showHeaderCollapse: false,
+    showHeaderCollapse: true,
     showSiderCollapse: true
     // hideAside: true
   };
@@ -228,17 +228,12 @@ export class DevLayoutComponent implements OnInit {
   }
 
   changeMenu(key: string): void {
-    this.menuSrv.add(
-      key === ''
-        ? deepCopy(this.menus)
-        : [
-            {
-              text: 'test',
-              group: true,
-              children: [{ text: `TYPE - ${key}`, link: '/dev/view/1', icon: 'anticon anticon-appstore' }]
-            }
-          ]
-    );
+    const type: Menu = {
+      text: 'test',
+      group: true,
+      children: [{ text: `TYPE - ${key}`, link: '/dev/view/1', icon: 'anticon anticon-appstore' }]
+    };
+    this.menuSrv.add(key === '' ? deepCopy(this.menus) : [type]);
     for (let tm of this.topMenus) {
       tm.selected = tm.key === key;
     }
@@ -280,6 +275,6 @@ export class DevLayoutComponent implements OnInit {
       }
     });
     if (res == null) return;
-    this.router.navigateByUrl(res.link!!);
+    this.router.navigateByUrl(res.link!);
   }
 }

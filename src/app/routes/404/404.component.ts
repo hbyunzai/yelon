@@ -6,7 +6,6 @@ import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 @Component({
   selector: 'not-found',
   templateUrl: './404.component.html',
-  standalone: true,
   imports: [RouterLink]
 })
 export class NotFoundComponent {

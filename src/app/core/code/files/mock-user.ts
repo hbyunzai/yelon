@@ -1,12 +1,12 @@
 export default `import { MockStatusError, MockRequest, r } from '@yelon/mock';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 // import * as Mock from 'mockjs';
 
 export const USERS = {
   // 支持值为 Object 和 Array
   'GET /users': (req: MockRequest) => {
     const total = req.queryString.total || 100;
-    const res: any = {
+    const res: NzSafeAny = {
       list: [],
       total
     };
@@ -35,7 +35,7 @@ export const USERS = {
     return res;
   },
   'GET /user/check/': () => false,
-  'GET /user/check/:name': (req: MockRequest) => req.params.name === 'yunzai-bot',
+  'GET /user/check/:name': (req: MockRequest) => req.params.name === 'cipchk',
   // GET POST 可省略
   // '/users/1': Mock.mock({ id: 1, 'rank|3': '★★★' }),
   // 发送 Status 错误

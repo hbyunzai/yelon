@@ -10,7 +10,7 @@ import { GithubButtonComponent } from 'ng-github-button';
 import { YUNZAI_I18N_TOKEN, RTLService, I18nPipe } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -26,6 +26,7 @@ import { MetaSearchGroupItem } from '../../interfaces';
 import { LayoutComponent } from '../layout.component';
 import { HeaderSearchComponent } from './search-box.component';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const pkg = require('../../../../package.json');
 const minimumVersion = +pkg.version.split('.')[0] - 2;
 
@@ -37,7 +38,6 @@ const minimumVersion = +pkg.version.split('.')[0] - 2;
     '[class.clearfix]': `true`
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     FormsModule,
     RouterLink,
@@ -61,7 +61,7 @@ const minimumVersion = +pkg.version.split('.')[0] - 2;
 export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile!: boolean;
-  oldVersionList = [17];
+  oldVersionList = [];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string; selected?: boolean }> = [
     { name: 'theme' },
@@ -95,7 +95,7 @@ export class HeaderComponent implements AfterViewInit {
     private router: Router,
     private msg: NzMessageService,
     private mobileSrv: MobileService,
-    @Inject(DOCUMENT) private doc: any,
+    @Inject(DOCUMENT) private doc: NzSafeAny,
     private cdr: ChangeDetectorRef,
     public rtl: RTLService,
     private layout: LayoutComponent

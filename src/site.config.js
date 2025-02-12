@@ -37,7 +37,7 @@ module.exports = {
           hasSubDir: false
         }
       ],
-      standalone: true
+
     },
     {
       name: 'components',
@@ -222,7 +222,7 @@ module.exports = {
           hasSubDir: true
         }
       ],
-      standalone: true
+
     },
     {
       name: 'auth',
@@ -244,7 +244,7 @@ module.exports = {
           hasSubDir: false
         }
       ],
-      standalone: true
+
     },
     {
       name: 'acl',
@@ -266,7 +266,7 @@ module.exports = {
           hasSubDir: false
         }
       ],
-      standalone: true
+
     },
     {
       name: 'cache',
@@ -288,7 +288,7 @@ module.exports = {
           hasSubDir: false
         }
       ],
-      standalone: true
+
     },
     {
       name: 'mock',
@@ -310,7 +310,7 @@ module.exports = {
           hasSubDir: false
         }
       ],
-      standalone: true
+
     },
     {
       name: 'util',
@@ -345,7 +345,7 @@ module.exports = {
           hasSubDir: true
         }
       ],
-      standalone: true
+
     },
     {
       name: 'form',
@@ -411,7 +411,7 @@ module.exports = {
           hasSubDir: true
         }
       ],
-      standalone: true
+
     },
     {
       name: 'chart',
@@ -446,7 +446,7 @@ module.exports = {
           hasSubDir: true
         }
       ],
-      standalone: true
+
     },
     {
       name: 'cli',
@@ -462,7 +462,6 @@ module.exports = {
       defaultRoute: 'getting-started',
       extraRouteMeta: [],
       metaIncludeAttributes: ['name', 'types', 'github', 'module'],
-      standalone: true,
       dir: [
         {
           src: ['./schematics/docs'],
@@ -533,7 +532,7 @@ module.exports = {
           hasSubDir: true
         }
       ],
-      standalone: true
+
     }
   ]
 };
