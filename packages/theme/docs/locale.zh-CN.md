@@ -28,11 +28,11 @@ export class AppModule { }
 ```ts
 import { en_US, YelonLocaleService } from '@yelon/theme';
 ...
-constructor(private yelonLocaleService: YelonLocaleService) {
+constructor(private yunzaiLocaleService: YelonLocaleService) {
 }
 
 switchLanguage() {
-  this.yelonLocaleService.setLocale(en_US);
+  this.yunzaiLocaleService.setLocale(en_US);
 }
 ```
 
@@ -56,6 +56,7 @@ switchLanguage() {
 | 西班牙语 | es_ES |
 | 意大利语 | it_IT |
 | 越南语 | vi_VI |
+| 阿拉伯语 | ar_SA |
 
 ## 增加语言包
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpContext, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of, delay, finalize, switchMap, tap } from 'rxjs';
@@ -6,7 +5,7 @@ import { Observable, of, delay, finalize, switchMap, tap } from 'rxjs';
 import { YunzaiConfigService, YunzaiThemeHttpClientConfig } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-export type _HttpHeaders = HttpHeaders | { [header: string]: string | string[] };
+export type _HttpHeaders = HttpHeaders | Record<string, string | string[]>;
 export type HttpObserve = 'body' | 'events' | 'response';
 
 /**
@@ -427,6 +426,7 @@ export class _HttpClient {
    */
   jsonp(url: string, params?: any, callbackParam: string = 'JSONP_CALLBACK'): Observable<any> {
     return of(null).pipe(
+      // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
       delay(0),
       tap(() => this.push()),
       switchMap(() => this.http.jsonp(this.appliedUrl(url, params), callbackParam)),
@@ -1038,6 +1038,7 @@ export class _HttpClient {
   ): Observable<any> {
     if (options.params) options.params = this.parseParams(options.params);
     return of(null).pipe(
+      // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
       delay(0),
       tap(() => this.push()),
       switchMap(() => this.http.request(method, url, options)),

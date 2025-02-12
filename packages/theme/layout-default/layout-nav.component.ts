@@ -44,7 +44,9 @@ const FLOATINGCLS = 'sidebar-nav__floating';
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   private readonly doc = inject(DOCUMENT);
@@ -111,11 +113,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
   private clearFloating(): void {
     if (!this.floatingEl) return;
     this.floatingEl.removeEventListener('click', this.floatingClickHandle.bind(this));
-    if (this.floatingEl.hasOwnProperty('remove')) {
-      this.floatingEl.remove();
-    } else if (this.floatingEl.parentNode) {
-      this.floatingEl.parentNode.removeChild(this.floatingEl);
-    }
+    this.floatingEl.parentNode?.removeChild(this.floatingEl);
   }
 
   private genFloating(): void {
@@ -145,9 +143,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
 
   private hideAll(): void {
     const allNode = this.floatingEl.querySelectorAll(`.${FLOATINGCLS}`);
-    for (let i = 0; i < allNode.length; i++) {
-      allNode[i].classList.remove(SHOWCLS);
-    }
+    allNode.forEach(node => node.classList.remove(SHOWCLS));
   }
 
   // calculate the node position values.
@@ -198,6 +194,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
     }
     this.ngZone.run(() => this.router.navigateByUrl(item.link!));
   }
+
   toggleOpen(item: Nav): void {
     this.menuSrv.toggleOpen(item);
   }
@@ -236,7 +233,7 @@ export class LayoutDefaultNavComponent implements OnInit, OnDestroy {
         }
         const icon = i.icon as MenuIcon;
         if (icon && icon.type === 'svg' && typeof icon.value === 'string') {
-          icon.value = this.sanitizer.bypassSecurityTrustHtml(icon.value!!);
+          icon.value = this.sanitizer.bypassSecurityTrustHtml(icon.value!);
         }
       });
       if (this.hideEmptyChildren) this.fixHide(data);

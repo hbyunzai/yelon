@@ -25,6 +25,7 @@ import { filter } from 'rxjs';
 
 import { SettingsService } from '@yelon/theme';
 import { updateHostClass } from '@yelon/util/browser';
+
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -44,7 +45,7 @@ import { LayoutDefaultOptions } from './types';
       <layout-default-header [items]="headerItems" />
     }
     @if (!opt.hideAside && displayAside) {
-      <div class="yunzai-default__aside" [ngStyle]="asideStyle">
+      <div class="yunzai-default__aside" [style]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
             <ng-container *ngTemplateOutlet="asideUser" />
@@ -59,7 +60,7 @@ import { LayoutDefaultOptions } from './types';
                 <ng-container *ngTemplateOutlet="asideBottom" />
               } @else {
                 <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
-                  <span nz-icon [nzType]="collapsedIcon"></span>
+                  <nz-icon [nzType]="collapsedIcon" />
                 </div>
               }
             </div>
@@ -67,11 +68,13 @@ import { LayoutDefaultOptions } from './types';
         </div>
       </div>
     }
-    <section class="yunzai-default__content" [ngStyle]="contentStyle">
+    <section class="yunzai-default__content" [style]="contentStyle">
       <ng-container *ngTemplateOutlet="content" />
       <ng-content />
     </section>
-  `
+  `,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class LayoutDefaultComponent implements OnInit {
   @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
@@ -85,7 +88,6 @@ export class LayoutDefaultComponent implements OnInit {
   set options(value: LayoutDefaultOptions | null | undefined) {
     this.srv.setOptions(value);
   }
-
   @Input() asideUser: TemplateRef<void> | null = null;
   @Input() asideBottom: TemplateRef<NzSafeAny> | null = null;
   @Input() nav: TemplateRef<void> | null = null;

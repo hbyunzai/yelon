@@ -49,7 +49,7 @@ interface LayoutDefaultHeaderItem {
         @if (!opt.hideAside && opt.showHeaderCollapse) {
           <li>
             <div class="yunzai-default__nav-item yunzai-default__nav-item--collapse" (click)="toggleCollapsed()">
-              <span nz-icon [nzType]="collapsedIcon"></span>
+              <nz-icon [nzType]="collapsedIcon" />
             </div>
           </li>
         }
@@ -68,7 +68,9 @@ interface LayoutDefaultHeaderItem {
   host: {
     '[class.yunzai-default__header]': `true`
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class LayoutDefaultHeaderComponent implements AfterViewInit {
   private readonly settings = inject(SettingsService);

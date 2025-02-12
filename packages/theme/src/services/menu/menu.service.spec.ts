@@ -3,11 +3,11 @@ import { filter } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
 import { deepCopy } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YunzaiI18NServiceFake, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 import { Menu, MenuInner } from './interface';
 import { MenuService } from './menu.service';
+import { YunzaiI18NServiceFake, YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 
 class MockACLService {
   can(val: string): boolean {
@@ -42,7 +42,7 @@ describe('Service: Menu', () => {
       badgeDot: true,
       badgeStatus: 'success'
     },
-    { text: 'text', externalLink: '//ng.yunzainfo.com' },
+    { text: 'text', externalLink: '//ng-yunzai.com' },
     { text: 'text', link: '/demo2', i18n: 'text' },
     { text: 'sub', children: [{ text: 'text', link: '/test', badge: 10 }] },
     { text: 'hide', link: '/hide', hide: true }
@@ -306,7 +306,7 @@ describe('Service: Menu', () => {
           {
             text: 'dashboard',
             link: '/dashboard',
-            icon: `http://ng.yunzainfo.com/1.jpg`
+            icon: `http://ng-yunzai.com/1.jpg`
           }
         ]);
         const icon: NzSafeAny = srv.menus[0].icon;
@@ -352,7 +352,7 @@ describe('Service: Menu', () => {
         expect(srv.find({ url: `/hide`, ignoreHide: false })).not.toBe(null);
       });
       it('custom result via cb', () => {
-        const res = srv.find({ url: `/always-first-item`, cb: _ => true });
+        const res = srv.find({ url: `/always-first-item`, cb: () => true });
         expect(res).toBe(srv.menus[0]);
       });
       it('return last item', () => {

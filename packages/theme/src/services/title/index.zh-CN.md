@@ -14,10 +14,9 @@ type: Service
 根据以下顺序获取 `title` 值：
 
 1. 路由配置 `{ data: { title: 'page name', titleI18n: 'page-name' } as RouteTitle }`
-2. 按照统一门户后台配置的规则显示
-3. 根据当前 URL 解析菜单数据
-4. 页面 `yunzai-default__content-title` 或 `page-header__title` 中获取 `h1` 内容
-5. 默认标题名
+2. 根据当前 URL 解析菜单数据
+3. 页面 `yunzai-default__content-title` 或 `page-header__title` 中获取 `h1` 内容
+4. 默认标题名
 
 ## API
 

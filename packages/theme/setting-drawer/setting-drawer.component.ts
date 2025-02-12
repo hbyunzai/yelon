@@ -13,14 +13,24 @@ import {
   OnInit
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 
 import { Layout, SettingsService } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { deepCopy, LazyService } from '@yelon/util/other';
+import { NzAlertComponent } from 'ng-zorro-antd/alert';
+import { NzButtonComponent } from 'ng-zorro-antd/button';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
+import { SettingDrawerItemComponent } from './setting-drawer-item.component';
 import { YUNZAIDEFAULTVAR, DEFAULT_COLORS, DEFAULT_VARS } from './setting-drawer.types';
 
 @Component({
@@ -30,7 +40,19 @@ import { YUNZAIDEFAULTVAR, DEFAULT_COLORS, DEFAULT_VARS } from './setting-drawer
     '[class.setting-drawer]': 'true',
     '[class.setting-drawer-rtl]': `dir === 'rtl'`
   },
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    FormsModule,
+    NzDrawerModule,
+    NzTooltipDirective,
+    NzIconDirective,
+    NzDividerModule,
+    NzTabsModule,
+    SettingDrawerItemComponent,
+    NzSwitchModule,
+    NzButtonComponent,
+    NzAlertComponent
+  ]
 })
 export class SettingDrawerComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
@@ -63,7 +85,7 @@ export class SettingDrawerComponent implements OnInit {
     this.resetData(this.cachedData, false);
   }
 
-  private get cachedData(): { [key: string]: NzSafeAny } {
+  private get cachedData(): Record<string, NzSafeAny> {
     return this.settingSrv.layout[YUNZAIDEFAULTVAR] || {};
   }
 
@@ -109,7 +131,7 @@ export class SettingDrawerComponent implements OnInit {
 
   private genVars(): NzSafeAny {
     const { data, color, validKeys } = this;
-    const vars: { [key: string]: string } = {
+    const vars: Record<string, string> = {
       [`@primary-color`]: color
     };
     validKeys.filter(key => key !== 'primary-color').forEach(key => (vars[`@${key}`] = data[key].value));
@@ -148,7 +170,7 @@ export class SettingDrawerComponent implements OnInit {
     this.settingSrv.setLayout(name, value);
   }
 
-  private resetData(nowData?: { [key: string]: NzSafeAny }, run: boolean = true): void {
+  private resetData(nowData?: Record<string, NzSafeAny>, run: boolean = true): void {
     nowData = nowData || {};
     const data = deepCopy(DEFAULT_VARS);
     Object.keys(data).forEach(key => {

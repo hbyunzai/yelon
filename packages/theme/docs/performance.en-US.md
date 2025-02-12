@@ -4,7 +4,7 @@ order: 10
 title: Performance
 ---
 
-ng-yunzai also includes a set of like bootstrap style tools, And built on the design principles developed by [Ant Design](https://ant.design/). If you are familiar with Bootstrap, it will be very friendly, because all naming as close as it. Also, Install [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode) plugin in VSCode for intellisense these class names.
+ng-yunzai also includes a set of like bootstrap style tools, And built on the design principles developed by [Ant Design](https://ant.design/). If you are familiar with Bootstrap, it will be very friendly, because all naming as close as it. Also, Install [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode) plugin in VSCode for intellisense these class names.
 
 ## Usage
 

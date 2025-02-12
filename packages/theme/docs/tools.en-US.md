@@ -6,7 +6,7 @@ title: Style Tools
 
 ng-yunzai builds a set of style tools for size, spacing, color, and more based on Ant Design.
 
-> Install [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode) plugin in VSCode for intellisense these class names.
+> Install [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode) plugin in VSCode for intellisense these class names.
 
 ## Spacing
 

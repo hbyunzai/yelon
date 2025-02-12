@@ -118,7 +118,7 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
 
   abstract use(lang: string, data?: Record<string, unknown>): void;
 
-  abstract getLangs(): NzSafeAny;
+  abstract getLangs(): NzSafeAny[];
 
   fanyi(path: string, params?: unknown | unknown[]): string {
     let content = this._data[path] || '';
@@ -127,15 +127,14 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
     if (!params) return content;
 
     if (typeof params === 'object') {
-      const interpolation = this.cog.interpolation!!;
+      const interpolation = this.cog.interpolation!;
       const objParams = params as Record<string, unknown>;
-      Object.keys(objParams).forEach(
-        key =>
-          (content = content.replace(
-            new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'),
-            `${objParams[key]}`
-          ))
-      );
+      Object.keys(objParams).forEach(key => {
+        content = content.replace(
+          new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'),
+          `${objParams[key]}`
+        );
+      });
     }
 
     (Array.isArray(params) ? params : [params]).forEach(

@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpParams } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { _HttpClient } from './http.client';
 import {
   BaseApi,
   BaseHeaders,
@@ -245,9 +244,9 @@ describe('theme: http.decorator', () => {
   });
 
   it('should construct a POST request', () => {
-    srv.save(1, { name: 'yunzai-bot' });
+    srv.save(1, { name: 'cipchk' });
     expect(request).toHaveBeenCalled();
-    expect(request.calls.mostRecent().args[2].body.name).toBe('yunzai-bot');
+    expect(request.calls.mostRecent().args[2].body.name).toBe('cipchk');
   });
 
   it('should construct a POST request via array body', () => {
