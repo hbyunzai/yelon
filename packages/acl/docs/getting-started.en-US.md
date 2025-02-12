@@ -4,7 +4,7 @@ title: Getting Started
 type: Documents
 ---
 
-ACL (Access Control List) is a very simple role-based permission control method, you can use in any Angular projects, a online [DEMO](//hbyunzai.github.io/ng-yunzai/#/logics/acl)
+ACL (Access Control List) is a very simple role-based permission control method, you can use in any Angular projects, a online [DEMO](//ng-yunzai.github.io/ng-yunzai/#/logics/acl)
 
 ## About ACLService
 
