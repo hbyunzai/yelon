@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { ChartEChartsOn } from '.';
 import { ChartEChartsComponent } from './echarts.component';
@@ -13,7 +13,7 @@ import { ChartEChartsOption } from './echarts.types';
 // let isClassECharts = false;
 class MockLazyService {
   load(): Promise<void> {
-    (window as NzSafeAny).echarts = {
+    (window as any).echarts = {
       init: () => {
         return {
           setOption: jasmine.createSpy('setOption'),
@@ -103,7 +103,7 @@ class TestComponent {
   height: string | number = 400;
   theme?: string | Record<string, unknown> | null = null;
   option: ChartEChartsOption = {};
-  initOpt: NzSafeAny;
+  initOpt: any;
   on: ChartEChartsOn[] = [
     {
       eventName: 'click',

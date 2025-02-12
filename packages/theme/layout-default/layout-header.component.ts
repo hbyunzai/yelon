@@ -12,14 +12,14 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { App, SettingsService } from '@yelon/theme';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultHeaderItemDirection, LayoutDefaultHeaderItemHidden, LayoutDefaultOptions } from './types';
 
 interface LayoutDefaultHeaderItem {
-  host: TemplateRef<NzSafeAny>;
+  host: TemplateRef<any>;
   hidden?: LayoutDefaultHeaderItemHidden;
   direction?: LayoutDefaultHeaderItemDirection;
 }

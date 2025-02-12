@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { map, tap } from 'rxjs';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, getData, getEnum } from '@yelon/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MentionOnSearchTypes, NzMentionComponent, NzMentionModule } from 'ng-zorro-antd/mention';
 
@@ -71,7 +71,7 @@ export class MentionWidget extends ControlUIWidget<SFMentionWidgetSchema> implem
 
   @ViewChild('mentions', { static: true }) private mentionChild!: NzMentionComponent;
   data: SFSchemaEnum[] = [];
-  i: NzSafeAny;
+  i: any;
   loading = false;
 
   ngOnInit(): void {
@@ -98,7 +98,7 @@ export class MentionWidget extends ControlUIWidget<SFMentionWidgetSchema> implem
           return [{ keyword: 'mention', message: `最多提及 ${max} 次` }];
         }
         return null;
-      }) as NzSafeAny;
+      }) as any;
     }
   }
 
@@ -109,7 +109,7 @@ export class MentionWidget extends ControlUIWidget<SFMentionWidgetSchema> implem
     });
   }
 
-  _select(options: NzSafeAny): void {
+  _select(options: any): void {
     if (this.ui.select) this.ui.select(options);
   }
 

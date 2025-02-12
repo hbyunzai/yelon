@@ -6,7 +6,7 @@ import { By } from '@angular/platform-browser';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { createTestContext } from '@yelon/testing';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { ResultComponent } from './result.component';
 
@@ -23,7 +23,7 @@ describe('abc: result', () => {
     fixture.detectChanges();
   });
 
-  function isText(cls: string, value: NzSafeAny): void {
+  function isText(cls: string, value: any): void {
     const el = dl.query(By.css(cls)).nativeElement as HTMLElement;
     expect(el ? el.innerText.trim() : '').toBe(value);
   }

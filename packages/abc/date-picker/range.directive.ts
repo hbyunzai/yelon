@@ -15,7 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { YunzaiConfigService, YunzaiDateRangePickerShortcut, YunzaiDateRangePickerShortcutItem } from '@yelon/util/config';
 import { fixEndTimeOfRange, getTimeDistance } from '@yelon/util/date-time';
 import { assert, deepMergeKey } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { DatePickerService } from 'ng-zorro-antd/date-picker/date-picker.service';
 
@@ -58,8 +58,8 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
   get shortcut(): YunzaiDateRangePickerShortcut | null {
     return this._shortcut;
   }
-  @Input({ required: true }) ngModelEnd: NzSafeAny;
-  @Output() readonly ngModelEndChange = new EventEmitter<NzSafeAny>();
+  @Input({ required: true }) ngModelEnd: any;
+  @Output() readonly ngModelEndChange = new EventEmitter<any>();
 
   private get dp(): NzDatePickerComponent {
     return this.nativeComp!.datePicker;
@@ -122,7 +122,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
   }
 
   private cd(): void {
-    (this.dp as NzSafeAny).cdr.markForCheck();
+    (this.dp as any).cdr.markForCheck();
   }
 
   private overrideNative(): void {
@@ -155,7 +155,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
       return;
     }
     const { enabled, list } = this._shortcut;
-    let extraFooter: TemplateRef<NzSafeAny> | undefined;
+    let extraFooter: TemplateRef<any> | undefined;
     if (!this.nativeComp || !enabled) {
       extraFooter = undefined;
     } else {

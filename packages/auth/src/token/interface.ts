@@ -2,7 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { YunzaiAuthConfig } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { YA_SERVICE_TOKEN_FACTORY } from './token.service';
 
@@ -12,7 +12,7 @@ export const YA_SERVICE_TOKEN = new InjectionToken<ITokenService>('YA_SERVICE_TO
 });
 
 export interface ITokenModel {
-  [key: string]: NzSafeAny;
+  [key: string]: any;
   access_token?: string | null;
   expires_in?: number;
   refresh_token?: string;

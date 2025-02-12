@@ -18,7 +18,7 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { take } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 @Component({
@@ -61,7 +61,7 @@ export class EllipsisComponent implements AfterViewInit, OnChanges {
     );
   }
 
-  private get win(): NzSafeAny {
+  private get win(): any {
     return this.doc.defaultView || window;
   }
 

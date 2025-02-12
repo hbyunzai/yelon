@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { SIGNAL, SignalNode } from '@angular/core/primitives/signals';
 
 import { deepMergeKey } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { YunzaiConfig, YunzaiConfigKey, YUNZAI_CONFIG } from './config.types';
 
@@ -11,7 +11,7 @@ export class YunzaiConfigService {
   private readonly config = { ...inject(YUNZAI_CONFIG, { optional: true }) };
 
   get<T extends YunzaiConfigKey>(componentName: T, key?: string): YunzaiConfig[T] {
-    const res = ((this.config[componentName] as Record<string, unknown>) || {}) as NzSafeAny;
+    const res = ((this.config[componentName] as Record<string, unknown>) || {}) as any;
     return key ? { [key]: res[key] } : res;
   }
 

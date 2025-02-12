@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { KeysPipe } from './keys.pipe';
 
@@ -50,7 +50,7 @@ describe('Pipe: keys', () => {
   imports: [KeysPipe, JsonPipe]
 })
 class TestComponent {
-  data: NzSafeAny = {
+  data: any = {
     name: 'cipchk',
     address: { city: 'shanghai', district: 'changning' }
   };

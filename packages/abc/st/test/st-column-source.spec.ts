@@ -1,7 +1,7 @@
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YunzaiI18NServiceFake } from '@yelon/theme';
 import { deepGet } from '@yelon/util/other';
-import { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NgClassInterface  } from 'ng-zorro-antd/core/types';
 
 import { STColumnSource, STColumnSourceProcessOptions } from '../st-column-source';
 import { STRowSource } from '../st-row.directive';
@@ -44,7 +44,7 @@ describe('st: column-source', () => {
 
   function genModule(other: { acl?: boolean; i18n?: boolean; cog?: any }): void {
     aclSrv = other.acl ? new ACLService({ merge: (_: any, def: any) => def } as any) : null;
-    i18nSrv = other.i18n ? new MockI18NServiceFake({ merge: () => {} } as NzSafeAny) : null;
+    i18nSrv = other.i18n ? new MockI18NServiceFake({ merge: () => {} } as any) : null;
     rowSrv = new STRowSource();
     stWidgetRegistry = new STWidgetRegistry();
     srv = new STColumnSource(new MockDomSanitizer() as any, rowSrv, aclSrv!, i18nSrv!, stWidgetRegistry);
@@ -570,7 +570,7 @@ describe('st: column-source', () => {
         expect(rowSrv.getTitle).toHaveBeenCalled();
       });
       it('should be template ref', () => {
-        const mockTemplateRef: NzSafeAny = {};
+        const mockTemplateRef: any = {};
         expect(rowSrv.getRow).not.toHaveBeenCalled();
         expect(rowSrv.getTitle).not.toHaveBeenCalled();
         const columns = [{ title: '', render: mockTemplateRef, renderTitle: mockTemplateRef }] as _STColumn[];

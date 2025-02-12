@@ -9,7 +9,7 @@ import { DatePipe, YNPipe, _HttpClient } from '@yelon/theme';
 import type { YunzaiSTConfig } from '@yelon/util/config';
 import { CurrencyService } from '@yelon/util/format';
 import { deepCopy, deepGet } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import type {
   STColumn,
@@ -51,7 +51,7 @@ export interface STDataSourceOptions {
   singleSort?: STSingleSort | null;
   multiSort?: STMultiSort;
   rowClassName?: STRowClassName | null;
-  customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
+  customRequest?: (options: STCustomRequestOptions) => Observable<any>;
 }
 
 export interface STDataSourceResult {
@@ -95,7 +95,7 @@ export class STDataSource {
     let retPs: number;
     let retList: STData[];
     let retPi: number;
-    let rawData: NzSafeAny;
+    let rawData: any;
     let showPage = page.show;
 
     if (typeof data === 'string') {
@@ -516,7 +516,7 @@ export class STDataSource {
       .forEach(col => {
         const filter = col.filter!;
         const values = this.getFilteredData(filter);
-        let obj: Record<string, NzSafeAny> = {};
+        let obj: Record<string, any> = {};
         if (filter.reName) {
           obj = filter.reName!(filter.menus!, col);
         } else {
@@ -531,8 +531,8 @@ export class STDataSource {
 
   // #region statistical
 
-  private genStatistical(columns: _STColumn[], list: STData[], rawData: NzSafeAny): STStatisticalResults {
-    const res: Record<string, NzSafeAny> = {};
+  private genStatistical(columns: _STColumn[], list: STData[], rawData: any): STStatisticalResults {
+    const res: Record<string, any> = {};
     columns.forEach((col, index) => {
       res[col.key || col.indexKey || index] =
         col.statistical == null ? {} : this.getStatistical(col, index, list, rawData);
@@ -540,7 +540,7 @@ export class STDataSource {
     return res;
   }
 
-  private getStatistical(col: _STColumn, index: number, list: STData[], rawData: NzSafeAny): STStatisticalResult {
+  private getStatistical(col: _STColumn, index: number, list: STData[], rawData: any): STStatisticalResult {
     const val = col.statistical;
     const item: STStatistical = {
       digits: 2,

@@ -5,9 +5,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { RxStomp } from '@stomp/rx-stomp';
 import { IRxStompPublishParams } from '@stomp/rx-stomp/esm6/i-rx-stomp-publish-params';
 import { IMessage, StompHeaders } from '@stomp/stompjs';
-
 import { YunzaiConfigService, YunzaiSocketConfig, log, WINDOW, useLocalStorageUser, YunzaiUser } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { NotificationService } from './notification.service';
 import { mergeSocketConfig, SOCKET_DEFAULT_CONFIG } from './socket.config';
@@ -17,13 +15,13 @@ export class StompService implements OnDestroy {
   config: YunzaiSocketConfig = SOCKET_DEFAULT_CONFIG;
   rxStomp: RxStomp;
   user?: YunzaiUser;
-  destroy$: Subject<unknown> = new Subject();
+  destroy$ = new Subject<unknown>();
 
   constructor(
     private configService: YunzaiConfigService,
     private injector: Injector,
     private notifyService: NotificationService,
-    @Inject(WINDOW) private win: NzSafeAny
+    @Inject(WINDOW) private win: any
   ) {
     const [, getUser] = useLocalStorageUser();
     if (!this.user) {

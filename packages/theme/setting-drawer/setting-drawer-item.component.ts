@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzInputDirective } from 'ng-zorro-antd/input';
 import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
@@ -16,10 +16,10 @@ import { NzSwitchComponent } from 'ng-zorro-antd/switch';
   imports: [FormsModule, NzInputDirective, NzInputNumberComponent, NzSwitchComponent, NzDrawerModule]
 })
 export class SettingDrawerItemComponent {
-  i: NzSafeAny = {};
+  i: any = {};
 
   @Input()
-  set data(val: NzSafeAny) {
+  set data(val: any) {
     this.i = val;
     if (val.type === 'px') {
       this.pxVal = +val.value.replace('px', '');

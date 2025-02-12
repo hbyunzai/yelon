@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { Lodop, LodopService } from '@yelon/abc/lodop';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -127,7 +127,7 @@ export class DemoComponent {
       this.pinters = this.lodopSrv.printer;
     });
   }
-  cog: NzSafeAny = {
+  cog: any = {
     url: 'https://localhost:8443/CLodopfuncs.js',
     printer: '',
     paper: '',
@@ -142,12 +142,12 @@ export class DemoComponent {
   };
   error = false;
   lodop: Lodop | null = null;
-  pinters: NzSafeAny[] = [];
+  pinters: any[] = [];
   papers: string[] = [];
 
   printing = false;
 
-  reload(options: NzSafeAny = { url: 'https://localhost:8443/CLodopfuncs.js' }): void {
+  reload(options: any = { url: 'https://localhost:8443/CLodopfuncs.js' }): void {
     this.pinters = [];
     this.papers = [];
     this.cog.printer = '';

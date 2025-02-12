@@ -2,7 +2,7 @@ import { Platform } from '@angular/cdk/platform';
 import { Injectable, InjectionToken, Provider, inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { App, Layout, SettingsNotify, User } from './types';
 
@@ -35,14 +35,14 @@ export class SettingsService<L extends Layout = Layout, U extends User = User, A
   private _user: U | null = null;
   private _layout: L | null = null;
 
-  getData(key: string): NzSafeAny {
+  getData(key: string): any {
     if (!this.platform.isBrowser) {
       return null;
     }
     return JSON.parse(localStorage.getItem(key) || 'null') || null;
   }
 
-  setData(key: string, value: NzSafeAny): void {
+  setData(key: string, value: any): void {
     if (!this.platform.isBrowser) {
       return;
     }
@@ -86,16 +86,16 @@ export class SettingsService<L extends Layout = Layout, U extends User = User, A
     return this.notify$.asObservable();
   }
 
-  setLayout<T extends Layout = Layout>(name: T, value?: NzSafeAny): boolean;
-  setLayout(name: string | L, value?: NzSafeAny): boolean;
-  setLayout(name: string | L, value?: NzSafeAny): boolean {
+  setLayout<T extends Layout = Layout>(name: T, value?: any): boolean;
+  setLayout(name: string | L, value?: any): boolean;
+  setLayout(name: string | L, value?: any): boolean {
     if (typeof name === 'string') {
       (this.layout as Layout)[name] = value;
     } else {
       this._layout = name;
     }
     this.setData(this.KEYS.layout, this._layout);
-    this.notify$.next({ type: 'layout', name, value } as NzSafeAny);
+    this.notify$.next({ type: 'layout', name, value } as any);
     return true;
   }
   getLayout<T>(): T {

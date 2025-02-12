@@ -16,7 +16,7 @@ import { BehaviorSubject, Observable, filter } from 'rxjs';
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { SEErrorRefresh, SELayout } from './se.types';
 
@@ -80,7 +80,7 @@ export class SETitleComponent implements OnInit {
   imports: [SETitleComponent, NzStringTemplateOutletDirective]
 })
 export class SEContainerComponent {
-  private errorNotify$ = new BehaviorSubject<SEErrorRefresh>(null as NzSafeAny);
+  private errorNotify$ = new BehaviorSubject<SEErrorRefresh>(null as any);
   @Input({ alias: 'se-container', transform: (v: unknown) => (v == null ? null : numberAttribute(v)) })
   colInCon?: REP_TYPE;
   @Input({ transform: (v: unknown) => (v == null ? null : numberAttribute(v)) }) col!: REP_TYPE;

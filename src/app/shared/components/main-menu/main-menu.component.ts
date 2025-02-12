@@ -13,7 +13,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
@@ -36,12 +36,12 @@ export class MainMenuComponent implements OnInit {
 
   @Output() readonly to = new EventEmitter<string>();
 
-  get menus(): NzSafeAny[] {
+  get menus(): any[] {
     return this.meta.menus!;
   }
 
   ngOnInit(): void {
     this.i18n.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(() => this.cdr.markForCheck());
-    this.count = this.meta.menus?.reduce((p: number, c: NzSafeAny) => (p += c.list.length), 0);
+    this.count = this.meta.menus?.reduce((p: number, c: any) => (p += c.list.length), 0);
   }
 }

@@ -3,7 +3,7 @@ import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick
 
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types/any';
+import { any } from 'ng-zorro-antd/core/types/any';
 
 import { PdfComponent } from './pdf.component';
 
@@ -44,7 +44,7 @@ describe('abc: pdf', () => {
 })
 class TestComponent {
   @ViewChild('comp') comp!: PdfComponent;
-  options: NzSafeAny;
+  options: any;
   src = '';
   delay = 0;
   change(): void {}

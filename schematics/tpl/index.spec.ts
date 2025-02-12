@@ -1,7 +1,7 @@
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import * as fs from 'fs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { createYunzaiAndModuleApp } from '../utils/testing';
 
@@ -26,7 +26,7 @@ describe('Schematic: tpl', () => {
 
   it('should be throw error when not found name', async () => {
     spyOn(fs, 'accessSync');
-    spyOn(fs, 'readdirSync').and.returnValue(['invalid-name'] as NzSafeAny);
+    spyOn(fs, 'readdirSync').and.returnValue(['invalid-name'] as any);
     try {
       await run();
       expect(true).toBe(false);

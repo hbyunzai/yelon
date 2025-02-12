@@ -1,6 +1,6 @@
 import { addDays, addSeconds } from 'date-fns';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import type { DisabledTimeConfig } from 'ng-zorro-antd/date-picker';
 
 import { dateTimePickerUtil } from './picker';
@@ -48,7 +48,7 @@ describe('util: date-time', () => {
         expect(res?.nzDisabledSeconds(NOW.getHours(), NOW.getMinutes()).length).toBe(secondsLength);
       }
       it('when is invalid date', () => {
-        const res = dateTimePickerUtil.disabledBeforeTime()(null as NzSafeAny);
+        const res = dateTimePickerUtil.disabledBeforeTime()(null as any);
         expect(res?.nzDisabledHours).toBeUndefined();
         expect(res?.nzDisabledMinutes).toBeUndefined();
         expect(res?.nzDisabledSeconds).toBeUndefined();

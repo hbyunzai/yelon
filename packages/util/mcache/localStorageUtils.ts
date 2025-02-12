@@ -1,5 +1,5 @@
 import { LayoutBasicAside, NavType, YunzaiNavTopic, YunzaiProjectInfo, YunzaiUser } from '@yelon/util/mtypes';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export const YZ_USER_KEY = '_yz_user';
 export const YZ_PROJECT_INFO_KEY = '_yz_project_info';
@@ -14,7 +14,7 @@ export const YZ_NEED_AUTH_KEY = '_yz_need_auth';
 
 function get<T>(key: string): T | null {
   if (key === YZ_HEADER_TYPE_KEY) {
-    return localStorage.getItem(key) as NzSafeAny;
+    return localStorage.getItem(key) as any;
   }
   const item = localStorage.getItem(key);
   return item ? JSON.parse(item) : null;

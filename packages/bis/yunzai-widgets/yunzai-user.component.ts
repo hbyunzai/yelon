@@ -53,7 +53,6 @@ export interface UserLink {
       </div>
     </nz-dropdown-menu>
   `,
-  standalone: true,
   imports: [NzDropDownModule, I18nPipe, NzIconModule, NzAvatarModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

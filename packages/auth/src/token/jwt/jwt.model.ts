@@ -1,4 +1,4 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { ITokenModel } from '../interface';
 import { urlBase64Decode } from './jwt.helper';
@@ -38,7 +38,7 @@ export interface JWT {
 }
 
 export class JWTTokenModel implements ITokenModel {
-  [key: string]: NzSafeAny;
+  [key: string]: any;
   access_token?: string | null;
   expires_in?: number;
   refresh_token?: string;

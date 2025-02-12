@@ -7,7 +7,7 @@ import { format, formatISO } from 'date-fns';
 
 import { createTestContext } from '@yelon/testing';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { DateWidget } from './date.widget';
 import { SFDateWidgetSchema } from './schema';
@@ -241,7 +241,7 @@ describe('form: widget: date', () => {
       };
       page.newSchema(s);
       const comp = getComp();
-      const ui = s.properties!.a.ui as NzSafeAny;
+      const ui = s.properties!.a.ui as any;
       expect(ui.onOpenChange).not.toHaveBeenCalled();
       comp._openChange(true);
       expect(ui.onOpenChange).toHaveBeenCalled();
@@ -252,7 +252,7 @@ describe('form: widget: date', () => {
       };
       page.newSchema(s);
       const comp = getComp();
-      const ui = s.properties!.a.ui as NzSafeAny;
+      const ui = s.properties!.a.ui as any;
       expect(ui.onOk).not.toHaveBeenCalled();
       comp._ok(true);
       expect(ui.onOk).toHaveBeenCalled();

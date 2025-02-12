@@ -3,7 +3,7 @@ import { filter } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { Menu, MenuInner } from './interface';
 import { MenuService } from './menu.service';
@@ -250,7 +250,7 @@ describe('Service: Menu', () => {
             icon: null
           }
         ]);
-        const icon: NzSafeAny = srv.menus[0].icon;
+        const icon: any = srv.menus[0].icon;
         expect(icon).toBeNull();
       });
       it('should be undefined', () => {
@@ -261,7 +261,7 @@ describe('Service: Menu', () => {
             icon: undefined
           }
         ]);
-        const icon: NzSafeAny = srv.menus[0].icon;
+        const icon: any = srv.menus[0].icon;
         expect(icon).toBeUndefined();
       });
       it('should be type is string', () => {
@@ -272,7 +272,7 @@ describe('Service: Menu', () => {
             icon: 'aa'
           }
         ]);
-        const icon: NzSafeAny = srv.menus[0].icon;
+        const icon: any = srv.menus[0].icon;
         expect(typeof icon).toBe('object');
         expect(icon.type).toBe('class');
       });
@@ -284,7 +284,7 @@ describe('Service: Menu', () => {
             icon: { type: 'icon', value: 'user' }
           }
         ]);
-        const icon: NzSafeAny = srv.menus[0].icon;
+        const icon: any = srv.menus[0].icon;
         expect(typeof icon).toBe('object');
         expect(icon.type).toBe('icon');
       });
@@ -296,7 +296,7 @@ describe('Service: Menu', () => {
             icon: `anticon anticon-user`
           }
         ]);
-        const icon: NzSafeAny = srv.menus[0].icon;
+        const icon: any = srv.menus[0].icon;
         expect(typeof icon).toBe('object');
         expect(icon.type).toBe('icon');
         expect(icon.value).toBe('user');
@@ -309,7 +309,7 @@ describe('Service: Menu', () => {
             icon: `http://ng-yunzai.com/1.jpg`
           }
         ]);
-        const icon: NzSafeAny = srv.menus[0].icon;
+        const icon: any = srv.menus[0].icon;
         expect(typeof icon).toBe('object');
         expect(icon.type).toBe('img');
       });
@@ -357,9 +357,9 @@ describe('Service: Menu', () => {
       });
       it('return last item', () => {
         const first = srv.find({ url: `/test` });
-        expect((first as NzSafeAny)._parent == null).toBe(true);
+        expect((first as any)._parent == null).toBe(true);
         const last = srv.find({ url: `/test`, last: true });
-        expect((last as NzSafeAny)._parent != null).toBe(true);
+        expect((last as any)._parent != null).toBe(true);
       });
     });
 

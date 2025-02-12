@@ -2,7 +2,7 @@ import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface CookieOptions {
   path?: string;
@@ -88,7 +88,7 @@ export class CookieService {
     if (typeof opt.expires !== 'string') {
       opt.expires = opt.expires ? opt.expires.toUTCString() : '';
     }
-    const optStr: Record<string, string | boolean> = opt as NzSafeAny;
+    const optStr: Record<string, string | boolean> = opt as any;
     const attributes = Object.keys(optStr)
       .filter(k => optStr[k] && optStr[k] !== true)
       .map(k => `${k}=${(optStr[k] as string).split(';')[0]}`)

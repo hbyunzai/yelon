@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { AjvSchemaValidatorFactory, SchemaValidatorFactory } from './validator.factory';
 import { WidgetRegistry } from './widget.factory';
@@ -16,7 +16,7 @@ import { NzWidgetRegistry } from './widgets/nz-widget.registry';
 
 export interface SFWidgetProvideConfig {
   KEY: string;
-  type: NzSafeAny;
+  type: any;
 }
 
 /**

@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2, PageG2DataCount, PageG2Height } from '@yelon/testing';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { G2BarComponent, G2BarData } from './bar.component';
 
@@ -43,7 +43,7 @@ describe('chart: bar', () => {
       const color = '#f50';
       page.context.color = color;
       page.dc();
-      expect((page.chart.geometries[0] as NzSafeAny).attributeOption.color.callback(1, 1)).toBe(color);
+      expect((page.chart.geometries[0] as any).attributeOption.color.callback(1, 1)).toBe(color);
     });
 
     it('#padding', () => {

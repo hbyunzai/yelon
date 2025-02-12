@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 @Injectable({ providedIn: 'root' })
 export class STWidgetRegistry {
-  private _widgets: Record<string, NzSafeAny> = {};
+  private _widgets: Record<string, any> = {};
 
-  get widgets(): NzSafeAny {
+  get widgets(): any {
     return this._widgets;
   }
 
-  register(type: string, widget: NzSafeAny): void {
+  register(type: string, widget: any): void {
     this._widgets[type] = widget;
   }
 
@@ -18,7 +18,7 @@ export class STWidgetRegistry {
     return Object.prototype.hasOwnProperty.call(this._widgets, type);
   }
 
-  get(type: string): NzSafeAny {
+  get(type: string): any {
     return this._widgets[type];
   }
 }

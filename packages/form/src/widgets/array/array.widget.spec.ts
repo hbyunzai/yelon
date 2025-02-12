@@ -3,7 +3,7 @@ import { ComponentFixture } from '@angular/core/testing';
 
 import { createTestContext } from '@yelon/testing';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { SFArrayWidgetSchema } from './schema';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../../spec/base.spec';
@@ -28,8 +28,8 @@ describe('form: widget: array', () => {
           }
         },
         ui: {
-          add: jasmine.createSpy('add') as NzSafeAny,
-          remove: jasmine.createSpy('remove') as NzSafeAny
+          add: jasmine.createSpy('add') as any,
+          remove: jasmine.createSpy('remove') as any
         }
       }
     }
@@ -45,7 +45,7 @@ describe('form: widget: array', () => {
 
   it('should be add item', () => {
     page.newSchema(schema).checkCount('.sf__array-item', 0).add().checkCount('.sf__array-item', 1);
-    expect((schema.properties!.arr.ui as NzSafeAny).add).toHaveBeenCalled();
+    expect((schema.properties!.arr.ui as any).add).toHaveBeenCalled();
   });
   it(`should be minItems`, () => {
     page.newSchema({
@@ -102,7 +102,7 @@ describe('form: widget: array', () => {
       const s = deepCopy(schema) as SFSchema;
       s.properties!.arr.ui = {
         removable: true,
-        remove: jasmine.createSpy('remove') as NzSafeAny
+        remove: jasmine.createSpy('remove') as any
       } as SFArrayWidgetSchema;
       page
         .newSchema(s)

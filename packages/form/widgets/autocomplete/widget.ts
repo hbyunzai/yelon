@@ -5,7 +5,7 @@ import { Observable, of, debounceTime, map, mergeMap, startWith, takeUntil } fro
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getCopyEnum, getEnum, toBool } from '@yelon/form';
 import { NzAutocompleteModule, NzAutocompleteOptionComponent } from 'ng-zorro-antd/auto-complete';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzInputModule } from 'ng-zorro-antd/input';
 
 import type { SFAutoCompleteWidgetSchema } from './schema';
@@ -55,7 +55,7 @@ import type { SFAutoCompleteWidgetSchema } from './schema';
 export class AutoCompleteWidget extends ControlUIWidget<SFAutoCompleteWidgetSchema> {
   static readonly KEY = 'autocomplete';
 
-  i: NzSafeAny = {};
+  i: any = {};
   list!: Observable<SFSchemaEnum[]>;
   typing: string = '';
   @ViewChild(NgModel, { static: false }) private ngModel!: NgModel;

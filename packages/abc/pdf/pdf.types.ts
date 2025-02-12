@@ -1,8 +1,8 @@
 // import type { PDFDocumentProxy } from 'pdfjs-dist';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-type PDFDocumentProxy = NzSafeAny;
+
+type PDFDocumentProxy = any;
 
 export type PdfChangeEventType =
   | 'loaded'
@@ -19,9 +19,9 @@ export interface PdfChangeEvent {
   pi?: number;
   total?: number;
   pdf?: PDFDocumentProxy | null;
-  ev?: NzSafeAny;
+  ev?: any;
   progress?: { loaded: number; total: number };
-  error?: NzSafeAny;
+  error?: any;
 }
 
 export enum PdfTextLayerMode {

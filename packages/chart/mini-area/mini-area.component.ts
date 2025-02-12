@@ -12,12 +12,12 @@ import {
 import type { Chart, Event } from '@antv/g2';
 
 import { G2BaseComponent, genMiniTooltipOptions } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface G2MiniAreaData {
-  x: NzSafeAny;
-  y: NzSafeAny;
-  [key: string]: NzSafeAny;
+  x: any;
+  y: any;
+  [key: string]: any;
 }
 
 export interface G2MiniAreaClickItem {
@@ -46,8 +46,8 @@ export class G2MiniAreaComponent extends G2BaseComponent {
   @Input({ transform: booleanAttribute }) fit = true;
   @Input({ transform: booleanAttribute }) line = false;
   @Input({ transform: booleanAttribute }) animate = true;
-  @Input() xAxis: NzSafeAny;
-  @Input() yAxis: NzSafeAny;
+  @Input() xAxis: any;
+  @Input() yAxis: any;
   @Input() padding: number | number[] | 'auto' = [8, 8, 8, 8];
   @Input() data: G2MiniAreaData[] = [];
   @Input() yTooltipSuffix = '';

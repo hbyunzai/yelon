@@ -3,7 +3,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, On
 import { Subject, takeUntil } from 'rxjs';
 
 import { I18nPipe, SettingsService, YUNZAI_I18N_TOKEN, YunzaiHttpI18NService, YunzaiI18NType } from '@yelon/theme';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
@@ -50,7 +50,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   host: {
     '[class.flex-1]': 'true'
   },
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NzDropDownModule, NzIconModule, I18nPipe, CommonModule]
 })
@@ -59,7 +58,7 @@ export class YunzaiHeaderI18nComponent implements OnInit, OnDestroy {
   private readonly i18n = inject<YunzaiHttpI18NService>(YUNZAI_I18N_TOKEN);
   private readonly doc = inject(DOCUMENT);
   langs: YunzaiI18NType[] = [];
-  private destroy$: Subject<NzSafeAny> = new Subject<NzSafeAny>();
+  private destroy$: Subject<any> = new Subject<any>();
   /** Whether to display language text */
   @Input({ transform: booleanAttribute }) showLangText = true;
 

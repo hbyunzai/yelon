@@ -12,7 +12,7 @@ import {
   YunzaiProfile
 } from '@yelon/util';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzI18nModule } from 'ng-zorro-antd/i18n';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -87,18 +87,18 @@ import { YunzaiStartupService } from '../startup.service';
   ]
 })
 export class YunzaiLayoutWebsite02Component {
-  @Input() logoSrc?: string | NzSafeAny;
+  @Input() logoSrc?: string | any;
   @Input() logoAlt?: string = 'logo';
   @Input() userMenuShow?: boolean = false;
-  @Input() slogan?: TemplateRef<void> | NzSafeAny;
-  @Input() contentTpl?: TemplateRef<void> | NzSafeAny;
+  @Input() slogan?: TemplateRef<void> | any;
+  @Input() contentTpl?: TemplateRef<void> | any;
 
   private readonly tokenService = inject(YA_SERVICE_TOKEN);
   private readonly configService = inject(YunzaiConfigService);
   private readonly startupSrv = inject(YunzaiStartupService);
   private readonly win = inject(WINDOW);
 
-  get _logoSrc(): string | NzSafeAny {
+  get _logoSrc(): string | any {
     return this.logoSrc;
   }
 
@@ -110,11 +110,11 @@ export class YunzaiLayoutWebsite02Component {
     return this.userMenuShow || false;
   }
 
-  get _slogan(): TemplateRef<void> | NzSafeAny {
+  get _slogan(): TemplateRef<void> | any {
     return this.slogan;
   }
 
-  get _contentTpl(): TemplateRef<void> | NzSafeAny {
+  get _contentTpl(): TemplateRef<void> | any {
     return this.contentTpl;
   }
 

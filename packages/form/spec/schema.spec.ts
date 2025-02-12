@@ -3,7 +3,7 @@ import { ComponentFixture, discardPeriodicTasks, fakeAsync } from '@angular/core
 
 import { createTestContext } from '@yelon/testing';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { configureSFTestSuite, SFPage, TestFormComponent } from './base.spec';
 import { ObjectProperty } from '../src/model/object.property';
@@ -185,7 +185,7 @@ describe('form: schema', () => {
           { '*': { optionalHelp: { text: '', placement: 'bottomRight' } } }
         );
         const prop = page.getProperty('/name');
-        expect((prop!.ui!.optionalHelp as NzSafeAny).placement!).toBe(`bottomRight`);
+        expect((prop!.ui!.optionalHelp as any).placement!).toBe(`bottomRight`);
         discardPeriodicTasks();
       }));
     });

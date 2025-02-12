@@ -1,5 +1,5 @@
 import { log, YunzaiConfigService, YunzaiSocketConfig } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export const SOCKET_DEFAULT_CONFIG: YunzaiSocketConfig = {
   baseUrl: '/backstage',
@@ -11,7 +11,7 @@ export const SOCKET_DEFAULT_CONFIG: YunzaiSocketConfig = {
   heartbeatIncoming: 1000 * 60,
   heartbeatOutgoing: 1000 * 60,
   reconnectDelay: 30000000,
-  debug: (msg: NzSafeAny) => {
+  debug: (msg: any) => {
     log(msg);
   }
 };

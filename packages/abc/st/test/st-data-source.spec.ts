@@ -6,7 +6,7 @@ import { firstValueFrom, of, throwError } from 'rxjs';
 import { DatePipe, YNPipe } from '@yelon/theme';
 import { CurrencyService } from '@yelon/util/format';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { STDataSource, STDataSourceOptions } from '../st-data-source';
 import { ST_DEFAULT_CONFIG } from '../st.config';
@@ -320,7 +320,7 @@ describe('abc: table: data-souce', () => {
       });
       it('should be process', done => {
         options.req.process = a => {
-          (a.params as NzSafeAny)!.pi = 2;
+          (a.params as any)!.pi = 2;
           return a;
         };
         let resParams!: HttpParams;
@@ -1076,7 +1076,7 @@ describe('abc: table: data-souce', () => {
     });
 
     it('should be custom function', done => {
-      let callbackRawData: NzSafeAny = null;
+      let callbackRawData: any = null;
       options.columns = [
         {
           title: '',

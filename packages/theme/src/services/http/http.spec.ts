@@ -6,7 +6,7 @@ import { of, catchError } from 'rxjs';
 
 import { YunzaiThemeHttpClientConfig, provideYunzaiConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { _HttpClient } from './http.client';
 
@@ -171,20 +171,20 @@ describe('theme: http.client', () => {
           expect(res).toBe(true);
         }));
         it('with object', fakeAsync(() => {
-          http.get<NzSafeAny>(URL).subscribe(_ => (res = _));
+          http.get<any>(URL).subscribe(_ => (res = _));
           tick();
           backend.expectOne(() => true).flush({});
           expect(typeof res).toBe('object');
         }));
         it('with HttpEvent', fakeAsync(() => {
-          http.get<NzSafeAny>(URL, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
+          http.get<any>(URL, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
           tick();
           backend.expectOne(() => true).flush({});
           expect(typeof res).toBe('object');
           expect(typeof res.type).toBe('number');
         }));
         it('with response', fakeAsync(() => {
-          http.get<NzSafeAny>(URL, PARAMS, { observe: 'response' }).subscribe(_ => (res = _));
+          http.get<any>(URL, PARAMS, { observe: 'response' }).subscribe(_ => (res = _));
           tick();
           backend.expectOne(() => true).flush({});
           expect(res instanceof HttpResponse).toBe(true);
@@ -259,7 +259,7 @@ describe('theme: http.client', () => {
       }));
 
       it('return a HttpEvent', fakeAsync(() => {
-        http.post<NzSafeAny>(URL, BODY, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
+        http.post<any>(URL, BODY, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
         tick();
         backend.expectOne(() => true).flush({});
         expect(typeof res).toBe('object');
@@ -599,7 +599,7 @@ describe('theme: http.client', () => {
       }));
 
       it('return a HttpEvent', fakeAsync(() => {
-        http.form<NzSafeAny>(URL, BODY, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
+        http.form<any>(URL, BODY, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
         tick();
         backend.expectOne(() => true).flush({});
         expect(typeof res).toBe('object');

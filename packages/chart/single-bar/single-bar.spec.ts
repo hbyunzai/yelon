@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2 } from '@yelon/testing';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { G2SingleBarComponent } from './single-bar.component';
 
@@ -62,7 +62,7 @@ class TestComponent {
   max = 100;
   line = false;
   format?: (value: number) => string;
-  padding: NzSafeAny = 0;
-  textStyle: NzSafeAny = { fontSize: 12, color: '#595959' };
+  padding: any = 0;
+  textStyle: any = { fontSize: 12, color: '#595959' };
   delay = 0;
 }

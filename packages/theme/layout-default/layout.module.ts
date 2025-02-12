@@ -6,7 +6,6 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 import { LayoutDefaultHeaderItemTriggerDirective } from './layout-header-item-trigger.directive';
@@ -33,7 +32,6 @@ const COMPONENTS = [
     NzIconModule,
     NzAvatarModule,
     NzDropDownModule,
-    NzMessageModule,
     NzBadgeModule
   ],
   declarations: COMPONENTS,

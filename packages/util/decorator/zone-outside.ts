@@ -1,5 +1,5 @@
 import { warn } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface ZoneOptions {
   ngZoneName?: string;
@@ -10,8 +10,8 @@ type DecoratorType = (target: unknown, fn: string, descriptor: PropertyDescripto
 function makeFn(type: 'runOutsideAngular' | 'run', options?: ZoneOptions): DecoratorType {
   return (_, __, descriptor) => {
     const source = descriptor.value;
-    descriptor.value = function (...data: NzSafeAny[]): () => void {
-      const that = this as NzSafeAny;
+    descriptor.value = function (...data: any[]): () => void {
+      const that = this as any;
       const ngZone = that[options?.ngZoneName || 'ngZone'];
       if (!ngZone) {
         if (typeof ngDevMode === 'undefined' || ngDevMode) {
@@ -19,7 +19,7 @@ function makeFn(type: 'runOutsideAngular' | 'run', options?: ZoneOptions): Decor
         }
         return source.call(this, ...data);
       }
-      let res: NzSafeAny;
+      let res: any;
       ngZone[type](() => {
         res = source.call(this, ...data);
       });

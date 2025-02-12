@@ -1,10 +1,10 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { isEmpty } from './is-empty';
 
 describe('util.#isEmpty', () => {
   it('should empty when only spaces', () => {
-    const mockEl: NzSafeAny = {
+    const mockEl: any = {
       childNodes: {
         length: 1,
         item: () => {
@@ -18,7 +18,7 @@ describe('util.#isEmpty', () => {
     expect(isEmpty(mockEl)).toBe(true);
   });
   it('should not empty when has text', () => {
-    const mockEl: NzSafeAny = {
+    const mockEl: any = {
       childNodes: {
         length: 1,
         item: () => {

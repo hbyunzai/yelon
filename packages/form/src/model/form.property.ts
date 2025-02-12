@@ -3,7 +3,7 @@ import { BehaviorSubject, combineLatest, Observable, distinctUntilChanged, map, 
 
 import { YunzaiSFConfig } from '@yelon/util/config';
 import { NzFormStatusService } from 'ng-zorro-antd/core/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 
 import { SF_SEQ } from '../const';
@@ -54,7 +54,7 @@ export abstract class FormProperty {
     if (parent) {
       this._root = parent.root;
     } else {
-      this._root = this as NzSafeAny;
+      this._root = this as any;
     }
     this.path = path;
   }

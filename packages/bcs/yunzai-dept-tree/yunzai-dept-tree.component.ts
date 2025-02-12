@@ -15,7 +15,7 @@ import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throw
 import { YunzaiGrade, YunzaiGradeService } from '@yelon/bcs/yunzai-grade';
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -120,7 +120,7 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   get nodes(): NzTreeNode[] {
-    return this.data as NzSafeAny[];
+    return this.data as any[];
   }
 
   get isMultiple(): boolean {
@@ -181,7 +181,7 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
       this.query();
     } else {
       this.state.dataBackup = this.data;
-      this.mapDeptTree(this.data as NzSafeAny);
+      this.mapDeptTree(this.data as any);
     }
   }
 
@@ -228,7 +228,7 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
             depts = this.recursionSearch(search, depts);
             this.onQueryComplete.emit(depts);
           }
-          this.mapDeptTree(depts as NzSafeAny);
+          this.mapDeptTree(depts as any);
           this.data = depts;
         }),
         catchError(error => {
@@ -290,7 +290,7 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
         map((depts: YunzaiDeptTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(depts);
-          this.mapDeptTree(depts as NzSafeAny);
+          this.mapDeptTree(depts as any);
           this.data = depts;
         }),
         catchError(error => {

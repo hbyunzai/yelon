@@ -13,7 +13,7 @@ import { BehaviorSubject, Observable, take, timer, Unsubscribable } from 'rxjs';
 import { Menu, MenuService } from '@yelon/theme';
 import { ScrollService } from '@yelon/util/browser';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { REUSE_TAB_CACHED_MANAGER } from './reuse-tab.cache';
 import {
@@ -356,18 +356,18 @@ export class ReuseTabService implements OnDestroy {
   /**
    * 刷新，触发一个 refresh 类型事件
    */
-  refresh(data?: NzSafeAny): void {
+  refresh(data?: any): void {
     this._cachedChange.next({ active: 'refresh', data });
   }
   // #endregion
 
   // #region privates
 
-  private destroy(_handle: NzSafeAny): void {
+  private destroy(_handle: any): void {
     if (_handle && _handle.componentRef && _handle.componentRef.destroy) _handle.componentRef.destroy();
   }
 
-  private di(...args: NzSafeAny[]): void {
+  private di(...args: any[]): void {
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
       if (!this.debug) return;
       console.warn(...args);
@@ -443,7 +443,7 @@ export class ReuseTabService implements OnDestroy {
     return this.can(route);
   }
 
-  saveCache(snapshot: ActivatedRouteSnapshot, _handle?: NzSafeAny, pos?: number): void {
+  saveCache(snapshot: ActivatedRouteSnapshot, _handle?: any, pos?: number): void {
     const snapshotTrue = this.getTruthRoute(snapshot);
     const url = this.getUrl(snapshot);
     const idx = this.index(url);
@@ -475,7 +475,7 @@ export class ReuseTabService implements OnDestroy {
   /**
    * 存储
    */
-  store(_snapshot: ActivatedRouteSnapshot, _handle: NzSafeAny): void {
+  store(_snapshot: ActivatedRouteSnapshot, _handle: any): void {
     const url = this.getUrl(_snapshot);
 
     if (_handle != null) {
@@ -532,7 +532,7 @@ export class ReuseTabService implements OnDestroy {
   /**
    * 提取复用数据
    */
-  retrieve(route: ActivatedRouteSnapshot): NzSafeAny | null {
+  retrieve(route: ActivatedRouteSnapshot): any | null {
     if (this.hasInValidRoute(route)) return null;
     const url = this.getUrl(route);
     const data = this.get(url);
@@ -580,7 +580,7 @@ export class ReuseTabService implements OnDestroy {
   }
 
   private get isDisabledInRouter(): boolean {
-    const routerConfig = this.injector.get<ExtraOptions>(ROUTER_CONFIGURATION, {} as NzSafeAny);
+    const routerConfig = this.injector.get<ExtraOptions>(ROUTER_CONFIGURATION, {} as any);
     return routerConfig.scrollPositionRestoration === 'disabled';
   }
 

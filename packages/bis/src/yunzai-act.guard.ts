@@ -12,12 +12,12 @@ import {
   useLocalStorageUser,
   YunzaiUser
 } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 @Injectable({ providedIn: 'root' })
 export class ActGuardService {
   private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
-  private menus: NzSafeAny[] = [];
+  private menus: any[] = [];
   private links: string[] = [];
 
   constructor(
@@ -32,7 +32,7 @@ export class ActGuardService {
     const user: YunzaiUser = getUser()!;
     log('act: user ', user);
     // @ts-ignore
-    this.menus = deepCopy((user.menu as NzSafeAny) || []).filter(
+    this.menus = deepCopy((user.menu as any) || []).filter(
       (m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode
     ) as Menu[];
     log('act: menus ', this.menus);

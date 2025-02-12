@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2 } from '@yelon/testing';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { G2PieComponent } from './pie.component';
 
@@ -97,7 +97,7 @@ describe('chart: pie', () => {
 })
 class TestMiniComponent {
   @ViewChild('comp', { static: true }) comp!: G2PieComponent;
-  data?: NzSafeAny[];
+  data?: any[];
   color: string | null = 'rgba(24, 144, 255, 0.85)';
   subTitle = 'subTitle';
   total = 'total';
@@ -136,7 +136,7 @@ class TestMiniComponent {
 })
 class TestFullComponent {
   @ViewChild('comp', { static: true }) comp!: G2PieComponent;
-  data: NzSafeAny[] = [];
+  data: any[] = [];
   color = 'rgba(24, 144, 255, 0.85)';
   subTitle = 'subTitle';
   total = 'total';

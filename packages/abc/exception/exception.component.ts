@@ -20,7 +20,7 @@ import { YelonLocaleService, LocaleData } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export type ExceptionType = 403 | 404 | 500;
 
@@ -88,7 +88,7 @@ export class ExceptionComponent implements OnInit {
     this._desc = this.dom.bypassSecurityTrustHtml(value);
   }
 
-  @Input() backRouterLink: string | NzSafeAny[] = '/';
+  @Input() backRouterLink: string | any[] = '/';
 
   checkContent(): void {
     this.hasCon = !isEmpty(this.conTpl.nativeElement);

@@ -1,10 +1,10 @@
 import type { NuMonacoEditorEvent, NuMonacoEditorModel } from '@ng-util/monaco-editor';
 
 import type { SFUISchemaItem } from '@yelon/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface MonacoEditorWidgetSchema extends SFUISchemaItem {
-  options?: NzSafeAny;
+  options?: any;
   delay?: number;
   change?: (value: string) => void;
   model?: NuMonacoEditorModel;

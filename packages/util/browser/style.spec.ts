@@ -1,4 +1,4 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { updateHostClass } from './style';
 
@@ -34,10 +34,10 @@ describe('util: style', () => {
   });
 
   class PageObject {
-    fakeEl: NzSafeAny = {};
-    fakeRender: NzSafeAny = {
-      removeClass: (_el: NzSafeAny, value: NzSafeAny) => delete this.fakeEl[value],
-      addClass: (_el: NzSafeAny, value: NzSafeAny) => (this.fakeEl[value] = ''),
+    fakeEl: any = {};
+    fakeRender: any = {
+      removeClass: (_el: any, value: any) => delete this.fakeEl[value],
+      addClass: (_el: any, value: any) => (this.fakeEl[value] = ''),
       removeAttribute: () => (this.fakeEl = {})
     };
 

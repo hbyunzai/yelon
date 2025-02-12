@@ -26,7 +26,7 @@ import { filter } from 'rxjs';
 import { SettingsService } from '@yelon/theme';
 import { updateHostClass } from '@yelon/util/browser';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { LayoutDisplayService } from './layout-display.service';
@@ -89,7 +89,7 @@ export class LayoutDefaultComponent implements OnInit {
     this.srv.setOptions(value);
   }
   @Input() asideUser: TemplateRef<void> | null = null;
-  @Input() asideBottom: TemplateRef<NzSafeAny> | null = null;
+  @Input() asideBottom: TemplateRef<any> | null = null;
   @Input() nav: TemplateRef<void> | null = null;
   @Input() content: TemplateRef<void> | null = null;
   @Input() customError?: string | null;
@@ -113,14 +113,14 @@ export class LayoutDefaultComponent implements OnInit {
     return this.srv.collapsedIcon;
   }
 
-  get contentStyle(): NzSafeAny {
+  get contentStyle(): any {
     return {
       'margin-top': !this.displayNav ? '0px' : '',
       'margin-left': !this.displayAside ? '0px' : ''
     };
   }
 
-  get asideStyle(): NzSafeAny {
+  get asideStyle(): any {
     return {
       'margin-top': !this.displayNav ? '0px' : ''
     };
@@ -136,7 +136,7 @@ export class LayoutDefaultComponent implements OnInit {
     private settings: SettingsService,
     private el: ElementRef,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private doc: NzSafeAny,
+    @Inject(DOCUMENT) private doc: any,
     private srv: LayoutDefaultService,
     private layoutDisplayService: LayoutDisplayService
   ) {

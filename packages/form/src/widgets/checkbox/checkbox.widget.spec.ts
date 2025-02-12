@@ -2,7 +2,7 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { createTestContext } from '@yelon/testing';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { CheckboxWidget } from './checkbox.widget';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../../spec/base.spec';
@@ -131,6 +131,6 @@ describe('form: widget: checkbox', () => {
     };
     page.newSchema(s).time(1000).checkCount('nz-checkbox-wrapper', 1).click('.ant-col-8 label').asyncEnd();
     expect(page.getValue('a').length).toBe(1);
-    expect((s.properties!.a.ui as NzSafeAny).change).toHaveBeenCalled();
+    expect((s.properties!.a.ui as any).change).toHaveBeenCalled();
   }));
 });

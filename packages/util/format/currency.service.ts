@@ -2,7 +2,7 @@ import { CurrencyPipe, formatNumber } from '@angular/common';
 import { DEFAULT_CURRENCY_CODE, Injectable, LOCALE_ID, inject } from '@angular/core';
 
 import { YunzaiConfigService, YunzaiUtilCurrencyConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import {
   CurrencyCNYOptions,
@@ -108,7 +108,7 @@ export class CurrencyService {
     }
 
     res.value = (isNegative ? '-' : '') + abs;
-    res.unitI18n = (options.unitI18n as Record<string, NzSafeAny>)[res.unit];
+    res.unitI18n = (options.unitI18n as Record<string, any>)[res.unit];
     return res;
   }
 

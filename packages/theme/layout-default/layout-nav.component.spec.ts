@@ -11,7 +11,7 @@ import { ACLService } from '@yelon/acl';
 import { YunzaiThemeModule, MenuIcon, MenuService, SettingsService } from '@yelon/theme';
 import { deepCopy } from '@yelon/util/other';
 import { WINDOW } from '@yelon/util/token';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { LayoutDefaultNavComponent, Nav } from './layout-nav.component';
 import { LayoutDefaultModule } from './layout.module';
@@ -615,7 +615,7 @@ describe('theme: layout-default-nav', () => {
           : null;
       return el ? (el as T) : null;
     }
-    checkText(cls: string, value: NzSafeAny): void {
+    checkText(cls: string, value: any): void {
       const el = this.getEl<HTMLElement>(cls);
       expect(el ? el.innerText.trim() : '').toBe(value);
     }

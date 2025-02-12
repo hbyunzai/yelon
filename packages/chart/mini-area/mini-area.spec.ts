@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2, PageG2Height } from '@yelon/testing';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { G2MiniAreaComponent } from './mini-area.component';
 
@@ -100,9 +100,9 @@ class TestComponent {
   @ViewChild('comp', { static: true }) comp!: G2MiniAreaComponent;
   line = false;
   height = PageG2Height;
-  xAxis: NzSafeAny;
-  yAxis: NzSafeAny;
-  data: NzSafeAny[] = [
+  xAxis: any;
+  yAxis: any;
+  data: any[] = [
     { x: 1, y: 10 },
     { x: 2, y: 20 }
   ];

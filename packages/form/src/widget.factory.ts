@@ -1,6 +1,6 @@
 import { ComponentRef, Injectable, ViewContainerRef, inject } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { FormProperty } from './model/form.property';
 import { SFUISchemaItem } from './schema/ui';
@@ -15,11 +15,11 @@ export class WidgetRegistry {
     return this._widgets;
   }
 
-  setDefault(widget: NzSafeAny): void {
+  setDefault(widget: any): void {
     this.defaultWidget = widget;
   }
 
-  register(type: string, widget: NzSafeAny): void {
+  register(type: string, widget: any): void {
     this._widgets[type] = widget;
   }
 
@@ -46,7 +46,7 @@ export class WidgetFactory {
       }
     }
 
-    const componentClass = this.registry.getType(type) as NzSafeAny;
+    const componentClass = this.registry.getType(type) as any;
     return container.createComponent(componentClass);
   }
 }

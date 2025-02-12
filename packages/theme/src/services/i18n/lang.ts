@@ -26,7 +26,7 @@ import {
   tr as dfTr
 } from 'date-fns/locale';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import {
   el_GR as zorroElGR,
   en_US as zorroEnUS,
@@ -57,10 +57,10 @@ import yelonZhTw from '../../locale/languages/zh-TW';
 export interface LangConfigData {
   abbr: string;
   text: string;
-  ng: NzSafeAny;
-  zorro: NzSafeAny;
-  date: NzSafeAny;
-  yelon: NzSafeAny;
+  ng: any;
+  zorro: any;
+  date: any;
+  yelon: any;
 }
 
 export const YUNZAI_LANGS: { [key: string]: LangConfigData } = {

@@ -1,15 +1,15 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface Meta {
   name?: string;
   github?: string;
-  types?: Array<{ 'zh-CN': string; 'en-US': string; [key: string]: NzSafeAny }>;
+  types?: Array<{ 'zh-CN': string; 'en-US': string; [key: string]: any }>;
   list?: MetaList[];
   module?: string;
 }
 
 export interface MetaList {
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 
   name?: string;
 
@@ -23,7 +23,7 @@ export interface MetaList {
 }
 
 export interface MetaItem {
-  [key: string]: NzSafeAny;
+  [key: string]: any;
   title?: string | { [key: string]: string };
   type?: string;
   order?: number;

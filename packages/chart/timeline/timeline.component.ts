@@ -17,7 +17,7 @@ import { format } from 'date-fns';
 import { G2BaseComponent, G2Time } from '@yelon/chart/core';
 import { toDate } from '@yelon/util/date-time';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 /**
@@ -40,7 +40,7 @@ export interface G2TimelineData {
   y4?: number;
   /** 指标5数据 */
   y5?: number;
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 }
 
 export interface G2TimelineMap {
@@ -188,7 +188,7 @@ export class G2TimelineComponent extends G2BaseComponent {
 
     // border
     _chart.geometries.forEach((v, idx: number) => {
-      v.color((colorMap as NzSafeAny)[`y${idx + 1}`]).size(borderWidth);
+      v.color((colorMap as any)[`y${idx + 1}`]).size(borderWidth);
     });
     _chart.height = height;
     _chart.padding = padding;

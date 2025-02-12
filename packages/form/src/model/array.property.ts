@@ -2,7 +2,7 @@ import { Injector } from '@angular/core';
 
 import { YunzaiSFConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { SF_SEQ } from '../const';
 import { SFValue } from '../interface';
@@ -58,7 +58,7 @@ export class ArrayProperty extends PropertyGroup {
   }
 
   _updateValue(): void {
-    const value: NzSafeAny[] = [];
+    const value: any[] = [];
     this.forEachChild((property: FormProperty) => {
       if (property.visible) {
         value.push({ ...(this.widget?.cleanValue ? null : property.formData), ...property.value });

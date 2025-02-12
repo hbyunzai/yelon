@@ -9,7 +9,7 @@ import { ACLService, YelonACLModule } from '@yelon/acl';
 import { createTestContext } from '@yelon/testing';
 import { YunzaiI18NService, YunzaiThemeModule, YUNZAI_I18N_TOKEN, YelonLocaleService, en_US } from '@yelon/theme';
 import { deepCopy } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { SCHEMA, SFPage, TestFormComponent } from './base.spec';
@@ -27,7 +27,7 @@ describe('form: component', () => {
 
   function genModule(options: { acl?: boolean; i18n?: boolean } = {}): void {
     options = { acl: false, i18n: false, ...options };
-    const imports: NzSafeAny[] = [NoopAnimationsModule, YelonFormModule.forRoot(), YunzaiThemeModule];
+    const imports: any[] = [NoopAnimationsModule, YelonFormModule.forRoot(), YunzaiThemeModule];
     if (options.acl) {
       imports.push(YelonACLModule);
     }
@@ -54,7 +54,7 @@ describe('form: component', () => {
       it('should throw error when parent is not object or array', () => {
         expect(() => {
           const factory = context.comp['formPropertyFactory'] as FormPropertyFactory;
-          factory.createProperty({}, {}, {}, { type: 'invalid', path: 'a' } as NzSafeAny, 'a');
+          factory.createProperty({}, {}, {}, { type: 'invalid', path: 'a' } as any, 'a');
         }).toThrowError(`Instanciation of a FormProperty with an unknown parent type: invalid`);
       });
 
@@ -63,7 +63,7 @@ describe('form: component', () => {
           context.schema = {
             properties: {
               a: {
-                type: 'aa' as NzSafeAny
+                type: 'aa' as any
               }
             }
           };
@@ -328,7 +328,7 @@ describe('form: component', () => {
       });
 
       describe('#autocomplete', () => {
-        [null, 'on', 'off'].forEach((type: NzSafeAny) => {
+        [null, 'on', 'off'].forEach((type: any) => {
           it(`with [${type}]`, () => {
             context.autocomplete = type;
             fixture.detectChanges();
@@ -353,7 +353,7 @@ describe('form: component', () => {
       });
 
       it('#disabled', () => {
-        const CLS: Record<string, string | NzSafeAny[]> = {
+        const CLS: Record<string, string | any[]> = {
           input: '.ant-input[disabled]',
           number: '.ant-input-number-disabled',
           switch: '.ant-switch-disabled'
@@ -670,7 +670,7 @@ describe('form: component', () => {
         };
         page.newSchema(s);
         expect(page.getProperty('/a').errors![0].message).toBe('A');
-        expect((s.properties!.a.ui as NzSafeAny).errors.required).toHaveBeenCalled();
+        expect((s.properties!.a.ui as any).errors.required).toHaveBeenCalled();
       });
 
       it('should be i18n', () => {
@@ -853,7 +853,7 @@ describe('form: component', () => {
       spyOn(i18n, 'fanyi').and.callFake(((key: string) => {
         if (key === 'null') return null;
         return lang === 'en' ? key : `zh-${key}`;
-      }) as NzSafeAny);
+      }) as any);
       const s: SFSchema = {
         properties: {
           a: {

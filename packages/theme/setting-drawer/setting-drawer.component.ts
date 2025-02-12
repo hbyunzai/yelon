@@ -21,7 +21,7 @@ import { ZoneOutside } from '@yelon/util/decorator';
 import { deepCopy, LazyService } from '@yelon/util/other';
 import { NzAlertComponent } from 'ng-zorro-antd/alert';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
@@ -76,7 +76,7 @@ export class SettingDrawerComponent implements OnInit {
   get layout(): Layout {
     return this.settingSrv.layout;
   }
-  data: NzSafeAny = {};
+  data: any = {};
   color: string;
   colors = DEFAULT_COLORS;
 
@@ -85,7 +85,7 @@ export class SettingDrawerComponent implements OnInit {
     this.resetData(this.cachedData, false);
   }
 
-  private get cachedData(): Record<string, NzSafeAny> {
+  private get cachedData(): Record<string, any> {
     return this.settingSrv.layout[YUNZAIDEFAULTVAR] || {};
   }
 
@@ -129,7 +129,7 @@ export class SettingDrawerComponent implements OnInit {
       });
   }
 
-  private genVars(): NzSafeAny {
+  private genVars(): any {
     const { data, color, validKeys } = this;
     const vars: Record<string, string> = {
       [`@primary-color`]: color
@@ -145,7 +145,7 @@ export class SettingDrawerComponent implements OnInit {
     const msgId = msg.loading(this.compilingText, { nzDuration: 0 }).messageId;
     setTimeout(() => {
       this.loadLess().then(() => {
-        (window as NzSafeAny).less.modifyVars(this.genVars()).then(() => {
+        (window as any).less.modifyVars(this.genVars()).then(() => {
           msg.success('成功');
           msg.remove(msgId);
           ngZone.run(() => cdr.detectChanges());
@@ -166,11 +166,11 @@ export class SettingDrawerComponent implements OnInit {
     this.resetData(this.cachedData, false);
   }
 
-  setLayout(name: string, value: NzSafeAny): void {
+  setLayout(name: string, value: any): void {
     this.settingSrv.setLayout(name, value);
   }
 
-  private resetData(nowData?: Record<string, NzSafeAny>, run: boolean = true): void {
+  private resetData(nowData?: Record<string, any>, run: boolean = true): void {
     nowData = nowData || {};
     const data = deepCopy(DEFAULT_VARS);
     Object.keys(data).forEach(key => {

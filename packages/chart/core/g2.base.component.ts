@@ -21,7 +21,7 @@ import { Subject, Subscription, filter, takeUntil } from 'rxjs';
 import type { Chart, Types } from '@antv/g2';
 
 import { ZoneOutside } from '@yelon/util/decorator';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { G2Service } from './g2.servicce';
 
@@ -37,8 +37,8 @@ export abstract class G2BaseComponent implements OnInit, OnChanges, OnDestroy {
     return this._chart;
   }
 
-  get winG2(): NzSafeAny {
-    return (window as NzSafeAny).G2;
+  get winG2(): any {
+    return (window as any).G2;
   }
 
   constructor() {

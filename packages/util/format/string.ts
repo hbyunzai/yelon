@@ -1,5 +1,5 @@
 import { deepGet } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 /**
  * String formatting
@@ -14,7 +14,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
  */
 export function format(
   str: string | null | undefined,
-  obj: NzSafeAny | null | undefined,
+  obj: any | null | undefined,
   needDeepGet: boolean = false
 ): string {
   return (str || '').replace(/\${([^}]+)}/g, (_work: string, key: string) =>
@@ -29,7 +29,7 @@ export interface FormatMaskOption {
 
 export interface FormatMaskToken {
   pattern: RegExp;
-  default?: NzSafeAny;
+  default?: any;
   transform?: (char: string) => string;
 }
 

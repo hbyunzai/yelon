@@ -46,6 +46,7 @@ export default tseslint.config(
     processor: angular.processInlineTemplates,
     rules: {
       'prettier/prettier': ['error', {}],
+      '@angular-eslint/no-output-on-prefix':['off'],
       '@angular-eslint/component-selector': [
         'off',
         {

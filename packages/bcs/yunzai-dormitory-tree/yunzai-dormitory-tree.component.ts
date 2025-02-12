@@ -14,7 +14,7 @@ import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throw
 
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -124,7 +124,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, OnDestroy, AfterVie
   }
 
   get nodes(): NzTreeNode[] {
-    return this.data as NzSafeAny[];
+    return this.data as any[];
   }
 
   get isMultiple(): boolean {
@@ -160,7 +160,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, OnDestroy, AfterVie
       this.query(this.param);
     } else {
       this.state.dataBackup = this.data;
-      this.mapDormTree(this.data as NzSafeAny);
+      this.mapDormTree(this.data as any);
     }
   }
 
@@ -192,7 +192,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, OnDestroy, AfterVie
             dorms = this.recursionSearch(search, dorms);
             this.onQueryComplete.emit(dorms);
           }
-          this.mapDormTree(dorms as NzSafeAny);
+          this.mapDormTree(dorms as any);
           this.data = dorms;
         }),
         catchError(error => {
@@ -232,7 +232,7 @@ export class YunzaiDormitoryTreeComponent implements OnInit, OnDestroy, AfterVie
         map((dorms: YunzaiDormitoryTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(dorms);
-          this.mapDormTree(dorms as NzSafeAny);
+          this.mapDormTree(dorms as any);
           this.data = dorms;
         }),
         catchError(error => {

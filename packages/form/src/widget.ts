@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs';
 
 import { LocaleData } from '@yelon/theme';
-import { NgClassType, NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NgClassType } from 'ng-zorro-antd/core/types';
 
 import type { ErrorData } from './errors';
 import type { SFValue } from './interface';
@@ -85,7 +85,7 @@ export abstract class Widget<T extends FormProperty, UIT extends SFUISchemaItem>
     di(this.ui, 'valueChanges', this.formProperty.path, this.formProperty);
   }
 
-  get value(): NzSafeAny {
+  get value(): any {
     return this.formProperty.value;
   }
 

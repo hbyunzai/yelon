@@ -1,6 +1,6 @@
 import { addDays, addSeconds, differenceInCalendarDays, format } from 'date-fns';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import type { DisabledDateFn, DisabledTimeConfig, DisabledTimeFn } from 'ng-zorro-antd/date-picker';
 
 // TODO: timezone process
@@ -73,7 +73,7 @@ export class DateTimePickerUtil {
     return (current): DisabledTimeConfig => {
       const cur = current as Date;
       if (cur == null) {
-        return {} as NzSafeAny;
+        return {} as any;
       }
       const now = addSeconds(this.now, offsetSeconds || 0);
       const nowHours = now.getHours();

@@ -19,7 +19,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, debounceTime, filter } from 'rxjs';
 
 import { NumberInput, ZoneOutside } from '@yelon/util/decorator';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 import { ChartEChartsService } from './echarts.service';
@@ -64,11 +64,11 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
   private _chart: ChartECharts | null = null;
   private _theme?: string | Record<string, unknown> | null;
   private _initOpt?: {
-    renderer?: NzSafeAny;
+    renderer?: any;
     devicePixelRatio?: number;
     width?: number;
     height?: number;
-    locale?: NzSafeAny;
+    locale?: any;
   };
   private _option!: ChartEChartsOption;
   _width = '100%';
@@ -89,7 +89,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
     }
   }
   @Input()
-  set initOpt(value: NzSafeAny) {
+  set initOpt(value: any) {
     this._initOpt = value;
     if (this._chart) {
       this.install();
@@ -137,7 +137,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
 
   install(): this {
     this.destroy();
-    const chart = (this._chart = (window as NzSafeAny).echarts.init(
+    const chart = (this._chart = (window as any).echarts.init(
       this.node.nativeElement,
       this._theme,
       this._initOpt
@@ -166,7 +166,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
   setOption(option: ChartEChartsOption, notMerge: boolean = false, lazyUpdate: boolean = false): this {
     if (this._chart) {
       this._chart.setOption(option, notMerge, lazyUpdate);
-      this.emit('set-option', { option } as NzSafeAny);
+      this.emit('set-option', { option } as any);
     }
     return this;
   }
@@ -175,7 +175,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
     if (!this.platform.isBrowser) {
       return;
     }
-    if ((window as NzSafeAny).echarts) {
+    if ((window as any).echarts) {
       this.load();
     } else {
       this.srv.libLoad();

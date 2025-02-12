@@ -4,7 +4,7 @@ import { APP_INITIALIZER, Injectable, Injector, Provider, inject } from '@angula
 
 import { TitleService } from '@yelon/theme';
 import { LazyService } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzIconService } from 'ng-zorro-antd/icon';
 
 import { ICONS } from '../../style-icons';
@@ -46,7 +46,7 @@ export class StartupService {
   }
 
   lazyLoad(): void {
-    const win = this.doc.defaultView as NzSafeAny;
+    const win = this.doc.defaultView as any;
     win.hj =
       win.hj ||
       function () {
@@ -61,7 +61,7 @@ export class StartupService {
       // this.lazy.loadScript(`https://www.googletagmanager.com/gtag/js?id=`)
       // this.lazy.loadScript(`https://static.hotjar.com/c/hotjar-${win._hjSettings.hjid}.js?sv=${win._hjSettings.hjsv}`)
     ]).then(() => {
-      const dataLayer: NzSafeAny[] = win.dataLayer || [];
+      const dataLayer: any[] = win.dataLayer || [];
       dataLayer.push(['js', new Date()]);
       dataLayer.push(['config', 'UA-120202005-1']);
     });

@@ -1,7 +1,7 @@
 import { Injector } from '@angular/core';
 
 import { YunzaiSFConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { SFValue } from '../interface';
 import { SFSchema } from '../schema/index';
@@ -24,7 +24,7 @@ export class ObjectProperty extends PropertyGroup {
     schemaValidatorFactory: SchemaValidatorFactory,
     schema: SFSchema,
     ui: SFUISchema | SFUISchemaItem,
-    formData: NzSafeAny,
+    formData: any,
     parent: PropertyGroup | null,
     path: string,
     options: YunzaiSFConfig
@@ -46,7 +46,7 @@ export class ObjectProperty extends PropertyGroup {
       (this.properties as Record<string, FormProperty>)[propertyId] = this.formPropertyFactory.createProperty(
         this.schema.properties![propertyId],
         this.ui[`$${propertyId}`],
-        ((this.formData || {}) as NzSafeAny)[propertyId],
+        ((this.formData || {}) as any)[propertyId],
         this,
         propertyId
       );

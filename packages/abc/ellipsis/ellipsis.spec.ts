@@ -2,7 +2,7 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 import { EllipsisComponent } from './ellipsis.component';
@@ -78,7 +78,7 @@ describe('abc: ellipsis', () => {
       });
       describe('when not support line clamp', () => {
         beforeEach(fakeAsync(() => {
-          spyOn(window, 'getComputedStyle').and.returnValue({ lineHeight: 20 } as NzSafeAny);
+          spyOn(window, 'getComputedStyle').and.returnValue({ lineHeight: 20 } as any);
           page.comp['isSupportLineClamp'] = false;
           context.lines = 1;
           page.tick();
@@ -90,7 +90,7 @@ describe('abc: ellipsis', () => {
         }));
         it('should be not innerText', fakeAsync(() => {
           const el = page.getEl('.ellipsis__shadow');
-          spyOnProperty(el!, 'innerText').and.returnValue(null as NzSafeAny);
+          spyOnProperty(el!, 'innerText').and.returnValue(null as any);
           context.lines = 2;
           page.tick();
           expect((dl.nativeElement as HTMLElement).innerHTML).toContain('...');

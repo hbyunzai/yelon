@@ -42,7 +42,7 @@ import { YunzaiConfigService, YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, deepMergeKey } from '@yelon/util/other';
 import { NzBadgeComponent } from 'ng-zorro-antd/badge';
 import { NzCheckboxComponent } from 'ng-zorro-antd/checkbox';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDividerComponent } from 'ng-zorro-antd/divider';
 import { NzContextMenuService, NzDropdownMenuComponent, NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
@@ -175,13 +175,13 @@ export class STTdComponent {
       }
       const modal = btn.modal!;
       const obj = { [modal.paramsName!]: record };
-      (this.modalHelper[btn.type === 'modal' ? 'create' : 'createStatic'] as NzSafeAny)(
+      (this.modalHelper[btn.type === 'modal' ? 'create' : 'createStatic'] as any)(
         modal.component,
         { ...obj, ...(modal.params && modal.params(record)) },
         deepMergeKey({}, true, cog.modal, modal)
       )
         .pipe(filter(w => typeof w !== 'undefined'))
-        .subscribe((res: NzSafeAny) => this.btnCallback(record, btn, res));
+        .subscribe((res: any) => this.btnCallback(record, btn, res));
       return;
     } else if (btn.type === 'drawer') {
       if (cog.drawer!.pureRecoard === true) {
@@ -209,7 +209,7 @@ export class STTdComponent {
     this.btnCallback(record, btn);
   }
 
-  private btnCallback(record: STData, btn: STColumnButton, modal?: NzSafeAny): NzSafeAny {
+  private btnCallback(record: STData, btn: STColumnButton, modal?: any): any {
     if (!btn.click) return;
     if (typeof btn.click === 'string') {
       switch (btn.click) {
@@ -351,10 +351,10 @@ export class STComponent implements AfterViewInit, OnChanges {
   @Input() singleSort?: STSingleSort | null;
   private _multiSort?: STMultiSort;
   @Input()
-  get multiSort(): NzSafeAny {
+  get multiSort(): any {
     return this._multiSort;
   }
-  set multiSort(value: NzSafeAny) {
+  set multiSort(value: any) {
     if (
       (typeof value === 'boolean' && !booleanAttribute(value)) ||
       (typeof value === 'object' && Object.keys(value).length === 0)
@@ -403,7 +403,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   @Input({ transform: numberAttribute }) virtualItemSize = 54;
   @Input({ transform: numberAttribute }) virtualMaxBufferPx = 200;
   @Input({ transform: numberAttribute }) virtualMinBufferPx = 100;
-  @Input() customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
+  @Input() customRequest?: (options: STCustomRequestOptions) => Observable<any>;
   @Input() virtualForTrackBy: TrackByFunction<STData> = index => index;
   @Input() trackBy: TrackByFunction<STData> = (_, item) => item;
 
@@ -474,7 +474,7 @@ export class STComponent implements AfterViewInit, OnChanges {
       : '';
   }
 
-  private changeEmit(type: STChangeType, data?: NzSafeAny): void {
+  private changeEmit(type: STChangeType, data?: any): void {
     const res: STChange = {
       type,
       pi: this.pi,
@@ -596,7 +596,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    * @param extraParams 重新指定 `extraParams` 值
    * @param options 选项
    */
-  load(pi: number = 1, extraParams?: NzSafeAny, options?: STLoadOptions): this {
+  load(pi: number = 1, extraParams?: any, options?: STLoadOptions): this {
     if (pi !== -1) this.pi = pi;
     if (typeof extraParams !== 'undefined') {
       this.req.params = options && options.merge ? { ...this.req.params, ...extraParams } : extraParams;
@@ -610,7 +610,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    *
    * @param extraParams 重新指定 `extraParams` 值
    */
-  reload(extraParams?: NzSafeAny, options?: STLoadOptions): this {
+  reload(extraParams?: any, options?: STLoadOptions): this {
     return this.load(-1, extraParams, options);
   }
 
@@ -623,7 +623,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    *
    * @param extraParams 重新指定 `extraParams` 值
    */
-  reset(extraParams?: NzSafeAny, options?: STLoadOptions): this {
+  reset(extraParams?: any, options?: STLoadOptions): this {
     this.clearStatus().load(1, extraParams, options);
     return this;
   }
@@ -815,7 +815,7 @@ export class STComponent implements AfterViewInit, OnChanges {
 
   // #region sort
 
-  sort(col: _STColumn, value: NzSafeAny): void {
+  sort(col: _STColumn, value: any): void {
     if (this.multiSort) {
       col._sort.default = value;
       col._sort.tick = this.dataSource.nextSortTick;
@@ -998,7 +998,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   // #endregion
 
   get cdkVirtualScrollViewport(): CdkVirtualScrollViewport | undefined {
-    return this.orgTable?.cdkVirtualScrollViewport as NzSafeAny;
+    return this.orgTable?.cdkVirtualScrollViewport as any;
   }
 
   private _resetColumns(options?: STResetColumnsOption): Observable<this> {

@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 
 import { YUNZAI_I18N_TOKEN, I18nPipe } from '@yelon/theme';
 import { LazyService } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-declare const docsearch: NzSafeAny;
+declare const docsearch: any;
 
 @Component({
   selector: 'header-search',
@@ -54,7 +54,7 @@ export class HeaderSearchComponent implements AfterViewInit {
           // queryLanguages: [this.i18n.zone]
           facetFilters: [`lang:${this.i18n.zone}`]
         },
-        handleSelected: (_input: NzSafeAny, _event: NzSafeAny, suggestion: { url: string }) => {
+        handleSelected: (_input: any, _event: any, suggestion: { url: string }) => {
           const url = suggestion?.url || '';
           if (isLocal || curHost === this.getHost(url)) {
             const pathName = url.replace(/.*\/\/[^\/]*/, '');

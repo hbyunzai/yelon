@@ -13,27 +13,27 @@ import {
   YunzaiConfigService,
   YunzaiUser
 } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class YunzaiAnalysisAddonGuardService {
   private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
-  private menus: NzSafeAny[] = [];
+  private menus: any[] = [];
   private links: Array<{ title: string; link: string }> = [];
-  private value: NzSafeAny = {};
+  private value: any = {};
 
   constructor(
     private configService: YunzaiConfigService,
     private pathToRegexp: PathToRegexpService,
-    @Inject(WINDOW) private win: NzSafeAny,
+    @Inject(WINDOW) private win: any,
     @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService
   ) {
     this.bis = mergeBisConfig(this.configService);
     const [, getUser] = useLocalStorageUser();
     const user: YunzaiUser = getUser()!;
-    this.menus = deepCopy((user.menu as NzSafeAny) || []).filter(
+    this.menus = deepCopy((user.menu as any) || []).filter(
       (m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode
     ) as Menu[];
     if (user) {

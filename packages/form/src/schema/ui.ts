@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 
 import type { ACLCanType } from '@yelon/acl';
-import type { NgClassType, NgStyleInterface, NzSafeAny, NzSizeLDSType } from 'ng-zorro-antd/core/types';
+import type { NgClassType, NgStyleInterface, NzSizeLDSType } from 'ng-zorro-antd/core/types';
 
 import type { ErrorSchema } from '../errors';
 import type { SFValue } from '../interface';
@@ -177,12 +177,12 @@ export interface SFVisibleIfReturn {
 
 export type SFVisibleIf = Record<
   string,
-  NzSafeAny[] | ((value: SFValue, property: FormProperty) => boolean | SFVisibleIfReturn | null)
+  any[] | ((value: SFValue, property: FormProperty) => boolean | SFVisibleIfReturn | null)
 >;
 
 /** 指定如何渲染 `Schema` */
 export interface SFUISchemaItem extends SFRenderSchema, SFHorizontalLayoutSchema, ErrorSchema, SFSchemaI18n {
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 
   /**
    * Whether to enable the debug mode, the trust information will be printed out when the data is changed and verified, it is not recommended to use it in the production environment

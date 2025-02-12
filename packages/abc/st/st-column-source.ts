@@ -5,7 +5,7 @@ import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, warn } from '@yelon/util/other';
-import type { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NgClassInterface } from 'ng-zorro-antd/core/types';
 
 import { STRowSource } from './st-row.directive';
 import { STWidgetRegistry } from './st-widget';
@@ -206,7 +206,7 @@ export class STColumnSource {
     let icon = 'filter';
     let iconTheme = 'fill';
     let fixMenus = true;
-    let value: NzSafeAny = undefined;
+    let value: any = undefined;
     switch (res.type) {
       case 'keyword':
         icon = 'search';
@@ -330,7 +330,7 @@ export class STColumnSource {
 
         cell.colSpan = colSpan;
         cell.colEnd = cell.colStart + colSpan - 1;
-        rows[rowIndex].push(cell as NzSafeAny);
+        rows[rowIndex].push(cell as any);
 
         currentColIndex += colSpan;
 
@@ -385,7 +385,7 @@ export class STColumnSource {
           number: 'text-right',
           currency: 'text-right',
           date: 'text-center'
-        } as NzSafeAny
+        } as any
       )[item.type!];
       if (typeClass) {
         builtInClassNames.push(typeClass);

@@ -6,7 +6,7 @@ import { By } from '@angular/platform-browser';
 import { Observable, of, throwError } from 'rxjs';
 
 import { LazyService } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { XlsxDirective } from './xlsx.directive';
 import { XlsxService } from './xlsx.service';
@@ -40,7 +40,7 @@ describe('abc: xlsx', () => {
   }
 
   beforeEach(() => {
-    (window as NzSafeAny).XLSX = {
+    (window as any).XLSX = {
       utils: {
         book_new: () => {
           return {};
@@ -64,9 +64,9 @@ describe('abc: xlsx', () => {
       },
       writeFile: jasmine.createSpy('writeFile')
     };
-    (window as NzSafeAny).cptable = {
+    (window as any).cptable = {
       utils: {
-        decode: (data: NzSafeAny) => {
+        decode: (data: any) => {
           return data;
         }
       }
@@ -75,13 +75,13 @@ describe('abc: xlsx', () => {
   });
 
   afterEach(() => {
-    delete (window as NzSafeAny).XLSX;
-    delete (window as NzSafeAny).cptable;
+    delete (window as any).XLSX;
+    delete (window as any).cptable;
   });
 
   describe('[#import]', () => {
     it('should be load xlsx lib when not found XLSX in window', () => {
-      delete (window as NzSafeAny).XLSX;
+      delete (window as any).XLSX;
       genModule();
       const lazySrv: LazyService = TestBed.inject<LazyService>(LazyService);
       spyOn(lazySrv, 'load').and.callFake(() => Promise.reject());
@@ -136,10 +136,10 @@ describe('abc: xlsx', () => {
     it(`should be can't load xlsx when file is error`, (done: () => void) => {
       genModule();
 
-      spyOn(FileReader.prototype, 'readAsArrayBuffer').and.callFake(function (this: NzSafeAny) {
+      spyOn(FileReader.prototype, 'readAsArrayBuffer').and.callFake(function (this: any) {
         this.onerror();
       });
-      srv.import(null as NzSafeAny).then(
+      srv.import(null as any).then(
         () => {
           expect(false).toBe(true);
           done();
@@ -160,7 +160,7 @@ describe('abc: xlsx', () => {
           sheets: [{ data: null, name: 'asdf.xlsx' }, { data: null }]
         } as XlsxExportOptions)
         .then(() => {
-          expect((window as NzSafeAny).XLSX.writeFile).toHaveBeenCalled();
+          expect((window as any).XLSX.writeFile).toHaveBeenCalled();
           done();
         });
     });
@@ -172,7 +172,7 @@ describe('abc: xlsx', () => {
           }
         } as XlsxExportOptions)
         .then(() => {
-          expect((window as NzSafeAny).XLSX.writeFile).toHaveBeenCalled();
+          expect((window as any).XLSX.writeFile).toHaveBeenCalled();
           done();
         });
     });
@@ -193,7 +193,7 @@ describe('abc: xlsx', () => {
         });
     });
     it('should catch error when XLSX process error', done => {
-      (window as NzSafeAny).XLSX.utils.book_new = null;
+      (window as any).XLSX.utils.book_new = null;
       srv
         .export({
           sheets: {
@@ -216,7 +216,7 @@ describe('abc: xlsx', () => {
           format: 'csv'
         } as XlsxExportOptions)
         .then(() => {
-          expect((window as NzSafeAny).XLSX.writeFile).toHaveBeenCalled();
+          expect((window as any).XLSX.writeFile).toHaveBeenCalled();
           done();
         });
     });
@@ -256,5 +256,5 @@ describe('abc: xlsx', () => {
   imports: [XlsxDirective]
 })
 class TestComponent {
-  data: NzSafeAny = {};
+  data: any = {};
 }

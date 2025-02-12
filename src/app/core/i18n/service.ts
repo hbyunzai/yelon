@@ -10,7 +10,7 @@ import {
   YunzaiI18NType
 } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 
 import { ENUS } from './en-US';
@@ -43,12 +43,12 @@ export class I18NService extends YunzaiI18nBaseService {
     }
     if (localStorage.lang) return localStorage.lang;
 
-    const winNav: NzSafeAny = window.navigator;
+    const winNav: any = window.navigator;
     if (typeof window === 'undefined' || typeof winNav === 'undefined') {
       return undefined;
     }
 
-    let browserLang: NzSafeAny = winNav.languages ? winNav.languages[0] : null;
+    let browserLang: any = winNav.languages ? winNav.languages[0] : null;
     browserLang = browserLang || winNav.language || winNav.browserLanguage || winNav.userLanguage;
 
     if (browserLang.indexOf('-') !== -1) {

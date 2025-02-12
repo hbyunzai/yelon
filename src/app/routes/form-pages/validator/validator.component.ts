@@ -8,7 +8,7 @@ import { YelonFormModule, SFLayout, SFSchema } from '@yelon/form';
 import { YUNZAI_I18N_TOKEN, I18nPipe, _HttpClient } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -149,7 +149,7 @@ export class FormValidatorComponent implements OnInit {
   }
 
   openOnStackBlitz(): void {
-    const obj: { [key: string]: NzSafeAny } = {
+    const obj: { [key: string]: any } = {
       schema: this.schema,
       layout: this.layout,
       formData: this.formCode || '{}',
@@ -165,19 +165,19 @@ export class FormValidatorComponent implements OnInit {
     copy(this.schema).then(() => this.msg.success(this.i18n.fanyi('app.demo.copied')));
   }
 
-  submit(value: NzSafeAny): void {
+  submit(value: any): void {
     this.msg.success(JSON.stringify(value));
   }
 
-  change(value: NzSafeAny): void {
+  change(value: any): void {
     console.log('formChange', value);
   }
 
-  valueChange(value: NzSafeAny): void {
+  valueChange(value: any): void {
     console.log('formChange', value);
   }
 
-  error(value: NzSafeAny): void {
+  error(value: any): void {
     console.log('formError', value);
   }
 }

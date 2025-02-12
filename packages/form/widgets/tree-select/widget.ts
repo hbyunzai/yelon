@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData, toBool } from '@yelon/form';
 import { NzFormatEmitEvent, NzTreeNode } from 'ng-zorro-antd/core/tree';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
 import type { SFTreeSelectWidgetSchema } from './schema';
@@ -90,7 +90,7 @@ export class TreeSelectWidget extends ControlUIWidget<SFTreeSelectWidgetSchema> 
     });
   }
 
-  change(value: NzSafeAny[] | NzSafeAny): void {
+  change(value: any[] | any): void {
     if (this.ui.change) this.ui.change(value);
     this.setValue(value == null ? this.ui.clearValue : value);
   }

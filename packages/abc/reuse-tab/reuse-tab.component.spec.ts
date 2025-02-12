@@ -14,7 +14,7 @@ import { Observable, of } from 'rxjs';
 
 import { YUNZAI_I18N_TOKEN, YelonLocaleModule, YelonLocaleService, en_US, MenuService, zh_CN } from '@yelon/theme';
 import { ScrollService } from '@yelon/util/browser';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { provideReuseTabConfig } from './provide';
 import { ReuseTabComponent } from './reuse-tab.component';
@@ -82,7 +82,7 @@ describe('abc: reuse-tab', () => {
         {
           provide: 'CanDeactivate',
           useValue: () => {
-            return new Observable((observer: NzSafeAny) => observer.next(false));
+            return new Observable((observer: any) => observer.next(false));
           }
         }
       ].concat(
@@ -92,7 +92,7 @@ describe('abc: reuse-tab', () => {
               {
                 provide: YUNZAI_I18N_TOKEN,
                 useClass: MockI18NServiceFake
-              } as NzSafeAny
+              } as any
             ]
       )
     });
@@ -780,8 +780,8 @@ describe('abc: reuse-tab', () => {
       expect(this.list[pos].url).toBe(url);
       return this;
     }
-    expectAttr(pos: number, attrName: string, value: NzSafeAny): this {
-      expect((this.list[pos] as NzSafeAny)[attrName]).toBe(value);
+    expectAttr(pos: number, attrName: string, value: any): this {
+      expect((this.list[pos] as any)[attrName]).toBe(value);
       return this;
     }
     expectActive(pos: number, result: boolean): this {

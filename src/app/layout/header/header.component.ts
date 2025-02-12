@@ -10,7 +10,7 @@ import { GithubButtonComponent } from 'ng-github-button';
 import { YUNZAI_I18N_TOKEN, RTLService, I18nPipe } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -95,7 +95,7 @@ export class HeaderComponent implements AfterViewInit {
     private router: Router,
     private msg: NzMessageService,
     private mobileSrv: MobileService,
-    @Inject(DOCUMENT) private doc: NzSafeAny,
+    @Inject(DOCUMENT) private doc: any,
     private cdr: ChangeDetectorRef,
     public rtl: RTLService,
     private layout: LayoutComponent

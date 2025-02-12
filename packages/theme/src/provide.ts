@@ -21,7 +21,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 
 import { YUNZAI_CONFIG, YunzaiConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NZ_DATE_LOCALE, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { NzIconService } from 'ng-zorro-antd/icon';
@@ -40,16 +40,16 @@ export interface YunzaiProvideOptions {
    * 初始化默认语言
    */
   defaultLang?: YunzaiProvideLang;
-  i18nClass?: Type<NzSafeAny>;
+  i18nClass?: Type<any>;
   icons?: IconDefinition[];
 }
 
 export interface YunzaiProvideLang {
   abbr: string;
-  ng: NzSafeAny;
-  zorro: NzSafeAny;
-  date: NzSafeAny;
-  yelon: NzSafeAny;
+  ng: any;
+  zorro: any;
+  date: any;
+  yelon: any;
 }
 
 export function provideYunzai(options: YunzaiProvideOptions): EnvironmentProviders {

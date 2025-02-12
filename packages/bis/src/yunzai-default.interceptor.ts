@@ -11,7 +11,7 @@ import { Observable, of, throwError, mergeMap, catchError } from 'rxjs';
 import { mergeBisConfig } from '@yelon/bis/config';
 import { IGNORE_BASE_URL } from '@yelon/theme';
 import { YUNZAI_CONFIG, YunzaiConfigService } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { checkStatus, getAdditionalHeaders, goTo, ReThrowHttpError, toLogin } from './helper';
 import { tryRefreshToken } from './refresh-token';
@@ -19,9 +19,9 @@ import { tryRefreshToken } from './refresh-token';
 function handleData(
   injector: Injector,
   ev: HttpResponseBase,
-  req: HttpRequest<NzSafeAny>,
+  req: HttpRequest<any>,
   next: HttpHandlerFn
-): Observable<NzSafeAny> {
+): Observable<any> {
   checkStatus(injector, ev);
   const config = injector.get(YUNZAI_CONFIG).bis!;
   switch (ev.status) {

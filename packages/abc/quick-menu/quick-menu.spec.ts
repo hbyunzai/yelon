@@ -3,7 +3,7 @@ import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { createTestContext } from '@yelon/testing';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { QuickMenuComponent } from './quick-menu.component';
 
@@ -23,7 +23,7 @@ describe('abc: quick-menu', () => {
 
   function style(name: string, value: string): void {
     const el = getEl();
-    expect((el.style as NzSafeAny)[name]).toBe(value);
+    expect((el.style as any)[name]).toBe(value);
   }
 
   describe('#width', () => {

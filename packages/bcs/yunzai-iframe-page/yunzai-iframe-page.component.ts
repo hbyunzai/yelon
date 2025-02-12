@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { MenuService } from '@yelon/theme';
 import { LayoutDefaultService } from '@yelon/theme/layout-default';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({
@@ -30,7 +30,7 @@ export class YunzaiIframePageComponent implements OnInit, OnDestroy {
   iframeSafeSrc?: SafeResourceUrl;
   iframePageHeight?: string;
   hasIframe: boolean = false;
-  resizeHandle: NzSafeAny;
+  resizeHandle: any;
 
   ngOnInit(): void {
     this.iframePageHeight = this.layoutService.options.hideHeader
@@ -51,7 +51,7 @@ export class YunzaiIframePageComponent implements OnInit, OnDestroy {
   }
 
   getIframeUrl(): void {
-    this.menuService.getRouterLink().subscribe((url: NzSafeAny) => {
+    this.menuService.getRouterLink().subscribe((url: any) => {
       if (url) {
         this.hasIframe = true;
         this.iframeSafeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);

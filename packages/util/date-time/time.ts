@@ -18,7 +18,7 @@ import {
 } from 'date-fns';
 
 import type { YunzaiThemePipeDateFormatCustom } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { DateLocale } from 'ng-zorro-antd/i18n';
 
 /**
@@ -89,7 +89,7 @@ export interface ToDateOptions {
   /** If parsing fails try to parse the date by pressing `formatString` */
   formatString?: string;
   /** If parsing fails returned default value, default: `new Date(NaN)` */
-  defaultValue?: NzSafeAny;
+  defaultValue?: any;
   timestampSecond?: boolean;
 }
 
@@ -116,11 +116,11 @@ export function toDate(value?: Date | string | number | null, options?: string |
     return new Date(timestampSecond ? valueNumber * 1000 : valueNumber);
   }
   let tryDate = parseISO(value);
-  if (isNaN(tryDate as NzSafeAny)) {
+  if (isNaN(tryDate as any)) {
     tryDate = parse(value, formatString!, new Date());
   }
 
-  return isNaN(tryDate as NzSafeAny) ? defaultValue : tryDate;
+  return isNaN(tryDate as any) ? defaultValue : tryDate;
 }
 
 /**
@@ -136,7 +136,7 @@ export function formatDate(
   options?: { locale?: DateLocale; customFormat?: YunzaiThemePipeDateFormatCustom }
 ): string {
   value = toDate(value);
-  if (isNaN(value as NzSafeAny)) return '';
+  if (isNaN(value as any)) return '';
 
   const langOpt = { locale: options?.locale };
   return formatString === 'fn'

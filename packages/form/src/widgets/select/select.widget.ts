@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject, catchError, debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs';
 
 import { ArrayService } from '@yelon/util/array';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { SFSelectWidgetSchema } from './schema';
 import { SFValue } from '../../interface';
@@ -87,7 +87,7 @@ export class SelectWidget extends ControlUIWidget<SFSelectWidgetSchema> implemen
   private search$ = new Subject<string>();
   i!: SFSelectWidgetSchema;
   data: SFSchemaEnum[] = [];
-  _value: NzSafeAny;
+  _value: any;
   hasGroup = false;
   loading = false;
 
@@ -126,7 +126,7 @@ export class SelectWidget extends ControlUIWidget<SFSelectWidgetSchema> implemen
       optionHeightPx: optionHeightPx || 32,
       optionOverflowSize: optionOverflowSize || 8,
       showArrow: toBool(showArrow, true),
-      compareWith: compareWith || ((o1: NzSafeAny, o2: NzSafeAny) => o1 === o2)
+      compareWith: compareWith || ((o1: any, o2: any) => o1 === o2)
     };
 
     const onSearch = this.ui.onSearch!;

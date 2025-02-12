@@ -102,15 +102,10 @@ export class YunzaiContactComponent {
   @Input() tableUser?: YunzaiTableUserProps;
   @Input() props?: YunzaiContactProps;
 
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelect: EventEmitter<YunzaiTableUser[]> = new EventEmitter<YunzaiTableUser[]>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelectDept: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelectRole: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelectDormitory: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() readonly onSelectGroup: EventEmitter<YunzaiFriendGroup> = new EventEmitter<YunzaiFriendGroup>();
 
   @ViewChild('table') table!: YunzaiTableUserComponent;

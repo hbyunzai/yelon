@@ -25,7 +25,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, filter, of } from 'rxjs';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NzTabComponent, NzTabSetComponent } from 'ng-zorro-antd/tabs';
 
@@ -270,7 +270,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
    * <reuse-tab #reuseTab></reuse-tab>
    * <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
    */
-  activate(instance: NzSafeAny): void {
+  activate(instance: any): void {
     if (this.srv == null) return;
     this.srv.componentRef = { instance };
   }

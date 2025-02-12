@@ -6,7 +6,7 @@ import { throwError } from 'rxjs';
 
 import { createTestContext } from '@yelon/testing';
 import { YelonLocaleModule } from '@yelon/theme';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { OnboardingService } from './onboarding.service';
 import { ONBOARDING_STORE_TOKEN } from './onboarding.storage';
@@ -129,8 +129,8 @@ describe('abc: onboarding', () => {
   it('should ignore start when current is running', fakeAsync(() => {
     page.start();
     spyOnProperty(srv, 'running').and.returnValue(true);
-    const srvAny = srv as NzSafeAny;
-    spyOn(srvAny as NzSafeAny, 'attach');
+    const srvAny = srv as any;
+    spyOn(srvAny as any, 'attach');
     page.start();
     expect(srvAny.attach).not.toHaveBeenCalled();
   }));

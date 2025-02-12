@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { format } from 'date-fns';
 
 import { toDate } from '@yelon/util/date-time';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { SFDateWidgetSchema } from './schema';
 import { SFValue } from '../../interface';
@@ -195,7 +195,7 @@ export class DateWidget extends ControlUIWidget<SFDateWidgetSchema> implements O
       value = toDate(value, toDateOptions);
     }
     if (this.flatRange) {
-      const endValue = toDate(this.endProperty.formData as NzSafeAny, {
+      const endValue = toDate(this.endProperty.formData as any, {
         formatString: this.endFormat || this.startFormat,
         defaultValue: null
       });
@@ -236,7 +236,7 @@ export class DateWidget extends ControlUIWidget<SFDateWidgetSchema> implements O
     if (this.ui.onOpenChange) this.ui.onOpenChange(status);
   }
 
-  _ok(value: NzSafeAny): void {
+  _ok(value: any): void {
     if (this.ui.onOk) this.ui.onOk(value);
   }
 

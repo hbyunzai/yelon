@@ -19,7 +19,7 @@ import { lastValueFrom, map } from 'rxjs';
 
 import { YelonFormModule, SFSchema, SFSchemaEnum, SFSelectWidgetSchema } from '@yelon/form';
 import { _HttpClient } from '@yelon/theme';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
@@ -46,7 +46,7 @@ export class DemoComponent {
                 .get(`https://api.randomuser.me/?results=5&q=${q}`)
                 .pipe(
                   map(res =>
-                    (res.results as NzSafeAny[]).map(i => ({ label: i.email, value: i.email }) as SFSchemaEnum)
+                    (res.results as any[]).map(i => ({ label: i.email, value: i.email }) as SFSchemaEnum)
                   )
                 )
             );

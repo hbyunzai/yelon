@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 
 import { ErrorCollectComponent } from '@yelon/abc/error-collect';
+
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 
 const CLSBODY = 'footer-toolbar__body';

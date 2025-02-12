@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import type { SFObjectWidgetRenderType } from './schema';
 import { ArrayProperty } from '../../model/array.property';
@@ -92,9 +92,9 @@ import { ObjectLayoutWidget } from '../../widget';
   standalone: false
 })
 export class ObjectWidget extends ObjectLayoutWidget implements OnInit {
-  grid: NzSafeAny;
+  grid: any;
   type: SFObjectWidgetRenderType = 'default';
-  list: NzSafeAny[] = [];
+  list: any[] = [];
   title?: string;
   showExpand = true;
   expand = true;
@@ -112,7 +112,7 @@ export class ObjectWidget extends ObjectLayoutWidget implements OnInit {
       this.title = this.schema.title as string;
     }
     this.grid = grid as SFGridSchema;
-    const list: NzSafeAny[] = [];
+    const list: any[] = [];
     for (const key of formProperty.propertiesId) {
       const property = (formProperty.properties as Record<string, FormProperty>)[key] as FormProperty;
       const item = {

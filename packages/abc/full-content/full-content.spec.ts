@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { ActivationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { FullContentToggleDirective } from './full-content-toggle.directive';
 import { FullContentComponent } from './full-content.component';
@@ -107,7 +107,7 @@ describe('abc: full-content', () => {
       const bodyHeight = 10;
       spyOn(bodyEl, 'getBoundingClientRect').and.returnValue({
         height: bodyHeight
-      } as NzSafeAny);
+      } as any);
       expect(bodyEl.getBoundingClientRect).not.toHaveBeenCalled();
       window.dispatchEvent(new Event('resize'));
       fixture.detectChanges();
@@ -116,7 +116,7 @@ describe('abc: full-content', () => {
       expect(context.comp._height).toBe(bodyHeight - el.getBoundingClientRect().top - context.padding);
     }));
     it('should be clear class when go to other route', () => {
-      const eventsSub = new BehaviorSubject<NzSafeAny>(null);
+      const eventsSub = new BehaviorSubject<any>(null);
       class MockRouter {
         events = eventsSub;
       }
@@ -135,7 +135,7 @@ describe('abc: full-content', () => {
       expect(bodyEl.classList.contains('full-content')).toBe(false);
     });
     it('should be attach class when back route', () => {
-      const eventsSub = new BehaviorSubject<NzSafeAny>(null);
+      const eventsSub = new BehaviorSubject<any>(null);
       class MockRouter {
         events = eventsSub;
       }

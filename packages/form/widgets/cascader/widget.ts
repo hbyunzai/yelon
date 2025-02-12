@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData, toBool } from '@yelon/form';
 import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import type { SFCascaderWidgetSchema } from './schema';
 
@@ -57,7 +57,7 @@ export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> impl
   showInput!: boolean;
   triggerAction!: string[];
   data: SFSchemaEnum[] = [];
-  loadData?: (node: NzCascaderOption, index: number) => PromiseLike<NzSafeAny>;
+  loadData?: (node: NzCascaderOption, index: number) => PromiseLike<any>;
 
   ngOnInit(): void {
     const { clearText, showArrow, showInput, triggerAction, asyncData } = this.ui;
@@ -82,7 +82,7 @@ export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> impl
     if (this.ui.visibleChange) this.ui.visibleChange(status);
   }
 
-  _change(value: NzSafeAny[] | null): void {
+  _change(value: any[] | null): void {
     this.setValue(value == null ? this.ui.clearValue : value);
     if (this.ui.change) {
       this.ui.change(value);

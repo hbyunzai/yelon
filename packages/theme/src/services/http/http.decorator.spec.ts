@@ -4,7 +4,7 @@ import { Injectable, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import {
   BaseApi,
@@ -56,7 +56,7 @@ class MockService extends BaseApi {
   }
 
   @POST(':id')
-  save(@Path('id') _id: number, @Body _data: NzSafeAny): Observable<any> {
+  save(@Path('id') _id: number, @Body _data: any): Observable<any> {
     return null as any;
   }
 
@@ -71,7 +71,7 @@ class MockService extends BaseApi {
   }
 
   @POST(':id')
-  payloadPost(@Payload _body: any, @Body _body2?: NzSafeAny): Observable<any> {
+  payloadPost(@Payload _body: any, @Body _body2?: any): Observable<any> {
     return null as any;
   }
 
@@ -258,7 +258,7 @@ describe('theme: http.decorator', () => {
 
   [`DELETE`, `OPTIONS`, `PUT`, `HEAD`, `PATCH`, `JSONP`].forEach(type => {
     it(`should construct a ${type} request`, () => {
-      (srv as NzSafeAny)[type]();
+      (srv as any)[type]();
       expect(request).toHaveBeenCalled();
       expect(request.calls.mostRecent().args[0]).toBe(type);
     });

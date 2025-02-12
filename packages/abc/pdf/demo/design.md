@@ -21,7 +21,7 @@ import { Subject } from 'rxjs';
 import { PdfChangeEvent, PdfComponent, PdfZoomScale } from '@yelon/abc/pdf';
 import { SEModule } from '@yelon/abc/se';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -179,7 +179,7 @@ export class DemoComponent implements OnInit {
   zoom = 1;
   autoReSize = true;
   outline = false;
-  outlineList: NzSafeAny = null;
+  outlineList: any = null;
   q = '';
   search$ = new Subject<string>();
 
@@ -235,7 +235,7 @@ export class DemoComponent implements OnInit {
   };
 
   loadOutline(): void {
-    this.comp.pdf?.getOutline().then((outline: NzSafeAny) => {
+    this.comp.pdf?.getOutline().then((outline: any) => {
       this.outlineList = outline;
     });
   }

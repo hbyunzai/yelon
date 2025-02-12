@@ -1,12 +1,12 @@
 import { EnvironmentProviders, inject, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { CellService } from './cell.service';
 
 export interface CellWidgetProvideConfig {
   KEY: string;
-  type: NzSafeAny;
+  type: any;
 }
 
 /**

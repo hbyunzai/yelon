@@ -7,7 +7,7 @@ import { YunzaiConfigService } from '@yelon/util/config';
 import { formatDate } from '@yelon/util/date-time';
 import { CurrencyService, formatMask } from '@yelon/util/format';
 import { deepMerge } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 
 import type {
@@ -120,8 +120,8 @@ export class CellService {
     opt.type = type;
     const isSafeHtml =
       typeof value === 'object' &&
-      typeof (value as NzSafeAny)?.getTypeName === 'function' &&
-      (value as NzSafeAny)?.getTypeName() != null;
+      typeof (value as any)?.getTypeName === 'function' &&
+      (value as any)?.getTypeName() != null;
 
     let res: CellTextResult = {
       result:

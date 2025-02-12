@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, of, delay, finalize, switchMap, tap } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiThemeHttpClientConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export type _HttpHeaders = HttpHeaders | Record<string, string | string[]>;
 export type HttpObserve = 'body' | 'events' | 'response';
@@ -45,8 +45,8 @@ export class _HttpClient {
     return this.lc;
   }
 
-  parseParams(params: NzSafeAny): HttpParams {
-    const newParams: NzSafeAny = {};
+  parseParams(params: any): HttpParams {
+    const newParams: any = {};
     if (params instanceof HttpParams) {
       return params;
     }
@@ -68,7 +68,7 @@ export class _HttpClient {
     return new HttpParams({ fromObject: newParams });
   }
 
-  appliedUrl(url: string, params?: NzSafeAny): string {
+  appliedUrl(url: string, params?: any): string {
     if (!params) return url;
     url += ~url.indexOf('?') ? '' : '?';
     const arr: string[] = [];
@@ -360,7 +360,7 @@ export class _HttpClient {
       withCredentials?: boolean;
       context?: HttpContext;
     }
-  ): Observable<HttpResponse<NzSafeAny>>;
+  ): Observable<HttpResponse<any>>;
 
   /**
    * **DELETE Request** Return a `any` type / 返回一个 `any` 类型
@@ -470,7 +470,7 @@ export class _HttpClient {
       withCredentials?: boolean;
       context?: HttpContext;
     }
-  ): Observable<HttpResponse<NzSafeAny>>;
+  ): Observable<HttpResponse<any>>;
 
   /**
    * **PATCH Request** Return a `any` type / 返回一个 `any` 类型
@@ -562,7 +562,7 @@ export class _HttpClient {
       withCredentials?: boolean;
       context?: HttpContext;
     }
-  ): Observable<HttpResponse<NzSafeAny>>;
+  ): Observable<HttpResponse<any>>;
 
   /**
    * **PUT Request** Return a `any` type / 返回一个 `any` 类型
@@ -948,7 +948,7 @@ export class _HttpClient {
       withCredentials?: boolean;
       context?: HttpContext;
     }
-  ): Observable<HttpResponse<NzSafeAny>>;
+  ): Observable<HttpResponse<any>>;
 
   /**
    * **Request** Return a `HttpResponse<R>` type / 返回一个 `HttpResponse<R>` 类型
