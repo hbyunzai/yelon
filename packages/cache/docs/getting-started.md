@@ -33,6 +33,7 @@ cacheService.set('/data/unit', [ '个', '件' ]);
 ```bash
 npm i -S @yelon/cache
 ```
+
 ### 参数
 
 | 成员 | 说明 | 类型 | 默认值 | 全局配置 |
