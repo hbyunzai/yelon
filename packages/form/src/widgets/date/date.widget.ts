@@ -5,11 +5,11 @@ import { format } from 'date-fns';
 import { toDate } from '@yelon/util/date-time';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+import { SFDateWidgetSchema } from './schema';
 import { SFValue } from '../../interface';
 import { FormProperty } from '../../model/form.property';
 import { toBool } from '../../utils';
 import { ControlUIWidget } from '../../widget';
-import { SFDateWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-date',
@@ -31,7 +31,7 @@ import { SFDateWidgetSchema } from './schema';
           [(ngModel)]="displayValue"
           (ngModelChange)="_change($event)"
           [nzAllowClear]="i.allowClear"
-          [ngClass]="ui.className!"
+          [class]="ui.className!"
           [nzDisabledDate]="ui.disabledDate"
           [nzLocale]="ui.locale!"
           [nzPlaceHolder]="ui.placeholder!"
@@ -52,7 +52,7 @@ import { SFDateWidgetSchema } from './schema';
           [(ngModel)]="displayValue"
           (ngModelChange)="_change($event)"
           [nzAllowClear]="i.allowClear"
-          [ngClass]="ui.className!"
+          [class]="ui.className!"
           [nzDisabledDate]="ui.disabledDate"
           [nzLocale]="ui.locale!"
           [nzPlaceHolder]="ui.placeholder!"
@@ -73,7 +73,7 @@ import { SFDateWidgetSchema } from './schema';
           [(ngModel)]="displayValue"
           (ngModelChange)="_change($event)"
           [nzAllowClear]="i.allowClear"
-          [ngClass]="ui.className!"
+          [class]="ui.className!"
           [nzDisabledDate]="ui.disabledDate"
           [nzLocale]="ui.locale!"
           [nzPlaceHolder]="ui.placeholder!"
@@ -93,7 +93,7 @@ import { SFDateWidgetSchema } from './schema';
           [(ngModel)]="displayValue"
           (ngModelChange)="_change($event)"
           [nzAllowClear]="i.allowClear"
-          [ngClass]="ui.className!"
+          [class]="ui.className!"
           [nzDisabledDate]="ui.disabledDate"
           [nzLocale]="ui.locale!"
           [nzPlaceHolder]="ui.placeholder!"
@@ -121,7 +121,7 @@ import { SFDateWidgetSchema } from './schema';
           [(ngModel)]="displayValue"
           (ngModelChange)="_change($event)"
           [nzAllowClear]="i.allowClear"
-          [ngClass]="ui.className!"
+          [class]="ui.className!"
           [nzDisabledDate]="ui.disabledDate"
           [nzLocale]="ui.locale!"
           [nzPlaceHolder]="ui.placeholder!"
@@ -141,7 +141,9 @@ import { SFDateWidgetSchema } from './schema';
     }
   </sf-item-wrap>`,
   preserveWhitespaces: false,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class DateWidget extends ControlUIWidget<SFDateWidgetSchema> implements OnInit {
   private startFormat!: string;
@@ -239,7 +241,7 @@ export class DateWidget extends ControlUIWidget<SFDateWidgetSchema> implements O
   }
 
   private get endProperty(): FormProperty {
-    return (this.formProperty.parent!.properties as { [key: string]: FormProperty })[this.ui.end!];
+    return (this.formProperty.parent!.properties as Record<string, FormProperty>)[this.ui.end!];
   }
 
   private setEnd(value: string | null): void {

@@ -1,4 +1,3 @@
-/* eslint-disable deprecation/deprecation */
 import { HttpHeaders, HttpResponse, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, TestRequest, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component, DebugElement } from '@angular/core';
@@ -7,10 +6,9 @@ import { By } from '@angular/platform-browser';
 
 import * as fs from 'file-saver';
 
-import { _HttpClient } from '@yelon/theme';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { DownFileModule } from './down-file.module';
+import { DownFileDirective } from './down-file.directive';
 
 function genFile(isRealFile: boolean = true): Blob {
   const blob = new Blob([
@@ -27,8 +25,6 @@ describe('abc: down-file', () => {
 
   function createComp(): void {
     TestBed.configureTestingModule({
-      imports: [DownFileModule],
-      declarations: [TestComponent],
       providers: [provideHttpClient(), provideHttpClientTesting()]
     });
 
@@ -53,7 +49,6 @@ describe('abc: down-file', () => {
         tick();
         const ret = httpBed.expectOne(req => req.url.startsWith('/')) as TestRequest;
         ret.flush(genFile());
-        // eslint-disable-next-line deprecation/deprecation
         expect(fs.saveAs).toHaveBeenCalled();
       }));
     });
@@ -127,7 +122,6 @@ describe('abc: down-file', () => {
       spyOn(fs, 'saveAs');
       spyOn(context, 'error');
       expect(context.error).not.toHaveBeenCalled();
-      // eslint-disable-next-line deprecation/deprecation
       expect(fs.saveAs).not.toHaveBeenCalled();
       const el = dl.query(By.css('#down-docx')).nativeElement as HTMLElement;
       el.click();
@@ -135,7 +129,6 @@ describe('abc: down-file', () => {
       tick();
       const ret = httpBed.expectOne(req => req.url.startsWith('/')) as TestRequest;
       ret.flush(null, { status: 201, statusText: '201' });
-      // eslint-disable-next-line deprecation/deprecation
       expect(fs.saveAs).not.toHaveBeenCalled();
       expect(context.error).toHaveBeenCalled();
       expect(el.classList.contains(`down-file__disabled`)).toBe(false);
@@ -221,7 +214,8 @@ describe('abc: down-file', () => {
         {{ i }}
       </button>
     }
-  `
+  `,
+  imports: [DownFileDirective]
 })
 class TestComponent {
   fileTypes = ['xlsx', 'docx', 'pptx', 'pdf'];

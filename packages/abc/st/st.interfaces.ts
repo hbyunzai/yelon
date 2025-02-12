@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpHeaders, HttpParams } from '@angular/common/http';
-import { ElementRef, TemplateRef } from '@angular/core';
-import { Observable } from 'rxjs';
+import type { CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragSortEvent } from '@angular/cdk/drag-drop';
+import type { HttpHeaders, HttpParams } from '@angular/common/http';
+import type { ElementRef, TemplateRef } from '@angular/core';
+import type { Observable } from 'rxjs';
 
 import type { ThemeType } from '@ant-design/icons-angular';
 
@@ -66,7 +66,7 @@ export interface STReq {
    *
    * 是否忽略参数中 `null` 或 `undefind` 值
    */
-  ignoreParamNull?: Boolean;
+  ignoreParamNull?: boolean;
   /** 请求方法，默认：`GET` */
   method?: string;
   /** 请求体 `body` */
@@ -94,16 +94,8 @@ export interface STReq {
 
 export interface STRequestOptions {
   body?: any;
-  headers?:
-    | HttpHeaders
-    | {
-        [header: string]: string | string[];
-      };
-  params?:
-    | HttpParams
-    | {
-        [param: string]: string | string[];
-      };
+  headers?: HttpHeaders | Record<string, string | string[]>;
+  params?: HttpParams | Record<string, string | string[]>;
   observe?: 'body' | 'events' | 'response';
   reportProgress?: boolean;
   responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
@@ -268,7 +260,7 @@ export interface STColumn<T extends STData = any> {
    * - `currency` 货币且居右(若 `className` 存在则优先)
    * - `date` 日期格式且居中(若 `className` 存在则优先)，使用 `dateFormat` 自定义格式
    * - `yn` 将`boolean`类型徽章化 [document](https://ng.yunzainfo.com/docs/data-render#yn)
-   * - `cell` 使用 `cell` 组件渲染 [document](https://ng.yunzainfo.com/components/cell)
+   * - `cell` 可指定 `click`，使用 `cell` 组件渲染 [document](https://ng.yunzainfo.com/components/cell)
    * - `widget` 使用自定义小部件动态创建
    */
   type?:
@@ -918,6 +910,8 @@ export interface STColumnButtonPop<T extends STData = any> {
    */
   title?: string;
 
+  titleI18n?: string;
+
   /**
    * Popover trigger mode, default: `click`
    */
@@ -955,10 +949,14 @@ export interface STColumnButtonPop<T extends STData = any> {
    */
   cancelText?: string;
 
+  cancelTextI18n?: string;
+
   /**
    * Text of the Confirm button
    */
   okText?: string;
+
+  okTextI18n?: string;
 
   /**
    * Button `type` of the Confirm button
@@ -1049,9 +1047,7 @@ export interface STMultiSort {
   global?: boolean;
 }
 
-export interface STMultiSortResultType {
-  [key: string]: string | string[];
-}
+export type STMultiSortResultType = Record<string, string | string[]>;
 
 /**
  * 徽标信息
@@ -1197,7 +1193,7 @@ export interface STChange<T extends STData = any> {
 /** 行单击参数 */
 export interface STChangeSort {
   value?: 'ascend' | 'descend';
-  map?: { [key: string]: string };
+  map?: Record<string, string>;
   column?: STColumn;
 }
 
@@ -1309,4 +1305,26 @@ export interface STCustomRequestOptions {
 export interface STOnCellResult {
   rowSpan?: number | null;
   colSpan?: number | null;
+}
+
+export interface STDragOptions {
+  /**
+   * Emits when the user drops an item inside the container, default: `moveItemInArray()`
+   */
+  dropped?: (e: CdkDragDrop<any, any, any>) => void;
+
+  /**
+   * Emits when the user has moved a new drag item into this container.
+   */
+  entered?: (e: CdkDragEnter<any>) => void;
+
+  /**
+   * Emits when the user removes an item from the container by dragging it into another container.
+   */
+  exited?: (e: CdkDragExit<any>) => void;
+
+  /**
+   * Emits as the user is swapping items while actively dragging.
+   */
+  sorted?: (e: CdkDragSortEvent<any>) => void;
 }

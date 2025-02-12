@@ -12,6 +12,7 @@ import { BehaviorSubject, Observable, take, timer, Unsubscribable } from 'rxjs';
 
 import { Menu, MenuService } from '@yelon/theme';
 import { ScrollService } from '@yelon/util/browser';
+
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { REUSE_TAB_CACHED_MANAGER } from './reuse-tab.cache';
@@ -41,7 +42,7 @@ export class ReuseTabService implements OnDestroy {
   private _cachedChange = new BehaviorSubject<ReuseTabNotify | null>(null);
   private _router$?: Unsubscribable;
   private removeUrlBuffer: string | null = null;
-  private positionBuffer: { [url: string]: [number, number] } = {};
+  private positionBuffer: Record<string, [number, number]> = {};
   componentRef?: ReuseComponentRef;
   debug = false;
   routeParamMatchMode: ReuseTabRouteParamMatchMode = 'strict';
@@ -391,6 +392,7 @@ export class ReuseTabService implements OnDestroy {
     if (!this.storageState) return;
 
     this.cached.list = this.stateSrv.get(this.stateKey).map(v => ({
+      ...v,
       title: { text: v.title },
       url: v.url,
       position: v.position

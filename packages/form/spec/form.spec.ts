@@ -9,14 +9,14 @@ import { ACLService, YelonACLModule } from '@yelon/acl';
 import { createTestContext } from '@yelon/testing';
 import { YunzaiI18NService, YunzaiThemeModule, YUNZAI_I18N_TOKEN, YelonLocaleService, en_US } from '@yelon/theme';
 import { deepCopy } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
+import { SCHEMA, SFPage, TestFormComponent } from './base.spec';
 import { FormPropertyFactory } from '../src/model/form.property.factory';
 import { YelonFormModule } from '../src/module';
 import { SFSchema } from '../src/schema/index';
 import { WidgetRegistry } from '../src/widget.factory';
-import { SCHEMA, SFPage, TestFormComponent } from './base.spec';
 registerLocaleData(zh);
 
 describe('form: component', () => {
@@ -263,24 +263,24 @@ describe('form: component', () => {
           expect((page.getEl('.ant-btn-primary') as HTMLButtonElement).disabled).toBe(true);
           context.liveValidate = false;
           fixture.detectChanges();
-          page.submit(false).setValue('/name', 'yunzai-bot').setValue('/pwd', '1111').submit(true);
+          page.submit(false).setValue('/name', 'cipchk').setValue('/pwd', '1111').submit(true);
         });
       });
 
       describe('#submit', () => {
         it('should be submit when is valid', () => {
-          page.setValue('/name', 'yunzai-bot').setValue('/pwd', '1111').isValid();
+          page.setValue('/name', 'cipchk').setValue('/pwd', '1111').isValid();
         });
         it('should not be submit when is invalid', () => {
-          page.setValue('/name', 'yunzai-bot').isValid(false);
+          page.setValue('/name', 'cipchk').isValid(false);
         });
       });
 
       describe('#reset', () => {
         it('should be set default value', () => {
           const schema = deepCopy(SCHEMA.user) as SFSchema;
-          schema.properties!.name.default = 'yunzai-bot';
-          page.newSchema(schema).reset().checkValue('/name', 'yunzai-bot');
+          schema.properties!.name.default = 'cipchk';
+          page.newSchema(schema).reset().checkValue('/name', 'cipchk');
         });
       });
 
@@ -353,7 +353,7 @@ describe('form: component', () => {
       });
 
       it('#disabled', () => {
-        const CLS: { [key: string]: string | NzSafeAny[] } = {
+        const CLS: Record<string, string | NzSafeAny[]> = {
           input: '.ant-input[disabled]',
           number: '.ant-input-number-disabled',
           switch: '.ant-switch-disabled'
@@ -447,27 +447,27 @@ describe('form: component', () => {
       });
 
       it('#formChange', () => {
-        page.setValue('/name', 'yunzai-bot');
+        page.setValue('/name', 'cipchk');
         expect(context.formChange).toHaveBeenCalled();
       });
 
       it('#formValueChange', () => {
-        page.setValue('/name', 'yunzai-bot');
+        page.setValue('/name', 'cipchk');
         expect(context.formValueChange).toHaveBeenCalled();
       });
 
       it('#formSubmit', () => {
-        page.setValue('/name', 'yunzai-bot').setValue('/pwd', 'asdf').submit();
+        page.setValue('/name', 'cipchk').setValue('/pwd', 'asdf').submit();
         expect(context.formSubmit).toHaveBeenCalled();
       });
 
       it('#formReset', () => {
-        page.setValue('/name', 'yunzai-bot').setValue('/pwd', 'asdf').reset();
+        page.setValue('/name', 'cipchk').setValue('/pwd', 'asdf').reset();
         expect(context.formReset).toHaveBeenCalled();
       });
 
       it('#formError', () => {
-        page.setValue('/name', 'yunzai-bot').setValue('/name', '');
+        page.setValue('/name', 'cipchk').setValue('/name', '');
         expect(context.formError).toHaveBeenCalled();
       });
     });
@@ -896,6 +896,8 @@ describe('form: component', () => {
 @Component({
   template: `
     <sf [layout]="layout" #comp [schema]="schema" [ui]="ui" [button]="button" [mode]="mode" [loading]="loading" />
-  `
+  `,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 class TestModeComponent extends TestFormComponent {}

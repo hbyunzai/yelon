@@ -40,7 +40,7 @@ const yunzaiConfig: YunzaiConfig = {
 
 ## API
 
-### pdf:standalone
+### pdf
 
 | 成员 | 说明 | 类型 | 默认值 | 全局配置 |
 |----|----|----|-----|------|

@@ -10,9 +10,9 @@ A simple form exception messages collector that jump to element location via cli
 
 ## API
 
-### error-collect:standalone
+### error-collect
 
 | Property | Description | Type | Default | Global Config |
 |----------|-------------|------|---------|---------------|
-| `[freq]` | Monitor frequency, unit is milliseconds | `number` | `500` | ✅ |
+| `[freq]` | Monitor frequency, unit is milliseconds | `number` | `250` | ✅ |
 | `[offsetTop]` | Top offset, unit is `px` | `number` | `145` | ✅ |

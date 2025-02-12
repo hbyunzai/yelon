@@ -4,12 +4,11 @@ import { By } from '@angular/platform-browser';
 
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ChartEChartsOn } from '.';
 import { ChartEChartsComponent } from './echarts.component';
-import { ChartEChartsModule } from './echarts.module';
-import { ChartEChartsEvent, ChartEChartsOption } from './echarts.types';
+import { ChartEChartsOption } from './echarts.types';
 
 // let isClassECharts = false;
 class MockLazyService {
@@ -35,9 +34,7 @@ describe('chart: chart-echarts', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: LazyService, useClass: MockLazyService }],
-      imports: [ChartEChartsModule],
-      declarations: [TestComponent]
+      providers: [{ provide: LazyService, useClass: MockLazyService }]
     });
     ({ fixture, dl, context } = createTestContext(TestComponent));
     spyOn(context, 'handleEvents');
@@ -97,7 +94,8 @@ describe('chart: chart-echarts', () => {
       [on]="on"
       (events)="handleEvents($event)"
     />
-  `
+  `,
+  imports: [ChartEChartsComponent]
 })
 class TestComponent {
   @ViewChild('cmp') readonly cmp!: ChartEChartsComponent;
@@ -117,5 +115,5 @@ class TestComponent {
       handler: console.log
     }
   ];
-  handleEvents(_: ChartEChartsEvent): void {}
+  handleEvents(): void {}
 }

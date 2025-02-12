@@ -91,6 +91,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
           [options]="{ type: 'checkbox', tooltip: 'Tooltip', checkbox: { label: 'Label' } }"
           [disabled]="disabled"
         />
+        {{ checkbox }}
         <a (click)="disabled = !disabled" class="ml-sm">Change Disabled</a>
       </div>
       <div nz-col nzSpan="8">
@@ -156,7 +157,6 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CellModule, FormsModule, JsonPipe, NzGridModule]
 })
 export class DemoComponent implements OnInit {

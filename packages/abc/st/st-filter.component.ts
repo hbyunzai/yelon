@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -8,11 +9,20 @@ import {
   ViewEncapsulation,
   inject
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import { LocaleData } from '@yelon/theme';
+import type { LocaleData } from '@yelon/theme';
+import { NzCheckboxComponent } from 'ng-zorro-antd/checkbox';
+import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconDirective } from 'ng-zorro-antd/icon';
+import { NzInputDirective } from 'ng-zorro-antd/input';
+import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzRadioComponent } from 'ng-zorro-antd/radio';
 
-import { STColumnFilter, STColumnFilterMenu, STIcon } from './st.interfaces';
-import { _STColumn } from './st.types';
+import type { STColumnFilter, STColumnFilterMenu, STIcon } from './st.interfaces';
+import type { _STColumn } from './st.types';
 
 @Component({
   selector: 'st-filter',
@@ -28,7 +38,7 @@ import { _STColumn } from './st.types';
       nzOverlayClassName="st__filter-wrap"
       (click)="stopPropagation($event)"
     >
-      <i nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!"></i>
+      <nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!" />
     </span>
     <nz-dropdown-menu #filterMenu="nzDropdownMenu">
       <div class="ant-table-filter-dropdown">
@@ -53,7 +63,7 @@ import { _STColumn } from './st.types';
                 [nzMin]="f.number!.min!"
                 [nzMax]="f.number!.max!"
                 [nzStep]="f.number!.step!"
-                [nzPrecision]="f.number!.precision"
+                [nzPrecision]="f.number!.precision || null"
                 [nzPlaceHolder]="f.placeholder!"
                 class="width-100"
               />
@@ -132,7 +142,20 @@ import { _STColumn } from './st.types';
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    FormsModule,
+    NzDropDownModule,
+    NzIconDirective,
+    NzInputDirective,
+    NzInputNumberComponent,
+    NzRangePickerComponent,
+    NzDatePickerComponent,
+    NgTemplateOutlet,
+    NzMenuModule,
+    NzCheckboxComponent,
+    NzRadioComponent
+  ]
 })
 export class STFilterComponent {
   private readonly cdr = inject(ChangeDetectorRef);

@@ -9,12 +9,11 @@ deprecated: 20.0.0
 
 # Will be removed in v20, Please use `nz-result` instead.
 
-
 结果页用于对用户进行的一系列任务处理结果进行反馈。
 
 ## API
 
-### result:standalone
+### result
 
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|

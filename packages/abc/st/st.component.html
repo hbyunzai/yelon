@@ -4,7 +4,7 @@
     <small class="st__head-optional" [innerHTML]="i.optional"></small>
   }
   @if (i.optionalHelp) {
-    <i class="st__head-tip" nz-tooltip [nzTooltipTitle]="i.optionalHelp" nz-icon nzType="question-circle"></i>
+    <nz-icon class="st__head-tip" nz-tooltip [nzTooltipTitle]="i.optionalHelp" nzType="question-circle" />
   }
 </ng-template>
 <ng-template #chkAllTpl let-custom>
@@ -58,7 +58,7 @@
       @for (row of _headers; track row) {
         <tr>
           @if ($first && expand) {
-            <th nzWidth="50px" [rowSpan]="_headers.length"></th>
+            <th nzWidth="50px" [rowSpan]="_headers.length" [nzLeft]="row[0].column._left ? true : false"></th>
           }
           @for (h of row; track h; let index = $index; let last = $last) {
             @let _c = h.column;
@@ -66,9 +66,9 @@
               [colSpan]="h.colSpan"
               [rowSpan]="h.rowSpan"
               [nzWidth]="$any(_c).width"
-              [nzLeft]="_c._left!"
-              [nzRight]="_c._right!"
-              [ngClass]="_c._className"
+              [nzLeft]="_c._left"
+              [nzRight]="_c._right"
+              [class]="_c._className"
               [attr.data-col]="_c.indexKey"
               [attr.data-col-index]="index"
               [nzShowSort]="_c._sort.enabled"
@@ -110,7 +110,7 @@
                               [nzDropdownMenu]="selectionMenu"
                               class="ant-table-selection-down st__checkall-selection"
                             >
-                              <i nz-icon nzType="down"></i>
+                              <nz-icon nzType="down" />
                             </div>
                           </div>
                         }
@@ -145,7 +145,15 @@
       }
     </thead>
   }
-  <tbody class="st__body">
+  <tbody
+    class="st__body"
+    cdkDropList
+    [cdkDropListDisabled]="drag() === null"
+    (cdkDropListDropped)="drag()?.dropped?.($event)"
+    (cdkDropListEntered)="drag()?.entered?.($event)"
+    (cdkDropListExited)="drag()?.exited?.($event)"
+    (cdkDropListSorted)="drag()?.sorted?.($event)"
+  >
     @if (!_loading) {
       <ng-template [ngTemplateOutlet]="bodyHeader!" [ngTemplateOutletContext]="{ $implicit: _statistical }" />
     }
@@ -154,7 +162,8 @@
         [attr.data-index]="index"
         (click)="_rowClick($event, i, index, false)"
         (dblclick)="_rowClick($event, i, index, true)"
-        [ngClass]="i._rowClassName"
+        [class]="i._rowClassName"
+        cdkDrag
       >
         @if (expand) {
           <td
@@ -164,6 +173,7 @@
             (nzExpandChange)="_expandChange(i, $event)"
             (click)="_stopPropagation($event)"
             nzWidth="50px"
+            [nzLeft]="_columns[0]._left ? true : false"
           ></td>
           <ng-template #wrapExpandIcon>
             <span (click)="_expandChange(i, !i.expand)">
@@ -175,10 +185,10 @@
           @let props = i._values[cIdx].props;
           @if (props?.colSpan > 0 && props?.rowSpan > 0) {
             <td
-              [nzLeft]="!!c._left"
-              [nzRight]="!!c._right"
+              [nzLeft]="c._left"
+              [nzRight]="c._right"
               [attr.data-col-index]="cIdx"
-              [ngClass]="c._className"
+              [class]="c._className"
               [attr.colspan]="props?.colSpan === 1 ? null : props?.colSpan"
               [attr.rowspan]="props?.rowSpan === 1 ? null : props?.rowSpan"
             >

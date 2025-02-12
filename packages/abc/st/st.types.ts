@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TemplateRef } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 
@@ -44,12 +43,11 @@ export interface _STColumn extends STColumn {
   /**
    * 校验需要未自定义 `className` 时应检查 `_isTruncate` 是否需要截短行为
    */
-  _className?: string | string[] | Set<string> | { [klass: string]: any } | null;
+  _className?: string | string[] | Set<string> | Record<string, any> | null;
   _sort: STSortMap;
   _width?: number;
-  _left?: string | boolean;
-  _right?: string | boolean;
-  __point?: number;
+  _left: string | boolean;
+  _right: string | boolean;
   __renderTitle?: TemplateRef<any>;
   __render?: TemplateRef<any>;
 }

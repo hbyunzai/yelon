@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YunzaiI18NServiceFake } from '@yelon/theme';
 import { deepGet } from '@yelon/util/other';
@@ -14,7 +12,7 @@ import { _STColumn } from '../st.types';
 
 const i18nResult = 'zh';
 class MockI18NServiceFake extends YunzaiI18NServiceFake {
-  fanyi(_key: string): string {
+  fanyi(): string {
     return i18nResult;
   }
 }
@@ -37,7 +35,12 @@ describe('st: column-source', () => {
   let rowSrv: STRowSource;
   let stWidgetRegistry: STWidgetRegistry;
   let page: PageObject;
-  const options: STColumnSourceProcessOptions = { widthMode, resizable: { disabled: true }, safeType: 'safeHtml' };
+  const options: STColumnSourceProcessOptions = {
+    widthMode,
+    resizable: { disabled: true },
+    safeType: 'safeHtml',
+    expand: false
+  };
 
   function genModule(other: { acl?: boolean; i18n?: boolean; cog?: any }): void {
     aclSrv = other.acl ? new ACLService({ merge: (_: any, def: any) => def } as any) : null;
@@ -228,7 +231,8 @@ describe('st: column-source', () => {
       it('should be working when className is object', () => {
         const res = srv.process([{ title: '', width: 10, type: 'number', className: { a: true, b: false } }], {
           widthMode: { strictBehavior: 'truncate' },
-          safeType: 'html'
+          safeType: 'html',
+          expand: false
         }).columns;
         const obj = res[0]._className as NgClassInterface;
         expect(obj['text-truncate']).toBe(true);
@@ -762,7 +766,7 @@ describe('st: column-source', () => {
       const newColumns = srv.process(columns, options).columns;
       if (type) {
         expect(newColumns.length).toBe(1);
-        expect((newColumns[0] as { [key: string]: any })[type].length).toBe(count);
+        expect((newColumns[0] as Record<string, any>)[type].length).toBe(count);
       } else {
         expect(newColumns.length).toBe(count);
       }

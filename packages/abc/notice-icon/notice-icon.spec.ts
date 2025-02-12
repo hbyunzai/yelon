@@ -3,13 +3,12 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { cleanCdkOverlayHtml, createTestContext } from '@yelon/testing';
 import { YelonLocaleModule, YelonLocaleService, en_US, zh_CN } from '@yelon/theme';
 
 import { NoticeIconComponent } from './notice-icon.component';
-import { NoticeIconModule } from './notice-icon.module';
 import { NoticeItem } from './notice-icon.types';
 
 const CLICKTIME = 151;
@@ -21,9 +20,8 @@ describe('abc: notice-icon', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, NoticeIconModule, YelonLocaleModule],
-      declarations: [TestComponent],
-      providers: [provideHttpClient(), provideHttpClientTesting()]
+      imports: [YelonLocaleModule],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideNoopAnimations()]
     });
     ({ fixture, dl, context } = createTestContext(TestComponent));
   });
@@ -51,10 +49,10 @@ describe('abc: notice-icon', () => {
     describe('should be show dropdown', () => {
       it('via popoverVisible property', () => {
         spyOn(context, 'popupVisibleChange');
-        expect(context.comp.popoverVisible).toBe(false);
+        expect(context.comp.popoverVisible()).toBe(false);
         context.popoverVisible = true;
         fixture.detectChanges();
-        expect(context.comp.popoverVisible).toBe(true);
+        expect(context.comp.popoverVisible()).toBe(true);
       });
       it('via click', done => {
         expect(context.popoverVisible).toBeUndefined();
@@ -140,7 +138,8 @@ describe('abc: notice-icon', () => {
       [(popoverVisible)]="popoverVisible"
       (popoverVisibleChange)="popupVisibleChange($event)"
     />
-  `
+  `,
+  imports: [NoticeIconComponent]
 })
 class TestComponent {
   @ViewChild('comp', { static: true })

@@ -1,11 +1,10 @@
 import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { provideYunzaiConfig } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STComponent } from '../st.component';
 import { STMultiSort } from '../st.interfaces';
-import { _STColumn } from '../st.types';
 import { PageObject, TestComponent, genModule } from './base.spec';
 
 describe('abc: st-sort', () => {

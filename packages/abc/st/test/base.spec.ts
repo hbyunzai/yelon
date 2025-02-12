@@ -5,19 +5,20 @@ import { Component, DebugElement, Injectable, TemplateRef, Type, ViewChild } fro
 import { ComponentFixture, discardPeriodicTasks, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { dispatchDropDown } from '@yelon/testing';
-import { YUNZAI_I18N_TOKEN, YelonLocaleModule, _HttpClient } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, YelonLocaleModule } from '@yelon/theme';
 import { deepCopy, deepGet } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPaginationComponent } from 'ng-zorro-antd/pagination';
 
 import { YunzaiI18NService, YunzaiI18NServiceFake } from '../../../theme/src/services/i18n/i18n';
+import { STRowDirective } from '../st-row.directive';
 import { STComponent } from '../st.component';
 import {
   STChange,
@@ -27,6 +28,7 @@ import {
   STColumnTitle,
   STContextmenuFn,
   STCustomRequestOptions,
+  STDragOptions,
   STError,
   STMultiSort,
   STPage,
@@ -35,7 +37,6 @@ import {
   STWidthMode
 } from '../st.interfaces';
 import { STModule } from '../st.module';
-import { _STColumn } from '../st.types';
 import { STWidgetRegistry } from './../st-widget';
 
 export const MOCKDATE = new Date();
@@ -70,7 +71,7 @@ export const USERS: NzSafeAny[] = genData(DEFAULTCOUNT);
 
 @Injectable()
 export class MockI18NServiceFake extends YunzaiI18NServiceFake {
-  fanyi(_key: string): string {
+  fanyi(): string {
     return 'zh';
   }
 }
@@ -86,6 +87,7 @@ export function genModule<T extends TestComponent>(
   other: {
     template?: string;
     i18n?: boolean;
+    i18nIgnoreOverride?: boolean;
     minColumn?: boolean;
     providers?: NzSafeAny[];
     createComp?: boolean;
@@ -100,7 +102,6 @@ export function genModule<T extends TestComponent>(
     ...other
   };
   const imports = [
-    NoopAnimationsModule,
     CommonModule,
     FormsModule,
     RouterModule.forRoot([]),
@@ -109,23 +110,29 @@ export function genModule<T extends TestComponent>(
     STModule,
     YelonLocaleModule
   ];
-  const providers = [
+  const providers: NzSafeAny[] = [
+    provideNoopAnimations(),
     provideHttpClient(),
-    provideHttpClientTesting(),
-    {
+    provideHttpClientTesting()
+    // {
+    //   provide: YUNZAI_I18N_TOKEN,
+    //   useClass: MockI18NServiceFake
+    // }
+  ];
+  if (other.i18nIgnoreOverride !== true) {
+    providers.push({
       provide: YUNZAI_I18N_TOKEN,
       useClass: MockI18NServiceFake
-    }
-  ];
+    });
+  }
   if (other.providers!.length > 0) {
     providers.push(...other.providers!);
   }
   TestBed.configureTestingModule({
     imports,
-    declarations: [TestComponent, TestExpandComponent, TestWidgetComponent],
     providers
   });
-  if (other.template) TestBed.overrideTemplate(TestComponent, other.template);
+  if (other.template && other.template?.length > 0) TestBed.overrideTemplate(TestComponent, other.template);
   if (other.createComp) {
     return new PageObject<T>(other.minColumn, type);
   }
@@ -420,6 +427,7 @@ export class PageObject<T extends TestComponent> {
       [showHeader]="showHeader"
       [contextmenu]="contextmenu"
       [customRequest]="customRequest"
+      [drag]="drag"
       (change)="change($event)"
       (error)="error($event)"
     />
@@ -427,7 +435,8 @@ export class PageObject<T extends TestComponent> {
       <span>In tpl</span>
       <a class="close_in_tpl" (click)="handle.close()">close</a>
     </ng-template>
-  `
+  `,
+  imports: [STComponent, STRowDirective]
 })
 export class TestComponent {
   @ViewChild('st', { static: true }) readonly comp!: STComponent;
@@ -457,14 +466,19 @@ export class TestComponent {
   virtualScroll = false;
   showHeader = true;
   customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
-  contextmenu: STContextmenuFn | null = _ => [
+  contextmenu: STContextmenuFn | null = () => [
     { text: 'a', fn: jasmine.createSpy() },
     { text: 'b', children: [{ text: 'c', fn: jasmine.createSpy() }] }
   ];
 
-  error(): void {}
-  change(): void {}
+  drag?: STDragOptions | boolean = false;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  error(_: any): void {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  change(_: any): void {}
 }
+
 @Component({
   template: `
     <st
@@ -480,7 +494,8 @@ export class TestComponent {
         {{ item.id }}
       </ng-template>
     </st>
-  `
+  `,
+  imports: [STComponent]
 })
 export class TestExpandComponent extends TestComponent {}
 

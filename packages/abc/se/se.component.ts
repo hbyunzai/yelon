@@ -1,5 +1,4 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { NgClass } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -54,8 +53,7 @@ let nextUniqueId = 0;
   animations: [helpMotion],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [NgClass, NzStringTemplateOutletDirective, NzTooltipDirective, NzIconDirective, CdkObserveContent]
+  imports: [NzStringTemplateOutletDirective, NzTooltipDirective, NzIconDirective, CdkObserveContent]
 })
 export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit {
   private readonly parentComp = inject(SEContainerComponent, { host: true, optional: true })!;
@@ -169,7 +167,7 @@ export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit {
     if (this._autoId) {
       const controlAccessor = this.ngControl.valueAccessor as NzSafeAny;
       const control = (controlAccessor?.elementRef || controlAccessor?._elementRef)?.nativeElement as HTMLElement;
-      if (!!control) {
+      if (control) {
         if (control.id) {
           this._id = control.id;
         } else {
@@ -233,7 +231,7 @@ export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit {
     this.inited = true;
     if (this.onceFlag) {
       Promise.resolve().then(() => {
-        this.updateStatus(this.ngControl?.invalid!);
+        this.updateStatus(this.ngControl!.invalid!);
         this.onceFlag = false;
       });
     }

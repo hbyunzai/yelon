@@ -3,7 +3,7 @@ import { concat, filter, mergeMap, take, tap } from 'rxjs';
 
 import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { LodopModule } from './lodop.module';
 import { LodopService } from './lodop.service';
@@ -212,6 +212,7 @@ describe('abc: lodop', () => {
         SET_LICENSES: jasmine.createSpy('SET_LICENSES'),
         SET_PRINT_STYLEA: jasmine.createSpy('SET_PRINT_STYLEA'),
         PRINT_INITA: jasmine.createSpy('PRINT_INITA').and.callFake(function (): void {
+          // eslint-disable-next-line prefer-rest-params
           mockRes = arguments[4];
         }),
         webskt: {

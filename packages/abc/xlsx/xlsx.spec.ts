@@ -6,9 +6,9 @@ import { By } from '@angular/platform-browser';
 import { Observable, of, throwError } from 'rxjs';
 
 import { LazyService } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { XlsxModule } from './xlsx.module';
+import { XlsxDirective } from './xlsx.directive';
 import { XlsxService } from './xlsx.service';
 import { XlsxExportOptions } from './xlsx.types';
 
@@ -29,8 +29,6 @@ describe('abc: xlsx', () => {
   let srv: XlsxService;
   function genModule(): void {
     TestBed.configureTestingModule({
-      imports: [XlsxModule],
-      declarations: [TestComponent],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -137,7 +135,7 @@ describe('abc: xlsx', () => {
 
     it(`should be can't load xlsx when file is error`, (done: () => void) => {
       genModule();
-      // eslint-disable-next-line prettier/prettier
+
       spyOn(FileReader.prototype, 'readAsArrayBuffer').and.callFake(function (this: NzSafeAny) {
         this.onerror();
       });
@@ -254,7 +252,8 @@ describe('abc: xlsx', () => {
 });
 
 @Component({
-  template: ` <button [xlsx]="data"></button> `
+  template: ` <button [xlsx]="data"></button> `,
+  imports: [XlsxDirective]
 })
 class TestComponent {
   data: NzSafeAny = {};

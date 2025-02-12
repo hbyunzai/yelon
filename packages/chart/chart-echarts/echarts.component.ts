@@ -48,7 +48,6 @@ import {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [NzSkeletonComponent]
 })
 export class ChartEChartsComponent implements OnInit, OnDestroy {
@@ -123,7 +122,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
   }
 
   private emit(type: ChartEChartsEventType, other?: ChartEChartsEvent): void {
-    this.events.emit({ type, chart: this.chart!!, ...other });
+    this.events.emit({ type, chart: this.chart!, ...other });
   }
 
   @ZoneOutside()
@@ -188,7 +187,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
         filter(() => !!this._chart),
         debounceTime(200)
       )
-      .subscribe(() => this._chart!!.resize());
+      .subscribe(() => this._chart!.resize());
   }
 
   ngOnDestroy(): void {

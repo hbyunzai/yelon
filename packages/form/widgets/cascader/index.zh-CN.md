@@ -42,8 +42,8 @@ type: Non-built-in widgets
 | `[placeholder]` | 在文字框中显示提示讯息 | `string` | - |
 | `[showSearch]` | 是否支持搜索 | `bool` | `false` |
 | `[allowClear]` | 是否显示清除按钮 | `bool` | `true` |
-| `[clearText]` | 清除按钮的标题 | `string` | `清除` |
 | `[clearValue]` | 清空时默认值 | `any` | `undefined` |
+| `[clearText]` | 清除按钮的标题 | `string` | `清除` |
 | `[showArrow]` | 是否显示箭头 | `bool` | `true` |
 | `[showInput]` | 是否显示输入框 | `bool` | `true` |
 | `[menuClassName]` | 自定义浮层类名 | `string` | - |

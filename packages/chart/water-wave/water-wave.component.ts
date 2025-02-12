@@ -1,5 +1,4 @@
 import { Platform } from '@angular/cdk/platform';
-import { NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -30,8 +29,7 @@ import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [NgStyle, NzStringTemplateOutletDirective]
+  imports: [NzStringTemplateOutletDirective]
 })
 export class G2WaterWaveComponent implements OnDestroy, OnChanges, OnInit {
   private readonly el: HTMLElement = inject(ElementRef).nativeElement;

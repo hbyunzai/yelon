@@ -32,7 +32,6 @@ import type { TinymceWidgetSchema } from './schema';
   `,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, TinymceComponent]
 })
 export class TinymceWidget extends ControlUIWidget<TinymceWidgetSchema> {

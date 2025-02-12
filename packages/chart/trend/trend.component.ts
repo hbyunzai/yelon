@@ -8,7 +8,7 @@ import { NzIconDirective } from 'ng-zorro-antd/icon';
   template: `
     <ng-content />
     @if (flag) {
-      <span class="trend__{{ flag }}"><i nz-icon nzType="caret-{{ flag }}"></i></span>
+      <span class="trend__{{ flag }}"><nz-icon nzType="caret-{{ flag }}" /></span>
     }
   `,
   host: {
@@ -20,7 +20,6 @@ import { NzIconDirective } from 'ng-zorro-antd/icon';
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [NzIconDirective]
 })
 export class TrendComponent {

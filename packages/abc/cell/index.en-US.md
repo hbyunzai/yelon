@@ -11,7 +11,7 @@ Cell formatting is supported for multiple data types, and supports widget mode.
 
 ## API
 
-### cell:standalone
+### cell
 
 | Property | Description | Type | Default |
 |----------|-------------|------|---------|
@@ -80,7 +80,6 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     '(click)': 'show()'
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [ NzToolTipModule ]
 })
 export class CellTestWidget implements CellWidgetInstance {

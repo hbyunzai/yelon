@@ -12,11 +12,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import {
-  YunzaiConfigService,
-  YunzaiDateRangePickerShortcut,
-  YunzaiDateRangePickerShortcutItem
-} from '@yelon/util/config';
+import { YunzaiConfigService, YunzaiDateRangePickerShortcut, YunzaiDateRangePickerShortcutItem } from '@yelon/util/config';
 import { fixEndTimeOfRange, getTimeDistance } from '@yelon/util/date-time';
 import { assert, deepMergeKey } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -27,8 +23,7 @@ import { RangePickerShortcutTplComponent } from './range-shortcut.component';
 
 @Directive({
   selector: 'nz-range-picker[extend]',
-  exportAs: 'extendRangePicker',
-  standalone: true
+  exportAs: 'extendRangePicker'
 })
 export class RangePickerDirective implements OnDestroy, AfterViewInit {
   static ngAcceptInputType_shortcut: YunzaiDateRangePickerShortcut | string | null;

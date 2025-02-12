@@ -29,8 +29,7 @@ import { SEErrorRefresh, SELayout } from './se.types';
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true
+  encapsulation: ViewEncapsulation.None
 })
 export class SETitleComponent implements OnInit {
   private readonly parentComp = inject(SEContainerComponent, { host: true, optional: true });
@@ -78,7 +77,6 @@ export class SETitleComponent implements OnInit {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [SETitleComponent, NzStringTemplateOutletDirective]
 })
 export class SEContainerComponent {

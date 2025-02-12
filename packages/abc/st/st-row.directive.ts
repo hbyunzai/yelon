@@ -2,8 +2,8 @@ import { Directive, Injectable, Input, OnInit, TemplateRef, inject } from '@angu
 
 @Injectable()
 export class STRowSource {
-  private titles: { [key: string]: TemplateRef<void> } = {};
-  private rows: { [key: string]: TemplateRef<void> } = {};
+  private titles: Record<string, TemplateRef<void>> = {};
+  private rows: Record<string, TemplateRef<void>> = {};
 
   add(type: string | undefined, path: string, ref: TemplateRef<void>): void {
     this[type === 'title' ? 'titles' : 'rows'][path] = ref;
@@ -18,7 +18,9 @@ export class STRowSource {
   }
 }
 
-@Directive({ selector: '[st-row]' })
+@Directive({
+  selector: '[st-row]'
+})
 export class STRowDirective implements OnInit {
   private readonly source = inject(STRowSource, { host: true });
   private readonly ref = inject(TemplateRef);

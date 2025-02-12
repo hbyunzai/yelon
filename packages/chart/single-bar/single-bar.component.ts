@@ -22,8 +22,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true
+  encapsulation: ViewEncapsulation.None
 })
 export class G2SingleBarComponent extends G2BaseComponent {
   // #region fields
@@ -38,7 +37,7 @@ export class G2SingleBarComponent extends G2BaseComponent {
   @Input({ transform: booleanAttribute }) line = false;
   @Input() format?: (value: number, item: NzSafeAny, index: number) => string;
   @Input() padding: number | number[] | 'auto' = 0;
-  @Input() textStyle: { [key: string]: NzSafeAny } = { fontSize: 12, color: '#595959' };
+  @Input() textStyle: Record<string, NzSafeAny> = { fontSize: 12, color: '#595959' };
 
   // #endregion
 

@@ -23,7 +23,6 @@ import { CountDownComponent } from '@yelon/abc/count-down';
 @Component({
   selector: 'app-demo',
   template: ` <count-down [config]="config" /> `,
-  standalone: true,
   imports: [CountDownComponent]
 })
 export class DemoComponent {

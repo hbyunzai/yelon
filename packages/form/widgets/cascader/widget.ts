@@ -36,6 +36,7 @@ import type { SFCascaderWidgetSchema } from './schema';
       [nzValueProperty]="ui.valueProperty || 'value'"
       [nzLoadData]="loadData"
       [nzPlaceHolder]="ui.placeholder!"
+      [nzPlacement]="ui.placement ?? 'bottomLeft'"
       [nzShowArrow]="showArrow"
       [nzShowInput]="showInput"
       [nzShowSearch]="ui.showSearch!"
@@ -46,7 +47,6 @@ import type { SFCascaderWidgetSchema } from './schema';
   </sf-item-wrap>`,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, NzCascaderModule]
 })
 export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> implements OnInit {
@@ -65,7 +65,7 @@ export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> impl
     this.showArrow = toBool(showArrow, true);
     this.showInput = toBool(showInput, true);
     this.triggerAction = triggerAction || ['click'];
-    if (!!asyncData) {
+    if (asyncData) {
       this.loadData = (node: NzCascaderOption, index: number) =>
         asyncData(node, index, this).then(() => this.detectChanges());
     }

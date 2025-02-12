@@ -1,6 +1,4 @@
-# @yelon/abc [![CI](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/hbyunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon) [![NPM version](https://img.shields.io/npm/v/@yelon/abc.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/abc)
-
-
+# @yelon/abc [![CI](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/ng-yunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon) [![NPM version](https://img.shields.io/npm/v/@yelon/abc.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/abc)
 
 Common business components of ng-yunzai.
 
@@ -8,7 +6,7 @@ Common business components of ng-yunzai.
 
 + [Document](https://ng.yunzainfo.com/components) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/components)
 + [@yelon Source](https://github.com/hbyunzai/yelon)
-+ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng.yunzainfo.com/))
++ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 
 ## Architecture
 

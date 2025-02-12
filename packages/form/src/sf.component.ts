@@ -74,7 +74,9 @@ export function useFactory(
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class SFComponent implements OnInit, OnChanges, OnDestroy {
   private readonly formPropertyFactory = inject(FormPropertyFactory);
@@ -201,7 +203,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
    *
    * 表单值
    */
-  get value(): { [key: string]: NzSafeAny } {
+  get value(): Record<string, NzSafeAny> {
     return this._item;
   }
 
@@ -611,9 +613,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
       if (Array.isArray(property.properties)) {
         property.properties.forEach(p => fn(p));
       } else {
-        Object.keys(property.properties).forEach(key =>
-          fn((property.properties as { [key: string]: FormProperty })[key])
-        );
+        Object.keys(property.properties).forEach(key => fn((property.properties as Record<string, FormProperty>)[key]));
       }
     };
     if (options.onlyRoot) {

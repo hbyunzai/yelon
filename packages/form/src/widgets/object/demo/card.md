@@ -29,7 +29,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
       <a (click)="msg.success('Success')">More</a>
     </ng-template>
   `,
-  standalone: true,
   imports: [YelonFormModule]
 })
 export class DemoComponent implements OnInit {

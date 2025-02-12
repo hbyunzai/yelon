@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -16,16 +15,31 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 @Component({
   selector: 'g2-mini-progress',
   exportAs: 'g2MiniProgress',
-  templateUrl: './mini-progress.component.html',
+  template: `
+    <div
+      nz-tooltip
+      [nzTooltipTitle]="targetSuffix + target + '%'"
+      class="g2-mini-progress__target"
+      [style]="{ left: target + '%' }"
+    >
+      <span class="g2-mini-progress__target-item" [style]="{ 'background-color': color }"></span>
+      <span class="g2-mini-progress__target-item" [style]="{ 'background-color': color }"></span>
+    </div>
+    <div class="g2-mini-progress__wrap">
+      <div
+        class="g2-mini-progress__value"
+        [style]="{ 'background-color': color, width: percent + '%', height: strokeWidth + 'px' }"
+      ></div>
+    </div>
+  `,
   host: { '[class.g2-mini-progress]': 'true' },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [NzTooltipDirective, NgStyle]
+  imports: [NzTooltipDirective]
 })
 export class G2MiniProgressComponent implements OnChanges {
-  readonly i18n = inject(YelonLocaleService);
+  readonly targetSuffix = inject(YelonLocaleService).getData('miniProgress').target;
   private readonly cdr = inject(ChangeDetectorRef);
 
   @Input() color = '#1890FF';

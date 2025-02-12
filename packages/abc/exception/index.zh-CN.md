@@ -10,7 +10,7 @@ module: import { ExceptionModule } from '@yelon/abc/exception';
 
 ## API
 
-### exception:standalone
+### exception
 
 | 成员 | 说明 | 类型 | 默认值 | 全局配置 |
 |----|----|----|-----|------|

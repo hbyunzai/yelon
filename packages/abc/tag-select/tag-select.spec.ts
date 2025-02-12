@@ -6,7 +6,6 @@ import { createTestContext } from '@yelon/testing';
 import { YelonLocaleModule, YelonLocaleService, en_US, zh_CN } from '@yelon/theme';
 
 import { TagSelectComponent } from './tag-select.component';
-import { TagSelectModule } from './tag-select.module';
 
 describe('abc: tag-select', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -15,8 +14,7 @@ describe('abc: tag-select', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TagSelectModule, YelonLocaleModule],
-      declarations: [TestComponent]
+      imports: [YelonLocaleModule]
     });
     ({ fixture, dl, context } = createTestContext(TestComponent));
     fixture.detectChanges();
@@ -64,7 +62,8 @@ describe('abc: tag-select', () => {
         <li style="width: 30%">{{ i.text }}</li>
       }
     </tag-select>
-  `
+  `,
+  imports: [TagSelectComponent]
 })
 class TestComponent {
   @ViewChild('comp', { static: true })
