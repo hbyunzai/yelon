@@ -55,7 +55,7 @@ export default {
   `,
   '.vscode/extensions.json': `{
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
-    "recommendations": ["yunzai-bot.ng-yunzai-extension-pack"]
+    "recommendations": ["cipchk.ng-yunzai-extension-pack"]
   }
   `,
   '.vscode/launch.json': `{

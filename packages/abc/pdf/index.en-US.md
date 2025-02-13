@@ -40,7 +40,7 @@ const yunzaiConfig: YunzaiConfig = {
 
 ## API
 
-### pdf:standalone
+### pdf
 
 | Property | Description | Type | Default | Global Config |
 |----------|-------------|------|---------|---------------|

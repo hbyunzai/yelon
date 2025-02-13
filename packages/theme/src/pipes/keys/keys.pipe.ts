@@ -1,14 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 /**
  * [Document](https://ng.yunzainfo.com/theme/keys)
  */
-@Pipe({ name: 'keys', standalone: true })
+@Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
-  transform(value: NzSafeAny, keyIsNumber: boolean = false): NzSafeAny[] {
-    const ret: NzSafeAny[] = [];
+  transform(value: any, keyIsNumber: boolean = false): any[] {
+    const ret: any[] = [];
     Object.keys(value).forEach(key => {
       ret.push({ key: keyIsNumber ? +key : key, value: value[key] });
     });

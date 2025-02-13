@@ -28,11 +28,11 @@ Provides the service of `YelonLocaleService` to dynamic change the locale text.
 ```ts
 import { en_US, YelonLocaleService } from '@yelon/theme';
 ...
-constructor(private yelonLocaleService: YelonLocaleService) {
+constructor(private yunzaiLocaleService: YelonLocaleService) {
 }
 
 switchLanguage() {
-  this.yelonLocaleService.setLocale(en_US);
+  this.yunzaiLocaleService.setLocale(en_US);
 }
 ```
 
@@ -42,20 +42,21 @@ Note: `en_US` is the package name, follow below.
 
 | Language | Filename |
 |----------|----------|
-| English | en_US |
-| Chinese (Simplified) | zh_CN |
-| Chinese (Traditional) | zh_TW |
-| Turkish | tr_TR |
-| Polish | pl_PL |
-| Greek | el_GR |
-| Korean | ko_KR |
-| Croatian | hr_HR |
-| Japanese | ja_JP |
-| Slovenian | sl_SI |
-| French | fr_FR |
-| Spanish | es_ES |
-| Italian | it_IT |
-| Vietnamese | vi_VI |
+| English | en_US    |
+| Chinese (Simplified) | zh_CN    |
+| Chinese (Traditional) | zh_TW    |
+| Turkish | tr_TR    |
+| Polish | pl_PL    |
+| Greek | el_GR    |
+| Korean | ko_KR    |
+| Croatian | hr_HR    |
+| Japanese | ja_JP    |
+| Slovenian | sl_SI    |
+| French | fr_FR    |
+| Spanish | es_ES    |
+| Italian | it_IT    |
+| Vietnamese | vi_VI    |
+| Arabic | ar_SA    |
 
 ## Add a new language
 

@@ -8,7 +8,7 @@ import { I18nPipe } from '@yelon/theme';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -287,10 +287,10 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     if (this.userIds.length > 0) {
       this.service.usersByIds(this.userIds).subscribe(users => {
         this.state.check.data = this.state.check.data.concat(users);
-        this.onChecked.emit(this.state.check.data as NzSafeAny);
+        this.onChecked.emit(this.state.check.data as any);
       });
     } else {
-      this.onChecked.emit(this.state.check.data as NzSafeAny);
+      this.onChecked.emit(this.state.check.data as any);
     }
   }
 
@@ -359,7 +359,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     this.onChecked.emit(this.state.check.data as YunzaiTableUser[]);
   }
 
-  onCheckedAll(e: NzSafeAny): void {
+  onCheckedAll(e: any): void {
     const checkedAll = e.target.labels[0].innerHTML.includes('checked');
     if (checkedAll) {
       const data = this.st._data.filter(
@@ -388,7 +388,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
     return false;
   }
 
-  isArraySubset(subset: NzSafeAny[], superset: NzSafeAny[]): boolean {
+  isArraySubset(subset: any[], superset: any[]): boolean {
     return subset.every(item => superset.some(superItem => superItem.userId === item.userId));
   }
 

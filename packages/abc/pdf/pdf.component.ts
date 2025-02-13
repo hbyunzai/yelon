@@ -31,7 +31,7 @@ import { fromEvent, timer, debounceTime, filter } from 'rxjs';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 import { PDF_DEFULAT_CONFIG } from './pdf.config';
@@ -40,12 +40,12 @@ import { PdfChangeEvent, PdfChangeEventType, PdfExternalLinkTarget, PdfTextLayer
 // TODO: Although pdfjs-dist is an optional dependency on canvas
 // will be installed automatically when the dependency is installed by default;
 // This requires a higher environment and often fails to install
-type PDFDocumentLoadingTask = NzSafeAny;
-type PDFDocumentProxy = NzSafeAny;
-type EventBus = NzSafeAny;
-type PDFFindController = NzSafeAny;
-type PDFLinkService = NzSafeAny;
-type PDFViewer = NzSafeAny;
+type PDFDocumentLoadingTask = any;
+type PDFDocumentProxy = any;
+type EventBus = any;
+type PDFFindController = any;
+type PDFLinkService = any;
+type PDFViewer = any;
 
 const CSS_UNITS: number = 96.0 / 72.0;
 const BORDER_WIDTH = 9;
@@ -67,7 +67,6 @@ const BORDER_WIDTH = 9;
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [NzSkeletonComponent]
 })
 export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
@@ -83,8 +82,8 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
   private lib: string = '';
   private _pdf?: PDFDocumentProxy | null;
   private loadingTask?: PDFDocumentLoadingTask;
-  private _src: NzSafeAny;
-  private lastSrc?: NzSafeAny;
+  private _src: any;
+  private lastSrc?: any;
   private _pi = 1;
   private _total = 0;
   private _showAll = true;
@@ -101,7 +100,7 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
   private singlePageFindController?: PDFFindController;
   private _eventBus?: EventBus;
 
-  @Input() set src(dataOrBuffer: NzSafeAny) {
+  @Input() set src(dataOrBuffer: any) {
     this._src = dataOrBuffer;
     this.load();
   }
@@ -172,7 +171,7 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
     return this._renderText ? this.textLayerMode : PdfTextLayerMode.DISABLE;
   }
 
-  private get win(): NzSafeAny {
+  private get win(): any {
     return this.doc.defaultView || window;
   }
 
@@ -285,14 +284,14 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private cleanDoc(): void {
-    this.multiPageViewer!.setDocument(null as NzSafeAny);
-    this.singlePageViewer!.setDocument(null as NzSafeAny);
+    this.multiPageViewer!.setDocument(null as any);
+    this.singlePageViewer!.setDocument(null as any);
 
     this.multiPageLinkService!.setDocument(null, null);
     this.singlePageLinkService!.setDocument(null, null);
 
-    this.multiPageFindController!.setDocument(null as NzSafeAny);
-    this.singlePageFindController!.setDocument(null as NzSafeAny);
+    this.multiPageFindController!.setDocument(null as any);
+    this.singlePageFindController!.setDocument(null as any);
   }
 
   private render(): void {
@@ -329,7 +328,7 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
     const currentViewer = this.pageViewer;
     if (!currentViewer) return;
 
-    this._pdf!.getPage(currentViewer.currentPageNumber).then((page: NzSafeAny) => {
+    this._pdf!.getPage(currentViewer.currentPageNumber).then((page: any) => {
       const { _rotation, _zoom } = this;
       const rotation = _rotation || page.rotate;
       const viewportWidth =
@@ -399,20 +398,20 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   private createEventBus(): EventBus {
     const eventBus: EventBus = new this.win.pdfjsViewer.EventBus();
-    eventBus.on(`pagesinit`, (ev: NzSafeAny) => {
+    eventBus.on(`pagesinit`, (ev: any) => {
       this.emit('pages-init', { ev });
     });
-    eventBus.on(`pagerendered`, (ev: NzSafeAny) => {
+    eventBus.on(`pagerendered`, (ev: any) => {
       this.emit('page-rendered', { ev });
     });
-    eventBus.on(`pagechanging`, (ev: NzSafeAny) => {
+    eventBus.on(`pagechanging`, (ev: any) => {
       const nowPi = ev.pageNumber;
       if (nowPi !== this._pi) {
         this._pi = nowPi;
         this.emit('pi', { ev });
       }
     });
-    eventBus.on(`textlayerrendered`, (ev: NzSafeAny) => {
+    eventBus.on(`textlayerrendered`, (ev: any) => {
       this.emit('text-layer-rendered', { ev });
     });
     return eventBus;

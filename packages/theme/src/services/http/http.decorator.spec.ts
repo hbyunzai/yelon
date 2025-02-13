@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpParams } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { _HttpClient } from './http.client';
+
 import {
   BaseApi,
   BaseHeaders,
@@ -57,7 +56,7 @@ class MockService extends BaseApi {
   }
 
   @POST(':id')
-  save(@Path('id') _id: number, @Body _data: NzSafeAny): Observable<any> {
+  save(@Path('id') _id: number, @Body _data: any): Observable<any> {
     return null as any;
   }
 
@@ -72,7 +71,7 @@ class MockService extends BaseApi {
   }
 
   @POST(':id')
-  payloadPost(@Payload _body: any, @Body _body2?: NzSafeAny): Observable<any> {
+  payloadPost(@Payload _body: any, @Body _body2?: any): Observable<any> {
     return null as any;
   }
 
@@ -245,9 +244,9 @@ describe('theme: http.decorator', () => {
   });
 
   it('should construct a POST request', () => {
-    srv.save(1, { name: 'yunzai-bot' });
+    srv.save(1, { name: 'cipchk' });
     expect(request).toHaveBeenCalled();
-    expect(request.calls.mostRecent().args[2].body.name).toBe('yunzai-bot');
+    expect(request.calls.mostRecent().args[2].body.name).toBe('cipchk');
   });
 
   it('should construct a POST request via array body', () => {
@@ -259,7 +258,7 @@ describe('theme: http.decorator', () => {
 
   [`DELETE`, `OPTIONS`, `PUT`, `HEAD`, `PATCH`, `JSONP`].forEach(type => {
     it(`should construct a ${type} request`, () => {
-      (srv as NzSafeAny)[type]();
+      (srv as any)[type]();
       expect(request).toHaveBeenCalled();
       expect(request.calls.mostRecent().args[0]).toBe(type);
     });

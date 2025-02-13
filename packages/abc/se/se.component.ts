@@ -1,5 +1,4 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { NgClass } from '@angular/common';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -28,7 +27,7 @@ import { isEmpty } from '@yelon/util/browser';
 import { helpMotion } from 'ng-zorro-antd/core/animation';
 import { NzFormStatusService } from 'ng-zorro-antd/core/form';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
@@ -54,8 +53,7 @@ let nextUniqueId = 0;
   animations: [helpMotion],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [NgClass, NzStringTemplateOutletDirective, NzTooltipDirective, NzIconDirective, CdkObserveContent]
+  imports: [NzStringTemplateOutletDirective, NzTooltipDirective, NzIconDirective, CdkObserveContent]
 })
 export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit {
   private readonly parentComp = inject(SEContainerComponent, { host: true, optional: true })!;
@@ -167,9 +165,9 @@ export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit {
       .statusChanges!.pipe(takeUntilDestroyed(this.destroy$))
       .subscribe(res => this.updateStatus(res === 'INVALID'));
     if (this._autoId) {
-      const controlAccessor = this.ngControl.valueAccessor as NzSafeAny;
+      const controlAccessor = this.ngControl.valueAccessor as any;
       const control = (controlAccessor?.elementRef || controlAccessor?._elementRef)?.nativeElement as HTMLElement;
-      if (!!control) {
+      if (control) {
         if (control.id) {
           this._id = control.id;
         } else {
@@ -181,7 +179,7 @@ export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit {
     if (this.required !== true) {
       let required = this.ngControl?.control?.hasValidator(Validators.required);
       if (required !== true) {
-        const rawValidators = (this.ngControl as NzSafeAny)?._rawValidators as Validator[];
+        const rawValidators = (this.ngControl as any)?._rawValidators as Validator[];
         required = rawValidators.find(w => w instanceof RequiredValidator) != null;
       }
       this.required = required;
@@ -233,7 +231,7 @@ export class SEComponent implements OnChanges, AfterContentInit, AfterViewInit {
     this.inited = true;
     if (this.onceFlag) {
       Promise.resolve().then(() => {
-        this.updateStatus(this.ngControl?.invalid!);
+        this.updateStatus(this.ngControl!.invalid!);
         this.onceFlag = false;
       });
     }

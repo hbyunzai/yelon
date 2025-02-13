@@ -6,7 +6,7 @@ import { Observable, filter, map } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { SettingsService } from '../settings/settings.service';
 
@@ -41,7 +41,7 @@ export class RTLService {
     this.updateHtml();
     // Should be wait inited
     Promise.resolve().then(() => {
-      (this.d as NzSafeAny).value = value;
+      (this.d as any).value = value;
       this.d.change.emit(value);
       this.srv.setLayout(RTL_DIRECTION, value);
     });
@@ -97,10 +97,10 @@ export class RTLService {
 
   private updateLibConfig(): void {
     RTL_NZ_COMPONENTS.forEach(name => {
-      this.nz.set(name as NzSafeAny, { nzDirection: this.dir });
+      this.nz.set(name as any, { nzDirection: this.dir });
     });
     RTL_YELON_COMPONENTS.forEach(name => {
-      this.yelon.set(name as NzSafeAny, { direction: this.dir });
+      this.yelon.set(name as any, { direction: this.dir });
     });
   }
 }

@@ -16,26 +16,21 @@
       "type": "node",
       "request": "launch",
       "name": "site generate",
-      "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
+      "program": "${workspaceFolder}/scripts/site/generate.ts",
+      "runtimeExecutable": "tsx",
+      "console": "integratedTerminal",
       "internalConsoleOptions": "openOnSessionStart",
-      "args": ["${workspaceFolder}/scripts/site/generate.ts", "auto-focus"],
-      "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/scripts/site/tsconfig.json",
-        "TS_NODE_TRANSPILE_ONLY": "true"
-      }
+      "skipFiles": []
     },
     {
       "type": "node",
       "request": "launch",
       "name": "schematics test",
-      "runtimeArgs": ["-r", "ts-node/register"],
-      "cwd": "${workspaceRoot}",
-      "sourceMaps": true,
-      "internalConsoleOptions": "openOnSessionStart",
-      "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/schematics/tsconfig.spec.json"
-      },
-      "args": ["${workspaceFolder}/schematics/test.ts"]
+      "program": "${workspaceFolder}/schematics/test.ts",
+      "runtimeExecutable": "tsx",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": []
     }
   ]
 }

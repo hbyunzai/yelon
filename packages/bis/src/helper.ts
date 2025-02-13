@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 export const CODEMESSAGE: { [key: number]: string } = {
@@ -44,7 +44,7 @@ export function checkStatus(injector: Injector, ev: HttpResponseBase): void {
 }
 
 export interface ReThrowHttpError {
-  body: NzSafeAny;
+  body: any;
   _throw: true;
 }
 

@@ -6,12 +6,12 @@ import isUtf8 from 'isutf8';
 import { YunzaiConfigService, YunzaiXlsxConfig } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyResult, LazyService } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { XlsxExportOptions, XlsxExportResult, XlsxExportSheet } from './xlsx.types';
 
-declare var XLSX: NzSafeAny;
-declare var cptable: NzSafeAny;
+declare const XLSX: any;
+declare const cptable: any;
 
 @Injectable({ providedIn: 'root' })
 export class XlsxService {
@@ -35,12 +35,12 @@ export class XlsxService {
   }
 
   @ZoneOutside()
-  private read(data: NzSafeAny): { [key: string]: NzSafeAny[][] } {
+  private read(data: any): Record<string, any[][]> {
     const {
       read,
       utils: { sheet_to_json }
     } = XLSX;
-    const ret: NzSafeAny = {};
+    const ret: any = {};
     const buf = new Uint8Array(data);
     let type = 'array';
     if (!isUtf8(buf)) {
@@ -51,7 +51,7 @@ export class XlsxService {
     }
     const wb = read(data, { type });
     wb.SheetNames.forEach((name: string) => {
-      const sheet: NzSafeAny = wb.Sheets[name];
+      const sheet: any = wb.Sheets[name];
       ret[name] = sheet_to_json(sheet, { header: 1 });
     });
     return ret;
@@ -60,23 +60,23 @@ export class XlsxService {
   /**
    * 导入Excel并输出JSON，支持 `<input type="file">`、URL 形式
    */
-  import(fileOrUrl: File | string): Promise<{ [key: string]: NzSafeAny[][] }> {
-    return new Promise<{ [key: string]: NzSafeAny[][] }>((resolve, reject) => {
-      const r = (data: NzSafeAny): void => this.ngZone.run(() => resolve(this.read(data)));
+  import(fileOrUrl: File | string): Promise<Record<string, any[][]>> {
+    return new Promise<Record<string, any[][]>>((resolve, reject) => {
+      const r = (data: any): void => this.ngZone.run(() => resolve(this.read(data)));
       this.init()
         .then(() => {
           // from url
           if (typeof fileOrUrl === 'string') {
             this.http.request('GET', fileOrUrl, { responseType: 'arraybuffer' }).subscribe({
               next: (res: ArrayBuffer) => r(new Uint8Array(res)),
-              error: (err: NzSafeAny) => reject(err)
+              error: (err: any) => reject(err)
             });
             return;
           }
           // from file
           const reader: FileReader = new FileReader();
-          reader.onload = (e: NzSafeAny) => r(e.target.result);
-          reader.onerror = (e: NzSafeAny) => reject(e);
+          reader.onload = (e: any) => r(e.target.result);
+          reader.onerror = (e: any) => reject(e);
           reader.readAsArrayBuffer(fileOrUrl);
         })
         .catch(() => reject(`Unable to load xlsx.js`));
@@ -93,10 +93,10 @@ export class XlsxService {
             writeFile,
             utils: { book_new, aoa_to_sheet, book_append_sheet }
           } = XLSX;
-          const wb: NzSafeAny = book_new();
+          const wb: any = book_new();
           if (Array.isArray(options.sheets)) {
             (options.sheets as XlsxExportSheet[]).forEach((value: XlsxExportSheet, index: number) => {
-              const ws: NzSafeAny = aoa_to_sheet(value.data);
+              const ws: any = aoa_to_sheet(value.data);
               book_append_sheet(wb, ws, value.name || `Sheet${index + 1}`);
             });
           } else {

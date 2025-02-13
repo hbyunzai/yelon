@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +14,7 @@ import type { Chart, Event } from '@antv/g2';
 
 import { G2BaseComponent } from '@yelon/chart/core';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzColDirective, NzRowDirective } from 'ng-zorro-antd/grid';
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
@@ -23,7 +22,7 @@ export interface G2RadarData {
   name: string;
   label: string;
   value: number;
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 }
 
 export interface G2RadarClickItem {
@@ -42,11 +41,10 @@ export interface G2RadarClickItem {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [NzSkeletonComponent, NzStringTemplateOutletDirective, NzRowDirective, NzColDirective, NgStyle]
+  imports: [NzSkeletonComponent, NzStringTemplateOutletDirective, NzRowDirective, NzColDirective]
 })
 export class G2RadarComponent extends G2BaseComponent {
-  legendData: NzSafeAny[] = [];
+  legendData: any[] = [];
 
   // #region fields
 

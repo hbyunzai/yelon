@@ -17,9 +17,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   template: `
     <div style="height: 280px;"></div>
     <global-footer [links]="links">
-      Copyright<i nz-icon nzType="copyright" class="mx-sm"></i>
-      2023
-      <a href="//github.com/yunzai-bot" target="_blank" class="mx-sm">yunzai-bot</a>出品
+      Copyright<nz-icon nzType="copyright" class="mx-sm" />
+      2025
+      <a href="//github.com/cipchk" target="_blank" class="mx-sm">卡色</a>出品
     </global-footer>
   `,
   styles: [
@@ -29,7 +29,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
       }
     `
   ],
-  standalone: true,
   imports: [GlobalFooterComponent, NzIconModule]
 })
 export class DemoComponent {
@@ -41,7 +40,7 @@ export class DemoComponent {
     },
     {
       title: 'Github',
-      href: 'https://github.com/hbyunzai',
+      href: 'https://github.com/ng-yunzai',
       blankTarget: true
     },
     {

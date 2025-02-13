@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DecimalPipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
@@ -7,11 +6,11 @@ import { firstValueFrom, of, throwError } from 'rxjs';
 import { DatePipe, YNPipe } from '@yelon/theme';
 import { CurrencyService } from '@yelon/util/format';
 import { deepCopy } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { STDataSource, STDataSourceOptions } from '../st-data-source';
 import { ST_DEFAULT_CONFIG } from '../st.config';
-import { STColumnButton, STColumnFilterMenu, STData } from '../st.interfaces';
+import { STColumnButton, STColumnFilterMenu, STData, STReq } from '../st.interfaces';
 import { _STColumn, _STDataValue } from '../st.types';
 
 const DEFAULT = {
@@ -46,6 +45,7 @@ describe('abc: table: data-souce', () => {
   let mockDomSanitizer: MockDomSanitizer;
 
   class MockHttpClient {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     request(_method: string, _url: string, _opt: any): any {
       return of(httpResponse);
     }
@@ -63,7 +63,7 @@ describe('abc: table: data-souce', () => {
       ps: DEFAULT.ps,
       data: [],
       total: DEFAULT.total,
-      req: deepCopy(ST_DEFAULT_CONFIG.req),
+      req: deepCopy(ST_DEFAULT_CONFIG.req as unknown as STReq),
       res: deepCopy(ST_DEFAULT_CONFIG.res),
       page: deepCopy(ST_DEFAULT_CONFIG.page),
       columns: [{ title: '', index: 'id' }] as _STColumn[],
@@ -189,7 +189,7 @@ describe('abc: table: data-souce', () => {
           done();
         });
       });
-      it('should be null, muse be ingore sort processing', done => {
+      it('should be null, muse be ignore sort processing', done => {
         options.headers[0][0].column._sort = {
           enabled: true,
           compare: null,
@@ -320,7 +320,7 @@ describe('abc: table: data-souce', () => {
       });
       it('should be process', done => {
         options.req.process = a => {
-          (a.params as NzSafeAny)!.pi = 2;
+          (a.params as any)!.pi = 2;
           return a;
         };
         let resParams!: HttpParams;
@@ -366,8 +366,8 @@ describe('abc: table: data-souce', () => {
         options.req.ignoreParamNull = true;
         options.req.params = { a: null, b: 1 };
         options.req.process = res => {
-          expect(Object.keys(res.params!!)).not.toContain(`a`);
-          expect(Object.keys(res.params!!)).toContain(`b`);
+          expect(Object.keys(res.params!)).not.toContain(`a`);
+          expect(Object.keys(res.params!)).toContain(`b`);
           return res;
         };
         srv.process(options).subscribe(() => done());
@@ -515,12 +515,16 @@ describe('abc: table: data-souce', () => {
             {
               title: '',
               index: 'id1',
-              _sort: { enabled: true, default: 'descend', key: 'id1' }
+              _sort: { enabled: true, default: 'descend', key: 'id1' },
+              _left: false,
+              _right: false
             },
             {
               title: '',
               index: 'id2',
-              _sort: { enabled: true, default: 'ascend', key: 'id2' }
+              _sort: { enabled: true, default: 'ascend', key: 'id2' },
+              _left: false,
+              _right: false
             }
           ];
           options.headers = [
@@ -968,6 +972,7 @@ describe('abc: table: data-souce', () => {
       options.data = [{ id: 1 }];
       options.columns = [
         {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           buttons: [{ text: (_, __) => `fn` }]
         }
       ] as _STColumn[];
@@ -1071,7 +1076,7 @@ describe('abc: table: data-souce', () => {
     });
 
     it('should be custom function', done => {
-      let callbackRawData: NzSafeAny = null;
+      let callbackRawData: any = null;
       options.columns = [
         {
           title: '',
@@ -1123,7 +1128,7 @@ describe('abc: table: data-souce', () => {
           done();
         });
       });
-      it('should be ingore currency', done => {
+      it('should be ignore currency', done => {
         options.columns = [{ title: '', index: 'a', statistical: { type: 'sum', currency: false } }] as _STColumn[];
         options.data = [{ a: 1 }, { a: 2 }, { a: 0.1 }];
 

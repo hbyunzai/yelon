@@ -5,19 +5,20 @@ import { Component, DebugElement, Injectable, TemplateRef, Type, ViewChild } fro
 import { ComponentFixture, discardPeriodicTasks, flush, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { dispatchDropDown } from '@yelon/testing';
-import { YUNZAI_I18N_TOKEN, YelonLocaleModule, _HttpClient } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, YelonLocaleModule } from '@yelon/theme';
 import { deepCopy, deepGet } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPaginationComponent } from 'ng-zorro-antd/pagination';
 
 import { YunzaiI18NService, YunzaiI18NServiceFake } from '../../../theme/src/services/i18n/i18n';
+import { STRowDirective } from '../st-row.directive';
 import { STComponent } from '../st.component';
 import {
   STChange,
@@ -27,6 +28,7 @@ import {
   STColumnTitle,
   STContextmenuFn,
   STCustomRequestOptions,
+  STDragOptions,
   STError,
   STMultiSort,
   STPage,
@@ -35,17 +37,16 @@ import {
   STWidthMode
 } from '../st.interfaces';
 import { STModule } from '../st.module';
-import { _STColumn } from '../st.types';
 import { STWidgetRegistry } from './../st-widget';
 
 export const MOCKDATE = new Date();
 export const MOCKIMG = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==`;
 
 const r = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1) + min);
-export function genData(count: number): NzSafeAny[] {
+export function genData(count: number): any[] {
   return Array(count)
     .fill({})
-    .map((_item: NzSafeAny, idx: number) => {
+    .map((_item: any, idx: number) => {
       return {
         id: idx + 1,
         name: `name ${idx + 1}`,
@@ -66,11 +67,11 @@ export function genData(count: number): NzSafeAny[] {
 
 export const PS = 3;
 export const DEFAULTCOUNT = PS + 1;
-export const USERS: NzSafeAny[] = genData(DEFAULTCOUNT);
+export const USERS: any[] = genData(DEFAULTCOUNT);
 
 @Injectable()
 export class MockI18NServiceFake extends YunzaiI18NServiceFake {
-  fanyi(_key: string): string {
+  fanyi(): string {
     return 'zh';
   }
 }
@@ -86,8 +87,9 @@ export function genModule<T extends TestComponent>(
   other: {
     template?: string;
     i18n?: boolean;
+    i18nIgnoreOverride?: boolean;
     minColumn?: boolean;
-    providers?: NzSafeAny[];
+    providers?: any[];
     createComp?: boolean;
   }
 ): PageObject<T> | undefined {
@@ -100,7 +102,6 @@ export function genModule<T extends TestComponent>(
     ...other
   };
   const imports = [
-    NoopAnimationsModule,
     CommonModule,
     FormsModule,
     RouterModule.forRoot([]),
@@ -109,23 +110,29 @@ export function genModule<T extends TestComponent>(
     STModule,
     YelonLocaleModule
   ];
-  const providers = [
+  const providers: any[] = [
+    provideNoopAnimations(),
     provideHttpClient(),
-    provideHttpClientTesting(),
-    {
+    provideHttpClientTesting()
+    // {
+    //   provide: YUNZAI_I18N_TOKEN,
+    //   useClass: MockI18NServiceFake
+    // }
+  ];
+  if (other.i18nIgnoreOverride !== true) {
+    providers.push({
       provide: YUNZAI_I18N_TOKEN,
       useClass: MockI18NServiceFake
-    }
-  ];
+    });
+  }
   if (other.providers!.length > 0) {
     providers.push(...other.providers!);
   }
   TestBed.configureTestingModule({
     imports,
-    declarations: [TestComponent, TestExpandComponent, TestWidgetComponent],
     providers
   });
-  if (other.template) TestBed.overrideTemplate(TestComponent, other.template);
+  if (other.template && other.template?.length > 0) TestBed.overrideTemplate(TestComponent, other.template);
   if (other.createComp) {
     return new PageObject<T>(other.minColumn, type);
   }
@@ -157,9 +164,9 @@ export class PageObject<T extends TestComponent> {
       this.context.columns = [{ title: '', index: 'id' }];
     }
 
-    spyOn(this.context as NzSafeAny, 'error').and.callFake((res: STError) => (this.spyErrorData = res));
-    this.changeSpy = spyOn(this.context as NzSafeAny, 'change').and.callFake(
-      ((e: NzSafeAny) => (this._changeData = e)) as NzSafeAny
+    spyOn(this.context as any, 'error').and.callFake((res: STError) => (this.spyErrorData = res));
+    this.changeSpy = spyOn(this.context as any, 'change').and.callFake(
+      ((e: any) => (this._changeData = e)) as any
     );
     this.comp = this.context.comp;
   }
@@ -255,7 +262,7 @@ export class PageObject<T extends TestComponent> {
     return this;
   }
   /** 断言组件内 `_columns` 值 */
-  expectColumn(title: string, path: string, valule: NzSafeAny): this {
+  expectColumn(title: string, path: string, valule: any): this {
     const ret = deepGet(
       this.comp._columns.find(w => (w.title as STColumnTitle).text === title),
       path
@@ -264,7 +271,7 @@ export class PageObject<T extends TestComponent> {
     return this;
   }
   /** 断言组件内 `_data` 值，下标从 `1` 开始 */
-  expectData(row: number, path: string, valule: NzSafeAny, options?: { message?: string }): this {
+  expectData(row: number, path: string, valule: any, options?: { message?: string }): this {
     const ret = deepGet(this.comp._data[row - 1], path);
     if (options?.message != null) {
       expect(ret).withContext(options.message).toBe(valule);
@@ -284,7 +291,7 @@ export class PageObject<T extends TestComponent> {
     this.fixture.detectChanges();
     return this;
   }
-  updateData(data: NzSafeAny): this {
+  updateData(data: any): this {
     this.context.data = data;
     return this.cd();
   }
@@ -294,7 +301,7 @@ export class PageObject<T extends TestComponent> {
     this.context.ps = ps;
     return this.cd();
   }
-  expectCompData(path: string, value: NzSafeAny): this {
+  expectCompData(path: string, value: any): this {
     expect(deepGet(this.comp, path)).toBe(value);
     return this;
   }
@@ -355,7 +362,7 @@ export class PageObject<T extends TestComponent> {
     this.fixture.detectChanges();
     return this;
   }
-  openContextMenu(col: number, row?: number, event?: NzSafeAny): this {
+  openContextMenu(col: number, row?: number, event?: any): this {
     let el: HTMLElement;
     if (typeof row === 'number') {
       el = this.getCell(row, col);
@@ -372,7 +379,7 @@ export class PageObject<T extends TestComponent> {
       preventDefault: jasmine.createSpy(),
       stopPropagation: jasmine.createSpy(),
       ...event
-    } as NzSafeAny);
+    } as any);
     return this.cd();
   }
   clickContentMenu(idx: number): this {
@@ -420,6 +427,7 @@ export class PageObject<T extends TestComponent> {
       [showHeader]="showHeader"
       [contextmenu]="contextmenu"
       [customRequest]="customRequest"
+      [drag]="drag"
       (change)="change($event)"
       (error)="error($event)"
     />
@@ -427,12 +435,13 @@ export class PageObject<T extends TestComponent> {
       <span>In tpl</span>
       <a class="close_in_tpl" (click)="handle.close()">close</a>
     </ng-template>
-  `
+  `,
+  imports: [STComponent, STRowDirective]
 })
 export class TestComponent {
   @ViewChild('st', { static: true }) readonly comp!: STComponent;
-  @ViewChild('tpl', { static: true }) readonly tpl!: TemplateRef<NzSafeAny>;
-  data: string | NzSafeAny[] | Observable<NzSafeAny[]> | null = deepCopy(USERS);
+  @ViewChild('tpl', { static: true }) readonly tpl!: TemplateRef<any>;
+  data: string | any[] | Observable<any[]> | null = deepCopy(USERS);
   res: STRes = {};
   req: STReq = {};
   columns!: STColumn[];
@@ -456,15 +465,20 @@ export class TestComponent {
   widthMode: STWidthMode = {};
   virtualScroll = false;
   showHeader = true;
-  customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
-  contextmenu: STContextmenuFn | null = _ => [
+  customRequest?: (options: STCustomRequestOptions) => Observable<any>;
+  contextmenu: STContextmenuFn | null = () => [
     { text: 'a', fn: jasmine.createSpy() },
     { text: 'b', children: [{ text: 'c', fn: jasmine.createSpy() }] }
   ];
 
-  error(): void {}
-  change(): void {}
+  drag?: STDragOptions | boolean = false;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  error(_: any): void {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  change(_: any): void {}
 }
+
 @Component({
   template: `
     <st
@@ -480,7 +494,8 @@ export class TestComponent {
         {{ item.id }}
       </ng-template>
     </st>
-  `
+  `,
+  imports: [STComponent]
 })
 export class TestExpandComponent extends TestComponent {}
 
@@ -490,5 +505,5 @@ export class TestExpandComponent extends TestComponent {}
 })
 export class TestWidgetComponent {
   id!: number;
-  record: NzSafeAny;
+  record: any;
 }

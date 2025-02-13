@@ -1,12 +1,12 @@
-import { ENVIRONMENT_INITIALIZER, EnvironmentProviders, inject, makeEnvironmentProviders } from '@angular/core';
+import { EnvironmentProviders, inject, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { STWidgetRegistry } from './st-widget';
 
 export interface STWidgetProvideConfig {
   KEY: string;
-  type: NzSafeAny;
+  type: any;
 }
 
 /**
@@ -14,13 +14,9 @@ export interface STWidgetProvideConfig {
  */
 export function provideSTWidgets(...widgets: STWidgetProvideConfig[]): EnvironmentProviders {
   return makeEnvironmentProviders([
-    {
-      provide: ENVIRONMENT_INITIALIZER,
-      multi: true,
-      useValue: () => {
-        const srv = inject(STWidgetRegistry);
-        widgets.forEach(widget => srv.register(widget.KEY, widget.type));
-      }
-    }
+    provideEnvironmentInitializer(() => {
+      const srv = inject(STWidgetRegistry);
+      widgets.forEach(widget => srv.register(widget.KEY, widget.type));
+    })
   ]);
 }

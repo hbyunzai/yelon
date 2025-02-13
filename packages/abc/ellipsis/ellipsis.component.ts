@@ -1,5 +1,5 @@
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { DOCUMENT, NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -18,7 +18,7 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { take } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 @Component({
@@ -28,8 +28,7 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [CdkObserveContent, NzTooltipDirective, NgTemplateOutlet, NgClass, NgStyle]
+  imports: [CdkObserveContent, NzTooltipDirective, NgTemplateOutlet]
 })
 export class EllipsisComponent implements AfterViewInit, OnChanges {
   private readonly el: HTMLElement = inject(ElementRef).nativeElement;
@@ -62,7 +61,7 @@ export class EllipsisComponent implements AfterViewInit, OnChanges {
     );
   }
 
-  private get win(): NzSafeAny {
+  private get win(): any {
     return this.doc.defaultView || window;
   }
 

@@ -1,5 +1,4 @@
-# @yelon/form [![CI](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/hbyunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon) [![NPM version](https://img.shields.io/npm/v/@yelon/form.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/form)
-
+# @yelon/form [![CI](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml/badge.svg)](https://github.com/hbyunzai/yelon/actions/workflows/ci.yml) [![Codecov](https://img.shields.io/codecov/c/github/ng-yunzai/yelon.svg?style=flat-square)](https://codecov.io/gh/hbyunzai/yelon) [![NPM version](https://img.shields.io/npm/v/@yelon/form.svg?style=flat-square)](https://www.npmjs.com/package/@yelon/form)
 
 Angular form generation based on JSON-Schema.
 
@@ -7,7 +6,7 @@ Angular form generation based on JSON-Schema.
 
 + [Document](https://ng.yunzainfo.com/form) ([Surge Mirror](https://ng-yunzai-doc.surge.sh/form)
 + [@yelon Source](https://github.com/hbyunzai/yelon)
-+ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng.yunzainfo.com/))
++ [DEMO](https://ng-yunzai.surge.sh) ([国内镜像](https://ng-yunzai.gitee.io/))
 
 ## Architecture
 

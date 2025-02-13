@@ -1,5 +1,4 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
-import { NgClass, NgStyle } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -36,8 +35,7 @@ import { AvatarListItemComponent } from './avatar-list-item.component';
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [NgStyle, NgClass, NzAvatarComponent, NzTooltipDirective]
+  imports: [NzAvatarComponent, NzTooltipDirective]
 })
 export class AvatarListComponent implements AfterViewInit, OnChanges {
   private readonly cdr = inject(ChangeDetectorRef);

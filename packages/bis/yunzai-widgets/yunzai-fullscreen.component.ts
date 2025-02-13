@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 
+import { I18nPipe } from '@yelon/theme';
 import screenfull from 'screenfull';
 
-import { I18nPipe } from '@yelon/theme';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
@@ -15,7 +15,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     '[class.flex-1]': 'true'
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NzIconModule, I18nPipe]
 })
 export class YunzaiHeaderFullScreenComponent {

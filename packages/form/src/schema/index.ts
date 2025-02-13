@@ -1,30 +1,28 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { SFUISchemaItem } from './ui';
 
-export interface SFSchemaDefinition {
-  [key: string]: SFSchema;
-}
+export type SFSchemaDefinition = Record<string, SFSchema>;
 
 export interface SFSchemaEnum {
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 
   /** 是否禁用状态 */
   disabled?: boolean;
 
   /** 文本 */
-  label?: NzSafeAny;
+  label?: any;
 
   /** 文本 */
-  title?: NzSafeAny;
+  title?: any;
 
   /** 值 */
-  value?: NzSafeAny;
+  value?: any;
 
   /**
    * 主键，适用部分小部件数据键名，例如：`tree-select`
    */
-  key?: NzSafeAny;
+  key?: any;
 
   /** 是否选中 */
   checked?: boolean;
@@ -59,7 +57,7 @@ export type SFSchemaEnumType = SFSchemaEnum | number | string | boolean;
  * **注意：** 所有结构都以标准为基准，除了 `ui` 属性为非标准单纯只是为了更好的开发
  */
 export interface SFSchema {
-  [key: string]: NzSafeAny;
+  [key: string]: any;
   //////////// Any /////////////
   /**
    * 数据类型，支持 JavaScript 基础类型；注意项：
@@ -172,7 +170,7 @@ export interface SFSchema {
   /**
    * 定义属性
    */
-  properties?: { [key: string]: SFSchema };
+  properties?: Record<string, SFSchema>;
   //////////// 条件类/////////////
   // 未来可能被移除
   // dependencies?: { [key: string]: string[] | SFSchema };
@@ -233,7 +231,7 @@ export interface SFSchema {
   /**
    * 默认值
    */
-  default?: NzSafeAny;
+  default?: any;
   /**
    * 是否只读状态
    */

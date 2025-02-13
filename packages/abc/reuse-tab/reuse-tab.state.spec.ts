@@ -1,4 +1,4 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { ReuseItem } from './reuse-tab.interfaces';
 import { ReuseTabLocalStorageState } from './reuse-tab.state';
@@ -13,7 +13,7 @@ describe('abc: reuse-tab(state)', () => {
   ];
 
   beforeEach(() => {
-    let data: { [key: string]: NzSafeAny } = {};
+    let data: Record<string, any> = {};
 
     spyOn(localStorage, 'getItem').and.callFake((key: string): string => {
       return data[key] || null;
@@ -39,7 +39,7 @@ describe('abc: reuse-tab(state)', () => {
     store.remove(KEY);
     expect(store.get(KEY).length).toBe(0);
     // when set null
-    store.update(KEY, null as NzSafeAny);
+    store.update(KEY, null as any);
     expect(store.get(KEY).length).toBe(0);
   });
 });

@@ -15,16 +15,16 @@ import type { Chart, Event } from '@antv/g2';
 
 import { G2BaseComponent, G2InteractionType } from '@yelon/chart/core';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 const TITLE_HEIGHT = 41;
 
 export interface G2BarData {
-  x: NzSafeAny;
-  y: NzSafeAny;
+  x: any;
+  y: any;
   color?: string | null;
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 }
 
 export interface G2BarClickItem {
@@ -50,7 +50,6 @@ export interface G2BarClickItem {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [NzStringTemplateOutletDirective, NzSkeletonComponent]
 })
 export class G2BarComponent extends G2BaseComponent {

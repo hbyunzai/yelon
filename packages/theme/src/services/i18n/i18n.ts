@@ -2,10 +2,9 @@ import { inject, Injectable, InjectionToken } from '@angular/core';
 import { BehaviorSubject, Observable, filter } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiThemeI18nConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export interface YunzaiI18NService {
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 
   /**
    * Call `use` to trigger change notification
@@ -42,7 +41,7 @@ export interface YunzaiI18NService {
    *
    * 返回当前语言列表
    */
-  getLangs(): NzSafeAny[];
+  getLangs(): any[];
 
   /**
    * Translate 翻译
@@ -118,7 +117,7 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
 
   abstract use(lang: string, data?: Record<string, unknown>): void;
 
-  abstract getLangs(): NzSafeAny;
+  abstract getLangs(): any;
 
   fanyi(path: string, params?: unknown | unknown[]): string {
     let content = this._data[path] || '';
@@ -127,7 +126,7 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
     if (!params) return content;
 
     if (typeof params === 'object') {
-      const interpolation = this.cog.interpolation!!;
+      const interpolation = this.cog.interpolation!;
       const objParams = params as Record<string, unknown>;
       Object.keys(objParams).forEach(
         key =>
@@ -153,7 +152,7 @@ export class YunzaiI18NServiceFake extends YunzaiI18nBaseService {
     this._change$.next(lang);
   }
 
-  getLangs(): NzSafeAny[] {
+  getLangs(): any[] {
     return [];
   }
 }

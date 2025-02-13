@@ -11,7 +11,7 @@ import {
 import type { Chart } from '@antv/g2';
 
 import { G2BaseComponent } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 @Component({
   selector: 'g2-single-bar',
@@ -22,8 +22,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true
+  encapsulation: ViewEncapsulation.None
 })
 export class G2SingleBarComponent extends G2BaseComponent {
   // #region fields
@@ -36,9 +35,9 @@ export class G2SingleBarComponent extends G2BaseComponent {
   @Input({ transform: numberAttribute }) max = 100;
   @Input({ transform: numberAttribute }) value = 0;
   @Input({ transform: booleanAttribute }) line = false;
-  @Input() format?: (value: number, item: NzSafeAny, index: number) => string;
+  @Input() format?: (value: number, item: any, index: number) => string;
   @Input() padding: number | number[] | 'auto' = 0;
-  @Input() textStyle: { [key: string]: NzSafeAny } = { fontSize: 12, color: '#595959' };
+  @Input() textStyle: Record<string, any> = { fontSize: 12, color: '#595959' };
 
   // #endregion
 

@@ -1,11 +1,10 @@
 import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { provideYunzaiConfig } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { STComponent } from '../st.component';
 import { STMultiSort } from '../st.interfaces';
-import { _STColumn } from '../st.types';
 import { PageObject, TestComponent, genModule } from './base.spec';
 
 describe('abc: st-sort', () => {
@@ -38,7 +37,7 @@ describe('abc: st-sort', () => {
       beforeEach(() => (context.multiSort = false));
       it('muse provide the compare function', fakeAsync(() => {
         spyOn(console, 'warn');
-        page.updateColumn([{ title: '', index: 'i', sort: { compare: 'a' } as NzSafeAny }]);
+        page.updateColumn([{ title: '', index: 'i', sort: { compare: 'a' } as any }]);
         comp.sort(comp._columns[0], 'descend');
         page.cd();
         expect(console.warn).toHaveBeenCalled();

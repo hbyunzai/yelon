@@ -2,10 +2,10 @@ import { Injectable, OnDestroy, inject } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, share } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
+
 import { Menu, MenuIcon, MenuInner } from './interface';
+import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 
 /**
  * 菜单服务，[在线文档](https://ng.yunzainfo.com/theme/menu)
@@ -107,7 +107,7 @@ export class MenuService implements OnDestroy {
       } else if (/^https?:\/\//.test(item.icon)) {
         type = 'img';
       }
-      item.icon = { type, value } as NzSafeAny;
+      item.icon = { type, value } as any;
     }
     if (item.icon != null) {
       item.icon = { theme: 'outline', spin: false, ...(item.icon as MenuIcon) };

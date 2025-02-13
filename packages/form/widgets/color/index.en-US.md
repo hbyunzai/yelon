@@ -8,7 +8,6 @@ Used when the user needs to customize the color selection.
 
 ## How to use
 
-
 Non-built-in modules need to additionally register `withColorWidget` in [json-schema](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/shared/json-schema/index.ts#L9).
 
 ## API

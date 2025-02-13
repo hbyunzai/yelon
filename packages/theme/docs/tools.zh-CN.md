@@ -6,7 +6,7 @@ title: 样式工具类
 
 ng-yunzai 在 Ant Design 的基础上生产一套尺寸、间距、颜色等工具类。
 
-> 在 VSCode 安装 [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=yunzai-bot.ng-yunzai-vscode) 插件，可以对所有工具集样式名称的智能提醒。
+> 在 VSCode 安装 [ng-yunzai snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-yunzai-vscode) 插件，可以对所有工具集样式名称的智能提醒。
 
 ## 间距
 

@@ -2,7 +2,6 @@ import { HttpErrorResponse, HttpEvent, HttpParams, HttpRequest } from '@angular/
 import { Observable, Observer } from 'rxjs';
 
 import { YunzaiAuthConfig } from '@yelon/util/config';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ALLOW_ANONYMOUS } from '../token';
 import { ToLogin } from './helper';
@@ -33,7 +32,7 @@ export function throwErr(req: HttpRequest<unknown>, options: YunzaiAuthConfig): 
   ToLogin(options);
 
   // Interrupt Http request, so need to generate a new Observable
-  return new Observable((observer: Observer<HttpEvent<NzSafeAny>>) => {
+  return new Observable((observer: Observer<HttpEvent<any>>) => {
     let statusText = '';
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
       statusText = `来自 @yelon/auth 的拦截，所请求URL未授权，若是登录API可加入 new HttpContext().set(ALLOW_ANONYMOUS, true) 来表示忽略校验，更多方法请参考： https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig\nThe interception from @yelon/auth, the requested URL is not authorized. If the login API can add new HttpContext().set(ALLOW_ANONYMOUS, true) to ignore the check, please refer to: https://ng.yunzainfo.com/auth/getting-started#YunzaiAuthConfig`;

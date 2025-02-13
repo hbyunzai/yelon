@@ -29,7 +29,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     </div>
     <button nz-button (click)="start()">Start</button>
   `,
-  standalone: true,
   imports: [NzButtonModule]
 })
 export class DemoComponent {
@@ -48,7 +47,7 @@ export class DemoComponent {
         {
           selectors: '.page-banner__slogan',
           content:
-            'ng-yunzai is an MIT-licensed open source project. In order to achieve better and sustainable development of the project, we expect to gain more backers. You can support us in any of the following ways, Or purchasing our <a href="https://e.ng.yunzainfo.com/" target="_blank">business theme</a>',
+            'ng-yunzai is an MIT-licensed open source project. In order to achieve better and sustainable development of the project, we expect to gain more backers. You can support us in any of the following ways, Or purchasing our <a href="https://e.ng-yunzai.com/" target="_blank">business theme</a>',
           width: 300,
           url: '/',
           before: 200

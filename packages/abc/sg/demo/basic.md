@@ -46,7 +46,6 @@ import { SGModule } from '@yelon/abc/sg';
       }
     `
   ],
-  standalone: true,
   imports: [SGModule]
 })
 export class DemoComponent {

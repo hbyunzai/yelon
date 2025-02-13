@@ -1,14 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
 
-import {
-  YunzaiI18nBaseService,
-  YelonLocaleService,
-  en_US as yelonEnUS,
-  zh_CN as yelonZhCn,
-  YunzaiI18NType
-} from '@yelon/theme';
+import { YunzaiI18nBaseService, YelonLocaleService, en_US as yelonEnUS, zh_CN as yelonZhCn } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
@@ -20,17 +13,16 @@ export type LangType = 'en-US' | 'zh-CN';
 
 @Injectable({ providedIn: 'root' })
 export class I18NService extends YunzaiI18nBaseService {
+  private readonly zorroI18n = inject(NzI18nService);
+  private readonly yelonI18n = inject(YelonLocaleService);
+  private readonly platform = inject(Platform);
+
   private _langs = [
     { code: 'en-US', text: 'English' },
     { code: 'zh-CN', text: '中文' }
   ];
 
-  constructor(
-    private zorroI18n: NzI18nService,
-    private yelonI18n: YelonLocaleService,
-    private platform: Platform,
-    cogSrv: YunzaiConfigService
-  ) {
+  constructor(cogSrv: YunzaiConfigService) {
     super(cogSrv);
     // from browser
     const lang = (this.getBrowserLang() || this.defaultLang) as LangType;
@@ -71,18 +63,15 @@ export class I18NService extends YunzaiI18nBaseService {
     this._data = isEn ? ENUS : ZHCN;
     this.zorroI18n.setLocale(isEn ? en_US : zh_CN);
     this.yelonI18n.setLocale(isEn ? yelonEnUS : yelonZhCn);
+
     if (emit !== false) this._change$.next(lang);
   }
 
-  getLangsSync(): Array<{ code: string; text: string }> {
+  getLangs(): Array<{ code: string; text: string }> {
     return this._langs;
   }
 
-  getLangs(): Observable<YunzaiI18NType[]> {
-    return of([]);
-  }
-
-  get defaultLang(): LangType {
+  override get defaultLang(): LangType {
     return 'zh-CN';
   }
 
@@ -94,13 +83,13 @@ export class I18NService extends YunzaiI18nBaseService {
     return ['zh-CN', 'en-US'];
   }
 
-  get(i: string | { [key: string]: string } | null): string {
+  get(i: string | Record<string, string> | null): string {
     if (i == null) return '';
     return typeof i === 'string' ? i : i[this.currentLang] || i[this.defaultLang] || '';
   }
 
   getFullLang(lang: string): string {
-    const res = this._langs.filter(l => l.code.split('-')[0] === lang);
+    const res = this._langs.filter(l => l.code === lang || l.code.split('-')[0] === lang);
     return res.length > 0 ? res[0].code : this.defaultLang;
   }
 

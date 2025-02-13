@@ -17,7 +17,7 @@ import { ArrayLayoutWidget } from '../../widget';
           <span class="sf__optional">
             {{ ui.optional }}
             @if (oh) {
-              <i
+              <nz-icon
                 nz-tooltip
                 [nzTooltipTitle]="oh.text"
                 [nzTooltipPlacement]="oh.placement"
@@ -26,9 +26,8 @@ import { ArrayLayoutWidget } from '../../widget';
                 [nzTooltipOverlayStyle]="oh.overlayStyle"
                 [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                 [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                nz-icon
                 [nzType]="oh.icon!"
-              ></i>
+              />
             }
           </span>
         </label>
@@ -47,20 +46,20 @@ import { ArrayLayoutWidget } from '../../widget';
     <div nz-col class="ant-form-item-control-wrapper" [nzSpan]="ui.spanControl!" [nzOffset]="ui.offsetControl!">
       <div class="ant-form-item-control" [class.has-error]="showError">
         <div nz-row class="sf__array-container">
-          <ng-container *ngFor="let i of $any(formProperty).properties; let $index = index">
+          @for (i of $any(formProperty).properties; track $index) {
             @if (i.visible && !i.ui.hidden) {
               <div nz-col [nzSpan]="arraySpan" [attr.data-index]="$index" class="sf__array-item">
                 <nz-card>
                   <sf-item [formProperty]="i" />
                   @if (showRemove) {
                     <span class="sf__array-remove" (click)="removeItem($index)" [attr.title]="removeTitle">
-                      <i nz-icon nzType="delete"></i>
+                      <nz-icon nzType="delete" />
                     </span>
                   }
                 </nz-card>
               </div>
             }
-          </ng-container>
+          }
         </div>
         @if (!ui.onlyVisual && showError) {
           <div class="ant-form-explain">{{ error }}</div>
@@ -73,7 +72,9 @@ import { ArrayLayoutWidget } from '../../widget';
   </nz-form-item>`,
   host: { '[class.sf__array]': 'true' },
   preserveWhitespaces: false,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class ArrayWidget extends ArrayLayoutWidget implements OnInit {
   addTitle!: SafeHtml;

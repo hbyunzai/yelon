@@ -11,7 +11,7 @@ module: import { CellModule } from '@yelon/abc/cell';
 
 ## API
 
-### cell:standalone
+### cell
 
 | 成员 | 说明 | 类型 | 默认值 |
 |----|----|----|-----|
@@ -80,7 +80,6 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     '(click)': 'show()'
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [ NzToolTipModule ]
 })
 export class CellTestWidget implements CellWidgetInstance {

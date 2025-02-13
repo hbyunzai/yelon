@@ -37,8 +37,7 @@ const hideTitleCls = `full-content__hidden-title`;
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true
+  encapsulation: ViewEncapsulation.None
 })
 export class FullContentComponent implements AfterViewInit, OnInit, OnChanges, OnDestroy {
   private readonly destroy$ = inject(DestroyRef);
@@ -117,7 +116,7 @@ export class FullContentComponent implements AfterViewInit, OnInit, OnChanges, O
         debounceTime(200)
       )
       .subscribe(() => {
-        if (!!this.doc.querySelector(`#${this.id}`)) {
+        if (this.doc.querySelector(`#${this.id}`)) {
           this.bodyEl.classList.add(wrapCls);
           this.updateCls();
         } else {

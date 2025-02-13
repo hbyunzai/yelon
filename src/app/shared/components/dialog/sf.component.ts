@@ -20,7 +20,6 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
       </div>
     </sf>
   `,
-  standalone: true,
   imports: [NzButtonModule, YelonFormModule]
 })
 export class DemoSfComponent {

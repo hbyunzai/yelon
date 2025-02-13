@@ -2,19 +2,18 @@ import { Component, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2 } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { G2SingleBarComponent } from './single-bar.component';
-import { G2SingleBarModule } from './single-bar.module';
 
 describe('chart: single-bar', () => {
   describe('', () => {
     let page: PageG2<TestComponent>;
 
-    beforeEach(() => {
-      page = new PageG2<TestComponent>().genModule(G2SingleBarModule, TestComponent);
+    beforeEach(fakeAsync(() => {
+      page = new PageG2<TestComponent>().genComp(TestComponent, true);
       page.genComp(TestComponent);
-    });
+    }));
 
     it('should be working', fakeAsync(() => {
       page.dcFirst().isDataCount('geometries', 1);
@@ -29,7 +28,7 @@ describe('chart: single-bar', () => {
     }));
   });
 
-  it('#delay', fakeAsync(() => checkDelay(G2SingleBarModule, TestComponent)));
+  it('#delay', fakeAsync(() => checkDelay(TestComponent)));
 });
 
 @Component({
@@ -49,7 +48,8 @@ describe('chart: single-bar', () => {
       [textStyle]="textStyle"
       [delay]="delay"
     />
-  `
+  `,
+  imports: [G2SingleBarComponent]
 })
 class TestComponent {
   @ViewChild('comp', { static: true }) comp!: G2SingleBarComponent;
@@ -62,7 +62,7 @@ class TestComponent {
   max = 100;
   line = false;
   format?: (value: number) => string;
-  padding: NzSafeAny = 0;
-  textStyle: NzSafeAny = { fontSize: 12, color: '#595959' };
+  padding: any = 0;
+  textStyle: any = { fontSize: 12, color: '#595959' };
   delay = 0;
 }

@@ -1,5 +1,5 @@
-import { ITokenModel } from '../token/interface';
 import { IStore } from './interface';
+import { ITokenModel } from '../token/interface';
 
 export function YA_STORE_TOKEN_LOCAL_FACTORY(): IStore {
   return new LocalStorageStore();
@@ -9,8 +9,8 @@ export function YA_STORE_TOKEN_LOCAL_FACTORY(): IStore {
  * `localStorage` storage, **not lost after closing the browser**.
  *
  * ```ts
- provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
- provideAuth(withLocalStorage()),
+  provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
+  provideAuth(withLocalStorage()),
  * ```
  */
 export class LocalStorageStore implements IStore {

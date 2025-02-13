@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpContext, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of, delay, finalize, switchMap, tap } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiThemeHttpClientConfig } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-export type _HttpHeaders = HttpHeaders | { [header: string]: string | string[] };
+
+export type _HttpHeaders = HttpHeaders | Record<string, string | string[]>;
 export type HttpObserve = 'body' | 'events' | 'response';
 
 /**
@@ -46,8 +45,8 @@ export class _HttpClient {
     return this.lc;
   }
 
-  parseParams(params: NzSafeAny): HttpParams {
-    const newParams: NzSafeAny = {};
+  parseParams(params: any): HttpParams {
+    const newParams: any = {};
     if (params instanceof HttpParams) {
       return params;
     }
@@ -69,7 +68,7 @@ export class _HttpClient {
     return new HttpParams({ fromObject: newParams });
   }
 
-  appliedUrl(url: string, params?: NzSafeAny): string {
+  appliedUrl(url: string, params?: any): string {
     if (!params) return url;
     url += ~url.indexOf('?') ? '' : '?';
     const arr: string[] = [];
@@ -361,7 +360,7 @@ export class _HttpClient {
       withCredentials?: boolean;
       context?: HttpContext;
     }
-  ): Observable<HttpResponse<NzSafeAny>>;
+  ): Observable<HttpResponse<any>>;
 
   /**
    * **DELETE Request** Return a `any` type / 返回一个 `any` 类型
@@ -427,6 +426,7 @@ export class _HttpClient {
    */
   jsonp(url: string, params?: any, callbackParam: string = 'JSONP_CALLBACK'): Observable<any> {
     return of(null).pipe(
+      // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
       delay(0),
       tap(() => this.push()),
       switchMap(() => this.http.jsonp(this.appliedUrl(url, params), callbackParam)),
@@ -470,7 +470,7 @@ export class _HttpClient {
       withCredentials?: boolean;
       context?: HttpContext;
     }
-  ): Observable<HttpResponse<NzSafeAny>>;
+  ): Observable<HttpResponse<any>>;
 
   /**
    * **PATCH Request** Return a `any` type / 返回一个 `any` 类型
@@ -562,7 +562,7 @@ export class _HttpClient {
       withCredentials?: boolean;
       context?: HttpContext;
     }
-  ): Observable<HttpResponse<NzSafeAny>>;
+  ): Observable<HttpResponse<any>>;
 
   /**
    * **PUT Request** Return a `any` type / 返回一个 `any` 类型
@@ -948,7 +948,7 @@ export class _HttpClient {
       withCredentials?: boolean;
       context?: HttpContext;
     }
-  ): Observable<HttpResponse<NzSafeAny>>;
+  ): Observable<HttpResponse<any>>;
 
   /**
    * **Request** Return a `HttpResponse<R>` type / 返回一个 `HttpResponse<R>` 类型
@@ -1038,6 +1038,7 @@ export class _HttpClient {
   ): Observable<any> {
     if (options.params) options.params = this.parseParams(options.params);
     return of(null).pipe(
+      // Make sure to always be asynchronous, see issues: https://github.com/hbyunzai/ng-yunzai/issues/1954
       delay(0),
       tap(() => this.push()),
       switchMap(() => this.http.request(method, url, options)),

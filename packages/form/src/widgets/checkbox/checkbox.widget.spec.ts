@@ -2,11 +2,11 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { createTestContext } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+
+import { CheckboxWidget } from './checkbox.widget';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../../spec/base.spec';
 import { SFSchema } from '../../schema';
-import { CheckboxWidget } from './checkbox.widget';
 
 describe('form: widget: checkbox', () => {
   let fixture: ComponentFixture<TestFormComponent>;
@@ -32,9 +32,9 @@ describe('form: widget: checkbox', () => {
       }
     });
     page.setValue('/a', 'item1').dc(1);
-    expect(page.getEl('.ant-checkbox-checked').nextSibling!.textContent).toBe('item1');
+    expect(page.getEl('.ant-checkbox-checked').nextSibling!.textContent?.trim()).toBe('item1');
     page.setValue('/a', 'item2').dc(1);
-    expect(page.getEl('.ant-checkbox-checked').nextSibling!.textContent).toBe('item2');
+    expect(page.getEl('.ant-checkbox-checked').nextSibling!.textContent?.trim()).toBe('item2');
   }));
 
   it('#visibleIf', fakeAsync(() => {
@@ -131,6 +131,6 @@ describe('form: widget: checkbox', () => {
     };
     page.newSchema(s).time(1000).checkCount('nz-checkbox-wrapper', 1).click('.ant-col-8 label').asyncEnd();
     expect(page.getValue('a').length).toBe(1);
-    expect((s.properties!.a.ui as NzSafeAny).change).toHaveBeenCalled();
+    expect((s.properties!.a.ui as any).change).toHaveBeenCalled();
   }));
 });

@@ -1,4 +1,4 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface YunzaiACLConfig {
   /**
@@ -34,5 +34,5 @@ export interface YunzaiACLType {
    */
   except?: boolean;
 
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 }

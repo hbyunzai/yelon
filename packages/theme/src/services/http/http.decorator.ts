@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpHeaders, HttpContext } from '@angular/common/http';
 import { Injectable, Injector, inject } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 
 import { ACLService, ACLCanType } from '@yelon/acl';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { _HttpClient } from './http.client';
 
@@ -63,13 +62,7 @@ export function BaseUrl(url: string) {
  * 默认 `headers`
  * - 有效范围：类
  */
-export function BaseHeaders(
-  headers:
-    | HttpHeaders
-    | {
-        [header: string]: string | string[];
-      }
-) {
+export function BaseHeaders(headers: HttpHeaders | Record<string, string | string[]>) {
   return function <TClass extends new (...args: any[]) => BaseApi>(target: TClass): TClass {
     const params = setParam(target.prototype);
     params.baseHeaders = headers;
@@ -125,7 +118,7 @@ export const Headers = makeParam('headers');
  */
 export const Payload = makeParam('payload')();
 
-function getValidArgs(data: any, key: string, args: any[]): NzSafeAny {
+function getValidArgs(data: any, key: string, args: any[]): any {
   if (!data[key] || !Array.isArray(data[key]) || data[key].length <= 0) {
     return undefined;
   }
@@ -147,7 +140,7 @@ function makeMethod(method: METHOD_TYPE) {
       descriptor!.value = function (...args: any[]): Observable<any> {
         options = options || {};
 
-        const injector = (this as NzSafeAny).injector as Injector;
+        const injector = (this as any).injector as Injector;
         const http = injector.get(_HttpClient, null) as _HttpClient;
         if (http == null) {
           throw new TypeError(
@@ -187,12 +180,12 @@ function makeMethod(method: METHOD_TYPE) {
           });
         requestUrl = requestUrl.replace(/\^\^/g, `:`);
 
-        const params = (data.query || []).reduce((p: NzSafeAny, i: ParamType) => {
+        const params = (data.query || []).reduce((p: any, i: ParamType) => {
           p[i.key] = args[i.index];
           return p;
         }, {});
 
-        const headers = (data.headers || []).reduce((p: NzSafeAny, i: ParamType) => {
+        const headers = (data.headers || []).reduce((p: any, i: ParamType) => {
           p[i.key] = args[i.index];
           return p;
         }, {});

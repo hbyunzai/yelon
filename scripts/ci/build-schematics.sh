@@ -55,6 +55,7 @@ tsconfigFile=${SOURCE}/tsconfig.json
 copyFiles() {
   mkdir -p ${2}
   readonly paths=(
+    "${1}.gitignore|${2}application/files/root/.gitignore"
     "${1}src/assets/tmp/img/message.svg|${2}application/files/src/assets/tmp/img/"
     "${1}src/assets/tmp/img/notice.svg|${2}application/files/src/assets/tmp/img/"
     "${1}src/assets/tmp/img/todo.svg|${2}application/files/src/assets/tmp/img/"
@@ -63,12 +64,10 @@ copyFiles() {
     # i18n data
     "${1}src/assets/tmp/i18n|${2}application/files/i18n"
     # code styles
-    "${1}.eslintignore|${2}application/files/root/"
-    "${1}.eslintrc.js|${2}application/files/root/.eslintrc.js"
+    "${1}eslint.config.mjs|${2}application/files/root/eslint.config.mjs"
     "${1}.prettierignore|${2}application/files/root/.prettierignore"
     "${1}.prettierrc.js|${2}application/files/root/.prettierrc.js"
-    "${1}.stylelintrc.js|${2}application/files/root/.stylelintrc.js"
-    "${1}.npmrc|${2}application/files/root"
+    "${1}stylelint.config.mjs|${2}application/files/root/stylelint.config.mjs"
     "${1}.nvmrc|${2}application/files/root"
     "${1}proxy.conf.js|${2}application/files/root"
     "${1}.husky|${2}application/files/root/.husky"
@@ -257,7 +256,7 @@ echo "Finished!!"
 if [[ ${DEBUG} == true ]]; then
   cd ../../
   DEBUG_FROM=${PWD}/work/yelon/dist/ng-yunzai/*
-  DEBUG_TO=${PWD}/work/ng-yunzai/node_modules/ng-yunzai/
+  DEBUG_TO=${PWD}/work/ng19/node_modules/ng-yunzai/
   echo "DEBUG_FROM:${DEBUG_FROM}"
   echo "DEBUG_TO:${DEBUG_TO}"
   rm -rf ${DEBUG_TO}

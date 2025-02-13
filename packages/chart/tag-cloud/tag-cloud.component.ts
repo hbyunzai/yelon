@@ -12,13 +12,13 @@ import { fromEvent, debounceTime, filter } from 'rxjs';
 import type { Chart, Event } from '@antv/g2';
 
 import { G2BaseComponent } from '@yelon/chart/core';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 export interface G2TagCloudData {
   value?: number;
   name?: string;
-  [key: string]: NzSafeAny;
+  [key: string]: any;
 }
 
 export interface G2TagCloudClickItem {
@@ -35,7 +35,6 @@ export interface G2TagCloudClickItem {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [NzSkeletonComponent]
 })
 export class G2TagCloudComponent extends G2BaseComponent {
@@ -52,8 +51,8 @@ export class G2TagCloudComponent extends G2BaseComponent {
   private initTagCloud(): void {
     const winG2 = this.winG2;
     winG2.registerShape('point', 'cloud', {
-      draw(cfg: NzSafeAny, container: NzSafeAny) {
-        const data = cfg.data as NzSafeAny;
+      draw(cfg: any, container: any) {
+        const data = cfg.data as any;
         const textShape = container.addShape({
           type: 'text',
           name: 'tag-cloud-text',
@@ -67,7 +66,7 @@ export class G2TagCloudComponent extends G2BaseComponent {
             textBaseline: 'Alphabetic',
             x: cfg.x,
             y: cfg.y
-          } as NzSafeAny
+          } as any
         });
         if (data.rotate) {
           winG2.Util.rotate(textShape, (data.rotate * Math.PI) / 180);
@@ -106,7 +105,7 @@ export class G2TagCloudComponent extends G2BaseComponent {
       showTitle: false,
       showMarkers: false
     });
-    (chart.coordinate() as NzSafeAny).reflect();
+    (chart.coordinate() as any).reflect();
     chart
       .point()
       .position('x*y')
@@ -135,7 +134,7 @@ export class G2TagCloudComponent extends G2BaseComponent {
     const { _chart, data } = this;
     if (!_chart || !Array.isArray(data) || data.length <= 0) return;
 
-    const dv = new (window as NzSafeAny).DataSet.View().source(data);
+    const dv = new (window as any).DataSet.View().source(data);
     const range = dv.range('value');
     const min = range[0];
     const max = range[1];
@@ -155,10 +154,10 @@ export class G2TagCloudComponent extends G2BaseComponent {
         }
         return random * 90; // 0, 90, 270
       },
-      fontSize(d: NzSafeAny) {
+      fontSize(d: any) {
         return ((d.value - min) / (max - min)) * (32 - 8) + 8;
       }
-    } as NzSafeAny);
+    } as any);
 
     _chart.changeData(dv.rows);
   }

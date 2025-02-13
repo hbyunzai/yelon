@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpParams, HttpResponse, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, TestRequest, provideHttpClientTesting } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
@@ -7,7 +6,7 @@ import { of, catchError } from 'rxjs';
 
 import { YunzaiThemeHttpClientConfig, provideYunzaiConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { _HttpClient } from './http.client';
 
@@ -18,7 +17,7 @@ describe('theme: http.client', () => {
   const time = new Date();
   const URL = '/user';
   const OK = 'ok!';
-  const PARAMS: { [key: string]: string } = { a: `1` };
+  const PARAMS: Record<string, string> = { a: `1` };
   const BODY = 'body data';
 
   function createModule(config?: YunzaiThemeHttpClientConfig): void {
@@ -60,7 +59,7 @@ describe('theme: http.client', () => {
       it('should be loading is false when request throw error', fakeAsync(() => {
         http
           .get('/error-url')
-          .pipe(catchError(_err => of(null)))
+          .pipe(catchError(() => of(null)))
           .subscribe();
         tick();
         backend.expectOne(() => true).error(new ProgressEvent('404'));
@@ -172,20 +171,20 @@ describe('theme: http.client', () => {
           expect(res).toBe(true);
         }));
         it('with object', fakeAsync(() => {
-          http.get<NzSafeAny>(URL).subscribe(_ => (res = _));
+          http.get<any>(URL).subscribe(_ => (res = _));
           tick();
           backend.expectOne(() => true).flush({});
           expect(typeof res).toBe('object');
         }));
         it('with HttpEvent', fakeAsync(() => {
-          http.get<NzSafeAny>(URL, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
+          http.get<any>(URL, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
           tick();
           backend.expectOne(() => true).flush({});
           expect(typeof res).toBe('object');
           expect(typeof res.type).toBe('number');
         }));
         it('with response', fakeAsync(() => {
-          http.get<NzSafeAny>(URL, PARAMS, { observe: 'response' }).subscribe(_ => (res = _));
+          http.get<any>(URL, PARAMS, { observe: 'response' }).subscribe(_ => (res = _));
           tick();
           backend.expectOne(() => true).flush({});
           expect(res instanceof HttpResponse).toBe(true);
@@ -260,7 +259,7 @@ describe('theme: http.client', () => {
       }));
 
       it('return a HttpEvent', fakeAsync(() => {
-        http.post<NzSafeAny>(URL, BODY, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
+        http.post<any>(URL, BODY, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
         tick();
         backend.expectOne(() => true).flush({});
         expect(typeof res).toBe('object');
@@ -600,7 +599,7 @@ describe('theme: http.client', () => {
       }));
 
       it('return a HttpEvent', fakeAsync(() => {
-        http.form<NzSafeAny>(URL, BODY, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
+        http.form<any>(URL, BODY, PARAMS, { observe: 'events' }).subscribe(_ => (res = _));
         tick();
         backend.expectOne(() => true).flush({});
         expect(typeof res).toBe('object');

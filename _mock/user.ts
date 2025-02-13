@@ -1,12 +1,12 @@
 import { MockStatusError, MockRequest, r } from '@yelon/mock';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 // import * as Mock from 'mockjs';
 
 export const USERS = {
   // 支持值为 Object 和 Array
   'GET /users': (req: MockRequest) => {
     const total = req.queryString.total || 100;
-    const res: NzSafeAny = {
+    const res: any = {
       list: [],
       total
     };

@@ -12,7 +12,7 @@ import {
   YunzaiConfigService,
   YunzaiNavTopic
 } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -153,7 +153,7 @@ export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchAllTopic();
     this.attachNav('all');
-    this.win.addEventListener('click', (event: NzSafeAny) => {
+    this.win.addEventListener('click', (event: any) => {
       const { target } = event;
       const btn = this.win.document.getElementById('navBtn');
       const dropdown = this.win.document.getElementById('navDropdown');

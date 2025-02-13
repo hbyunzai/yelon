@@ -10,7 +10,7 @@ Transforms Object or Map into an array of key value pairs.
 Data:
 
 ```typescript
-const data = { name: 'yunzai-bot', address: { city: 'shanghai', district: 'changning' } };
+const data = { name: 'cipchk', address: { city: 'shanghai', district: 'changning' } };
 ```
 
 Use:

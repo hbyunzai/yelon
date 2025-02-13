@@ -3,11 +3,11 @@ import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzTagComponent } from 'ng-zorro-antd/tag';
 
-import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 import { withTagWidget } from './index';
+import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 
 describe('form: widget: tag', () => {
   let fixture: ComponentFixture<TestFormComponent>;
@@ -50,7 +50,7 @@ describe('form: widget: tag', () => {
     const res = page.getValue('a') as number[];
     expect(res.length).toBe(1);
     expect(res[0]).toBe(2);
-    expect((s.properties!.a.ui as NzSafeAny).checkedChange).toHaveBeenCalled();
+    expect((s.properties!.a.ui as any).checkedChange).toHaveBeenCalled();
   }));
 
   it('#setValue', fakeAsync(() => {
@@ -160,7 +160,7 @@ describe('form: widget: tag', () => {
         };
         page.newSchema(s).typeEvent('click', '.anticon');
 
-        const ui = s.properties!.a.ui as NzSafeAny;
+        const ui = s.properties!.a.ui as any;
         expect(ui.onClose).toHaveBeenCalled();
       }));
     });

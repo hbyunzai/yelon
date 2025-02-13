@@ -15,7 +15,7 @@ import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throw
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -128,7 +128,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   get nodes(): NzTreeNode[] {
-    return this.data as NzSafeAny[];
+    return this.data as any[];
   }
 
   get isMultiple(): boolean {
@@ -164,7 +164,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy
       this.query(this.roleGroupCode);
     } else {
       this.state.dataBackup = this.data;
-      this.mapRoleTree(this.data as NzSafeAny);
+      this.mapRoleTree(this.data as any);
     }
   }
 
@@ -196,7 +196,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy
             depts = this.recursionSearch(search, depts);
             this.onQueryComplete.emit(depts);
           }
-          this.mapRoleTree(depts as NzSafeAny);
+          this.mapRoleTree(depts as any);
           this.data = depts;
         }),
         catchError(error => {
@@ -236,7 +236,7 @@ export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy
         map((roles: YunzaiRoleTree[]) => {
           this.state.expandKeys = [];
           this.onQueryComplete.emit(roles);
-          this.mapRoleTree(roles as NzSafeAny);
+          this.mapRoleTree(roles as any);
           this.data = roles;
         }),
         catchError(error => {

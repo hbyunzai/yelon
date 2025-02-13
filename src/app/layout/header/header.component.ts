@@ -26,6 +26,7 @@ import { MetaSearchGroupItem } from '../../interfaces';
 import { LayoutComponent } from '../layout.component';
 import { HeaderSearchComponent } from './search-box.component';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const pkg = require('../../../../package.json');
 const minimumVersion = +pkg.version.split('.')[0] - 2;
 
@@ -37,7 +38,6 @@ const minimumVersion = +pkg.version.split('.')[0] - 2;
     '[class.clearfix]': `true`
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     FormsModule,
     RouterLink,
@@ -61,7 +61,7 @@ const minimumVersion = +pkg.version.split('.')[0] - 2;
 export class HeaderComponent implements AfterViewInit {
   private inited = false;
   isMobile!: boolean;
-  oldVersionList = [17];
+  oldVersionList = [];
   currentVersion = pkg.version;
   yelonLibs: Array<{ name: string; default?: string; selected?: boolean }> = [
     { name: 'theme' },

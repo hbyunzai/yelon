@@ -23,7 +23,7 @@ import { timer, take } from 'rxjs';
 import type Plyr from 'plyr';
 
 import { ZoneOutside } from '@yelon/util/decorator';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { MediaService } from './media.service';
 
@@ -38,8 +38,7 @@ export type MediaType = 'html5' | 'youtube' | 'video' | 'audio';
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true
+  encapsulation: ViewEncapsulation.None
 })
 export class MediaComponent implements OnChanges, AfterViewInit, OnDestroy {
   private readonly destroy$ = inject(DestroyRef);
@@ -70,7 +69,7 @@ export class MediaComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private init(): void {
-    const winPlyr = (window as NzSafeAny).Plyr;
+    const winPlyr = (window as any).Plyr;
     if (!winPlyr) {
       throw new Error(
         `No window.Plyr found, please make sure that cdn or local path exists, the current referenced path is: ${JSON.stringify(

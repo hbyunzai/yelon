@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { format } from 'date-fns';
 
 import { ControlUIWidget, YelonFormModule, SFValue, toBool } from '@yelon/form';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 import type { SFTimeWidgetSchema } from './schema';
@@ -46,7 +46,6 @@ import type { SFTimeWidgetSchema } from './schema';
   </sf-item-wrap>`,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, NzTimePickerModule]
 })
 export class TimeWidget extends ControlUIWidget<SFTimeWidgetSchema> implements OnInit {
@@ -54,7 +53,7 @@ export class TimeWidget extends ControlUIWidget<SFTimeWidgetSchema> implements O
 
   private valueFormat: string | undefined;
   displayValue: Date | null = null;
-  i: NzSafeAny;
+  i: any;
 
   ngOnInit(): void {
     const ui = this.ui;

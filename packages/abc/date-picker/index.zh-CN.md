@@ -10,7 +10,7 @@ module: import { DatePickerModule } from '@yelon/abc/date-picker';
 
 ## API
 
-### [extend]:standalone
+### [extend]
 
 需要配合 [nz-range-picker](https://ng.ant.design/components/date-picker/zh#nz-range-picker) 一起使用，例如：
 

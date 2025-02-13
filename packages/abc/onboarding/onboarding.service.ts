@@ -14,7 +14,7 @@ import { of, pipe, Subscription, delay, switchMap } from 'rxjs';
 
 import { YelonLocaleService } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { OnboardingComponent } from './onboarding.component';
 import { ONBOARDING_STORE_TOKEN } from './onboarding.storage';
@@ -57,7 +57,7 @@ export class OnboardingService implements OnDestroy {
     });
     this.compRef = compRef;
     this.appRef.attachView(compRef.hostView);
-    const compNode = (compRef.hostView as EmbeddedViewRef<NzSafeAny>).rootNodes[0];
+    const compNode = (compRef.hostView as EmbeddedViewRef<any>).rootNodes[0];
     const doc = this._getDoc();
     const cdk = doc.querySelector('.cdk-overlay-container') as HTMLElement;
     if (cdk) {
@@ -108,7 +108,7 @@ export class OnboardingService implements OnDestroy {
   }
 
   private showItem(isStart: boolean = false): void {
-    const items = this.config?.items!;
+    const items = this.config!.items!;
     const item = {
       position: 'bottomLeft',
       before: of(true),
@@ -132,7 +132,7 @@ export class OnboardingService implements OnDestroy {
     this.updateRunning(true);
 
     this.running$ = of(true)
-      .pipe(pipe.apply(this, pipes as NzSafeAny) as NzSafeAny)
+      .pipe(pipe.apply(this, pipes as any) as any)
       .subscribe({
         next: () => this.cancelRunning().updateRunning(false),
         error: () => this.done()

@@ -1,6 +1,6 @@
-<section class="code-box-demo" [ngStyle]="{ background: item.bg }">
-  <div [ngClass]="{ 'browser-mockup': item.browser }" [ngStyle]="{ 'height.px': item.browser }">
-    <div [ngClass]="{ 'browser-scroll': item.browser }">
+<section class="code-box-demo" [style]="{ background: item.bg }">
+  <div [class.browser-mockup]="item.browser" [style]="{ height: item.browser + 'px' }">
+    <div [class.browser-scroll]="item.browser">
       <ng-content />
     </div>
   </div>
@@ -15,14 +15,13 @@
   }
   <div class="code-box-actions">
     @if (false) {
-      <i
+      <nz-icon
         nz-tooltip
         [nzTooltipTitle]="codeSandboxTpl"
         (click)="openOnlineIDE('CodeSandbox', true)"
-        nz-icon
         nzType="code-sandbox"
         class="code-box-code-icon"
-      ></i>
+      />
       <ng-template #codeSandboxTpl>
         {{ 'app.demo.code-sandbox' | i18n }}
         @if (false) {
@@ -32,30 +31,28 @@
         }
       </ng-template>
     }
-    <i
+    <nz-icon
       nz-tooltip
       [nzTooltipTitle]="stackblitzTpl"
       (click)="openOnlineIDE()"
-      nz-icon
       nzType="thunderbolt"
       nzTheme="fill"
       class="code-box-code-icon"
-    ></i>
+    />
     <ng-template #stackblitzTpl>
       {{ 'app.demo.stackblitz' | i18n }}
       (
       <a (click)="openOnlineIDE('StackBlitz', true)">{{ 'app.demo.code-sandbox-cli' | i18n }}</a>
       )
     </ng-template>
-    <i
+    <nz-icon
       nz-tooltip
       [nzTooltipTitle]="'app.demo.copy' | i18n"
       (click)="onCopy(item.code)"
-      nz-icon
       [nzType]="copied ? 'check' : 'snippets'"
       class="code-box-code-icon"
       [class.ant-tooltip-open]="copied"
-    ></i>
+    />
     <i nz-tooltip [nzTooltipTitle]="expand ? 'Hide Code' : 'Show Code'" class="code-expand-icon">
       <img
         alt="expand code"
@@ -64,7 +61,8 @@
             ? 'https://gw.alipayobjects.com/zos/antfincdn/btT3qDZn1U/wSAkBuJFbdxsosKKpqyq.svg'
             : 'https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg'
         "
-        [ngClass]="{ 'code-expand-icon-hide': expand, 'code-expand-icon-show': !expand }"
+        [class.code-expand-icon-hide]="expand"
+        [class.code-expand-icon-show]="!expand"
         (click)="handle()"
       />
       <img
@@ -74,13 +72,14 @@
             ? 'https://gw.alipayobjects.com/zos/antfincdn/CjZPwcKUG3/OpROPHYqWmrMDBFMZtKF.svg'
             : 'https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg'
         "
-        [ngClass]="{ 'code-expand-icon-show': expand, 'code-expand-icon-hide': !expand }"
+        [class.code-expand-icon-show]="expand"
+        [class.code-expand-icon-hide]="!expand"
         (click)="handle()"
       />
     </i>
   </div>
 </section>
-<section class="highlight-wrapper" [ngClass]="{ 'highlight-wrapper-expand': expand }">
+<section class="highlight-wrapper" [class.highlight-wrapper-expand]="expand">
   <div class="highlight">
     <pre class="hljs language-ts"><code>{{item.code}}</code></pre>
   </div>

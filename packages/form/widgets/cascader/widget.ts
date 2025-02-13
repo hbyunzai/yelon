@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData, toBool } from '@yelon/form';
 import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import type { SFCascaderWidgetSchema } from './schema';
 
@@ -36,6 +36,7 @@ import type { SFCascaderWidgetSchema } from './schema';
       [nzValueProperty]="ui.valueProperty || 'value'"
       [nzLoadData]="loadData"
       [nzPlaceHolder]="ui.placeholder!"
+      [nzPlacement]="ui.placement ?? 'bottomLeft'"
       [nzShowArrow]="showArrow"
       [nzShowInput]="showInput"
       [nzShowSearch]="ui.showSearch!"
@@ -46,7 +47,6 @@ import type { SFCascaderWidgetSchema } from './schema';
   </sf-item-wrap>`,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, NzCascaderModule]
 })
 export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> implements OnInit {
@@ -57,7 +57,7 @@ export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> impl
   showInput!: boolean;
   triggerAction!: string[];
   data: SFSchemaEnum[] = [];
-  loadData?: (node: NzCascaderOption, index: number) => PromiseLike<NzSafeAny>;
+  loadData?: (node: NzCascaderOption, index: number) => PromiseLike<any>;
 
   ngOnInit(): void {
     const { clearText, showArrow, showInput, triggerAction, asyncData } = this.ui;
@@ -65,7 +65,7 @@ export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> impl
     this.showArrow = toBool(showArrow, true);
     this.showInput = toBool(showInput, true);
     this.triggerAction = triggerAction || ['click'];
-    if (!!asyncData) {
+    if (asyncData) {
       this.loadData = (node: NzCascaderOption, index: number) =>
         asyncData(node, index, this).then(() => this.detectChanges());
     }
@@ -82,7 +82,7 @@ export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> impl
     if (this.ui.visibleChange) this.ui.visibleChange(status);
   }
 
-  _change(value: NzSafeAny[] | null): void {
+  _change(value: any[] | null): void {
     this.setValue(value == null ? this.ui.clearValue : value);
     if (this.ui.change) {
       this.ui.change(value);

@@ -4,19 +4,19 @@ import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throw
 
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { log } from '@yelon/util';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { toLogin } from './helper';
 
 let refreshToking = false;
-let refreshToken$: BehaviorSubject<NzSafeAny> = new BehaviorSubject<NzSafeAny>(null);
+let refreshToken$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
 export const tryRefreshToken = (
   injector: Injector,
   ev: HttpResponseBase,
-  req: HttpRequest<NzSafeAny>,
+  req: HttpRequest<any>,
   next: HttpHandlerFn
-): Observable<NzSafeAny> => {
+): Observable<any> => {
   // 连刷新Token的请求都错了，那就是真错了
   if (['/auth/oauth/getOrCreateToken/webapp'].some(url => req.url.includes(url))) {
     toLogin(injector);
@@ -52,7 +52,7 @@ export const tryRefreshToken = (
   );
 };
 
-function reAttachToken(injector: Injector, req: HttpRequest<NzSafeAny>): HttpRequest<NzSafeAny> {
+function reAttachToken(injector: Injector, req: HttpRequest<any>): HttpRequest<any> {
   const token = injector.get(YA_SERVICE_TOKEN).get()?.access_token;
   return req.clone({
     setHeaders: {
@@ -61,7 +61,7 @@ function reAttachToken(injector: Injector, req: HttpRequest<NzSafeAny>): HttpReq
   });
 }
 
-function refreshTokenRequest(injector: Injector): Observable<NzSafeAny> {
+function refreshTokenRequest(injector: Injector): Observable<any> {
   const model = injector.get(YA_SERVICE_TOKEN).get();
   const form = new FormData();
   form.set('refresh_token', model?.refresh_token!);

@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { getTimeDistance, toDate } from './time';
 
@@ -34,7 +34,7 @@ describe('util: time', () => {
       { type: '-year', ret1: `1999-01-01 00:00:00`, ret2: `1999-12-31 23:59:59` }
     ].forEach(item => {
       it(`with ${item.type}`, () => {
-        const ret = getTimeDistance(item.type as NzSafeAny, +NOW);
+        const ret = getTimeDistance(item.type as any, +NOW);
         expect(ret.length).toBe(2);
         expect(f(ret[0])).toBe(item.ret1);
         expect(f(ret[1])).toBe(item.ret2);
@@ -71,7 +71,7 @@ describe('util: time', () => {
     expect(f(toDate(Math.trunc(+NOW / 1000), { timestampSecond: true }))).toBe(`2000-01-01 00:00:00`);
     expect(f(toDate(`${+NOW}`))).toBe(`2000-01-01 00:00:00`);
     expect(f(toDate(f(NOW)))).toBe(`2000-01-01 00:00:00`);
-    expect(isNaN(toDate(new String('') as NzSafeAny) as NzSafeAny)).toBe(true);
+    expect(isNaN(toDate(new String('') as any) as any)).toBe(true);
   });
 
   function f(d: Date, formatString = `yyyy-MM-dd HH:mm:ss`): string {

@@ -32,7 +32,6 @@ import type { SFQrCodeWidgetSchema } from './schema';
   </sf-item-wrap>`,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, NzQRCodeModule]
 })
 export class QrCodeWidget extends ControlUIWidget<SFQrCodeWidgetSchema> {

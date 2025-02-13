@@ -33,7 +33,6 @@ import type { MonacoEditorWidgetSchema } from './schema';
   `,
   preserveWhitespaces: false,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [FormsModule, YelonFormModule, NuMonacoEditorComponent]
 })
 export class MonacoEditorWidget extends ControlUIWidget<MonacoEditorWidgetSchema> {

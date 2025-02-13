@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
+
+import type { SFObjectWidgetRenderType } from './schema';
 import { ArrayProperty } from '../../model/array.property';
 import { FormProperty } from '../../model/form.property';
 import type { SFGridSchema } from '../../schema/ui';
 import { toBool } from '../../utils';
 import { ObjectLayoutWidget } from '../../widget';
-import type { SFObjectWidgetRenderType } from './schema';
 
 @Component({
   selector: 'sf-object',
@@ -51,22 +51,20 @@ import type { SFObjectWidgetRenderType } from './schema';
         [nzActions]="ui.cardActions || []"
         [nzBodyStyle]="ui.cardBodyStyle!"
         [nzBordered]="ui.cardBordered || true"
-        [nzBorderless]="ui.cardBorderless || false"
         class="sf__object-card"
         [class.sf__object-card-fold]="!expand"
       >
         <ng-template #cardTitleTpl>
           <div [class.point]="showExpand" (click)="changeExpand()">
             @if (showExpand) {
-              <i nz-icon [nzType]="expand ? 'down' : 'up'" class="mr-xs text-xs"></i>
+              <nz-icon [nzType]="expand ? 'down' : 'up'" class="mr-xs text-xs" />
             }
             {{ title }}
             @if (ui.optional || oh) {
               <span class="sf__optional">
                 {{ ui.optional }}
                 @if (oh) {
-                  <i
-                    s
+                  <nz-icon
                     nz-tooltip
                     [nzTooltipTitle]="oh.text"
                     [nzTooltipPlacement]="oh.placement"
@@ -76,9 +74,8 @@ import type { SFObjectWidgetRenderType } from './schema';
                     [nzTooltipOverlayStyle]="oh.overlayStyle"
                     [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                     [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                    nz-icon
                     [nzType]="oh.icon!"
-                  ></i>
+                  />
                 }
               </span>
             }
@@ -90,12 +87,14 @@ import type { SFObjectWidgetRenderType } from './schema';
       <ng-template [ngTemplateOutlet]="default" />
     }`,
   preserveWhitespaces: false,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class ObjectWidget extends ObjectLayoutWidget implements OnInit {
-  grid: NzSafeAny;
+  grid: any;
   type: SFObjectWidgetRenderType = 'default';
-  list: NzSafeAny[] = [];
+  list: any[] = [];
   title?: string;
   showExpand = true;
   expand = true;
@@ -113,9 +112,9 @@ export class ObjectWidget extends ObjectLayoutWidget implements OnInit {
       this.title = this.schema.title as string;
     }
     this.grid = grid as SFGridSchema;
-    const list: NzSafeAny[] = [];
+    const list: any[] = [];
     for (const key of formProperty.propertiesId) {
-      const property = (formProperty.properties as { [key: string]: FormProperty })[key] as FormProperty;
+      const property = (formProperty.properties as Record<string, FormProperty>)[key] as FormProperty;
       const item = {
         property,
         grid: property.ui.grid || grid || {},

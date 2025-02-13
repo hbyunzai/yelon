@@ -1,6 +1,11 @@
 import { SFUISchemaItem } from '@yelon/form';
-import { NzCascaderExpandTrigger, NzCascaderOption, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
-import { NgStyleInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
+import type {
+  NzCascaderExpandTrigger,
+  NzCascaderOption,
+  NzCascaderPlacement,
+  NzShowSearchOptions
+} from 'ng-zorro-antd/cascader';
+import { NgStyleInterface  } from 'ng-zorro-antd/core/types';
 
 import type { CascaderWidget } from './widget';
 
@@ -13,6 +18,8 @@ export interface SFCascaderWidgetSchema extends SFUISchemaItem {
    * 在文字框中显示提示讯息
    */
   placeholder?: string;
+
+  placement?: NzCascaderPlacement;
 
   /**
    * 是否支持搜索，默认：`false`
@@ -27,7 +34,7 @@ export interface SFCascaderWidgetSchema extends SFUISchemaItem {
   /**
    * 清空时默认值，默认：`undefined`
    */
-  clearValue?: NzSafeAny;
+  clearValue?: any;
 
   /**
    * 清除按钮的标题，默认：`清除`
@@ -107,7 +114,7 @@ export interface SFCascaderWidgetSchema extends SFUISchemaItem {
   /**
    * 选项值变更事件
    */
-  change?: (values: NzSafeAny[] | null) => void;
+  change?: (values: any[] | null) => void;
 
   /**
    * 选项变更事件

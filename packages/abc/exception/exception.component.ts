@@ -20,7 +20,7 @@ import { YelonLocaleService, LocaleData } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export type ExceptionType = 403 | 404 | 500;
 
@@ -35,7 +35,6 @@ export type ExceptionType = 403 | 404 | 500;
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [CdkObserveContent, NzButtonComponent, RouterLink]
 })
 export class ExceptionComponent implements OnInit {
@@ -57,7 +56,7 @@ export class ExceptionComponent implements OnInit {
   _img: SafeUrl = '';
   _title: SafeHtml = '';
   _desc: SafeHtml = '';
-  private typeDict!: { [key: number | string]: { img: string; title: string; desc?: string } };
+  private typeDict!: Record<number | string, { img: string; title: string; desc?: string }>;
 
   @Input()
   set type(value: ExceptionType) {
@@ -89,7 +88,7 @@ export class ExceptionComponent implements OnInit {
     this._desc = this.dom.bypassSecurityTrustHtml(value);
   }
 
-  @Input() backRouterLink: string | NzSafeAny[] = '/';
+  @Input() backRouterLink: string | any[] = '/';
 
   checkContent(): void {
     this.hasCon = !isEmpty(this.conTpl.nativeElement);

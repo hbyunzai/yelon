@@ -3,7 +3,7 @@ import { concat, filter, mergeMap, take, tap } from 'rxjs';
 
 import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { LodopModule } from './lodop.module';
 import { LodopService } from './lodop.service';
@@ -12,7 +12,7 @@ import { Lodop } from './lodop.types';
 const cog: YunzaiConfig = {
   lodop: { name: 'LODOP' }
 };
-let mockLodop: NzSafeAny;
+let mockLodop: any;
 let isErrRequest = false;
 let loadCount = 0;
 let isNullLodop = false;
@@ -21,7 +21,7 @@ class MockLazyService {
     ++loadCount;
     if (isErrRequest) return Promise.resolve({ status: 'error' });
 
-    (window as NzSafeAny)[cog.lodop!.name!] = isNullLodop ? null : mockLodop;
+    (window as any)[cog.lodop!.name!] = isNullLodop ? null : mockLodop;
     return Promise.resolve({ status: 'ok' });
   }
 }
@@ -84,8 +84,8 @@ describe('abc: lodop', () => {
         }
       };
       setTimeout(() => {
-        const obj = (window as NzSafeAny)[cog.lodop!.name!] as Lodop;
-        (obj.webskt as NzSafeAny).readyState = 1;
+        const obj = (window as any)[cog.lodop!.name!] as Lodop;
+        (obj.webskt as any).readyState = 1;
       }, 30);
       srv.lodop.subscribe(res => {
         expect(res).not.toBeNull();
@@ -167,7 +167,7 @@ describe('abc: lodop', () => {
       const url = 'http://a.com/lodop.js?aa=1';
       cog.lodop!.url = url;
       genModule();
-      const scriptSrv = (srv as NzSafeAny).scriptSrv;
+      const scriptSrv = (srv as any).scriptSrv;
       spyOn(scriptSrv, 'loadScript').and.callFake(() => Promise.resolve({ status: 'ok' }));
       srv.reset();
       expect(scriptSrv.loadScript).toHaveBeenCalled();
@@ -212,6 +212,7 @@ describe('abc: lodop', () => {
         SET_LICENSES: jasmine.createSpy('SET_LICENSES'),
         SET_PRINT_STYLEA: jasmine.createSpy('SET_PRINT_STYLEA'),
         PRINT_INITA: jasmine.createSpy('PRINT_INITA').and.callFake(function (): void {
+          // eslint-disable-next-line prefer-rest-params
           mockRes = arguments[4];
         }),
         webskt: {

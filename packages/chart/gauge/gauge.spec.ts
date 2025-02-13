@@ -4,14 +4,13 @@ import { fakeAsync } from '@angular/core/testing';
 import { checkDelay, PageG2 } from '@yelon/testing';
 
 import { G2GaugeComponent } from './gauge.component';
-import { G2GaugeModule } from './gauge.module';
 
 describe('chart: gauge', () => {
   let page: PageG2<TestComponent>;
 
   describe('', () => {
     beforeEach(fakeAsync(() => {
-      page = new PageG2<TestComponent>().makeModule(G2GaugeModule, TestComponent);
+      page = new PageG2<TestComponent>().genComp(TestComponent, true);
     }));
 
     it('should be working', () => {
@@ -22,11 +21,12 @@ describe('chart: gauge', () => {
     });
   });
 
-  it('#delay', fakeAsync(() => checkDelay(G2GaugeModule, TestComponent)));
+  it('#delay', fakeAsync(() => checkDelay(TestComponent)));
 });
 
 @Component({
-  template: ` <g2-gauge #comp [title]="'核销率'" height="164" [percent]="percent" [delay]="delay" />`
+  template: ` <g2-gauge #comp [title]="'核销率'" height="164" [percent]="percent" [delay]="delay" />`,
+  imports: [G2GaugeComponent]
 })
 class TestComponent {
   @ViewChild('comp', { static: true }) comp!: G2GaugeComponent;

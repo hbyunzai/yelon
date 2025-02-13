@@ -88,6 +88,7 @@ module: import { STModule } from '@yelon/abc/st';
 | `[responsiveHideHeaderFooter]` | 是否在小屏幕下才显示顶部与底部 | `boolean` | `false` | ✅ |
 | `[resizable]` | 当前表格所有列的调整表头配置项，**不支持多表头** | `STResizable, boolean` | - | - |
 | `[trackBy]` | `@for` 列表循环的 `TrackByFunction` 函数 | `TrackByFunction<T>` | - | - |
+| `[drag]` | 拖拽排序 | `STDragOptions, boolean` | - | - |
 | `(change)` | 变化时回调，包括：`pi`、`ps`、`checkbox`、`radio`、`sort`、`filter`、`click`、`dblClick`、`expand` 变动 | `EventEmitter<STChange>` | - | - |
 | `(error)` | 异常时回调 | `EventEmitter<STError>` | - | - |
 
@@ -104,7 +105,7 @@ module: import { STModule } from '@yelon/abc/st';
 | `reset(extraParams?: any, options?: STLoadOptions)` | 重置且重新设置 `pi` 为 `1`，包含单多选、排序、过滤状态（同默认状态一并清除） |
 | `addRow(data: STData | STData[], options?: { index?: number })` | 添加行 |
 | `removeRow(data: STData | STData[] | number)` | 移除行 |
-| `setRow(index: number | STData, item: STData, options?: { refreshSchema?: boolean; emitReload?: boolean })` | 修改行数据，支持部分字段更新 |
+| `setRow(index: number | STData, item: STData, options?: { refreshSchema?: boolean; emitReload?: boolean; arrayProcessMethod?: boolean })` | 修改行数据，支持部分字段更新 |
 | `pureItem(itemOrIndex: STData | number)` | 返回纯净数据，`st` 内部会维护一组用于缓存的数据，这部分数据可能会影响后端 |
 | `clear(cleanStatus = true)` | 清空所有数据 |
 | `clearStatus()` | 清空所有状态（包含单多选、排序、过滤状态） |

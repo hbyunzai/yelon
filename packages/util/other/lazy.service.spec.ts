@@ -2,19 +2,19 @@ import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { take } from 'rxjs';
 
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { LazyService } from './lazy.service';
 
 let testStatus = 'ok';
 class MockDocument {
-  querySelectorAll(): NzSafeAny {
+  querySelectorAll(): any {
     return {};
   }
-  getElementsByTagName = (): NzSafeAny => {
+  getElementsByTagName = (): any => {
     return [
       {
-        appendChild: (node: NzSafeAny) => {
+        appendChild: (node: any) => {
           if (node.testStatus === 'ok') {
             if (node.readyState) {
               node.readyState = 'complete';
@@ -29,8 +29,8 @@ class MockDocument {
       }
     ];
   };
-  createElement = (): NzSafeAny => {
-    const ret: NzSafeAny = {
+  createElement = (): any => {
+    const ret: any = {
       testStatus,
       onload: () => {}
     };
@@ -52,7 +52,7 @@ describe('utils: lazy', () => {
   });
 
   it('should be load via LazyLoadItem', () => {
-    const res: NzSafeAny = {};
+    const res: any = {};
     const content = 'var a = 1;';
     spyOn(doc, 'createElement').and.callFake(() => res);
     srv.load([{ path: '1.js', options: { innerContent: content } }]);
@@ -71,7 +71,7 @@ describe('utils: lazy', () => {
       srv.load('/1.js');
     });
     it('should be custom content', () => {
-      const res: NzSafeAny = {};
+      const res: any = {};
       const content = 'var a = 1;';
       spyOn(doc, 'createElement').and.callFake(() => res);
       srv.loadScript('/1.js', { innerContent: content });
@@ -94,7 +94,7 @@ describe('utils: lazy', () => {
       });
     });
     it('should be custom content', () => {
-      const res: NzSafeAny = {
+      const res: any = {
         onerror(): void {}
       };
       const content = 'var a = 1;';
@@ -139,7 +139,7 @@ describe('utils: lazy', () => {
 
   describe('#attributes', () => {
     it('should be working', () => {
-      const res: NzSafeAny = {
+      const res: any = {
         setAttribute(key: string, value: string): void {
           res[key] = value;
         }

@@ -1,7 +1,7 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export function setFavicon(path: string): void {
-  const link: NzSafeAny = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  const link: any = document.querySelector("link[rel*='icon']") || document.createElement('link');
   link.type = 'image/x-icon';
   link.rel = 'shortcut icon';
   link.href = path;

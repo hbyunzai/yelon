@@ -47,7 +47,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
           <button nz-button>操作</button>
         </nz-button-group>
         <button nz-button nz-dropdown [nzDropdownMenu]="actionMoreMenu" class="mx-sm">
-          <i nz-icon nzType="ellipsis"></i>
+          <nz-icon nzType="ellipsis" />
         </button>
         <nz-dropdown-menu #actionMoreMenu="nzDropdownMenu">
           <ul nz-menu>
@@ -88,7 +88,6 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
       </ng-template>
     </page-header>
   `,
-  standalone: true,
   imports: [
     PageHeaderComponent,
     NzBreadCrumbModule,

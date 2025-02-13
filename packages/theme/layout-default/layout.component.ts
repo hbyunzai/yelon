@@ -25,7 +25,8 @@ import { filter } from 'rxjs';
 
 import { SettingsService } from '@yelon/theme';
 import { updateHostClass } from '@yelon/util/browser';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
+
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { LayoutDisplayService } from './layout-display.service';
@@ -44,7 +45,7 @@ import { LayoutDefaultOptions } from './types';
       <layout-default-header [items]="headerItems" />
     }
     @if (!opt.hideAside && displayAside) {
-      <div class="yunzai-default__aside" [ngStyle]="asideStyle">
+      <div class="yunzai-default__aside" [style]="asideStyle">
         <div class="yunzai-default__aside-wrap">
           <div class="yunzai-default__aside-inner">
             <ng-container *ngTemplateOutlet="asideUser" />
@@ -59,7 +60,7 @@ import { LayoutDefaultOptions } from './types';
                 <ng-container *ngTemplateOutlet="asideBottom" />
               } @else {
                 <div class="yunzai-default__aside-link-collapsed" (click)="toggleCollapsed()">
-                  <span nz-icon [nzType]="collapsedIcon"></span>
+                  <nz-icon [nzType]="collapsedIcon" />
                 </div>
               }
             </div>
@@ -67,11 +68,13 @@ import { LayoutDefaultOptions } from './types';
         </div>
       </div>
     }
-    <section class="yunzai-default__content" [ngStyle]="contentStyle">
+    <section class="yunzai-default__content" [style]="contentStyle">
       <ng-container *ngTemplateOutlet="content" />
       <ng-content />
     </section>
-  `
+  `,
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class LayoutDefaultComponent implements OnInit {
   @ContentChildren(LayoutDefaultHeaderItemComponent, { descendants: false })
@@ -85,9 +88,8 @@ export class LayoutDefaultComponent implements OnInit {
   set options(value: LayoutDefaultOptions | null | undefined) {
     this.srv.setOptions(value);
   }
-
   @Input() asideUser: TemplateRef<void> | null = null;
-  @Input() asideBottom: TemplateRef<NzSafeAny> | null = null;
+  @Input() asideBottom: TemplateRef<any> | null = null;
   @Input() nav: TemplateRef<void> | null = null;
   @Input() content: TemplateRef<void> | null = null;
   @Input() customError?: string | null;
@@ -111,14 +113,14 @@ export class LayoutDefaultComponent implements OnInit {
     return this.srv.collapsedIcon;
   }
 
-  get contentStyle(): NzSafeAny {
+  get contentStyle(): any {
     return {
       'margin-top': !this.displayNav ? '0px' : '',
       'margin-left': !this.displayAside ? '0px' : ''
     };
   }
 
-  get asideStyle(): NzSafeAny {
+  get asideStyle(): any {
     return {
       'margin-top': !this.displayNav ? '0px' : ''
     };
@@ -134,7 +136,7 @@ export class LayoutDefaultComponent implements OnInit {
     private settings: SettingsService,
     private el: ElementRef,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private doc: NzSafeAny,
+    @Inject(DOCUMENT) private doc: any,
     private srv: LayoutDefaultService,
     private layoutDisplayService: LayoutDisplayService
   ) {

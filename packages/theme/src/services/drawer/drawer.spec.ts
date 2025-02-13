@@ -1,11 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
-import { NzDrawerModule, NzDrawerRef } from 'ng-zorro-antd/drawer';
+import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 
-import { YunzaiThemeModule } from '../../theme.module';
 import { DrawerHelper } from './drawer.helper';
 
 describe('theme: DrawerHelper', () => {
@@ -13,13 +11,9 @@ describe('theme: DrawerHelper', () => {
   let fixture: ComponentFixture<TestComponent>;
 
   beforeEach(() => {
-    @NgModule({
-      imports: [CommonModule, NoopAnimationsModule, YunzaiThemeModule, NzDrawerModule],
-      declarations: [TestDrawerComponent, TestComponent]
-    })
-    class TestModule {}
-
-    TestBed.configureTestingModule({ imports: [TestModule] });
+    TestBed.configureTestingModule({
+      providers: [provideNoopAnimations(), NzDrawerService]
+    });
     fixture = TestBed.createComponent(TestComponent);
     drawer = TestBed.inject<DrawerHelper>(DrawerHelper);
   });
@@ -297,9 +291,11 @@ class TestDrawerComponent {
       } else {
         this.modal.close(this.ret);
       }
-    });
+    }, 10);
   }
 }
 
-@Component({ template: `` })
+@Component({
+  template: ``
+})
 class TestComponent {}

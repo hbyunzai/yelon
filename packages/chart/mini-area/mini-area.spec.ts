@@ -2,19 +2,18 @@ import { Component, ViewChild } from '@angular/core';
 import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2, PageG2Height } from '@yelon/testing';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { G2MiniAreaComponent } from './mini-area.component';
-import { G2MiniAreaModule } from './mini-area.module';
 
 describe('chart: mini-area', () => {
   describe('', () => {
     let page: PageG2<TestComponent>;
 
-    beforeEach(() => {
-      page = new PageG2<TestComponent>().genModule(G2MiniAreaModule, TestComponent);
+    beforeEach(fakeAsync(() => {
+      page = new PageG2<TestComponent>().genComp(TestComponent, true);
       page.genComp(TestComponent);
-    });
+    }));
 
     it('should be working', fakeAsync(() => {
       page
@@ -77,7 +76,7 @@ describe('chart: mini-area', () => {
     });
   });
 
-  it('#delay', fakeAsync(() => checkDelay(G2MiniAreaModule, TestComponent)));
+  it('#delay', fakeAsync(() => checkDelay(TestComponent)));
 });
 
 @Component({
@@ -94,15 +93,16 @@ describe('chart: mini-area', () => {
       [xAxis]="xAxis"
       [yAxis]="yAxis"
     />
-  `
+  `,
+  imports: [G2MiniAreaComponent]
 })
 class TestComponent {
   @ViewChild('comp', { static: true }) comp!: G2MiniAreaComponent;
   line = false;
   height = PageG2Height;
-  xAxis: NzSafeAny;
-  yAxis: NzSafeAny;
-  data: NzSafeAny[] = [
+  xAxis: any;
+  yAxis: any;
+  data: any[] = [
     { x: 1, y: 10 },
     { x: 2, y: 20 }
   ];

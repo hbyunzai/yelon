@@ -25,11 +25,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, filter, of } from 'rxjs';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NzTabComponent, NzTabSetComponent } from 'ng-zorro-antd/tabs';
 
-import { ReuseTabContextMenuComponent } from './reuse-tab-context-menu.component';
 import { ReuseTabContextComponent } from './reuse-tab-context.component';
 import { ReuseTabContextDirective } from './reuse-tab-context.directive';
 import { ReuseTabContextService } from './reuse-tab-context.service';
@@ -63,12 +62,10 @@ import { REUSE_TAB_STORAGE_KEY, REUSE_TAB_STORAGE_STATE } from './reuse-tab.stat
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [
     NgTemplateOutlet,
     NzTabSetComponent,
     NzTabComponent,
-    ReuseTabContextMenuComponent,
     ReuseTabContextDirective,
     ReuseTabContextComponent,
     NzIconDirective
@@ -112,7 +109,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
   @Input() customContextMenu: ReuseCustomContextMenu[] = [];
   @Input() tabBarExtraContent?: TemplateRef<void>;
   @Input() tabBarGutter?: number;
-  @Input() tabBarStyle: { [key: string]: string } | null = null;
+  @Input() tabBarStyle: Record<string, string> | null = null;
   @Input() tabType: 'line' | 'card' = 'line';
   @Input() routeParamMatchMode: ReuseTabRouteParamMatchMode = 'strict';
   @Input({ transform: booleanAttribute }) disabled = false;
@@ -273,7 +270,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
    * <reuse-tab #reuseTab></reuse-tab>
    * <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
    */
-  activate(instance: NzSafeAny): void {
+  activate(instance: any): void {
     if (this.srv == null) return;
     this.srv.componentRef = { instance };
   }

@@ -39,7 +39,7 @@ const yunzaiConfig: YunzaiConfig = {
 
 ## API
 
-### [media]:standalone
+### [media]
 
 | Property | Description | Type | Default | Global Config |
 |----------|-------------|------|---------|---------------|

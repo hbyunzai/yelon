@@ -10,8 +10,7 @@ import { YunzaiDateRangePickerShortcutItem } from '@yelon/util/config';
         <a (click)="click(i)" [innerHTML]="i._text" [class.ml-sm]="!$first"></a>
       }
     </ng-template>
-  `,
-  standalone: true
+  `
 })
 export class RangePickerShortcutTplComponent {
   @ViewChild('tpl', { static: true })
@@ -19,5 +18,6 @@ export class RangePickerShortcutTplComponent {
 
   list: YunzaiDateRangePickerShortcutItem[] = [];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   click(_: YunzaiDateRangePickerShortcutItem): void {}
 }

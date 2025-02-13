@@ -2,7 +2,14 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import ngLang from '@angular/common/locales/zh';
 import { APP_ID, ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withViewTransitions } from '@angular/router';
+import {
+  provideRouter,
+  RouterFeatures,
+  withComponentInputBinding,
+  withHashLocation,
+  withInMemoryScrolling,
+  withViewTransitions
+} from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { provideNuMonacoEditorConfig } from '@ng-util/monaco-editor';
@@ -10,10 +17,9 @@ import { zhCN as dateLang } from 'date-fns/locale';
 import { provideTinymce } from 'ngx-tinymce';
 
 import { provideCellWidgets } from '@yelon/abc/cell';
+import { ReuseTabMatchMode, provideReuseTabConfig } from '@yelon/abc/reuse-tab';
 import { provideSTWidgets } from '@yelon/abc/st';
 import { provideSFConfig } from '@yelon/form';
-import { withMonacoEditorWidget } from '@yelon/form/widgets-third/monaco-editor';
-import { withTinymceWidget } from '@yelon/form/widgets-third/tinymce';
 import { withAutoCompleteWidget } from '@yelon/form/widgets/autocomplete';
 import { withCascaderWidget } from '@yelon/form/widgets/cascader';
 import { withColorWidget } from '@yelon/form/widgets/color';
@@ -27,6 +33,8 @@ import { withTimeWidget } from '@yelon/form/widgets/time';
 import { withTransferWidget } from '@yelon/form/widgets/transfer';
 import { withTreeSelectWidget } from '@yelon/form/widgets/tree-select';
 import { withUploadWidget } from '@yelon/form/widgets/upload';
+import { withMonacoEditorWidget } from '@yelon/form/widgets-third/monaco-editor';
+import { withTinymceWidget } from '@yelon/form/widgets-third/tinymce';
 import { mockInterceptor, provideMockConfig } from '@yelon/mock';
 import { zh_CN as yelonLang, YunzaiProvideLang, provideYunzai } from '@yelon/theme';
 import { YunzaiConfig } from '@yelon/util/config';
@@ -84,17 +92,19 @@ const yunzaiConfig: YunzaiConfig = {
 
 const ngZorroConfig: NzConfig = {};
 
+const routerFeatures: RouterFeatures[] = [
+  withComponentInputBinding(),
+  withViewTransitions(),
+  withInMemoryScrolling({ scrollPositionRestoration: 'top' })
+];
+if (!environment.production) routerFeatures.push(withHashLocation());
+
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: APP_ID, useValue: 'ngYunzaiDoc' },
     provideHttpClient(withFetch(), withInterceptors([mockInterceptor])),
     provideAnimations(),
-    provideRouter(
-      routes,
-      withComponentInputBinding(),
-      withViewTransitions(),
-      withInMemoryScrolling({ scrollPositionRestoration: 'top' })
-    ),
+    provideRouter(routes, ...routerFeatures),
     // provideClientHydration(), // 暂时不开启水合，除了编译时间长，还有就是对DOM要求比较高
     provideYunzai({ config: yunzaiConfig, defaultLang, i18nClass: I18NService }),
     provideNzConfig(ngZorroConfig),
@@ -133,7 +143,7 @@ export const appConfig: ApplicationConfig = {
     { provide: ErrorHandler, useClass: CustomErrorHandler },
     // Elements
     importProvidersFrom(ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })),
-    provideElements()
-    // provideReuseTabConfig({ max: 2 })
+    provideElements(),
+    provideReuseTabConfig({ max: 2, mode: ReuseTabMatchMode.MenuForce })
   ]
 };

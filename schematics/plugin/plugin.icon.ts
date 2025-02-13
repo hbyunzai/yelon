@@ -115,7 +115,7 @@ function genByClass(node: Element): string | null {
 }
 
 function genByComp(node: Element): string[] | null {
-  if (!node.attrs.find(attr => attr.name === 'nz-icon')) return null;
+  if (node.nodeName != 'nz-icon' && !node.attrs.find(attr => attr.name === 'nz-icon')) return null;
 
   const type = node.attrs.find(attr => ['type', '[type]', 'nztype', '[nztype]'].includes(attr.name));
   if (!type) return null;
@@ -150,7 +150,7 @@ function getNgValue(attr: Attribute): string[] | null {
   const templatVarIndex = str.indexOf('{{');
 
   if (templatVarIndex === -1) {
-    // <i nz-icon [nzType]="d.status === 'NORMAL' ? 'close1' : 'close2'"></i>
+    // <nz-icon [nzType]="d.status === 'NORMAL' ? 'close1' : 'close2'"></i>
     const conMatch = /\? ['"]([^'"]+)['"] : ['"]([^'"]+)['"]/g.exec(str);
     if (conMatch != null && conMatch.length === 3) {
       return [conMatch[1], conMatch[2]];
@@ -276,7 +276,7 @@ export const ICONS = [ ];
     return;
   }
   const source = getSourceFile(tree, path);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const allImports = findNodes(source as any, ts.SyntaxKind.ImportDeclaration);
   const iconImport = allImports.find((w: ts.ImportDeclaration) =>
     w.moduleSpecifier.getText().includes('@ant-design/icons-angular/icons')
@@ -315,9 +315,9 @@ export function pluginIcon(options: PluginOptions): Rule {
     const icons = getIcons(options, tree);
     genIconFile(options, tree, icons);
     console.log(`\n\n`);
-    console.log(`生成成功，如果是首次运行，需要手动引用，参考：https://ng-alain.com/theme/icon/zh`);
+    console.log(`生成成功，如果是首次运行，需要手动引用，参考：https://ng.yunzainfo.com/theme/icon/zh`);
     console.log(
-      `Finished, if it's first run, you need manually reference it, refer to: https://ng-alain.com/theme/icon/en`
+      `Finished, if it's first run, you need manually reference it, refer to: https://ng.yunzainfo.com/theme/icon/en`
     );
     console.log(`\n\n`);
   };

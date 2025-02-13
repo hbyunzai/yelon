@@ -17,7 +17,7 @@ import {
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzNoAnimationDirective } from 'ng-zorro-antd/core/no-animation';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { NzPopoverDirective } from 'ng-zorro-antd/popover';
 
 import { OnboardingConfig, OnboardingItem, OnboardingOpType } from './onboarding.types';
@@ -43,7 +43,6 @@ interface OnboardingLightData {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [NzPopoverDirective, NzStringTemplateOutletDirective, NzButtonComponent, NzNoAnimationDirective]
 })
 export class OnboardingComponent implements OnDestroy, AfterViewInit {
@@ -52,7 +51,7 @@ export class OnboardingComponent implements OnDestroy, AfterViewInit {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly doc = inject(DOCUMENT);
 
-  private time: NzSafeAny;
+  private time: any;
   private prevSelectorEl?: HTMLElement;
   config!: OnboardingConfig;
   item!: OnboardingItem;

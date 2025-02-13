@@ -1,4 +1,4 @@
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export const YUNZAIDEFAULTVAR = 'yunzai-default-vars';
 export const DEFAULT_COLORS = [
@@ -39,7 +39,7 @@ export const DEFAULT_COLORS = [
     color: '#001529'
   }
 ];
-export const DEFAULT_VARS: { [key: string]: NzSafeAny } = {
+export const DEFAULT_VARS: Record<string, any> = {
   'primary-color': { label: '主颜色', type: 'color', default: '#1890ff' },
   'yunzai-default-header-hg': {
     label: '高',

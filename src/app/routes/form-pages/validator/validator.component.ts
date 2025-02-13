@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { NuMonacoEditorComponent } from '@ng-util/monaco-editor';
 
-import { YelonFormModule, SFLayout, SFSchema } from '@yelon/form';
+import { YelonFormModule, SFLayout, SFSchema, SFUISchema } from '@yelon/form';
 import { YUNZAI_I18N_TOKEN, I18nPipe, _HttpClient } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -31,7 +31,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
       (formChange)="change($event)"
       (formError)="error($event)"></sf>
     \`,
-  standalone: true,
   imports: [YelonFormModule]
 })
 export class DemoComponent {
@@ -58,7 +57,6 @@ export class DemoComponent {
   selector: 'form-validator',
   templateUrl: './validator.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     FormsModule,
     NzGridModule,
@@ -91,9 +89,9 @@ export class FormValidatorComponent implements OnInit {
   schema!: string;
   schemaData!: SFSchema;
   formCode!: string;
-  formData!: {};
+  formData!: object;
   uiCode!: string;
-  uiSchema!: {};
+  uiSchema!: SFUISchema;
   expand = true;
   editorOptions = { language: 'json', theme: 'vs' };
 
@@ -149,7 +147,7 @@ export class FormValidatorComponent implements OnInit {
   }
 
   openOnStackBlitz(): void {
-    const obj: { [key: string]: NzSafeAny } = {
+    const obj: Record<string, NzSafeAny> = {
       schema: this.schema,
       layout: this.layout,
       formData: this.formCode || '{}',

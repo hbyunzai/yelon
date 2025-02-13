@@ -1,7 +1,7 @@
 import { PreloadingStrategy, Route } from '@angular/router';
 import { Observable, of, catchError } from 'rxjs';
 
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 /**
  * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).
@@ -18,7 +18,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
  * })
  */
 export class PreloadOptionalModules implements PreloadingStrategy {
-  preload(route: Route, fn: () => Observable<NzSafeAny>): Observable<NzSafeAny> {
+  preload(route: Route, fn: () => Observable<any>): Observable<any> {
     return route.data?.preload === true ? fn().pipe(catchError(() => of(null))) : of(null);
   }
 }

@@ -7,11 +7,11 @@ import type jsZipType from 'jszip';
 import { YunzaiConfigService, YunzaiZipConfig } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyResult, LazyService } from '@yelon/util/other';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import { ZipSaveOptions } from './zip.types';
 
-declare var JSZip: jsZipType;
+declare const JSZip: jsZipType;
 
 @Injectable({ providedIn: 'root' })
 export class ZipService {
@@ -110,7 +110,7 @@ export class ZipService {
     this.check(zip);
     const opt = { filename: 'download.zip', ...options } as ZipSaveOptions;
     return new Promise<void>((resolve, reject) => {
-      zip!.generateAsync<'blob'>({ type: 'blob', ...opt.options } as NzSafeAny, opt.update as NzSafeAny).then(
+      zip!.generateAsync<'blob'>({ type: 'blob', ...opt.options } as any, opt.update as any).then(
         data => {
           if (opt.callback) opt.callback(data);
           saveAs(data, opt.filename);

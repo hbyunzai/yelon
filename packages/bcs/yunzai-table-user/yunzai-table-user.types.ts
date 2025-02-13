@@ -1,6 +1,6 @@
 import { STColumn, STData } from '@yelon/abc/st';
 import { SFSchema } from '@yelon/form';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 export interface YunzaiTableUser {
   userId: string;
@@ -45,7 +45,7 @@ export interface YunzaiTableUserRole {
   roleDesc: string | null;
   displayIndex: number | null;
   landingPageUrl: string | null;
-  roleGroups: NzSafeAny; // Change this type based on the actual structure if available
+  roleGroups: any; // Change this type based on the actual structure if available
   thisDepartment: boolean;
   onlyOne: boolean;
   onlyDeptOne: boolean;
@@ -58,11 +58,11 @@ export interface YunzaiTableUserDept {
   deptName: string;
   deptType: string;
   deptComment: string | null;
-  leaf: NzSafeAny; // Change this type based on the actual structure if available
+  leaf: any; // Change this type based on the actual structure if available
   displayIndex: number;
   deptCode: string;
   status: number;
-  deptLevel: NzSafeAny; // Change this type based on the actual structure if available
+  deptLevel: any; // Change this type based on the actual structure if available
   children: YunzaiTableUserDept[];
   pid: string | null;
   expand: boolean;
@@ -88,7 +88,7 @@ export interface YunzaiTableUserProps {
   filteredColumns?: string[];
   customColumns?: STColumn[];
   additionalColumns?: STColumn[];
-  page?: NzSafeAny;
+  page?: any;
   list?: boolean;
   scroll?: {
     x?: string | null;
@@ -105,7 +105,7 @@ export interface YunzaiTableUserState {
   data: YunzaiTableUser[] | string;
   dataBackup: YunzaiTableUser[] | string;
   columns: STColumn[];
-  page: NzSafeAny;
+  page: any;
   schema: SFSchema;
   check: {
     data: STData[];

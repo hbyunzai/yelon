@@ -1,9 +1,8 @@
 import { fakeAsync } from '@angular/core/testing';
 
 import { deepCopy } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import { _STColumn } from '../st.types';
+
 import { PageObject, genModule, TestExpandComponent, USERS } from './base.spec';
 
 describe('abc: st-expand', () => {
@@ -79,7 +78,7 @@ describe('abc: st-expand', () => {
   describe('should be set showExpand in row data', () => {
     it(`muse be hide expand icon`, fakeAsync(() => {
       context.expandRowByClick = false;
-      context.data = deepCopy(USERS).slice(0, 1) as NzSafeAny[];
+      context.data = deepCopy(USERS).slice(0, 1) as any[];
       context.data[0].showExpand = false;
       page
         .cd()

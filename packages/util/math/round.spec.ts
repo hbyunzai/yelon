@@ -1,9 +1,9 @@
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 
 import * as ROUND from './round';
 
 describe('util.round', () => {
-  function run(methodName: keyof typeof ROUND, data: Array<{ k: NzSafeAny[]; v: number }>): void {
+  function run(methodName: keyof typeof ROUND, data: Array<{ k: any[]; v: number }>): void {
     for (const item of data) {
       const value = item.k[0];
       const precision = item.k.length === 2 ? item.k[1] : undefined;

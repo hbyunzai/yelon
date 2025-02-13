@@ -5,13 +5,12 @@ import type Plyr from 'plyr';
 
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
-import { NzSafeAny } from 'ng-zorro-antd/core/types/any';
+import { any } from 'ng-zorro-antd/core/types/any';
 
 import { MediaComponent, MediaType } from './media.component';
-import { MediaModule } from './media.module';
 
 class MockPlyr {
-  source: NzSafeAny = {};
+  source: any = {};
   on(_key: string, fn: () => void): void {
     fn();
   }
@@ -24,13 +23,9 @@ describe('abc: media', () => {
   let context: TestComponent;
   let page: PageObject;
   let lazySrv: LazyService;
-  const win: NzSafeAny = window;
+  const win: any = window;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [MediaModule],
-      declarations: [TestComponent, TestCustomVideoComponent]
-    });
     ({ fixture, context } = createTestContext(TestComponent));
     page = new PageObject();
     lazySrv = TestBed.inject(LazyService);
@@ -91,7 +86,7 @@ describe('abc: media', () => {
       return this;
     }
 
-    get player(): NzSafeAny {
+    get player(): any {
       return context.comp.player;
     }
 
@@ -106,17 +101,19 @@ describe('abc: media', () => {
 @Component({
   template: ` <media #comp [type]="type" [source]="source" [options]="options" [delay]="delay" (ready)="ready()">
     <span></span>
-  </media>`
+  </media>`,
+  imports: [MediaComponent]
 })
 class TestComponent {
   @ViewChild('comp') comp!: MediaComponent;
   type: MediaType = 'video';
   source: string | Plyr.SourceInfo = '1.mp4';
-  options: NzSafeAny;
+  options: any;
   delay = 0;
   ready(): void {}
 }
 @Component({
-  template: `<media #comp [source]="source"><video data-type="custom"></video></media>`
+  template: `<media #comp [source]="source"><video data-type="custom"></video></media>`,
+  imports: [MediaComponent]
 })
 class TestCustomVideoComponent extends TestComponent {}
