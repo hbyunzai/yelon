@@ -17,6 +17,9 @@ describe('NgYunzaiSchematic: application', () => {
       expect(packageJson.dependencies['@yelon/auth']).toBeDefined();
       expect(packageJson.dependencies['@yelon/cache']).toBeDefined();
       expect(packageJson.dependencies['@yelon/mock']).toBeDefined();
+      expect(packageJson.dependencies['@yelon/bis']).toBeDefined();
+      expect(packageJson.dependencies['@yelon/bcs']).toBeDefined();
+      expect(packageJson.dependencies['@yelon/socket']).toBeDefined();
     });
     it('should be add addFileReplacements', () => {
       const angualrJson = tree.readContent('angular.json');
