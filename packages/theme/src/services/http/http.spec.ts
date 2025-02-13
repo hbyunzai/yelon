@@ -7,7 +7,6 @@ import { of, catchError } from 'rxjs';
 import { YunzaiThemeHttpClientConfig, provideYunzaiConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
 
-
 import { _HttpClient } from './http.client';
 
 describe('theme: http.client', () => {

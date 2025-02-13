@@ -1,7 +1,8 @@
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YunzaiI18NServiceFake } from '@yelon/theme';
 import { deepGet } from '@yelon/util/other';
-import { NgClassInterface  } from 'ng-zorro-antd/core/types';
+
+import { NgClassInterface } from 'ng-zorro-antd/core/types';
 
 import { STColumnSource, STColumnSourceProcessOptions } from '../st-column-source';
 import { STRowSource } from '../st-row.directive';

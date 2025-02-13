@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { NuMonacoEditorModule } from '@ng-util/monaco-editor';
-
 import { YelonFormModule, WidgetRegistry } from '@yelon/form';
 
 import { MonacoEditorWidget } from './widget';

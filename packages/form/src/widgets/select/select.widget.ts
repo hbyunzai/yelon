@@ -3,7 +3,6 @@ import { Subject, catchError, debounceTime, distinctUntilChanged, switchMap, tak
 
 import { ArrayService } from '@yelon/util/array';
 
-
 import { SFSelectWidgetSchema } from './schema';
 import { SFValue } from '../../interface';
 import { SFSchemaEnum } from '../../schema';

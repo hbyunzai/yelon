@@ -1,5 +1,3 @@
-
-
 export type LocaleData = Record<string, any>;
 
 export interface ExceptionLocaleData extends LocaleData {

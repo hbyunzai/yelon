@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { YelonFormModule, WidgetRegistry } from '@yelon/form';
+
 import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 
 import { SegmentedWidget } from './widget';

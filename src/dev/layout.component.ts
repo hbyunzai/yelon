@@ -16,13 +16,9 @@ import {
   MenuUnfoldOutline,
   PlusOutline,
   SearchOutline,
-  // Optional
   SettingOutline,
   UserOutline
 } from '@ant-design/icons-angular/icons';
-
-// #region icons
-
 import { ReuseCustomContextMenu, ReuseTabComponent } from '@yelon/abc/reuse-tab';
 import { YUNZAI_I18N_TOKEN, Menu, MenuService, RTLService, SettingsService, User } from '@yelon/theme';
 import { LayoutDefaultModule, LayoutDefaultOptions } from '@yelon/theme/layout-default';
@@ -51,12 +47,9 @@ const ICONS = [
   LogoutOutline,
   EllipsisOutline,
   GlobalOutline,
-  // Optional
   GithubOutline,
   AppstoreOutline
 ];
-
-// #endregion
 
 @Component({
   selector: 'dev-layout',
@@ -121,8 +114,8 @@ export class DevLayoutComponent implements OnInit {
     logoCollapsed: `./assets/logo.svg`,
     hideHeader: false,
     showHeaderCollapse: true,
-    showSiderCollapse: true
-    // hideAside: true
+    showSiderCollapse: true,
+    hideAside: false
   };
 
   lang: LangType = 'zh-CN';

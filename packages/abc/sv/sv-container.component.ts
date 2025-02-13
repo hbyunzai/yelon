@@ -14,6 +14,7 @@ import {
 
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
+
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 
 @Component({

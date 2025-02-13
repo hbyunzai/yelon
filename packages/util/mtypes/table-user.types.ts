@@ -1,5 +1,3 @@
-
-
 export interface TableUser {
   userId: string;
   account: string;
@@ -43,7 +41,6 @@ export interface TableUserRole {
   roleDesc: string | null;
   displayIndex: number | null;
   landingPageUrl: string | null;
-  // @ts-ignore no-explicit-any
   roleGroups: any;
   thisDepartment: boolean;
   onlyOne: boolean;

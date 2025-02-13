@@ -11,7 +11,6 @@ registerLocaleData(localeZhHans);
 import { formatDistanceToNow } from 'date-fns';
 import { zhCN as dateFnsLang } from 'date-fns/locale';
 
-
 import { DatePipe } from './date.pipe';
 
 describe('Pipe: _date', () => {

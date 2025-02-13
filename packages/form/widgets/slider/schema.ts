@@ -1,4 +1,5 @@
 import type { SFUISchemaItem } from '@yelon/form';
+
 import { NzMarks, NzSliderValue } from 'ng-zorro-antd/slider';
 
 export interface SFSliderWidgetSchema extends SFUISchemaItem {

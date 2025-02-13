@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -202,8 +200,8 @@ export class PathToRegexpService {
   arrayToRegexp(path: any, keys: any, options: any): RegExp {
     const parts = [];
 
-    for (let i = 0; i < path.length; i++) {
-      parts.push(this.pathToRegexp(path[i], keys, options).source);
+    for (const item of path) {
+      parts.push(this.pathToRegexp(item, keys, options).source);
     }
 
     return new RegExp(`(?:${parts.join('|')})`, this.flags(options));
@@ -227,9 +225,7 @@ export class PathToRegexpService {
       .join('|');
     let route = start ? '^' : '';
 
-    for (let i = 0; i < tokens.length; i++) {
-      const token = tokens[i];
-
+    for (let token of tokens) {
       if (typeof token === 'string') {
         route += this.escapeString(token);
       } else {

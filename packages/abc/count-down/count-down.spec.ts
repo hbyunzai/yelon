@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 
+import { createTestContext } from '@yelon/testing';
 import { addSeconds } from 'date-fns';
 import { CountdownConfig } from 'ngx-countdown';
-
-import { createTestContext } from '@yelon/testing';
 
 import { CountDownComponent } from './count-down.component';
 

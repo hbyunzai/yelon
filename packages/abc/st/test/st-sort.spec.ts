@@ -2,7 +2,6 @@ import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { provideYunzaiConfig } from '@yelon/util/config';
 
-
 import { STComponent } from '../st.component';
 import { STMultiSort } from '../st.interfaces';
 import { PageObject, TestComponent, genModule } from './base.spec';

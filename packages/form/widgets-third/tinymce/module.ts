@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { NgxTinymceModule } from 'ngx-tinymce';
-
 import { YelonFormModule, WidgetRegistry } from '@yelon/form';
+import { NgxTinymceModule } from 'ngx-tinymce';
 
 import { TinymceWidget } from './widget';
 

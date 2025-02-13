@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { YelonFormModule, WidgetRegistry } from '@yelon/form';
+
 import { NzColorPickerModule } from 'ng-zorro-antd/color-picker';
 
 import { ColorWidget } from './widget';

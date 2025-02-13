@@ -1,5 +1,3 @@
-
-
 import * as ROUND from './round';
 
 describe('util.round', () => {

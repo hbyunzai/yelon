@@ -3,7 +3,6 @@ import { Injector } from '@angular/core';
 import { YunzaiSFConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
 
-
 import { SF_SEQ } from '../const';
 import { SFValue } from '../interface';
 import { SFSchema } from '../schema/index';

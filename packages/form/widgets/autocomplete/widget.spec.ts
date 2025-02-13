@@ -6,7 +6,6 @@ import { mergeConfig, SFSchema, SFSchemaEnum } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
 import { YunzaiConfigService } from '@yelon/util/config';
 
-
 import { withAutoCompleteWidget } from './index';
 import { SFAutoCompleteWidgetSchema } from './schema';
 import { AutoCompleteWidget } from './widget';

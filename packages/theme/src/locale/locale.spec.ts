@@ -1,7 +1,5 @@
 import { filter } from 'rxjs';
 
-
-
 import enUS from './languages/en-US';
 import zhCN from './languages/zh-CN';
 import { YelonLocaleService } from './locale.service';

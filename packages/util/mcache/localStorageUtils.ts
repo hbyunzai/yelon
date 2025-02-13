@@ -1,6 +1,5 @@
 import { LayoutBasicAside, NavType, YunzaiNavTopic, YunzaiProjectInfo, YunzaiUser } from '@yelon/util/mtypes';
 
-
 export const YZ_USER_KEY = '_yz_user';
 export const YZ_PROJECT_INFO_KEY = '_yz_project_info';
 export const YZ_CURRENT_KEY = '_yz_current';

@@ -1,5 +1,3 @@
-
-
 export interface CLodop {
   /**
    * 判断是否支持https协议的属性

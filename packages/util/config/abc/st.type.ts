@@ -2,7 +2,6 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { Observable } from 'rxjs';
 
-
 import type { NzDrawerOptions } from 'ng-zorro-antd/drawer';
 import type { ModalOptions } from 'ng-zorro-antd/modal';
 import type { PaginationItemRenderContext } from 'ng-zorro-antd/pagination';
@@ -84,10 +83,7 @@ export interface YunzaiSTConfig {
           total?: string | string[];
           list?: string | string[];
         }
-      | ((
-          result: any,
-          options: { pi: number; ps: number; total: number }
-        ) => { total: number; list: any[] });
+      | ((result: any, options: { pi: number; ps: number; total: number }) => { total: number; list: any[] });
     /**
      * 数据预处理
      */

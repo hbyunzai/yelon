@@ -1,7 +1,5 @@
 // import type { PDFDocumentProxy } from 'pdfjs-dist';
 
-
-
 type PDFDocumentProxy = any;
 
 export type PdfChangeEventType =

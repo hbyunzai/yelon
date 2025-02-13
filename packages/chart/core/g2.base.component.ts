@@ -19,9 +19,7 @@ import {
 import { Subject, Subscription, filter, takeUntil } from 'rxjs';
 
 import type { Chart, Types } from '@antv/g2';
-
 import { ZoneOutside } from '@yelon/util/decorator';
-
 
 import { G2Service } from './g2.servicce';
 

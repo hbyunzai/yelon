@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-
-
 import type { SFObjectWidgetRenderType } from './schema';
 import { ArrayProperty } from '../../model/array.property';
 import { FormProperty } from '../../model/form.property';

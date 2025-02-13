@@ -12,7 +12,6 @@ import { mergeBisConfig } from '@yelon/bis/config';
 import { IGNORE_BASE_URL } from '@yelon/theme';
 import { YUNZAI_CONFIG, YunzaiConfigService } from '@yelon/util';
 
-
 import { checkStatus, getAdditionalHeaders, goTo, ReThrowHttpError, toLogin } from './helper';
 import { tryRefreshToken } from './refresh-token';
 

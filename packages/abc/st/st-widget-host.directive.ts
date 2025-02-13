@@ -1,7 +1,5 @@
 import { Directive, Input, OnInit, ViewContainerRef, inject } from '@angular/core';
 
-
-
 import { STWidgetRegistry } from './st-widget';
 import { STColumn, STData } from './st.interfaces';
 

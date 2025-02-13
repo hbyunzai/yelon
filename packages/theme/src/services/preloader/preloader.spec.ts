@@ -1,8 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { EnvironmentInjector, Injector, PLATFORM_ID, runInInjectionContext } from '@angular/core';
 
-
-
 import { stepPreloader } from './preloader';
 
 describe('theme: preloader', () => {

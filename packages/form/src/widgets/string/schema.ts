@@ -1,8 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
-
-
 import type { SFUISchemaItem } from '../../schema/ui';
 
 export interface SFStringWidgetSchema extends SFUISchemaItem {

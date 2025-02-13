@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ControlUIWidget, YelonFormModule, SFValue, getData } from '@yelon/form';
+
 import { NzSegmentedComponent, NzSegmentedOptions } from 'ng-zorro-antd/segmented';
 
 import type { SFSegmentedWidgetSchema } from './schema';

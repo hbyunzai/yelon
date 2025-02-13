@@ -19,7 +19,6 @@ import {
   MenuFoldOutline,
   MenuUnfoldOutline
 } from '@ant-design/icons-angular/icons';
-
 import { YUNZAI_CONFIG, YunzaiConfig } from '@yelon/util/config';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';

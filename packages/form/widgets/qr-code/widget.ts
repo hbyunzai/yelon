@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ControlUIWidget, YelonFormModule } from '@yelon/form';
+
 import { NzQRCodeModule } from 'ng-zorro-antd/qr-code';
 
 import type { SFQrCodeWidgetSchema } from './schema';

@@ -1,5 +1,3 @@
-
-
 import { isEmpty } from './is-empty';
 
 describe('util.#isEmpty', () => {

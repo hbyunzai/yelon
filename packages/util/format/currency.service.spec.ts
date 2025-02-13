@@ -1,8 +1,6 @@
 import { DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-
-
 import { CurrencyService } from './currency.service';
 
 describe('util: FormatCurrencyService', () => {

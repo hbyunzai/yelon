@@ -20,10 +20,8 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { timer, take } from 'rxjs';
 
-import type Plyr from 'plyr';
-
 import { ZoneOutside } from '@yelon/util/decorator';
-
+import type Plyr from 'plyr';
 
 import { MediaService } from './media.service';
 

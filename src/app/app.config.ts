@@ -13,9 +13,6 @@ import {
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { provideNuMonacoEditorConfig } from '@ng-util/monaco-editor';
-import { zhCN as dateLang } from 'date-fns/locale';
-import { provideTinymce } from 'ngx-tinymce';
-
 import { provideCellWidgets } from '@yelon/abc/cell';
 import { ReuseTabMatchMode, provideReuseTabConfig } from '@yelon/abc/reuse-tab';
 import { provideSTWidgets } from '@yelon/abc/st';
@@ -38,6 +35,9 @@ import { withTinymceWidget } from '@yelon/form/widgets-third/tinymce';
 import { mockInterceptor, provideMockConfig } from '@yelon/mock';
 import { zh_CN as yelonLang, YunzaiProvideLang, provideYunzai } from '@yelon/theme';
 import { YunzaiConfig } from '@yelon/util/config';
+import { zhCN as dateLang } from 'date-fns/locale';
+import { provideTinymce } from 'ngx-tinymce';
+
 import { NzConfig, provideNzConfig } from 'ng-zorro-antd/core/config';
 import { zh_CN as zorroLang } from 'ng-zorro-antd/i18n';
 

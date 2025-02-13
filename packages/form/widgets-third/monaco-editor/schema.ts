@@ -1,7 +1,5 @@
 import type { NuMonacoEditorEvent, NuMonacoEditorModel } from '@ng-util/monaco-editor';
-
 import type { SFUISchemaItem } from '@yelon/form';
-
 
 export interface MonacoEditorWidgetSchema extends SFUISchemaItem {
   options?: any;

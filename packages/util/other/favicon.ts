@@ -1,5 +1,3 @@
-
-
 export function setFavicon(path: string): void {
   const link: any = document.querySelector("link[rel*='icon']") || document.createElement('link');
   link.type = 'image/x-icon';

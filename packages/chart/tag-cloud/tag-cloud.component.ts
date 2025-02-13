@@ -10,7 +10,6 @@ import {
 import { fromEvent, debounceTime, filter } from 'rxjs';
 
 import type { Chart, Event } from '@antv/g2';
-
 import { G2BaseComponent } from '@yelon/chart/core';
 
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';

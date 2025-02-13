@@ -3,7 +3,6 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 
 import { createTestContext } from '@yelon/testing';
 
-
 import { G2Service } from '../core';
 import { G2CustomComponent } from './custom.component';
 

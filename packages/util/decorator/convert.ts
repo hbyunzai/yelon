@@ -1,6 +1,5 @@
 import { warn } from '@yelon/util/other';
 
-
 export type BooleanInput = boolean | string | undefined | null;
 export type NumberInput = number | string | undefined | null;
 
@@ -9,11 +8,7 @@ function propDecoratorFactory<T, D>(
   fallback: (v: T, defaultValue: D) => D,
   defaultValue: any
 ): (target: any, propName: string) => void {
-  function propDecorator(
-    target: any,
-    propName: string,
-    originalDescriptor?: TypedPropertyDescriptor<any>
-  ): any {
+  function propDecorator(target: any, propName: string, originalDescriptor?: TypedPropertyDescriptor<any>): any {
     const privatePropName = `$$__${propName}`;
 
     if (typeof ngDevMode === 'undefined' || ngDevMode) {

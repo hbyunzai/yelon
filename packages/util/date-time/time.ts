@@ -1,3 +1,4 @@
+import type { YunzaiThemePipeDateFormatCustom } from '@yelon/util/config';
 import {
   addDays,
   endOfDay,
@@ -16,8 +17,6 @@ import {
   format,
   formatDistanceToNow
 } from 'date-fns';
-
-import type { YunzaiThemePipeDateFormatCustom } from '@yelon/util/config';
 
 import { DateLocale } from 'ng-zorro-antd/i18n';
 

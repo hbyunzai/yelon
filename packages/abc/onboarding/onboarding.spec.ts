@@ -7,7 +7,6 @@ import { throwError } from 'rxjs';
 import { createTestContext } from '@yelon/testing';
 import { YelonLocaleModule } from '@yelon/theme';
 
-
 import { OnboardingService } from './onboarding.service';
 import { ONBOARDING_STORE_TOKEN } from './onboarding.storage';
 import { OnboardingConfig, OnboardingOpType } from './onboarding.types';

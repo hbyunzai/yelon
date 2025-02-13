@@ -1,11 +1,9 @@
 import { Injectable, NgZone, inject } from '@angular/core';
 
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { REGEX } from '@yelon/util/format';
-
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 
 import { mergeConfig } from './config';
 import { ErrorData } from './errors';

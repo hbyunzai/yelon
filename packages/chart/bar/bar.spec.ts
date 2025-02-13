@@ -3,7 +3,6 @@ import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2, PageG2DataCount, PageG2Height } from '@yelon/testing';
 
-
 import { G2BarComponent, G2BarData } from './bar.component';
 
 describe('chart: bar', () => {

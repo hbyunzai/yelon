@@ -1,5 +1,3 @@
-
-
 import { copy } from './copy';
 
 describe('abc: utils', () => {

@@ -1,5 +1,3 @@
-
-
 export interface YunzaiACLConfig {
   /**
    * Router URL when guard fail, default: `/403`

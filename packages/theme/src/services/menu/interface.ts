@@ -2,7 +2,6 @@ import { SafeHtml } from '@angular/platform-browser';
 
 import type { ACLCanType } from '@yelon/acl';
 
-
 export interface MenuIcon {
   /**
    * Type for icon

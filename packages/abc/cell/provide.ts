@@ -1,7 +1,5 @@
 import { EnvironmentProviders, inject, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
 
-
-
 import { CellService } from './cell.service';
 
 export interface CellWidgetProvideConfig {

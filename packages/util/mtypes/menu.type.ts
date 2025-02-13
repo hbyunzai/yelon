@@ -1,5 +1,3 @@
-
-
 export interface YunzaiMenu {
   [key: string]: any;
   appCode: string;

@@ -1,5 +1,3 @@
-
-
 export interface XlsxExportOptions {
   /**
    * worksheets in the workbook, e.g:

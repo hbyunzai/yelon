@@ -11,8 +11,8 @@ import {
   YunzaiConfigService,
   YunzaiProfile
 } from '@yelon/util';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzI18nModule } from 'ng-zorro-antd/i18n';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -119,24 +119,24 @@ export class YunzaiLayoutWebsite02Component {
   }
 
   get _username(): string {
-    const [_, getUser] = useLocalStorageUser();
+    const [, getUser] = useLocalStorageUser();
     return getUser()?.realname || '';
   }
 
   get _avatar(): string | undefined {
-    const [_, getUser] = useLocalStorageUser();
+    const [, getUser] = useLocalStorageUser();
     const baseUrl: string = this.configService.get('bis')?.baseUrl || '/backstage';
     const avatarUrl = getUser()?.avatarId ? `${baseUrl}/filecenter/file/${getUser()?.avatarId}` : undefined;
     return avatarUrl;
   }
 
   get isLogin(): boolean {
-    const [_, getUser] = useLocalStorageUser();
+    const [, getUser] = useLocalStorageUser();
     return !!this.tokenService.get()?.access_token && !!getUser();
   }
 
   get _links(): YunzaiProfile[] {
-    const [_, getProjectInfo] = useLocalStorageProjectInfo();
+    const [, getProjectInfo] = useLocalStorageProjectInfo();
     return getProjectInfo()?.profileList || [];
   }
 

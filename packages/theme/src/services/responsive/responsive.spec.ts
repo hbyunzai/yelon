@@ -1,5 +1,3 @@
-
-
 import { ResponsiveService } from './responsive';
 
 describe('theme: responsive', () => {

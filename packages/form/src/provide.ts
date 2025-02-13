@@ -9,7 +9,6 @@ import {
 
 import { YunzaiConfigService } from '@yelon/util/config';
 
-
 import { AjvSchemaValidatorFactory, SchemaValidatorFactory } from './validator.factory';
 import { WidgetRegistry } from './widget.factory';
 import { NzWidgetRegistry } from './widgets/nz-widget.registry';

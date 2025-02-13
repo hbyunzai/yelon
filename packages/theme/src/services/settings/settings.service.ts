@@ -2,8 +2,6 @@ import { Platform } from '@angular/cdk/platform';
 import { Injectable, InjectionToken, Provider, inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-
-
 import { App, Layout, SettingsNotify, User } from './types';
 
 export interface SettingsKeys {

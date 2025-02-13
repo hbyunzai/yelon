@@ -3,11 +3,9 @@ import zh from '@angular/common/locales/zh';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush } from '@angular/core/testing';
 
-import { format, formatISO } from 'date-fns';
-
 import { createTestContext } from '@yelon/testing';
 import { deepCopy } from '@yelon/util/other';
-
+import { format, formatISO } from 'date-fns';
 
 import { DateWidget } from './date.widget';
 import { SFDateWidgetSchema } from './schema';

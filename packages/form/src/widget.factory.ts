@@ -1,7 +1,5 @@
 import { ComponentRef, Injectable, ViewContainerRef, inject } from '@angular/core';
 
-
-
 import { FormProperty } from './model/form.property';
 import { SFUISchemaItem } from './schema/ui';
 import type { Widget } from './widget';

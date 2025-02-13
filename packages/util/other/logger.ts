@@ -1,5 +1,3 @@
-
-
 declare const ngDevMode: boolean;
 
 const record: Record<string, boolean> = {};

@@ -4,7 +4,6 @@ import { ComponentFixture, discardPeriodicTasks, fakeAsync } from '@angular/core
 import { createTestContext } from '@yelon/testing';
 import { deepCopy } from '@yelon/util/other';
 
-
 import { configureSFTestSuite, SFPage, TestFormComponent } from './base.spec';
 import { ObjectProperty } from '../src/model/object.property';
 import { SFSchema } from '../src/schema/index';

@@ -1,6 +1,5 @@
 import { deepGet } from '@yelon/util/other';
 
-
 /**
  * String formatting
  *

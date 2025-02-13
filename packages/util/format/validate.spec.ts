@@ -1,5 +1,3 @@
-
-
 import * as v from './validate';
 
 export const TEST_DATA = {

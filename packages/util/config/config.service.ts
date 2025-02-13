@@ -3,7 +3,6 @@ import { SIGNAL, SignalNode } from '@angular/core/primitives/signals';
 
 import { deepMergeKey } from '@yelon/util/other';
 
-
 import { YunzaiConfig, YunzaiConfigKey, YUNZAI_CONFIG } from './config.types';
 
 @Injectable({ providedIn: 'root' })

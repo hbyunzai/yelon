@@ -2,7 +2,6 @@ import { Injector } from '@angular/core';
 
 import { YunzaiSFConfig } from '@yelon/util/config';
 
-
 import { SFValue } from '../interface';
 import { SFSchema } from '../schema/index';
 import { SFUISchema, SFUISchemaItem } from '../schema/ui';

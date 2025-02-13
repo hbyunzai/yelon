@@ -99,17 +99,17 @@ export class YunzaiLayoutWebsite01Component {
   }
 
   get _username(): string {
-    const [_, getUser] = useLocalStorageUser();
+    const [, getUser] = useLocalStorageUser();
     return getUser()?.realname || '';
   }
 
   get isLogin(): boolean {
-    const [_, getUser] = useLocalStorageUser();
+    const [, getUser] = useLocalStorageUser();
     return !!this.tokenService.get()?.access_token && !!getUser();
   }
 
   get _links(): YunzaiProfile[] {
-    const [_, getProjectInfo] = useLocalStorageProjectInfo();
+    const [, getProjectInfo] = useLocalStorageProjectInfo();
     return getProjectInfo()?.profileList || [];
   }
 

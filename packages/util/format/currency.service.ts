@@ -3,7 +3,6 @@ import { DEFAULT_CURRENCY_CODE, Injectable, LOCALE_ID, inject } from '@angular/c
 
 import { YunzaiConfigService, YunzaiUtilCurrencyConfig } from '@yelon/util/config';
 
-
 import {
   CurrencyCNYOptions,
   CurrencyFormatOptions,

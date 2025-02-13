@@ -1,7 +1,5 @@
 import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 
-
-
 import { _Validators } from './validators';
 import { TEST_DATA } from '../format/validate.spec';
 

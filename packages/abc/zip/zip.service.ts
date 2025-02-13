@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone, inject } from '@angular/core';
 
-import { saveAs } from 'file-saver';
-import type jsZipType from 'jszip';
-
 import { YunzaiConfigService, YunzaiZipConfig } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyResult, LazyService } from '@yelon/util/other';
-
+import { saveAs } from 'file-saver';
+import type jsZipType from 'jszip';
 
 import { ZipSaveOptions } from './zip.types';
 

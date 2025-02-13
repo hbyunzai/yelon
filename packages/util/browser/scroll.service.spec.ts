@@ -2,8 +2,6 @@ import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import { Injector, StaticProvider } from '@angular/core';
 
-
-
 import { ScrollService } from './scroll.service';
 
 describe('Util: ScrollService', () => {

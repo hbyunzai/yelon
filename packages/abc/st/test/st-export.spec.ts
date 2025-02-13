@@ -1,7 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 
-
-
 import { XlsxService } from '../../xlsx/xlsx.service';
 import { XlsxExportOptions } from '../../xlsx/xlsx.types';
 import { STExport } from '../st-export';

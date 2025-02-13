@@ -1,7 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-
-
 /**
  * [Document](https://ng.yunzainfo.com/theme/keys)
  */

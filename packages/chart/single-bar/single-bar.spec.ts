@@ -3,7 +3,6 @@ import { fakeAsync } from '@angular/core/testing';
 
 import { checkDelay, PageG2 } from '@yelon/testing';
 
-
 import { G2SingleBarComponent } from './single-bar.component';
 
 describe('chart: single-bar', () => {

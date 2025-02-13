@@ -1,7 +1,5 @@
 import extend from 'extend';
 
-
-
 /**
  * Gets the value at `path` of `object`, like `_.get` in lodash.
  *

@@ -2,7 +2,6 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 import { EllipsisComponent } from './ellipsis.component';

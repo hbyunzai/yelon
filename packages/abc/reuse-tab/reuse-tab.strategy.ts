@@ -1,8 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, RouteReuseStrategy } from '@angular/router';
 
-
-
 import { ReuseTabService } from './reuse-tab.service';
 
 export class ReuseTabStrategy implements RouteReuseStrategy {

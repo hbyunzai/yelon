@@ -7,7 +7,6 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { createTestContext } from '@yelon/testing';
 
-
 import { ResultComponent } from './result.component';
 
 describe('abc: result', () => {

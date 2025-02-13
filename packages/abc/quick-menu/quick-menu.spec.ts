@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 
 import { createTestContext } from '@yelon/testing';
 
-
 import { QuickMenuComponent } from './quick-menu.component';
 
 describe('abc: quick-menu', () => {

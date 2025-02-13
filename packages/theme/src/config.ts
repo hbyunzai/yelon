@@ -1,8 +1,6 @@
 import type { HttpInterceptorFn } from '@angular/common/http';
 import type { EnvironmentProviders, ModuleWithProviders, Provider, Type } from '@angular/core';
 
-
-
 export interface Environment {
   [key: string]: any;
 

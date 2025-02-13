@@ -1,7 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
-
 import { NzOptionComponent, NzSelectModeType } from 'ng-zorro-antd/select';
 
 import { SFValue } from '../../interface';

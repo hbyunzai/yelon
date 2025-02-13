@@ -28,10 +28,10 @@ import { ReuseTabService } from '@yelon/abc/reuse-tab';
 import { YUNZAI_I18N_TOKEN, Menu, MenuService, SettingsService, TitleService } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
 import { YunzaiConfigService } from '@yelon/util/config';
+
 import { NzAffixComponent } from 'ng-zorro-antd/affix';
 import { NzBreadCrumbComponent, NzBreadCrumbItemComponent } from 'ng-zorro-antd/breadcrumb';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
-
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 interface PageHeaderPath {

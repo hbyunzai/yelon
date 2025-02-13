@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs';
 
 import { LocaleData } from '@yelon/theme';
+
 import { NgClassType } from 'ng-zorro-antd/core/types';
 
 import type { ErrorData } from './errors';

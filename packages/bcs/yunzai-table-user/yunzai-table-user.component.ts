@@ -5,10 +5,10 @@ import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { STColumn, STComponent, STData, STModule, STRequestOptions } from '@yelon/abc/st';
 import { SFComponent, SFSchema, SFValue, YelonFormModule } from '@yelon/form';
 import { I18nPipe } from '@yelon/theme';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -112,7 +112,7 @@ export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   @ViewChild('st') st!: STComponent;
   @ViewChild('sf') sf!: SFComponent;
   @Input() props?: YunzaiTableUserProps;
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onChecked: EventEmitter<YunzaiTableUser[]> = new EventEmitter<YunzaiTableUser[]>();
   private readonly service: YunzaiTableUserService = inject(YunzaiTableUserService);
   private $destroy = new Subject();

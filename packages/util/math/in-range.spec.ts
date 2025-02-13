@@ -1,5 +1,3 @@
-
-
 import { inRange } from './in-range';
 
 describe('util.inRange', () => {

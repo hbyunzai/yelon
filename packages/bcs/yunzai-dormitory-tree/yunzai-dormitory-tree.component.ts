@@ -13,8 +13,8 @@ import {
 import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
 
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
-import { NzCardModule } from 'ng-zorro-antd/card';
 
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -93,9 +93,9 @@ export class YunzaiDormitoryTreeComponent implements OnInit, OnDestroy, AfterVie
   @ViewChild('form') sf!: SFComponent;
 
   @Input() props?: YunzaiDormitoryTreeProps;
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onQueryComplete: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onSelect: EventEmitter<YunzaiDormitoryTree[]> = new EventEmitter<YunzaiDormitoryTree[]>();
   private readonly service: YunzaiDormitoryTreeService = inject(YunzaiDormitoryTreeService);
   private $destroy = new Subject();

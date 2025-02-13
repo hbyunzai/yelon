@@ -1,7 +1,6 @@
 import { STColumn, STData } from '@yelon/abc/st';
 import { SFSchema } from '@yelon/form';
 
-
 export interface YunzaiTableUser {
   userId: string;
   account: string;

@@ -13,6 +13,7 @@ import {
 import { catchError, debounceTime, map, Subject, takeUntil, throwError } from 'rxjs';
 
 import { SFComponent, YelonFormModule } from '@yelon/form';
+
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzListModule } from 'ng-zorro-antd/list';
@@ -58,9 +59,9 @@ import { YunzaiFriendGroup, YunzaiFriendGroupProps, YunzaiFriendGroupState } fro
 })
 export class YunzaiFriendGroupComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() props?: YunzaiFriendGroupProps;
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onQueryComplete: EventEmitter<YunzaiFriendGroup[]> = new EventEmitter<YunzaiFriendGroup[]>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onSelect: EventEmitter<YunzaiFriendGroup> = new EventEmitter<YunzaiFriendGroup>();
   @ViewChild('form') sf!: SFComponent;
   private readonly $destroy = new Subject();

@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { format } from 'date-fns';
-
 import { toDate } from '@yelon/util/date-time';
-
+import { format } from 'date-fns';
 
 import { SFDateWidgetSchema } from './schema';
 import { SFValue } from '../../interface';

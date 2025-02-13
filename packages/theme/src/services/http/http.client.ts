@@ -4,7 +4,6 @@ import { Observable, of, delay, finalize, switchMap, tap } from 'rxjs';
 
 import { YunzaiConfigService, YunzaiThemeHttpClientConfig } from '@yelon/util/config';
 
-
 export type _HttpHeaders = HttpHeaders | Record<string, string | string[]>;
 export type HttpObserve = 'body' | 'events' | 'response';
 

@@ -1,5 +1,3 @@
-
-
 import { SFUISchemaItem } from './ui';
 
 export type SFSchemaDefinition = Record<string, SFSchema>;

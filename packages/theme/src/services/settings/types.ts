@@ -1,7 +1,5 @@
 import { Direction } from '@angular/cdk/bidi';
 
-
-
 export interface App {
   [key: string]: any;
   /** Name for app */

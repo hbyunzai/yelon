@@ -2,9 +2,8 @@ import { JsonPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
-import { format } from 'date-fns';
-
 import { PageHeaderModule } from '@yelon/abc/page-header';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'dev-list-layout',

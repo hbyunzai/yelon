@@ -15,8 +15,8 @@ import { BehaviorSubject, Observable, filter } from 'rxjs';
 
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 
+import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 
 import { SEErrorRefresh, SELayout } from './se.types';
 

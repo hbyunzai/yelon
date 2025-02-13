@@ -1,5 +1,3 @@
-
-
 import { updateHostClass } from './style';
 
 describe('util: style', () => {

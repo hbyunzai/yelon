@@ -26,7 +26,6 @@ import {
   tr as dfTr
 } from 'date-fns/locale';
 
-
 import {
   el_GR as zorroElGR,
   en_US as zorroEnUS,
@@ -63,7 +62,7 @@ export interface LangConfigData {
   yelon: any;
 }
 
-export const YUNZAI_LANGS: { [key: string]: LangConfigData } = {
+export const YUNZAI_LANGS: Record<string, LangConfigData> = {
   'zh-CN': {
     text: '简体中文',
     ng: ngZh,

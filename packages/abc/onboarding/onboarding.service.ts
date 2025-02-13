@@ -15,7 +15,6 @@ import { of, pipe, Subscription, delay, switchMap } from 'rxjs';
 import { YelonLocaleService } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
 
-
 import { OnboardingComponent } from './onboarding.component';
 import { ONBOARDING_STORE_TOKEN } from './onboarding.storage';
 import { OnboardingConfig, OnboardingItem, OnboardingOpType } from './onboarding.types';

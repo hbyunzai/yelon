@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 
 import { YunzaiAuthConfig } from '@yelon/util';
 
-
 import { YA_SERVICE_TOKEN_FACTORY } from './token.service';
 
 export const YA_SERVICE_TOKEN = new InjectionToken<ITokenService>('YA_SERVICE_TOKEN', {

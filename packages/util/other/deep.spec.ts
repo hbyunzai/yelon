@@ -1,5 +1,3 @@
-
-
 import { deepCopy, deepGet, deepMerge, deepMergeKey } from './deep';
 
 describe('abc: utils', () => {

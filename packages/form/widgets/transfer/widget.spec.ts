@@ -5,7 +5,6 @@ import { of } from 'rxjs';
 import { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
 
-
 import { withTransferWidget } from './index';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../spec/base.spec';
 

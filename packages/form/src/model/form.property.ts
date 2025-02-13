@@ -2,8 +2,8 @@ import { Injector, NgZone } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, distinctUntilChanged, map, take } from 'rxjs';
 
 import { YunzaiSFConfig } from '@yelon/util/config';
-import { NzFormStatusService } from 'ng-zorro-antd/core/form';
 
+import { NzFormStatusService } from 'ng-zorro-antd/core/form';
 import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 
 import { SF_SEQ } from '../const';

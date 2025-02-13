@@ -1,6 +1,5 @@
 import { warn } from '@yelon/util/other';
 
-
 export interface ZoneOptions {
   ngZoneName?: string;
 }

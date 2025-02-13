@@ -1,5 +1,3 @@
-
-
 import { format, formatMask, FormatMaskOption } from './string';
 
 describe('util: string', () => {

@@ -1,10 +1,9 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
 
-import { format } from 'date-fns';
-
 import type { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
+import { format } from 'date-fns';
 
 import { withTimeWidget } from './index';
 import { TimeWidget } from './widget';

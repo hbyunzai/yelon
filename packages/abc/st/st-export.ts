@@ -3,7 +3,6 @@ import { Injectable, inject } from '@angular/core';
 import { XlsxExportResult, XlsxService } from '@yelon/abc/xlsx';
 import { deepGet } from '@yelon/util/other';
 
-
 import { STColumn, STExportOptions } from './st.interfaces';
 import { _STColumn } from './st.types';
 

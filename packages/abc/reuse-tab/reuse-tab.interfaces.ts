@@ -1,8 +1,6 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
-
-
 import { ReuseTabContextComponent } from './reuse-tab-context.component';
 
 /**

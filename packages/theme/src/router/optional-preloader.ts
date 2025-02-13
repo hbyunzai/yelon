@@ -1,8 +1,6 @@
 import { PreloadingStrategy, Route } from '@angular/router';
 import { Observable, of, catchError } from 'rxjs';
 
-
-
 /**
  * Optional pre-loading module, when it's necessary to load the resource at the first page load for some lazy routes, [example](https://github.com/hbyunzai/ng-yunzai/blob/master/src/app/routes/routes-routing.module.ts).
  *

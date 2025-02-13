@@ -14,8 +14,8 @@ import {
   SettingsService,
   TitleService
 } from '@yelon/theme';
-import { NzAffixComponent } from 'ng-zorro-antd/affix';
 
+import { NzAffixComponent } from 'ng-zorro-antd/affix';
 
 import { PageHeaderComponent } from './page-header.component';
 import { ReuseTabService } from '../reuse-tab/reuse-tab.service';

@@ -9,7 +9,6 @@ import { cleanCdkOverlayHtml, dispatchFakeEvent, typeInElement } from '@yelon/te
 import { YunzaiThemeModule } from '@yelon/theme';
 import { deepCopy, deepGet } from '@yelon/util/other';
 
-
 import { SFWidgetProvideConfig, provideSFConfig } from '../src';
 import { SF_SEQ } from '../src/const';
 import { SFButton } from '../src/interface';

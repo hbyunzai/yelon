@@ -8,9 +8,9 @@ import { resizeWindow } from '@yelon/util';
   providedIn: 'root'
 })
 export class LayoutDisplayService implements OnDestroy {
-  private displayNav: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  private displayAside: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  private displayReuseTab: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  private displayNav = new BehaviorSubject<boolean>(true);
+  private displayAside = new BehaviorSubject<boolean>(true);
+  private displayReuseTab = new BehaviorSubject<boolean>(true);
   private $destroy = new Subject<void>();
 
   constructor(private activatedRoute: ActivatedRoute) {

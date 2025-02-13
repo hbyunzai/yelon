@@ -1,6 +1,5 @@
 import { log, YunzaiConfigService, YunzaiSocketConfig } from '@yelon/util';
 
-
 export const SOCKET_DEFAULT_CONFIG: YunzaiSocketConfig = {
   baseUrl: '/backstage',
   connectHeaders: {

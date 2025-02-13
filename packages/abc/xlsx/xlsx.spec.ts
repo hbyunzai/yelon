@@ -7,7 +7,6 @@ import { Observable, of, throwError } from 'rxjs';
 
 import { LazyService } from '@yelon/util/other';
 
-
 import { XlsxDirective } from './xlsx.directive';
 import { XlsxService } from './xlsx.service';
 import { XlsxExportOptions } from './xlsx.types';

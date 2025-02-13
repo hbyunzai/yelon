@@ -1,5 +1,3 @@
-
-
 export interface YunzaiChartConfig {
   /**
    * [G2](https://g2.antv.vision/zh/docs/manual/getting-started) library path

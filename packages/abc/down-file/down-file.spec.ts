@@ -6,8 +6,6 @@ import { By } from '@angular/platform-browser';
 
 import * as fs from 'file-saver';
 
-
-
 import { DownFileDirective } from './down-file.directive';
 
 function genFile(isRealFile: boolean = true): Blob {

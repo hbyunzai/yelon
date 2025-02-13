@@ -4,8 +4,6 @@ import { Injectable, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
-
-
 import {
   BaseApi,
   BaseHeaders,

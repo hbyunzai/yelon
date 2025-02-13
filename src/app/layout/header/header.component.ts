@@ -5,10 +5,10 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { MatchRouterDirective } from '@shared';
-import { GithubButtonComponent } from 'ng-github-button';
-
 import { YUNZAI_I18N_TOKEN, RTLService, I18nPipe } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
+import { GithubButtonComponent } from 'ng-github-button';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';

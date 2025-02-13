@@ -2,8 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { take } from 'rxjs';
 
-
-
 import { LazyService } from './lazy.service';
 
 let testStatus = 'ok';

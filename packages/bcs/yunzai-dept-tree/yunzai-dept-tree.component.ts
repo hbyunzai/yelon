@@ -14,8 +14,8 @@ import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throw
 
 import { YunzaiGrade, YunzaiGradeService } from '@yelon/bcs/yunzai-grade';
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
-import { NzCardModule } from 'ng-zorro-antd/card';
 
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -88,9 +88,9 @@ import { YUNZAI_DEPT_TYPES, YunzaiDeptTree, YunzaiDeptTreeProps, YunzaiDeptTreeS
 export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('form') sf!: SFComponent;
   @Input() props?: YunzaiDeptTreeProps;
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onQueryComplete: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onSelect: EventEmitter<YunzaiDeptTree[]> = new EventEmitter<YunzaiDeptTree[]>();
   private readonly deptTreeService: YunzaiDeptTreeService = inject(YunzaiDeptTreeService);
   private readonly gradeService: YunzaiGradeService = inject(YunzaiGradeService);

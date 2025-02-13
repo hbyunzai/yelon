@@ -4,7 +4,6 @@ import { concat, filter, mergeMap, take, tap } from 'rxjs';
 import { YunzaiConfig, YUNZAI_CONFIG } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
 
-
 import { LodopModule } from './lodop.module';
 import { LodopService } from './lodop.service';
 import { Lodop } from './lodop.types';

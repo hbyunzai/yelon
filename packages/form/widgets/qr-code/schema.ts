@@ -1,4 +1,5 @@
 import type { SFUISchemaItem } from '@yelon/form';
+
 import type { ERROR_LEVEL_MAP } from 'ng-zorro-antd/qr-code/qrcode';
 
 export interface SFQrCodeWidgetSchema extends SFUISchemaItem {

@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable, Subscription, share } from 'rxjs';
 
 import { ACLService } from '@yelon/acl';
 
-
 import { Menu, MenuIcon, MenuInner } from './interface';
 import { YUNZAI_I18N_TOKEN } from '../i18n/i18n';
 

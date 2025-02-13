@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 
-import type Plyr from 'plyr';
-
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
+import type Plyr from 'plyr';
 
 import { MediaComponent, MediaType } from './media.component';
 

@@ -1,7 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 
-
-
 import { SettingsService } from './settings.service';
 import { App, User, Layout } from './types';
 import { YunzaiThemeModule } from '../../theme.module';

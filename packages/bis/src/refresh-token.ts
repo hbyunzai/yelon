@@ -5,7 +5,6 @@ import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throw
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { log } from '@yelon/util';
 
-
 import { toLogin } from './helper';
 
 let refreshToking = false;
@@ -64,7 +63,9 @@ function reAttachToken(injector: Injector, req: HttpRequest<any>): HttpRequest<a
 function refreshTokenRequest(injector: Injector): Observable<any> {
   const model = injector.get(YA_SERVICE_TOKEN).get();
   const form = new FormData();
-  form.set('refresh_token', model?.refresh_token!);
+  if (model?.refresh_token) {
+    form.set('refresh_token', model.refresh_token);
+  }
   form.set('grant_type', 'refresh_token');
   form.set('scope', 'webapp');
   return injector.get(HttpClient).post(`/auth/oauth/getOrCreateToken/webapp`, form);

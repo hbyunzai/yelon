@@ -1,7 +1,5 @@
 import { EnvironmentProviders, inject, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
 
-
-
 import { STWidgetRegistry } from './st-widget';
 
 export interface STWidgetProvideConfig {

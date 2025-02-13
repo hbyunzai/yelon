@@ -1,5 +1,3 @@
-
-
 export const YUNZAIDEFAULTVAR = 'yunzai-default-vars';
 export const DEFAULT_COLORS = [
   {

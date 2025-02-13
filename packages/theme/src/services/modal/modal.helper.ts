@@ -196,11 +196,7 @@ export class ModalHelper {
    * // 关闭
    * this.nzModalRef.destroy();
    */
-  createStatic(
-    comp: TemplateRef<any> | Type<any>,
-    params?: any,
-    options?: ModalHelperOptions
-  ): Observable<any> {
+  createStatic(comp: TemplateRef<any> | Type<any>, params?: any, options?: ModalHelperOptions): Observable<any> {
     const modalOptions = {
       nzMaskClosable: false,
       ...(options && options.modalOptions)

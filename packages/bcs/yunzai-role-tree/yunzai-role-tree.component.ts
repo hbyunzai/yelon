@@ -13,9 +13,9 @@ import {
 import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
 
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
-
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -97,9 +97,9 @@ import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunz
 export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('form') sf!: SFComponent;
   @Input() props?: YunzaiRoleTreeProps;
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onQueryComplete: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+
   @Output() readonly onSelect: EventEmitter<YunzaiRoleTree[]> = new EventEmitter<YunzaiRoleTree[]>();
   private readonly service: YunzaiRoleTreeService = inject(YunzaiRoleTreeService);
   private $destroy = new Subject();

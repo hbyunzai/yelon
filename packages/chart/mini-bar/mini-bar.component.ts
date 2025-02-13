@@ -9,9 +9,7 @@ import {
 } from '@angular/core';
 
 import type { Chart, Event } from '@antv/g2';
-
 import { G2BaseComponent, genMiniTooltipOptions } from '@yelon/chart/core';
-
 
 export interface G2MiniBarData {
   x: any;

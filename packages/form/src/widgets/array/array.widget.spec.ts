@@ -4,7 +4,6 @@ import { ComponentFixture } from '@angular/core/testing';
 import { createTestContext } from '@yelon/testing';
 import { deepCopy } from '@yelon/util/other';
 
-
 import { SFArrayWidgetSchema } from './schema';
 import { configureSFTestSuite, SFPage, TestFormComponent } from '../../../spec/base.spec';
 import { ArrayProperty, FormProperty } from '../../model';

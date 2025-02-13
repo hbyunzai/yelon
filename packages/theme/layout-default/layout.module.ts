@@ -25,15 +25,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    NzToolTipModule,
-    NzIconModule,
-    NzAvatarModule,
-    NzDropDownModule,
-    NzBadgeModule
-  ],
+  imports: [CommonModule, RouterModule, NzToolTipModule, NzIconModule, NzAvatarModule, NzDropDownModule, NzBadgeModule],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })

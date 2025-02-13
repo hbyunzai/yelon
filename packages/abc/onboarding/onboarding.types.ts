@@ -2,8 +2,6 @@ import { TemplateRef } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 
-
-
 export type OnboardingOpType = 'next' | 'prev' | 'skip' | 'done';
 
 export interface OnboardingConfig {

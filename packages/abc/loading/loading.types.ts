@@ -1,7 +1,5 @@
 import { SafeHtml } from '@angular/platform-browser';
 
-
-
 export type LoadingType = 'text' | 'icon' | 'spin' | 'custom';
 
 export interface LoadingIcon {

@@ -2,8 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, filter, share } from 'rxjs';
 
-
-
 export interface LazyResult {
   path: string;
   status: 'ok' | 'error' | 'loading';

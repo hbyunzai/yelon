@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
 
-
 import { ChartEChartsOn } from '.';
 import { ChartEChartsComponent } from './echarts.component';
 import { ChartEChartsOption } from './echarts.types';

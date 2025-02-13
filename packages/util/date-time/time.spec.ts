@@ -1,8 +1,6 @@
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 
-
-
 import { getTimeDistance, toDate } from './time';
 
 const NOW = new Date(2000, 0, 1, 0, 0, 0, 0);

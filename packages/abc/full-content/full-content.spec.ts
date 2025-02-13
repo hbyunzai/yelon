@@ -5,8 +5,6 @@ import { By } from '@angular/platform-browser';
 import { ActivationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
-
-
 import { FullContentToggleDirective } from './full-content-toggle.directive';
 import { FullContentComponent } from './full-content.component';
 import { FullContentService } from './full-content.service';

@@ -1,5 +1,3 @@
-
-
 export interface YunzaiNavTopic {
   // 扩展项
   attribute: any;

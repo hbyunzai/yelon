@@ -4,7 +4,6 @@ import { Observable, of, Subject } from 'rxjs';
 import { YunzaiConfigService, YunzaiLodopConfig } from '@yelon/util/config';
 import { LazyService } from '@yelon/util/other';
 
-
 import { Lodop, LodopPrintResult, LodopResult } from './lodop.types';
 
 @Injectable({ providedIn: 'root' })

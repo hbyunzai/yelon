@@ -2,10 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Observable, of, throwError } from 'rxjs';
 
-import * as fs from 'file-saver';
-
 import { LazyService } from '@yelon/util/other';
-
+import * as fs from 'file-saver';
 
 import { ZipService } from './zip.service';
 

@@ -3,8 +3,6 @@ import { ComponentFixture, discardPeriodicTasks, flush, TestBed, tick } from '@a
 
 import { Chart } from '@antv/g2';
 
-
-
 export type PageG2Type = 'geometries' | 'views';
 
 export const PageG2DataCount = 2;

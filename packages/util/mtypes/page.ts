@@ -1,5 +1,3 @@
-
-
 export interface YunzaiPageParam<T> {
   pageNum?: number;
   pageSize?: number;

@@ -165,9 +165,7 @@ export class PageObject<T extends TestComponent> {
     }
 
     spyOn(this.context as any, 'error').and.callFake((res: STError) => (this.spyErrorData = res));
-    this.changeSpy = spyOn(this.context as any, 'change').and.callFake(
-      ((e: any) => (this._changeData = e)) as any
-    );
+    this.changeSpy = spyOn(this.context as any, 'change').and.callFake(((e: any) => (this._changeData = e)) as any);
     this.comp = this.context.comp;
   }
   get(cls: string): DebugElement {

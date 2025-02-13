@@ -13,7 +13,6 @@ import {
   YunzaiUser
 } from '@yelon/util';
 
-
 @Injectable({ providedIn: 'root' })
 export class ActGuardService {
   private bis: YunzaiBusinessConfig = BUSINESS_DEFAULT_CONFIG;
@@ -31,7 +30,6 @@ export class ActGuardService {
     const [, getUser] = useLocalStorageUser();
     const user: YunzaiUser = getUser()!;
     log('act: user ', user);
-    // @ts-ignore
     this.menus = deepCopy((user.menu as any) || []).filter(
       (m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode
     ) as Menu[];

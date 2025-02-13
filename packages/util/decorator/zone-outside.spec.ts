@@ -1,7 +1,5 @@
 import { NgZone } from '@angular/core';
 
-
-
 import { ZoneOutside, ZoneRun } from './zone-outside';
 
 describe('util.#ZoneOutside', () => {

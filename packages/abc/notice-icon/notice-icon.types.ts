@@ -1,7 +1,5 @@
 import { TemplateRef } from '@angular/core';
 
-
-
 export interface NoticeItem {
   [key: string]: any;
 

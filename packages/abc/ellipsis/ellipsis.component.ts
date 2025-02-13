@@ -18,7 +18,6 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { take } from 'rxjs';
 
-
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 @Component({

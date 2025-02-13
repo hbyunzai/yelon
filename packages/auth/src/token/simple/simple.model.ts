@@ -1,5 +1,3 @@
-
-
 import { ITokenModel } from '../interface';
 
 export class SimpleTokenModel implements ITokenModel {

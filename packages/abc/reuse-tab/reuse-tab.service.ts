@@ -13,8 +13,6 @@ import { BehaviorSubject, Observable, take, timer, Unsubscribable } from 'rxjs';
 import { Menu, MenuService } from '@yelon/theme';
 import { ScrollService } from '@yelon/util/browser';
 
-
-
 import { REUSE_TAB_CACHED_MANAGER } from './reuse-tab.cache';
 import {
   ReuseComponentRef,

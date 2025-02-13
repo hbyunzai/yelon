@@ -27,7 +27,6 @@ import {
   YunzaiMenuAttribute
 } from '@yelon/util';
 
-
 export interface LoadParam {
   force?: boolean;
 }
@@ -118,7 +117,10 @@ export class YunzaiStartupService {
           this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
           this.settingService.setUser({
             name: yunzaiUser.realname,
-            avatar: `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}` || '',
+            avatar:
+              this.config.baseUrl && yunzaiUser.avatarId
+                ? `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}`
+                : '',
             email: yunzaiUser.email
           });
           this.titleService.default = currentMenu && currentMenu.text ? currentMenu.text : 'default application name';

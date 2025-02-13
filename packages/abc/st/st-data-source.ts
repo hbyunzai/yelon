@@ -10,7 +10,6 @@ import type { YunzaiSTConfig } from '@yelon/util/config';
 import { CurrencyService } from '@yelon/util/format';
 import { deepCopy, deepGet } from '@yelon/util/other';
 
-
 import type {
   STColumn,
   STColumnFilter,

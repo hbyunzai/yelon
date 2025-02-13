@@ -1,7 +1,5 @@
 import type { Options as AjvOptions } from 'ajv';
 
-
-
 export interface YunzaiSFConfigFormatMap {
   'date-time': { widget?: string; showTime?: boolean; format?: string };
   date: { widget?: string; format?: string };

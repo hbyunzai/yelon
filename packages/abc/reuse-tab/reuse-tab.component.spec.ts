@@ -15,7 +15,6 @@ import { Observable, of } from 'rxjs';
 import { YUNZAI_I18N_TOKEN, YelonLocaleModule, YelonLocaleService, en_US, MenuService, zh_CN } from '@yelon/theme';
 import { ScrollService } from '@yelon/util/browser';
 
-
 import { provideReuseTabConfig } from './provide';
 import { ReuseTabComponent } from './reuse-tab.component';
 import {
