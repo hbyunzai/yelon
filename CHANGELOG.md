@@ -1,3 +1,22 @@
+# [19.0.0](https://github.com/hbyunzai/yelon/compare/18.3.0...19.0.0) (2025-02-13)
+
+
+### Bug Fixes
+
+* fix ci and route paths ([3541f31](https://github.com/hbyunzai/yelon/commit/3541f3148a2e3af3964e817cefa6b3b1adeeb9ab))
+* fix missing functions ([aeb31cc](https://github.com/hbyunzai/yelon/commit/aeb31ccb38c74b5db662d6fc8a0e7866383d1318))
+* fix test ([9a2a5c9](https://github.com/hbyunzai/yelon/commit/9a2a5c915a54191094c44ef935539b667e1f9784))
+* style linperf: optimizing `[@let](https://github.com/let)` ([#1849](https://github.com/hbyunzai/yelon/issues/1849))t ([bc7143b](https://github.com/hbyunzai/yelon/commit/bc7143be690c6dede0217d252e7d75a2223fa801))
+* style lint ([359a14a](https://github.com/hbyunzai/yelon/commit/359a14a263ca513d09921b43bd99d4d945a76ce8))
+
+
+### Features
+
+* **abc:avatar-list:** set deprecated ([#1848](https://github.com/hbyunzai/yelon/issues/1848)) ([4d3542d](https://github.com/hbyunzai/yelon/commit/4d3542de152275f8ec9950ff2a22f9e6b9f5aa16))
+* **theme:menu:** add `getDefaultRedirect` method ([#1850](https://github.com/hbyunzai/yelon/issues/1850)) ([ba573fe](https://github.com/hbyunzai/yelon/commit/ba573fe4ee0f504b36ec5b34f797fea7330075e3))
+
+
+
 ## 18.3.0 (2024-11-07)
 
 * feat: yarn 4.5.0 ([ffbedf1](https://github.com/hbyunzai/yelon/commit/ffbedf1))
