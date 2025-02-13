@@ -13,7 +13,7 @@ type: Documents
 透过 `YelonAuthConfig` 可以指定参数名以及其发送位置，例如：
 
 ```ts
-token_send_key = 'token';
+token_send_key = 'access_token';
 token_send_template = 'Bearer ${token}';
 token_send_place = 'header';
 ```

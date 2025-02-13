@@ -9,7 +9,7 @@ describe('auth: cookie-storage', () => {
   let data: Record<string, any> = {};
   let putSpy: jasmine.Spy;
   let store: CookieStorageStore;
-  const KEY = 'token';
+  const KEY = 'access_token';
   const VALUE: ITokenModel = {
     access_token: 'token data'
   } as ITokenModel;

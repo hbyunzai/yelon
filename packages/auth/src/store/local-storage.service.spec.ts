@@ -3,7 +3,7 @@ import { ITokenModel } from '../token/interface';
 
 describe('auth: local-storage', () => {
   const store = new LocalStorageStore();
-  const KEY = 'token';
+  const KEY = 'access_token';
   const VALUE: ITokenModel = {
     access_token: 'token data'
   } as ITokenModel;

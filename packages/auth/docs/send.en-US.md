@@ -15,7 +15,7 @@ It is better to add the corresponding authentication information to each request
 The parameter name and its sending location can be specified via `YelonAuthConfig`, for example:
 
 ```ts
-token_send_key = 'token';
+token_send_key = 'access_token';
 token_send_template = 'Bearer ${token}';
 token_send_place = 'header';
 ```

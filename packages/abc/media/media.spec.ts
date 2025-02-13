@@ -5,7 +5,6 @@ import type Plyr from 'plyr';
 
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
-import { any } from 'ng-zorro-antd/core/types/any';
 
 import { MediaComponent, MediaType } from './media.component';
 

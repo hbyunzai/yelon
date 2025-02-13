@@ -3,7 +3,6 @@ import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick
 
 import { createTestContext } from '@yelon/testing';
 import { LazyService } from '@yelon/util/other';
-import { any } from 'ng-zorro-antd/core/types/any';
 
 import { PdfComponent } from './pdf.component';
 

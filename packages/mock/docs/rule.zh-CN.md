@@ -49,7 +49,7 @@ export const USERS = {
   // Function
   '/qs': (req: MockRequest) => req.queryString.pi,
   // 支持返回完整的 HttpResponse
-  '/http': (req: MockRequest) => new HttpResponse({ body: 'Body', headers: new HttpHeaders({ 'token': '1' }) }),
+  '/http': (req: MockRequest) => new HttpResponse({ body: 'Body', headers: new HttpHeaders({ 'access_token': '1' }) }),
   // 发送 Status 错误
   '/404': () => { throw new MockStatusError(404); },
   // 支持 Observable
