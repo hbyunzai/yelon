@@ -81,13 +81,13 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Test
         run: yarn run test
-      - uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./coverage/
-          files: cobertura-coverage.xml
-          fail_ci_if_error: true
-          verbose: true
+#      - uses: codecov/codecov-action@v5
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+#          directory: ./coverage/
+#          files: cobertura-coverage.xml
+#          fail_ci_if_error: true
+#          verbose: true
 
   test-cli:
     runs-on: ubuntu-latest
