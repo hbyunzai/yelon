@@ -13,6 +13,15 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## [19.0.1](https://github.com/hbyunzai/yelon/compare/19.0.0...19.0.1) (2025-02-14)
+
+
+### Bug Fixes
+
+* fix bugs ([f99d260](https://github.com/hbyunzai/yelon/commit/f99d26056555745368d63b5f8942b92df1988668))
+* fix schema missing bis bcs socket ([54e6cdf](https://github.com/hbyunzai/yelon/commit/54e6cdf86844d7296a83703df0d639da7f56c59c))
+
+
 # [19.0.0](https://github.com/hbyunzai/yelon/compare/18.3.0...19.0.0) (2025-02-13)
 
 
