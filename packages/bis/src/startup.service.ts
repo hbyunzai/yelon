@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { APP_INITIALIZER, inject, Injectable, Provider } from '@angular/core';
-import { catchError, combineLatest, EMPTY, map, mergeMap, Observable, of } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {EnvironmentProviders, inject, Injectable, provideAppInitializer, Provider} from '@angular/core';
+import {catchError, combineLatest, EMPTY, map, mergeMap, Observable, of} from 'rxjs';
 
-import { ACLService } from '@yelon/acl';
-import { ITokenModel, YA_SERVICE_TOKEN } from '@yelon/auth';
-import { mergeBisConfig } from '@yelon/bis/config';
+import {ACLService} from '@yelon/acl';
+import {ITokenModel, YA_SERVICE_TOKEN} from '@yelon/auth';
+import {mergeBisConfig} from '@yelon/bis/config';
 import {
   Menu,
   MenuService,
@@ -31,16 +31,25 @@ export interface LoadParam {
   force?: boolean;
 }
 
-export function provideYunzaiStartup(): Provider[] {
-  return [
-    YunzaiStartupService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (startupService: YunzaiStartupService) => () => startupService.load(),
-      deps: [YunzaiStartupService],
-      multi: true
-    }
-  ];
+// export function provideYunzaiStartup(): Provider[] {
+//   return [
+//     YunzaiStartupService,
+//     {
+//       provide: APP_INITIALIZER,
+//       useFactory: (startupService: YunzaiStartupService) => () => startupService.load(),
+//       deps: [YunzaiStartupService],
+//       multi: true
+//     }
+//   ];
+// }
+
+export function provideYunzaiStartup(): Array<Provider | EnvironmentProviders> {
+  const appInitializer = (): Observable<void> => {
+    const startupService = inject(YunzaiStartupService);
+    return startupService.load();
+  };
+
+  return [YunzaiStartupService, provideAppInitializer(appInitializer)];
 }
 
 @Injectable()
@@ -114,7 +123,7 @@ export class YunzaiStartupService {
         );
         const currentMenu = yunzaiMenus.pop();
         if (currentMenu) {
-          this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
+          this.settingService.setApp({name: currentMenu.text, description: currentMenu.intro});
           this.settingService.setUser({
             name: yunzaiUser.realname,
             avatar:

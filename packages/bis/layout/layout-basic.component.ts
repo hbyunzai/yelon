@@ -95,7 +95,7 @@ export interface ApplicationInfoInterface {
           nzTrigger="click"
           nzPlacement="bottomRight"
         >
-          <i nz-icon nzType="setting"></i>
+          <nz-icon nzType="setting" />
         </div>
         <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
           <div nz-menu style="width: 200px;">
@@ -113,22 +113,22 @@ export interface ApplicationInfoInterface {
                 >
                   <ng-container [ngSwitch]="i.value">
                     <ng-container *ngSwitchCase="NavType.APPLICATION">
-                      <i nz-icon nzType="appstore" class="mr-sm"></i>
+                      <nz-icon nzType="appstore" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchCase="NavType.GROUP">
-                      <i nz-icon nzType="group" class="mr-sm"></i>
+                      <nz-icon nzType="group" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchCase="NavType.TILE">
-                      <i nz-icon nzType="dash" class="mr-sm"></i>
+                      <nz-icon nzType="dash" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchCase="NavType.BLANK">
-                      <i nz-icon nzType="border" class="mr-sm"></i>
+                      <nz-icon nzType="border" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchCase="NavType.TABS">
-                      <i nz-icon nzType="insert-row-above" class="mr-sm"></i>
+                      <nz-icon nzType="insert-row-above" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchDefault>
-                      <i nz-icon nzType="appstore" class="mr-sm"></i>
+                      <nz-icon nzType="appstore" class="mr-sm" />
                     </ng-container>
                     {{ 'mode.nav.' + i.value | i18n }}
                   </ng-container>
@@ -172,7 +172,7 @@ export interface ApplicationInfoInterface {
       </nz-dropdown-menu>
     </ng-template>
     <ng-template #contentTpl>
-      <reuse-tab #reuseTab [ngStyle]="reusetabCSS" />
+      <reuse-tab #reuseTab [style]="reusetabCSS" />
       <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)" />
     </ng-template>
     <ng-template #noneTpl>
@@ -209,7 +209,6 @@ export interface ApplicationInfoInterface {
       </ng-container>
     </nz-modal>
   `,
-  standalone: true,
   imports: [
     LayoutDefaultModule,
     RouterModule,

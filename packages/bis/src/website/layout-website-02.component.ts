@@ -73,7 +73,7 @@ import { YunzaiStartupService } from '../startup.service';
       </main>
     </div>
   `,
-  standalone: true,
+
   imports: [
     RouterOutlet,
     I18nPipe,

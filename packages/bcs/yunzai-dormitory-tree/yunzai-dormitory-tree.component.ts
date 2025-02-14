@@ -85,7 +85,7 @@ import {
     </ng-template>
     <ng-template #blank />
   `,
-  standalone: true,
+
   providers: [YunzaiDormitoryTreeService],
   imports: [NzSpinModule, YelonFormModule, NzCardModule, NzIconModule, NzEmptyModule, NzTreeModule, CommonModule]
 })

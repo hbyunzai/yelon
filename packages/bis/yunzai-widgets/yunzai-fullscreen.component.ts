@@ -8,7 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 @Component({
   selector: 'yunzai-header-fullscreen',
   template: `
-    <i nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></i>
+    <nz-icon [nzType]="status ? 'fullscreen-exit' : 'fullscreen'"></nz-icon>
     {{ (status ? 'menu.fullscreen.exit' : 'menu.fullscreen') | i18n }}
   `,
   host: {

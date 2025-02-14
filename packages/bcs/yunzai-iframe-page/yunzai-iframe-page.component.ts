@@ -19,7 +19,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
       <nz-spin nzSpinning="true" />
     }
   `,
-  standalone: true,
+
   imports: [NzSpinModule]
 })
 export class YunzaiIframePageComponent implements OnInit, OnDestroy {

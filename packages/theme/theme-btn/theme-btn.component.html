@@ -24,10 +24,10 @@
     </g>
   </svg>
   <nz-dropdown-menu #menu="nzDropdownMenu">
-    <ul nz-menu nzSelectable class="theme-list">
+    <ul nz-menu [nzSelectable]="true" class="theme-list">
       @for (i of types; track $index) {
         <li nz-menu-item [attr.data-text]="i.text | i18n" (click)="onThemeChange(i.key)" [style]="{ color: i.color }">
-          <i nz-icon nzType="bg-colors"></i> {{ i.text | i18n }}
+          <nz-icon nzType="bg-colors"></nz-icon> {{ i.text | i18n }}
         </li>
       }
     </ul>

@@ -15,6 +15,7 @@ import {
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
@@ -32,7 +33,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
             (ngModelChange)="onSearch()"
           />
           <ng-template #prefixTemplate>
-            <i nz-icon nzType="search" nzTheme="outline"></i>
+            <nz-icon nzType="search" nzTheme="outline"></nz-icon>
           </ng-template>
         </nz-input-group>
       </div>
@@ -121,8 +122,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
       </div>
     </div>
   `,
-  standalone: true,
-  imports: [I18nPipe, FormsModule, NzFormModule, NzInputModule, CommonModule, NzGridModule]
+  imports: [I18nPipe, FormsModule, NzFormModule, NzInputModule, CommonModule, NzGridModule, NzIconModule]
 })
 export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
   private readonly config = mergeBisConfig(inject(YunzaiConfigService));

@@ -53,7 +53,7 @@ import { YunzaiFriendGroup, YunzaiFriendGroupProps, YunzaiFriendGroupState } fro
       <sf #form layout="inline" [button]="'none'" [schema]="state.schema" />
     </ng-template>
   `,
-  standalone: true,
+
   imports: [NzSpinModule, NzCardModule, CommonModule, NzEmptyModule, YelonFormModule, NzListModule],
   providers: [YunzaiFriendGroupService]
 })

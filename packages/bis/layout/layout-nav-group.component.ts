@@ -25,11 +25,11 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
                 [nzOverlayClassName]="'yz-application-dropdown'"
               >
                 @if (menu.icon) {
-                  <i nz-icon [nzType]="menu.icon" nzTheme="outline"></i>
+                  <nz-icon [nzType]="menu.icon" nzTheme="outline"></nz-icon>
                 }
                 {{ menu.name | i18n }}
                 @if (menu.children && menu.children.length > 0) {
-                  <i nz-icon nzType="down" nzTheme="outline"></i>
+                  <nz-icon nzType="down" nzTheme="outline"></nz-icon>
                 }
               </a>
               <nz-dropdown-menu #menuTpl="nzDropdownMenu">
@@ -45,7 +45,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
                             (click)="open(item)"
                           >
                             @if (item.icon) {
-                              <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                              <nz-icon [nzType]="item.icon" nzTheme="outline"></nz-icon>
                             }
                             {{ item.name | i18n }}
                           </li>
@@ -61,7 +61,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
       </nz-tabset>
     </div>
   `,
-  standalone: true,
+
   imports: [NzIconModule, NzDropDownModule, I18nPipe, NzTabsModule]
 })
 export class YunzaiLayoutNavGroupComponent implements OnInit, OnDestroy {

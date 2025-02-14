@@ -81,7 +81,7 @@ import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunz
     </ng-template>
     <ng-template #blank />
   `,
-  standalone: true,
+
   imports: [
     NzSpinModule,
     YelonFormModule,

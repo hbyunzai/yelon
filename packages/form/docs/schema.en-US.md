@@ -314,7 +314,7 @@ Is visible with conditions, for example:
 | `[widget]` | Widget | `string` | - |
 | `[i18n]` | Refers to the i18n key of `schema.title` | `string` | - |
 | `[descriptionI18n]` | Refers to the i18n key of `schema.description` | `string` | - |
-| `[class]` | Customized class, equals to `[ngClass]` | `string,string[]` | - |
+| `[class]` | Customized class, equals to `[class]` | `string,string[]` | - |
 | `[width]` | Width, unit: `px` | `number` | - |
 | `[size]` | Size of element | `default,large,small` | - |
 | `[grid]` | Property for responsive | `SFGridSchema` | - |

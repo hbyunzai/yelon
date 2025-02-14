@@ -45,7 +45,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'image-wrapper',
   template: `
-    <div [ngStyle]="style">
+    <div [style]="style">
       <img class="img" [src]="src" [alt]="desc" />
       @if (desc) {
         <div class="desc">{{ desc }}</div>

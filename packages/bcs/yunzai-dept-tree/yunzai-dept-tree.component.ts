@@ -81,7 +81,7 @@ import { YUNZAI_DEPT_TYPES, YunzaiDeptTree, YunzaiDeptTreeProps, YunzaiDeptTreeS
     </ng-template>
     <ng-template #blank />
   `,
-  standalone: true,
+
   imports: [NzSpinModule, NzCardModule, CommonModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule],
   providers: [YunzaiDeptTreeService, YunzaiGradeService]
 })

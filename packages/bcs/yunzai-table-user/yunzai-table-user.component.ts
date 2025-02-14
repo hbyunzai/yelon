@@ -79,7 +79,7 @@ import {
             <li nz-menu-item class="people-item">
               <div class="people-item-right">{{ item?.realName || '--' }}</div>
               <span class="del-btn" (click)="unCheck(item)">
-                <i nz-icon nzType="close" nzTheme="outline"></i>
+                <nz-icon nzType="close" nzTheme="outline"></nz-icon>
               </span>
             </li>
           }
@@ -92,7 +92,7 @@ import {
       <button nz-button nzType="primary" (click)="onReset()">{{ 'reset' | i18n }}</button>
     </ng-template>
   `,
-  standalone: true,
+
   providers: [YunzaiTableUserService],
   imports: [
     CommonModule,

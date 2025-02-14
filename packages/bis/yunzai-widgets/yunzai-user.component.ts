@@ -42,13 +42,13 @@ export interface UserLink {
       <div nz-menu class="width-sm">
         @for (m of menus; track m) {
           <div data-event-id="_nav_user" [attr.data-name]="m.name | i18n" nz-menu-item (click)="to(m.url)">
-            <i nz-icon [nzType]="m.icon" class="mr-sm"></i>
+            <nz-icon [nzType]="m.icon" class="mr-sm"></nz-icon>
             {{ m.name | i18n }}
           </div>
         }
         <li nz-menu-divider></li>
         <div data-event-id="_nav_user" data-name="注销登录" nz-menu-item (click)="logout()">
-          <i nz-icon nzType="logout" class="mr-sm"></i>
+          <nz-icon nzType="logout" class="mr-sm"></nz-icon>
           {{ 'logout' | i18n }}
         </div>
       </div>

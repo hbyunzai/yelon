@@ -314,7 +314,7 @@ UI Schema 结构由通用性和小部件API两部分组成，以下是通用性�
 | `[widget]` | 指定采用什么小部件渲染 | `string` | - |
 | `[i18n]` | 指 `schema.title` 的国际化键值 | `string` | - |
 | `[descriptionI18n]` | 指 `schema.description` 的国际化键值 | `string` | - |
-| `[class]` | 自定义类，等同 `[ngClass]` 值 | `string,string[]` | - |
+| `[class]` | 自定义类，等同 `[class]` 值 | `string,string[]` | - |
 | `[width]` | 指定宽度，单位：`px` | `number` | - |
 | `[size]` | 元素组件大小 | `default,large,small` | - |
 | `[grid]` | 响应式属性 | `SFGridSchema` | - |

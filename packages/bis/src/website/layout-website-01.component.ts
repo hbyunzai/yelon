@@ -33,11 +33,11 @@ import { YunzaiStartupService } from '../startup.service';
             <span nz-icon nzType="user" nzTheme="outline"></span>{{ _username }}<span nz-icon nzType="down"></span>
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
-            <ul nz-menu nzSelectable>
+            <ul nz-menu [nzSelectable]="true">
               @for (link of _links; track $index) {
                 <li nz-menu-item class="yz-layout-website-01-link__li" (click)="to(link.url)">{{ link.name }}</li>
               }
-              <li nz-menu-item nzDanger class="yz-layout-website-01-link__li" (click)="logout()"
+              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()"
                 >{{ 'menu.account.logout' | i18n }}
               </li>
             </ul>
@@ -68,7 +68,7 @@ import { YunzaiStartupService } from '../startup.service';
       </main>
     </div>
   `,
-  standalone: true,
+
   imports: [RouterOutlet, I18nPipe, NzI18nModule, NgFor, NgIf, NzDropDownModule, NzIconModule, NgTemplateOutlet]
 })
 export class YunzaiLayoutWebsite01Component {

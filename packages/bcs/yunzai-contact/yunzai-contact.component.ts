@@ -80,7 +80,6 @@ import { YunzaiContactProps, YunzaiContactState } from './yunzai-contact.types';
       </nz-row>
     </ng-template>
   `,
-  standalone: true,
   imports: [
     FormsModule,
     CommonModule,
