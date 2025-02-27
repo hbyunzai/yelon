@@ -1,3 +1,12 @@
+## [19.0.2-beta.1](https://github.com/hbyunzai/yelon/compare/19.0.1...19.0.2-beta.1) (2025-02-27)
+
+
+### Bug Fixes
+
+* fix logout url ([2687650](https://github.com/hbyunzai/yelon/commit/268765059f45d77c46089aa8e8ca56ca5c15fabe))
+
+
+
 ## [19.0.1](https://github.com/hbyunzai/yelon/compare/19.0.0...19.0.1) (2025-02-14)
 
 
