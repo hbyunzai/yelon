@@ -9,6 +9,8 @@ import { cleanCdkOverlayHtml, dispatchFakeEvent, typeInElement } from '@yelon/te
 import { YunzaiThemeModule } from '@yelon/theme';
 import { deepCopy, deepGet } from '@yelon/util/other';
 
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 import { SFWidgetProvideConfig, provideSFConfig } from '../src';
 import { SF_SEQ } from '../src/const';
 import { SFButton } from '../src/interface';
@@ -38,8 +40,8 @@ let context: TestFormComponent;
 export function builder(options?: {
   detectChanges?: boolean;
   template?: string;
-  ignoreAntd?: boolean;
-  imports?: any[];
+  ingoreAntd?: boolean;
+  imports?: NzSafeAny[];
 }): {
   fixture: ComponentFixture<TestFormComponent>;
   dl: DebugElement;
@@ -75,9 +77,9 @@ export function builder(options?: {
 }
 
 export function configureSFTestSuite(options?: {
-  imports?: any[];
+  imports?: NzSafeAny[];
   widgets?: SFWidgetProvideConfig[];
-  providers?: any[];
+  providers?: NzSafeAny[];
 }): void {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -131,12 +133,12 @@ export class SFPage {
     return path.startsWith(SF_SEQ) ? path : SF_SEQ + path;
   }
 
-  getValue(path: string): any {
+  getValue(path: string): NzSafeAny {
     path = this.fixPath(path);
     return this.comp.getValue(path);
   }
 
-  setValue(path: string, value: any, dc: number = 0): this {
+  setValue(path: string, value: NzSafeAny, dc: number = 0): this {
     path = this.fixPath(path);
     this.comp.setValue(path, value);
     if (dc > 0) {
@@ -186,7 +188,7 @@ export class SFPage {
     return this.dc();
   }
 
-  newSchema(schema: SFSchema, ui?: SFUISchema, formData?: any): this {
+  newSchema(schema: SFSchema, ui?: SFUISchema, formData?: NzSafeAny): this {
     context.schema = schema;
     if (typeof ui !== 'undefined') context.ui = ui;
     if (typeof formData !== 'undefined') context.formData = formData;
@@ -202,7 +204,7 @@ export class SFPage {
     return this.dc();
   }
 
-  checkSchema(path: string, propertyName: string, value: any): this {
+  checkSchema(path: string, propertyName: string, value: NzSafeAny): this {
     path = this.fixPath(path);
     const property = this.comp.rootProperty!.searchProperty(path);
     expect(property != null).toBe(true);
@@ -212,7 +214,7 @@ export class SFPage {
     return this;
   }
 
-  checkUI(path: string, propertyName: string, value: any): this {
+  checkUI(path: string, propertyName: string, value: NzSafeAny): this {
     path = this.fixPath(path);
     const property = this.comp.rootProperty!.searchProperty(path);
     expect(property != null).toBe(true);
@@ -222,7 +224,7 @@ export class SFPage {
     return this;
   }
 
-  checkValue(path: string, value: any, propertyName?: string): this {
+  checkValue(path: string, value: NzSafeAny, propertyName?: string): this {
     path = this.fixPath(path);
     const property = this.comp.rootProperty!.searchProperty(path);
     expect(property != null).toBe(true);
@@ -249,7 +251,7 @@ export class SFPage {
     return this;
   }
 
-  checkElText(cls: string, value: any, viaDocument: boolean = false): this {
+  checkElText(cls: string, value: NzSafeAny, viaDocument: boolean = false): this {
     const node = viaDocument ? document.querySelector(cls) : this.getEl(cls);
     if (value == null) {
       expect(node).toBeNull();
@@ -267,11 +269,11 @@ export class SFPage {
 
   checkStyle(cls: string, key: string, value: string): this {
     const el = this.getEl(cls);
-    expect((el.style as any)[key]).toBe(value);
+    expect((el.style as NzSafeAny)[key]).toBe(value);
     return this;
   }
 
-  checkAttr(cls: string, key: string, value: any, required: boolean = true): this {
+  checkAttr(cls: string, key: string, value: NzSafeAny, required: boolean = true): this {
     const el = this.getEl(cls);
     const attr = el.attributes.getNamedItem(key);
     if (required) expect(attr!.textContent).toBe(value);
@@ -285,7 +287,7 @@ export class SFPage {
     return this;
   }
 
-  checkInput(cls: string, value: any, viaDocument: boolean = false): this {
+  checkInput(cls: string, value: NzSafeAny, viaDocument: boolean = false): this {
     const ipt = (viaDocument ? document.querySelector(cls) : dl.query(By.css(cls)).nativeElement) as HTMLInputElement;
     expect(ipt.value).toBe(value);
     return this;
@@ -308,20 +310,20 @@ export class SFPage {
     return this.dc();
   }
 
-  typeCharOnly(value: any, cls: string = 'input'): this {
+  typeCharOnly(value: NzSafeAny, cls: string = 'input'): this {
     const node = this.getEl(cls) as HTMLInputElement;
     typeInElement(value, node);
     return this;
   }
 
-  typeChar(value: any, cls: string = 'input'): this {
+  typeChar(value: NzSafeAny, cls: string = 'input'): this {
     const node = this.getEl(cls) as HTMLInputElement;
     typeInElement(value, node);
     tick();
     return this.dc();
   }
 
-  typeCharByDebugElement(value: any, cls: string = 'input'): this {
+  typeCharByDebugElement(value: NzSafeAny, cls: string = 'input'): this {
     const node = this.getDl(cls);
     const input = node.nativeElement as HTMLInputElement;
     input.focus();
@@ -395,7 +397,7 @@ export class TestFormComponent {
   layout = 'horizontal';
   schema: SFSchema | null = SCHEMA.user;
   ui: SFUISchema | null = {};
-  formData: any;
+  formData: NzSafeAny;
   button: SFButton | 'none' | null | undefined = {};
   liveValidate = true;
   autocomplete?: 'on' | 'off';
