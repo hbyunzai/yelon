@@ -12,7 +12,7 @@ import { NoticeIconComponent } from '@yelon/abc/notice-icon';
 
 @Component({
   selector: 'app-demo',
-  template: ` <notice-icon count="5" /> `,
+  template: `<notice-icon count="5" />`,
   imports: [NoticeIconComponent]
 })
 export class DemoComponent {}
