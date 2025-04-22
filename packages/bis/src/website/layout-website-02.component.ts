@@ -146,7 +146,7 @@ export class YunzaiLayoutWebsite02Component {
 
   logout(): void {
     const baseUrl = this.configService.get('bis')?.baseUrl || '/backstage';
-    this.win.location.href = `${baseUrl}/cas-proxy/app/logout?callback=` + encodeURIComponent(this.win.location.href);
+    this.win.location.href = `${baseUrl}/cas-proxy/app/logout?callback=${encodeURIComponent(this.win.location.href)}`;
   }
 
   to(url?: string): void {
