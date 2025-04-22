@@ -95,7 +95,7 @@ export interface ApplicationInfoInterface {
           nzTrigger="click"
           nzPlacement="bottomRight"
         >
-          <nz-icon nzType="setting" />
+          <nz-icon nzType="setting" nzTheme="outline"></nz-icon>
         </div>
         <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
           <div nz-menu style="width: 200px;">
@@ -113,22 +113,22 @@ export interface ApplicationInfoInterface {
                 >
                   <ng-container [ngSwitch]="i.value">
                     <ng-container *ngSwitchCase="NavType.APPLICATION">
-                      <nz-icon nzType="appstore" class="mr-sm" />
+                      <nz-icon nzType="appstore" nzTheme="outline" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchCase="NavType.GROUP">
-                      <nz-icon nzType="group" class="mr-sm" />
+                      <nz-icon nzType="group" nzTheme="outline" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchCase="NavType.TILE">
-                      <nz-icon nzType="dash" class="mr-sm" />
+                      <nz-icon nzType="dash" nzTheme="outline" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchCase="NavType.BLANK">
-                      <nz-icon nzType="border" class="mr-sm" />
+                      <nz-icon nzType="border" nzTheme="outline" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchCase="NavType.TABS">
-                      <nz-icon nzType="insert-row-above" class="mr-sm" />
+                      <nz-icon nzType="insert-row-above" nzTheme="outline" class="mr-sm" />
                     </ng-container>
                     <ng-container *ngSwitchDefault>
-                      <nz-icon nzType="appstore" class="mr-sm" />
+                      <nz-icon nzType="appstore" nzTheme="outline" class="mr-sm" />
                     </ng-container>
                     {{ 'mode.nav.' + i.value | i18n }}
                   </ng-container>

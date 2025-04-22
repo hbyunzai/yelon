@@ -12,12 +12,19 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   template: `
     @if (showLangText) {
       <div nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight">
-        <nz-icon nzType="global"></nz-icon>
+        <nz-icon nzType="global" nzTheme="outline"></nz-icon>
         {{ 'lang.nav' | i18n }}
-        <nz-icon nzType="down"></nz-icon>
+        <nz-icon nzType="down" nzTheme="outline"></nz-icon>
       </div>
     } @else {
-      <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global"></i>
+      <i
+        nz-dropdown
+        [nzDropdownMenu]="langMenu"
+        nzPlacement="bottomRight"
+        nz-icon
+        nzType="global"
+        nzTheme="outline"
+      ></i>
     }
     <nz-dropdown-menu data-event-id="_nav_lang" #langMenu="nzDropdownMenu">
       <ul nz-menu>

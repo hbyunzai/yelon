@@ -1,7 +1,7 @@
 import { Observable, of, map } from 'rxjs';
 
 import { deepCopy } from '@yelon/util/other';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 
 import { SF_SEQ } from './const';
@@ -9,15 +9,15 @@ import type { SFValue } from './interface';
 import type { SFSchema, SFSchemaDefinition, SFSchemaEnum } from './schema';
 import type { SFUISchema, SFUISchemaItem, SFUISchemaItemRun, SFVisibleIf } from './schema/ui';
 
-export function isBlank(o: any): boolean {
+export function isBlank(o: NzSafeAny): boolean {
   return o == null;
 }
 
-export function toBool(value: any, defaultValue: boolean): boolean {
+export function toBool(value: NzSafeAny, defaultValue: boolean): boolean {
   return value == null ? defaultValue : `${value}` !== 'false';
 }
 
-export function di(ui: SFUISchema, ...args: any[]): void {
+export function di(ui: SFUISchema, ...args: NzSafeAny[]): void {
   if (typeof ngDevMode === 'undefined' || ngDevMode) {
     if (ui.debug) {
       console.warn(...args);
@@ -26,12 +26,12 @@ export function di(ui: SFUISchema, ...args: any[]): void {
 }
 
 /** 根据 `$ref` 查找 `definitions` */
-function findSchemaDefinition($ref: string, definitions: SFSchemaDefinition): any {
+function findSchemaDefinition($ref: string, definitions: SFSchemaDefinition): NzSafeAny {
   const match = /^#\/definitions\/(.*)$/.exec($ref);
   if (match && match[1]) {
     // parser JSON Pointer
     const parts = match[1].split(SF_SEQ);
-    let current: any = definitions;
+    let current: NzSafeAny = definitions;
     for (let part of parts) {
       part = part.replace(/~1/g, SF_SEQ).replace(/~0/g, '~');
       if (Object.prototype.hasOwnProperty.call(current, part)) {
@@ -120,12 +120,12 @@ function detectKey(keys: string[], detectKeys: string[]): void {
 
 export function orderProperties(properties: string[], order: string[]): string[] {
   if (!Array.isArray(order)) return properties;
-  const arrayToHash = (arr: any): any =>
-    arr.reduce((prev: any, curr: any) => {
+  const arrayToHash = (arr: NzSafeAny): NzSafeAny =>
+    arr.reduce((prev: NzSafeAny, curr: NzSafeAny) => {
       prev[curr] = true;
       return prev;
     }, {});
-  const errorPropList = (arr: any): string => `property [${arr.join(`', '`)}]`;
+  const errorPropList = (arr: NzSafeAny): string => `property [${arr.join(`', '`)}]`;
 
   const propertyHash = arrayToHash(properties);
   const orderHash = arrayToHash(order);
@@ -149,10 +149,10 @@ export function orderProperties(properties: string[], order: string[]): string[]
   return complete;
 }
 
-export function getEnum(list: any[], formData: any, readOnly: boolean): SFSchemaEnum[] {
+export function getEnum(list: NzSafeAny[], formData: NzSafeAny, readOnly: boolean): SFSchemaEnum[] {
   if (isBlank(list) || !Array.isArray(list) || list.length === 0) return [];
   if (typeof list[0] !== 'object') {
-    list = list.map((item: any) => {
+    list = list.map((item: NzSafeAny) => {
       return { label: item, value: item } as SFSchemaEnum;
     });
   }
@@ -169,18 +169,18 @@ export function getEnum(list: any[], formData: any, readOnly: boolean): SFSchema
   return list;
 }
 
-export function getCopyEnum(list: any[], formData: any, readOnly: boolean): SFSchemaEnum[] {
+export function getCopyEnum(list: NzSafeAny[], formData: NzSafeAny, readOnly: boolean): SFSchemaEnum[] {
   return getEnum(deepCopy(list || []), formData, readOnly);
 }
 
 export function getData(
   schema: SFSchema,
   ui: SFUISchemaItem,
-  formData: any,
-  asyncArgs?: any
+  formData: NzSafeAny,
+  asyncArgs?: NzSafeAny
 ): Observable<SFSchemaEnum[]> {
   if (typeof ui.asyncData === 'function') {
-    return ui.asyncData(asyncArgs).pipe(map((list: SFSchemaEnum[]) => getEnum(list, formData, schema.readOnly!)));
+    return ui.asyncData(asyncArgs).pipe(map((list: SFSchemaEnum[]) => getCopyEnum(list, formData, schema.readOnly!)));
   }
   return of(getCopyEnum(schema.enum!, formData, schema.readOnly!));
 }
