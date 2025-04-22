@@ -59,6 +59,7 @@ Every select triggers a HTTP request, data source is from `asyncData`; includes 
 | `[valueProperty]` | Property of `value` | `string` | `value` |
 | `[labelProperty]` | Property of `label` | `string` | `label` |
 | `[visibleChange]` | Asynchronous load event | `(value: boolean) => void` | - |
+| `[multiple]` | Support multiple | `boolean` | `false` |
 | `[change]` | Selected value changed event | `(values: any[]) => void` | - |
 | `[selectionChange]` | Select option changed event | `(values: NzCascaderOption[]) => void` | - |
 | `[clear]` | Content clear event | `() => void` | - |
