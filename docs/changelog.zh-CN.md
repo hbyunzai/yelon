@@ -13,6 +13,16 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## 19.2.0 (2025-04-22)
+
+* chore: lint code ([6c83ee5](https://github.com/hbyunzai/yelon/commit/6c83ee5))
+* build: bump angular to 19.2 ([70727d0](https://github.com/hbyunzai/yelon/commit/70727d0))
+* docs: update (#1897) ([9171a51](https://github.com/hbyunzai/yelon/commit/9171a51)), closes [#1897](https://github.com/hbyunzai/yelon/issues/1897)
+* feat(abc:st): add sort directions (#1894) ([4469791](https://github.com/hbyunzai/yelon/commit/4469791)), closes [#1894](https://github.com/hbyunzai/yelon/issues/1894)
+* feat(form:cascader): add multiple (#1895) ([a9d9839](https://github.com/hbyunzai/yelon/commit/a9d9839)), closes [#1895](https://github.com/hbyunzai/yelon/issues/1895)
+* feat(form:transfer): add `oneWay` (#1896) ([310f6bc](https://github.com/hbyunzai/yelon/commit/310f6bc)), closes [#1896](https://github.com/hbyunzai/yelon/issues/1896)
+
+
 # [19.1.0](https://github.com/hbyunzai/yelon/compare/19.0.2-beta.1...19.1.0) (2025-04-22)
 
 
