@@ -14,7 +14,7 @@ import type { DisabledTimeFn } from 'ng-zorro-antd/date-picker';
 import type { NzDrawerOptions } from 'ng-zorro-antd/drawer';
 import type { ModalOptions } from 'ng-zorro-antd/modal';
 import type { PaginationItemRenderContext } from 'ng-zorro-antd/pagination';
-import type { NzTablePaginationType } from 'ng-zorro-antd/table';
+import type { NzTablePaginationType, NzTableSortOrder } from 'ng-zorro-antd/table';
 
 import type { STComponent } from './st.component';
 
@@ -259,8 +259,8 @@ export interface STColumn<T extends STData = any> {
    * - `number` 数字且居右(若 `className` 存在则优先)
    * - `currency` 货币且居右(若 `className` 存在则优先)
    * - `date` 日期格式且居中(若 `className` 存在则优先)，使用 `dateFormat` 自定义格式
-   * - `yn` 将`boolean`类型徽章化 [document](https://ng.yunzainfo.com/docs/data-render#yn)
-   * - `cell` 可指定 `click`，使用 `cell` 组件渲染 [document](https://ng.yunzainfo.com/components/cell)
+   * - `yn` 将`boolean`类型徽章化 [document](https://ng-alain.com/docs/data-render#yn)
+   * - `cell` 可指定 `click`，使用 `cell` 组件渲染 [document](https://ng-alain.com/components/cell)
    * - `widget` 使用自定义小部件动态创建
    */
   type?:
@@ -329,9 +329,11 @@ export interface STColumn<T extends STData = any> {
   /**
    * 排序配置项，远程数据配置**优先**规则：
    * - `true` 表示允许排序，且若数据源为本地时自动生成 `compare: (a, b) => a[index] - b[index]` 方法
+   * - `ascend` 表示升序
+   * - `descend` 表示降序
    * - `string` 表示远程数据排序相对应 `key` 值
    */
-  sort?: true | string | STColumnSort<T>;
+  sort?: true | STColumnSort<T> | 'ascend' | 'descend' | string;
   /**
    * 过滤配置项
    */
@@ -341,9 +343,9 @@ export interface STColumn<T extends STData = any> {
    */
   format?: (item: T, col: STColumn, index: number) => string;
   /**
-   * Safe rendering type, default: `safeHtml`, Support [global config](https://ng.yunzainfo.com/docs/global-config)
+   * Safe rendering type, default: `safeHtml`, Support [global config](https://ng-alain.com/docs/global-config)
    *
-   * 安全渲染方式，默认：`safeHtml`，支持[全局配置](https://ng.yunzainfo.com/docs/global-config/zh)
+   * 安全渲染方式，默认：`safeHtml`，支持[全局配置](https://ng-alain.com/docs/global-config/zh)
    */
   safeType?: STColumnSafeType;
   /**
@@ -373,7 +375,7 @@ export interface STColumn<T extends STData = any> {
    */
   dateFormat?: string;
   /**
-   * Currency format option, `type=currency` is valid, pls refer of [CurrencyService.commas](https://ng.yunzainfo.com/util/format/#commas).
+   * Currency format option, `type=currency` is valid, pls refer of [CurrencyService.commas](https://ng-alain.com/util/format/#commas).
    *
    * 货币格式选项，`type=currency` 有效。
    */
@@ -387,7 +389,7 @@ export interface STColumn<T extends STData = any> {
    */
   exported?: boolean;
   /**
-   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng-alain.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
   /** 当不存在数据时以默认值替代 */
@@ -534,6 +536,12 @@ export interface STColumnSort<T extends STData = any> {
    * - `{ ascend: 'asc', descend: 'desc' }` 结果 `?name=desc&pi=1`
    */
   reName?: { ascend?: string; descend?: string };
+  /**
+   * 支持的排序方式
+   *
+   * Supported sort order
+   */
+  directions?: NzTableSortOrder[];
 }
 
 export interface STSortMap<T extends STData = any> extends STColumnSort<T> {
@@ -598,7 +606,7 @@ export interface STColumnFilter<T extends STData = any> {
   reName?: (list: STColumnFilterMenu[], col: STColumn) => Record<string, unknown>;
 
   /**
-   * 自定义过滤器，请参考 [Custom Data](https://ng.yunzainfo.com/components/st/en?#components-st-custom-data) 示例。
+   * 自定义过滤器，请参考 [Custom Data](https://ng-alain.com/components/st/en?#components-st-custom-data) 示例。
    */
   custom?: TemplateRef<{ $implicit: STColumnFilter; col: STColumn; handle: STColumnFilterHandle }>;
 
@@ -669,7 +677,7 @@ export interface STColumnFilterMenu {
    */
   checked?: boolean;
   /**
-   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng-alain.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
 
@@ -691,7 +699,7 @@ export interface STColumnSelection<T extends STData = any> {
 
 export interface STcolumnCurrency {
   /**
-   * See [CurrencyService.commas](https://ng.yunzainfo.com/util/format/en#format)
+   * See [CurrencyService.commas](https://ng-alain.com/util/format/en#format)
    */
   format?: CurrencyFormatOptions;
 }
@@ -787,7 +795,7 @@ export interface STColumnButton<T extends STData = any> {
    */
   children?: Array<STColumnButton<T>>;
   /**
-   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng-alain.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
   /**

@@ -2,9 +2,11 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import type { NzDrawerOptions } from 'ng-zorro-antd/drawer';
 import type { ModalOptions } from 'ng-zorro-antd/modal';
 import type { PaginationItemRenderContext } from 'ng-zorro-antd/pagination';
+import type { NzTableSortOrder } from 'ng-zorro-antd/table';
 
 export interface YunzaiSTConfig {
   /**
@@ -48,7 +50,7 @@ export interface YunzaiSTConfig {
     /** 请求方法，默认：`GET` */
     method?: string;
     /** 请求体 `Header` */
-    headers?: any;
+    headers?: NzSafeAny;
     /**
      * 重命名参数 `pi`、`ps`，默认：`{ pi: 'pi', ps: 'ps', skip: 'skip', limit: 'limit' }`
      * - `{ pi: 'Page' }` => `pi` 会被替换成 Page
@@ -70,7 +72,7 @@ export interface YunzaiSTConfig {
     /**
      * 请求前数据处理
      */
-    process?: (requestOptions: any) => any;
+    process?: (requestOptions: NzSafeAny) => NzSafeAny;
   };
   /** 返回体配置 */
   res?: {
@@ -80,14 +82,17 @@ export interface YunzaiSTConfig {
      */
     reName?:
       | {
-          total?: string | string[];
-          list?: string | string[];
-        }
-      | ((result: any, options: { pi: number; ps: number; total: number }) => { total: number; list: any[] });
+      total?: string | string[];
+      list?: string | string[];
+    }
+      | ((
+      result: NzSafeAny,
+      options: { pi: number; ps: number; total: number }
+    ) => { total: number; list: NzSafeAny[] });
     /**
      * 数据预处理
      */
-    process?: (data: any[], rawData?: any) => any[];
+    process?: (data: NzSafeAny[], rawData?: NzSafeAny) => NzSafeAny[];
   };
   /** 返回体配置 */
   page?: {
@@ -155,6 +160,10 @@ export interface YunzaiSTConfig {
    * 重命名排序值，`columns` 的重命名高于属性
    */
   sortReName?: { ascend?: string; descend?: string };
+  /**
+   * 排序状态
+   */
+  sortDirections?: NzTableSortOrder[];
   /**
    * 单排序规则
    * - 若不指定，则返回：`columnName=ascend|descend`
@@ -340,7 +349,7 @@ export interface YunzaiSTConfig {
   /**
    * 表格行的类名
    */
-  rowClassName?: (record: any, index: number) => string;
+  rowClassName?: (record: NzSafeAny, index: number) => string;
   /**
    * 通过点击行来展开子行，Default: `false`
    */
@@ -417,7 +426,7 @@ export interface YunzaiSTConfig {
       headers?: HttpHeaders | Record<string, string | string[]>;
       params?: HttpParams | Record<string, string | string[]>;
     };
-  }) => Observable<any>;
+  }) => Observable<NzSafeAny>;
   /**
    * Date format
    *

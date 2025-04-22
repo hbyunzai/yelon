@@ -6,7 +6,7 @@ import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, warn } from '@yelon/util/other';
 
-import type { NgClassInterface } from 'ng-zorro-antd/core/types';
+import type { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STRowSource } from './st-row.directive';
 import { STWidgetRegistry } from './st-widget';
@@ -95,7 +95,7 @@ export class STColumnSource {
           }
           item.type = 'none';
         } else {
-          item.modal = { ...{ paramsName: 'record', size: 'lg' }, ...modal, ...item.modal };
+          item.modal = { paramsName: 'record', size: 'lg', ...modal, ...item.modal };
         }
       }
 
@@ -106,7 +106,7 @@ export class STColumnSource {
           }
           item.type = 'none';
         } else {
-          item.drawer = { ...{ paramsName: 'record', size: 'lg' }, ...drawer, ...item.drawer };
+          item.drawer = { paramsName: 'record', size: 'lg', ...drawer, ...item.drawer };
         }
       }
 
@@ -179,7 +179,11 @@ export class STColumnSource {
     let res: STSortMap = {};
 
     if (typeof item.sort === 'string') {
-      res.key = item.sort;
+      if (item.sort === 'ascend' || item.sort === 'descend') {
+        res.directions = [item.sort, null];
+      } else {
+        res.key = item.sort;
+      }
     } else if (typeof item.sort !== 'boolean') {
       res = item.sort;
     } else if (typeof item.sort === 'boolean') {
@@ -188,6 +192,10 @@ export class STColumnSource {
 
     if (!res.key) {
       res.key = item.indexKey;
+    }
+
+    if (!Array.isArray(res.directions)) {
+      res.directions = this.cog.sortDirections ?? ['ascend', 'descend', null];
     }
 
     res.enabled = true;
@@ -207,7 +215,7 @@ export class STColumnSource {
     let icon = 'filter';
     let iconTheme = 'fill';
     let fixMenus = true;
-    let value: any = undefined;
+    let value: NzSafeAny = undefined;
     switch (res.type) {
       case 'keyword':
         icon = 'search';
@@ -331,7 +339,7 @@ export class STColumnSource {
 
         cell.colSpan = colSpan;
         cell.colEnd = cell.colStart + colSpan - 1;
-        rows[rowIndex].push(cell as any);
+        rows[rowIndex].push(cell as NzSafeAny);
 
         currentColIndex += colSpan;
 
@@ -386,7 +394,7 @@ export class STColumnSource {
           number: 'text-right',
           currency: 'text-right',
           date: 'text-center'
-        } as any
+        } as NzSafeAny
       )[item.type!];
       if (typeClass) {
         builtInClassNames.push(typeClass);
