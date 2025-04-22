@@ -13,6 +13,20 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+# [19.1.0](https://github.com/hbyunzai/yelon/compare/19.0.2-beta.1...19.1.0) (2025-04-22)
+
+
+### Bug Fixes
+
+* **form:array:** fix track to identify each item uniquely ([#1892](https://github.com/hbyunzai/yelon/issues/1892)) ([5915540](https://github.com/hbyunzai/yelon/commit/59155401059f4cb70aceee6136fb59c04528b0d1))
+* **form:utils:** replace getEnum with getCopyEnum in getData ([3ff9260](https://github.com/hbyunzai/yelon/commit/3ff9260e38a32b13d09c62cbde096158b5f8872a))
+
+
+### Features
+
+* **module:theme:** add the `badgeOverflowCount` property to Menu ([#1891](https://github.com/hbyunzai/yelon/issues/1891)) ([cc0326a](https://github.com/hbyunzai/yelon/commit/cc0326a9b7bb332172050c5aebd501cab8c3170a))
+
+
 ## [19.0.2-beta.1](https://github.com/hbyunzai/yelon/compare/19.0.1...19.0.2-beta.1) (2025-02-27)
 
 
