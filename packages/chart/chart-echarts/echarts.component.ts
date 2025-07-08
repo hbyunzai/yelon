@@ -18,8 +18,8 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, debounceTime, filter } from 'rxjs';
 
-import { NumberInput, ZoneOutside } from '@yelon/util/decorator';
-
+import { ZoneOutside } from '@yelon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 import { ChartEChartsService } from './echarts.service';
@@ -45,15 +45,11 @@ import {
     '[style.width]': `_width`,
     '[style.height]': `_height`
   },
-
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzSkeletonComponent]
 })
 export class ChartEChartsComponent implements OnInit, OnDestroy {
-  static ngAcceptInputType_width: NumberInput;
-  static ngAcceptInputType_height: NumberInput;
-
   private readonly srv = inject(ChartEChartsService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly ngZone = inject(NgZone);
@@ -64,21 +60,21 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
   private _chart: ChartECharts | null = null;
   private _theme?: string | Record<string, unknown> | null;
   private _initOpt?: {
-    renderer?: any;
+    renderer?: NzSafeAny;
     devicePixelRatio?: number;
     width?: number;
     height?: number;
-    locale?: any;
+    locale?: NzSafeAny;
   };
   private _option!: ChartEChartsOption;
   _width = '100%';
   _height = '400px';
 
   @Input()
-  set width(val: NumberInput) {
+  set width(val: number | string | null | undefined) {
     this._width = typeof val === 'number' ? `${val}px` : `${val}`;
   }
-  @Input() set height(val: NumberInput) {
+  @Input() set height(val: number | string | null | undefined) {
     this._height = typeof val === 'number' ? `${val}px` : `${val}`;
   }
   @Input()
@@ -89,7 +85,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
     }
   }
   @Input()
-  set initOpt(value: any) {
+  set initOpt(value: NzSafeAny) {
     this._initOpt = value;
     if (this._chart) {
       this.install();
@@ -137,7 +133,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
 
   install(): this {
     this.destroy();
-    const chart = (this._chart = (window as any).echarts.init(
+    const chart = (this._chart = (window as NzSafeAny).echarts.init(
       this.node.nativeElement,
       this._theme,
       this._initOpt
@@ -166,7 +162,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
   setOption(option: ChartEChartsOption, notMerge: boolean = false, lazyUpdate: boolean = false): this {
     if (this._chart) {
       this._chart.setOption(option, notMerge, lazyUpdate);
-      this.emit('set-option', { option } as any);
+      this.emit('set-option', { option } as NzSafeAny);
     }
     return this;
   }
@@ -175,7 +171,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
     if (!this.platform.isBrowser) {
       return;
     }
-    if ((window as any).echarts) {
+    if ((window as NzSafeAny).echarts) {
       this.load();
     } else {
       this.srv.libLoad();

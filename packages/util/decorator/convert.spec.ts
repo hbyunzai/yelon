@@ -16,15 +16,14 @@ describe('util.#toBoolean', () => {
     { value: [], ret: true }
   ].forEach(item => {
     const au = typeof item.defaultValue !== 'undefined';
-    it(`should coerce [${JSON.stringify(item.value)}] to [${JSON.stringify(item.ret)}]${
-      au ? ', because allow undefined' : ''
-    }`, () => {
-      if (au) {
-        expect(toBoolean(item.value, item.defaultValue)).toBe(item.ret);
-      } else {
-        expect(toBoolean(item.value)).toBe(item.ret);
-      }
-    });
+    it(`should coerce [${JSON.stringify(item.value)}] to [${JSON.stringify(item.ret)}]${au ? ', because allow undefined' : ''
+      }`, () => {
+        if (au) {
+          expect(toBoolean(item.value, item.defaultValue)).toBe(item.ret);
+        } else {
+          expect(toBoolean(item.value)).toBe(item.ret);
+        }
+      });
   });
 });
 
