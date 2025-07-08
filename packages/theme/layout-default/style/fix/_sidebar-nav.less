@@ -59,10 +59,18 @@
     }
   }
 
+  &__divider {
+    height: 1px;
+    margin: 4px 0;
+    overflow: hidden;
+    line-height: 0;
+    background-color: @yunzai-default-aside-nav-divider-bg;
+  }
+
   // Selected
   &__selected {
-    background-color: @yunzai-default-aside-nav-selected-bg;
     border-left-color: @yunzai-default-aside-nav-selected-text-color;
+    background-color: @yunzai-default-aside-nav-selected-bg;
 
     > @{sidebar-nav-prefix}__item-link {
       color: @yunzai-default-aside-nav-selected-text-color;
@@ -117,9 +125,9 @@
         position: absolute;
         width: 6px;
         height: 1.5px;
+        border-radius: 2px;
         background: #fff;
         background-image: linear-gradient(to right, @menu-item-color, @menu-item-color);
-        border-radius: 2px;
         transition: background-color 0.3s @ease-in-out, transform 0.3s @ease-in-out, top 0.3s @ease-in-out;
       }
 
@@ -182,9 +190,9 @@
     z-index: @zindex + 7;
     display: none;
     min-width: 160px;
-    background-color: @yunzai-default-aside-bg;
     border: 1px solid @yunzai-default-content-heading-border;
     border-radius: 4px;
+    background-color: @yunzai-default-aside-bg;
 
     @{sidebar-nav-prefix}__item {
       &-link {
