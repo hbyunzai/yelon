@@ -5,6 +5,7 @@ import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsMod
 import { By } from '@angular/platform-browser';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputDirective } from 'ng-zorro-antd/input';
 
@@ -71,7 +72,7 @@ describe('abc: error-collect', () => {
       `<form nz-form [formGroup]="validateForm"><error-collect #ec [freq]="freq"></error-collect></form>`
     );
     getPropertiesAndCreate();
-    const safeComp = context.comp as any;
+    const safeComp = context.comp as NzSafeAny;
     spyOn(safeComp, 'findParent');
     (dl.query(By.css('error-collect')).nativeElement as HTMLElement).click();
     expect(safeComp.findParent).not.toHaveBeenCalled();

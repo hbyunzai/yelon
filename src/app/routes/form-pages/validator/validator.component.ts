@@ -3,10 +3,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
 import { NuMonacoEditorComponent } from '@ng-util/monaco-editor';
+
 import { YelonFormModule, SFLayout, SFSchema, SFUISchema } from '@yelon/form';
 import { YUNZAI_I18N_TOKEN, I18nPipe, _HttpClient } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
-
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -14,6 +14,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSpaceCompactComponent } from 'ng-zorro-antd/space';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
@@ -63,6 +64,7 @@ export class DemoComponent {
     NzSelectModule,
     NzRadioModule,
     NzButtonModule,
+    NzSpaceCompactComponent,
     NzToolTipModule,
     NzIconModule,
     NzTabsModule,

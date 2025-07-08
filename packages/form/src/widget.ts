@@ -3,8 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs';
 
 import { LocaleData } from '@yelon/theme';
-
-import { NgClassType } from 'ng-zorro-antd/core/types';
+import type { NgClassType, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import type { ErrorData } from './errors';
 import type { SFValue } from './interface';
@@ -86,7 +85,7 @@ export abstract class Widget<T extends FormProperty, UIT extends SFUISchemaItem>
     di(this.ui, 'valueChanges', this.formProperty.path, this.formProperty);
   }
 
-  get value(): any {
+  get value(): NzSafeAny {
     return this.formProperty.value;
   }
 
@@ -106,22 +105,22 @@ export abstract class Widget<T extends FormProperty, UIT extends SFUISchemaItem>
 @Directive()
 export class ControlWidget extends Widget<FormProperty, SFUISchemaItem> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset(_value: SFValue): void {}
-  afterViewInit(): void {}
+  reset(_value: SFValue): void { }
+  afterViewInit(): void { }
 }
 
 @Directive()
 export class ControlUIWidget<UIT extends SFUISchemaItem> extends Widget<FormProperty, UIT> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset(_value: SFValue): void {}
-  afterViewInit(): void {}
+  reset(_value: SFValue): void { }
+  afterViewInit(): void { }
 }
 
 @Directive()
 export class ArrayLayoutWidget extends Widget<ArrayProperty, SFArrayWidgetSchema> implements AfterViewInit {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset(_value: SFValue): void {}
-  afterViewInit(): void {}
+  reset(_value: SFValue): void { }
+  afterViewInit(): void { }
 
   ngAfterViewInit(): void {
     this.formProperty.errorsChanges.pipe(takeUntil(this.sfItemComp!.destroy$)).subscribe(() => this.cd.detectChanges());
@@ -131,8 +130,8 @@ export class ArrayLayoutWidget extends Widget<ArrayProperty, SFArrayWidgetSchema
 @Directive()
 export class ObjectLayoutWidget extends Widget<ObjectProperty, SFObjectWidgetSchema> implements AfterViewInit {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset(_value: SFValue): void {}
-  afterViewInit(): void {}
+  reset(_value: SFValue): void { }
+  afterViewInit(): void { }
 
   ngAfterViewInit(): void {
     this.formProperty.errorsChanges.pipe(takeUntil(this.sfItemComp!.destroy$)).subscribe(() => this.cd.detectChanges());

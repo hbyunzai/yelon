@@ -15,7 +15,7 @@ export default tseslint.config(
       'dist/',
       'coverage/',
       'junit/',
-      'ng-alain/',
+      'ng-yunzai/',
       'schematics/**/files/**/*',
       'src/dist/**/*',
       'src/templates/**/*',
@@ -46,7 +46,7 @@ export default tseslint.config(
     processor: angular.processInlineTemplates,
     rules: {
       'prettier/prettier': ['error', {}],
-      '@angular-eslint/no-output-on-prefix':['off'],
+      '@angular-eslint/no-output-on-prefix': ['off'],
       '@angular-eslint/component-selector': [
         'off',
         {
@@ -161,7 +161,7 @@ export default tseslint.config(
               position: 'before'
             },
             {
-              pattern: '{ng-zorro-antd/**,@delon/**}',
+              pattern: '{ng-zorro-antd/**,@yelon/**}',
               group: 'internal',
               position: 'before'
             },
@@ -195,7 +195,8 @@ export default tseslint.config(
       'max-len': 'off',
       'no-empty': 'off',
       '@typescript-eslint/no-empty-function': 'off',
-      '@typescript-eslint/no-deprecated': 'warn'
+      '@typescript-eslint/no-deprecated': 'warn',
+      '@angular-eslint/prefer-inject': 'off'
     }
   },
   {

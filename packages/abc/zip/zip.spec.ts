@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Observable, of, throwError } from 'rxjs';
 
+import fs from 'file-saver';
+
 import { LazyService } from '@yelon/util/other';
-import * as fs from 'file-saver';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { ZipService } from './zip.service';
 
@@ -11,14 +14,14 @@ let isErrorRequest = false;
 let isClassZIP = false;
 let isErrorGenZip = false;
 class JSZip {
-  file(): void {}
+  file(): void { }
   generateAsync(): Promise<void> {
     return isErrorGenZip ? Promise.reject('') : Promise.resolve();
   }
 }
 class MockLazyService {
   load(): Promise<void> {
-    (window as any).JSZip = isClassZIP ? JSZip : DEFAULTMOCKJSZIP;
+    (window as NzSafeAny).JSZip = isClassZIP ? JSZip : DEFAULTMOCKJSZIP;
     return Promise.resolve();
   }
 }
@@ -27,7 +30,7 @@ const DEFAULTMOCKJSZIP = {
   loadAsync: () => {
     return Promise.resolve();
   },
-  write: () => {}
+  write: () => { }
 };
 
 class MockHttpClient {
@@ -115,7 +118,7 @@ describe('abc: zip', () => {
   });
 
   describe('#pushUrl', () => {
-    let zip: any;
+    let zip: NzSafeAny;
     beforeEach((done: () => void) => {
       isClassZIP = true;
       genModule();
@@ -152,7 +155,7 @@ describe('abc: zip', () => {
   });
 
   describe('#save', () => {
-    let zip: any;
+    let zip: NzSafeAny;
     beforeEach((done: () => void) => {
       isClassZIP = true;
       genModule();

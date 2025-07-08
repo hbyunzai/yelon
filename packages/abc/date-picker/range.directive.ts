@@ -12,16 +12,11 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import {
-  YunzaiConfigService,
-  YunzaiDateRangePickerShortcut,
-  YunzaiDateRangePickerShortcutItem
-} from '@yelon/util/config';
+import { YunzaiConfigService, YunzaiDateRangePickerShortcut, YunzaiDateRangePickerShortcutItem } from '@yelon/util/config';
 import { fixEndTimeOfRange, getTimeDistance } from '@yelon/util/date-time';
 import { assert, deepMergeKey } from '@yelon/util/other';
-
-import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
-import { DatePickerService } from 'ng-zorro-antd/date-picker/date-picker.service';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDatePickerComponent, NzRangePickerComponent, type ɵDatePickerService } from 'ng-zorro-antd/date-picker';
 
 import { RangePickerShortcutTplComponent } from './range-shortcut.component';
 
@@ -62,14 +57,14 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
   get shortcut(): YunzaiDateRangePickerShortcut | null {
     return this._shortcut;
   }
-  @Input({ required: true }) ngModelEnd: any;
-  @Output() readonly ngModelEndChange = new EventEmitter<any>();
+  @Input({ required: true }) ngModelEnd: NzSafeAny;
+  @Output() readonly ngModelEndChange = new EventEmitter<NzSafeAny>();
 
   private get dp(): NzDatePickerComponent {
     return this.nativeComp!.datePicker;
   }
 
-  private get srv(): DatePickerService {
+  private get srv(): ɵDatePickerService {
     return this.dp.datePickerService;
   }
 
@@ -126,7 +121,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
   }
 
   private cd(): void {
-    (this.dp as any).cdr.markForCheck();
+    (this.dp as NzSafeAny).cdr.markForCheck();
   }
 
   private overrideNative(): void {
@@ -159,7 +154,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
       return;
     }
     const { enabled, list } = this._shortcut;
-    let extraFooter: TemplateRef<any> | undefined;
+    let extraFooter: TemplateRef<NzSafeAny> | undefined;
     if (!this.nativeComp || !enabled) {
       extraFooter = undefined;
     } else {

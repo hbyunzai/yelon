@@ -78,7 +78,7 @@ export class AuthStorageStore implements IStore {
 ```diff
  const yunzaiProvides = [
    provideYunzaiConfig(yunzaiConfig)
-+  { provide: DA_STORE_TOKEN, useClass: AuthStorageStore },
++  { provide: YA_STORE_TOKEN, useClass: AuthStorageStore },
  ];
 ```
 

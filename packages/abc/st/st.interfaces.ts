@@ -115,8 +115,8 @@ export interface STRes<T extends STData = any> {
    * - `{ total: 'Total' }` => Total 会被当作 `total`
    */
   reName?:
-    | STResReNameType
-    | ((result: any, options: { pi: number; ps: number; total: number }) => { total: number; list: T[] });
+  | STResReNameType
+  | ((result: any, options: { pi: number; ps: number; total: number }) => { total: number; list: T[] });
   /**
    * 数据预处理
    */
@@ -259,26 +259,26 @@ export interface STColumn<T extends STData = any> {
    * - `number` 数字且居右(若 `className` 存在则优先)
    * - `currency` 货币且居右(若 `className` 存在则优先)
    * - `date` 日期格式且居中(若 `className` 存在则优先)，使用 `dateFormat` 自定义格式
-   * - `yn` 将`boolean`类型徽章化 [document](https://ng-alain.com/docs/data-render#yn)
-   * - `cell` 可指定 `click`，使用 `cell` 组件渲染 [document](https://ng-alain.com/components/cell)
+   * - `yn` 将`boolean`类型徽章化 [document](https://ng.yunzainfo.com/docs/data-render#yn)
+   * - `cell` 可指定 `click`，使用 `cell` 组件渲染 [document](https://ng.yunzainfo.com/components/cell)
    * - `widget` 使用自定义小部件动态创建
    */
   type?:
-    | ''
-    | 'checkbox'
-    | 'link'
-    | 'badge'
-    | 'tag'
-    | 'enum'
-    | 'radio'
-    | 'img'
-    | 'currency'
-    | 'number'
-    | 'date'
-    | 'yn'
-    | 'no'
-    | 'cell'
-    | 'widget';
+  | ''
+  | 'checkbox'
+  | 'link'
+  | 'badge'
+  | 'tag'
+  | 'enum'
+  | 'radio'
+  | 'img'
+  | 'currency'
+  | 'number'
+  | 'date'
+  | 'yn'
+  | 'no'
+  | 'cell'
+  | 'widget';
 
   /**
    * `cell` component options
@@ -343,9 +343,9 @@ export interface STColumn<T extends STData = any> {
    */
   format?: (item: T, col: STColumn, index: number) => string;
   /**
-   * Safe rendering type, default: `safeHtml`, Support [global config](https://ng-alain.com/docs/global-config)
+   * Safe rendering type, default: `safeHtml`, Support [global config](https://ng.yunzainfo.com/docs/global-config)
    *
-   * 安全渲染方式，默认：`safeHtml`，支持[全局配置](https://ng-alain.com/docs/global-config/zh)
+   * 安全渲染方式，默认：`safeHtml`，支持[全局配置](https://ng.yunzainfo.com/docs/global-config/zh)
    */
   safeType?: STColumnSafeType;
   /**
@@ -375,7 +375,7 @@ export interface STColumn<T extends STData = any> {
    */
   dateFormat?: string;
   /**
-   * Currency format option, `type=currency` is valid, pls refer of [CurrencyService.commas](https://ng-alain.com/util/format/#commas).
+   * Currency format option, `type=currency` is valid, pls refer of [CurrencyService.commas](https://ng.yunzainfo.com/util/format/#commas).
    *
    * 货币格式选项，`type=currency` 有效。
    */
@@ -389,7 +389,7 @@ export interface STColumn<T extends STData = any> {
    */
   exported?: boolean;
   /**
-   * 权限，等同 [ACLCanType](https://ng-alain.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
   /** 当不存在数据时以默认值替代 */
@@ -432,7 +432,7 @@ export interface STColumn<T extends STData = any> {
 
   widget?: STWidgetColumn<T>;
 
-  enum?: { [key: string]: string; [key: number]: string };
+  enum?: { [key: string]: string;[key: number]: string };
 
   /**
    * 分组表头
@@ -606,7 +606,7 @@ export interface STColumnFilter<T extends STData = any> {
   reName?: (list: STColumnFilterMenu[], col: STColumn) => Record<string, unknown>;
 
   /**
-   * 自定义过滤器，请参考 [Custom Data](https://ng-alain.com/components/st/en?#components-st-custom-data) 示例。
+   * 自定义过滤器，请参考 [Custom Data](https://ng.yunzainfo.com/components/st/en?#components-st-custom-data) 示例。
    */
   custom?: TemplateRef<{ $implicit: STColumnFilter; col: STColumn; handle: STColumnFilterHandle }>;
 
@@ -677,7 +677,7 @@ export interface STColumnFilterMenu {
    */
   checked?: boolean;
   /**
-   * 权限，等同 [ACLCanType](https://ng-alain.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
 
@@ -699,7 +699,7 @@ export interface STColumnSelection<T extends STData = any> {
 
 export interface STcolumnCurrency {
   /**
-   * See [CurrencyService.commas](https://ng-alain.com/util/format/en#format)
+   * See [CurrencyService.commas](https://ng.yunzainfo.com/util/format/en#format)
    */
   format?: CurrencyFormatOptions;
 }
@@ -795,7 +795,7 @@ export interface STColumnButton<T extends STData = any> {
    */
   children?: Array<STColumnButton<T>>;
   /**
-   * 权限，等同 [ACLCanType](https://ng-alain.com/acl/getting-started/#ACLCanType) 参数值
+   * 权限，等同 [ACLCanType](https://ng.yunzainfo.com/acl/getting-started/#ACLCanType) 参数值
    */
   acl?: ACLCanType;
   /**
@@ -929,18 +929,18 @@ export interface STColumnButtonPop<T extends STData = any> {
    * The position of the popover relative to the target, default: `top`
    */
   placement?:
-    | 'top'
-    | 'left'
-    | 'right'
-    | 'bottom'
-    | 'topLeft'
-    | 'topRight'
-    | 'bottomLeft'
-    | 'bottomRight'
-    | 'leftTop'
-    | 'leftBottom'
-    | 'rightTop'
-    | 'rightBottom';
+  | 'top'
+  | 'left'
+  | 'right'
+  | 'bottom'
+  | 'topLeft'
+  | 'topRight'
+  | 'bottomLeft'
+  | 'bottomRight'
+  | 'leftTop'
+  | 'leftBottom'
+  | 'rightTop'
+  | 'rightBottom';
 
   /**
    * Class name of the popover card
@@ -1101,18 +1101,18 @@ export interface STColumnTagValue {
    * - 色值：#f50,#ff0
    */
   color?:
-    | 'geekblue'
-    | 'blue'
-    | 'purple'
-    | 'success'
-    | 'red'
-    | 'volcano'
-    | 'orange'
-    | 'gold'
-    | 'lime'
-    | 'green'
-    | 'cyan'
-    | string;
+  | 'geekblue'
+  | 'blue'
+  | 'purple'
+  | 'success'
+  | 'red'
+  | 'volcano'
+  | 'orange'
+  | 'gold'
+  | 'lime'
+  | 'green'
+  | 'cyan'
+  | string;
 
   /**
    * Text popup tip

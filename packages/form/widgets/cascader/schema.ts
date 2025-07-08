@@ -1,12 +1,11 @@
 import { SFUISchemaItem } from '@yelon/form';
-
 import type {
   NzCascaderExpandTrigger,
   NzCascaderOption,
   NzCascaderPlacement,
   NzShowSearchOptions
 } from 'ng-zorro-antd/cascader';
-import { NgStyleInterface } from 'ng-zorro-antd/core/types';
+import type { NgStyleInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import type { CascaderWidget } from './widget';
 
@@ -35,7 +34,7 @@ export interface SFCascaderWidgetSchema extends SFUISchemaItem {
   /**
    * 清空时默认值，默认：`undefined`
    */
-  clearValue?: any;
+  clearValue?: NzSafeAny;
 
   /**
    * 清除按钮的标题，默认：`清除`
@@ -120,7 +119,7 @@ export interface SFCascaderWidgetSchema extends SFUISchemaItem {
   /**
    * 选项值变更事件
    */
-  change?: (values: any[] | null) => void;
+  change?: (values: NzSafeAny[] | null) => void;
 
   /**
    * 选项变更事件

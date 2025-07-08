@@ -1,8 +1,7 @@
 import { ACLService } from '@yelon/acl';
 import { YunzaiI18NService, YunzaiI18NServiceFake } from '@yelon/theme';
 import { deepGet } from '@yelon/util/other';
-
-import { NgClassInterface } from 'ng-zorro-antd/core/types';
+import type { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STColumnSource, STColumnSourceProcessOptions } from '../st-column-source';
 import { STRowSource } from '../st-row.directive';
@@ -45,7 +44,7 @@ describe('st: column-source', () => {
 
   function genModule(other: { acl?: boolean; i18n?: boolean; cog?: any }): void {
     aclSrv = other.acl ? new ACLService({ merge: (_: any, def: any) => def } as any) : null;
-    i18nSrv = other.i18n ? new MockI18NServiceFake({ merge: () => {} } as any) : null;
+    i18nSrv = other.i18n ? new MockI18NServiceFake({ merge: () => { } } as NzSafeAny) : null;
     rowSrv = new STRowSource();
     stWidgetRegistry = new STWidgetRegistry();
     srv = new STColumnSource(new MockDomSanitizer() as any, rowSrv, aclSrv!, i18nSrv!, stWidgetRegistry);
@@ -411,7 +410,7 @@ describe('st: column-source', () => {
       });
       describe('#type', () => {
         describe('with keyword', () => {
-          it('should be ignore specify menus values', () => {
+          it('should be ingore specify menus values', () => {
             const res = srv.process([{ title: '', filter: { type: 'keyword' } }], options).columns[0].filter;
             expect(res!.menus!.length).toBe(1);
           });
@@ -581,7 +580,7 @@ describe('st: column-source', () => {
         expect(rowSrv.getTitle).toHaveBeenCalled();
       });
       it('should be template ref', () => {
-        const mockTemplateRef: any = {};
+        const mockTemplateRef: NzSafeAny = {};
         expect(rowSrv.getRow).not.toHaveBeenCalled();
         expect(rowSrv.getTitle).not.toHaveBeenCalled();
         const columns = [{ title: '', render: mockTemplateRef, renderTitle: mockTemplateRef }] as _STColumn[];
@@ -624,7 +623,7 @@ describe('st: column-source', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [{ index: 'id' }] }], options);
         expect(res.headers.length).toBe(2);
       });
-      it('should be ignored grouping columns when children when is empty', () => {
+      it('should be ingored grouping columns when children when is empty', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [] }], options);
         expect(res.headers.length).toBe(1);
       });
@@ -663,7 +662,7 @@ describe('st: column-source', () => {
             {
               title: '',
               index: 'id',
-              selections: [{ text: '1', select: () => {} }]
+              selections: [{ text: '1', select: () => { } }]
             }
           ],
           1,
@@ -674,7 +673,7 @@ describe('st: column-source', () => {
             {
               title: '',
               index: 'id',
-              selections: [{ text: '1', select: () => {}, acl: 'admin' }]
+              selections: [{ text: '1', select: () => { }, acl: 'admin' }]
             }
           ],
           0,
