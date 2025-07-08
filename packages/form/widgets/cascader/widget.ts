@@ -46,7 +46,7 @@ import type { SFCascaderWidgetSchema } from './schema';
       (nzSelectionChange)="_selectionChange($event)"
     />
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NzCascaderModule]
 })

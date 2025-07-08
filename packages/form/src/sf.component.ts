@@ -72,7 +72,7 @@ export function useFactory(
     '[class.sf__no-colon]': `noColon`,
     '[class.sf__compact]': `compact`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/prefer-standalone

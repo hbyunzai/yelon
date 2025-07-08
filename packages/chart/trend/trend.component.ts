@@ -17,7 +17,7 @@ import { NzIconDirective } from 'ng-zorro-antd/icon';
     '[class.trend__reverse]': 'colorful && reverseColor',
     '[attr.data-flag]': `flag`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzIconDirective]

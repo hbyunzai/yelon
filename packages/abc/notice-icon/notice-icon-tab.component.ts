@@ -13,7 +13,7 @@ import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
   selector: 'notice-icon-tab',
   exportAs: 'noticeIconTab',
   templateUrl: './notice-icon-tab.component.html',
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [
     NgTemplateOutlet,

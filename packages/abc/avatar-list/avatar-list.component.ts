@@ -32,7 +32,7 @@ import { AvatarListItemComponent } from './avatar-list-item.component';
     '[class.avatar-list]': 'true',
     '[class.avatar-list-rtl]': `dir === 'rtl'`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzAvatarComponent, NzTooltipDirective]

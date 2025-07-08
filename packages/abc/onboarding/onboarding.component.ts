@@ -39,7 +39,7 @@ interface OnboardingLightData {
     '[class.onboarding-rtl]': `dir === 'rtl'`,
     '[attr.data-onboarding-active]': `active`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzPopoverDirective, NzStringTemplateOutletDirective, NzButtonComponent, NzNoAnimationDirective]
@@ -107,7 +107,7 @@ export class OnboardingComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     // Waiting https://github.com/NG-ZORRO/ng-zorro-antd/issues/6491
-    this.popover.component!.onClickOutside = () => {};
+    this.popover.component!.onClickOutside = () => { };
   }
 
   private scroll(pos: OnboardingLightData): void {

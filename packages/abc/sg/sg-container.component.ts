@@ -13,7 +13,7 @@ import { YunzaiConfigService } from '@yelon/util/config';
     '[class.ant-row]': 'true',
     '[class.sg__wrap]': 'true'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })

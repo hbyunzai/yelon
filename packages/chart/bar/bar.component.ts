@@ -46,7 +46,7 @@ export interface G2BarClickItem {
   host: {
     '[style.height.px]': 'height'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzStringTemplateOutletDirective, NzSkeletonComponent]

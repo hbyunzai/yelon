@@ -48,7 +48,7 @@ import type { SFAutoCompleteWidgetSchema } from './schema';
       }
     </nz-autocomplete>
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [AsyncPipe, FormsModule, YelonFormModule, NzInputModule, NzAutocompleteModule]
 })

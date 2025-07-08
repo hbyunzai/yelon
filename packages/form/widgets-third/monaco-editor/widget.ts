@@ -30,7 +30,7 @@ import type { MonacoEditorWidgetSchema } from './schema';
       />
     </sf-item-wrap>
   `,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NuMonacoEditorComponent]
 })

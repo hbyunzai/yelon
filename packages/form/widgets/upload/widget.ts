@@ -67,7 +67,7 @@ import type { SFUploadWidgetSchema } from './schema';
       }
     </nz-upload>
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NzUploadModule, NzIconModule, NzButtonModule]
 })

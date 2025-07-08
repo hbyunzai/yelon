@@ -25,7 +25,7 @@ const prefixCls = `sg`;
     '[style.padding-left.px]': 'paddingValue',
     '[style.padding-right.px]': 'paddingValue'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })

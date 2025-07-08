@@ -24,7 +24,7 @@ import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
   host: {
     '[class.sv__title]': 'true'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
@@ -73,7 +73,7 @@ export class SVTitleComponent implements OnInit {
     '[class.sv__bordered]': `bordered`,
     '[class.clearfix]': `true`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [SVTitleComponent, NzStringTemplateOutletDirective]

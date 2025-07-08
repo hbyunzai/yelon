@@ -45,7 +45,7 @@ import {
     '[style.width]': `_width`,
     '[style.height]': `_height`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzSkeletonComponent]

@@ -34,7 +34,7 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
     </div>
   `,
   host: { '[class.g2-mini-progress]': 'true' },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzTooltipDirective]

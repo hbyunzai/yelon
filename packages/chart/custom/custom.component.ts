@@ -26,7 +26,7 @@ import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
   host: {
     '[style.height.px]': 'height'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzSkeletonComponent]

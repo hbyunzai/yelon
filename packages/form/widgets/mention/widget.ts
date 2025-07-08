@@ -62,7 +62,7 @@ import type { SFMentionWidgetSchema } from './schema';
       }
     </nz-mention>
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NzInputModule, NzMentionModule]
 })

@@ -27,7 +27,7 @@ import { SEErrorRefresh, SELayout } from './se.types';
   host: {
     '[class.se__title]': 'true'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
@@ -74,7 +74,7 @@ export class SETitleComponent implements OnInit {
     '[style.margin-left.px]': `margin`,
     '[style.margin-right.px]': `margin`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [SETitleComponent, NzStringTemplateOutletDirective]

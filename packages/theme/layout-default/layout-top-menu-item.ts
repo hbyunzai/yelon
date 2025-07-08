@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, booleanAt
     '[class.yunzai-default__top-menu-item-selected]': `selected`,
     '[class.yunzai-default__top-menu-item-disabled]': `disabled`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/prefer-standalone

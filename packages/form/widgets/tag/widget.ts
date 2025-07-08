@@ -46,7 +46,7 @@ import type { SFTagWidgetSchema } from './schema';
       </nz-tag>
     }
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, NgTemplateOutlet, YelonFormModule, NzTagModule, NzIconModule]
 })

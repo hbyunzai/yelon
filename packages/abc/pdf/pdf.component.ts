@@ -64,7 +64,7 @@ const BORDER_WIDTH = 9;
   host: {
     '[class.d-block]': `true`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzSkeletonComponent]

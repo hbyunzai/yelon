@@ -20,9 +20,9 @@ import { ControlUIWidget } from '../../widget';
       />
     </sf-item-wrap>
   `,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false
 })
-export class CustomWidget extends ControlUIWidget<SFCustomWidgetSchema> {}
+export class CustomWidget extends ControlUIWidget<SFCustomWidgetSchema> { }

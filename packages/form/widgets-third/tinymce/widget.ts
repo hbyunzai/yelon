@@ -28,7 +28,7 @@ import type { TinymceWidgetSchema } from './schema';
       />
     </sf-item-wrap>
   `,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, TinymceComponent]
 })

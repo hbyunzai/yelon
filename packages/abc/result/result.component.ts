@@ -26,7 +26,7 @@ import { NzIconDirective } from 'ng-zorro-antd/icon';
     '[class.result]': 'true',
     '[class.result-rtl]': `dir === 'rtl'`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzIconDirective, NzStringTemplateOutletDirective]

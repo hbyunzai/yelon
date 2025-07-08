@@ -49,7 +49,7 @@ export interface G2PieRatio {
     '[class.g2-pie__legend-block]': 'block',
     '[class.g2-pie__mini]': 'isPercent'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzSkeletonComponent, NzStringTemplateOutletDirective, NzDividerComponent]

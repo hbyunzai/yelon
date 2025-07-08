@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   selector: 'avatar-list-item, [avatar-list-item]',
   exportAs: 'avatarListItem',
   template: `<ng-content />`,
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })

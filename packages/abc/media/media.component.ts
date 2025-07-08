@@ -34,7 +34,7 @@ export type MediaType = 'html5' | 'youtube' | 'video' | 'audio';
   host: {
     '[style.display]': `'block'`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })

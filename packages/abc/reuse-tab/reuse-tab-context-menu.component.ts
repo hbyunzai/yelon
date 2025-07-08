@@ -28,7 +28,7 @@ import {
     '(document:click)': 'closeMenu($event)',
     '(document:contextmenu)': 'closeMenu($event)'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzMenuDirective, NzMenuItemComponent]
