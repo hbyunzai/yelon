@@ -52,3 +52,4 @@ module: import { NoticeIconModule } from '@yelon/abc/notice-icon';
 |----|----|----|-----|
 | `[title]` | 标题 | `string` | - |
 | `[item]` | 数据项 | `NoticeItem` | - |
+| `[event]` | 点击事件 | `Event` | - |
