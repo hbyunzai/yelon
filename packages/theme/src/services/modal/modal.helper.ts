@@ -1,10 +1,11 @@
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { DOCUMENT } from '@angular/common';
 import { Injectable, TemplateRef, Type, inject } from '@angular/core';
+import { SIGNAL, SignalNode } from '@angular/core/primitives/signals';
 import { Observable, Observer, delay, filter, take, tap } from 'rxjs';
 
 import { deepMerge } from '@yelon/util/other';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { ModalOptions, NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 const CLS_DRAG = 'MODAL-DRAG';
@@ -81,10 +82,10 @@ export class ModalHelper {
    * this.nzModalRef.destroy();
    */
   create(
-    comp?: TemplateRef<any> | Type<any> | 'confirm' | 'info' | 'success' | 'error' | 'warning',
-    params?: any | ModalHelperOptions | null,
+    comp?: TemplateRef<NzSafeAny> | Type<NzSafeAny> | 'confirm' | 'info' | 'success' | 'error' | 'warning',
+    params?: NzSafeAny | ModalHelperOptions | null,
     options?: ModalHelperOptions
-  ): Observable<any> {
+  ): Observable<NzSafeAny> {
     const isBuildIn = typeof comp === 'string';
     options = deepMerge(
       {
@@ -94,7 +95,7 @@ export class ModalHelper {
       },
       isBuildIn && arguments.length === 2 ? params : options
     );
-    return new Observable((observer: Observer<any>) => {
+    return new Observable((observer: Observer<NzSafeAny>) => {
       const { size, includeTabs, modalOptions, drag, useNzData, focus } = options as ModalHelperOptions;
       let cls: string[] = [];
       let width = '';
@@ -125,7 +126,7 @@ export class ModalHelper {
         cls.push(CLS_DRAG, dragWrapCls);
       }
       const mth = isBuildIn ? this.srv[comp] : this.srv.create;
-      const subject: NzModalRef<any, any> = mth.call(this.srv, {
+      const subject: NzModalRef<NzSafeAny, NzSafeAny> = mth.call(this.srv, {
         nzWrapClassName: cls.join(' '),
         nzContent: isBuildIn ? undefined : comp,
         nzWidth: width ? width : undefined,
@@ -136,7 +137,15 @@ export class ModalHelper {
       } as ModalOptions);
       // 保留 nzComponentParams 原有风格，但依然可以通过 @Inject(NZ_MODAL_DATA) 获取
       if (subject.componentInstance != null && useNzData !== true) {
-        Object.assign(subject.componentInstance, params);
+        Object.entries(params as object).forEach(([key, value]) => {
+          const t = subject.componentInstance as any;
+          const s = t[key]?.[SIGNAL] as SignalNode<any>;
+          if (s != null) {
+            s.value = value;
+          } else {
+            t[key] = value;
+          }
+        });
       }
       subject.afterOpen
         .pipe(
@@ -166,7 +175,7 @@ export class ModalHelper {
             el.dataset.focused = focus;
           }
         });
-      subject.afterClose.pipe(take(1)).subscribe((res: any) => {
+      subject.afterClose.pipe(take(1)).subscribe((res: NzSafeAny) => {
         if (options!.exact === true) {
           if (res != null) {
             observer.next(res);
@@ -196,7 +205,11 @@ export class ModalHelper {
    * // 关闭
    * this.nzModalRef.destroy();
    */
-  createStatic(comp: TemplateRef<any> | Type<any>, params?: any, options?: ModalHelperOptions): Observable<any> {
+  createStatic(
+    comp: TemplateRef<NzSafeAny> | Type<NzSafeAny>,
+    params?: NzSafeAny,
+    options?: ModalHelperOptions
+  ): Observable<NzSafeAny> {
     const modalOptions = {
       nzMaskClosable: false,
       ...(options && options.modalOptions)
