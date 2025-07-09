@@ -54,11 +54,12 @@ export interface YunzaiI18NService {
 
 export const YUNZAI_I18N_TOKEN = new InjectionToken<YunzaiI18NService>('yunzaiI18nToken', {
   providedIn: 'root',
-  factory: () => new YunzaiI18NServiceFake(inject(YunzaiConfigService))
+  factory: () => new YunzaiI18NServiceFake()
 });
 
 @Injectable()
 export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
+  protected readonly cogSrv = inject(YunzaiConfigService);
   private cog: YunzaiThemeI18nConfig;
   protected _change$ = new BehaviorSubject<string | null>(null);
   protected _currentLang: string = '';
@@ -77,8 +78,8 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
     return this._data;
   }
 
-  constructor(cogSrv: YunzaiConfigService) {
-    this.cog = cogSrv.merge('themeI18n', {
+  constructor() {
+    this.cog = this.cogSrv.merge('themeI18n', {
       interpolation: ['{{', '}}']
     })!;
   }
@@ -128,13 +129,12 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
     if (typeof params === 'object') {
       const interpolation = this.cog.interpolation!;
       const objParams = params as Record<string, unknown>;
-      Object.keys(objParams).forEach(
-        key =>
-          (content = content.replace(
-            new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'),
-            `${objParams[key]}`
-          ))
-      );
+      Object.keys(objParams).forEach(key => {
+        content = content.replace(
+          new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'),
+          `${objParams[key]}`
+        );
+      });
     }
 
     (Array.isArray(params) ? params : [params]).forEach(

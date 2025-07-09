@@ -2,8 +2,6 @@ import { Platform } from '@angular/cdk/platform';
 import { Injectable, inject } from '@angular/core';
 
 import { YunzaiI18nBaseService, YelonLocaleService, en_US as yelonEnUS, zh_CN as yelonZhCn } from '@yelon/theme';
-import { YunzaiConfigService } from '@yelon/util/config';
-
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 
@@ -23,8 +21,8 @@ export class I18NService extends YunzaiI18nBaseService {
     { code: 'zh-CN', text: '中文' }
   ];
 
-  constructor(cogSrv: YunzaiConfigService) {
-    super(cogSrv);
+  constructor() {
+    super();
     // from browser
     const lang = (this.getBrowserLang() || this.defaultLang) as LangType;
     this.use(lang, {}, false);

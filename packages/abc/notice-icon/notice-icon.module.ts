@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { YelonLocaleModule } from '@yelon/theme';
-
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzOutletModule } from 'ng-zorro-antd/core/outlet';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';

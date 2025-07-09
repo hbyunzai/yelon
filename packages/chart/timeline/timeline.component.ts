@@ -12,10 +12,10 @@ import {
 } from '@angular/core';
 
 import type { Chart, Event, Types } from '@antv/g2';
-import { G2BaseComponent, G2Time } from '@yelon/chart/core';
-import { toDate } from '@yelon/util/date-time';
 import { format } from 'date-fns';
 
+import { G2BaseComponent, G2Time } from '@yelon/chart/core';
+import { toDate } from '@yelon/util/date-time';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
@@ -74,7 +74,7 @@ export interface G2TimelineClickItem {
     }
     <div #container></div>
   `,
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzStringTemplateOutletDirective, NzSkeletonComponent]

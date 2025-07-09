@@ -2,7 +2,6 @@ import { Injectable, Injector, OnDestroy, inject } from '@angular/core';
 import {
   ActivatedRoute,
   ActivatedRouteSnapshot,
-  ExtraOptions,
   NavigationEnd,
   NavigationStart,
   Router,
@@ -12,6 +11,7 @@ import { BehaviorSubject, Observable, take, timer, Unsubscribable } from 'rxjs';
 
 import { Menu, MenuService } from '@yelon/theme';
 import { ScrollService } from '@yelon/util/browser';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { REUSE_TAB_CACHED_MANAGER } from './reuse-tab.cache';
 import {
@@ -578,7 +578,7 @@ export class ReuseTabService implements OnDestroy {
   }
 
   private get isDisabledInRouter(): boolean {
-    const routerConfig = this.injector.get<ExtraOptions>(ROUTER_CONFIGURATION, {} as any);
+    const routerConfig = this.injector.get(ROUTER_CONFIGURATION, {} as NzSafeAny);
     return routerConfig.scrollPositionRestoration === 'disabled';
   }
 

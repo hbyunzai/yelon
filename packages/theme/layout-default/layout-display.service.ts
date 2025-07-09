@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
@@ -13,7 +13,9 @@ export class LayoutDisplayService implements OnDestroy {
   private displayReuseTab = new BehaviorSubject<boolean>(true);
   private $destroy = new Subject<void>();
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+
+  constructor() {
     this.activatedRoute.queryParams.pipe(takeUntil(this.$destroy)).subscribe(params => {
       if (params['displayNav']) {
         try {

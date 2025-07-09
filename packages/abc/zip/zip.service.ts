@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone, inject } from '@angular/core';
 
+import { saveAs } from 'file-saver';
+import type jsZipType from 'jszip';
+
 import { YunzaiConfigService, YunzaiZipConfig } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyResult, LazyService } from '@yelon/util/other';
-import { saveAs } from 'file-saver';
-import type jsZipType from 'jszip';
 
 import { ZipSaveOptions } from './zip.types';
 
@@ -16,11 +17,12 @@ export class ZipService {
   private readonly http = inject(HttpClient);
   private readonly lazy = inject(LazyService);
   private readonly ngZone = inject(NgZone);
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   private cog: YunzaiZipConfig;
 
-  constructor(configSrv: YunzaiConfigService) {
-    this.cog = configSrv.merge('zip', {
+  constructor() {
+    this.cog = this.cogSrv.merge('zip', {
       url: 'https://cdn.jsdelivr.net/npm/jszip@3/dist/jszip.min.js',
       utils: []
     })!;

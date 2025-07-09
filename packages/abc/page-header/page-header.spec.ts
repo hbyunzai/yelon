@@ -14,7 +14,6 @@ import {
   SettingsService,
   TitleService
 } from '@yelon/theme';
-
 import { NzAffixComponent } from 'ng-zorro-antd/affix';
 
 import { PageHeaderComponent } from './page-header.component';
@@ -236,7 +235,7 @@ describe('abc: page-header', () => {
       let i18n: YunzaiI18NService;
       beforeEach(() => {
         TestBed.overrideProvider(YUNZAI_I18N_TOKEN, {
-          useFactory: () => new MockI18NServiceFake({ merge: () => {} } as any)
+          useFactory: () => new MockI18NServiceFake()
         });
         ({ fixture, dl, context } = createTestContext(TestI18nComponent));
         i18n = TestBed.inject(YUNZAI_I18N_TOKEN);

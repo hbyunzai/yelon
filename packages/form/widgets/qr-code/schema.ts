@@ -1,7 +1,5 @@
 import type { SFUISchemaItem } from '@yelon/form';
 
-import type { ERROR_LEVEL_MAP } from 'ng-zorro-antd/qr-code/qrcode';
-
 export interface SFQrCodeWidgetSchema extends SFUISchemaItem {
   /** QR code Padding */
   padding?: number;
@@ -20,7 +18,7 @@ export interface SFQrCodeWidgetSchema extends SFUISchemaItem {
   /** QR code status */
   status?: 'active' | 'expired' | 'loading';
   /** Error Code Level */
-  level?: keyof typeof ERROR_LEVEL_MAP;
+  level?: 'L' | 'M' | 'Q' | 'H';
   /** Callback */
   refresh?: (qr: string) => void;
 }

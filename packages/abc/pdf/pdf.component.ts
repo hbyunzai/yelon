@@ -31,7 +31,6 @@ import { fromEvent, timer, debounceTime, filter } from 'rxjs';
 import { YunzaiConfigService } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyService } from '@yelon/util/other';
-
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 import { PDF_DEFULAT_CONFIG } from './pdf.config';
@@ -64,7 +63,7 @@ const BORDER_WIDTH = 9;
   host: {
     '[class.d-block]': `true`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzSkeletonComponent]
@@ -77,6 +76,7 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly ngZone = inject(NgZone);
   private readonly destroy$ = inject(DestroyRef);
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   inited = false;
   private lib: string = '';
@@ -179,8 +179,8 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
     return this._el.querySelector('.pdf-container') as HTMLElement;
   }
 
-  constructor(configSrv: YunzaiConfigService) {
-    const cog = configSrv.merge('pdf', PDF_DEFULAT_CONFIG)!;
+  constructor() {
+    const cog = this.cogSrv.merge('pdf', PDF_DEFULAT_CONFIG)!;
     Object.assign(this, cog);
 
     const lib = cog.lib!;

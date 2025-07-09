@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData, toBool } from '@yelon/form';
-
 import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
 
 import type { SFCascaderWidgetSchema } from './schema';
@@ -46,7 +45,7 @@ import type { SFCascaderWidgetSchema } from './schema';
       (nzSelectionChange)="_selectionChange($event)"
     />
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NzCascaderModule]
 })

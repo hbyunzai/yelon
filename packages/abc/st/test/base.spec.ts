@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 import { dispatchDropDown } from '@yelon/testing';
 import { YUNZAI_I18N_TOKEN, YelonLocaleModule } from '@yelon/theme';
 import { deepCopy, deepGet } from '@yelon/util/other';
-
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPaginationComponent } from 'ng-zorro-antd/pagination';
@@ -426,6 +425,7 @@ export class PageObject<T extends TestComponent> {
       [contextmenu]="contextmenu"
       [customRequest]="customRequest"
       [drag]="drag"
+      [delay]="delay"
       (change)="change($event)"
       (error)="error($event)"
     />
@@ -470,6 +470,8 @@ export class TestComponent {
   ];
 
   drag?: STDragOptions | boolean = false;
+
+  delay = false;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   error(_: any): void {}

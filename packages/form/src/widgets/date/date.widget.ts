@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { toDate } from '@yelon/util/date-time';
 import { format } from 'date-fns';
+
+import { toDate } from '@yelon/util/date-time';
 
 import { SFDateWidgetSchema } from './schema';
 import { SFValue } from '../../interface';
@@ -138,7 +139,7 @@ import { ControlUIWidget } from '../../widget';
       }
     }
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false

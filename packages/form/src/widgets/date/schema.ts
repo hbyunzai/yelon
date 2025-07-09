@@ -10,7 +10,7 @@ export interface SFDateWidgetSchema extends SFUISchemaItem {
 
   size?: NzDatePickerSizeType;
 
-  placeholder?: string;
+  placeholder?: string | string[];
 
   /**
    * Inline mode of the date picker

@@ -1,14 +1,13 @@
 import { Platform } from '@angular/cdk/platform';
 import { registerLocaleData } from '@angular/common';
 import ngEn from '@angular/common/locales/en';
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { Observable, catchError, of, Subject, takeUntil } from 'rxjs';
 
-import { ITokenService, YA_SERVICE_TOKEN } from '@yelon/auth';
-import { YunzaiConfigService } from '@yelon/util/config';
 import { enUS as dfEn } from 'date-fns/locale';
 import { map } from 'rxjs/operators';
 
+import { ITokenService, YA_SERVICE_TOKEN } from '@yelon/auth';
 import { NzI18nService, en_US as zorroEnUS } from 'ng-zorro-antd/i18n';
 
 import { YunzaiI18nBaseService } from './i18n';
@@ -32,17 +31,14 @@ export interface YunzaiI18NType {
 export class YunzaiHttpI18NService extends YunzaiI18nBaseService implements OnDestroy {
   protected override _defaultLang = DEFAULT;
   private $destroy = new Subject();
-
-  constructor(
-    private http: _HttpClient,
-    private settings: SettingsService,
-    private nzI18nService: NzI18nService,
-    private yelonLocaleService: YelonLocaleService,
-    private platform: Platform,
-    @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService,
-    cogSrv: YunzaiConfigService
-  ) {
-    super(cogSrv);
+  private http: _HttpClient = inject(_HttpClient);
+  private settings: SettingsService = inject(SettingsService);
+  private nzI18nService: NzI18nService = inject(NzI18nService);
+  private yelonLocaleService: YelonLocaleService = inject(YelonLocaleService);
+  private platform: Platform = inject(Platform);
+  private tokenService: ITokenService = inject(YA_SERVICE_TOKEN);
+  constructor() {
+    super();
     if (this.tokenService.get()?.access_token) {
       const defaultLang = this.getDefaultLang();
       this.getLangs()

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
@@ -6,7 +6,7 @@ import { Message } from './interface';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-  constructor(private notifyService: NzNotificationService) {}
+  private notifyService: NzNotificationService = inject(NzNotificationService);
 
   notify(message: Message): void {
     this.notifyService.create(message.type!, message.title!, message.content!);

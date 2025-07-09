@@ -4,7 +4,6 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { Observable, of, debounceTime, map, mergeMap, startWith, takeUntil } from 'rxjs';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getCopyEnum, getEnum, toBool } from '@yelon/form';
-
 import { NzAutocompleteModule, NzAutocompleteOptionComponent } from 'ng-zorro-antd/auto-complete';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
@@ -48,7 +47,7 @@ import type { SFAutoCompleteWidgetSchema } from './schema';
       }
     </nz-autocomplete>
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [AsyncPipe, FormsModule, YelonFormModule, NzInputModule, NzAutocompleteModule]
 })

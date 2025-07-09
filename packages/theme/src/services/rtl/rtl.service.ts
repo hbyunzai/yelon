@@ -5,7 +5,6 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, filter, map } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
-
 import { NzConfigService } from 'ng-zorro-antd/core/config';
 
 import { SettingsService } from '../settings/settings.service';
@@ -41,7 +40,7 @@ export class RTLService {
     this.updateHtml();
     // Should be wait inited
     Promise.resolve().then(() => {
-      (this.d as any).value = value;
+      this.d.valueSignal.set(value);
       this.d.change.emit(value);
       this.srv.setLayout(RTL_DIRECTION, value);
     });

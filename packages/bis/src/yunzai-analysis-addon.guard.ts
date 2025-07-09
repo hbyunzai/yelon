@@ -1,4 +1,4 @@
-import { Inject, inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivateChildFn, CanActivateFn } from '@angular/router';
 
 import { ITokenService, YA_SERVICE_TOKEN } from '@yelon/auth';
@@ -23,12 +23,12 @@ export class YunzaiAnalysisAddonGuardService {
   private links: Array<{ title: string; link: string }> = [];
   private value: any = {};
 
-  constructor(
-    private configService: YunzaiConfigService,
-    private pathToRegexp: PathToRegexpService,
-    @Inject(WINDOW) private win: any,
-    @Inject(YA_SERVICE_TOKEN) private tokenService: ITokenService
-  ) {
+  private configService: YunzaiConfigService = inject(YunzaiConfigService);
+  private pathToRegexp: PathToRegexpService = inject(PathToRegexpService);
+  private win: any = inject(WINDOW);
+  private tokenService: ITokenService = inject(YA_SERVICE_TOKEN);
+
+  constructor() {
     this.bis = mergeBisConfig(this.configService);
     const [, getUser] = useLocalStorageUser();
     const user: YunzaiUser = getUser()!;

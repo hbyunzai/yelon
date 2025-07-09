@@ -1,10 +1,11 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { Component, DebugElement, OnInit, ViewChild } from '@angular/core';
+import { Component, DebugElement, inject, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputDirective } from 'ng-zorro-antd/input';
 
@@ -59,7 +60,7 @@ describe('abc: error-collect', () => {
     it('#rtl', () => {
       expect(dl.query(By.css('.error-collect-rtl'))).toBeNull();
       const srv = TestBed.inject(Directionality);
-      srv.change.emit('rtl');
+      srv.valueSignal.set('rtl');
       fixture.detectChanges();
       expect(dl.query(By.css('.error-collect-rtl'))).not.toBeNull();
     });
@@ -71,7 +72,7 @@ describe('abc: error-collect', () => {
       `<form nz-form [formGroup]="validateForm"><error-collect #ec [freq]="freq"></error-collect></form>`
     );
     getPropertiesAndCreate();
-    const safeComp = context.comp as any;
+    const safeComp = context.comp as NzSafeAny;
     spyOn(safeComp, 'findParent');
     (dl.query(By.css('error-collect')).nativeElement as HTMLElement).click();
     expect(safeComp.findParent).not.toHaveBeenCalled();
@@ -100,13 +101,14 @@ describe('abc: error-collect', () => {
   imports: [NzFormModule, NzInputDirective, ErrorCollectComponent, ReactiveFormsModule]
 })
 class TestComponent implements OnInit {
+  private readonly fb = inject(UntypedFormBuilder);
   freq = 20;
   offsetTop = 65 + 16;
   @ViewChild('ec', { static: true })
   comp!: ErrorCollectComponent;
   validateForm: UntypedFormGroup;
-  constructor(fb: UntypedFormBuilder) {
-    this.validateForm = fb.group({
+  constructor() {
+    this.validateForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]]
     });
   }

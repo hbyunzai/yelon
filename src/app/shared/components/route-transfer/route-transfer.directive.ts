@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
-
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Directive({

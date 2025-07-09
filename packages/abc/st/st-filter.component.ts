@@ -12,7 +12,6 @@ import {
 import { FormsModule } from '@angular/forms';
 
 import type { LocaleData } from '@yelon/theme';
-
 import { NzCheckboxComponent } from 'ng-zorro-antd/checkbox';
 import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -141,7 +140,7 @@ import type { _STColumn } from './st.types';
     '[class.st__filter]': `true`,
     '[class.ant-table-filter-trigger-container-open]': `visible`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [

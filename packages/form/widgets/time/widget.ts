@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ControlUIWidget, YelonFormModule, SFValue, toBool } from '@yelon/form';
 import { format } from 'date-fns';
 
+import { ControlUIWidget, YelonFormModule, SFValue, toBool } from '@yelon/form';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 import type { SFTimeWidgetSchema } from './schema';
@@ -43,7 +43,7 @@ import type { SFTimeWidgetSchema } from './schema';
       (nzOpenChange)="_openChange($event)"
     />
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NzTimePickerModule]
 })

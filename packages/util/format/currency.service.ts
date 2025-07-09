@@ -2,6 +2,7 @@ import { CurrencyPipe, formatNumber } from '@angular/common';
 import { DEFAULT_CURRENCY_CODE, Injectable, LOCALE_ID, inject } from '@angular/core';
 
 import { YunzaiConfigService, YunzaiUtilCurrencyConfig } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import {
   CurrencyCNYOptions,
@@ -15,13 +16,14 @@ import {
 export class CurrencyService {
   private readonly locale = inject(LOCALE_ID);
   private readonly defCurrencyCode = inject(DEFAULT_CURRENCY_CODE, { optional: true }) ?? 'USD';
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   private c: YunzaiUtilCurrencyConfig;
   private readonly currencyPipe: CurrencyPipe;
 
-  constructor(cog: YunzaiConfigService) {
+  constructor() {
     this.currencyPipe = new CurrencyPipe(this.locale, this.defCurrencyCode);
-    this.c = cog.merge('utilCurrency', {
+    this.c = this.cogSrv.merge('utilCurrency', {
       startingUnit: 'yuan',
       megaUnit: { Q: '京', T: '兆', B: '亿', M: '万', K: '千' },
       precision: 2,
@@ -107,7 +109,7 @@ export class CurrencyService {
     }
 
     res.value = (isNegative ? '-' : '') + abs;
-    res.unitI18n = (options.unitI18n as Record<string, any>)[res.unit];
+    res.unitI18n = (options.unitI18n as Record<string, NzSafeAny>)[res.unit];
     return res;
   }
 

@@ -20,8 +20,9 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { timer, take } from 'rxjs';
 
-import { ZoneOutside } from '@yelon/util/decorator';
 import type Plyr from 'plyr';
+
+import { ZoneOutside } from '@yelon/util/decorator';
 
 import { MediaService } from './media.service';
 
@@ -34,7 +35,7 @@ export type MediaType = 'html5' | 'youtube' | 'video' | 'audio';
   host: {
     '[style.display]': `'block'`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })

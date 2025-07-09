@@ -2,7 +2,6 @@ import { TemplateRef } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 
 import type { CellOptions } from '@yelon/abc/cell';
-
 import type { NgClassType } from 'ng-zorro-antd/core/types';
 
 import type {

@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { map, tap } from 'rxjs';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, getData, getEnum } from '@yelon/form';
-
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { MentionOnSearchTypes, NzMentionComponent, NzMentionModule } from 'ng-zorro-antd/mention';
 
@@ -62,7 +61,7 @@ import type { SFMentionWidgetSchema } from './schema';
       }
     </nz-mention>
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NzInputModule, NzMentionModule]
 })

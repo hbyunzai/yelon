@@ -13,7 +13,7 @@
     "**/bower_components": true,
     "**/*.code-search": true,
     "**/dist/*/**": true,
-    "**/ng-alain": true,
+    "**/ng-yunzai": true,
     "**/.yarn": true,
     "**/src/app/routes/gen/": true
   },
@@ -23,7 +23,7 @@
   },
   "[typescript]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[less]": {
     "editor.formatOnSave": true,

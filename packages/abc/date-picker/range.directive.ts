@@ -19,9 +19,8 @@ import {
 } from '@yelon/util/config';
 import { fixEndTimeOfRange, getTimeDistance } from '@yelon/util/date-time';
 import { assert, deepMergeKey } from '@yelon/util/other';
-
-import { NzDatePickerComponent, NzRangePickerComponent } from 'ng-zorro-antd/date-picker';
-import { DatePickerService } from 'ng-zorro-antd/date-picker/date-picker.service';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { NzDatePickerComponent, NzRangePickerComponent, type ɵDatePickerService } from 'ng-zorro-antd/date-picker';
 
 import { RangePickerShortcutTplComponent } from './range-shortcut.component';
 
@@ -35,6 +34,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
   private readonly dom = inject(DomSanitizer);
   private readonly vcr = inject(ViewContainerRef);
   private readonly nativeComp = inject(NzRangePickerComponent, { host: true, optional: true });
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   private defaultShortcuts: YunzaiDateRangePickerShortcut;
   private _shortcut: YunzaiDateRangePickerShortcut | null = null;
@@ -62,25 +62,25 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
   get shortcut(): YunzaiDateRangePickerShortcut | null {
     return this._shortcut;
   }
-  @Input({ required: true }) ngModelEnd: any;
-  @Output() readonly ngModelEndChange = new EventEmitter<any>();
+  @Input({ required: true }) ngModelEnd: NzSafeAny;
+  @Output() readonly ngModelEndChange = new EventEmitter<NzSafeAny>();
 
   private get dp(): NzDatePickerComponent {
     return this.nativeComp!.datePicker;
   }
 
-  private get srv(): DatePickerService {
+  private get srv(): ɵDatePickerService {
     return this.dp.datePickerService;
   }
 
-  constructor(configSrv: YunzaiConfigService) {
+  constructor() {
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
       assert(
         !!this.nativeComp,
         `It should be attached to nz-range-picker component, for example: '<nz-range-picker [(ngModel)]="i.start" extend [(ngModelEnd)]="i.end" shortcut></nz-range-picker>'`
       );
     }
-    const cog = configSrv.merge('dataRange', {
+    const cog = this.cogSrv.merge('dataRange', {
       nzFormat: 'yyyy-MM-dd',
       nzAllowClear: true,
       nzAutoFocus: false,
@@ -126,7 +126,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
   }
 
   private cd(): void {
-    (this.dp as any).cdr.markForCheck();
+    (this.dp as NzSafeAny).cdr.markForCheck();
   }
 
   private overrideNative(): void {
@@ -159,7 +159,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
       return;
     }
     const { enabled, list } = this._shortcut;
-    let extraFooter: TemplateRef<any> | undefined;
+    let extraFooter: TemplateRef<NzSafeAny> | undefined;
     if (!this.nativeComp || !enabled) {
       extraFooter = undefined;
     } else {

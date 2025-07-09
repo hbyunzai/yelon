@@ -1,8 +1,10 @@
-import { ACLService } from '@yelon/acl';
-import { YunzaiI18NService, YunzaiI18NServiceFake } from '@yelon/theme';
-import { deepGet } from '@yelon/util/other';
+import { Injectable } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 
-import { NgClassInterface } from 'ng-zorro-antd/core/types';
+import { ACLService } from '@yelon/acl';
+import { YUNZAI_I18N_TOKEN, YunzaiI18NService, YunzaiI18NServiceFake } from '@yelon/theme';
+import { deepGet } from '@yelon/util/other';
+import type { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STColumnSource, STColumnSourceProcessOptions } from '../st-column-source';
 import { STRowSource } from '../st-row.directive';
@@ -12,15 +14,10 @@ import { STColumn, STColumnButtonPop, STIcon, STResizable, STWidthMode } from '.
 import { _STColumn } from '../st.types';
 
 const i18nResult = 'zh';
+@Injectable()
 class MockI18NServiceFake extends YunzaiI18NServiceFake {
   fanyi(): string {
     return i18nResult;
-  }
-}
-
-class MockDomSanitizer {
-  bypassSecurityTrustHtml(text: string): string {
-    return text;
   }
 }
 
@@ -30,7 +27,6 @@ const widthMode: STWidthMode = {
 };
 
 describe('st: column-source', () => {
-  let aclSrv: ACLService | null;
   let i18nSrv: YunzaiI18NService | null;
   let srv: STColumnSource;
   let rowSrv: STRowSource;
@@ -44,11 +40,18 @@ describe('st: column-source', () => {
   };
 
   function genModule(other: { acl?: boolean; i18n?: boolean; cog?: any }): void {
-    aclSrv = other.acl ? new ACLService({ merge: (_: any, def: any) => def } as any) : null;
-    i18nSrv = other.i18n ? new MockI18NServiceFake({ merge: () => {} } as any) : null;
-    rowSrv = new STRowSource();
-    stWidgetRegistry = new STWidgetRegistry();
-    srv = new STColumnSource(new MockDomSanitizer() as any, rowSrv, aclSrv!, i18nSrv!, stWidgetRegistry);
+    const providers: any[] = [STRowSource, STWidgetRegistry, STColumnSource];
+    if (other.acl) {
+      providers.push(ACLService);
+    }
+    if (other.i18n) {
+      providers.push({ provide: YUNZAI_I18N_TOKEN, useClass: MockI18NServiceFake });
+    }
+    TestBed.configureTestingModule({ providers });
+    rowSrv = TestBed.inject(STRowSource);
+    stWidgetRegistry = TestBed.inject(STWidgetRegistry);
+    i18nSrv = TestBed.inject(YUNZAI_I18N_TOKEN);
+    srv = TestBed.inject(STColumnSource);
     srv.setCog(other.cog || ST_DEFAULT_CONFIG);
     page = new PageObject();
   }
@@ -411,7 +414,7 @@ describe('st: column-source', () => {
       });
       describe('#type', () => {
         describe('with keyword', () => {
-          it('should be ignore specify menus values', () => {
+          it('should be ingore specify menus values', () => {
             const res = srv.process([{ title: '', filter: { type: 'keyword' } }], options).columns[0].filter;
             expect(res!.menus!.length).toBe(1);
           });
@@ -581,7 +584,7 @@ describe('st: column-source', () => {
         expect(rowSrv.getTitle).toHaveBeenCalled();
       });
       it('should be template ref', () => {
-        const mockTemplateRef: any = {};
+        const mockTemplateRef: NzSafeAny = {};
         expect(rowSrv.getRow).not.toHaveBeenCalled();
         expect(rowSrv.getTitle).not.toHaveBeenCalled();
         const columns = [{ title: '', render: mockTemplateRef, renderTitle: mockTemplateRef }] as _STColumn[];
@@ -624,7 +627,7 @@ describe('st: column-source', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [{ index: 'id' }] }], options);
         expect(res.headers.length).toBe(2);
       });
-      it('should be ignored grouping columns when children when is empty', () => {
+      it('should be ingored grouping columns when children when is empty', () => {
         const res = srv.process([{ title: '1', index: 'id', children: [] }], options);
         expect(res.headers.length).toBe(1);
       });
@@ -649,7 +652,7 @@ describe('st: column-source', () => {
   describe('[acl]', () => {
     beforeEach(() => {
       genModule({ acl: true });
-      aclSrv!.set({ role: ['user'] });
+      TestBed.inject(ACLService).set({ role: ['user'] });
     });
 
     it('in columns', () => {

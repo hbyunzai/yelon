@@ -3,13 +3,13 @@ import {
   Component,
   ContentChildren,
   ElementRef,
-  Inject,
   Input,
   QueryList,
   Renderer2,
   TemplateRef,
   booleanAttribute,
-  OnInit
+  OnInit,
+  inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -25,7 +25,6 @@ import { filter } from 'rxjs';
 
 import { SettingsService } from '@yelon/theme';
 import { updateHostClass } from '@yelon/util/browser';
-
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { LayoutDisplayService } from './layout-display.service';
@@ -129,17 +128,17 @@ export class LayoutDefaultComponent implements OnInit {
     this.srv.toggleCollapsed();
   }
 
-  constructor(
-    router: Router,
-    private msgSrv: NzMessageService,
-    private settings: SettingsService,
-    private el: ElementRef,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private doc: any,
-    private srv: LayoutDefaultService,
-    private layoutDisplayService: LayoutDisplayService
-  ) {
-    router.events
+  private readonly router = inject(Router);
+  private readonly msgSrv = inject(NzMessageService);
+  private readonly settings = inject(SettingsService);
+  private readonly el = inject(ElementRef);
+  private readonly renderer = inject(Renderer2);
+  private readonly doc = inject(DOCUMENT);
+  private readonly srv = inject(LayoutDefaultService);
+  private readonly layoutDisplayService = inject(LayoutDisplayService);
+
+  constructor() {
+    this.router.events
       .pipe(
         takeUntilDestroyed(),
         filter(() => !this.fetchingStrictly)

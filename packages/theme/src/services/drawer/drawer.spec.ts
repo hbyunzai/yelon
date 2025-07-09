@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
@@ -145,7 +145,7 @@ describe('theme: DrawerHelper', () => {
         expect((els[0] as HTMLElement).style.height).toBe(`100px`);
       });
     });
-    it('should be ignore drawer-sm when nzWidth has set', () => {
+    it('should be ingore drawer-sm when nzWidth has set', () => {
       drawer
         .static(
           '',
@@ -281,10 +281,11 @@ describe('theme: DrawerHelper', () => {
   template: ` <div id="drawer{{ id }}">drawer{{ id }}</div> `
 })
 class TestDrawerComponent {
+  private readonly modal = inject(NzDrawerRef);
   id: string = '';
   ret = 'true';
 
-  constructor(private modal: NzDrawerRef) {
+  constructor() {
     setTimeout(() => {
       if (this.ret === 'destroy') {
         this.modal.close();

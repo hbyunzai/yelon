@@ -4,7 +4,6 @@ import { EnvironmentProviders, Injectable, Injector, Provider, inject, provideAp
 
 import { TitleService } from '@yelon/theme';
 import { LazyService } from '@yelon/util/other';
-
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconService } from 'ng-zorro-antd/icon';
 
@@ -29,8 +28,9 @@ export class StartupService {
   private readonly doc = inject(DOCUMENT);
   private readonly platform = inject(Platform);
   private readonly lazy = inject(LazyService);
-  constructor(iconSrv: NzIconService) {
-    iconSrv.addIcon(...ICONS);
+  private readonly iconSrv = inject(NzIconService);
+  constructor() {
+    this.iconSrv.addIcon(...ICONS);
   }
 
   load(): Promise<void> {

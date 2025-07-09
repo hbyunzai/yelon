@@ -1,10 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Injector, isDevMode, OnDestroy } from '@angular/core';
+import { inject, Injectable, isDevMode, OnDestroy } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { RxStomp } from '@stomp/rx-stomp';
 import { IRxStompPublishParams } from '@stomp/rx-stomp/esm6/i-rx-stomp-publish-params';
 import { IMessage, StompHeaders } from '@stomp/stompjs';
+
 import { YunzaiConfigService, YunzaiSocketConfig, log, WINDOW, useLocalStorageUser, YunzaiUser } from '@yelon/util';
 
 import { NotificationService } from './notification.service';
@@ -17,12 +18,12 @@ export class StompService implements OnDestroy {
   user?: YunzaiUser;
   destroy$ = new Subject<unknown>();
 
-  constructor(
-    private configService: YunzaiConfigService,
-    private injector: Injector,
-    private notifyService: NotificationService,
-    @Inject(WINDOW) private win: any
-  ) {
+  private configService: YunzaiConfigService = inject(YunzaiConfigService);
+  private notifyService: NotificationService = inject(NotificationService);
+  private win: any = inject(WINDOW);
+  private document: Document = inject(DOCUMENT);
+
+  constructor() {
     const [, getUser] = useLocalStorageUser();
     if (!this.user) {
       this.user = getUser()!;
@@ -35,7 +36,7 @@ export class StompService implements OnDestroy {
       this.rxStomp.configure(this.config);
       return;
     }
-    const { location } = this.injector.get(DOCUMENT);
+    const { location } = this.document;
     const { protocol, host } = location;
     log('stomp.service: ', `protocol is ${protocol},host is ${host}`);
     if (protocol.includes('http') && !protocol.includes('https')) {

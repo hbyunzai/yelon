@@ -22,7 +22,6 @@ import { combineLatest, Subscription, take } from 'rxjs';
 
 import { updateHostClass } from '@yelon/util/browser';
 import { WINDOW } from '@yelon/util/token';
-
 import { NzBadgeComponent } from 'ng-zorro-antd/badge';
 import { NzCheckboxComponent } from 'ng-zorro-antd/checkbox';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
@@ -113,7 +112,7 @@ import type { CellDefaultText, CellOptions, CellTextResult, CellValue } from './
     }
   `,
   exportAs: 'cell',
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [

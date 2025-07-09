@@ -23,7 +23,7 @@ import { ControlUIWidget } from '../../widget';
       [nzLoading]="ui.loading"
     />
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false

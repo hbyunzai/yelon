@@ -2,8 +2,9 @@ import { HttpResponse } from '@angular/common/http';
 import { Directive, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
 import { finalize } from 'rxjs';
 
-import { _HttpClient } from '@yelon/theme';
 import { saveAs } from 'file-saver';
+
+import { _HttpClient } from '@yelon/theme';
 
 @Directive({
   selector: '[down-file]',

@@ -211,6 +211,7 @@ The content area is the business page area, the specification details：
 | `@yunzai-default-aside-nav-selected-text-color` | `#108ee9` | Nav selected text color |
 | `@yunzai-default-aside-nav-selected-bg` | `#fcfcfc` | Nav selected background color |
 | `@yunzai-default-aside-collapsed-wd` | `@layout-gutter * 8` | Width of aside collapsed |
+| `@yunzai-default-aside-nav-divider-bg` | `#efe3e5` | Nav divider background color |
 | `@yunzai-default-aside-collapsed-nav-fs` | `24px` | Font size of aside collapsed |
 | `@yunzai-default-aside-collapsed-nav-img-wh` | `24px` | Width & height nav image of aside collapsed |
 | `@yunzai-default-content-heading-bg` | `#fafbfc` | Heading background color of content area |

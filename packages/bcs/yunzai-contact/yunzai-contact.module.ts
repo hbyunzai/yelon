@@ -8,7 +8,6 @@ import { YunzaiFriendGroupModule } from '@yelon/bcs/yunzai-friend-group';
 import { YunzaiRoleTreeModule } from '@yelon/bcs/yunzai-role-tree';
 import { YunzaiTableUserModule } from '@yelon/bcs/yunzai-table-user';
 import { I18nPipe } from '@yelon/theme';
-
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzRadioModule } from 'ng-zorro-antd/radio';

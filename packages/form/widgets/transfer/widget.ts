@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData } from '@yelon/form';
-
 import {
   NzTransferModule,
   TransferCanMove,
@@ -43,7 +42,7 @@ import type { SFTransferWidgetSchema } from './schema';
       (nzSelectChange)="_selectChange($event)"
     />
   </sf-item-wrap> `,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NzTransferModule]
 })

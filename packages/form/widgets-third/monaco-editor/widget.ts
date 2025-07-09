@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { NuMonacoEditorComponent, type NuMonacoEditorEvent } from '@ng-util/monaco-editor';
+
 import { ControlUIWidget, YelonFormModule } from '@yelon/form';
 
 import type { MonacoEditorWidgetSchema } from './schema';
@@ -30,7 +31,7 @@ import type { MonacoEditorWidgetSchema } from './schema';
       />
     </sf-item-wrap>
   `,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, NuMonacoEditorComponent]
 })

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { YelonFormModule, WidgetRegistry } from '@yelon/form';
-
 import { NzTransferModule } from 'ng-zorro-antd/transfer';
 
 import { TransferWidget } from './widget';

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
@@ -46,6 +46,14 @@ describe('theme: ModalHelper', () => {
       fixture.detectChanges();
       expect(document.querySelector<HTMLElement>('.noNzData')?.innerText.trim()).toBe('true');
       expect(document.querySelector<HTMLElement>('.nzData')?.innerText.trim()).toBe('a');
+    }));
+    it('should be params allow signal', fakeAsync(() => {
+      modal.create(TestModalComponent, { input_value: 10 }).subscribe(() => {
+        expect(true).toBeTruthy();
+        flush();
+      });
+      fixture.detectChanges();
+      expect(document.querySelector<HTMLElement>('.input_value')?.innerText.trim()).toBe('10');
     }));
     describe('#exact width true', () => {
       it('should be not trigger subscript when return a undefined value', fakeAsync(() => {
@@ -160,16 +168,18 @@ describe('theme: ModalHelper', () => {
   template: `
     <div id="modal{{ id }}" class="handle noNzData">{{ ret }}</div>
     <div class="nzData">{{ data.ret }}</div>
+    <div class="input_value">{{ input_value() }}</div>
   `
 })
 class TestModalComponent {
   id = '';
   ret = 'true';
+  input_value = input<string>('');
 
-  constructor(
-    private modal: NzModalRef,
-    @Inject(NZ_MODAL_DATA) public data: { ret: string }
-  ) {
+  private readonly modal = inject(NzModalRef);
+  readonly data = inject<{ ret: string }>(NZ_MODAL_DATA, { optional: true });
+
+  constructor() {
     setTimeout(() => {
       if (this.ret === 'destroy') {
         this.modal.destroy();

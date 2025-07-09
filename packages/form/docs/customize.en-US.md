@@ -43,7 +43,7 @@ export function withTestWidget(): SFWidgetProvideConfig {
     </tinymce>
     <!-- End area -->
   </sf-item-wrap>`,
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [YelonFormModule]
 })

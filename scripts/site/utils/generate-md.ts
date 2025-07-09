@@ -61,7 +61,7 @@ const converters = [highlight()].concat([
     (node: any) => {
       const attrs = { ...JsonML.getAttributes(node) };
       let target = attrs.href.startsWith('//') || attrs.href.startsWith('http') ? ' target="_blank"' : '';
-      if (~attrs.href.indexOf('ng-alain.com')) target = '';
+      if (~attrs.href.indexOf('ng.yunzainfo.com')) target = '';
       return `<a${target} href="${attrs.href}" data-url="${attrs.href}">${JsonML.getChildren(node).map(toHtml).join('')}</a>`;
     }
   ],

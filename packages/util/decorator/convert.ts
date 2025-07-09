@@ -1,4 +1,5 @@
 import { warn } from '@yelon/util/other';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 export type BooleanInput = boolean | string | undefined | null;
 export type NumberInput = number | string | undefined | null;
@@ -6,9 +7,13 @@ export type NumberInput = number | string | undefined | null;
 function propDecoratorFactory<T, D>(
   name: string,
   fallback: (v: T, defaultValue: D) => D,
-  defaultValue: any
-): (target: any, propName: string) => void {
-  function propDecorator(target: any, propName: string, originalDescriptor?: TypedPropertyDescriptor<any>): any {
+  defaultValue: NzSafeAny
+): (target: NzSafeAny, propName: string) => void {
+  function propDecorator(
+    target: NzSafeAny,
+    propName: string,
+    originalDescriptor?: TypedPropertyDescriptor<NzSafeAny>
+  ): NzSafeAny {
     const privatePropName = `$$__${propName}`;
 
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
@@ -59,14 +64,14 @@ export function toBoolean(
  * {AT}Input() {AT}InputBoolean(null) visible: boolean = false;
  * ```
  */
-export function InputBoolean(defaultValue: boolean | null = false): any {
+export function InputBoolean(defaultValue: boolean | null = false): NzSafeAny {
   return propDecoratorFactory('InputBoolean', toBoolean, defaultValue);
 }
 
 export function toNumber(value: unknown): number;
 export function toNumber<D>(value: unknown, fallback: D): number | D;
 export function toNumber(value: unknown, fallbackValue: number = 0): number {
-  return !isNaN(parseFloat(value as any)) && !isNaN(Number(value)) ? Number(value) : fallbackValue;
+  return !isNaN(parseFloat(value as NzSafeAny)) && !isNaN(Number(value)) ? Number(value) : fallbackValue;
 }
 
 /**
@@ -81,6 +86,6 @@ export function toNumber(value: unknown, fallbackValue: number = 0): number {
  * {AT}Input() {AT}InputNumber(null) visible: number = 2;
  * ```
  */
-export function InputNumber(defaultValue: number | null = 0): any {
+export function InputNumber(defaultValue: number | null = 0): NzSafeAny {
   return propDecoratorFactory('InputNumber', toNumber, defaultValue);
 }

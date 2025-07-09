@@ -11,7 +11,6 @@ import {
 import { fromEvent, debounceTime, takeUntil } from 'rxjs';
 
 import { G2BaseComponent } from '@yelon/chart/core';
-
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 @Component({
@@ -26,7 +25,7 @@ import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
   host: {
     '[style.height.px]': 'height'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzSkeletonComponent]

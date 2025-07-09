@@ -19,11 +19,11 @@ export class ActGuardService {
   private menus: any[] = [];
   private links: string[] = [];
 
-  constructor(
-    private configService: YunzaiConfigService,
-    private pathToRegexp: PathToRegexpService,
-    private router: Router
-  ) {
+  private configService: YunzaiConfigService = inject(YunzaiConfigService);
+  private pathToRegexp: PathToRegexpService = inject(PathToRegexpService);
+  private router: Router = inject(Router);
+
+  constructor() {
     log('act: ');
     this.bis = mergeBisConfig(this.configService);
     log('act: config ', this.bis);

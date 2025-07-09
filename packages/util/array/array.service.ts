@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { YunzaiConfigService, YunzaiUtilArrayConfig } from '@yelon/util/config';
-
 import { NzTreeNode } from 'ng-zorro-antd/core/tree';
 
 import {
@@ -14,10 +13,11 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ArrayService {
+  private readonly cogSrv = inject(YunzaiConfigService);
   private c: YunzaiUtilArrayConfig;
 
-  constructor(cog: YunzaiConfigService) {
-    this.c = cog.merge('utilArray', {
+  constructor() {
+    this.c = this.cogSrv.merge('utilArray', {
       deepMapName: 'deep',
       parentMapName: 'parent',
       idMapName: 'id',

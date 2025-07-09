@@ -8,6 +8,7 @@ import {
   ChangeDetectorRef,
   Component,
   DestroyRef,
+  effect,
   ElementRef,
   EventEmitter,
   inject,
@@ -29,20 +30,12 @@ import { Router } from '@angular/router';
 import { isObservable, Observable, of, filter, catchError, map, finalize, throwError, lastValueFrom } from 'rxjs';
 
 import { CellComponent } from '@yelon/abc/cell';
-import {
-  YUNZAI_I18N_TOKEN,
-  DatePipe,
-  YelonLocaleService,
-  DrawerHelper,
-  LocaleData,
-  ModalHelper,
-  YNPipe
-} from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN, DatePipe, YelonLocaleService, DrawerHelper, ModalHelper, YNPipe } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, deepMergeKey } from '@yelon/util/other';
-
 import { NzBadgeComponent } from 'ng-zorro-antd/badge';
 import { NzCheckboxComponent } from 'ng-zorro-antd/checkbox';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDividerComponent } from 'ng-zorro-antd/divider';
 import { NzContextMenuService, NzDropdownMenuComponent, NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
@@ -94,7 +87,6 @@ import type { _STColumn, _STDataValue, _STHeader, _STTdNotify, _STTdNotifyType }
 @Component({
   selector: 'st-td',
   templateUrl: './st-td.component.html',
-  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
@@ -175,13 +167,13 @@ export class STTdComponent {
       }
       const modal = btn.modal!;
       const obj = { [modal.paramsName!]: record };
-      (this.modalHelper[btn.type === 'modal' ? 'create' : 'createStatic'] as any)(
+      (this.modalHelper[btn.type === 'modal' ? 'create' : 'createStatic'] as NzSafeAny)(
         modal.component,
         { ...obj, ...(modal.params && modal.params(record)) },
         deepMergeKey({}, true, cog.modal, modal)
       )
         .pipe(filter(w => typeof w !== 'undefined'))
-        .subscribe((res: any) => this.btnCallback(record, btn, res));
+        .subscribe((res: NzSafeAny) => this.btnCallback(record, btn, res));
       return;
     } else if (btn.type === 'drawer') {
       if (cog.drawer!.pureRecoard === true) {
@@ -209,7 +201,7 @@ export class STTdComponent {
     this.btnCallback(record, btn);
   }
 
-  private btnCallback(record: STData, btn: STColumnButton, modal?: any): any {
+  private btnCallback(record: STData, btn: STColumnButton, modal?: NzSafeAny): NzSafeAny {
     if (!btn.click) return;
     if (typeof btn.click === 'string') {
       switch (btn.click) {
@@ -240,7 +232,6 @@ export class STTdComponent {
     '[class.ant-table-rep]': `responsive`,
     '[class.ant-table-rep__hide-header-footer]': `responsiveHideHeaderFooter`
   },
-  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
@@ -266,9 +257,9 @@ export class STComponent implements AfterViewInit, OnChanges {
   private readonly exportSrv = inject(STExport);
   private readonly columnSource = inject(STColumnSource);
   private readonly dataSource = inject(STDataSource);
-  private readonly yunzaiI18n = inject(YelonLocaleService);
   private readonly cms = inject(NzContextMenuService, { optional: true });
   private readonly destroy$ = inject(DestroyRef);
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   private totalTpl = ``;
   private inied = false;
@@ -279,7 +270,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   private _widthMode!: STWidthMode;
   private customWidthConfig: boolean = false;
   _widthConfig: string[] = [];
-  locale: LocaleData = {};
+  locale = inject(YelonLocaleService).valueSignal('st');
   _loading = false;
   _data: STData[] = [];
   _statistical: STStatisticalResults = {};
@@ -323,6 +314,7 @@ export class STComponent implements AfterViewInit, OnChanges {
     this.updateTotalTpl();
   }
   @Input() data?: string | STData[] | Observable<STData[]>;
+  @Input() delay?: boolean = false;
   @Input() columns?: STColumn[] | null;
   @Input() contextmenu?: STContextmenuFn | null;
   @Input({ transform: (v: unknown) => numberAttribute(v, 10) }) ps = 10;
@@ -351,10 +343,10 @@ export class STComponent implements AfterViewInit, OnChanges {
   @Input() singleSort?: STSingleSort | null;
   private _multiSort?: STMultiSort;
   @Input()
-  get multiSort(): any {
+  get multiSort(): NzSafeAny {
     return this._multiSort;
   }
-  set multiSort(value: any) {
+  set multiSort(value: NzSafeAny) {
     if (
       (typeof value === 'boolean' && !booleanAttribute(value)) ||
       (typeof value === 'object' && Object.keys(value).length === 0)
@@ -403,7 +395,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   @Input({ transform: numberAttribute }) virtualItemSize = 54;
   @Input({ transform: numberAttribute }) virtualMaxBufferPx = 200;
   @Input({ transform: numberAttribute }) virtualMinBufferPx = 100;
-  @Input() customRequest?: (options: STCustomRequestOptions) => Observable<any>;
+  @Input() customRequest?: (options: STCustomRequestOptions) => Observable<NzSafeAny>;
   @Input() virtualForTrackBy: TrackByFunction<STData> = index => index;
   @Input() trackBy: TrackByFunction<STData> = (_, item) => item;
 
@@ -425,9 +417,9 @@ export class STComponent implements AfterViewInit, OnChanges {
     return this.columns == null;
   }
 
-  constructor(configSrv: YunzaiConfigService) {
-    this.yunzaiI18n.change.pipe(takeUntilDestroyed()).subscribe(() => {
-      this.locale = this.yunzaiI18n.getData('st');
+  constructor() {
+    effect(() => {
+      this.locale();
       if (this._columns.length > 0) {
         this.updateTotalTpl();
         this.cd();
@@ -441,7 +433,7 @@ export class STComponent implements AfterViewInit, OnChanges {
       )
       .subscribe(() => this.refreshColumns());
 
-    this.setCog(configSrv.merge('st', ST_DEFAULT_CONFIG)!);
+    this.setCog(this.cogSrv.merge('st', ST_DEFAULT_CONFIG)!);
   }
 
   private setCog(cog: YunzaiSTConfig): void {
@@ -474,7 +466,7 @@ export class STComponent implements AfterViewInit, OnChanges {
       : '';
   }
 
-  private changeEmit(type: STChangeType, data?: any): void {
+  private changeEmit(type: STChangeType, data?: NzSafeAny): void {
     const res: STChange = {
       type,
       pi: this.pi,
@@ -503,7 +495,7 @@ export class STComponent implements AfterViewInit, OnChanges {
     if (typeof total === 'string' && total.length) {
       this.totalTpl = total;
     } else if (booleanAttribute(total)) {
-      this.totalTpl = this.locale.total;
+      this.totalTpl = this.locale().total;
     } else {
       this.totalTpl = '';
     }
@@ -564,7 +556,6 @@ export class STComponent implements AfterViewInit, OnChanges {
         this._data = result.list ?? [];
         this._statistical = result.statistical as STStatisticalResults;
         // Should be re-render in next tike when using virtual scroll
-        // https://github.com/hbyunzai/ng-yunzai/issues/1836
         if (this.cdkVirtualScrollViewport != null) {
           Promise.resolve().then(() => this.cdkVirtualScrollViewport?.checkViewportSize());
         }
@@ -596,7 +587,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    * @param extraParams 重新指定 `extraParams` 值
    * @param options 选项
    */
-  load(pi: number = 1, extraParams?: any, options?: STLoadOptions): this {
+  load(pi: number = 1, extraParams?: NzSafeAny, options?: STLoadOptions): this {
     if (pi !== -1) this.pi = pi;
     if (typeof extraParams !== 'undefined') {
       this.req.params = options && options.merge ? { ...this.req.params, ...extraParams } : extraParams;
@@ -610,7 +601,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    *
    * @param extraParams 重新指定 `extraParams` 值
    */
-  reload(extraParams?: any, options?: STLoadOptions): this {
+  reload(extraParams?: NzSafeAny, options?: STLoadOptions): this {
     return this.load(-1, extraParams, options);
   }
 
@@ -623,7 +614,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    *
    * @param extraParams 重新指定 `extraParams` 值
    */
-  reset(extraParams?: any, options?: STLoadOptions): this {
+  reset(extraParams?: NzSafeAny, options?: STLoadOptions): this {
     this.clearStatus().load(1, extraParams, options);
     return this;
   }
@@ -815,7 +806,7 @@ export class STComponent implements AfterViewInit, OnChanges {
 
   // #region sort
 
-  sort(col: _STColumn, value: any): void {
+  sort(col: _STColumn, value: NzSafeAny): void {
     if (this.multiSort) {
       col._sort.default = value;
       col._sort.tick = this.dataSource.nextSortTick;
@@ -998,7 +989,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   // #endregion
 
   get cdkVirtualScrollViewport(): CdkVirtualScrollViewport | undefined {
-    return this.orgTable?.cdkVirtualScrollViewport as any;
+    return this.orgTable?.cdkVirtualScrollViewport as NzSafeAny;
   }
 
   private _resetColumns(options?: STResetColumnsOption): Observable<this> {
@@ -1074,7 +1065,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit(): void {
-    this.refreshColumns();
+    if (!this.delay) this.refreshColumns();
     if (!this.req.lazyLoad) this.loadPageData().subscribe();
     this.inied = true;
   }

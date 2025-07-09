@@ -15,7 +15,6 @@ import { BehaviorSubject, Observable, filter } from 'rxjs';
 
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 
 import { SEErrorRefresh, SELayout } from './se.types';
@@ -27,7 +26,7 @@ import { SEErrorRefresh, SELayout } from './se.types';
   host: {
     '[class.se__title]': 'true'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
@@ -74,12 +73,13 @@ export class SETitleComponent implements OnInit {
     '[style.margin-left.px]': `margin`,
     '[style.margin-right.px]': `margin`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [SETitleComponent, NzStringTemplateOutletDirective]
 })
 export class SEContainerComponent {
+  private readonly cogSrv = inject(YunzaiConfigService);
   private errorNotify$ = new BehaviorSubject<SEErrorRefresh>(null as any);
   @Input({ alias: 'se-container', transform: (v: unknown) => (v == null ? null : numberAttribute(v)) })
   colInCon?: REP_TYPE;
@@ -126,8 +126,8 @@ export class SEContainerComponent {
     return this.errorNotify$.pipe(filter(v => v != null));
   }
 
-  constructor(configSrv: YunzaiConfigService) {
-    configSrv.attach(this, 'se', {
+  constructor() {
+    this.cogSrv.attach(this, 'se', {
       size: 'default',
       nzLayout: 'horizontal',
       gutter: 32,

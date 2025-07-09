@@ -38,12 +38,11 @@ describe('abc: pdf', () => {
 });
 
 @Component({
-  template: ` <pdf #comp [src]="src" [options]="options" [delay]="delay" (change)="change()" /> `,
+  template: ` <pdf #comp [src]="src" [delay]="delay" (change)="change()" /> `,
   imports: [PdfComponent]
 })
 class TestComponent {
   @ViewChild('comp') comp!: PdfComponent;
-  options: any;
   src = '';
   delay = 0;
   change(): void {}

@@ -14,6 +14,7 @@ title:
 Provide rich interfaces for customization.
 
 ```ts
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -21,7 +22,7 @@ import { Subject } from 'rxjs';
 import { PdfChangeEvent, PdfComponent, PdfZoomScale } from '@yelon/abc/pdf';
 import { SEModule } from '@yelon/abc/se';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -161,7 +162,8 @@ import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
     NzSelectModule,
     NzInputNumberModule,
     NzPaginationModule,
-    NzEmptyModule
+    NzEmptyModule,
+    NgTemplateOutlet
   ]
 })
 export class DemoComponent implements OnInit {
@@ -179,7 +181,7 @@ export class DemoComponent implements OnInit {
   zoom = 1;
   autoReSize = true;
   outline = false;
-  outlineList: any = null;
+  outlineList: NzSafeAny = null;
   q = '';
   search$ = new Subject<string>();
 
@@ -220,8 +222,9 @@ export class DemoComponent implements OnInit {
     this.src = src;
   }
 
-  changeShowAllPages(_val: boolean): void {
+  changeShowAllPages(v: boolean): void {
     this.stickToPage = true;
+    console.log('changeShowAllPages', v);
   }
 
   beforeUpload = (file: NzUploadFile): boolean => {
@@ -235,7 +238,7 @@ export class DemoComponent implements OnInit {
   };
 
   loadOutline(): void {
-    this.comp.pdf?.getOutline().then((outline: any) => {
+    this.comp.pdf?.getOutline().then((outline: NzSafeAny) => {
       this.outlineList = outline;
     });
   }

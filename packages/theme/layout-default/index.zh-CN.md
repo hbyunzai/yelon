@@ -211,6 +211,7 @@ export class LayoutBasicComponent {
 | `@yunzai-default-aside-nav-selected-text-color` | `#108ee9` | 侧边栏菜单激活时文本颜色 |
 | `@yunzai-default-aside-nav-selected-bg` | `#fcfcfc` | 侧边栏菜单激活时背景颜色 |
 | `@yunzai-default-aside-collapsed-wd` | `@layout-gutter * 8` | 侧边栏收缩后宽度 |
+| `@yunzai-default-aside-nav-divider-bg` | `#efe3e5` | 分隔线颜色 |
 | `@yunzai-default-aside-collapsed-nav-fs` | `24px` | 侧边栏收缩后文本字号 |
 | `@yunzai-default-aside-collapsed-nav-img-wh` | `24px` | 侧边栏收缩后图像宽高 |
 | `@yunzai-default-content-heading-bg` | `#fafbfc` | 内容区域标题背景色 |

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { YunzaiACLConfig, YunzaiConfigService } from '@yelon/util/config';
@@ -16,6 +16,8 @@ export class ACLService {
   private abilities: Array<number | string> = [];
   private full = false;
   private aclChange = new BehaviorSubject<ACLType | boolean | null>(null);
+
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   /** ACL变更通知 */
   get change(): Observable<ACLType | boolean | null> {
@@ -35,8 +37,8 @@ export class ACLService {
     return this.options.guard_url!;
   }
 
-  constructor(configSrv: YunzaiConfigService) {
-    this.options = configSrv.merge('acl', ACL_DEFAULT_CONFIG)!;
+  constructor() {
+    this.options = this.cogSrv.merge('acl', ACL_DEFAULT_CONFIG)!;
   }
 
   private parseACLType(val: string | string[] | number | number[] | ACLType | null): ACLType {

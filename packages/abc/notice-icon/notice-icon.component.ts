@@ -11,17 +11,14 @@ import {
   output,
   signal
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 
-import { YelonLocaleService, LocaleData } from '@yelon/theme';
-
+import { YelonLocaleService } from '@yelon/theme';
 import { NzBadgeComponent } from 'ng-zorro-antd/badge';
 import type { NgClassType } from 'ng-zorro-antd/core/types';
 import { NzDropDownDirective, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NzSpinComponent } from 'ng-zorro-antd/spin';
-import { NzTabComponent, NzTabSetComponent } from 'ng-zorro-antd/tabs';
+import { NzTabComponent, NzTabsComponent } from 'ng-zorro-antd/tabs';
 
 import { NoticeIconTabComponent } from './notice-icon-tab.component';
 import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
@@ -31,7 +28,6 @@ import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
   exportAs: 'noticeIcon',
   templateUrl: './notice-icon.component.html',
   host: { '[class.notice-icon__btn]': 'true' },
-  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
@@ -41,15 +37,13 @@ import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
     NzDropDownDirective,
     NzDropdownMenuComponent,
     NzSpinComponent,
-    NzTabSetComponent,
+    NzTabsComponent,
     NzTabComponent,
     NoticeIconTabComponent
   ]
 })
 export class NoticeIconComponent {
-  locale = toSignal<LocaleData>(inject(YelonLocaleService).change.pipe(map(data => data['noticeIcon'])), {
-    requireSync: true
-  });
+  locale = inject(YelonLocaleService).valueSignal('noticeIcon');
   data = input<NoticeItem[]>([]);
   count = input(undefined, { transform: numberAttribute });
   loading = input(false, { transform: booleanAttribute });
@@ -74,13 +68,5 @@ export class NoticeIconComponent {
   onVisibleChange(result: boolean): void {
     this.delayShow.set(result);
     this.popoverVisibleChange.emit(result);
-  }
-
-  onSelect(i: NoticeIconSelect): void {
-    this.select.emit(i);
-  }
-
-  onClear(title: string): void {
-    this.clear.emit(title);
   }
 }

@@ -8,7 +8,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { cleanCdkOverlayHtml, dispatchFakeEvent, typeInElement } from '@yelon/testing';
 import { YunzaiThemeModule } from '@yelon/theme';
 import { deepCopy, deepGet } from '@yelon/util/other';
-
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { SFWidgetProvideConfig, provideSFConfig } from '../src';

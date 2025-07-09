@@ -24,7 +24,6 @@ import { filter } from 'rxjs';
 
 import { ResponsiveService } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
-
 import { helpMotion } from 'ng-zorro-antd/core/animation';
 import { NzFormStatusService } from 'ng-zorro-antd/core/form';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
@@ -48,7 +47,7 @@ let nextUniqueId = 0;
     '[class.ant-form-item-has-error]': 'invalid',
     '[class.ant-form-item-with-help]': 'showErr'
   },
-  preserveWhitespaces: false,
+
   providers: [NzFormStatusService],
   animations: [helpMotion],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,4 @@
-import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Directionality } from '@angular/cdk/bidi';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
@@ -25,9 +25,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, filter, of } from 'rxjs';
 
 import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
-
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
-import { NzTabComponent, NzTabSetComponent } from 'ng-zorro-antd/tabs';
+import { NzTabComponent, NzTabsComponent } from 'ng-zorro-antd/tabs';
 
 import { ReuseTabContextComponent } from './reuse-tab-context.component';
 import { ReuseTabContextDirective } from './reuse-tab-context.directive';
@@ -56,15 +56,14 @@ import { REUSE_TAB_STORAGE_KEY, REUSE_TAB_STORAGE_STATE } from './reuse-tab.stat
     '[class.reuse-tab__line]': `tabType === 'line'`,
     '[class.reuse-tab__card]': `tabType === 'card'`,
     '[class.reuse-tab__disabled]': `disabled`,
-    '[class.reuse-tab-rtl]': `dir === 'rtl'`
+    '[class.reuse-tab-rtl]': `dir() === 'rtl'`
   },
   providers: [ReuseTabContextService],
-  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
     NgTemplateOutlet,
-    NzTabSetComponent,
+    NzTabsComponent,
     NzTabComponent,
     ReuseTabContextDirective,
     ReuseTabContextComponent,
@@ -79,17 +78,16 @@ export class ReuseTabComponent implements OnInit, OnChanges {
   private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN);
   private readonly doc = inject(DOCUMENT);
   private readonly platform = inject(Platform);
-  private readonly directionality = inject(Directionality);
   private readonly stateKey = inject(REUSE_TAB_STORAGE_KEY);
   private readonly stateSrv = inject(REUSE_TAB_STORAGE_STATE);
 
-  @ViewChild('tabset') private tabset!: NzTabSetComponent;
+  @ViewChild('tabset') private tabset!: NzTabsComponent;
   private destroy$ = inject(DestroyRef);
   private _keepingScrollContainer?: Element | null;
   list: ReuseItem[] = [];
   item?: ReuseItem;
   pos = 0;
-  dir?: Direction = 'ltr';
+  dir = inject(Directionality).valueSignal;
 
   // #region fields
 
@@ -270,7 +268,7 @@ export class ReuseTabComponent implements OnInit, OnChanges {
    * <reuse-tab #reuseTab></reuse-tab>
    * <router-outlet (activate)="reuseTab.activate($event)" (attach)="reuseTab.activate($event)"></router-outlet>
    */
-  activate(instance: any): void {
+  activate(instance: NzSafeAny): void {
     if (this.srv == null) return;
     this.srv.componentRef = { instance };
   }
@@ -289,7 +287,6 @@ export class ReuseTabComponent implements OnInit, OnChanges {
     ls.forEach((i, idx) => (i.active = pos === idx));
     this.pos = pos;
     // TODO: 目前无法知道为什么 `pos` 无法通过 `nzSelectedIndex` 生效，因此强制使用组件实例的方式来修改，这种方式是安全的
-    // https://github.com/hbyunzai/ng-yunzai/issues/1736
     this.tabset.nzSelectedIndex = pos;
     this.list = ls;
     this.cdr.detectChanges();
@@ -299,12 +296,6 @@ export class ReuseTabComponent implements OnInit, OnChanges {
   // #endregion
 
   ngOnInit(): void {
-    this.dir = this.directionality.value;
-    this.directionality.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
-      this.dir = direction;
-      this.cdr.detectChanges();
-    });
-
     if (!this.platform.isBrowser || this.srv == null) {
       return;
     }

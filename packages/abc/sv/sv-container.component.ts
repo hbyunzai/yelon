@@ -14,7 +14,6 @@ import {
 
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
-
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 
 @Component({
@@ -24,7 +23,7 @@ import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
   host: {
     '[class.sv__title]': 'true'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
@@ -73,7 +72,7 @@ export class SVTitleComponent implements OnInit {
     '[class.sv__bordered]': `bordered`,
     '[class.clearfix]': `true`
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [SVTitleComponent, NzStringTemplateOutletDirective]
@@ -92,13 +91,14 @@ export class SVContainerComponent {
   @Input({ transform: booleanAttribute }) default!: boolean;
   @Input({ transform: booleanAttribute }) noColon = false;
   @Input({ transform: booleanAttribute }) bordered = false;
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   get margin(): Record<string, string> {
     return this.bordered ? {} : { 'margin-left': `${-(this.gutter / 2)}px`, 'margin-right': `${-(this.gutter / 2)}px` };
   }
 
-  constructor(configSrv: YunzaiConfigService) {
-    configSrv.attach(this, 'sv', {
+  constructor() {
+    this.cogSrv.attach(this, 'sv', {
       size: 'large',
       gutter: 32,
       layout: 'horizontal',

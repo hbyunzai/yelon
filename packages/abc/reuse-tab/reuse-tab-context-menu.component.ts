@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 
 import { YelonLocaleService } from '@yelon/theme';
-
 import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
 
 import {
@@ -28,19 +27,19 @@ import {
     '(document:click)': 'closeMenu($event)',
     '(document:contextmenu)': 'closeMenu($event)'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzMenuDirective, NzMenuItemComponent]
 })
 export class ReuseTabContextMenuComponent implements OnInit {
-  private readonly i18nSrv = inject(YelonLocaleService);
+  private locale = inject(YelonLocaleService).valueSignal('reuseTab');
 
   private _i18n!: ReuseContextI18n;
   @Input()
   set i18n(value: ReuseContextI18n) {
     this._i18n = {
-      ...this.i18nSrv.getData('reuseTab'),
+      ...this.locale(),
       ...value
     };
   }

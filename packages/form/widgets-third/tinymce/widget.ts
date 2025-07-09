@@ -1,8 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ControlUIWidget, YelonFormModule } from '@yelon/form';
 import { TinymceComponent } from 'ngx-tinymce';
+
+import { ControlUIWidget, YelonFormModule } from '@yelon/form';
 
 import type { TinymceWidgetSchema } from './schema';
 
@@ -28,7 +29,7 @@ import type { TinymceWidgetSchema } from './schema';
       />
     </sf-item-wrap>
   `,
-  preserveWhitespaces: false,
+
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, YelonFormModule, TinymceComponent]
 })

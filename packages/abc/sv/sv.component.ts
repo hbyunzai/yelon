@@ -17,7 +17,6 @@ import {
 
 import { ResponsiveService } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
-
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
@@ -34,7 +33,7 @@ const prefixCls = `sv`;
     '[style.padding-left.px]': 'paddingValue',
     '[style.padding-right.px]': 'paddingValue'
   },
-  preserveWhitespaces: false,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzStringTemplateOutletDirective, NzTooltipDirective, NzIconDirective, CdkObserveContent]
