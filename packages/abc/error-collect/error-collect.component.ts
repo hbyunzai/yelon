@@ -13,7 +13,7 @@ import {
   numberAttribute,
   signal
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
@@ -47,7 +47,7 @@ export class ErrorCollectComponent implements OnInit {
 
   _hiden = signal(true);
   count = signal(0);
-  dir = toSignal(inject(Directionality).change);
+  dir = inject(Directionality).valueSignal;
 
   readonly freq = input(0, { transform: numberAttribute });
   readonly offsetTop = input(0, { transform: numberAttribute });

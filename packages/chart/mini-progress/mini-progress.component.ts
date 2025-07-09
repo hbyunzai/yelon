@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 
 import { YelonLocaleService } from '@yelon/theme';
-
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 
 @Component({
@@ -19,7 +18,7 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
   template: `
     <div
       nz-tooltip
-      [nzTooltipTitle]="targetSuffix + target + '%'"
+      [nzTooltipTitle]="locale().targetSuffix + target + '%'"
       class="g2-mini-progress__target"
       [style]="{ left: target + '%' }"
     >
@@ -34,13 +33,12 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
     </div>
   `,
   host: { '[class.g2-mini-progress]': 'true' },
-
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [NzTooltipDirective]
 })
 export class G2MiniProgressComponent implements OnChanges {
-  readonly targetSuffix = inject(YelonLocaleService).getData('miniProgress').target;
+  locale = inject(YelonLocaleService).valueSignal('miniProgress');
   private readonly cdr = inject(ChangeDetectorRef);
 
   @Input() color = '#1890FF';

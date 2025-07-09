@@ -11,11 +11,8 @@ import {
   output,
   signal
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 
-import { YelonLocaleService, LocaleData } from '@yelon/theme';
-
+import { YelonLocaleService } from '@yelon/theme';
 import { NzBadgeComponent } from 'ng-zorro-antd/badge';
 import type { NgClassType } from 'ng-zorro-antd/core/types';
 import { NzDropDownDirective, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
@@ -31,7 +28,6 @@ import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
   exportAs: 'noticeIcon',
   templateUrl: './notice-icon.component.html',
   host: { '[class.notice-icon__btn]': 'true' },
-
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
@@ -47,9 +43,7 @@ import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
   ]
 })
 export class NoticeIconComponent {
-  locale = toSignal<LocaleData>(inject(YelonLocaleService).change.pipe(map(data => data['noticeIcon'])), {
-    requireSync: true
-  });
+  locale = inject(YelonLocaleService).valueSignal('noticeIcon');
   data = input<NoticeItem[]>([]);
   count = input(undefined, { transform: numberAttribute });
   loading = input(false, { transform: booleanAttribute });
@@ -75,5 +69,4 @@ export class NoticeIconComponent {
     this.delayShow.set(result);
     this.popoverVisibleChange.emit(result);
   }
-
 }

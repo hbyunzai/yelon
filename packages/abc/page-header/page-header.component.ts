@@ -1,4 +1,4 @@
-import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Directionality } from '@angular/cdk/bidi';
 import { CdkObserveContent } from '@angular/cdk/observers';
 import { Platform } from '@angular/cdk/platform';
 import { NgTemplateOutlet } from '@angular/common';
@@ -7,7 +7,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DestroyRef,
   ElementRef,
   Input,
   OnChanges,
@@ -31,6 +30,7 @@ import { YunzaiConfigService } from '@yelon/util/config';
 import { NzAffixComponent } from 'ng-zorro-antd/affix';
 import { NzBreadCrumbComponent, NzBreadCrumbItemComponent } from 'ng-zorro-antd/breadcrumb';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 interface PageHeaderPath {
@@ -42,7 +42,6 @@ interface PageHeaderPath {
   selector: 'page-header',
   exportAs: 'pageHeader',
   templateUrl: './page-header.component.html',
-
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
@@ -64,8 +63,6 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN);
   private readonly titleSrv = inject(TitleService);
   private readonly reuseSrv = inject(ReuseTabService, { optional: true });
-  private readonly directionality = inject(Directionality);
-  private readonly destroy$ = inject(DestroyRef);
   private readonly settings = inject(SettingsService);
   private readonly platform = inject(Platform);
   private readonly cogSrv = inject(YunzaiConfigService);
@@ -74,7 +71,7 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('affix', { static: false }) private affix!: NzAffixComponent;
   inited = false;
   isBrowser = true;
-  dir?: Direction = 'ltr';
+  dir = inject(Directionality).valueSignal;
 
   private get menus(): Menu[] {
     return this.menuSrv.getPathByUrl(this.router.url, this.recursiveBreadcrumb);
@@ -86,7 +83,7 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   // #region fields
 
   _title: string | null = null;
-  _titleTpl: TemplateRef<any> | null = null;
+  _titleTpl: TemplateRef<NzSafeAny> | null = null;
   @Input()
   set title(value: string | TemplateRef<void> | null) {
     if (value instanceof TemplateRef) {
@@ -110,7 +107,7 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   @Input({ transform: booleanAttribute }) syncTitle!: boolean;
   @Input({ transform: booleanAttribute }) fixed!: boolean;
   @Input({ transform: numberAttribute }) fixedOffsetTop!: number;
-  @Input() breadcrumb?: TemplateRef<any> | null = null;
+  @Input() breadcrumb?: TemplateRef<NzSafeAny> | null = null;
   @Input({ transform: booleanAttribute }) recursiveBreadcrumb!: boolean;
   @Input() logo?: TemplateRef<void> | null = null;
   @Input() action?: TemplateRef<void> | null = null;
@@ -137,9 +134,9 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
         takeUntilDestroyed(),
         filter(w => this.affix && w.type === 'layout' && w.name === 'collapsed')
       )
-      .subscribe(() => this.affix.updatePosition({} as any));
+      .subscribe(() => this.affix.updatePosition({} as NzSafeAny));
 
-    const obsList: Array<Observable<any>> = [this.router.events.pipe(filter(ev => ev instanceof NavigationEnd))];
+    const obsList: Array<Observable<NzSafeAny>> = [this.router.events.pipe(filter(ev => ev instanceof NavigationEnd))];
     if (this.menuSrv != null) obsList.push(this.menuSrv.change);
     obsList.push(this.i18nSrv.change);
     merge(...obsList)
@@ -206,11 +203,6 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.dir = this.directionality.value;
-    this.directionality.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
-      this.dir = direction;
-      this.cdr.detectChanges();
-    });
     this.refresh();
     this.inited = true;
   }

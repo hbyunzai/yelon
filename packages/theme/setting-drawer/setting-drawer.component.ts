@@ -1,27 +1,25 @@
-import { Direction, Directionality } from '@angular/cdk/bidi';
+import { Directionality } from '@angular/cdk/bidi';
 import { DOCUMENT } from '@angular/common';
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DestroyRef,
   inject,
   Input,
   isDevMode,
   NgZone,
   OnInit
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
 import { Layout, SettingsService } from '@yelon/theme';
 import { copy } from '@yelon/util/browser';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { deepCopy, LazyService } from '@yelon/util/other';
-
 import { NzAlertComponent } from 'ng-zorro-antd/alert';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzIconDirective } from 'ng-zorro-antd/icon';
@@ -38,7 +36,7 @@ import { YUNZAIDEFAULTVAR, DEFAULT_COLORS, DEFAULT_VARS } from './setting-drawer
   templateUrl: './setting-drawer.component.html',
   host: {
     '[class.setting-drawer]': 'true',
-    '[class.setting-drawer-rtl]': `dir === 'rtl'`
+    '[class.setting-drawer-rtl]': `dir() === 'rtl'`
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
@@ -61,8 +59,6 @@ export class SettingDrawerComponent implements OnInit {
   private readonly lazy = inject(LazyService);
   private readonly ngZone = inject(NgZone);
   private readonly doc = inject(DOCUMENT);
-  private readonly directionality = inject(Directionality);
-  private readonly destroy$ = inject(DestroyRef);
 
   @Input({ transform: booleanAttribute }) autoApplyColor = true;
   @Input() compilingText = 'Compiling...';
@@ -70,13 +66,13 @@ export class SettingDrawerComponent implements OnInit {
   @Input() lessJs = 'https://cdn.jsdelivr.net/npm/less';
 
   private loadedLess = false;
-  dir?: Direction = 'ltr';
+  dir = inject(Directionality).valueSignal;
   isDev = isDevMode();
   collapse = false;
   get layout(): Layout {
     return this.settingSrv.layout;
   }
-  data: any = {};
+  data: NzSafeAny = {};
   color: string;
   colors = DEFAULT_COLORS;
 
@@ -85,7 +81,7 @@ export class SettingDrawerComponent implements OnInit {
     this.resetData(this.cachedData, false);
   }
 
-  private get cachedData(): Record<string, any> {
+  private get cachedData(): Record<string, NzSafeAny> {
     return this.settingSrv.layout[YUNZAIDEFAULTVAR] || {};
   }
 
@@ -94,11 +90,6 @@ export class SettingDrawerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dir = this.directionality.value;
-    this.directionality.change.pipe(takeUntilDestroyed(this.destroy$)).subscribe(direction => {
-      this.dir = direction;
-      this.cdr.detectChanges();
-    });
     if (this.autoApplyColor && this.color !== this.DEFAULT_PRIMARY) {
       this.changeColor(this.color);
       this.runLess();
@@ -129,7 +120,7 @@ export class SettingDrawerComponent implements OnInit {
       });
   }
 
-  private genVars(): any {
+  private genVars(): NzSafeAny {
     const { data, color, validKeys } = this;
     const vars: Record<string, string> = {
       [`@primary-color`]: color
@@ -145,7 +136,7 @@ export class SettingDrawerComponent implements OnInit {
     const msgId = msg.loading(this.compilingText, { nzDuration: 0 }).messageId;
     setTimeout(() => {
       this.loadLess().then(() => {
-        (window as any).less.modifyVars(this.genVars()).then(() => {
+        (window as NzSafeAny).less.modifyVars(this.genVars()).then(() => {
           msg.success('成功');
           msg.remove(msgId);
           ngZone.run(() => cdr.detectChanges());
@@ -166,11 +157,11 @@ export class SettingDrawerComponent implements OnInit {
     this.resetData(this.cachedData, false);
   }
 
-  setLayout(name: string, value: any): void {
+  setLayout(name: string, value: NzSafeAny): void {
     this.settingSrv.setLayout(name, value);
   }
 
-  private resetData(nowData?: Record<string, any>, run: boolean = true): void {
+  private resetData(nowData?: Record<string, NzSafeAny>, run: boolean = true): void {
     nowData = nowData || {};
     const data = deepCopy(DEFAULT_VARS);
     Object.keys(data).forEach(key => {

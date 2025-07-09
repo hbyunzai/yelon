@@ -14,6 +14,7 @@ import { of, pipe, Subscription, delay, switchMap } from 'rxjs';
 
 import { YelonLocaleService } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { OnboardingComponent } from './onboarding.component';
 import { ONBOARDING_STORE_TOKEN } from './onboarding.storage';
@@ -21,7 +22,6 @@ import { OnboardingConfig, OnboardingItem, OnboardingOpType } from './onboarding
 
 @Injectable({ providedIn: 'root' })
 export class OnboardingService implements OnDestroy {
-  private readonly i18n = inject(YelonLocaleService);
   private readonly appRef = inject(ApplicationRef);
   private readonly router = inject(Router);
   private readonly doc = inject(DOCUMENT);
@@ -36,6 +36,7 @@ export class OnboardingService implements OnDestroy {
   private running$: Subscription | null = null;
   private _running = false;
   private type: OnboardingOpType | null = null;
+  private locale = inject(YelonLocaleService).valueSignal('onboarding');
 
   private _getDoc(): Document {
     return this.doc;
@@ -56,7 +57,7 @@ export class OnboardingService implements OnDestroy {
     });
     this.compRef = compRef;
     this.appRef.attachView(compRef.hostView);
-    const compNode = (compRef.hostView as EmbeddedViewRef<any>).rootNodes[0];
+    const compNode = (compRef.hostView as EmbeddedViewRef<NzSafeAny>).rootNodes[0];
     const doc = this._getDoc();
     const cdk = doc.querySelector('.cdk-overlay-container') as HTMLElement;
     if (cdk) {
@@ -112,7 +113,7 @@ export class OnboardingService implements OnDestroy {
       position: 'bottomLeft',
       before: of(true),
       after: of(true),
-      ...this.i18n.getData('onboarding'),
+      ...this.locale(),
       ...items[this.active]
     } as OnboardingItem;
     const dir = this.configSrv.get('onboarding')!.direction || this.directionality.value;
@@ -131,7 +132,7 @@ export class OnboardingService implements OnDestroy {
     this.updateRunning(true);
 
     this.running$ = of(true)
-      .pipe(pipe.apply(this, pipes as any) as any)
+      .pipe(pipe.apply(this, pipes as NzSafeAny) as NzSafeAny)
       .subscribe({
         next: () => this.cancelRunning().updateRunning(false),
         error: () => this.done()
