@@ -23,6 +23,8 @@ export class LayoutDefaultService {
   private _options$ = new BehaviorSubject<LayoutDefaultOptions>(DEFAULT);
   private _options: LayoutDefaultOptions = DEFAULT;
 
+  private readonly bm = inject(BreakpointObserver);
+
   get options(): LayoutDefaultOptions {
     return this._options;
   }
@@ -40,12 +42,13 @@ export class LayoutDefaultService {
     return `menu-${type}`;
   }
 
-  constructor(bm: BreakpointObserver) {
+  constructor() {
     const mobileMedia = 'only screen and (max-width: 767.99px)';
-    bm.observe(mobileMedia)
+    this.bm
+      .observe(mobileMedia)
       .pipe(takeUntilDestroyed())
       .subscribe(state => this.checkMedia(state.matches));
-    this.checkMedia(bm.isMatched(mobileMedia));
+    this.checkMedia(this.bm.isMatched(mobileMedia));
   }
 
   private checkMedia(value: boolean): void {

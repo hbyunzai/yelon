@@ -1,3 +1,7 @@
+import { TestBed } from '@angular/core/testing';
+
+import { provideYunzaiConfig } from '@yelon/util/config';
+
 import { ResponsiveService } from './responsive';
 
 describe('theme: responsive', () => {
@@ -5,17 +9,26 @@ describe('theme: responsive', () => {
 
   it('should be throw error when invalid range', () => {
     expect(() => {
-      srv = new ResponsiveService({
-        merge: (_key: string, def: any) => ({ ...def, ...{ rules: { 10: {} } } })
-      } as any);
+      TestBed.configureTestingModule({
+        providers: [
+          provideYunzaiConfig({
+            themeResponsive: {
+              rules: { 10: { xs: 24 } }
+            }
+          }),
+          ResponsiveService
+        ]
+      });
+      srv = TestBed.inject(ResponsiveService);
     }).toThrow();
   });
 
   describe('#genCls', () => {
     beforeEach(() => {
-      srv = new ResponsiveService({
-        merge: (_key: string, def: any) => ({ ...def })
-      } as any);
+      TestBed.configureTestingModule({
+        providers: [ResponsiveService]
+      });
+      srv = TestBed.inject(ResponsiveService);
     });
     it('rule 1', () => {
       const res = srv.genCls(1);

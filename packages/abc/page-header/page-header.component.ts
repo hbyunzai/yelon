@@ -28,7 +28,6 @@ import { ReuseTabService } from '@yelon/abc/reuse-tab';
 import { YUNZAI_I18N_TOKEN, Menu, MenuService, SettingsService, TitleService } from '@yelon/theme';
 import { isEmpty } from '@yelon/util/browser';
 import { YunzaiConfigService } from '@yelon/util/config';
-
 import { NzAffixComponent } from 'ng-zorro-antd/affix';
 import { NzBreadCrumbComponent, NzBreadCrumbItemComponent } from 'ng-zorro-antd/breadcrumb';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
@@ -67,6 +66,9 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   private readonly reuseSrv = inject(ReuseTabService, { optional: true });
   private readonly directionality = inject(Directionality);
   private readonly destroy$ = inject(DestroyRef);
+  private readonly settings = inject(SettingsService);
+  private readonly platform = inject(Platform);
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   @ViewChild('conTpl', { static: false }) private conTpl!: ElementRef;
   @ViewChild('affix', { static: false }) private affix!: NzAffixComponent;
@@ -118,9 +120,9 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
 
   // #endregion
 
-  constructor(settings: SettingsService, configSrv: YunzaiConfigService, platform: Platform) {
-    this.isBrowser = platform.isBrowser;
-    configSrv.attach(this, 'pageHeader', {
+  constructor() {
+    this.isBrowser = this.platform.isBrowser;
+    this.cogSrv.attach(this, 'pageHeader', {
       home: '首页',
       homeLink: '/',
       autoBreadcrumb: true,
@@ -130,7 +132,7 @@ export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
       fixed: false,
       fixedOffsetTop: 64
     });
-    settings.notify
+    this.settings.notify
       .pipe(
         takeUntilDestroyed(),
         filter(w => this.affix && w.type === 'layout' && w.name === 'collapsed')

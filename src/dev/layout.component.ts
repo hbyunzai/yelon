@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
 import {
@@ -16,22 +16,25 @@ import {
   MenuUnfoldOutline,
   PlusOutline,
   SearchOutline,
+  // Optional
   SettingOutline,
   UserOutline
 } from '@ant-design/icons-angular/icons';
+
+// #region icons
+
 import { ReuseCustomContextMenu, ReuseTabComponent } from '@yelon/abc/reuse-tab';
 import { YUNZAI_I18N_TOKEN, Menu, MenuService, RTLService, SettingsService, User } from '@yelon/theme';
 import { LayoutDefaultModule, LayoutDefaultOptions } from '@yelon/theme/layout-default';
 import { SettingDrawerModule } from '@yelon/theme/setting-drawer';
 import { deepCopy } from '@yelon/util/other';
-
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import { I18NService, LangType } from '@core';
+import { LangType } from '@core';
 
 const ICONS = [
   MenuFoldOutline,
@@ -47,16 +50,19 @@ const ICONS = [
   LogoutOutline,
   EllipsisOutline,
   GlobalOutline,
+  // Optional
   GithubOutline,
   AppstoreOutline
 ];
+
+// #endregion
 
 @Component({
   selector: 'dev-layout',
   template: `
     <layout-default [options]="options" [asideUser]="asideUserTpl">
       <layout-default-header-item direction="left">
-        <a class="yunzai-default__nav-item" href="//github.com/hbyunzai/ng-yunzai" target="_blank">
+        <a class="yunzai-default__nav-item" href="//github.com/ng-yunzai/ng-yunzai" target="_blank">
           <nz-icon nzType="github" />
         </a>
       </layout-default-header-item>
@@ -71,7 +77,7 @@ const ICONS = [
         <a class="yunzai-default__nav-item" (click)="rtl.toggle()">{{ rtl.nextDir | uppercase }}</a>
       </layout-default-header-item>
       <layout-default-header-item direction="right">
-        <a class="yunzai-default__nav-item" href="//github.com/hbyunzai/ng-yunzai" target="_blank"> githbu </a>
+        <a class="yunzai-default__nav-item" href="//github.com/ng-yunzai/ng-yunzai" target="_blank"> githbu </a>
       </layout-default-header-item>
       <ng-template #asideUserTpl>
         <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="yunzai-default__aside-user">
@@ -109,13 +115,21 @@ const ICONS = [
   ]
 })
 export class DevLayoutComponent implements OnInit {
+  private readonly menuSrv = inject(MenuService);
+  private readonly router = inject(Router);
+  private readonly i18n = inject(YUNZAI_I18N_TOKEN);
+  private readonly iconSrv = inject(NzIconService);
+  readonly rtl = inject(RTLService);
+  readonly settings = inject(SettingsService);
+  readonly msgSrv = inject(NzMessageService);
+
   options: LayoutDefaultOptions = {
     logoExpanded: `./assets/logo-full.svg`,
     logoCollapsed: `./assets/logo.svg`,
     hideHeader: false,
     showHeaderCollapse: true,
-    showSiderCollapse: true,
-    hideAside: false
+    showSiderCollapse: true
+    // hideAside: true
   };
 
   lang: LangType = 'zh-CN';
@@ -210,16 +224,8 @@ export class DevLayoutComponent implements OnInit {
     }
   ];
 
-  constructor(
-    iconSrv: NzIconService,
-    private menuSrv: MenuService,
-    public settings: SettingsService,
-    public msgSrv: NzMessageService,
-    private router: Router,
-    @Inject(YUNZAI_I18N_TOKEN) private i18n: I18NService,
-    public rtl: RTLService
-  ) {
-    iconSrv.addIcon(...ICONS);
+  constructor() {
+    this.iconSrv.addIcon(...ICONS);
     // this.testReuse();
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/prefer-inject */
 import { DecimalPipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import { Host, Injectable } from '@angular/core';
@@ -80,7 +81,7 @@ export class STDataSource {
     @Host() private numberPipe: DecimalPipe,
     private currencySrv: CurrencyService,
     private dom: DomSanitizer
-  ) {}
+  ) { }
 
   setCog(val: YunzaiSTConfig): void {
     this.cog = val;

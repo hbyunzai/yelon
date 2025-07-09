@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone, inject } from '@angular/core';
 
+import isUtf8 from 'isutf8';
+
 import { YunzaiConfigService, YunzaiXlsxConfig } from '@yelon/util/config';
 import { ZoneOutside } from '@yelon/util/decorator';
 import { LazyResult, LazyService } from '@yelon/util/other';
-import isUtf8 from 'isutf8';
 
 import { XlsxExportOptions, XlsxExportResult, XlsxExportSheet } from './xlsx.types';
 
@@ -16,11 +17,12 @@ export class XlsxService {
   private readonly http = inject(HttpClient);
   private readonly lazy = inject(LazyService);
   private readonly ngZone = inject(NgZone);
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   private cog: YunzaiXlsxConfig;
 
-  constructor(configSrv: YunzaiConfigService) {
-    this.cog = configSrv.merge('xlsx', {
+  constructor() {
+    this.cog = this.cogSrv.merge('xlsx', {
       url: 'https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js',
       modules: [`https://cdn.jsdelivr.net/npm/xlsx/dist/cpexcel.js`]
     })!;
@@ -45,7 +47,7 @@ export class XlsxService {
       try {
         data = cptable.utils.decode(936, buf);
         type = 'string';
-      } catch {}
+      } catch { }
     }
     const wb = read(data, { type });
     wb.SheetNames.forEach((name: string) => {

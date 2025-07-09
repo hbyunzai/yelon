@@ -1,4 +1,4 @@
-import { Component, DebugElement, Injectable, TemplateRef, ViewChild } from '@angular/core';
+import { Component, DebugElement, inject, Injectable, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -88,11 +88,11 @@ describe('abc: reuse-tab', () => {
         !needI18n
           ? []
           : [
-              {
-                provide: YUNZAI_I18N_TOKEN,
-                useClass: MockI18NServiceFake
-              } as any
-            ]
+            {
+              provide: YUNZAI_I18N_TOKEN,
+              useClass: MockI18NServiceFake
+            } as any
+          ]
       )
     });
   }
@@ -857,7 +857,7 @@ describe('abc: reuse-tab', () => {
   `,
   imports: [RouterLink, RouterOutlet]
 })
-class AppComponent {}
+class AppComponent { }
 
 @Component({
   template: `
@@ -906,8 +906,8 @@ class LayoutComponent {
   titleRender?: TemplateRef<{ $implicit: ReuseItem }>;
   storageState = false;
   canClose?: ReuseCanClose;
-  change(): void {}
-  close(): void {}
+  change(): void { }
+  close(): void { }
 }
 
 @Component({
@@ -919,8 +919,8 @@ class LayoutComponent {
 })
 class AComponent {
   time = +new Date();
-  _onReuseInit(): void {}
-  _onReuseDestroy(): void {}
+  _onReuseInit(): void { }
+  _onReuseDestroy(): void { }
 }
 
 @Component({
@@ -935,8 +935,8 @@ class AComponent {
 })
 class BComponent {
   time = +new Date();
-  _onReuseInit(): void {}
-  _onReuseDestroy(): void {}
+  _onReuseInit(): void { }
+  _onReuseDestroy(): void { }
 }
 
 @Component({
@@ -949,12 +949,13 @@ class BComponent {
   imports: [RouterLink]
 })
 class CComponent {
+  private readonly srv = inject(ReuseTabService);
   time = +new Date();
-  constructor(private srv: ReuseTabService) {
+  constructor() {
     this.srv.title = 'new c title';
   }
-  _onReuseInit(): void {}
-  _onReuseDestroy(): void {}
+  _onReuseInit(): void { }
+  _onReuseDestroy(): void { }
 }
 
 @Component({
@@ -968,8 +969,8 @@ class CComponent {
 })
 class DComponent {
   time = +new Date();
-  _onReuseInit(): void {}
-  _onReuseDestroy(): void {}
+  _onReuseInit(): void { }
+  _onReuseDestroy(): void { }
 }
 
 @Component({
@@ -980,10 +981,11 @@ class DComponent {
   `
 })
 class EComponent {
+  private readonly reuse = inject(ReuseTabService);
   time = +new Date();
-  constructor(reuse: ReuseTabService) {
-    reuse.closable = false;
+  constructor() {
+    this.reuse.closable = false;
   }
-  _onReuseInit(): void {}
-  _onReuseDestroy(): void {}
+  _onReuseInit(): void { }
+  _onReuseDestroy(): void { }
 }

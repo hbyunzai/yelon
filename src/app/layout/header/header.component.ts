@@ -1,16 +1,15 @@
 import { DOCUMENT, NgTemplateOutlet, UpperCasePipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { MatchRouterDirective } from '@shared';
-import { YUNZAI_I18N_TOKEN, RTLService, I18nPipe } from '@yelon/theme';
-import { copy } from '@yelon/util/browser';
 import { GithubButtonComponent } from 'ng-github-button';
 
+import { YUNZAI_I18N_TOKEN, RTLService, I18nPipe } from '@yelon/theme';
+import { copy } from '@yelon/util/browser';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -90,17 +89,17 @@ export class HeaderComponent implements AfterViewInit {
     return (this.doc as Document).defaultView || window;
   }
 
-  constructor(
-    @Inject(YUNZAI_I18N_TOKEN) public i18n: I18NService,
-    private router: Router,
-    private msg: NzMessageService,
-    private mobileSrv: MobileService,
-    @Inject(DOCUMENT) private doc: NzSafeAny,
-    private cdr: ChangeDetectorRef,
-    public rtl: RTLService,
-    private layout: LayoutComponent
-  ) {
-    router.events.pipe(filter(evt => evt instanceof NavigationEnd)).subscribe(() => {
+  readonly i18n = inject<I18NService>(YUNZAI_I18N_TOKEN);
+  readonly rtl = inject(RTLService);
+  private readonly router = inject(Router);
+  private readonly msg = inject(NzMessageService);
+  private readonly mobileSrv = inject(MobileService);
+  private readonly doc = inject(DOCUMENT);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly layout = inject(LayoutComponent);
+
+  constructor() {
+    this.router.events.pipe(filter(evt => evt instanceof NavigationEnd)).subscribe(() => {
       this.menuVisible = false;
       this.genYelonType();
     });

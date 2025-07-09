@@ -17,9 +17,10 @@ export class LodopService implements OnDestroy {
   private _init = new Subject<LodopResult>();
   private _events = new Subject<LodopPrintResult>();
   private printBuffer: any[] = [];
+  private readonly cogSrv = inject(YunzaiConfigService);
 
-  constructor(configSrv: YunzaiConfigService) {
-    this.defaultConfig = configSrv.merge('lodop', {
+  constructor() {
+    this.defaultConfig = this.cogSrv.merge('lodop', {
       url: 'http://localhost:8443/CLodopfuncs.js',
       name: 'CLODOP',
       companyName: '',
@@ -161,7 +162,7 @@ export class LodopService implements OnDestroy {
         try {
           const fakeFn = new Function(`return [${res[2]}]`);
           arr = fakeFn();
-        } catch {}
+        } catch { }
 
         if (arr != null && Array.isArray(arr) && contextObj) {
           for (let i = 0; i < arr.length; i++) {

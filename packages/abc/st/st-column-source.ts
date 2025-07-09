@@ -1,11 +1,10 @@
-import { Host, Inject, Injectable, Optional, TemplateRef } from '@angular/core';
+import { inject, Injectable, TemplateRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { ACLService } from '@yelon/acl';
-import { YunzaiI18NService, YUNZAI_I18N_TOKEN } from '@yelon/theme';
+import { YUNZAI_I18N_TOKEN } from '@yelon/theme';
 import { YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, warn } from '@yelon/util/other';
-
 import type { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STRowSource } from './st-row.directive';
@@ -34,14 +33,11 @@ export interface STColumnSourceProcessOptions {
 @Injectable()
 export class STColumnSource {
   private cog!: YunzaiSTConfig;
-
-  constructor(
-    private dom: DomSanitizer,
-    @Host() private rowSource: STRowSource,
-    @Optional() private acl: ACLService,
-    @Optional() @Inject(YUNZAI_I18N_TOKEN) private i18nSrv: YunzaiI18NService,
-    private stWidgetRegistry: STWidgetRegistry
-  ) {}
+  private readonly dom = inject(DomSanitizer);
+  private readonly rowSource = inject(STRowSource, { host: true });
+  private readonly acl = inject(ACLService, { optional: true });
+  private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
+  private readonly stWidgetRegistry = inject(STWidgetRegistry);
 
   setCog(val: YunzaiSTConfig): void {
     this.cog = val;
@@ -275,7 +271,7 @@ export class STColumnSource {
     this.updateDefault(res);
 
     if (this.acl) {
-      res.menus = res.menus?.filter(w => this.acl.can(w.acl!));
+      res.menus = res.menus?.filter(w => this.acl!.can(w.acl!));
     }
 
     return res.menus?.length === 0 ? null : res;
@@ -465,7 +461,7 @@ export class STColumnSource {
         }
       }
       if (this.acl) {
-        item.selections = item.selections.filter(w => this.acl.can(w.acl!));
+        item.selections = item.selections.filter(w => this.acl!.can(w.acl!));
       }
       // radio
       if (item.type === 'radio') {

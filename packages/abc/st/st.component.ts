@@ -40,7 +40,6 @@ import {
 } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSTConfig } from '@yelon/util/config';
 import { deepCopy, deepMergeKey } from '@yelon/util/other';
-
 import { NzBadgeComponent } from 'ng-zorro-antd/badge';
 import { NzCheckboxComponent } from 'ng-zorro-antd/checkbox';
 import { NzDividerComponent } from 'ng-zorro-antd/divider';
@@ -269,6 +268,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   private readonly yunzaiI18n = inject(YelonLocaleService);
   private readonly cms = inject(NzContextMenuService, { optional: true });
   private readonly destroy$ = inject(DestroyRef);
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   private totalTpl = ``;
   private inied = false;
@@ -425,7 +425,7 @@ export class STComponent implements AfterViewInit, OnChanges {
     return this.columns == null;
   }
 
-  constructor(configSrv: YunzaiConfigService) {
+  constructor() {
     this.yunzaiI18n.change.pipe(takeUntilDestroyed()).subscribe(() => {
       this.locale = this.yunzaiI18n.getData('st');
       if (this._columns.length > 0) {
@@ -441,7 +441,7 @@ export class STComponent implements AfterViewInit, OnChanges {
       )
       .subscribe(() => this.refreshColumns());
 
-    this.setCog(configSrv.merge('st', ST_DEFAULT_CONFIG)!);
+    this.setCog(this.cogSrv.merge('st', ST_DEFAULT_CONFIG)!);
   }
 
   private setCog(cog: YunzaiSTConfig): void {

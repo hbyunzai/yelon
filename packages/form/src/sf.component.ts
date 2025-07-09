@@ -25,7 +25,6 @@ import { ACLService } from '@yelon/acl';
 import { YUNZAI_I18N_TOKEN, YelonLocaleService, LocaleData } from '@yelon/theme';
 import { YunzaiConfigService, YunzaiSFConfig } from '@yelon/util/config';
 import { deepCopy } from '@yelon/util/other';
-
 import type { NzFormControlStatusType } from 'ng-zorro-antd/form';
 
 import { mergeConfig } from './config';
@@ -87,6 +86,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
   private readonly aclSrv = inject(ACLService);
   private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN);
   private readonly platform = inject(Platform);
+  private readonly cogSrv = inject(YunzaiConfigService);
 
   private _renders = new Map<string, TemplateRef<void>>();
   private _item!: Record<string, unknown>;
@@ -305,8 +305,8 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     this.formSubmit.emit(this.value);
   }
 
-  constructor(cogSrv: YunzaiConfigService) {
-    this.options = mergeConfig(cogSrv);
+  constructor() {
+    this.options = mergeConfig(this.cogSrv);
     this.liveValidate = this.options.liveValidate as boolean;
     this.firstVisual = this.options.firstVisual as boolean;
     this.autocomplete = this.options.autocomplete as 'on' | 'off';

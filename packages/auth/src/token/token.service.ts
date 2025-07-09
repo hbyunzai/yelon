@@ -8,7 +8,7 @@ import { AuthReferrer, ITokenModel, ITokenService } from './interface';
 import { YA_STORE_TOKEN } from '../store/interface';
 
 export function YA_SERVICE_TOKEN_FACTORY(): ITokenService {
-  return new TokenService(inject(YunzaiConfigService));
+  return new TokenService();
 }
 
 /**
@@ -22,9 +22,10 @@ export class TokenService implements ITokenService, OnDestroy {
   private interval$?: Subscription;
   private _referrer: AuthReferrer = {};
   private _options: YunzaiAuthConfig;
+  private readonly cogSrv = inject(YunzaiConfigService);
 
-  constructor(configSrv: YunzaiConfigService) {
-    this._options = mergeConfig(configSrv);
+  constructor() {
+    this._options = mergeConfig(this.cogSrv);
   }
 
   get refresh(): Observable<ITokenModel> {

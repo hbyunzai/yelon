@@ -17,7 +17,6 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
-
 import { NzIconDirective } from 'ng-zorro-antd/icon';
 
 @Component({
@@ -43,6 +42,7 @@ export class ErrorCollectComponent implements OnInit {
   private readonly doc = inject(DOCUMENT);
   private readonly platform = inject(Platform);
   private readonly destroy$ = inject(DestroyRef);
+  private readonly cogSrv = inject(YunzaiConfigService);
   private formEl: HTMLFormElement | null = null;
 
   _hiden = signal(true);
@@ -52,8 +52,8 @@ export class ErrorCollectComponent implements OnInit {
   readonly freq = input(0, { transform: numberAttribute });
   readonly offsetTop = input(0, { transform: numberAttribute });
 
-  constructor(configSrv: YunzaiConfigService) {
-    configSrv.attach(this, 'errorCollect', { freq: 250, offsetTop: 65 + 64 + 8 * 2 });
+  constructor() {
+    this.cogSrv.attach(this, 'errorCollect', { freq: 250, offsetTop: 65 + 64 + 8 * 2 });
   }
 
   private get errEls(): NodeListOf<HTMLElement> {

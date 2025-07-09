@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, numberAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject, numberAttribute } from '@angular/core';
 
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';
@@ -18,6 +18,7 @@ import { YunzaiConfigService } from '@yelon/util/config';
   encapsulation: ViewEncapsulation.None
 })
 export class SGContainerComponent {
+  private readonly cogSrv = inject(YunzaiConfigService);
   @Input({ transform: numberAttribute }) gutter!: number;
   @Input({ alias: 'sg-container', transform: (v: unknown) => (v == null ? null : numberAttribute(v)) })
   colInCon?: REP_TYPE;
@@ -27,8 +28,8 @@ export class SGContainerComponent {
     return -(this.gutter / 2);
   }
 
-  constructor(configSrv: YunzaiConfigService) {
-    configSrv.attach(this, 'sg', {
+  constructor() {
+    this.cogSrv.attach(this, 'sg', {
       gutter: 32,
       col: 2
     });
