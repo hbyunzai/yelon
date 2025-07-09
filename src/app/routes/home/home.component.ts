@@ -4,11 +4,11 @@ import { AfterViewInit, Component, NgZone, OnDestroy, OnInit, inject } from '@an
 import { RouterLink } from '@angular/router';
 
 import { FooterComponent } from '@shared';
-import { YUNZAI_I18N_TOKEN, I18nPipe } from '@yelon/theme';
-import { ZoneOutside } from '@yelon/util/decorator';
 import AOS from 'aos';
 import { GithubButtonComponent } from 'ng-github-button';
 
+import { YUNZAI_I18N_TOKEN, I18nPipe } from '@yelon/theme';
+import { ZoneOutside } from '@yelon/util/decorator';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';

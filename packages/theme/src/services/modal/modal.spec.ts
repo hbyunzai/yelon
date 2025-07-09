@@ -193,4 +193,4 @@ class TestModalComponent {
 @Component({
   template: ``
 })
-class TestComponent { }
+class TestComponent {}

@@ -474,9 +474,9 @@ export class TestComponent {
   delay = false;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  error(_: any): void { }
+  error(_: any): void {}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  change(_: any): void { }
+  change(_: any): void {}
 }
 
 @Component({
@@ -497,7 +497,7 @@ export class TestComponent {
   `,
   imports: [STComponent]
 })
-export class TestExpandComponent extends TestComponent { }
+export class TestExpandComponent extends TestComponent {}
 
 @Component({
   template: ` <div class="widget-id-value">{{ id }}</div>

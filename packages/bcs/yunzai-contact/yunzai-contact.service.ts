@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
 
 import { YUNZAI_DEPT_TYPES } from '@yelon/bcs/yunzai-dept-tree';
 import { YunzaiTableUser } from '@yelon/bcs/yunzai-table-user';
-
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { YunzaiContactComponent } from './yunzai-contact.component';
@@ -13,7 +12,7 @@ import { YunzaiContactParam } from './yunzai-contact.types';
   providedIn: 'root'
 })
 export class YunzaiContactService {
-  constructor(private modal: NzModalService) {}
+  private modal: NzModalService = inject(NzModalService);
 
   create(
     nzOnOk: (users: YunzaiTableUser[]) => Observable<boolean>,

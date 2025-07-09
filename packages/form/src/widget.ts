@@ -105,22 +105,22 @@ export abstract class Widget<T extends FormProperty, UIT extends SFUISchemaItem>
 @Directive()
 export class ControlWidget extends Widget<FormProperty, SFUISchemaItem> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset(_value: SFValue): void { }
-  afterViewInit(): void { }
+  reset(_value: SFValue): void {}
+  afterViewInit(): void {}
 }
 
 @Directive()
 export class ControlUIWidget<UIT extends SFUISchemaItem> extends Widget<FormProperty, UIT> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset(_value: SFValue): void { }
-  afterViewInit(): void { }
+  reset(_value: SFValue): void {}
+  afterViewInit(): void {}
 }
 
 @Directive()
 export class ArrayLayoutWidget extends Widget<ArrayProperty, SFArrayWidgetSchema> implements AfterViewInit {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset(_value: SFValue): void { }
-  afterViewInit(): void { }
+  reset(_value: SFValue): void {}
+  afterViewInit(): void {}
 
   ngAfterViewInit(): void {
     this.formProperty.errorsChanges.pipe(takeUntil(this.sfItemComp!.destroy$)).subscribe(() => this.cd.detectChanges());
@@ -130,8 +130,8 @@ export class ArrayLayoutWidget extends Widget<ArrayProperty, SFArrayWidgetSchema
 @Directive()
 export class ObjectLayoutWidget extends Widget<ObjectProperty, SFObjectWidgetSchema> implements AfterViewInit {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  reset(_value: SFValue): void { }
-  afterViewInit(): void { }
+  reset(_value: SFValue): void {}
+  afterViewInit(): void {}
 
   ngAfterViewInit(): void {
     this.formProperty.errorsChanges.pipe(takeUntil(this.sfItemComp!.destroy$)).subscribe(() => this.cd.detectChanges());

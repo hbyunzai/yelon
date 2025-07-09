@@ -67,7 +67,7 @@ export class CodeBoxComponent implements OnInit {
   @Input() type: 'default' | 'simple' = 'default';
   @Input() expand: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.appService.theme$.pipe(takeUntilDestroyed(this.destroy$)).subscribe(data => {

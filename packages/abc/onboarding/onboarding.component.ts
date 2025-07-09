@@ -107,7 +107,7 @@ export class OnboardingComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     // Waiting https://github.com/NG-ZORRO/ng-zorro-antd/issues/6491
-    this.popover.component!.onClickOutside = () => { };
+    this.popover.component!.onClickOutside = () => {};
   }
 
   private scroll(pos: OnboardingLightData): void {

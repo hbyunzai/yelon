@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ControlUIWidget, YelonFormModule, toBool } from '@yelon/form';
-
 import { NzRateModule } from 'ng-zorro-antd/rate';
 
 import type { SFRateWidgetSchema } from './schema';

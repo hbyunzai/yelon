@@ -81,7 +81,7 @@ export class STDataSource {
     @Host() private numberPipe: DecimalPipe,
     private currencySrv: CurrencyService,
     private dom: DomSanitizer
-  ) { }
+  ) {}
 
   setCog(val: YunzaiSTConfig): void {
     this.cog = val;

@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs';
 
 import type { SFSchemaEnum, SFSchemaEnumType, SFUISchemaItem } from '@yelon/form';
-
 import type { NzAutocompleteOptionComponent } from 'ng-zorro-antd/auto-complete';
 import type { CompareWith } from 'ng-zorro-antd/core/types';
 

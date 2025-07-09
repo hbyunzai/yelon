@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData } from '@yelon/form';
-
 import {
   NzTransferModule,
   TransferCanMove,

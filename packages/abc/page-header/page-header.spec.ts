@@ -373,7 +373,7 @@ describe('abc: page-header', () => {
         setTitle = jasmine.createSpy();
       }
       class MockReuse {
-        set title(_val: string) { }
+        set title(_val: string) {}
         get title(): string {
           return '';
         }
@@ -458,7 +458,7 @@ class TestBaseComponent {
   `,
   imports: [PageHeaderComponent]
 })
-class TestComponent extends TestBaseComponent { }
+class TestComponent extends TestBaseComponent {}
 
 @Component({
   template: `
@@ -466,7 +466,7 @@ class TestComponent extends TestBaseComponent { }
   `,
   imports: [PageHeaderComponent]
 })
-class TestAutoBreadcrumbComponent extends TestBaseComponent { }
+class TestAutoBreadcrumbComponent extends TestBaseComponent {}
 
 @Component({
   template: `
@@ -481,4 +481,4 @@ class TestAutoBreadcrumbComponent extends TestBaseComponent { }
   `,
   imports: [PageHeaderComponent]
 })
-class TestI18nComponent extends TestBaseComponent { }
+class TestI18nComponent extends TestBaseComponent {}

@@ -11,7 +11,6 @@ import {
 import { fromEvent, debounceTime, takeUntil } from 'rxjs';
 
 import { G2BaseComponent } from '@yelon/chart/core';
-
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 @Component({

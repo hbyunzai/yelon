@@ -3,7 +3,6 @@ import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
-
 import { NzSliderComponent } from 'ng-zorro-antd/slider';
 
 import { withSliderWidget } from './index';

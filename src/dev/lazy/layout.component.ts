@@ -2,8 +2,9 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { PageHeaderModule } from '@yelon/abc/page-header';
 import { format } from 'date-fns';
+
+import { PageHeaderModule } from '@yelon/abc/page-header';
 
 @Component({
   selector: 'dev-lazy-layout',

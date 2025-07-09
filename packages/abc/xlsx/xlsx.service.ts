@@ -47,7 +47,7 @@ export class XlsxService {
       try {
         data = cptable.utils.decode(936, buf);
         type = 'string';
-      } catch { }
+      } catch {}
     }
     const wb = read(data, { type });
     wb.SheetNames.forEach((name: string) => {

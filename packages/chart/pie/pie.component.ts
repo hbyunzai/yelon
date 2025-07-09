@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 
 import type { Chart, Event } from '@antv/g2';
-import { G2BaseComponent, G2InteractionType } from '@yelon/chart/core';
 
+import { G2BaseComponent, G2InteractionType } from '@yelon/chart/core';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';
 import { NzDividerComponent } from 'ng-zorro-antd/divider';
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';

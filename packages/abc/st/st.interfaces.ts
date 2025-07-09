@@ -4,11 +4,11 @@ import type { ElementRef, TemplateRef } from '@angular/core';
 import type { Observable } from 'rxjs';
 
 import type { ThemeType } from '@ant-design/icons-angular';
+
 import type { CellOptions } from '@yelon/abc/cell';
 import type { ACLCanType } from '@yelon/acl';
 import type { DrawerHelperOptions, ModalHelperOptions, YNMode } from '@yelon/theme';
 import type { CurrencyFormatOptions } from '@yelon/util/format';
-
 import type { NgClassType, NgStyleInterface } from 'ng-zorro-antd/core/types';
 import type { DisabledTimeFn } from 'ng-zorro-antd/date-picker';
 import type { NzDrawerOptions } from 'ng-zorro-antd/drawer';
@@ -115,8 +115,8 @@ export interface STRes<T extends STData = any> {
    * - `{ total: 'Total' }` => Total 会被当作 `total`
    */
   reName?:
-  | STResReNameType
-  | ((result: any, options: { pi: number; ps: number; total: number }) => { total: number; list: T[] });
+    | STResReNameType
+    | ((result: any, options: { pi: number; ps: number; total: number }) => { total: number; list: T[] });
   /**
    * 数据预处理
    */
@@ -264,21 +264,21 @@ export interface STColumn<T extends STData = any> {
    * - `widget` 使用自定义小部件动态创建
    */
   type?:
-  | ''
-  | 'checkbox'
-  | 'link'
-  | 'badge'
-  | 'tag'
-  | 'enum'
-  | 'radio'
-  | 'img'
-  | 'currency'
-  | 'number'
-  | 'date'
-  | 'yn'
-  | 'no'
-  | 'cell'
-  | 'widget';
+    | ''
+    | 'checkbox'
+    | 'link'
+    | 'badge'
+    | 'tag'
+    | 'enum'
+    | 'radio'
+    | 'img'
+    | 'currency'
+    | 'number'
+    | 'date'
+    | 'yn'
+    | 'no'
+    | 'cell'
+    | 'widget';
 
   /**
    * `cell` component options
@@ -432,7 +432,7 @@ export interface STColumn<T extends STData = any> {
 
   widget?: STWidgetColumn<T>;
 
-  enum?: { [key: string]: string;[key: number]: string };
+  enum?: { [key: string]: string; [key: number]: string };
 
   /**
    * 分组表头
@@ -929,18 +929,18 @@ export interface STColumnButtonPop<T extends STData = any> {
    * The position of the popover relative to the target, default: `top`
    */
   placement?:
-  | 'top'
-  | 'left'
-  | 'right'
-  | 'bottom'
-  | 'topLeft'
-  | 'topRight'
-  | 'bottomLeft'
-  | 'bottomRight'
-  | 'leftTop'
-  | 'leftBottom'
-  | 'rightTop'
-  | 'rightBottom';
+    | 'top'
+    | 'left'
+    | 'right'
+    | 'bottom'
+    | 'topLeft'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomRight'
+    | 'leftTop'
+    | 'leftBottom'
+    | 'rightTop'
+    | 'rightBottom';
 
   /**
    * Class name of the popover card
@@ -1101,18 +1101,18 @@ export interface STColumnTagValue {
    * - 色值：#f50,#ff0
    */
   color?:
-  | 'geekblue'
-  | 'blue'
-  | 'purple'
-  | 'success'
-  | 'red'
-  | 'volcano'
-  | 'orange'
-  | 'gold'
-  | 'lime'
-  | 'green'
-  | 'cyan'
-  | string;
+    | 'geekblue'
+    | 'blue'
+    | 'purple'
+    | 'success'
+    | 'red'
+    | 'volcano'
+    | 'orange'
+    | 'gold'
+    | 'lime'
+    | 'green'
+    | 'cyan'
+    | string;
 
   /**
    * Text popup tip

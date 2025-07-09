@@ -11,7 +11,6 @@ import {
   YunzaiBusinessConfig,
   YunzaiConfigService
 } from '@yelon/util';
-
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';

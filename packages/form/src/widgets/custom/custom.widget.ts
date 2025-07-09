@@ -25,4 +25,4 @@ import { ControlUIWidget } from '../../widget';
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false
 })
-export class CustomWidget extends ControlUIWidget<SFCustomWidgetSchema> { }
+export class CustomWidget extends ControlUIWidget<SFCustomWidgetSchema> {}

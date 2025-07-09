@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, map, Observable, Subscription } from 'rxjs';
 
+import { formatDistanceToNow } from 'date-fns';
+
 import { NoticeIconModule, NoticeIconSelect, NoticeItem } from '@yelon/abc/notice-icon';
 import { _HttpClient, YUNZAI_I18N_TOKEN, YunzaiHttpI18NService } from '@yelon/theme';
 import { WINDOW } from '@yelon/util';
-import { formatDistanceToNow } from 'date-fns';
-
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { NzMessageService } from 'ng-zorro-antd/message';
 

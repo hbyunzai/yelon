@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { YunzaiMockConfig, provideYunzaiConfig } from '@yelon/util/config';
 import * as Mock from 'mockjs';
+
+import { YunzaiMockConfig, provideYunzaiConfig } from '@yelon/util/config';
 
 import { MockOptions, MockRequest, MockRule } from './interface';
 import { MockService } from './mock.service';

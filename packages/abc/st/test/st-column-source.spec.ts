@@ -666,7 +666,7 @@ describe('st: column-source', () => {
             {
               title: '',
               index: 'id',
-              selections: [{ text: '1', select: () => { } }]
+              selections: [{ text: '1', select: () => {} }]
             }
           ],
           1,
@@ -677,7 +677,7 @@ describe('st: column-source', () => {
             {
               title: '',
               index: 'id',
-              selections: [{ text: '1', select: () => { }, acl: 'admin' }]
+              selections: [{ text: '1', select: () => {}, acl: 'admin' }]
             }
           ],
           0,

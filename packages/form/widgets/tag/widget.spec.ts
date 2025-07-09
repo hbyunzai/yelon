@@ -3,7 +3,6 @@ import { ComponentFixture, fakeAsync } from '@angular/core/testing';
 
 import { SFSchema } from '@yelon/form';
 import { createTestContext } from '@yelon/testing';
-
 import { NzTagComponent } from 'ng-zorro-antd/tag';
 
 import { withTagWidget } from './index';

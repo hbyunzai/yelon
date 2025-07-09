@@ -14,7 +14,7 @@ let isErrorRequest = false;
 let isClassZIP = false;
 let isErrorGenZip = false;
 class JSZip {
-  file(): void { }
+  file(): void {}
   generateAsync(): Promise<void> {
     return isErrorGenZip ? Promise.reject('') : Promise.resolve();
   }
@@ -30,7 +30,7 @@ const DEFAULTMOCKJSZIP = {
   loadAsync: () => {
     return Promise.resolve();
   },
-  write: () => { }
+  write: () => {}
 };
 
 class MockHttpClient {

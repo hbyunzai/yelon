@@ -236,7 +236,7 @@ class TestComponent {
 
   pre?: (ev: MouseEvent) => Promise<boolean>;
 
-  success(): void { }
+  success(): void {}
 
-  error(): void { }
+  error(): void {}
 }

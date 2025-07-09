@@ -45,5 +45,5 @@ class TestComponent {
   @ViewChild('comp') comp!: PdfComponent;
   src = '';
   delay = 0;
-  change(): void { }
+  change(): void {}
 }

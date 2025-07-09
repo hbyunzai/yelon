@@ -1,7 +1,6 @@
 import type { TemplateRef } from '@angular/core';
 
 import type { SFUISchemaItem } from '@yelon/form';
-
 import type { NzColor, NzColorPickerFormatType, NzColorPickerTriggerType } from 'ng-zorro-antd/color-picker';
 
 export interface SFColorWidgetSchema extends SFUISchemaItem {

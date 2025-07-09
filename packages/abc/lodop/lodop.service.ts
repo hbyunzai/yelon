@@ -162,7 +162,7 @@ export class LodopService implements OnDestroy {
         try {
           const fakeFn = new Function(`return [${res[2]}]`);
           arr = fakeFn();
-        } catch { }
+        } catch {}
 
         if (arr != null && Array.isArray(arr) && contextObj) {
           for (let i = 0; i < arr.length; i++) {

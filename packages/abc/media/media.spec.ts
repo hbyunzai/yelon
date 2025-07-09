@@ -14,7 +14,7 @@ class MockPlyr {
   on(_key: string, fn: () => void): void {
     fn();
   }
-  destroy(): void { }
+  destroy(): void {}
 }
 
 describe('abc: media', () => {
@@ -110,10 +110,10 @@ class TestComponent {
   source: string | Plyr.SourceInfo = '1.mp4';
   options: NzSafeAny;
   delay = 0;
-  ready(): void { }
+  ready(): void {}
 }
 @Component({
   template: `<media #comp [source]="source"><video data-type="custom"></video></media>`,
   imports: [MediaComponent]
 })
-class TestCustomVideoComponent extends TestComponent { }
+class TestCustomVideoComponent extends TestComponent {}

@@ -5,8 +5,9 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { lastValueFrom, of } from 'rxjs';
 
-import { YunzaiMockConfig, provideYunzaiConfig } from '@yelon/util/config';
 import * as Mock from 'mockjs';
+
+import { YunzaiMockConfig, provideYunzaiConfig } from '@yelon/util/config';
 
 import { MockRequest } from './interface';
 import { mockInterceptor } from './mock.interceptor';

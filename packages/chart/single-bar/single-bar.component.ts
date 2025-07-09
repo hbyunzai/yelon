@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 
 import type { Chart } from '@antv/g2';
+
 import { G2BaseComponent } from '@yelon/chart/core';
 
 @Component({

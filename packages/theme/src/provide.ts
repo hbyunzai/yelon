@@ -19,8 +19,8 @@ import {
   MenuFoldOutline,
   MenuUnfoldOutline
 } from '@ant-design/icons-angular/icons';
-import { YUNZAI_CONFIG, YunzaiConfig } from '@yelon/util/config';
 
+import { YUNZAI_CONFIG, YunzaiConfig } from '@yelon/util/config';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NZ_DATE_LOCALE, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { NzIconService } from 'ng-zorro-antd/icon';

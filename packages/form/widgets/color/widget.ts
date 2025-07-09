@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ControlUIWidget, YelonFormModule } from '@yelon/form';
-
 import { NzColorPickerModule, type NzColor, type NzColorPickerFormatType } from 'ng-zorro-antd/color-picker';
 
 import type { SFColorWidgetSchema } from './schema';

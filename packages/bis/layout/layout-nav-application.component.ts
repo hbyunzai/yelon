@@ -12,7 +12,6 @@ import {
   YunzaiConfigService,
   YunzaiNavTopic
 } from '@yelon/util';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';

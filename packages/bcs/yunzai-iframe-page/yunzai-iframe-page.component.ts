@@ -3,7 +3,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { MenuService } from '@yelon/theme';
 import { LayoutDefaultService } from '@yelon/theme/layout-default';
-
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({

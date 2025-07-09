@@ -45,7 +45,7 @@ describe('theme: DrawerHelper', () => {
           expect(false).toBeTruthy();
           done();
         },
-        error: () => { },
+        error: () => {},
         complete: () => {
           expect(true).toBeTruthy();
           done();
@@ -299,4 +299,4 @@ class TestDrawerComponent {
 @Component({
   template: ``
 })
-class TestComponent { }
+class TestComponent {}

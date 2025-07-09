@@ -5,7 +5,6 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, filter, map } from 'rxjs';
 
 import { YunzaiConfigService } from '@yelon/util/config';
-
 import { NzConfigService } from 'ng-zorro-antd/core/config';
 
 import { SettingsService } from '../settings/settings.service';
