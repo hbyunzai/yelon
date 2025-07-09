@@ -32,12 +32,12 @@ export interface STColumnSourceProcessOptions {
 
 @Injectable()
 export class STColumnSource {
-  private cog!: YunzaiSTConfig;
   private readonly dom = inject(DomSanitizer);
   private readonly rowSource = inject(STRowSource, { host: true });
   private readonly acl = inject(ACLService, { optional: true });
   private readonly i18nSrv = inject(YUNZAI_I18N_TOKEN, { optional: true });
   private readonly stWidgetRegistry = inject(STWidgetRegistry);
+  private cog!: YunzaiSTConfig;
 
   setCog(val: YunzaiSTConfig): void {
     this.cog = val;
@@ -49,7 +49,8 @@ export class STColumnSource {
       return;
     }
 
-    let pop = {
+    let pop: STColumnButtonPop = {
+      okType: 'primary',
       ...def
     };
     if (typeof i.pop === 'string') {
