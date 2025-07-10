@@ -13,6 +13,36 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+
+## 20.0.0-beta.0 (2025-07-10)
+
+* release(20.0.0-beta.0): release 20.0.0-beta.0 ([51e5dd9](https://github.com/hbyunzai/yelon/commit/51e5dd9))
+* fix: fix ci node version ([4562934](https://github.com/hbyunzai/yelon/commit/4562934))
+* fix: fix schema path ([b204a2a](https://github.com/hbyunzai/yelon/commit/b204a2a))
+* fix(form): incorrect strict mode ([7c303f6](https://github.com/hbyunzai/yelon/commit/7c303f6))
+* chore: bump ng-zorro-antd to beta ([42d6073](https://github.com/hbyunzai/yelon/commit/42d6073))
+* chore: bump to angular 20 ([#1905] ([d2db201](https://github.com/hbyunzai/yelon/commit/d2db201)), closes [#1905](https://github.com/hbyunzai/yelon/issues/1905)
+* chore: chore script permission ([fa65d9a](https://github.com/hbyunzai/yelon/commit/fa65d9a))
+* chore: lint code ([569945b](https://github.com/hbyunzai/yelon/commit/569945b))
+* feat(abc:notice-icon): add event of select ([666abe8](https://github.com/hbyunzai/yelon/commit/666abe8))
+* feat(abc:st): add `delay` property ([#1854] ([498a6b0](https://github.com/hbyunzai/yelon/commit/498a6b0)), closes [#1854](https://github.com/hbyunzai/yelon/issues/1854)
+* feat(theme:menu): add `render_type` of menu item ([ab40e60](https://github.com/hbyunzai/yelon/commit/ab40e60))
+* feat(theme:modalhelper): support signal of params ([a4a6ce3](https://github.com/hbyunzai/yelon/commit/a4a6ce3))
+* fix(form:checkbox): make deprecated of `span` property ([315cabd](https://github.com/hbyunzai/yelon/commit/315cabd))
+* refactor(abc:exception): migrate to signals ([91a3460](https://github.com/hbyunzai/yelon/commit/91a3460))
+* refactor(abc:footer-toolbar): migrate to signals ([1118903](https://github.com/hbyunzai/yelon/commit/1118903))
+* refactor(abc:full-content): migrate to signals ([24d5b3d](https://github.com/hbyunzai/yelon/commit/24d5b3d))
+* refactor(abc:global-footer): migrate to signals ([a170b64](https://github.com/hbyunzai/yelon/commit/a170b64))
+* refactor(module:*): remove APIs were marked as deprecated in v19 ([4056ba8](https://github.com/hbyunzai/yelon/commit/4056ba8))
+* refactor(module:*): remove APIs were marked as deprecated in v19 ([41d2cbf](https://github.com/hbyunzai/yelon/commit/41d2cbf))
+* refactor(module:*): remove redundant `preserveWhitespaces` ([c98a916](https://github.com/hbyunzai/yelon/commit/c98a916))
+* refactor(module:*): use inject pattern ([#1909] ([cbc4b7b](https://github.com/hbyunzai/yelon/commit/cbc4b7b)), closes [#1909](https://github.com/hbyunzai/yelon/issues/1909)
+* test(abc:st): add `delay` ([#1910] ([cdcca58](https://github.com/hbyunzai/yelon/commit/cdcca58)), closes [#1910](https://github.com/hbyunzai/yelon/issues/1910)
+* refactor(*): migrate rtl & locale to signals ([433ec64](https://github.com/hbyunzai/yelon/commit/433ec64))
+* feat(form): support string array in `placeholder` ([65ba7fa](https://github.com/hbyunzai/yelon/commit/65ba7fa))
+* test: fix form test ([1a916d5](https://github.com/hbyunzai/yelon/commit/1a916d5))
+
+
 ## 19.2.0 (2025-04-22)
 
 * chore: lint code ([6c83ee5](https://github.com/hbyunzai/yelon/commit/6c83ee5))
