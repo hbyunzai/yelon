@@ -14,6 +14,17 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 
 ---
 
+## 20.0.0 (2025-07-28)
+
+* fix: add changelog ([522dcca](https://github.com/hbyunzai/yelon/commit/522dcca))
+* fix: fix package version ([caff832](https://github.com/hbyunzai/yelon/commit/caff832))
+* fix: fix result module in schematics ([91393d2](https://github.com/hbyunzai/yelon/commit/91393d2))
+* chore: fix eslint ([e56b4c8](https://github.com/hbyunzai/yelon/commit/e56b4c8))
+* chore: fix site code ([6507edc](https://github.com/hbyunzai/yelon/commit/6507edc))
+* build: bump ng-zorro-antd to 20.1.0 ([54d182f](https://github.com/hbyunzai/yelon/commit/54d182f))
+
+
+
 ## 20.0.0-beta.0 (2025-07-10)
 
 * release(20.0.0-beta.0): release 20.0.0-beta.0 ([51e5dd9](https://github.com/hbyunzai/yelon/commit/51e5dd9))
