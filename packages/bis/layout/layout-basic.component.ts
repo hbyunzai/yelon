@@ -86,14 +86,7 @@ export interface ApplicationInfoInterface {
         <theme-btn />
       </layout-default-header-item>
       <layout-default-header-item direction="right" hidden="mobile">
-        <div
-          data-event-id="_nav_settings"
-          layout-default-header-item-trigger
-          nz-dropdown
-          [nzDropdownMenu]="settingsMenu"
-          nzTrigger="click"
-          nzPlacement="bottomRight"
-        >
+        <div data-event-id="_nav_settings" layout-default-header-item-trigger nz-dropdown [nzDropdownMenu]="settingsMenu" nzTrigger="click" nzPlacement="bottomRight">
           <nz-icon nzType="setting" nzTheme="outline"></nz-icon>
         </div>
         <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
@@ -104,12 +97,7 @@ export interface ApplicationInfoInterface {
 
             @if (headerStyleList.length > 1) {
               @for (i of headerStyleList; track $index) {
-                <div
-                  data-event-id="_nav_mode"
-                  nz-menu-item
-                  [attr.data-type]="i.value"
-                  (click)="onNavTypeChange(i.value)"
-                >
+                <div data-event-id="_nav_mode" nz-menu-item [attr.data-type]="i.value" (click)="onNavTypeChange(i.value)">
                   <ng-container [ngSwitch]="i.value">
                     <ng-container *ngSwitchCase="NavType.APPLICATION">
                       <nz-icon nzType="appstore" nzTheme="outline" class="mr-sm" />
@@ -152,13 +140,8 @@ export interface ApplicationInfoInterface {
       </layout-default-header-item>
     </layout-default>
     <ng-template #asideUserTpl>
-      <div data-event-id="_route_user" class="yunzai-default__aside-user">
-        <nz-avatar
-          class="yunzai-default__aside-user-avatar"
-          [nzSize]="40"
-          [nzSrc]="aside.icon"
-          (click)="aboutApplication()"
-        />
+      <div data-event-id="_route_user" class="yunzai-default__aside-user" style="margin-bottom: 8px">
+        <nz-avatar class="yunzai-default__aside-user-avatar" style="flex-wrap: wrap;" [nzSize]="40" [nzSrc]="aside.icon" (click)="aboutApplication()" />
         <div class="yunzai-default__aside-user-info" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu">
           <strong>{{ aside.name | i18n }}</strong>
           <p>{{ aside.intro | i18n }}</p>
@@ -178,36 +161,36 @@ export interface ApplicationInfoInterface {
       <router-outlet />
     </ng-template>
 
-    <nz-modal
-      nzTitle="关于本应用"
-      [(nzVisible)]="applicationModal.isVisible"
-      [nzOkText]="null"
-      [nzCancelText]="'关闭'"
-      [nzWidth]="700"
-      (nzOnCancel)="applicationModal.isVisible = false"
-    >
+    <nz-modal nzTitle="关于本应用" [(nzVisible)]="applicationModal.isVisible" [nzOkText]="null" [nzCancelText]="'关闭'" [nzWidth]="700" (nzOnCancel)="applicationModal.isVisible = false">
       <ng-container *nzModalContent>
         <nz-skeleton [nzLoading]="applicationModal.loading" [nzActive]="true">
           <nz-descriptions nzBordered [nzSize]="'middle'" [nzColumn]="{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }">
             <nz-descriptions-item nzTitle="应用名称">{{ applicationInfo?.showName }}</nz-descriptions-item>
             <nz-descriptions-item nzTitle="应用标识">{{ applicationInfo?.name }}</nz-descriptions-item>
             <nz-descriptions-item nzTitle="版本总数">{{ applicationInfo?.versionNum }}</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="应用首次部署时间">{{
-              applicationInfo?.firstDeploymentDate | date: 'yyyy-MM-dd HH:mm:ss'
-            }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="应用首次部署时间">{{ applicationInfo?.firstDeploymentDate | date: 'yyyy-MM-dd HH:mm:ss' }}</nz-descriptions-item>
             <nz-descriptions-item nzTitle="当前版本">{{ applicationInfo?.currentVersion }}</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="当前版本部署时间">{{
-              applicationInfo?.currentDeploymentDate | date: 'yyyy-MM-dd HH:mm:ss'
-            }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="当前版本部署时间">{{ applicationInfo?.currentDeploymentDate | date: 'yyyy-MM-dd HH:mm:ss' }}</nz-descriptions-item>
             <nz-descriptions-item nzTitle="最新版本">{{ applicationInfo?.lastVersion }}</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="最新版本发布时间">{{
-              applicationInfo?.lastPushDate | date: 'yyyy-MM-dd HH:mm:ss'
-            }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="最新版本发布时间">{{ applicationInfo?.lastPushDate | date: 'yyyy-MM-dd HH:mm:ss' }}</nz-descriptions-item>
           </nz-descriptions>
         </nz-skeleton>
       </ng-container>
     </nz-modal>
   `,
+  styles: [
+    `
+      ::ng-deep .sidebar-nav__item-icon {
+        display: none;
+      }
+
+      ::ng-deep .sidebar-nav__item-icon.anticon,
+      ::ng-deep .sidebar-nav__item-icon.sidebar-nav__item-img,
+      ::ng-deep .sidebar-nav__item-icon.sidebar-nav__item-svg {
+        display: inline-block;
+      }
+    `
+  ],
   imports: [
     LayoutDefaultModule,
     RouterModule,
