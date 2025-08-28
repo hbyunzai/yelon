@@ -1,7 +1,7 @@
 @import '@yelon/theme/theme-default.less';
 
 :root {
-  --primary-color: @primary-color; 
+  --primary-color: @primary-color;
   --fade10-primary-color: fade(@primary-color, 10%);
   --fade25-primary-color: fade(@primary-color, 25%);
 }
@@ -60,7 +60,7 @@
         width: calc(100% - 50px);
       }
 
-      span {
+      .anticon-right {
         font-size: 10px;
         margin-left: 8px;
       }
@@ -68,7 +68,7 @@
       &:hover{
         background: var(--fade25-primary-color);
 
-        b, span {
+        b, .anticon-right {
           color: var(--primary-color);
           font-weight: 600;
         }
@@ -89,6 +89,16 @@
   padding: 36px 40px;
   height: 100%;
 
+  .ant-input-affix-wrapper{
+    background-color: @yz-application-bgColor;
+    .ant-input{
+      background-color: @yz-application-bgColor;
+      color: @yz-application-list-ul-h5-color;
+    }
+    .ant-input-prefix{
+      color: @yz-application-list-ul-h5-color;
+    }
+  }
   .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
     border-color: var(--primary-color) !important;
   }
