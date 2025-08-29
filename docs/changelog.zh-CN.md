@@ -13,6 +13,12 @@ NG-YUNZAI 严格遵循 [Semantic Versioning 2.0.0](http://semver.org/lang/zh-CN/
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
 ---
+## <small>20.0.2 (2025-08-29)</small>
+
+* fix: fix theme json ([93648ca](https://github.com/hbyunzai/yelon/commit/93648ca))
+* chore: refactor theme ([ac10e40](https://github.com/hbyunzai/yelon/commit/ac10e40))
+
+
 ## <small>20.0.1 (2025-08-29)</small>
 
 * fix(layout): 修改一些样式 ([88906f1](https://github.com/hbyunzai/yelon/commit/88906f1))
