@@ -4,13 +4,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { I18nPipe } from '@yelon/theme';
-import {
-  useLocalStorageProjectInfo,
-  useLocalStorageUser,
-  WINDOW,
-  YunzaiConfigService,
-  YunzaiProfile
-} from '@yelon/util';
+import { useLocalStorageProjectInfo, useLocalStorageUser, WINDOW, YunzaiConfigService, YunzaiProfile } from '@yelon/util';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzI18nModule } from 'ng-zorro-antd/i18n';
@@ -39,13 +33,7 @@ import { YunzaiStartupService } from '../startup.service';
               <ng-template *ngTemplateOutlet="_slogan" />
             </div>
             @if (isLogin) {
-              <a
-                class="yz-layout-website-02-link"
-                nz-dropdown
-                [nzDropdownMenu]="menu"
-                [nzDisabled]="!_userMenuShow"
-                [nzPlacement]="'bottomRight'"
-              >
+              <a class="yz-layout-website-02-link" nz-dropdown [nzDropdownMenu]="menu" [nzDisabled]="!_userMenuShow" [nzPlacement]="'bottomRight'">
                 <nz-avatar nzIcon="user" [nzSrc]="_avatar" /><b>欢迎访问：{{ _username }}</b>
                 <span nz-icon nzType="down" *ngIf="_userMenuShow"></span>
               </a>
@@ -54,15 +42,11 @@ import { YunzaiStartupService } from '../startup.service';
                   @for (link of _links; track $index) {
                     <li nz-menu-item class="yz-layout-website-02-link__li" (click)="to(link.url)">{{ link.name }}</li>
                   }
-                  <li nz-menu-item nzDanger class="yz-layout-website-02-link__li" (click)="logout()">{{
-                    'menu.account.logout' | i18n
-                  }}</li>
+                  <li nz-menu-item nzDanger class="yz-layout-website-02-link__li" (click)="logout()">{{ 'menu.account.logout' | i18n }}</li>
                 </ul>
               </nz-dropdown-menu>
             } @else {
-              <a class="yz-layout-website-02-link" (click)="login()">
-                <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a
-              >
+              <a class="yz-layout-website-02-link" (click)="login()"> <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a>
             }
           </div>
         </div>
@@ -73,17 +57,7 @@ import { YunzaiStartupService } from '../startup.service';
     </div>
   `,
 
-  imports: [
-    RouterOutlet,
-    I18nPipe,
-    NzI18nModule,
-    NgFor,
-    NgIf,
-    NzDropDownModule,
-    NzIconModule,
-    NgTemplateOutlet,
-    NzAvatarModule
-  ]
+  imports: [RouterOutlet, I18nPipe, NzI18nModule, NgFor, NgIf, NzDropDownModule, NzIconModule, NgTemplateOutlet, NzAvatarModule]
 })
 export class YunzaiLayoutWebsite02Component {
   @Input() logoSrc?: string | any;

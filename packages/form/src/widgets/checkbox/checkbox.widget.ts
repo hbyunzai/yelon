@@ -10,26 +10,12 @@ import { ControlUIWidget } from '../../widget';
   selector: 'sf-checkbox',
   template: `<ng-template #all>
       @if (ui.checkAll) {
-        <label
-          nz-checkbox
-          class="sf__checkbox-all mr-sm"
-          [(ngModel)]="allChecked"
-          (ngModelChange)="onAllChecked()"
-          [nzIndeterminate]="indeterminate"
-        >
+        <label nz-checkbox class="sf__checkbox-all mr-sm" [(ngModel)]="allChecked" (ngModelChange)="onAllChecked()" [nzIndeterminate]="indeterminate">
           {{ ui.checkAllText || l.checkAllText }}
         </label>
       }
     </ng-template>
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="true"
-      [title]="labelTitle"
-    >
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="true" [title]="labelTitle">
       @if (inited) {
         @if (data.length === 0) {
           <label nz-checkbox [nzDisabled]="disabled" [ngModel]="value" (ngModelChange)="_setValue($event)">

@@ -140,8 +140,8 @@ export interface ApplicationInfoInterface {
       </layout-default-header-item>
     </layout-default>
     <ng-template #asideUserTpl>
-      <div data-event-id="_route_user" class="yunzai-default__aside-user" style="margin-bottom: 8px">
-        <nz-avatar class="yunzai-default__aside-user-avatar" style="flex-wrap: wrap;" [nzSize]="40" [nzSrc]="aside.icon" (click)="aboutApplication()" />
+      <div data-event-id="_route_user" class="yunzai-default__aside-user">
+        <nz-avatar class="yunzai-default__aside-user-avatar" [nzSize]="40" [nzSrc]="aside.icon" (click)="aboutApplication()" />
         <div class="yunzai-default__aside-user-info" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu">
           <strong>{{ aside.name | i18n }}</strong>
           <p>{{ aside.intro | i18n }}</p>
@@ -178,19 +178,6 @@ export interface ApplicationInfoInterface {
       </ng-container>
     </nz-modal>
   `,
-  styles: [
-    `
-      ::ng-deep .sidebar-nav__item-icon {
-        display: none;
-      }
-
-      ::ng-deep .sidebar-nav__item-icon.anticon,
-      ::ng-deep .sidebar-nav__item-icon.sidebar-nav__item-img,
-      ::ng-deep .sidebar-nav__item-icon.sidebar-nav__item-svg {
-        display: inline-block;
-      }
-    `
-  ],
   imports: [
     LayoutDefaultModule,
     RouterModule,

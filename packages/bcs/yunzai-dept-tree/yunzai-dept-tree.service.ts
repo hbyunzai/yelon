@@ -29,12 +29,7 @@ export class YunzaiDeptTreeService {
    * @param types dept types
    * @param gradeId gradeId
    */
-  tree(
-    includeClass: boolean,
-    history: boolean,
-    types?: YUNZAI_DEPT_TYPES[],
-    gradeId?: string
-  ): Observable<YunzaiDeptTree[]>;
+  tree(includeClass: boolean, history: boolean, types?: YUNZAI_DEPT_TYPES[], gradeId?: string): Observable<YunzaiDeptTree[]>;
 
   /**
    * @param includeClass include class
@@ -42,12 +37,7 @@ export class YunzaiDeptTreeService {
    * @param types dept types
    * @param gradeId gradeId
    */
-  tree(
-    includeClass: boolean,
-    history: boolean,
-    types?: YUNZAI_DEPT_TYPES[],
-    gradeId?: string
-  ): Observable<YunzaiDeptTree[]> {
+  tree(includeClass: boolean, history: boolean, types?: YUNZAI_DEPT_TYPES[], gradeId?: string): Observable<YunzaiDeptTree[]> {
     let params = Object.create({});
     if (includeClass) {
       params['includeClass'] = true;

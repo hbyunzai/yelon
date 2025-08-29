@@ -3,12 +3,14 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
+import { mergeBisConfig } from '@yelon/bis/config';
 import { _HttpClient, I18nPipe, YunzaiHttpI18NService } from '@yelon/theme';
-import { LayoutNavApplicationState, useLocalStorageHeader, WINDOW, YUNZAI_CONFIG, YunzaiBusinessConfig, YunzaiConfig, YunzaiNavTopic } from '@yelon/util';
+import { LayoutNavApplicationState, useLocalStorageHeader, WINDOW, YunzaiConfigService, YunzaiNavTopic } from '@yelon/util';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+
 @Component({
   selector: `yunzai-layout-nav-application`,
   template: `
@@ -24,63 +26,82 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     </ng-template>
 
     <ng-template #ld>
-      <div style="overflow: hidden;width: 100%; height: calc(100% - 58px)">
-        <div class="yz-application-list">
-          <ul>
-            <li *ngFor="let topic of state.list">
+      <div class="yz-application-list">
+        <ul>
+          @for (topic of state.list; track topic) {
+            <li>
               <h5>{{ topic.name | i18n }}</h5>
-              <a data-event-id="_nav_item" [attr.data-name]="nav.name | i18n" href="javascript:;" *ngFor="let nav of topic.children" (click)="open(nav)">{{ nav.name | i18n }}</a>
+              @for (nav of topic.children; track nav) {
+                <a data-event-id="_nav_item" [attr.data-name]="nav.name | i18n" href="javascript:;" (click)="open(nav)">{{ nav.name | i18n }}</a>
+              }
             </li>
-          </ul>
-        </div>
+          }
+        </ul>
       </div>
     </ng-template>
 
-    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item" (click)="diffChange()">{{ 'mode.nav' | i18n }}</div>
+    <div data-event-id="_nav_app" id="navBtn" class="yunzai-default__nav-item" (click)="diffChange()">{{ 'mode.nav' | i18n }} </div>
 
-    <div class="yz-application" id="navDropdown" *ngIf="state.active">
-      <div class="yz-application-topic">
-        <h2>{{ 'mode.nav' | i18n }}</h2>
-        <dl>
-          <dd *ngIf="showMineMenu" data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')">
-            <b> {{ 'mode.nav.mine' | i18n }}</b>
-            <nz-icon nzType="right" nzTheme="outline"></nz-icon>
-          </dd>
-          <dd data-event-id="_nav_topic" [attr.data-name]="nav.name | i18n" class="yz-application-text" *ngFor="let nav of state.topics" (click)="attachNav('other', nav)">
-            <b>{{ nav.name | i18n }}</b>
-            <nz-icon nzType="right" nzTheme="outline"></nz-icon>
-          </dd>
-        </dl>
-      </div>
-      <div [ngSwitch]="state.topic" class="yz-application-container">
-        <ng-container *ngIf="state.type === 'mine'">
-          <ng-template [ngTemplateOutlet]="search"></ng-template>
-          <ng-template [ngTemplateOutlet]="ld"></ng-template>
-        </ng-container>
-        <div *ngIf="state.type === 'other'" style="overflow: hidden;width: 100%; height: 100%">
-          <div class="yz-application-list">
-            <div class="yz-application-list-item">
-              <ul>
-                <li data-event-id="_nav_item" [attr.data-name]="nav.name | i18n" *ngFor="let nav of state.list" (click)="open(nav)">
-                  <a href="javascript:;">
-                    <h4>{{ nav.name | i18n }}</h4>
-                    <p>{{ nav.intro | i18n }}</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+    <div class="yz-application" id="navDropdown" nz-row *ngIf="state.active">
+      <div nz-col [nzSpan]="3" class="yz-application-topic">
+        <div class="yz-application-topic-list">
+          @if (showAllMenu) {
+            <div data-event-id="_nav_topic" data-name="全部应用" class="yz-application-text" (click)="attachNav('all')">{{ 'mode.nav.all' | i18n }} </div>
+          }
+          @if (showMineMenu) {
+            <div data-event-id="_nav_topic" data-name="我的应用" class="yz-application-text" (click)="attachNav('mine')">{{ 'mode.nav.mine' | i18n }} </div>
+          }
+          @for (nav of state.topics; track nav) {
+            <div data-event-id="_nav_topic" [attr.data-name]="nav.name | i18n" class="yz-application-text" (click)="attachNav('other', nav)">{{ nav.name | i18n }} </div>
+          }
         </div>
+      </div>
+      <div nz-col [nzSpan]="21" class="yz-application-container">
+        @switch (state.type) {
+          @case ('all') {
+            <div>
+              <ng-template [ngTemplateOutlet]="search" />
+              <ng-template [ngTemplateOutlet]="ld" />
+            </div>
+          }
+          @case ('mine') {
+            <div>
+              <ng-template [ngTemplateOutlet]="search" />
+              <ng-template [ngTemplateOutlet]="ld" />
+            </div>
+          }
+          @case ('other') {
+            <div class="yz-application-list yz-application-list-other">
+              <div class="yz-application-list-item">
+                <ul>
+                  @for (nav of state.list; track nav) {
+                    <li data-event-id="_nav_item" [attr.data-name]="nav.name | i18n" (click)="open(nav)">
+                      <a href="javascript:;">
+                        <h4>{{ nav.name | i18n }}</h4>
+                        <p>{{ nav.intro | i18n }}</p>
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          }
+        }
       </div>
     </div>
   `,
   imports: [I18nPipe, FormsModule, NzFormModule, NzInputModule, CommonModule, NzGridModule, NzIconModule]
 })
 export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
-  private $destroy = new Subject();
+  private readonly config = mergeBisConfig(inject(YunzaiConfigService));
+  private readonly http = inject(_HttpClient);
+  private readonly win = inject(WINDOW);
+  private readonly i18n = inject(YunzaiHttpI18NService);
+  private readonly destroy$ = new Subject();
+
   state: LayoutNavApplicationState = {
     active: false,
-    type: 'mine',
+    type: 'all',
     topic: undefined,
     topics: [],
     list: [],
@@ -88,24 +109,18 @@ export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
   };
 
   get showAllMenu(): boolean {
-    if (this.bis.nav) return this.bis.nav!.all!;
+    if (this.config.nav) return this.config.nav!.all!;
     return true;
   }
 
   get showMineMenu(): boolean {
-    if (this.bis.nav) return this.bis.nav!.mine!;
+    if (this.config.nav) return this.config.nav!.mine!;
     return true;
   }
 
-  private i18n: YunzaiHttpI18NService = inject(YunzaiHttpI18NService);
-  private http: _HttpClient = inject(_HttpClient);
-  private win: any = inject(WINDOW);
-  private conf: YunzaiConfig = inject(YUNZAI_CONFIG);
-  private bis: YunzaiBusinessConfig = this.conf.bis!;
-
   ngOnInit(): void {
     this.fetchAllTopic();
-    this.attachNav('mine');
+    this.attachNav('all');
     this.win.addEventListener('click', (event: any) => {
       const { target } = event;
       const btn = this.win.document.getElementById('navBtn');
@@ -180,7 +195,7 @@ export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
           appId: topic.key,
           createDate: new Date()
         })
-        .pipe(takeUntil(this.$destroy))
+        .pipe(takeUntil(this.destroy$))
         .subscribe();
     }
     switch (topic.target) {
@@ -224,6 +239,6 @@ export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.$destroy.complete();
+    this.destroy$.complete();
   }
 }

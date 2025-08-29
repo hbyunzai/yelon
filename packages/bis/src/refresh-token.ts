@@ -10,12 +10,7 @@ import { toLogin } from './helper';
 let refreshToking = false;
 let refreshToken$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-export const tryRefreshToken = (
-  injector: Injector,
-  ev: HttpResponseBase,
-  req: HttpRequest<any>,
-  next: HttpHandlerFn
-): Observable<any> => {
+export const tryRefreshToken = (injector: Injector, ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandlerFn): Observable<any> => {
   // 连刷新Token的请求都错了，那就是真错了
   if (['/auth/oauth/getOrCreateToken/webapp'].some(url => req.url.includes(url))) {
     toLogin(injector);

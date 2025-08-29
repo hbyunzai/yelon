@@ -7,14 +7,7 @@ import { ControlUIWidget } from '../../widget';
 
 @Component({
   selector: 'sf-string',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #ipt>
       <input
         nz-input
@@ -63,26 +56,11 @@ export class StringWidget extends ControlUIWidget<SFStringWidgetSchema> implemen
   private change$: BehaviorSubject<string> | null = null;
 
   ngOnInit(): void {
-    const {
-      addOnAfter,
-      addOnAfterIcon,
-      addOnBefore,
-      addOnBeforeIcon,
-      prefix,
-      prefixIcon,
-      suffix,
-      suffixIcon,
-      autofocus
-    } = this.ui;
-    this.type =
-      addOnAfter || addOnBefore || addOnAfterIcon || addOnBeforeIcon || prefix || prefixIcon || suffix || suffixIcon
-        ? 'addon'
-        : '';
+    const { addOnAfter, addOnAfterIcon, addOnBefore, addOnBeforeIcon, prefix, prefixIcon, suffix, suffixIcon, autofocus } = this.ui;
+    this.type = addOnAfter || addOnBefore || addOnAfterIcon || addOnBeforeIcon || prefix || prefixIcon || suffix || suffixIcon ? 'addon' : '';
     if (autofocus === true) {
       setTimeout(() => {
-        (
-          (this.injector.get(ElementRef).nativeElement as HTMLElement).querySelector(`#${this.id}`) as HTMLElement
-        ).focus();
+        ((this.injector.get(ElementRef).nativeElement as HTMLElement).querySelector(`#${this.id}`) as HTMLElement).focus();
       }, 20);
     }
     this.initChange();

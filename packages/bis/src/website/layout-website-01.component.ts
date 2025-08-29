@@ -4,13 +4,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { I18nPipe } from '@yelon/theme';
-import {
-  YunzaiProfile,
-  useLocalStorageProjectInfo,
-  useLocalStorageUser,
-  WINDOW,
-  YunzaiConfigService
-} from '@yelon/util';
+import { YunzaiProfile, useLocalStorageProjectInfo, useLocalStorageUser, WINDOW, YunzaiConfigService } from '@yelon/util';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzI18nModule } from 'ng-zorro-antd/i18n';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -23,12 +17,7 @@ import { YunzaiStartupService } from '../startup.service';
     <div class="yz-layout-website-01">
       <div class="yz-layout-website-01-nav__user">
         @if (isLogin) {
-          <a
-            class="yz-layout-website-01-link"
-            nz-dropdown
-            [nzDropdownMenu]="menu"
-            [nzOverlayStyle]="{ width: '120px' }"
-          >
+          <a class="yz-layout-website-01-link" nz-dropdown [nzDropdownMenu]="menu" [nzOverlayStyle]="{ width: '120px' }">
             <span nz-icon nzType="user" nzTheme="outline"></span>{{ _username }}<span nz-icon nzType="down"></span>
           </a>
           <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -36,15 +25,11 @@ import { YunzaiStartupService } from '../startup.service';
               @for (link of _links; track $index) {
                 <li nz-menu-item class="yz-layout-website-01-link__li" (click)="to(link.url)">{{ link.name }}</li>
               }
-              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()"
-                >{{ 'menu.account.logout' | i18n }}
-              </li>
+              <li nz-menu-item [nzDanger]="true" class="yz-layout-website-01-link__li" (click)="logout()">{{ 'menu.account.logout' | i18n }} </li>
             </ul>
           </nz-dropdown-menu>
         } @else {
-          <a class="yz-layout-website-01-link" (click)="login()">
-            <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a
-          >
+          <a class="yz-layout-website-01-link" (click)="login()"> <span nz-icon nzType="login" nzTheme="outline"></span>{{ 'app.login.login' | i18n }}</a>
         }
       </div>
 

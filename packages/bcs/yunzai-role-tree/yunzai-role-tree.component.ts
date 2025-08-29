@@ -1,15 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
 
 import { SFComponent, SFValueChange, YelonFormModule } from '@yelon/form';
@@ -59,12 +49,7 @@ import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunz
     <ng-template #treeTemplate let-node let-origin="origin">
       @if (!node.isLeaf) {
         <span [title]="node.title">
-          <i
-            nz-icon
-            nzTheme="twotone"
-            [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
-            (click)="open(node)"
-          ></i>
+          <i nz-icon nzTheme="twotone" [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'" (click)="open(node)"></i>
           <span class="leaf-name">{{ node.title }}</span>
         </span>
       } @else {
@@ -81,16 +66,7 @@ import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunz
     <ng-template #blank />
   `,
 
-  imports: [
-    NzSpinModule,
-    YelonFormModule,
-    NzButtonModule,
-    NzIconModule,
-    NzEmptyModule,
-    NzTreeModule,
-    CommonModule,
-    NzCardModule
-  ],
+  imports: [NzSpinModule, YelonFormModule, NzButtonModule, NzIconModule, NzEmptyModule, NzTreeModule, CommonModule, NzCardModule],
   providers: [YunzaiRoleTreeService]
 })
 export class YunzaiRoleTreeComponent implements OnInit, AfterViewInit, OnDestroy {

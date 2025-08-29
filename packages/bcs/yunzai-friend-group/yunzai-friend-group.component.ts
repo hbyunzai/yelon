@@ -1,15 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  AfterViewInit,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild,
-  inject
-} from '@angular/core';
+import { Component, AfterViewInit, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { catchError, debounceTime, map, Subject, takeUntil, throwError } from 'rxjs';
 
 import { SFComponent, YelonFormModule } from '@yelon/form';

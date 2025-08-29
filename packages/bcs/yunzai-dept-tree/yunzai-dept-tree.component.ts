@@ -1,15 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { catchError, debounceTime, map, of, Subject, switchMap, takeUntil, throwError, zip } from 'rxjs';
 
 import { YunzaiGrade, YunzaiGradeService } from '@yelon/bcs/yunzai-grade';
@@ -59,12 +49,7 @@ import { YUNZAI_DEPT_TYPES, YunzaiDeptTree, YunzaiDeptTreeProps, YunzaiDeptTreeS
     <ng-template #treeTemplate let-node let-origin="origin">
       @if (!node.isLeaf) {
         <span [title]="node.title">
-          <i
-            nz-icon
-            nzTheme="twotone"
-            [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'"
-            (click)="open(node)"
-          ></i>
+          <i nz-icon nzTheme="twotone" [nzType]="node.isExpanded ? 'minus-square' : 'plus-square'" (click)="open(node)"></i>
           <span class="leaf-name">{{ node.title }}</span>
         </span>
       } @else {
@@ -216,10 +201,7 @@ export class YunzaiDeptTreeComponent implements OnInit, OnDestroy, AfterViewInit
           if (this.props && this.props.data) {
             return zip(of(search), of(this.state.dataBackup));
           }
-          return zip(
-            of(search),
-            this.deptTreeService.tree(!!includeClass, !!includeClassHistory, this.deptTypes, gradeId)
-          );
+          return zip(of(search), this.deptTreeService.tree(!!includeClass, !!includeClassHistory, this.deptTypes, gradeId));
         }),
         map(([search, depts]) => {
           this.state.expandKeys = [];
