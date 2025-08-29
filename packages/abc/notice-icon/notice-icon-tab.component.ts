@@ -14,14 +14,7 @@ import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
   templateUrl: './notice-icon-tab.component.html',
 
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    NgTemplateOutlet,
-    NzStringTemplateOutletDirective,
-    NzListComponent,
-    NzListItemComponent,
-    NzListItemMetaComponent,
-    NzTagComponent
-  ]
+  imports: [NgTemplateOutlet, NzStringTemplateOutletDirective, NzListComponent, NzListItemComponent, NzListItemMetaComponent, NzTagComponent]
 })
 export class NoticeIconTabComponent {
   locale = input.required<LocaleData>();

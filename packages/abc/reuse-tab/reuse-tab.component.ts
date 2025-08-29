@@ -61,14 +61,7 @@ import { REUSE_TAB_STORAGE_KEY, REUSE_TAB_STORAGE_STATE } from './reuse-tab.stat
   providers: [ReuseTabContextService],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    NgTemplateOutlet,
-    NzTabsComponent,
-    NzTabComponent,
-    ReuseTabContextDirective,
-    ReuseTabContextComponent,
-    NzIconDirective
-  ]
+  imports: [NgTemplateOutlet, NzTabsComponent, NzTabComponent, ReuseTabContextDirective, ReuseTabContextComponent, NzIconDirective]
 })
 export class ReuseTabComponent implements OnInit, OnChanges {
   private readonly srv = inject(ReuseTabService, { optional: true })!;

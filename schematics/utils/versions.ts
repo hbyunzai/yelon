@@ -11,9 +11,7 @@ import { BUILD_TARGET_LINT, getProjectFromWorkspace } from './workspace';
 export function UpgradeMainVersions(tree: Tree, version: string = VERSION): void {
   addPackage(
     tree,
-    ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart', 'bis', 'bcs', 'socket'].map(
-      name => `@yelon/${name}@${version}`
-    )
+    ['abc', 'acl', 'auth', 'cache', 'form', 'mock', 'theme', 'util', 'chart', 'bis', 'bcs', 'socket'].map(name => `@yelon/${name}@${version}`)
   );
   addPackage(
     tree,

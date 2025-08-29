@@ -26,15 +26,7 @@ interface ThemeItem {
   host: {
     '[class.home-wrapper]': 'true'
   },
-  imports: [
-    RouterLink,
-    I18nPipe,
-    NzCarouselModule,
-    NzTooltipModule,
-    NzButtonModule,
-    GithubButtonComponent,
-    FooterComponent
-  ]
+  imports: [RouterLink, I18nPipe, NzCarouselModule, NzTooltipModule, NzButtonModule, GithubButtonComponent, FooterComponent]
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   readonly i18n = inject(YUNZAI_I18N_TOKEN);

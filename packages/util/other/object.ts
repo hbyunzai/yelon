@@ -10,20 +10,9 @@
  */
 export function omit<T extends object>(obj: T | null | undefined, params?: string | number | null): T;
 export function omit<T extends object>(obj: T | null | undefined, params?: Array<string | number> | null): T;
-export function omit<T extends object>(
-  obj: T | null | undefined,
-  fn: (key: string | number, value: any, obj: T) => boolean
-): T;
-export function omit<T extends object>(
-  obj: T | null | undefined,
-  params: Array<string | number> | null,
-  fn: (key: string | number, value: any, obj: T) => boolean
-): T;
-export function omit<T extends object>(
-  obj: T | null | undefined,
-  params: any,
-  fn?: (key: string | number, value: any, obj: T) => boolean
-): T {
+export function omit<T extends object>(obj: T | null | undefined, fn: (key: string | number, value: any, obj: T) => boolean): T;
+export function omit<T extends object>(obj: T | null | undefined, params: Array<string | number> | null, fn: (key: string | number, value: any, obj: T) => boolean): T;
+export function omit<T extends object>(obj: T | null | undefined, params: any, fn?: (key: string | number, value: any, obj: T) => boolean): T {
   if (obj == null) return {} as T;
   if (typeof params === 'function') {
     fn = params;
@@ -31,8 +20,6 @@ export function omit<T extends object>(
   }
   const isFn = typeof fn === 'function';
   params = Array.isArray(params) ? params : [params];
-  const res = Object.fromEntries(
-    Object.entries(obj).filter(i => !params || (!params.includes(i[0]) && (!isFn || fn!(i[0], i[1], obj))))
-  );
+  const res = Object.fromEntries(Object.entries(obj).filter(i => !params || (!params.includes(i[0]) && (!isFn || fn!(i[0], i[1], obj)))));
   return res as T;
 }

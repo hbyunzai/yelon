@@ -23,11 +23,7 @@ describe('Schematic: view', () => {
     });
 
     it('should support a.b.c module name', async () => {
-      tree = await runner.runSchematic(
-        'view',
-        { name: 'view', module: 'trade', target: 'list', standalone: false },
-        tree
-      );
+      tree = await runner.runSchematic('view', { name: 'view', module: 'trade', target: 'list', standalone: false }, tree);
       expect(tree.exists('/projects/foo/src/app/routes/trade/list/view/view.component.ts')).toBe(true);
     });
   });
@@ -44,17 +40,11 @@ describe('Schematic: view', () => {
 
     it('should be generate list page', () => {
       [routingPath, tsPath, htmlPath].forEach(path => expect(tree.exists(path)).toBe(true));
-      expect(tree.readContent(routingPath)).not.toContain(
-        `import { TradeViewComponent } from './view/view.component';`
-      );
+      expect(tree.readContent(routingPath)).not.toContain(`import { TradeViewComponent } from './view/view.component';`);
     });
 
     it('should support a.b.c module name', async () => {
-      tree = await runner.runSchematic(
-        'view',
-        { name: 'view', module: 'trade', target: 'list', standalone: true },
-        tree
-      );
+      tree = await runner.runSchematic('view', { name: 'view', module: 'trade', target: 'list', standalone: true }, tree);
       expect(tree.exists('/projects/foo/src/app/routes/trade/list/view/view.component.ts')).toBe(true);
     });
   });

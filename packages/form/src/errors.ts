@@ -102,11 +102,7 @@ export interface ErrorSchema {
    *
    * 自定义校验，最后结果会与 Ajv 校验结果进行合并显示
    */
-  validator?: (
-    value: SFValue,
-    formProperty: FormProperty,
-    form: PropertyGroup
-  ) => ErrorData[] | Observable<ErrorData[]>;
+  validator?: (value: SFValue, formProperty: FormProperty, form: PropertyGroup) => ErrorData[] | Observable<ErrorData[]>;
 
   /**
    * Form status value, only supports `this.sf.getProperty('/department')?.updateFeedback('validating')` calling method

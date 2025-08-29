@@ -13,9 +13,7 @@ import { authJWTInterceptor } from './jwt.interceptor';
 import { JWTTokenModel } from './jwt.model';
 
 function genModel(
-  token:
-    | string
-    | null = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6Inl1bnphaS1ib3QiLCJhZG1pbiI6dHJ1ZSwiZXhwIjo0NjcwNDA5NjAwfQ.VfRGUDLkemgGmbWFg5ofZzhM4mxHnFiYaxsztbPDICQ`
+  token: string | null = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6Inl1bnphaS1ib3QiLCJhZG1pbiI6dHJ1ZSwiZXhwIjo0NjcwNDA5NjAwfQ.VfRGUDLkemgGmbWFg5ofZzhM4mxHnFiYaxsztbPDICQ`
 ): JWTTokenModel {
   const model = new JWTTokenModel();
   // from: https://jwt.io/

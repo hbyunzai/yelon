@@ -12,9 +12,7 @@ export function readJSON<T = any>(tree: Tree, jsonFile: string, type?: string): 
     }
     return json;
   } catch (ex) {
-    console.log(
-      `Can't parse json file (${jsonFile}), pls check for comments or trailing commas, or validate json via https://jsonlint.com/`
-    );
+    console.log(`Can't parse json file (${jsonFile}), pls check for comments or trailing commas, or validate json via https://jsonlint.com/`);
     throw ex;
   }
 }
@@ -28,12 +26,7 @@ export interface ModifyJSONParam {
   value: any;
 }
 
-export function modifyJSON(
-  tree: Tree,
-  jsonPath: string,
-  modifies: ModifyJSONParam | ModifyJSONParam[],
-  options?: ModificationOptions
-): void {
+export function modifyJSON(tree: Tree, jsonPath: string, modifies: ModifyJSONParam | ModifyJSONParam[], options?: ModificationOptions): void {
   if (!tree.exists(jsonPath)) return null;
   let sourceText = tree.read(jsonPath)!.toString('utf-8');
   (Array.isArray(modifies) ? modifies : [modifies])

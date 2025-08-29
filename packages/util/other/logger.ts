@@ -22,8 +22,7 @@ function consoleCommonBehavior(consoleFunc: (...args: any) => void, ...args: any
 }
 
 // Warning should only be printed in dev mode and only once.
-export const warn = (...args: any[]): void =>
-  consoleCommonBehavior((...arg: any[]) => console.warn(PREFIX, ...arg), ...args);
+export const warn = (...args: any[]): void => consoleCommonBehavior((...arg: any[]) => console.warn(PREFIX, ...arg), ...args);
 
 export const warnDeprecation = (...args: any[]): any => {
   if (typeof ngDevMode === 'undefined' || ngDevMode) {

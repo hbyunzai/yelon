@@ -39,140 +39,52 @@ export interface Lodop extends CLodop {
   PRINT_INIT(strTaskName: string): boolean;
 
   /** 设定纸张大小 */
-  SET_PRINT_PAGESIZE(
-    intOrient: number,
-    PageWidth: number | string,
-    PageHeight: number | string,
-    strPageName: string
-  ): void;
+  SET_PRINT_PAGESIZE(intOrient: number, PageWidth: number | string, PageHeight: number | string, strPageName: string): void;
 
   /** 增加超文本打印项(普通模式) */
-  ADD_PRINT_HTM(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strHtmlContent: string
-  ): void;
+  ADD_PRINT_HTM(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strHtmlContent: string): void;
 
   /**
    * 增加表格打印项（超文本模式）
    */
-  ADD_PRINT_TABLE(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strHtml: string
-  ): void;
+  ADD_PRINT_TABLE(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strHtml: string): void;
 
   /**
    * 增加表格打印项（超文本模式）
    */
-  ADD_PRINT_TABLE(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strHtml: string
-  ): void;
+  ADD_PRINT_TABLE(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strHtml: string): void;
 
   /**
    * 增加超文本打印项（URL模式）
    */
-  ADD_PRINT_URL(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strURL: string
-  ): void;
+  ADD_PRINT_URL(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strURL: string): void;
 
   /** 增加纯文本打印项 */
-  ADD_PRINT_TEXT(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strContent: string
-  ): void;
+  ADD_PRINT_TEXT(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strContent: string): void;
 
   /** 增加图片打印项 */
-  ADD_PRINT_IMAGE(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strHtmlContent: string
-  ): void;
+  ADD_PRINT_IMAGE(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strHtmlContent: string): void;
 
   /** 增加矩形线 */
-  ADD_PRINT_RECT(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    intLineStyle: number,
-    intLineWidth: number
-  ): void;
+  ADD_PRINT_RECT(Top: number | string, Left: number | string, Width: number | string, Height: number | string, intLineStyle: number, intLineWidth: number): void;
 
   /** 增加椭圆线 */
-  ADD_PRINT_ELLIPSE(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    intLineStyle: number,
-    intLineWidth: number
-  ): void;
+  ADD_PRINT_ELLIPSE(Top: number | string, Left: number | string, Width: number | string, Height: number | string, intLineStyle: number, intLineWidth: number): void;
 
   /** 增加直线 */
-  ADD_PRINT_LINE(
-    Top1: number | string,
-    Left1: number | string,
-    Top2: number | string,
-    Left2: number | string,
-    intLineStyle: number,
-    intLineWidth: number
-  ): void;
+  ADD_PRINT_LINE(Top1: number | string, Left1: number | string, Top2: number | string, Left2: number | string, intLineStyle: number, intLineWidth: number): void;
 
   /** 增加条形码 */
-  ADD_PRINT_BARCODE(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    CodeType: string,
-    CodeValue: string
-  ): void;
+  ADD_PRINT_BARCODE(Top: number | string, Left: number | string, Width: number | string, Height: number | string, CodeType: string, CodeValue: string): void;
 
   /** 增加图表 */
-  ADD_PRINT_CHART(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    ChartType: number,
-    strHtml: string
-  ): void;
+  ADD_PRINT_CHART(Top: number | string, Left: number | string, Width: number | string, Height: number | string, ChartType: number, strHtml: string): void;
 
   /** 增加PDF */
-  ADD_PRINT_PDF(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strContent: string
-  ): void;
+  ADD_PRINT_PDF(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strContent: string): void;
 
   /** 增加PDF */
-  ADD_PRINT_PDF(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strContent: string
-  ): void;
+  ADD_PRINT_PDF(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strContent: string): void;
 
   /** 装载文档式模板 */
   ADD_PRINT_DATA(strDataStyle: string, varDataValue: any): void;
@@ -204,11 +116,7 @@ export interface Lodop extends CLodop {
   /** 指定打印设备 */
   SET_PRINTER_INDEX(oIndexOrName: number | string): boolean;
   /** 【CLodop】指定打印机 */
-  SET_PRINTER_INDEX(
-    DriverIndex: number | string,
-    PrinterIDandName: number | string,
-    SubDevIndex: number | string
-  ): boolean;
+  SET_PRINTER_INDEX(DriverIndex: number | string, PrinterIDandName: number | string, SubDevIndex: number | string): boolean;
 
   /** 选择打印设备 */
   SELECT_PRINTER(): number;
@@ -223,14 +131,7 @@ export interface Lodop extends CLodop {
   SET_PRINT_COPIES(intCopies: number): boolean;
 
   /** 设置预览窗口 */
-  SET_PREVIEW_WINDOW(
-    intDispMode: number,
-    intToolMode: number,
-    blDirectPrint: number,
-    inWidth: number,
-    intHeight: number,
-    strTitleButtonCaptoin: string
-  ): void;
+  SET_PREVIEW_WINDOW(intDispMode: number, intToolMode: number, blDirectPrint: number, inWidth: number, intHeight: number, strTitleButtonCaptoin: string): void;
 
   /** 指定背景图 */
   ADD_PRINT_SETUP_BKIMG(strImgHtml: string): void;
@@ -275,40 +176,16 @@ export interface Lodop extends CLodop {
   GET_DIALOG_VALUE(oType: string, oPreValue: string): string;
 
   /** (增强型)打印初始化 */
-  PRINT_INITA(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strPrintName: string
-  ): boolean;
+  PRINT_INITA(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strPrintName: string): boolean;
 
   /** (增强型)增加超文本打印项(图形模式) */
-  ADD_PRINT_HTML(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strHtmlContent: string
-  ): void;
+  ADD_PRINT_HTML(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strHtmlContent: string): void;
 
   /** (增强型)增加表格打印项（URL模式） */
-  ADD_PRINT_TBURL(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strURL: string
-  ): void;
+  ADD_PRINT_TBURL(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strURL: string): void;
 
   /** (增强型)增加纯文本打印项 */
-  ADD_PRINT_TEXTA(
-    Top: number | string,
-    Left: number | string,
-    Width: number | string,
-    Height: number | string,
-    strContent: string
-  ): void;
+  ADD_PRINT_TEXTA(Top: number | string, Left: number | string, Width: number | string, Height: number | string, strContent: string): void;
 
   /** (增强型)设置打印项风格A, 继承 `SET_PRINT_STYLE` 的所有属性 */
   SET_PRINT_STYLEA(varItemNameID: number | string, strStyleName: string, varStyleValue: number | string): void;

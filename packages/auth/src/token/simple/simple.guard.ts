@@ -42,8 +42,7 @@ export const authSimpleCanActivate: CanActivateFn = (_, state) => inject(AuthSim
  * }
  * ```
  */
-export const authSimpleCanActivateChild: CanActivateChildFn = (_, state) =>
-  inject(AuthSimpleGuardService).process(state.url);
+export const authSimpleCanActivateChild: CanActivateChildFn = (_, state) => inject(AuthSimpleGuardService).process(state.url);
 
 /**
  * Simple 路由守卫, [ACL Document](https://ng.yunzainfo.com/auth/guard).

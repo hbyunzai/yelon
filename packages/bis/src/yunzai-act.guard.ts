@@ -3,15 +3,7 @@ import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 
 import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from '@yelon/bis/config';
 import { Menu } from '@yelon/theme';
-import {
-  deepCopy,
-  log,
-  YunzaiBusinessConfig,
-  YunzaiConfigService,
-  PathToRegexpService,
-  useLocalStorageUser,
-  YunzaiUser
-} from '@yelon/util';
+import { deepCopy, log, YunzaiBusinessConfig, YunzaiConfigService, PathToRegexpService, useLocalStorageUser, YunzaiUser } from '@yelon/util';
 
 @Injectable({ providedIn: 'root' })
 export class ActGuardService {
@@ -30,9 +22,7 @@ export class ActGuardService {
     const [, getUser] = useLocalStorageUser();
     const user: YunzaiUser = getUser()!;
     log('act: user ', user);
-    this.menus = deepCopy((user.menu as any) || []).filter(
-      (m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode
-    ) as Menu[];
+    this.menus = deepCopy((user.menu as any) || []).filter((m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode) as Menu[];
     log('act: menus ', this.menus);
     this.getAllLinks(this.menus, this.links);
     log('act: links ', this.links);
@@ -72,15 +62,7 @@ export class ActGuardService {
   }
 
   preHandle(url: string): boolean {
-    return (
-      url.includes('error') ||
-      url.includes('exception') ||
-      url.includes('displayIndex') ||
-      url === '' ||
-      url === null ||
-      url === '/' ||
-      url.includes('iframePage')
-    );
+    return url.includes('error') || url.includes('exception') || url.includes('displayIndex') || url === '' || url === null || url === '/' || url.includes('iframePage');
   }
 
   getAllLinks(menu: Menu[], links: string[]): void {

@@ -146,14 +146,7 @@ describe('form: widget: select', () => {
         }
       }
     };
-    page
-      .newSchema(s)
-      .checkValue('/a', 1)
-      .time()
-      .typeEvent('click', '.ant-select-close-icon')
-      .time()
-      .checkValue('/a', 2)
-      .asyncEnd();
+    page.newSchema(s).checkValue('/a', 1).time().typeEvent('click', '.ant-select-close-icon').time().checkValue('/a', 2).asyncEnd();
   }));
 
   describe('#onSearch', () => {

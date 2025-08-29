@@ -1,10 +1,5 @@
 import { SFUISchemaItem } from '@yelon/form';
-import type {
-  NzCascaderExpandTrigger,
-  NzCascaderOption,
-  NzCascaderPlacement,
-  NzShowSearchOptions
-} from 'ng-zorro-antd/cascader';
+import type { NzCascaderExpandTrigger, NzCascaderOption, NzCascaderPlacement, NzShowSearchOptions } from 'ng-zorro-antd/cascader';
 import type { NgStyleInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import type { CascaderWidget } from './widget';

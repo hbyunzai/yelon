@@ -5,15 +5,7 @@ import { By } from '@angular/platform-browser';
 import { Router, provideRouter } from '@angular/router';
 
 import { createTestContext } from '@yelon/testing';
-import {
-  YunzaiI18NService,
-  YunzaiI18NServiceFake,
-  YunzaiThemeModule,
-  YUNZAI_I18N_TOKEN,
-  MenuService,
-  SettingsService,
-  TitleService
-} from '@yelon/theme';
+import { YunzaiI18NService, YunzaiI18NServiceFake, YunzaiThemeModule, YUNZAI_I18N_TOKEN, MenuService, SettingsService, TitleService } from '@yelon/theme';
 import { NzAffixComponent } from 'ng-zorro-antd/affix';
 
 import { PageHeaderComponent } from './page-header.component';
@@ -34,11 +26,7 @@ describe('abc: page-header', () => {
 
   function genModule(other: { template?: string; providers?: any[]; created?: boolean }): void {
     const imports = [YunzaiThemeModule];
-    const providers = [
-      provideRouter([{ path: '1-1/:name', component: TestComponent }]),
-      { provide: APP_BASE_HREF, useValue: '/' },
-      SettingsService
-    ];
+    const providers = [provideRouter([{ path: '1-1/:name', component: TestComponent }]), { provide: APP_BASE_HREF, useValue: '/' }, SettingsService];
     if (other.providers && other.providers.length) {
       providers.push(...other.providers);
     }
@@ -72,11 +60,7 @@ describe('abc: page-header', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [YunzaiThemeModule],
-        providers: [
-          provideRouter([{ path: '1-1/:name', component: TestComponent }]),
-          { provide: APP_BASE_HREF, useValue: '/' },
-          SettingsService
-        ]
+        providers: [provideRouter([{ path: '1-1/:name', component: TestComponent }]), { provide: APP_BASE_HREF, useValue: '/' }, SettingsService]
       });
     });
 
@@ -117,9 +101,7 @@ describe('abc: page-header', () => {
         });
         it('should be update position when switch collapsed', () => {
           const srv = TestBed.inject(SettingsService);
-          const affixComp = dl
-            .query(By.directive(NzAffixComponent))
-            .injector.get<NzAffixComponent>(NzAffixComponent, undefined);
+          const affixComp = dl.query(By.directive(NzAffixComponent)).injector.get<NzAffixComponent>(NzAffixComponent, undefined);
           spyOn(affixComp, 'updatePosition');
           srv.setLayout('collapsed', true);
           expect(affixComp.updatePosition).toHaveBeenCalled();
@@ -446,8 +428,7 @@ class TestBaseComponent {
       [action]="action"
       [extra]="extra"
       [content]="content"
-      [tab]="tab"
-    >
+      [tab]="tab">
       <ng-template #breadcrumb><div class="breadcrumb">面包屑</div></ng-template>
       <ng-template #logo><div class="logo">logo</div></ng-template>
       <ng-template #action><div class="action">action</div></ng-template>
@@ -461,24 +442,13 @@ class TestBaseComponent {
 class TestComponent extends TestBaseComponent {}
 
 @Component({
-  template: `
-    <page-header #comp [title]="title" [home]="home" [homeI18n]="homeI18n" [autoBreadcrumb]="autoBreadcrumb" />
-  `,
+  template: ` <page-header #comp [title]="title" [home]="home" [homeI18n]="homeI18n" [autoBreadcrumb]="autoBreadcrumb" /> `,
   imports: [PageHeaderComponent]
 })
 class TestAutoBreadcrumbComponent extends TestBaseComponent {}
 
 @Component({
-  template: `
-    <page-header
-      #comp
-      [title]="title"
-      [home]="home"
-      [homeI18n]="homeI18n"
-      [homeLink]="homeLink"
-      [autoBreadcrumb]="autoBreadcrumb"
-    />
-  `,
+  template: ` <page-header #comp [title]="title" [home]="home" [homeI18n]="homeI18n" [homeLink]="homeLink" [autoBreadcrumb]="autoBreadcrumb" /> `,
   imports: [PageHeaderComponent]
 })
 class TestI18nComponent extends TestBaseComponent {}

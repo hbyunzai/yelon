@@ -10,14 +10,7 @@ import type { SFTimeWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-time',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-time-picker
       [nzId]="id"
       [(ngModel)]="displayValue"
@@ -40,8 +33,7 @@ import type { SFTimeWidgetSchema } from './schema';
       [nzPlaceHolder]="ui.placeholder!"
       [nzNowText]="ui.nowText!"
       [nzOkText]="ui.okText!"
-      (nzOpenChange)="_openChange($event)"
-    />
+      (nzOpenChange)="_openChange($event)" />
   </sf-item-wrap>`,
 
   encapsulation: ViewEncapsulation.None,

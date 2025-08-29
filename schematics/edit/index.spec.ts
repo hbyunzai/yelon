@@ -20,17 +20,11 @@ describe('Schematic: edit', () => {
       tree = await runner.runSchematic('edit', { name: 'edit', module: 'trade', standalone: false }, tree);
       [modulePath, routingPath, tsPath, htmlPath].forEach(path => expect(tree.exists(path)).toBe(true));
       expect(tree.readContent(modulePath)).toContain(`import { TradeEditComponent } from './edit/edit.component';`);
-      expect(tree.readContent(routingPath)).not.toContain(
-        `import { TradeEditComponent } from './edit/edit.component';`
-      );
+      expect(tree.readContent(routingPath)).not.toContain(`import { TradeEditComponent } from './edit/edit.component';`);
     });
 
     it('when modal is false', async () => {
-      tree = await runner.runSchematic(
-        'edit',
-        { name: 'edit', module: 'trade', standalone: false, modal: false },
-        tree
-      );
+      tree = await runner.runSchematic('edit', { name: 'edit', module: 'trade', standalone: false, modal: false }, tree);
       const cont = tree.readContent(routingPath);
       expect(cont).toContain(`{ path: 'edit', component: TradeEditComponent }`);
     });

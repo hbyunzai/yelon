@@ -10,14 +10,7 @@ import type { SFMentionWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-mention',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-mention
       #mentions
       [nzSuggestions]="data"
@@ -27,8 +20,7 @@ import type { SFMentionWidgetSchema } from './schema';
       [nzPlacement]="i.placement"
       [nzPrefix]="i.prefix"
       (nzOnSelect)="_select($event)"
-      (nzOnSearchChange)="_search($event)"
-    >
+      (nzOnSearchChange)="_search($event)">
       @if (ui.inputStyle === 'textarea') {
         <textarea
           nzMentionTrigger
@@ -41,8 +33,7 @@ import type { SFMentionWidgetSchema } from './schema';
           (ngModelChange)="setValue($event)"
           [attr.maxLength]="schema.maxLength || null"
           [attr.placeholder]="ui.placeholder"
-          [nzAutosize]="i.autosize"
-        >
+          [nzAutosize]="i.autosize">
         </textarea>
       } @else {
         <input
@@ -56,8 +47,7 @@ import type { SFMentionWidgetSchema } from './schema';
           (ngModelChange)="setValue($event)"
           [attr.maxLength]="schema.maxLength || null"
           [attr.placeholder]="ui.placeholder"
-          autocomplete="off"
-        />
+          autocomplete="off" />
       }
     </nz-mention>
   </sf-item-wrap>`,

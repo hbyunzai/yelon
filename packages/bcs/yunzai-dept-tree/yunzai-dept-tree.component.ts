@@ -39,8 +39,7 @@ import { YUNZAI_DEPT_TYPES, YunzaiDeptTree, YunzaiDeptTreeProps, YunzaiDeptTreeS
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }

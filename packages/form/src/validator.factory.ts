@@ -13,10 +13,7 @@ import { SFSchema } from './schema';
 
 @Injectable()
 export abstract class SchemaValidatorFactory {
-  abstract createValidatorFn(
-    schema: SFSchema,
-    extraOptions: { ignoreKeywords: string[]; debug: boolean }
-  ): (value: SFValue) => ErrorData[];
+  abstract createValidatorFn(schema: SFSchema, extraOptions: { ignoreKeywords: string[]; debug: boolean }): (value: SFValue) => ErrorData[];
 }
 
 @Injectable()
@@ -51,14 +48,8 @@ export class AjvSchemaValidatorFactory extends SchemaValidatorFactory {
     });
   }
 
-  createValidatorFn(
-    schema: SFSchema,
-    extraOptions: { ignoreKeywords: string[]; debug: boolean }
-  ): (value: SFValue) => ErrorData[] {
-    const ignoreKeywords: string[] = [
-      ...(this.options.ignoreKeywords as string[]),
-      ...((extraOptions.ignoreKeywords as string[]) || [])
-    ];
+  createValidatorFn(schema: SFSchema, extraOptions: { ignoreKeywords: string[]; debug: boolean }): (value: SFValue) => ErrorData[] {
+    const ignoreKeywords: string[] = [...(this.options.ignoreKeywords as string[]), ...((extraOptions.ignoreKeywords as string[]) || [])];
 
     return (value: SFValue): ErrorData[] => {
       try {

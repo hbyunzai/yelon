@@ -33,11 +33,7 @@ describe('abc: global-footer', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [
-        provideRouter([]),
-        { provide: APP_BASE_HREF, useValue: '/' },
-        { provide: WINDOW, useFactory: () => new MockWindow() }
-      ]
+      providers: [provideRouter([]), { provide: APP_BASE_HREF, useValue: '/' }, { provide: WINDOW, useFactory: () => new MockWindow() }]
     });
   });
 

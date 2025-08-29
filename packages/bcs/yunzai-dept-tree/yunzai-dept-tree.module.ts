@@ -14,16 +14,7 @@ import { YunzaiDeptTreeService } from './yunzai-dept-tree.service';
 
 const COMPONENTS = [YunzaiDeptTreeComponent];
 @NgModule({
-  imports: [
-    NzSpinModule,
-    NzCardModule,
-    CommonModule,
-    YelonFormModule,
-    NzIconModule,
-    NzEmptyModule,
-    NzTreeModule,
-    ...COMPONENTS
-  ],
+  imports: [NzSpinModule, NzCardModule, CommonModule, YelonFormModule, NzIconModule, NzEmptyModule, NzTreeModule, ...COMPONENTS],
   providers: [YunzaiDeptTreeService, YunzaiGradeService],
   exports: COMPONENTS
 })

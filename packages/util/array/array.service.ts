@@ -3,13 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { YunzaiConfigService, YunzaiUtilArrayConfig } from '@yelon/util/config';
 import { NzTreeNode } from 'ng-zorro-antd/core/tree';
 
-import {
-  ArrayServiceArrToTreeNodeOptions,
-  ArrayServiceArrToTreeOptions,
-  ArrayServiceGetKeysByTreeNodeOptions,
-  ArrayServiceGroupByResult,
-  ArrayServiceTreeToArrOptions
-} from './array-type.service';
+import { ArrayServiceArrToTreeNodeOptions, ArrayServiceArrToTreeOptions, ArrayServiceGetKeysByTreeNodeOptions, ArrayServiceGroupByResult, ArrayServiceTreeToArrOptions } from './array-type.service';
 
 @Injectable({ providedIn: 'root' })
 export class ArrayService {
@@ -290,11 +284,7 @@ export class ArrayService {
     return Array.from(
       array
         .reduce((map, value) => {
-          const key = predicate
-            ? typeof predicate === 'string'
-              ? (value as any)[predicate]
-              : predicate!(value)
-            : value;
+          const key = predicate ? (typeof predicate === 'string' ? (value as any)[predicate] : predicate!(value)) : value;
           if (!map.has(key)) {
             map.set(key, value);
           }

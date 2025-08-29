@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewEncapsulation,
-  numberAttribute
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewEncapsulation, numberAttribute } from '@angular/core';
 import { fromEvent, debounceTime, takeUntil } from 'rxjs';
 
 import { G2BaseComponent } from '@yelon/chart/core';

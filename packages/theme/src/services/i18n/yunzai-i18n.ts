@@ -65,9 +65,7 @@ export class YunzaiHttpI18NService extends YunzaiI18nBaseService implements OnDe
     if (ngDevMode) {
       return this.http.get(`./assets/tmp/i18n/${lang}.json`);
     } else {
-      return this.http
-        .get(`/i18n/api/v2/language/${lang}`)
-        .pipe(catchError(() => this.http.get(`./assets/tmp/i18n/${lang}.json`)));
+      return this.http.get(`/i18n/api/v2/language/${lang}`).pipe(catchError(() => this.http.get(`./assets/tmp/i18n/${lang}.json`)));
     }
   }
 

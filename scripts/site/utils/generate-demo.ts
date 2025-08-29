@@ -29,14 +29,7 @@ function fixExample(item: any, filePath: string, config: ModuleConfig): void {
   generateDoc(obj, exampleIndexTpl!, filePath);
 }
 
-export function generateDemo(
-  rootDir: string,
-  key: string,
-  dir: string,
-  cols: number,
-  config: ModuleConfig,
-  siteConfig: SiteConfig
-): DemoData {
+export function generateDemo(rootDir: string, key: string, dir: string, cols: number, config: ModuleConfig, siteConfig: SiteConfig): DemoData {
   if (!exampleIndexTpl) {
     exampleIndexTpl = fs.readFileSync(path.join(rootDir, siteConfig.template.examples_index)).toString('utf8');
   }
@@ -108,9 +101,7 @@ export function generateDemo(
           const summaryLang = `${summaryNode[1]}`;
           if (JsonML.getTagName(summaryNode) === 'h2' && ~siteConfig.langs.indexOf(summaryLang)) {
             const nextLangPos = summaryChildren.slice(i + 1).findIndex((node: any) => JsonML.getTagName(node) === 'h2');
-            summaryRet[summaryLang] = [''].concat(
-              nextLangPos === -1 ? summaryChildren.slice(i + 1) : summaryChildren.slice(i + 1, nextLangPos + 1)
-            );
+            summaryRet[summaryLang] = [''].concat(nextLangPos === -1 ? summaryChildren.slice(i + 1) : summaryChildren.slice(i + 1, nextLangPos + 1));
             if (nextLangPos === -1) break;
             i = nextLangPos;
           }
@@ -129,9 +120,7 @@ export function generateDemo(
       } else {
         item.componentName = `${genUpperName(item.id)}Component`;
       }
-      item.code = `${item.code}`
-        .replace(/selector:[ ]?(['|"|`])([^'"`]+)/g, `selector: $1${item.id}`)
-        .replace(/export class ([^ {]+)/g, `export class ${item.componentName}`);
+      item.code = `${item.code}`.replace(/selector:[ ]?(['|"|`])([^'"`]+)/g, `selector: $1${item.id}`).replace(/export class ([^ {]+)/g, `export class ${item.componentName}`);
       // save demo component
       let filePath = path.join(rootDir, config.dist, key, `${markdownData.name}.ts`);
       if (item.type === 'example') {

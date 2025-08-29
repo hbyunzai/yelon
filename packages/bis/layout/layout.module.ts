@@ -17,18 +17,7 @@ import { YunzaiLayoutNavTileComponent } from './layout-nav-tile.component';
 const COMPONENTS = [YunzaiLayoutNavTileComponent, YunzaiLayoutNavGroupComponent, YunzaiLayoutBasicComponent];
 
 @NgModule({
-  imports: [
-    I18nPipe,
-    FormsModule,
-    NzFormModule,
-    NzInputModule,
-    CommonModule,
-    NzGridModule,
-    NzIconModule,
-    NzDropDownModule,
-    NzTabsModule,
-    ...COMPONENTS
-  ],
+  imports: [I18nPipe, FormsModule, NzFormModule, NzInputModule, CommonModule, NzGridModule, NzIconModule, NzDropDownModule, NzTabsModule, ...COMPONENTS],
   exports: COMPONENTS
 })
 export class YunzaiLayoutModule {}

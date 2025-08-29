@@ -12,15 +12,7 @@ import { OnboardingComponent } from './onboarding.component';
 const COMPONENTS = [OnboardingComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    YelonLocaleModule,
-    NzPopoverModule,
-    NzOutletModule,
-    NzButtonModule,
-    NzNoAnimationModule,
-    COMPONENTS
-  ],
+  imports: [CommonModule, YelonLocaleModule, NzPopoverModule, NzOutletModule, NzButtonModule, NzNoAnimationModule, COMPONENTS],
   exports: COMPONENTS
 })
 export class OnboardingModule {}

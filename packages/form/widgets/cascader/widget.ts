@@ -8,14 +8,7 @@ import type { SFCascaderWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-cascader',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-cascader
       [nzDisabled]="disabled"
       [nzSize]="ui.size!"
@@ -42,8 +35,7 @@ import type { SFCascaderWidgetSchema } from './schema';
       [nzMultiple]="ui.multiple"
       (nzClear)="_clear()"
       (nzVisibleChange)="_visibleChange($event)"
-      (nzSelectionChange)="_selectionChange($event)"
-    />
+      (nzSelectionChange)="_selectionChange($event)" />
   </sf-item-wrap>`,
 
   encapsulation: ViewEncapsulation.None,
@@ -66,8 +58,7 @@ export class CascaderWidget extends ControlUIWidget<SFCascaderWidgetSchema> impl
     this.showInput = toBool(showInput, true);
     this.triggerAction = triggerAction || ['click'];
     if (asyncData) {
-      this.loadData = (node: NzCascaderOption, index: number) =>
-        asyncData(node, index, this).then(() => this.detectChanges());
+      this.loadData = (node: NzCascaderOption, index: number) => asyncData(node, index, this).then(() => this.detectChanges());
     }
   }
 

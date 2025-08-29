@@ -57,10 +57,7 @@ export class _HttpClient {
       // 忽略空值
       if (nullValueHandling === 'ignore' && paramValue == null) return;
       // 将时间转化为：时间戳 (秒)
-      if (
-        paramValue instanceof Date &&
-        (dateValueHandling === 'timestamp' || dateValueHandling === 'timestampSecond')
-      ) {
+      if (paramValue instanceof Date && (dateValueHandling === 'timestamp' || dateValueHandling === 'timestampSecond')) {
         paramValue = dateValueHandling === 'timestamp' ? paramValue.valueOf() : Math.trunc(paramValue.valueOf() / 1000);
       }
       newParams[key] = paramValue;

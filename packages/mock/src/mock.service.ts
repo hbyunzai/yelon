@@ -46,9 +46,7 @@ export class MockService implements OnDestroy {
       Object.keys(rules).forEach((ruleKey: string) => {
         const value = rules[ruleKey];
         if (!(typeof value === 'function' || typeof value === 'object' || typeof value === 'string')) {
-          throw Error(
-            `mock value of [${key}-${ruleKey}] should be function or object or string, but got ${typeof value}`
-          );
+          throw Error(`mock value of [${key}-${ruleKey}] should be function or object or string, but got ${typeof value}`);
         }
         const rule = this.genRule(ruleKey, value);
         if (['GET', 'POST', 'PUT', 'HEAD', 'DELETE', 'PATCH', 'OPTIONS'].indexOf(rule.method) === -1) {

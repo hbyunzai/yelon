@@ -61,22 +61,20 @@ export abstract class Widget<T extends FormProperty, UIT extends SFUISchemaItem>
   }
 
   ngAfterViewInit(): void {
-    this.formProperty.errorsChanges
-      .pipe(takeUntil(this.sfItemComp!.destroy$))
-      .subscribe((errors: ErrorData[] | null) => {
-        if (errors == null) return;
+    this.formProperty.errorsChanges.pipe(takeUntil(this.sfItemComp!.destroy$)).subscribe((errors: ErrorData[] | null) => {
+      if (errors == null) return;
 
-        di(this.ui, 'errorsChanges', this.formProperty.path, errors);
+      di(this.ui, 'errorsChanges', this.formProperty.path, errors);
 
-        // 不显示首次校验视觉
-        const firstVisual = this.sfComp?.firstVisual;
-        if (firstVisual || (!firstVisual && this.sfComp?._inited)) {
-          this.showError = errors.length > 0;
-          this.error = this.showError ? (errors[0].message as string) : '';
+      // 不显示首次校验视觉
+      const firstVisual = this.sfComp?.firstVisual;
+      if (firstVisual || (!firstVisual && this.sfComp?._inited)) {
+        this.showError = errors.length > 0;
+        this.error = this.showError ? (errors[0].message as string) : '';
 
-          this.cd.detectChanges();
-        }
-      });
+        this.cd.detectChanges();
+      }
+    });
     this.afterViewInit();
   }
 

@@ -8,14 +8,7 @@ import type { SFRateWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-rate',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-rate
       [nzDisabled]="disabled"
       [ngModel]="value"
@@ -24,8 +17,7 @@ import type { SFRateWidgetSchema } from './schema';
       [nzAllowHalf]="allowHalf"
       [nzTooltips]="ui.tooltips || []"
       [nzAutoFocus]="autoFocus"
-      [nzCount]="$any(count)"
-    />
+      [nzCount]="$any(count)" />
     @if (hasText && formProperty.value) {
       <span class="ant-rate-text">{{ text }}</span>
     }

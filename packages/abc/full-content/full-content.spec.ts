@@ -157,13 +157,7 @@ describe('abc: full-content', () => {
 
 @Component({
   template: `
-    <full-content
-      #comp
-      [(fullscreen)]="fullscreen"
-      [hideTitle]="hideTitle"
-      [padding]="padding"
-      (fullscreenChange)="change()"
-    >
+    <full-content #comp [(fullscreen)]="fullscreen" [hideTitle]="hideTitle" [padding]="padding" (fullscreenChange)="change()">
       <button full-toggle>Full</button>
     </full-content>
   `,

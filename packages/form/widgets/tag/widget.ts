@@ -10,31 +10,12 @@ import type { SFTagWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-tag',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #icon let-i>
-      <nz-icon
-        [nzType]="i.type"
-        [nzTheme]="i.theme"
-        [nzTwotoneColor]="i.twotoneColor"
-        [nzRotate]="i.rotate"
-        [nzIconfont]="i.iconfont"
-        [nzSpin]="i.spin"
-      />
+      <nz-icon [nzType]="i.type" [nzTheme]="i.theme" [nzTwotoneColor]="i.twotoneColor" [nzRotate]="i.rotate" [nzIconfont]="i.iconfont" [nzSpin]="i.spin" />
     </ng-template>
     @for (i of data; track $index) {
-      <nz-tag
-        [nzMode]="ui.mode || 'checkable'"
-        [nzChecked]="i.checked"
-        (nzOnClose)="_close($event)"
-        (nzCheckedChange)="onChange(i)"
-      >
+      <nz-tag [nzMode]="ui.mode || 'checkable'" [nzChecked]="i.checked" (nzOnClose)="_close($event)" (nzCheckedChange)="onChange(i)">
         @if (i.prefixIcon) {
           <ng-template [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{ $implicit: i.prefixIcon }" />
         }

@@ -50,10 +50,7 @@ describe('form: widget: transfer', () => {
         }
       }
     };
-    page
-      .newSchema(s)
-      .typeEvent('click', `${CLS.left} .ant-transfer-list-content-item label`)
-      .typeEvent('click', CLS.rightBtn);
+    page.newSchema(s).typeEvent('click', `${CLS.left} .ant-transfer-list-content-item label`).typeEvent('click', CLS.rightBtn);
 
     expect((page.getValue('a') as number[]).length).toBe(2);
 
@@ -113,10 +110,7 @@ describe('form: widget: transfer', () => {
           }
         }
       };
-      page
-        .newSchema(s)
-        .typeEvent('click', `${CLS.left} .ant-transfer-list-content-item label`)
-        .typeEvent('click', CLS.rightBtn);
+      page.newSchema(s).typeEvent('click', `${CLS.left} .ant-transfer-list-content-item label`).typeEvent('click', CLS.rightBtn);
 
       expect((s.properties!.a.ui as any).change).toHaveBeenCalled();
 
@@ -144,10 +138,7 @@ describe('form: widget: transfer', () => {
           }
         }
       };
-      page
-        .newSchema(s)
-        .typeEvent('click', `${CLS.left} .ant-transfer-list-content-item label`)
-        .typeEvent('click', CLS.rightBtn);
+      page.newSchema(s).typeEvent('click', `${CLS.left} .ant-transfer-list-content-item label`).typeEvent('click', CLS.rightBtn);
 
       expect((s.properties!.a.ui as any).canMove).toHaveBeenCalled();
 
@@ -175,12 +166,7 @@ describe('form: widget: transfer', () => {
             }
           }
         };
-        page
-          .newSchema(s)
-          .checkCount(`${CLS.left} .ant-transfer-list-content-item`, 3)
-          .typeChar('O', `${CLS.left} .ant-input`)
-          .checkCount(`${CLS.left} .ant-transfer-list-content-item`, 1)
-          .asyncEnd();
+        page.newSchema(s).checkCount(`${CLS.left} .ant-transfer-list-content-item`, 3).typeChar('O', `${CLS.left} .ant-input`).checkCount(`${CLS.left} .ant-transfer-list-content-item`, 1).asyncEnd();
       }));
       it('shoule be defined', fakeAsync(() => {
         const s: SFSchema = {
@@ -204,12 +190,7 @@ describe('form: widget: transfer', () => {
             }
           }
         };
-        page
-          .newSchema(s)
-          .checkCount(`${CLS.left} .ant-transfer-list-content-item`, 3)
-          .typeChar('O', `${CLS.left} .ant-input`)
-          .checkCount(`${CLS.left} .ant-transfer-list-content-item`, 1)
-          .asyncEnd();
+        page.newSchema(s).checkCount(`${CLS.left} .ant-transfer-list-content-item`, 3).typeChar('O', `${CLS.left} .ant-input`).checkCount(`${CLS.left} .ant-transfer-list-content-item`, 1).asyncEnd();
         expect((s.properties!.a.ui as any).searchChange).toHaveBeenCalled();
       }));
     });

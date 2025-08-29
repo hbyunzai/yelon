@@ -14,25 +14,10 @@ import { YunzaiHeaderI18nComponent } from './yunzai-i18n.component';
 import { YunzaiHeaderNotifyComponent } from './yunzai-notify.component';
 import { YunzaiHeaderUserComponent } from './yunzai-user.component';
 
-const COMPONENTS = [
-  YunzaiHeaderClearStorageComponent,
-  YunzaiHeaderFullScreenComponent,
-  YunzaiHeaderNotifyComponent,
-  YunzaiHeaderI18nComponent,
-  YunzaiHeaderUserComponent
-];
+const COMPONENTS = [YunzaiHeaderClearStorageComponent, YunzaiHeaderFullScreenComponent, YunzaiHeaderNotifyComponent, YunzaiHeaderI18nComponent, YunzaiHeaderUserComponent];
 
 @NgModule({
-  imports: [
-    NzAvatarModule,
-    RouterModule,
-    NoticeIconModule,
-    NzDropDownModule,
-    CommonModule,
-    NzIconModule,
-    I18nPipe,
-    ...COMPONENTS
-  ],
+  imports: [NzAvatarModule, RouterModule, NoticeIconModule, NzDropDownModule, CommonModule, NzIconModule, I18nPipe, ...COMPONENTS],
   exports: COMPONENTS
 })
 export class YunzaiWidgetsModule {}

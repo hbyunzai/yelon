@@ -3,27 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { ControlUIWidget, YelonFormModule, SFSchemaEnum, SFValue, getData } from '@yelon/form';
-import {
-  NzTransferModule,
-  TransferCanMove,
-  TransferChange,
-  TransferItem,
-  TransferSearchChange,
-  TransferSelectChange
-} from 'ng-zorro-antd/transfer';
+import { NzTransferModule, TransferCanMove, TransferChange, TransferItem, TransferSearchChange, TransferSelectChange } from 'ng-zorro-antd/transfer';
 
 import type { SFTransferWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-transfer',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-transfer
       [nzDataSource]="$any(list)"
       [nzTitles]="i.titles"
@@ -39,8 +25,7 @@ import type { SFTransferWidgetSchema } from './schema';
       [nzCanMove]="_canMove"
       (nzChange)="_change($event)"
       (nzSearchChange)="_searchChange($event)"
-      (nzSelectChange)="_selectChange($event)"
-    />
+      (nzSelectChange)="_selectChange($event)" />
   </sf-item-wrap> `,
 
   encapsulation: ViewEncapsulation.None,

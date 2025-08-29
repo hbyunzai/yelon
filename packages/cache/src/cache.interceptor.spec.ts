@@ -35,13 +35,11 @@ describe('cache: interceptor', () => {
   it('should be truth request and cache data of response when is not cache', done => {
     const key = 'b';
     const res = 'ok';
-    http
-      .get('/test', { responseType: 'text', context: new HttpContext().set(CACHE, { key, expire: 60 }) })
-      .subscribe(res => {
-        expect(res).toBe(res);
-        expect((cacheSrv.getNone(key) as HttpResponse<string>)?.body).toBe(res);
-        done();
-      });
+    http.get('/test', { responseType: 'text', context: new HttpContext().set(CACHE, { key, expire: 60 }) }).subscribe(res => {
+      expect(res).toBe(res);
+      expect((cacheSrv.getNone(key) as HttpResponse<string>)?.body).toBe(res);
+      done();
+    });
     httpBed.expectOne('/test').flush(res);
   });
 
@@ -92,26 +90,22 @@ describe('cache: interceptor', () => {
     it('when enabled is false', done => {
       const key = 'b';
       const res = 'ok';
-      http
-        .get(key, { responseType: 'text', context: new HttpContext().set(CACHE, { enabled: false }) })
-        .subscribe(res => {
-          expect(res).toBe(res);
-          expect(cacheSrv.has(key)).toBe(false);
-          done();
-        });
+      http.get(key, { responseType: 'text', context: new HttpContext().set(CACHE, { enabled: false }) }).subscribe(res => {
+        expect(res).toBe(res);
+        expect(cacheSrv.has(key)).toBe(false);
+        done();
+      });
       httpBed.expectOne(key).flush(res, { headers: { 'cache-control': 'max-age=60' } });
     });
 
     it('when expire is 0', done => {
       const key = 'b';
       const res = 'ok';
-      http
-        .get('/test', { responseType: 'text', context: new HttpContext().set(CACHE, { expire: 0 }) })
-        .subscribe(res => {
-          expect(res).toBe(res);
-          expect(cacheSrv.has(key)).toBe(false);
-          done();
-        });
+      http.get('/test', { responseType: 'text', context: new HttpContext().set(CACHE, { expire: 0 }) }).subscribe(res => {
+        expect(res).toBe(res);
+        expect(cacheSrv.has(key)).toBe(false);
+        done();
+      });
       httpBed.expectOne('/test').flush(res);
     });
   });

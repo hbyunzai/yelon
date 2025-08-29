@@ -100,15 +100,7 @@ export function genModule<T extends TestComponent>(
     createComp: true,
     ...other
   };
-  const imports = [
-    CommonModule,
-    FormsModule,
-    RouterModule.forRoot([]),
-    NzModalModule,
-    NzDrawerModule,
-    STModule,
-    YelonLocaleModule
-  ];
+  const imports = [CommonModule, FormsModule, RouterModule.forRoot([]), NzModalModule, NzDrawerModule, STModule, YelonLocaleModule];
   const providers: any[] = [
     provideNoopAnimations(),
     provideHttpClient(),
@@ -191,9 +183,7 @@ export class PageObject<T extends TestComponent> {
    * 获取单元格，下标从 `1` 开始
    */
   getCell(row: number = 1, column: number = 1): HTMLElement {
-    const cell = (this.dl.nativeElement as HTMLElement).querySelector(
-      `.st__body tr[data-index="${row - 1}"] td:nth-child(${column})`
-    ) as HTMLElement;
+    const cell = (this.dl.nativeElement as HTMLElement).querySelector(`.st__body tr[data-index="${row - 1}"] td:nth-child(${column})`) as HTMLElement;
     return cell;
   }
   /**
@@ -236,9 +226,7 @@ export class PageObject<T extends TestComponent> {
   }
   /** 获取标头 */
   getHead(name: string): HTMLElement {
-    const el = (this.dl.nativeElement as HTMLElement).querySelector(
-      `.ant-table-thead th[data-col="${name}"]`
-    ) as HTMLElement;
+    const el = (this.dl.nativeElement as HTMLElement).querySelector(`.ant-table-thead th[data-col="${name}"]`) as HTMLElement;
     return el;
   }
   clickHead(name: string, cls: string): this {
@@ -427,8 +415,7 @@ export class PageObject<T extends TestComponent> {
       [drag]="drag"
       [delay]="delay"
       (change)="change($event)"
-      (error)="error($event)"
-    />
+      (error)="error($event)" />
     <ng-template #tpl let-handle="handle">
       <span>In tpl</span>
       <a class="close_in_tpl" (click)="handle.close()">close</a>
@@ -481,15 +468,7 @@ export class TestComponent {
 
 @Component({
   template: `
-    <st
-      #st
-      [data]="data"
-      [columns]="columns"
-      [expand]="expand"
-      [expandRowByClick]="expandRowByClick"
-      [expandAccordion]="expandAccordion"
-      (change)="change($event)"
-    >
+    <st #st [data]="data" [columns]="columns" [expand]="expand" [expandRowByClick]="expandRowByClick" [expandAccordion]="expandAccordion" (change)="change($event)">
       <ng-template #expand let-item let-index="index" let-column="column">
         {{ item.id }}
       </ng-template>

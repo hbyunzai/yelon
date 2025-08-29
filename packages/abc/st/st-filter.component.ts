@@ -1,14 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewEncapsulation,
-  inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import type { LocaleData } from '@yelon/theme';
@@ -36,8 +27,7 @@ import type { _STColumn } from './st.types';
       [nzClickHide]="false"
       [(nzVisible)]="visible"
       nzOverlayClassName="st__filter-wrap"
-      (click)="stopPropagation($event)"
-    >
+      (click)="stopPropagation($event)">
       <nz-icon [nzType]="icon.type" [nzTheme]="icon.theme!" />
     </span>
     <nz-dropdown-menu #filterMenu="nzDropdownMenu">
@@ -45,14 +35,7 @@ import type { _STColumn } from './st.types';
         @switch (f.type) {
           @case ('keyword') {
             <div class="st__filter-keyword">
-              <input
-                type="text"
-                nz-input
-                [attr.placeholder]="f.placeholder"
-                [(ngModel)]="f.menus![0]!.value"
-                (ngModelChange)="n.emit($event)"
-                (keyup.enter)="confirm()"
-              />
+              <input type="text" nz-input [attr.placeholder]="f.placeholder" [(ngModel)]="f.menus![0]!.value" (ngModelChange)="n.emit($event)" (keyup.enter)="confirm()" />
             </div>
           }
           @case ('number') {
@@ -65,8 +48,7 @@ import type { _STColumn } from './st.types';
                 [nzStep]="f.number!.step!"
                 [nzPrecision]="f.number!.precision || null"
                 [nzPlaceHolder]="f.placeholder!"
-                class="width-100"
-              />
+                class="width-100" />
             </div>
           }
           @case ('date') {
@@ -80,8 +62,7 @@ import type { _STColumn } from './st.types';
                   [nzShowNow]="f.date!.showNow"
                   [nzShowToday]="f.date!.showToday"
                   [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
+                  [nzDisabledTime]="f.date!.disabledTime" />
               } @else {
                 <nz-date-picker
                   nzInline
@@ -91,17 +72,13 @@ import type { _STColumn } from './st.types';
                   [nzShowNow]="f.date!.showNow"
                   [nzShowToday]="f.date!.showToday"
                   [nzDisabledDate]="f.date!.disabledDate"
-                  [nzDisabledTime]="f.date!.disabledTime"
-                />
+                  [nzDisabledTime]="f.date!.disabledTime" />
               }
             </div>
           }
           @case ('custom') {
             <div class="st__filter-custom">
-              <ng-template
-                [ngTemplateOutlet]="f.custom!"
-                [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }"
-              />
+              <ng-template [ngTemplateOutlet]="f.custom!" [ngTemplateOutletContext]="{ $implicit: f, col: col, handle: this }" />
             </div>
           }
           @default {

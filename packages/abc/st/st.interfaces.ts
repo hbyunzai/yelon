@@ -114,9 +114,7 @@ export interface STRes<T extends STData = any> {
    * 重命名返回参数 `total`、`list`
    * - `{ total: 'Total' }` => Total 会被当作 `total`
    */
-  reName?:
-    | STResReNameType
-    | ((result: any, options: { pi: number; ps: number; total: number }) => { total: number; list: T[] });
+  reName?: STResReNameType | ((result: any, options: { pi: number; ps: number; total: number }) => { total: number; list: T[] });
   /**
    * 数据预处理
    */
@@ -263,22 +261,7 @@ export interface STColumn<T extends STData = any> {
    * - `cell` 可指定 `click`，使用 `cell` 组件渲染 [document](https://ng.yunzainfo.com/components/cell)
    * - `widget` 使用自定义小部件动态创建
    */
-  type?:
-    | ''
-    | 'checkbox'
-    | 'link'
-    | 'badge'
-    | 'tag'
-    | 'enum'
-    | 'radio'
-    | 'img'
-    | 'currency'
-    | 'number'
-    | 'date'
-    | 'yn'
-    | 'no'
-    | 'cell'
-    | 'widget';
+  type?: '' | 'checkbox' | 'link' | 'badge' | 'tag' | 'enum' | 'radio' | 'img' | 'currency' | 'number' | 'date' | 'yn' | 'no' | 'cell' | 'widget';
 
   /**
    * `cell` component options
@@ -483,12 +466,7 @@ export interface STColumnTitle {
 
 export type STStatisticalType = 'count' | 'distinctCount' | 'sum' | 'average' | 'max' | 'min';
 
-export type STStatisticalFn<T extends STData = any> = (
-  values: number[],
-  col: STColumn,
-  list: T[],
-  rawData?: any
-) => STStatisticalResult;
+export type STStatisticalFn<T extends STData = any> = (values: number[], col: STColumn, list: T[], rawData?: any) => STStatisticalResult;
 
 export interface STStatistical<T extends STData = any> {
   type: STStatisticalType | STStatisticalFn<T>;
@@ -928,19 +906,7 @@ export interface STColumnButtonPop<T extends STData = any> {
   /**
    * The position of the popover relative to the target, default: `top`
    */
-  placement?:
-    | 'top'
-    | 'left'
-    | 'right'
-    | 'bottom'
-    | 'topLeft'
-    | 'topRight'
-    | 'bottomLeft'
-    | 'bottomRight'
-    | 'leftTop'
-    | 'leftBottom'
-    | 'rightTop'
-    | 'rightBottom';
+  placement?: 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 
   /**
    * Class name of the popover card
@@ -1100,19 +1066,7 @@ export interface STColumnTagValue {
    * - 预设：geekblue,blue,purple,success,red,volcano,orange,gold,lime,green,cyan
    * - 色值：#f50,#ff0
    */
-  color?:
-    | 'geekblue'
-    | 'blue'
-    | 'purple'
-    | 'success'
-    | 'red'
-    | 'volcano'
-    | 'orange'
-    | 'gold'
-    | 'lime'
-    | 'green'
-    | 'cyan'
-    | string;
+  color?: 'geekblue' | 'blue' | 'purple' | 'success' | 'red' | 'volcano' | 'orange' | 'gold' | 'lime' | 'green' | 'cyan' | string;
 
   /**
    * Text popup tip
@@ -1122,19 +1076,7 @@ export interface STColumnTagValue {
   tooltip?: string;
 }
 
-export type STChangeType =
-  | 'loaded'
-  | 'pi'
-  | 'ps'
-  | 'checkbox'
-  | 'radio'
-  | 'sort'
-  | 'filter'
-  | 'filterChange'
-  | 'click'
-  | 'dblClick'
-  | 'expand'
-  | 'resize';
+export type STChangeType = 'loaded' | 'pi' | 'ps' | 'checkbox' | 'radio' | 'sort' | 'filter' | 'filterChange' | 'click' | 'dblClick' | 'expand' | 'resize';
 
 /**
  * 回调数据
@@ -1261,9 +1203,7 @@ export interface STResizable {
   preview?: boolean;
 }
 
-export type STContextmenuFn<T extends STData = any> = (
-  options: STContextmenuOptions<T>
-) => Observable<STContextmenuItem[]> | STContextmenuItem[];
+export type STContextmenuFn<T extends STData = any> = (options: STContextmenuOptions<T>) => Observable<STContextmenuItem[]> | STContextmenuItem[];
 
 export interface STContextmenuOptions<T extends STData = any> {
   event: MouseEvent;

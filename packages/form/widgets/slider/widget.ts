@@ -8,14 +8,7 @@ import type { SFSliderWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-slider',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-slider
       [ngModel]="value"
       (ngModelChange)="setValue($event)"
@@ -29,8 +22,7 @@ import type { SFSliderWidgetSchema } from './schema';
       [nzIncluded]="included"
       [nzVertical]="ui.vertical"
       [nzTipFormatter]="_formatter"
-      (nzOnAfterChange)="_afterChange($event)"
-    />
+      (nzOnAfterChange)="_afterChange($event)" />
   </sf-item-wrap>`,
 
   encapsulation: ViewEncapsulation.None,

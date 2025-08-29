@@ -66,16 +66,7 @@ describe('abc: quick-menu', () => {
 });
 
 @Component({
-  template: `
-    <quick-menu
-      #comp
-      [width]="width"
-      [bgColor]="bgColor"
-      [borderColor]="borderColor"
-      [expand]="expand"
-      (expandChange)="expandChange()"
-    />
-  `,
+  template: ` <quick-menu #comp [width]="width" [bgColor]="bgColor" [borderColor]="borderColor" [expand]="expand" (expandChange)="expandChange()" /> `,
   imports: [QuickMenuComponent]
 })
 class TestComponent {

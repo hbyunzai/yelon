@@ -88,9 +88,7 @@ export default function (options: NgAddOptions): Rule {
       ngCoreVersion = ngCoreVersion.substring(1);
     }
     if (!ngCoreVersion.startsWith(`${V}.`)) {
-      throw new SchematicsException(
-        `Sorry, the current version only supports angular ${V}.x, pls downgrade the global Anguar-cli version: [npm install -g @angular/cli@${V}]`
-      );
+      throw new SchematicsException(`Sorry, the current version only supports angular ${V}.x, pls downgrade the global Anguar-cli version: [npm install -g @angular/cli@${V}]`);
     }
 
     return chain([genRules(options), finished()])(tree, context);

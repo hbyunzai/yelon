@@ -30,9 +30,7 @@ export function pluginDefaultLanguage(options: PluginOptions): Rule {
     }
     console.log(`Changes default languare [${oldLang}] to [${options.defaultLanguage}]`);
     // angular
-    content = content
-      .replace(/@angular\/common\/locales\/([^']+)/, `@angular/common/locales/${options.defaultLanguage}`)
-      .replace(/abbr: '([^']+)/, `abbr: '${options.defaultLanguage}`);
+    content = content.replace(/@angular\/common\/locales\/([^']+)/, `@angular/common/locales/${options.defaultLanguage}`).replace(/abbr: '([^']+)/, `abbr: '${options.defaultLanguage}`);
     // zorro
     content = content.replace(/ ([^ ]+) as zorroLang/, ` ${targetLang.zorro} as zorroLang`);
     content = content.replace(/ ([^ ]+) as dateLang/, ` ${targetLang.date} as dateLang`);

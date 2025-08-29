@@ -79,8 +79,7 @@ export function resolveIfSchema(_schema: SFSchema, _ui: SFUISchemaItemRun): void
 }
 
 function resolveIf(schema: SFSchema, ui: SFUISchemaItemRun): SFSchema | null {
-  if (!(Object.prototype.hasOwnProperty.call(schema, 'if') && Object.prototype.hasOwnProperty.call(schema, 'then')))
-    return null;
+  if (!(Object.prototype.hasOwnProperty.call(schema, 'if') && Object.prototype.hasOwnProperty.call(schema, 'then'))) return null;
   if (!schema.if!.properties) throw new Error(`if: does not contain 'properties'`);
 
   const allKeys = Object.keys(schema.properties!);
@@ -173,12 +172,7 @@ export function getCopyEnum(list: NzSafeAny[], formData: NzSafeAny, readOnly: bo
   return getEnum(deepCopy(list || []), formData, readOnly);
 }
 
-export function getData(
-  schema: SFSchema,
-  ui: SFUISchemaItem,
-  formData: NzSafeAny,
-  asyncArgs?: NzSafeAny
-): Observable<SFSchemaEnum[]> {
+export function getData(schema: SFSchema, ui: SFUISchemaItem, formData: NzSafeAny, asyncArgs?: NzSafeAny): Observable<SFSchemaEnum[]> {
   if (typeof ui.asyncData === 'function') {
     return ui.asyncData(asyncArgs).pipe(map((list: SFSchemaEnum[]) => getCopyEnum(list, formData, schema.readOnly!)));
   }

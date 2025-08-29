@@ -43,17 +43,7 @@ describe('chart: mini-bar', () => {
 });
 
 @Component({
-  template: `
-    <g2-mini-bar
-      style="display: block;"
-      #comp
-      color="#cceafe"
-      [height]="height"
-      [tooltipType]="tooltipType"
-      [data]="data"
-      [delay]="delay"
-    />
-  `,
+  template: ` <g2-mini-bar style="display: block;" #comp color="#cceafe" [height]="height" [tooltipType]="tooltipType" [data]="data" [delay]="delay" /> `,
   imports: [G2MiniBarComponent]
 })
 class TestComponent {

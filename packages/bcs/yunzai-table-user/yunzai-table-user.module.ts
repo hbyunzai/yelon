@@ -18,20 +18,7 @@ import { YunzaiTableUserService } from './yunzai-table-user.service';
 export const COMPONENTS = [YunzaiTableUserComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    YelonFormModule,
-    STModule,
-    I18nPipe,
-    NzCheckboxModule,
-    NzDividerModule,
-    NzButtonModule,
-    NzEmptyModule,
-    NzIconModule,
-    NzMenuModule,
-    NzCardModule,
-    ...COMPONENTS
-  ],
+  imports: [CommonModule, YelonFormModule, STModule, I18nPipe, NzCheckboxModule, NzDividerModule, NzButtonModule, NzEmptyModule, NzIconModule, NzMenuModule, NzCardModule, ...COMPONENTS],
   providers: [YunzaiTableUserService],
   exports: COMPONENTS
 })

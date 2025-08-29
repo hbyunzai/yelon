@@ -239,10 +239,7 @@ export class STDataSource {
           text = this.currencySrv.format(value, col.currency?.format);
           break;
         case 'date':
-          text =
-            value == null || value === col.default || (typeof value === 'number' && value <= 0)
-              ? col.default
-              : this.datePipe.transform(value, col.dateFormat);
+          text = value == null || value === col.default || (typeof value === 'number' && value <= 0) ? col.default : this.datePipe.transform(value, col.dateFormat);
           break;
         case 'yn':
           text = this.ynPipe.transform(value === col.yn!.truth, col.yn!.yes!, col.yn!.no!, col.yn!.mode!, false);
@@ -361,9 +358,7 @@ export class STDataSource {
         }
         return { ...this.get(result[i], c, i), props, cell };
       });
-      result[i]._rowClassName = [rowClassName ? rowClassName(result[i], i) : null, result[i].className]
-        .filter(w => !!w)
-        .join(' ');
+      result[i]._rowClassName = [rowClassName ? rowClassName(result[i], i) : null, result[i].className].filter(w => !!w).join(' ');
     }
     return result;
   }
@@ -461,11 +456,7 @@ export class STDataSource {
     return ++this.sortTick;
   }
 
-  getReqSortMap(
-    singleSort: STSingleSort | undefined | null,
-    multiSort: STMultiSort | undefined,
-    headers: _STHeader[][]
-  ): STMultiSortResultType {
+  getReqSortMap(singleSort: STSingleSort | undefined | null, multiSort: STMultiSort | undefined, headers: _STHeader[][]): STMultiSortResultType {
     let ret: STMultiSortResultType = {};
     const sortList = this.getValidSort(headers);
 
@@ -479,9 +470,7 @@ export class STDataSource {
         ...multiSort
       };
 
-      const sortMap = sortList
-        .sort((a, b) => a.tick - b.tick)
-        .map(item => item.key! + ms.nameSeparator + ((item.reName || {})[item.default!] || item.default));
+      const sortMap = sortList.sort((a, b) => a.tick - b.tick).map(item => item.key! + ms.nameSeparator + ((item.reName || {})[item.default!] || item.default));
 
       ret = { [ms.key!]: ms.arrayParam ? sortMap : sortMap.join(ms.separator) };
 
@@ -534,8 +523,7 @@ export class STDataSource {
   private genStatistical(columns: _STColumn[], list: STData[], rawData: any): STStatisticalResults {
     const res: Record<string, any> = {};
     columns.forEach((col, index) => {
-      res[col.key || col.indexKey || index] =
-        col.statistical == null ? {} : this.getStatistical(col, index, list, rawData);
+      res[col.key || col.indexKey || index] = col.statistical == null ? {} : this.getStatistical(col, index, list, rawData);
     });
     return res;
   }

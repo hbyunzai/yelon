@@ -1,30 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import {
-  ContentTemplateData,
-  DemoData,
-  ExampleModules,
-  Meta,
-  MetaOriginal,
-  MetaTemplateData,
-  ModuleConfig,
-  ModuleTemplateData,
-  SiteConfig
-} from './interfaces';
+import { ContentTemplateData, DemoData, ExampleModules, Meta, MetaOriginal, MetaTemplateData, ModuleConfig, ModuleTemplateData, SiteConfig } from './interfaces';
 import { generateDemo } from './utils/generate-demo';
 import { generateExampleModule } from './utils/generate-example';
 import { groupFiles } from './utils/group-files';
 import { parseMd } from './utils/parse-md';
-import {
-  genComponentName,
-  generateDoc,
-  genSelector,
-  genUpperName,
-  genUrl,
-  handleExploreStr,
-  includeAttributes
-} from './utils/utils';
+import { genComponentName, generateDoc, genSelector, genUpperName, genUrl, handleExploreStr, includeAttributes } from './utils/utils';
 
 const target = process.argv[2];
 const isSyncSpecific = !!target && target !== 'init';
@@ -120,9 +102,7 @@ function generateModule(config: ModuleConfig): void {
       }
     });
 
-    const newList = demos.data.filter(
-      (w: any) => w.type === 'example' && exampleModules.list.filter(ew => ew.urls === w.urls).length === 0
-    );
+    const newList = demos.data.filter((w: any) => w.type === 'example' && exampleModules.list.filter(ew => ew.urls === w.urls).length === 0);
 
     exampleModules.list.push(...newList);
   }
@@ -167,14 +147,7 @@ function generateModule(config: ModuleConfig): void {
       // #endregion
 
       // #region generate demo files
-      const demos = generateDemo(
-        rootDir,
-        meta.name,
-        path.join(path.dirname(item.data[defaultLang]), 'demo'),
-        meta.cols,
-        config,
-        siteConfig
-      );
+      const demos = generateDemo(rootDir, meta.name, path.join(path.dirname(item.data[defaultLang]), 'demo'), meta.cols, config, siteConfig);
       // #endregion
 
       // #region generate document file
@@ -231,9 +204,7 @@ function generateModule(config: ModuleConfig): void {
     });
   });
 
-  const metaTpl = fs
-    .readFileSync(path.join(rootDir, config.template?.meta ?? './src/templates/meta.ts'))
-    .toString('utf8');
+  const metaTpl = fs.readFileSync(path.join(rootDir, config.template?.meta ?? './src/templates/meta.ts')).toString('utf8');
   const defaultModuleTpl = config.standalone ? './src/templates/standalone.routes.ts' : './src/templates/module.ts';
   const moduleTpl = fs.readFileSync(path.join(rootDir, config.template?.module ?? defaultModuleTpl)).toString('utf8');
   // #region generate meta file

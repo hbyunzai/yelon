@@ -1,13 +1,7 @@
 import { Component, DebugElement, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {
-  NavigationCancel,
-  NavigationError,
-  provideRouter,
-  RouteConfigLoadEnd,
-  RouteConfigLoadStart
-} from '@angular/router';
+import { NavigationCancel, NavigationError, provideRouter, RouteConfigLoadEnd, RouteConfigLoadStart } from '@angular/router';
 
 import { createTestContext } from '@yelon/testing';
 import { provideNzIconsTesting } from 'ng-zorro-antd/icon/testing';
@@ -207,16 +201,7 @@ describe('theme: layout-default', () => {
 
 @Component({
   template: `
-    <layout-default
-      #comp
-      [options]="options"
-      [asideUser]="asideUser"
-      [nav]="nav"
-      [content]="content"
-      [customError]="customError"
-      [fetchingStrictly]="fetchingStrictly"
-      [fetching]="fetching"
-    >
+    <layout-default #comp [options]="options" [asideUser]="asideUser" [nav]="nav" [content]="content" [customError]="customError" [fetchingStrictly]="fetchingStrictly" [fetching]="fetching">
       <layout-default-header-item direction="left">
         <span class="header-left">left</span>
       </layout-default-header-item>

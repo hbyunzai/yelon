@@ -69,18 +69,7 @@ describe('chart: bar', () => {
 
 @Component({
   template: `
-    <g2-bar
-      style="display: block;"
-      #comp
-      [delay]="delay"
-      [height]="height"
-      [title]="title"
-      [color]="color"
-      [padding]="padding"
-      [data]="data"
-      [autoLabel]="autoLabel"
-      (clickItem)="clickItem()"
-    />
+    <g2-bar style="display: block;" #comp [delay]="delay" [height]="height" [title]="title" [color]="color" [padding]="padding" [data]="data" [autoLabel]="autoLabel" (clickItem)="clickItem()" />
     <ng-template #titleTpl><p id="titleTpl">titleTpl</p></ng-template>
   `,
   imports: [G2BarComponent]

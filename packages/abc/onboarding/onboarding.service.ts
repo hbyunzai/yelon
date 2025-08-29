@@ -1,14 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { DOCUMENT } from '@angular/common';
-import {
-  ApplicationRef,
-  ComponentRef,
-  EmbeddedViewRef,
-  Injectable,
-  OnDestroy,
-  createComponent,
-  inject
-} from '@angular/core';
+import { ApplicationRef, ComponentRef, EmbeddedViewRef, Injectable, OnDestroy, createComponent, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { of, pipe, Subscription, delay, switchMap } from 'rxjs';
 

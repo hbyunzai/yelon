@@ -4,15 +4,7 @@ import { CanActivateChildFn, CanActivateFn } from '@angular/router';
 import { ITokenService, YA_SERVICE_TOKEN } from '@yelon/auth';
 import { BUSINESS_DEFAULT_CONFIG, mergeBisConfig } from '@yelon/bis/config';
 import { Menu } from '@yelon/theme';
-import {
-  deepCopy,
-  PathToRegexpService,
-  useLocalStorageUser,
-  WINDOW,
-  YunzaiBusinessConfig,
-  YunzaiConfigService,
-  YunzaiUser
-} from '@yelon/util';
+import { deepCopy, PathToRegexpService, useLocalStorageUser, WINDOW, YunzaiBusinessConfig, YunzaiConfigService, YunzaiUser } from '@yelon/util';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +24,7 @@ export class YunzaiAnalysisAddonGuardService {
     this.bis = mergeBisConfig(this.configService);
     const [, getUser] = useLocalStorageUser();
     const user: YunzaiUser = getUser()!;
-    this.menus = deepCopy((user.menu as any) || []).filter(
-      (m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode
-    ) as Menu[];
+    this.menus = deepCopy((user.menu as any) || []).filter((m: Menu) => m.systemCode && m.systemCode === this.bis.systemCode) as Menu[];
     if (user) {
       this.value = {
         systemCode: this.bis.systemCode,
@@ -100,7 +90,5 @@ export class YunzaiAnalysisAddonGuardService {
   }
 }
 
-export const analysisAddonCanActive: CanActivateFn = (_, state) =>
-  inject(YunzaiAnalysisAddonGuardService).process(state.url);
-export const analysisAddonCanActiveChild: CanActivateChildFn = (_, state) =>
-  inject(YunzaiAnalysisAddonGuardService).process(state.url);
+export const analysisAddonCanActive: CanActivateFn = (_, state) => inject(YunzaiAnalysisAddonGuardService).process(state.url);
+export const analysisAddonCanActiveChild: CanActivateChildFn = (_, state) => inject(YunzaiAnalysisAddonGuardService).process(state.url);

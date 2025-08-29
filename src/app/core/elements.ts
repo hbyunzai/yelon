@@ -1,12 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  EnvironmentProviders,
-  Injector,
-  PLATFORM_ID,
-  Provider,
-  inject,
-  provideEnvironmentInitializer
-} from '@angular/core';
+import { EnvironmentProviders, Injector, PLATFORM_ID, Provider, inject, provideEnvironmentInitializer } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 
 import { EXAMPLE_COMPONENTS } from '../routes/gen/examples';

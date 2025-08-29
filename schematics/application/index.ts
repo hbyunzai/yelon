@@ -1,19 +1,6 @@
 import { strings } from '@angular-devkit/core';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
-import {
-  apply,
-  chain,
-  filter,
-  MergeStrategy,
-  mergeWith,
-  move,
-  noop,
-  Rule,
-  SchematicContext,
-  template,
-  Tree,
-  url
-} from '@angular-devkit/schematics';
+import { apply, chain, filter, MergeStrategy, mergeWith, move, noop, Rule, SchematicContext, template, Tree, url } from '@angular-devkit/schematics';
 import { updateWorkspace } from '@schematics/angular/utility/workspace';
 
 import { getLangData } from '../core/lang.config';
@@ -131,14 +118,12 @@ function addRunScriptToPackageJson(): Rule {
     json.scripts[`${commandPrefix}hmr`] = `ng s${commandFragment} -o --hmr`;
     json.scripts[`${commandPrefix}build`] = `npm run ng-high-memory build${commandFragment}`;
     json.scripts[`${commandPrefix}analyze`] = `npm run ng-high-memory build${commandFragment} -- --source-map`;
-    json.scripts[`${commandPrefix}analyze:view`] =
-      `source-map-explorer dist/${mulitProject ? `${projectName}/` : ''}**/*.js`;
+    json.scripts[`${commandPrefix}analyze:view`] = `source-map-explorer dist/${mulitProject ? `${projectName}/` : ''}**/*.js`;
     json.scripts[`${commandPrefix}test-coverage`] = `ng test${commandFragment} --code-coverage --watch=false`;
     const themeCommand = mulitProject ? ` -n=${projectName}` : '';
     json.scripts[`${commandPrefix}color-less`] = `ng-yunzai-plugin-theme -t=colorLess${themeCommand}`;
     json.scripts[`${commandPrefix}theme`] = `ng-yunzai-plugin-theme -t=themeCss${themeCommand}`;
-    json.scripts[`${commandPrefix}icon`] =
-      `ng g ng-yunzai:plugin icon${mulitProject ? ` --project ${projectName}` : ''}`;
+    json.scripts[`${commandPrefix}icon`] = `ng g ng-yunzai:plugin icon${mulitProject ? ` --project ${projectName}` : ''}`;
     json.scripts.prepare = `husky install`;
     writePackage(tree, json);
     return tree;
@@ -242,13 +227,7 @@ function addSchematics(options: ApplicationOptions): Rule {
 }
 
 function forceLess(): Rule {
-  return addAssetsToTarget(
-    [{ type: 'style', value: `${mulitProject ? `projects/${projectName}/` : ''}src/styles.less` }],
-    'add',
-    [BUILD_TARGET_BUILD],
-    projectName,
-    false
-  );
+  return addAssetsToTarget([{ type: 'style', value: `${mulitProject ? `projects/${projectName}/` : ''}src/styles.less` }], 'add', [BUILD_TARGET_BUILD], projectName, false);
 }
 
 function addStyle(): Rule {

@@ -5,14 +5,7 @@ import { ControlUIWidget } from '../../widget';
 
 @Component({
   selector: 'sf-number',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-input-number
       [nzId]="id"
       [ngModel]="value"
@@ -27,8 +20,7 @@ import { ControlUIWidget } from '../../widget';
       [nzPrecision]="ui.precision || null"
       [nzPlaceHolder]="ui.placeholder || ''"
       [style.width]="width"
-      [class.ant-input-number__hide-step]="ui.hideStep"
-    />
+      [class.ant-input-number__hide-step]="ui.hideStep" />
   </sf-item-wrap>`,
 
   encapsulation: ViewEncapsulation.None,

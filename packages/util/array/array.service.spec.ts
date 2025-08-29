@@ -173,10 +173,7 @@ describe('utils: array', () => {
           const options = {
             [`${key}MapName`]: key
           };
-          const res = srv.arrToTreeNode(
-            [{ id: 1, parent_id: 0, title: 't1', [key]: true, isLeaf: key !== 'expanded' }],
-            options
-          );
+          const res = srv.arrToTreeNode([{ id: 1, parent_id: 0, title: 't1', [key]: true, isLeaf: key !== 'expanded' }], options);
           page = new PageTreeNode(res);
           page.check('0', key.startsWith('is') ? key : `is${key.slice(0, 1).toUpperCase() + key.slice(1)}`, true);
         });
@@ -297,9 +294,7 @@ describe('utils: array', () => {
     it('should be working', () => {
       expect(JSON.stringify(srv.uniq([1, 2, 2, 3, 1]))).toBe(`[1,2,3]`);
       expect(JSON.stringify(srv.uniq([{ a: 1 }, { a: 1 }, { a: 2 }], 'a'))).toBe(`[{"a":1},{"a":2}]`);
-      expect(JSON.stringify(srv.uniq([{ a: 1 }, { a: 1 }, { a: 2 }], _v => (_v.a === 1 ? 'a' : 'b')))).toBe(
-        `[{"a":1},{"a":2}]`
-      );
+      expect(JSON.stringify(srv.uniq([{ a: 1 }, { a: 1 }, { a: 2 }], _v => (_v.a === 1 ? 'a' : 'b')))).toBe(`[{"a":1},{"a":2}]`);
     });
   });
 

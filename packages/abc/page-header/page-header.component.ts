@@ -44,16 +44,7 @@ interface PageHeaderPath {
   templateUrl: './page-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    NzAffixComponent,
-    NgTemplateOutlet,
-    NzSkeletonComponent,
-    NzBreadCrumbComponent,
-    NzBreadCrumbItemComponent,
-    RouterLink,
-    NzStringTemplateOutletDirective,
-    CdkObserveContent
-  ]
+  imports: [NzAffixComponent, NgTemplateOutlet, NzSkeletonComponent, NzBreadCrumbComponent, NzBreadCrumbItemComponent, RouterLink, NzStringTemplateOutletDirective, CdkObserveContent]
 })
 export class PageHeaderComponent implements OnInit, OnChanges, AfterViewInit {
   private readonly renderer = inject(Renderer2);

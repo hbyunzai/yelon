@@ -7,19 +7,7 @@ import type { ErrorSchema } from '../errors';
 import type { SFValue } from '../interface';
 import type { FormProperty } from '../model/form.property';
 
-export type SFPlacement =
-  | 'top'
-  | 'left'
-  | 'right'
-  | 'bottom'
-  | 'topLeft'
-  | 'topRight'
-  | 'bottomLeft'
-  | 'bottomRight'
-  | 'leftTop'
-  | 'leftBottom'
-  | 'rightTop'
-  | 'rightBottom';
+export type SFPlacement = 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 
 export type SFTrigger = 'click' | 'focus' | 'hover';
 
@@ -175,10 +163,7 @@ export interface SFVisibleIfReturn {
   required?: boolean;
 }
 
-export type SFVisibleIf = Record<
-  string,
-  any[] | ((value: SFValue, property: FormProperty) => boolean | SFVisibleIfReturn | null)
->;
+export type SFVisibleIf = Record<string, any[] | ((value: SFValue, property: FormProperty) => boolean | SFVisibleIfReturn | null)>;
 
 /** 指定如何渲染 `Schema` */
 export interface SFUISchemaItem extends SFRenderSchema, SFHorizontalLayoutSchema, ErrorSchema, SFSchemaI18n {

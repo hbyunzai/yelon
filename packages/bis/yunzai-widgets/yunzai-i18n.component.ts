@@ -16,36 +16,16 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
         <nz-icon nzType="down" nzTheme="outline"></nz-icon>
       </div>
     } @else {
-      <i
-        nz-dropdown
-        [nzDropdownMenu]="langMenu"
-        nzPlacement="bottomRight"
-        nz-icon
-        nzType="global"
-        nzTheme="outline"
-      ></i>
+      <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global" nzTheme="outline"></i>
     }
     <nz-dropdown-menu data-event-id="_nav_lang" #langMenu="nzDropdownMenu">
       <ul nz-menu>
         @for (item of langs; track item) {
-          <li
-            data-event-id="_nav_lang"
-            [attr.data-text]="item.text"
-            nz-menu-item
-            [nzSelected]="item.code === curLangCode"
-            (click)="change(item.code)"
-          >
+          <li data-event-id="_nav_lang" [attr.data-text]="item.text" nz-menu-item [nzSelected]="item.code === curLangCode" (click)="change(item.code)">
             @if (!item.icon) {
               <span role="img" [attr.aria-label]="item.text" class="pr-xs">{{ item.abbr }}</span>
             } @else {
-              <img
-                style="margin-right:4px"
-                width="50px"
-                height="30px"
-                [src]="'data:image/png;base64,' + item.icon"
-                [alt]="item.abbr"
-                class="pr-xs"
-              />
+              <img style="margin-right:4px" width="50px" height="30px" [src]="'data:image/png;base64,' + item.icon" [alt]="item.abbr" class="pr-xs" />
             }
             {{ item.text }}
           </li>

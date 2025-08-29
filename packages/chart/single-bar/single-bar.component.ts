@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  SimpleChanges,
-  ViewEncapsulation,
-  booleanAttribute,
-  numberAttribute
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, SimpleChanges, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
 
 import type { Chart } from '@antv/g2';
 

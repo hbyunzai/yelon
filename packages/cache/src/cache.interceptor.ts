@@ -37,12 +37,7 @@ export const httpCacheInterceptor: HttpInterceptorFn = (req, next) => {
   const cacheData = srv.getNone<HttpEvent<any>>(options.key);
   if (cacheData != null) {
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
-      console.log(
-        `%c👽${req.method}->${req.urlWithParams}->from cache(onle in development)`,
-        'background:#000;color:#1890ff',
-        req,
-        cacheData
-      );
+      console.log(`%c👽${req.method}->${req.urlWithParams}->from cache(onle in development)`, 'background:#000;color:#1890ff', req, cacheData);
     }
     return of(cacheData);
   }

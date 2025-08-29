@@ -45,8 +45,7 @@ describe('chart: single-bar', () => {
       [format]="format"
       [padding]="padding"
       [textStyle]="textStyle"
-      [delay]="delay"
-    />
+      [delay]="delay" />
   `,
   imports: [G2SingleBarComponent]
 })

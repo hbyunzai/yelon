@@ -3,19 +3,10 @@ import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core
 import { FormsModule } from '@angular/forms';
 
 import { YunzaiDeptTree, YunzaiDeptTreeModule, YunzaiDeptTreeProps } from '@yelon/bcs/yunzai-dept-tree';
-import {
-  YunzaiDormitoryTree,
-  YunzaiDormitoryTreeModule,
-  YunzaiDormitoryTreeProps
-} from '@yelon/bcs/yunzai-dormitory-tree';
+import { YunzaiDormitoryTree, YunzaiDormitoryTreeModule, YunzaiDormitoryTreeProps } from '@yelon/bcs/yunzai-dormitory-tree';
 import { YunzaiFriendGroup, YunzaiFriendGroupModule, YunzaiFriendGroupProps } from '@yelon/bcs/yunzai-friend-group';
 import { YunzaiRoleTree, YunzaiRoleTreeModule, YunzaiRoleTreeProps } from '@yelon/bcs/yunzai-role-tree';
-import {
-  YunzaiTableUser,
-  YunzaiTableUserComponent,
-  YunzaiTableUserModule,
-  YunzaiTableUserProps
-} from '@yelon/bcs/yunzai-table-user';
+import { YunzaiTableUser, YunzaiTableUserComponent, YunzaiTableUserModule, YunzaiTableUserProps } from '@yelon/bcs/yunzai-table-user';
 import { I18nPipe } from '@yelon/theme';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';

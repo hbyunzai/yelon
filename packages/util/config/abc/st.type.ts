@@ -85,10 +85,7 @@ export interface YunzaiSTConfig {
           total?: string | string[];
           list?: string | string[];
         }
-      | ((
-          result: NzSafeAny,
-          options: { pi: number; ps: number; total: number }
-        ) => { total: number; list: NzSafeAny[] });
+      | ((result: NzSafeAny, options: { pi: number; ps: number; total: number }) => { total: number; list: NzSafeAny[] });
     /**
      * 数据预处理
      */
@@ -276,19 +273,7 @@ export interface YunzaiSTConfig {
     /**
      * The position of the popover relative to the target, default: `top`
      */
-    placement?:
-      | 'top'
-      | 'left'
-      | 'right'
-      | 'bottom'
-      | 'topLeft'
-      | 'topRight'
-      | 'bottomLeft'
-      | 'bottomRight'
-      | 'leftTop'
-      | 'leftBottom'
-      | 'rightTop'
-      | 'rightBottom';
+    placement?: 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 
     /**
      * Class name of the popover card

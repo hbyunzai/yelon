@@ -8,14 +8,7 @@ import type { SFColorWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-color',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     @if (ui.block) {
       <nz-color-block [nzColor]="value" [nzSize]="$any(ui.size)" />
     } @else {
@@ -32,8 +25,7 @@ import type { SFColorWidgetSchema } from './schema';
         [nzShowText]="ui.showText"
         [nzAllowClear]="ui.allowClear"
         (nzOnChange)="_change($event)"
-        (nzOnFormatChange)="_formatChange($event)"
-      />
+        (nzOnFormatChange)="_formatChange($event)" />
     }
   </sf-item-wrap>`,
 

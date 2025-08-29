@@ -20,11 +20,7 @@ export function writePackage(tree: Tree, json: any): any {
  * addPackage(tree, [ '＠yelon/abc＠^1.0.0' ], 'devDependencies')
  * ```
  */
-export function addPackage(
-  tree: Tree,
-  pkg: string | string[],
-  type: 'dependencies' | 'devDependencies' | 'scripts' = 'dependencies'
-): Tree {
+export function addPackage(tree: Tree, pkg: string | string[], type: 'dependencies' | 'devDependencies' | 'scripts' = 'dependencies'): Tree {
   const json = readPackage(tree, type);
   if (json == null) return tree;
 
@@ -48,11 +44,7 @@ export function addPackage(
  * removePackage(tree, [ '＠yelon/abc' ], 'devDependencies')
  * ```
  */
-export function removePackage(
-  tree: Tree,
-  pkg: string | string[],
-  type: 'dependencies' | 'devDependencies' | 'scripts' = 'dependencies'
-): Tree {
+export function removePackage(tree: Tree, pkg: string | string[], type: 'dependencies' | 'devDependencies' | 'scripts' = 'dependencies'): Tree {
   const json = readPackage(tree, type);
   if (json == null) return tree;
 

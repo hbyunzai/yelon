@@ -159,10 +159,7 @@ export class ModalHelper {
           delay(modalOptions?.nzNoAnimation ? 10 : 241)
         )
         .subscribe(() => {
-          const btns = subject
-            .getElement()
-            .querySelector<HTMLDivElement>('.ant-modal-confirm-btns, .modal-footer')
-            ?.querySelectorAll<HTMLButtonElement>('.ant-btn');
+          const btns = subject.getElement().querySelector<HTMLDivElement>('.ant-modal-confirm-btns, .modal-footer')?.querySelectorAll<HTMLButtonElement>('.ant-btn');
           const btnSize = btns?.length ?? 0;
           let el: HTMLButtonElement | null = null;
           if (btnSize === 1) {
@@ -205,11 +202,7 @@ export class ModalHelper {
    * // 关闭
    * this.nzModalRef.destroy();
    */
-  createStatic(
-    comp: TemplateRef<NzSafeAny> | Type<NzSafeAny>,
-    params?: NzSafeAny,
-    options?: ModalHelperOptions
-  ): Observable<NzSafeAny> {
+  createStatic(comp: TemplateRef<NzSafeAny> | Type<NzSafeAny>, params?: NzSafeAny, options?: ModalHelperOptions): Observable<NzSafeAny> {
     const modalOptions = {
       nzMaskClosable: false,
       ...(options && options.modalOptions)

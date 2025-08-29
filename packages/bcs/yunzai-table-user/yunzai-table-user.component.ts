@@ -14,13 +14,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 import { YunzaiTableUserService } from './yunzai-table-user.service';
-import {
-  YunzaiTableUser,
-  YunzaiTableUserParam,
-  YunzaiTableUserProps,
-  YunzaiTableUserRole,
-  YunzaiTableUserState
-} from './yunzai-table-user.types';
+import { YunzaiTableUser, YunzaiTableUserParam, YunzaiTableUserProps, YunzaiTableUserRole, YunzaiTableUserState } from './yunzai-table-user.types';
 
 @Component({
   selector: 'yunzai-table-user',
@@ -93,19 +87,7 @@ import {
   `,
 
   providers: [YunzaiTableUserService],
-  imports: [
-    CommonModule,
-    YelonFormModule,
-    STModule,
-    I18nPipe,
-    NzCheckboxModule,
-    NzDividerModule,
-    NzButtonModule,
-    NzEmptyModule,
-    NzIconModule,
-    NzMenuModule,
-    NzCardModule
-  ]
+  imports: [CommonModule, YelonFormModule, STModule, I18nPipe, NzCheckboxModule, NzDividerModule, NzButtonModule, NzEmptyModule, NzIconModule, NzMenuModule, NzCardModule]
 })
 export class YunzaiTableUserComponent implements OnInit, AfterViewInit {
   @ViewChild('st') st!: STComponent;

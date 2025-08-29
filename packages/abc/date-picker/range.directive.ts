@@ -1,22 +1,7 @@
-import {
-  AfterViewInit,
-  ComponentRef,
-  Directive,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  Output,
-  TemplateRef,
-  ViewContainerRef,
-  inject
-} from '@angular/core';
+import { AfterViewInit, ComponentRef, Directive, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewContainerRef, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import {
-  YunzaiConfigService,
-  YunzaiDateRangePickerShortcut,
-  YunzaiDateRangePickerShortcutItem
-} from '@yelon/util/config';
+import { YunzaiConfigService, YunzaiDateRangePickerShortcut, YunzaiDateRangePickerShortcutItem } from '@yelon/util/config';
 import { fixEndTimeOfRange, getTimeDistance } from '@yelon/util/date-time';
 import { assert, deepMergeKey } from '@yelon/util/other';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -44,12 +29,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
 
   @Input()
   set shortcut(val: YunzaiDateRangePickerShortcut | null) {
-    const item = deepMergeKey(
-      { list: [] },
-      true,
-      this.defaultShortcuts,
-      val == null ? {} : val
-    ) as YunzaiDateRangePickerShortcut;
+    const item = deepMergeKey({ list: [] }, true, this.defaultShortcuts, val == null ? {} : val) as YunzaiDateRangePickerShortcut;
     if (typeof val !== 'object') {
       item.enabled = val !== false;
     }
@@ -75,10 +55,7 @@ export class RangePickerDirective implements OnDestroy, AfterViewInit {
 
   constructor() {
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
-      assert(
-        !!this.nativeComp,
-        `It should be attached to nz-range-picker component, for example: '<nz-range-picker [(ngModel)]="i.start" extend [(ngModelEnd)]="i.end" shortcut></nz-range-picker>'`
-      );
+      assert(!!this.nativeComp, `It should be attached to nz-range-picker component, for example: '<nz-range-picker [(ngModel)]="i.start" extend [(ngModelEnd)]="i.end" shortcut></nz-range-picker>'`);
     }
     const cog = this.cogSrv.merge('dataRange', {
       nzFormat: 'yyyy-MM-dd',

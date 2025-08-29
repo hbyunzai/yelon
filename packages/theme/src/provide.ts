@@ -1,24 +1,8 @@
 import { registerLocaleData } from '@angular/common';
-import {
-  EnvironmentProviders,
-  LOCALE_ID,
-  Provider,
-  Type,
-  importProvidersFrom,
-  inject,
-  makeEnvironmentProviders,
-  provideEnvironmentInitializer
-} from '@angular/core';
+import { EnvironmentProviders, LOCALE_ID, Provider, Type, importProvidersFrom, inject, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
 
 import type { IconDefinition } from '@ant-design/icons-angular';
-import {
-  BellOutline,
-  DeleteOutline,
-  InboxOutline,
-  PlusOutline,
-  MenuFoldOutline,
-  MenuUnfoldOutline
-} from '@ant-design/icons-angular/icons';
+import { BellOutline, DeleteOutline, InboxOutline, PlusOutline, MenuFoldOutline, MenuUnfoldOutline } from '@ant-design/icons-angular/icons';
 
 import { YUNZAI_CONFIG, YunzaiConfig } from '@yelon/util/config';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
@@ -73,15 +57,7 @@ export function provideYunzai(options: YunzaiProvideOptions): EnvironmentProvide
     provides.push({ provide: YUNZAI_I18N_TOKEN, useClass: i18nCls, multi: false });
   }
 
-  const icons: IconDefinition[] = [
-    BellOutline,
-    DeleteOutline,
-    PlusOutline,
-    InboxOutline,
-    MenuFoldOutline,
-    MenuUnfoldOutline,
-    ...(options.icons ?? [])
-  ];
+  const icons: IconDefinition[] = [BellOutline, DeleteOutline, PlusOutline, InboxOutline, MenuFoldOutline, MenuUnfoldOutline, ...(options.icons ?? [])];
   provides.push(
     provideEnvironmentInitializer(() => {
       inject(NzIconService, { optional: true })?.addIcon(...icons);

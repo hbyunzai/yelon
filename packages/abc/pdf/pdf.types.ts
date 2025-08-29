@@ -2,14 +2,7 @@
 
 type PDFDocumentProxy = any;
 
-export type PdfChangeEventType =
-  | 'loaded'
-  | 'load-progress'
-  | 'pages-init'
-  | 'page-rendered'
-  | 'text-layer-rendered'
-  | 'pi'
-  | 'error';
+export type PdfChangeEventType = 'loaded' | 'load-progress' | 'pages-init' | 'page-rendered' | 'text-layer-rendered' | 'pi' | 'error';
 export type PdfZoomScale = 'page-height' | 'page-fit' | 'page-width';
 
 export interface PdfChangeEvent {

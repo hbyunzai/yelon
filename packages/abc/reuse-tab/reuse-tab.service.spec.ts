@@ -551,11 +551,7 @@ describe('abc: reuse-tab(service)', () => {
   it('#storageState', () => {
     genModule();
     const stateSrv = TestBed.inject(REUSE_TAB_STORAGE_STATE);
-    spyOn(stateSrv, 'get').and.returnValue([
-      { title: 'ti1', url: '/a' } as ReuseItem,
-      { title: 'ti2', url: '/b' } as ReuseItem,
-      { title: 'ti3', url: '/c' } as ReuseItem
-    ]);
+    spyOn(stateSrv, 'get').and.returnValue([{ title: 'ti1', url: '/a' } as ReuseItem, { title: 'ti2', url: '/b' } as ReuseItem, { title: 'ti3', url: '/c' } as ReuseItem]);
     srv.storageState = true;
     srv.init();
     expect(srv.items.length).toBe(3);

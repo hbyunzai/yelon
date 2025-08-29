@@ -67,12 +67,7 @@ export class ArrayProperty extends PropertyGroup {
   }
 
   private addProperty(formData: Record<string, unknown>): FormProperty {
-    const newProperty = this.formPropertyFactory.createProperty(
-      deepCopy(this.schema.items!),
-      deepCopy(this.ui.$items),
-      formData,
-      this as PropertyGroup
-    ) as ObjectProperty;
+    const newProperty = this.formPropertyFactory.createProperty(deepCopy(this.schema.items!), deepCopy(this.ui.$items), formData, this as PropertyGroup) as ObjectProperty;
     (this.properties as FormProperty[]).push(newProperty);
     return newProperty;
   }

@@ -1,18 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { CdkObserveContent } from '@angular/cdk/observers';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  afterNextRender,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-  viewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, afterNextRender, computed, effect, inject, input, signal, viewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 

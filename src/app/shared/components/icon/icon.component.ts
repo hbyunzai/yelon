@@ -4,15 +4,7 @@ import { NzIconDirective } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'icon',
-  template: `
-    <nz-icon
-      [nzType]="type"
-      [nzTheme]="theme"
-      [nzSpin]="spin"
-      [nzTwotoneColor]="twoToneColor"
-      [nzIconfont]="iconfont"
-    />
-  `,
+  template: ` <nz-icon [nzType]="type" [nzTheme]="theme" [nzSpin]="spin" [nzTwotoneColor]="twoToneColor" [nzIconfont]="iconfont" /> `,
   imports: [NzIconDirective]
 })
 export class IconComponent {

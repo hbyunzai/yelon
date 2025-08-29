@@ -2,12 +2,7 @@ import type { Type } from '@angular/core';
 import type { SafeValue } from '@angular/platform-browser';
 import type { Observable } from 'rxjs';
 
-import type {
-  CurrencyCNYOptions,
-  CurrencyFormatOptions,
-  CurrencyMegaOptions,
-  FormatMaskOption
-} from '@yelon/util/format';
+import type { CurrencyCNYOptions, CurrencyFormatOptions, CurrencyMegaOptions, FormatMaskOption } from '@yelon/util/format';
 import type { NzImagePreviewOptions } from 'ng-zorro-antd/image';
 
 export type CellRenderType = 'primary' | 'success' | 'danger' | 'warning';
@@ -39,23 +34,7 @@ export interface CellWidget {
   ref: Type<unknown> | CellWidgetFn;
 }
 
-export type CellType =
-  | 'string'
-  | 'number'
-  | 'mega'
-  | 'currency'
-  | 'cny'
-  | 'boolean'
-  | 'date'
-  | 'img'
-  | 'link'
-  | 'html'
-  | 'badge'
-  | 'tag'
-  | 'checkbox'
-  | 'radio'
-  | 'enum'
-  | 'widget';
+export type CellType = 'string' | 'number' | 'mega' | 'currency' | 'cny' | 'boolean' | 'date' | 'img' | 'link' | 'html' | 'badge' | 'tag' | 'checkbox' | 'radio' | 'enum' | 'widget';
 
 export interface CellOptions {
   /**
@@ -271,19 +250,7 @@ export interface CellTagValue {
    * - 预设：geekblue,blue,purple,success,red,volcano,orange,gold,lime,green,cyan
    * - 色值：#f50,#ff0
    */
-  color?:
-    | 'geekblue'
-    | 'blue'
-    | 'purple'
-    | 'success'
-    | 'red'
-    | 'volcano'
-    | 'orange'
-    | 'gold'
-    | 'lime'
-    | 'green'
-    | 'cyan'
-    | string;
+  color?: 'geekblue' | 'blue' | 'purple' | 'success' | 'red' | 'volcano' | 'orange' | 'gold' | 'lime' | 'green' | 'cyan' | string;
   /**
    * Text popup tip
    *

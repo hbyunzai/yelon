@@ -1,15 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  SimpleChanges,
-  TemplateRef,
-  ViewEncapsulation,
-  booleanAttribute,
-  numberAttribute
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, SimpleChanges, TemplateRef, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
 
 import type { Chart, Event, Types } from '@antv/g2';
 import { format } from 'date-fns';

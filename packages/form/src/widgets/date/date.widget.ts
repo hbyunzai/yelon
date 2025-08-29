@@ -12,14 +12,7 @@ import { ControlUIWidget } from '../../widget';
 
 @Component({
   selector: 'sf-date',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     @switch (mode) {
       @case ('year') {
         <nz-year-picker
@@ -39,8 +32,7 @@ import { ControlUIWidget } from '../../widget';
           (nzOnOpenChange)="_openChange($event)"
           [nzRenderExtraFooter]="ui.renderExtraFooter"
           [nzInputReadOnly]="ui.inputReadOnly"
-          [nzInline]="ui.inline!"
-        />
+          [nzInline]="ui.inline!" />
       }
       @case ('month') {
         <nz-month-picker
@@ -60,8 +52,7 @@ import { ControlUIWidget } from '../../widget';
           (nzOnOpenChange)="_openChange($event)"
           [nzRenderExtraFooter]="ui.renderExtraFooter"
           [nzInputReadOnly]="ui.inputReadOnly"
-          [nzInline]="ui.inline!"
-        />
+          [nzInline]="ui.inline!" />
       }
       @case ('week') {
         <nz-week-picker
@@ -80,8 +71,7 @@ import { ControlUIWidget } from '../../widget';
           [nzDropdownClassName]="ui.dropdownClassName"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOpenChange)="_openChange($event)"
-        />
+          (nzOnOpenChange)="_openChange($event)" />
       }
       @case ('range') {
         <nz-range-picker
@@ -108,8 +98,7 @@ import { ControlUIWidget } from '../../widget';
           [nzMode]="$any(ui.rangeMode)"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOk)="_ok($event)"
-        />
+          (nzOnOk)="_ok($event)" />
       }
       @default {
         <nz-date-picker
@@ -134,8 +123,7 @@ import { ControlUIWidget } from '../../widget';
           [nzShowWeekNumber]="ui.showWeekNumber || false"
           [nzInputReadOnly]="ui.inputReadOnly"
           [nzInline]="ui.inline!"
-          (nzOnOk)="_ok($event)"
-        />
+          (nzOnOk)="_ok($event)" />
       }
     }
   </sf-item-wrap>`,
@@ -219,9 +207,7 @@ export class DateWidget extends ControlUIWidget<SFDateWidgetSchema> implements O
       return;
     }
 
-    const res = Array.isArray(value)
-      ? [format(value[0], this.startFormat), format(value[1], this.endFormat || this.startFormat)]
-      : format(value, this.startFormat);
+    const res = Array.isArray(value) ? [format(value[0], this.startFormat), format(value[1], this.endFormat || this.startFormat)] : format(value, this.startFormat);
 
     if (this.flatRange) {
       this.setValue(res[0]);

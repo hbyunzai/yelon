@@ -1,15 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  Renderer2,
-  ViewEncapsulation,
-  inject,
-  numberAttribute
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, Renderer2, ViewEncapsulation, inject, numberAttribute } from '@angular/core';
 
 import { ResponsiveService } from '@yelon/theme';
 

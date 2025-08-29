@@ -207,11 +207,7 @@ export class PdfComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   private initDelay(): void {
     if (!this.win.pdfjsLib) {
-      throw new Error(
-        `No window.pdfjsLib found, please make sure that cdn or local path exists, the current referenced path is: ${JSON.stringify(
-          this.lib
-        )}`
-      );
+      throw new Error(`No window.pdfjsLib found, please make sure that cdn or local path exists, the current referenced path is: ${JSON.stringify(this.lib)}`);
     }
     this.inited = true;
     this.cdr.detectChanges();

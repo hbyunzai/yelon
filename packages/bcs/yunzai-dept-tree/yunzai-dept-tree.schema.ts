@@ -2,12 +2,7 @@ import { Observable, of } from 'rxjs';
 
 import { SFSchema, SFSchemaEnumType } from '@yelon/form';
 
-export function generateSchema(
-  ic: boolean,
-  ich: boolean,
-  gra: boolean,
-  data?: Observable<SFSchemaEnumType[]>
-): SFSchema {
+export function generateSchema(ic: boolean, ich: boolean, gra: boolean, data?: Observable<SFSchemaEnumType[]>): SFSchema {
   let schema: SFSchema = {
     properties: {
       search: {

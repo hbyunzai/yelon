@@ -16,16 +16,8 @@ describe('NgYunzaiSchematic: plugin: sts', () => {
       const json = JSON.parse(tree.readContent('package.json'));
       expect(json.devDependencies['ng-yunzai-sts']).toBeDefined();
       expect(tree.exists(`/_cli-tpl/_fix.js`)).toBe(true);
-      expect(
-        tree.exists(
-          `/_cli-tpl/swagger-edit/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.html.template`
-        )
-      ).toBe(true);
-      expect(
-        tree.exists(
-          `/_cli-tpl/swagger-list/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.ts.template`
-        )
-      ).toBe(true);
+      expect(tree.exists(`/_cli-tpl/swagger-edit/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.html.template`)).toBe(true);
+      expect(tree.exists(`/_cli-tpl/swagger-list/__path__/__name@dasherize@if-flat__/__name@dasherize__.component.ts.template`)).toBe(true);
     });
   });
 

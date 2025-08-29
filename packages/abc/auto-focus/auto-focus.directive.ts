@@ -1,13 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  afterNextRender,
-  booleanAttribute,
-  inject,
-  input,
-  numberAttribute,
-  output
-} from '@angular/core';
+import { Directive, ElementRef, afterNextRender, booleanAttribute, inject, input, numberAttribute, output } from '@angular/core';
 import { take, timer } from 'rxjs';
 
 @Directive({

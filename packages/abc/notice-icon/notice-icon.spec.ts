@@ -136,8 +136,7 @@ describe('abc: notice-icon', () => {
       (select)="select($event)"
       (clear)="clear($event)"
       [(popoverVisible)]="popoverVisible"
-      (popoverVisibleChange)="popupVisibleChange($event)"
-    />
+      (popoverVisibleChange)="popupVisibleChange($event)" />
   `,
   imports: [NoticeIconComponent]
 })

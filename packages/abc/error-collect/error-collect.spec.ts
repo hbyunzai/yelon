@@ -67,10 +67,7 @@ describe('abc: error-collect', () => {
   });
 
   it('should be not to error element when not errores', () => {
-    TestBed.overrideTemplate(
-      TestComponent,
-      `<form nz-form [formGroup]="validateForm"><error-collect #ec [freq]="freq"></error-collect></form>`
-    );
+    TestBed.overrideTemplate(TestComponent, `<form nz-form [formGroup]="validateForm"><error-collect #ec [freq]="freq"></error-collect></form>`);
     getPropertiesAndCreate();
     const safeComp = context.comp as NzSafeAny;
     spyOn(safeComp, 'findParent');
@@ -80,9 +77,7 @@ describe('abc: error-collect', () => {
 
   it('should be throw [No found form element] if no form element', () => {
     expect(() => {
-      TestBed.overrideTemplate(TestComponent, `<error-collect #ec [freq]="freq" />`)
-        .createComponent(TestComponent)
-        .detectChanges();
+      TestBed.overrideTemplate(TestComponent, `<error-collect #ec [freq]="freq" />`).createComponent(TestComponent).detectChanges();
     }).toThrowError('No found form element');
   });
 });

@@ -25,15 +25,7 @@ declare const hljs: any;
 @Component({
   selector: 'app-docs',
   templateUrl: './docs.component.html',
-  imports: [
-    I18nPipe,
-    RouteTransferDirective,
-    NzAffixModule,
-    NzAnchorModule,
-    NzAlertModule,
-    NzTooltipModule,
-    EditButtonComponent
-  ]
+  imports: [I18nPipe, RouteTransferDirective, NzAffixModule, NzAnchorModule, NzAlertModule, NzTooltipModule, EditButtonComponent]
 })
 export class DocsComponent implements OnInit, OnDestroy {
   readonly meta = inject(MetaService);
@@ -112,9 +104,7 @@ export class DocsComponent implements OnInit, OnDestroy {
 
   private genDemoTitle(): void {
     this.demoStr = this.i18n.fanyi('app.component.examples');
-    this.demoContent = this.sanitizer.bypassSecurityTrustHtml(
-      `<a class="lake-link"><i data-anchor="${this.demoStr}"></i></a>${this.demoStr}`
-    );
+    this.demoContent = this.sanitizer.bypassSecurityTrustHtml(`<a class="lake-link"><i data-anchor="${this.demoStr}"></i></a>${this.demoStr}`);
   }
 
   private init(): void {

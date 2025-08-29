@@ -37,8 +37,7 @@ import { YunzaiDormitoryTree, YunzaiDormitoryTreeParam, YunzaiDormitoryTreeProps
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }

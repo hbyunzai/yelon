@@ -4,12 +4,7 @@ import { Injectable, inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 
 import { ReuseTabContextMenuComponent } from './reuse-tab-context-menu.component';
-import {
-  ReuseContextCloseEvent,
-  ReuseContextEvent,
-  ReuseContextI18n,
-  ReuseCustomContextMenu
-} from './reuse-tab.interfaces';
+import { ReuseContextCloseEvent, ReuseContextEvent, ReuseContextI18n, ReuseCustomContextMenu } from './reuse-tab.interfaces';
 
 @Injectable()
 export class ReuseTabContextService {

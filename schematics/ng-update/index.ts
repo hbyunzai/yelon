@@ -18,9 +18,6 @@ export function postUpdate(context: SchematicContext, targetVersion: TargetVersi
   context.logger.info('');
 
   if (hasFailures) {
-    context.logger.warn(
-      '  ⚠  Some issues were detected but could not be fixed automatically. Please check the ' +
-        'output above and fix these issues manually.'
-    );
+    context.logger.warn('  ⚠  Some issues were detected but could not be fixed automatically. Please check the ' + 'output above and fix these issues manually.');
   }
 }

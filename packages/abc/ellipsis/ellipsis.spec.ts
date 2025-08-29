@@ -187,26 +187,14 @@ class TestBaseComponent {
 }
 
 @Component({
-  template: `
-    <ellipsis #comp [tooltip]="tooltip" [length]="length" [fullWidthRecognition]="fullWidthRecognition" [tail]="tail">{{
-      text
-    }}</ellipsis>
-  `,
+  template: ` <ellipsis #comp [tooltip]="tooltip" [length]="length" [fullWidthRecognition]="fullWidthRecognition" [tail]="tail">{{ text }}</ellipsis> `,
   imports: [EllipsisComponent]
 })
 class TestLengthComponent extends TestBaseComponent {}
 
 @Component({
   template: `
-    <ellipsis
-      #comp
-      [tooltip]="tooltip"
-      [lines]="lines"
-      [fullWidthRecognition]="fullWidthRecognition"
-      [tail]="tail"
-      style="width: 1px; display: block;"
-      ><div [innerHTML]="html"></div
-    ></ellipsis>
+    <ellipsis #comp [tooltip]="tooltip" [lines]="lines" [fullWidthRecognition]="fullWidthRecognition" [tail]="tail" style="width: 1px; display: block;"><div [innerHTML]="html"></div></ellipsis>
   `,
   imports: [EllipsisComponent]
 })

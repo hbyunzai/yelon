@@ -33,9 +33,7 @@ export function provideAuth(store?: AuthFeature<AuthFeatureKind.Store>): Environ
 
 /** `cookie` storage */
 export function withCookie(): AuthFeature<AuthFeatureKind.Store> {
-  return makeAuthFeature(AuthFeatureKind.Store, [
-    { provide: YA_STORE_TOKEN, useClass: CookieStorageStore, deps: [CookieService] }
-  ]);
+  return makeAuthFeature(AuthFeatureKind.Store, [{ provide: YA_STORE_TOKEN, useClass: CookieStorageStore, deps: [CookieService] }]);
 }
 
 /** `localStorage` storage, **not lost after closing the browser**. */

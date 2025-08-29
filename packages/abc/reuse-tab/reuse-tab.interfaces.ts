@@ -60,17 +60,7 @@ export interface ReuseTabCached {
 
 export interface ReuseTabNotify {
   /** 事件类型 */
-  active:
-    | 'add'
-    | 'override'
-    | 'title'
-    | 'clear'
-    | 'closable'
-    | 'close'
-    | 'closeRight'
-    | 'move'
-    | 'refresh'
-    | 'loadState';
+  active: 'add' | 'override' | 'title' | 'clear' | 'closable' | 'close' | 'closeRight' | 'move' | 'refresh' | 'loadState';
   url?: string;
   title?: ReuseTitle;
   item?: ReuseTabCached;

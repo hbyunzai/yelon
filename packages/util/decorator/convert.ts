@@ -4,16 +4,8 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 export type BooleanInput = boolean | string | undefined | null;
 export type NumberInput = number | string | undefined | null;
 
-function propDecoratorFactory<T, D>(
-  name: string,
-  fallback: (v: T, defaultValue: D) => D,
-  defaultValue: NzSafeAny
-): (target: NzSafeAny, propName: string) => void {
-  function propDecorator(
-    target: NzSafeAny,
-    propName: string,
-    originalDescriptor?: TypedPropertyDescriptor<NzSafeAny>
-  ): NzSafeAny {
+function propDecoratorFactory<T, D>(name: string, fallback: (v: T, defaultValue: D) => D, defaultValue: NzSafeAny): (target: NzSafeAny, propName: string) => void {
+  function propDecorator(target: NzSafeAny, propName: string, originalDescriptor?: TypedPropertyDescriptor<NzSafeAny>): NzSafeAny {
     const privatePropName = `$$__${propName}`;
 
     if (typeof ngDevMode === 'undefined' || ngDevMode) {
@@ -29,9 +21,7 @@ function propDecoratorFactory<T, D>(
 
     return {
       get(): string {
-        return originalDescriptor && originalDescriptor.get
-          ? originalDescriptor.get.bind(this)()
-          : this[privatePropName];
+        return originalDescriptor && originalDescriptor.get ? originalDescriptor.get.bind(this)() : this[privatePropName];
       },
       set(value: T): void {
         if (originalDescriptor && originalDescriptor.set) {
@@ -45,10 +35,7 @@ function propDecoratorFactory<T, D>(
   return propDecorator;
 }
 
-export function toBoolean(
-  value: unknown,
-  defaultValue: boolean | null | undefined = false
-): boolean | null | undefined {
+export function toBoolean(value: unknown, defaultValue: boolean | null | undefined = false): boolean | null | undefined {
   return value == null ? defaultValue : `${value}` !== 'false';
 }
 

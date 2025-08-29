@@ -64,20 +64,7 @@ import { StringWidget } from './widgets/string/string.widget';
 import { TextWidget } from './widgets/text/text.widget';
 import { TextareaWidget } from './widgets/textarea/textarea.widget';
 
-const WIDGETS = [
-  ObjectWidget,
-  ArrayWidget,
-  StringWidget,
-  NumberWidget,
-  DateWidget,
-  RadioWidget,
-  CheckboxWidget,
-  BooleanWidget,
-  TextareaWidget,
-  SelectWidget,
-  CustomWidget,
-  TextWidget
-];
+const WIDGETS = [ObjectWidget, ArrayWidget, StringWidget, NumberWidget, DateWidget, RadioWidget, CheckboxWidget, BooleanWidget, TextareaWidget, SelectWidget, CustomWidget, TextWidget];
 
 // #endregion
 

@@ -1,14 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  TemplateRef,
-  ViewEncapsulation,
-  booleanAttribute,
-  numberAttribute
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
 
 import type { Chart, Event } from '@antv/g2';
 
@@ -119,21 +109,7 @@ export class G2PieComponent extends G2BaseComponent {
   }
 
   install(): void {
-    const {
-      node,
-      height,
-      padding,
-      tooltip,
-      inner,
-      hasLegend,
-      interaction,
-      theme,
-      animate,
-      lineWidth,
-      isPercent,
-      percentColor,
-      colors
-    } = this;
+    const { node, height, padding, tooltip, inner, hasLegend, interaction, theme, animate, lineWidth, isPercent, percentColor, colors } = this;
     const chart: Chart = (this._chart = new this.winG2.Chart({
       container: node.nativeElement,
       autoFit: true,

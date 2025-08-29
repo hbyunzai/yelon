@@ -5,14 +5,7 @@ import { catchError, combineLatest, EMPTY, map, mergeMap, Observable, of } from 
 import { ACLService } from '@yelon/acl';
 import { ITokenModel, YA_SERVICE_TOKEN } from '@yelon/auth';
 import { mergeBisConfig } from '@yelon/bis/config';
-import {
-  Menu,
-  MenuService,
-  SettingsService,
-  TitleService,
-  YUNZAI_I18N_TOKEN,
-  YunzaiHttpI18NService
-} from '@yelon/theme';
+import { Menu, MenuService, SettingsService, TitleService, YUNZAI_I18N_TOKEN, YunzaiHttpI18NService } from '@yelon/theme';
 import {
   deepCopy,
   useLocalStorageCurrent,
@@ -94,11 +87,7 @@ export class YunzaiStartupService {
         return of(void 0);
       }),
       mergeMap(() => {
-        return combineLatest([
-          this.httpClient.get(`/auth/user`),
-          this.httpClient.get(`/auth/allheader/v2`),
-          this.httpClient.get(`/app-manager/project/info`)
-        ]).pipe(
+        return combineLatest([this.httpClient.get(`/auth/user`), this.httpClient.get(`/auth/allheader/v2`), this.httpClient.get(`/app-manager/project/info`)]).pipe(
           map(([user, header, project]: any) => {
             setUser(user.principal);
             setTenant(user.tenantId);
@@ -118,18 +107,13 @@ export class YunzaiStartupService {
       }),
       mergeMap(() => {
         const yunzaiUser = getUser()!;
-        const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(
-          m => m.systemCode && m.systemCode === this.config.systemCode
-        );
+        const yunzaiMenus: YunzaiMenu[] = deepCopy(yunzaiUser.menu).filter(m => m.systemCode && m.systemCode === this.config.systemCode);
         const currentMenu = yunzaiMenus.pop();
         if (currentMenu) {
           this.settingService.setApp({ name: currentMenu.text, description: currentMenu.intro });
           this.settingService.setUser({
             name: yunzaiUser.realname,
-            avatar:
-              this.config.baseUrl && yunzaiUser.avatarId
-                ? `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}`
-                : '',
+            avatar: this.config.baseUrl && yunzaiUser.avatarId ? `${this.config.baseUrl}/filecenter/file/${yunzaiUser.avatarId}` : '',
             email: yunzaiUser.email
           });
           this.titleService.default = currentMenu && currentMenu.text ? currentMenu.text : 'default application name';
@@ -185,37 +169,35 @@ export class YunzaiStartupService {
       return of(false);
     } else {
       const uri = encodeURIComponent(this.win.location.href);
-      return this.httpClient
-        .get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`)
-        .pipe(
-          map((response: any) => {
-            switch (response.errcode) {
-              case 2000:
-                return response.data;
-              case 2001:
-                if (!force && !auto) {
-                  // 自动认证为false情况下会出现: 后台已经下线,但是用户进入网页存储了上次的cookie,Token，所以网页还是登录状态
-                  // 在这里如果2001时自动清理客户端过时的token以保证页面显示登录状态正常
-                  localStorage.clear();
-                  this.tokenService.clear();
-                  return false;
-                }
-                this.win.location.href = response.msg;
-                throw Error("Cookie Error: Can't find Cas Cookie,So jump to login!");
-              default:
-                if (response.data) {
-                  console.error(response.data);
-                  throw Error(response.data);
-                } else if (response.msg) {
-                  console.error(response.msg);
-                  throw Error(response.msg);
-                } else {
-                  console.error('cas unknown error');
-                  throw Error('Unknown Error: Cas auth exception!');
-                }
-            }
-          })
-        );
+      return this.httpClient.get(`/cas-proxy/app/validate_full?callback=${uri}&_allow_anonymous=true&timestamp=${new Date().getTime()}`).pipe(
+        map((response: any) => {
+          switch (response.errcode) {
+            case 2000:
+              return response.data;
+            case 2001:
+              if (!force && !auto) {
+                // 自动认证为false情况下会出现: 后台已经下线,但是用户进入网页存储了上次的cookie,Token，所以网页还是登录状态
+                // 在这里如果2001时自动清理客户端过时的token以保证页面显示登录状态正常
+                localStorage.clear();
+                this.tokenService.clear();
+                return false;
+              }
+              this.win.location.href = response.msg;
+              throw Error("Cookie Error: Can't find Cas Cookie,So jump to login!");
+            default:
+              if (response.data) {
+                console.error(response.data);
+                throw Error(response.data);
+              } else if (response.msg) {
+                console.error(response.msg);
+                throw Error(response.msg);
+              } else {
+                console.error('cas unknown error');
+                throw Error('Unknown Error: Cas auth exception!');
+              }
+          }
+        })
+      );
     }
   }
 }

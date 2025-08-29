@@ -16,19 +16,7 @@ import { CellComponent } from './cell.component';
 const COMPS = [CellComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    NzCheckboxModule,
-    NzRadioModule,
-    NzBadgeModule,
-    NzTagModule,
-    NzTooltipModule,
-    NzIconModule,
-    NzImageModule,
-    ...COMPS,
-    CellHostDirective
-  ],
+  imports: [CommonModule, FormsModule, NzCheckboxModule, NzRadioModule, NzBadgeModule, NzTagModule, NzTooltipModule, NzIconModule, NzImageModule, ...COMPS, CellHostDirective],
   exports: COMPS
 })
 export class CellModule {}

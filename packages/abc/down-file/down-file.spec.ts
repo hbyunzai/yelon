@@ -12,9 +12,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { DownFileDirective } from './down-file.directive';
 
 function genFile(isRealFile: boolean = true): Blob {
-  const blob = new Blob([
-    isRealFile ? `iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==` : ''
-  ]);
+  const blob = new Blob([isRealFile ? `iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==` : '']);
   return blob;
 }
 
@@ -210,8 +208,7 @@ describe('abc: down-file', () => {
         [file-name]="fileName"
         [pre]="pre"
         (success)="success()"
-        (error)="error()"
-      >
+        (error)="error()">
         {{ i }}
       </button>
     }

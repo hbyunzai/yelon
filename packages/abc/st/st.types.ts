@@ -4,15 +4,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import type { CellOptions } from '@yelon/abc/cell';
 import type { NgClassType } from 'ng-zorro-antd/core/types';
 
-import type {
-  STColumn,
-  STColumnButton,
-  STColumnSafeType,
-  STData,
-  STIcon,
-  STOnCellResult,
-  STSortMap
-} from './st.interfaces';
+import type { STColumn, STColumnButton, STColumnSafeType, STData, STIcon, STOnCellResult, STSortMap } from './st.interfaces';
 
 /**
  * @inner

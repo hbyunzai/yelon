@@ -38,9 +38,7 @@ class MockLocation {
 
 const MockAuth0 = {
   type: 'auth0',
-  url: `//yunzai-bot.auth0.com/login?client=8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5&redirect_uri=${decodeURIComponent(
-    'http://localhost:4200/#/login/callback'
-  )}`,
+  url: `//yunzai-bot.auth0.com/login?client=8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5&redirect_uri=${decodeURIComponent('http://localhost:4200/#/login/callback')}`,
   be: { client: '8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5' },
   model: { client: '8gcNydIDzGBYxzqV0Vm1CX_RXH-wsWo5', access_token: '123' }
 };
@@ -50,14 +48,7 @@ describe('auth: social.service', () => {
 
   function genModule(tokenData?: SimpleTokenModel): void {
     TestBed.configureTestingModule({
-      providers: [
-        provideHttpClient(),
-        provideHttpClientTesting(),
-        provideRouter([]),
-        SocialService,
-        { provide: DOCUMENT, useClass: MockDocument },
-        { provide: Router, useValue: mockRouter }
-      ]
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([]), SocialService, { provide: DOCUMENT, useClass: MockDocument }, { provide: Router, useValue: mockRouter }]
     });
     if (tokenData) TestBed.inject(YA_SERVICE_TOKEN).set(tokenData);
 

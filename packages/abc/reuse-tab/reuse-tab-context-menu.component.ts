@@ -1,24 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewEncapsulation,
-  inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation, inject } from '@angular/core';
 
 import { YelonLocaleService } from '@yelon/theme';
 import { NzMenuDirective, NzMenuItemComponent } from 'ng-zorro-antd/menu';
 
-import {
-  CloseType,
-  ReuseContextCloseEvent,
-  ReuseContextI18n,
-  ReuseCustomContextMenu,
-  ReuseItem
-} from './reuse-tab.interfaces';
+import { CloseType, ReuseContextCloseEvent, ReuseContextI18n, ReuseCustomContextMenu, ReuseItem } from './reuse-tab.interfaces';
 
 @Component({
   selector: 'reuse-tab-context-menu',

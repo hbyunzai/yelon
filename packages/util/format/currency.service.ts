@@ -4,13 +4,7 @@ import { DEFAULT_CURRENCY_CODE, Injectable, LOCALE_ID, inject } from '@angular/c
 import { YunzaiConfigService, YunzaiUtilCurrencyConfig } from '@yelon/util/config';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 
-import {
-  CurrencyCNYOptions,
-  CurrencyFormatOptions,
-  CurrencyMegaOptions,
-  CurrencyMegaResult,
-  CurrencyMega_Powers
-} from './currency.types';
+import { CurrencyCNYOptions, CurrencyFormatOptions, CurrencyMegaOptions, CurrencyMegaResult, CurrencyMega_Powers } from './currency.types';
 
 @Injectable({ providedIn: 'root' })
 export class CurrencyService {
@@ -57,19 +51,9 @@ export class CurrencyService {
     }
     if (options.ngCurrency != null) {
       const cur = options.ngCurrency!;
-      return this.currencyPipe.transform(
-        truthValue,
-        cur.currencyCode,
-        cur.display,
-        cur.digitsInfo,
-        cur.locale || this.locale
-      )!;
+      return this.currencyPipe.transform(truthValue, cur.currencyCode, cur.display, cur.digitsInfo, cur.locale || this.locale)!;
     }
-    const res = formatNumber(
-      truthValue,
-      this.locale,
-      `.${options.ignoreZeroPrecision ? 1 : options.precision}-${options.precision}`
-    );
+    const res = formatNumber(truthValue, this.locale, `.${options.ignoreZeroPrecision ? 1 : options.precision}-${options.precision}`);
     return options.ignoreZeroPrecision ? res.replace(/(?:\.[0]+)$/g, '') : res;
   }
 
@@ -148,54 +132,10 @@ export class CurrencyService {
     integer = (+integer).toString();
     const inWords = options.inWords;
     const unit: Record<string, string[]> = {
-      num: inWords
-        ? ['', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '点']
-        : ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '点'],
+      num: inWords ? ['', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '点'] : ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '点'],
       radice: inWords
-        ? [
-            '',
-            '拾',
-            '佰',
-            '仟',
-            '万',
-            '拾',
-            '佰',
-            '仟',
-            '亿',
-            '拾',
-            '佰',
-            '仟',
-            '万亿',
-            '拾',
-            '佰',
-            '仟',
-            '兆',
-            '拾',
-            '佰',
-            '仟'
-          ]
-        : [
-            '',
-            '十',
-            '百',
-            '千',
-            '万',
-            '十',
-            '百',
-            '千',
-            '亿',
-            '十',
-            '百',
-            '千',
-            '万亿',
-            '十',
-            '百',
-            '千',
-            '兆',
-            '十',
-            '百',
-            '千'
-          ],
+        ? ['', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿', '拾', '佰', '仟', '万亿', '拾', '佰', '仟', '兆', '拾', '佰', '仟']
+        : ['', '十', '百', '千', '万', '十', '百', '千', '亿', '十', '百', '千', '万亿', '十', '百', '千', '兆', '十', '百', '千'],
       dec: ['角', '分', '厘', '毫']
     };
     if (inWords) {
@@ -246,11 +186,7 @@ export class CurrencyService {
         decimalRes += cnZero + cnNum + cnDesc;
       }
     }
-    const ret =
-      symbol +
-      (inWords
-        ? integerRes + (decimalRes === '零' ? '元整' : `元${decimalRes}`)
-        : integerRes + (decimalRes === '' ? '' : `点${decimalRes}`));
+    const ret = symbol + (inWords ? integerRes + (decimalRes === '零' ? '元整' : `元${decimalRes}`) : integerRes + (decimalRes === '' ? '' : `点${decimalRes}`));
     return ret;
   }
 }

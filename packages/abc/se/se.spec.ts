@@ -1,14 +1,6 @@
 import { Component, DebugElement, EventEmitter, inject, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import {
-  UntypedFormBuilder,
-  FormControlName,
-  UntypedFormGroup,
-  FormsModule,
-  NgModel,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
+import { UntypedFormBuilder, FormControlName, UntypedFormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule, provideNoopAnimations } from '@angular/platform-browser/animations';
 
@@ -546,8 +538,7 @@ describe('abc: edit', () => {
       [labelWidth]="parent_labelWidth"
       [gutter]="parent_gutter"
       [errors]="parent_errors"
-      [noColon]="parent_noColon"
-    >
+      [noColon]="parent_noColon">
       <se-title>title</se-title>
       <se
         #viewComp
@@ -562,8 +553,7 @@ describe('abc: edit', () => {
         [line]="line"
         [labelWidth]="labelWidth"
         [noColon]="noColon"
-        [hideLabel]="hideLabel"
-      >
+        [hideLabel]="hideLabel">
         <input type="text" [(ngModel)]="val" name="val" required [disabled]="disabled" />
       </se>
     </form>

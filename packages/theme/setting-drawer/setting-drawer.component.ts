@@ -1,16 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { DOCUMENT } from '@angular/common';
-import {
-  booleanAttribute,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  inject,
-  Input,
-  isDevMode,
-  NgZone,
-  OnInit
-} from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, isDevMode, NgZone, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { Layout, SettingsService } from '@yelon/theme';
@@ -39,18 +29,7 @@ import { YUNZAIDEFAULTVAR, DEFAULT_COLORS, DEFAULT_VARS } from './setting-drawer
     '[class.setting-drawer-rtl]': `dir() === 'rtl'`
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    FormsModule,
-    NzDrawerModule,
-    NzTooltipDirective,
-    NzIconDirective,
-    NzDividerModule,
-    NzTabsModule,
-    SettingDrawerItemComponent,
-    NzSwitchModule,
-    NzButtonComponent,
-    NzAlertComponent
-  ]
+  imports: [FormsModule, NzDrawerModule, NzTooltipDirective, NzIconDirective, NzDividerModule, NzTabsModule, SettingDrawerItemComponent, NzSwitchModule, NzButtonComponent, NzAlertComponent]
 })
 export class SettingDrawerComponent implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);

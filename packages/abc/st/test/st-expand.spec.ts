@@ -39,13 +39,7 @@ describe('abc: st-expand', () => {
     }));
     it('should be click icon when with true', fakeAsync(() => {
       context.expandRowByClick = true;
-      page
-        .cd()
-        .expectData(1, 'expand', undefined)
-        .clickCell('.ant-table-row-expand-icon')
-        .expectData(1, 'expand', true)
-        .expectChangeType('expand')
-        .asyncEnd();
+      page.cd().expectData(1, 'expand', undefined).clickCell('.ant-table-row-expand-icon').expectData(1, 'expand', true).expectChangeType('expand').asyncEnd();
     }));
   });
   describe('expandRowByClick', () => {
@@ -79,12 +73,7 @@ describe('abc: st-expand', () => {
       context.expandRowByClick = false;
       context.data = deepCopy(USERS).slice(0, 1) as any[];
       context.data[0].showExpand = false;
-      page
-        .cd()
-        .expectElCount('.ant-table-row-expand-icon', 0)
-        .clickCell(1, 2)
-        .expectChangeType('expand', false)
-        .asyncEnd();
+      page.cd().expectElCount('.ant-table-row-expand-icon', 0).clickCell(1, 2).expectChangeType('expand', false).asyncEnd();
     }));
   });
 });

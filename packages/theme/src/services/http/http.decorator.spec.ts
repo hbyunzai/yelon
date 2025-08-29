@@ -4,25 +4,7 @@ import { Injectable, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 
-import {
-  BaseApi,
-  BaseHeaders,
-  BaseUrl,
-  Body,
-  DELETE,
-  FORM,
-  GET,
-  HEAD,
-  Headers,
-  JSONP,
-  OPTIONS,
-  PATCH,
-  Path,
-  Payload,
-  POST,
-  PUT,
-  Query
-} from './http.decorator';
+import { BaseApi, BaseHeaders, BaseUrl, Body, DELETE, FORM, GET, HEAD, Headers, JSONP, OPTIONS, PATCH, Path, Payload, POST, PUT, Query } from './http.decorator';
 
 @BaseUrl('/user')
 @BaseHeaders({ bh: 'a' })

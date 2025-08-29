@@ -18,9 +18,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
       <button nz-button (click)="srv.setOptions({ hideHeader: true, hideAside: true })">隐藏顶部与侧边栏</button>
       <button nz-button (click)="srv.setOptions({ showHeaderCollapse: true })">显示顶部折叠开关</button>
       <button nz-button (click)="srv.setOptions({ showSiderCollapse: true })">显示侧边栏底部折叠开关</button>
-      <button nz-button (click)="srv.setOptions({ showHeaderCollapse: true, showSiderCollapse: true })">
-        显示顶部与侧边栏底部折叠开关
-      </button>
+      <button nz-button (click)="srv.setOptions({ showHeaderCollapse: true, showSiderCollapse: true })"> 显示顶部与侧边栏底部折叠开关 </button>
       <button nz-button (click)="srv.setOptions({})">恢复默认</button>
     </div>
   `,

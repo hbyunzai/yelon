@@ -1,16 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  booleanAttribute,
-  effect,
-  inject,
-  input,
-  numberAttribute,
-  output,
-  signal
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, effect, inject, input, numberAttribute, output, signal } from '@angular/core';
 
 import { YelonLocaleService } from '@yelon/theme';
 import { NzBadgeComponent } from 'ng-zorro-antd/badge';
@@ -30,17 +19,7 @@ import { NoticeIconSelect, NoticeItem } from './notice-icon.types';
   host: { '[class.notice-icon__btn]': 'true' },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    NgTemplateOutlet,
-    NzBadgeComponent,
-    NzIconDirective,
-    NzDropDownDirective,
-    NzDropdownMenuComponent,
-    NzSpinComponent,
-    NzTabsComponent,
-    NzTabComponent,
-    NoticeIconTabComponent
-  ]
+  imports: [NgTemplateOutlet, NzBadgeComponent, NzIconDirective, NzDropDownDirective, NzDropdownMenuComponent, NzSpinComponent, NzTabsComponent, NzTabComponent, NoticeIconTabComponent]
 })
 export class NoticeIconComponent {
   locale = inject(YelonLocaleService).valueSignal('noticeIcon');

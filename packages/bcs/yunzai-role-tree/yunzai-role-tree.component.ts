@@ -39,8 +39,7 @@ import { YunzaiRoleTree, YunzaiRoleTreeProps, YunzaiRoleTreeState } from './yunz
           [nzExpandedIcon]="blank"
           [nzBlockNode]="true"
           [nzHideUnMatched]="true"
-          [nzTreeTemplate]="treeTemplate"
-        />
+          [nzTreeTemplate]="treeTemplate" />
       } @else {
         <nz-empty />
       }

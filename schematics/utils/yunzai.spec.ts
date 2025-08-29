@@ -27,11 +27,7 @@ const COMPONENTS = [Components...];
 
   describe('#withoutModulePrefixInComponentName', () => {
     it('with true', async () => {
-      tree = await runner.runSchematic(
-        'empty',
-        { name: 'list', module: 'trade', withoutModulePrefixInComponentName: true } as CommonSchema,
-        tree
-      );
+      tree = await runner.runSchematic('empty', { name: 'list', module: 'trade', withoutModulePrefixInComponentName: true } as CommonSchema, tree);
       const listTsCon = tree.readContent(`/projects/foo/src/app/routes/trade/list/list.component.ts`);
       expect(listTsCon).toContain(`ListComponent`);
     });

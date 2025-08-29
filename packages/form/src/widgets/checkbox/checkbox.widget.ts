@@ -32,8 +32,7 @@ import { ControlUIWidget } from '../../widget';
                   [nzTooltipOverlayStyle]="oh.overlayStyle"
                   [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                   [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                  [nzType]="oh.icon!"
-                />
+                  [nzType]="oh.icon!" />
               }
             </span>
           </label>

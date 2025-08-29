@@ -32,9 +32,7 @@ describe('Service: Title', () => {
     const i18nProvider: any[] = loadI18n ? [{ provide: YUNZAI_I18N_TOKEN, useClass: YunzaiI18NServiceFake }] : [];
     TestBed.configureTestingModule({
       imports: [YunzaiThemeModule, RouterModule.forRoot([])],
-      providers: [TitleService, MenuService, { provide: Title, useClass: TestTitleService }, ...i18nProvider].concat(
-        providers
-      )
+      providers: [TitleService, MenuService, { provide: Title, useClass: TestTitleService }, ...i18nProvider].concat(providers)
     });
     title = TestBed.inject<Title>(Title) as any;
     srv = TestBed.inject<TitleService>(TitleService);

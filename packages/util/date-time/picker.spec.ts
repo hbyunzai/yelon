@@ -36,12 +36,7 @@ describe('util: date-time', () => {
         .toBe(true);
     });
     describe('disabled time', () => {
-      function checkRes(
-        res: DisabledTimeConfig,
-        hourseLength: number,
-        minutesLength: number,
-        secondsLength: number
-      ): void {
+      function checkRes(res: DisabledTimeConfig, hourseLength: number, minutesLength: number, secondsLength: number): void {
         expect(res?.nzDisabledHours().length).toBe(hourseLength);
         expect(res?.nzDisabledMinutes(NOW.getHours()).length).toBe(minutesLength);
         expect(res?.nzDisabledSeconds(NOW.getHours(), NOW.getMinutes()).length).toBe(secondsLength);

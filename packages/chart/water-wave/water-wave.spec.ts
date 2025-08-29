@@ -42,17 +42,7 @@ describe('chart: water-wave', () => {
 });
 
 @Component({
-  template: `
-    <g2-water-wave
-      #comp
-      [title]="title"
-      [color]="color"
-      [height]="height"
-      [percent]="percent"
-      [delay]="delay"
-      [animate]="animate"
-    />
-  `,
+  template: ` <g2-water-wave #comp [title]="title" [color]="color" [height]="height" [percent]="percent" [delay]="delay" [animate]="animate" /> `,
   imports: [G2WaterWaveComponent]
 })
 class TestComponent {

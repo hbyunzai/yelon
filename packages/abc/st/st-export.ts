@@ -53,8 +53,7 @@ export class STExport {
     const columns = opt.columens! as _STColumn[];
     let validColCount = 0;
     let wpx = false;
-    const invalidFn = (col: _STColumn): boolean =>
-      col.exported === false || !col.index || !(!col.buttons || col.buttons.length === 0);
+    const invalidFn = (col: _STColumn): boolean => col.exported === false || !col.index || !(!col.buttons || col.buttons.length === 0);
     for (const [idx, col] of columns.entries()) {
       if (invalidFn(col)) continue;
       if (!wpx && col._width != null) wpx = true;

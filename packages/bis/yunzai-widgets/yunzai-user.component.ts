@@ -4,13 +4,7 @@ import { RouterModule } from '@angular/router';
 import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { mergeBisConfig } from '@yelon/bis/config';
 import { I18nPipe } from '@yelon/theme';
-import {
-  useLocalStorageProjectInfo,
-  useLocalStorageUser,
-  WINDOW,
-  YunzaiBusinessConfig,
-  YunzaiConfigService
-} from '@yelon/util';
+import { useLocalStorageProjectInfo, useLocalStorageUser, WINDOW, YunzaiBusinessConfig, YunzaiConfigService } from '@yelon/util';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -25,13 +19,7 @@ export interface UserLink {
 @Component({
   selector: `yunzai-header-user`,
   template: `
-    <div
-      class="yunzai-default__nav-item d-flex align-items-center px-sm"
-      data-event-id="_nav_user"
-      nz-dropdown
-      nzPlacement="bottomRight"
-      [nzDropdownMenu]="userMenu"
-    >
+    <div class="yunzai-default__nav-item d-flex align-items-center px-sm" data-event-id="_nav_user" nz-dropdown nzPlacement="bottomRight" [nzDropdownMenu]="userMenu">
       <div class="yz-user-name">
         <nz-avatar [nzSrc]="icon" nzSize="small" class="mr-sm" />
         {{ username }}
@@ -73,9 +61,7 @@ export class YunzaiHeaderUserComponent implements OnInit {
     const projectInfo = getProjectInfo()!;
     const user = getUser()!;
     this.username = user.realname ? user.realname : '未命名';
-    this.icon = user.avatarId
-      ? `${this.config.baseUrl}/filecenter/file/${user.avatarId}`
-      : `./assets/tmp/img/avatar.jpg`;
+    this.icon = user.avatarId ? `${this.config.baseUrl}/filecenter/file/${user.avatarId}` : `./assets/tmp/img/avatar.jpg`;
     this.menus = projectInfo.profileList as UserLink[];
   }
 

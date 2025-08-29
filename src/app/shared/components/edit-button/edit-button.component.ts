@@ -9,13 +9,7 @@ import { MetaService } from '@core';
 @Component({
   selector: 'edit-button',
   template: `
-    <a
-      href="{{ _full }}"
-      target="_blank"
-      class="edit-button"
-      nz-tooltip
-      nzTooltipTitle="{{ 'app.content.edit-page' | i18n }}"
-    >
+    <a href="{{ _full }}" target="_blank" class="edit-button" nz-tooltip nzTooltipTitle="{{ 'app.content.edit-page' | i18n }}">
       <nz-icon nzType="edit" />
     </a>
   `,

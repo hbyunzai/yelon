@@ -25,8 +25,7 @@ import { ControlUIWidget } from '../../widget';
         [attr.autoFocus]="ui.autofocus"
         (keyup.enter)="enter($event)"
         (focus)="focus($event)"
-        (blur)="blur($event)"
-      />
+        (blur)="blur($event)" />
     </ng-template>
 
     @if (type === 'addon') {
@@ -38,8 +37,7 @@ import { ControlUIWidget } from '../../widget';
         [nzPrefix]="ui.prefix"
         [nzPrefixIcon]="ui.prefixIcon"
         [nzSuffix]="ui.suffix"
-        [nzSuffixIcon]="ui.suffixIcon"
-      >
+        [nzSuffixIcon]="ui.suffixIcon">
         <ng-template [ngTemplateOutlet]="ipt" />
       </nz-input-group>
     } @else {

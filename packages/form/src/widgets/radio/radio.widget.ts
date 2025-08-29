@@ -8,21 +8,8 @@ import { ControlUIWidget } from '../../widget';
 
 @Component({
   selector: 'sf-radio',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
-    <nz-radio-group
-      [nzSize]="ui.size!"
-      [nzName]="id"
-      [ngModel]="value"
-      (ngModelChange)="_setValue($event)"
-      [nzButtonStyle]="ui.buttonStyle || 'outline'"
-    >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+    <nz-radio-group [nzSize]="ui.size!" [nzName]="id" [ngModel]="value" (ngModelChange)="_setValue($event)" [nzButtonStyle]="ui.buttonStyle || 'outline'">
       @if (styleType) {
         @for (option of data; track $index) {
           <label nz-radio [nzValue]="option.value" [nzDisabled]="disabled || option.disabled">

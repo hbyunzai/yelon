@@ -81,11 +81,7 @@ export class LazyService {
    * Load a script file
    */
   loadScript(path: string, options?: LazyLoadOptions): Promise<LazyResult>;
-  loadScript(
-    path: string,
-    innerContent?: string | LazyLoadOptions,
-    attributes?: Record<string, string>
-  ): Promise<LazyResult> {
+  loadScript(path: string, innerContent?: string | LazyLoadOptions, attributes?: Record<string, string>): Promise<LazyResult> {
     const options: LazyLoadOptions =
       typeof innerContent === 'object'
         ? innerContent
@@ -132,12 +128,7 @@ export class LazyService {
    * Load a style file
    */
   loadStyle(path: string, options?: LazyLoadOptions): Promise<LazyResult>;
-  loadStyle(
-    path: string,
-    rel?: string | LazyLoadOptions,
-    innerContent?: string,
-    attributes?: Record<string, string>
-  ): Promise<LazyResult> {
+  loadStyle(path: string, rel?: string | LazyLoadOptions, innerContent?: string, attributes?: Record<string, string>): Promise<LazyResult> {
     const options: LazyLoadOptions =
       typeof rel === 'object'
         ? rel

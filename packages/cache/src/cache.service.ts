@@ -18,10 +18,7 @@ export class CacheService implements OnDestroy {
   private readonly platform = inject(Platform);
 
   private readonly memory: Map<string, ICache> = new Map<string, ICache>();
-  private readonly notifyBuffer: Map<string, BehaviorSubject<CacheNotifyResult>> = new Map<
-    string,
-    BehaviorSubject<CacheNotifyResult>
-  >();
+  private readonly notifyBuffer: Map<string, BehaviorSubject<CacheNotifyResult>> = new Map<string, BehaviorSubject<CacheNotifyResult>>();
   private meta: Set<string> = new Set<string>();
   private freqTick = 3000;
   private freqTime: any;
@@ -78,21 +75,13 @@ export class CacheService implements OnDestroy {
    * - `set('data/1', this.http.get('data/1')).subscribe()`
    * - `set('data/1', this.http.get('data/1'), { expire: 10 }).subscribe()`
    */
-  set<T>(
-    key: string,
-    data: Observable<T>,
-    options?: { type?: 's'; expire?: number; emitNotify?: boolean }
-  ): Observable<T>;
+  set<T>(key: string, data: Observable<T>, options?: { type?: 's'; expire?: number; emitNotify?: boolean }): Observable<T>;
   /**
    * Persistent cached `Observable` object, for example:
    * - `set('data/1', this.http.get('data/1')).subscribe()`
    * - `set('data/1', this.http.get('data/1'), { expire: 10 }).subscribe()`
    */
-  set(
-    key: string,
-    data: Observable<any>,
-    options?: { type?: 's'; expire?: number; emitNotify?: boolean }
-  ): Observable<any>;
+  set(key: string, data: Observable<any>, options?: { type?: 's'; expire?: number; emitNotify?: boolean }): Observable<any>;
   /**
    * Persistent cached simple object, for example:
    * - `set('data/1', 1)`
@@ -236,19 +225,11 @@ export class CacheService implements OnDestroy {
   /**
    * 获取缓存，若不存在则设置持久化缓存 `Observable` 对象
    */
-  tryGet<T>(
-    key: string,
-    data: Observable<T>,
-    options?: { type?: 's'; expire?: number; emitNotify?: boolean }
-  ): Observable<T>;
+  tryGet<T>(key: string, data: Observable<T>, options?: { type?: 's'; expire?: number; emitNotify?: boolean }): Observable<T>;
   /**
    * 获取缓存，若不存在则设置持久化缓存 `Observable` 对象
    */
-  tryGet(
-    key: string,
-    data: Observable<any>,
-    options?: { type?: 's'; expire?: number; emitNotify?: boolean }
-  ): Observable<any>;
+  tryGet(key: string, data: Observable<any>, options?: { type?: 's'; expire?: number; emitNotify?: boolean }): Observable<any>;
   /**
    * 获取缓存，若不存在则设置持久化缓存基础对象
    */

@@ -182,12 +182,7 @@ export class STTdComponent {
       const drawer = btn.drawer!;
       const obj = { [drawer.paramsName!]: record };
       this.drawerHelper
-        .create(
-          drawer.title!,
-          drawer.component,
-          { ...obj, ...(drawer.params && drawer.params(record)) },
-          deepMergeKey({}, true, cog.drawer, drawer)
-        )
+        .create(drawer.title!, drawer.component, { ...obj, ...(drawer.params && drawer.params(record)) }, deepMergeKey({}, true, cog.drawer, drawer))
         .pipe(filter(w => typeof w !== 'undefined'))
         .subscribe(res => this.btnCallback(record, btn, res));
       return;
@@ -347,10 +342,7 @@ export class STComponent implements AfterViewInit, OnChanges {
     return this._multiSort;
   }
   set multiSort(value: NzSafeAny) {
-    if (
-      (typeof value === 'boolean' && !booleanAttribute(value)) ||
-      (typeof value === 'object' && Object.keys(value).length === 0)
-    ) {
+    if ((typeof value === 'boolean' && !booleanAttribute(value)) || (typeof value === 'object' && Object.keys(value).length === 0)) {
       this._multiSort = undefined;
       return;
     }
@@ -461,9 +453,7 @@ export class STComponent implements AfterViewInit, OnChanges {
   }
 
   renderTotal(total: string, range: string[]): string {
-    return this.totalTpl
-      ? this.totalTpl.replace('{{total}}', total).replace('{{range[0]}}', range[0]).replace('{{range[1]}}', range[1])
-      : '';
+    return this.totalTpl ? this.totalTpl.replace('{{total}}', total).replace('{{range[0]}}', range[0]).replace('{{range[1]}}', range[1]) : '';
   }
 
   private changeEmit(type: STChangeType, data?: NzSafeAny): void {
@@ -925,9 +915,7 @@ export class STComponent implements AfterViewInit, OnChanges {
    * @param opt 额外参数
    */
   export(newData?: STData[] | true, opt?: STExportOptions): void {
-    const data = Array.isArray(newData)
-      ? this.dataSource.optimizeData({ columns: this._columns, result: newData })
-      : this._data;
+    const data = Array.isArray(newData) ? this.dataSource.optimizeData({ columns: this._columns, result: newData }) : this._data;
     (newData === true ? this.filteredData : of(data)).subscribe((res: STData[]) =>
       this.exportSrv.export({
         columens: this._columns,

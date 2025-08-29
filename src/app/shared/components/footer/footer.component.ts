@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  NgZone,
-  booleanAttribute,
-  inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, NgZone, booleanAttribute, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { YUNZAI_I18N_TOKEN, I18nPipe } from '@yelon/theme';

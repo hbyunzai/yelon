@@ -11,14 +11,8 @@ import { deepGet } from '@yelon/util/other';
  * // output: this is asdf
  * ```
  */
-export function format(
-  str: string | null | undefined,
-  obj: any | null | undefined,
-  needDeepGet: boolean = false
-): string {
-  return (str || '').replace(/\${([^}]+)}/g, (_work: string, key: string) =>
-    needDeepGet ? deepGet(obj, key.split('.'), '') : (obj || {})[key] || ''
-  );
+export function format(str: string | null | undefined, obj: any | null | undefined, needDeepGet: boolean = false): string {
+  return (str || '').replace(/\${([^}]+)}/g, (_work: string, key: string) => (needDeepGet ? deepGet(obj, key.split('.'), '') : (obj || {})[key] || ''));
 }
 
 export interface FormatMaskOption {

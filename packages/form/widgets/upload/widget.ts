@@ -13,14 +13,7 @@ import type { SFUploadWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-upload',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-upload
       [nzType]="i.type"
       [(nzFileList)]="fileList"
@@ -48,8 +41,7 @@ import type { SFUploadWidgetSchema } from './schema';
       [nzDownload]="ui.download"
       [nzTransformFile]="ui.transformFile"
       (nzChange)="change($event)"
-      [nzShowButton]="fileList.length < i.limitFileCount"
-    >
+      [nzShowButton]="fileList.length < i.limitFileCount">
       @switch (btnType) {
         @case ('plus') {
           <nz-icon nzType="plus" />
@@ -143,14 +135,12 @@ export class UploadWidget extends ControlUIWidget<SFUploadWidgetSchema> implemen
 
   reset(value: SFValue): void {
     const { fileList } = this.ui;
-    (fileList ? of(fileList) : Array.isArray(value) ? of(value) : getData(this.schema, this.ui, null)).subscribe(
-      list => {
-        this.fileList = list as NzUploadFile[];
-        this.formProperty._value = this.pureValue(list);
-        this.formProperty.updateValueAndValidity({ onlySelf: false, emitValueEvent: false, emitValidator: false });
-        this.detectChanges();
-      }
-    );
+    (fileList ? of(fileList) : Array.isArray(value) ? of(value) : getData(this.schema, this.ui, null)).subscribe(list => {
+      this.fileList = list as NzUploadFile[];
+      this.formProperty._value = this.pureValue(list);
+      this.formProperty.updateValueAndValidity({ onlySelf: false, emitValueEvent: false, emitValidator: false });
+      this.detectChanges();
+    });
   }
 
   private _getValue(file: NzUploadFile): any {

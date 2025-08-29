@@ -36,11 +36,7 @@ describe('form: widget: mention', () => {
         a: { type: 'string', enum: DATA, ui: { widget, select: jasmine.createSpy() } }
       }
     };
-    page
-      .newSchema(s)
-      .typeChar('@')
-      .checkCount('.ant-mentions-dropdown-menu-item', DATA.length, true)
-      .typeEvent('click', '.ant-mentions-dropdown-menu-item');
+    page.newSchema(s).typeChar('@').checkCount('.ant-mentions-dropdown-menu-item', DATA.length, true).typeEvent('click', '.ant-mentions-dropdown-menu-item');
 
     expect((s.properties!.a.ui as any).select).toHaveBeenCalled();
   }));

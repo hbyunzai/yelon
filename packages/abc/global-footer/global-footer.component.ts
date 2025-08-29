@@ -1,14 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  contentChildren,
-  inject,
-  input
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed, contentChildren, inject, input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 

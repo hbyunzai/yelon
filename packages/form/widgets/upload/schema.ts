@@ -1,14 +1,7 @@
 import { Observable, Subscription } from 'rxjs';
 
 import type { SFSchemaEnumType, SFUISchemaItem } from '@yelon/form';
-import type {
-  NzShowUploadList,
-  NzUploadChangeParam,
-  NzUploadFile,
-  NzUploadTransformFileType,
-  NzUploadXHRArgs,
-  UploadFilter
-} from 'ng-zorro-antd/upload';
+import type { NzShowUploadList, NzUploadChangeParam, NzUploadFile, NzUploadTransformFileType, NzUploadXHRArgs, UploadFilter } from 'ng-zorro-antd/upload';
 
 export interface SFUploadWidgetSchema extends SFUISchemaItem {
   /**

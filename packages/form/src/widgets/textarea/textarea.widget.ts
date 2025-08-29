@@ -7,14 +7,7 @@ import { ControlUIWidget } from '../../widget';
 
 @Component({
   selector: 'sf-textarea',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <ng-template #ipt>
       <textarea
         nz-input
@@ -29,16 +22,12 @@ import { ControlUIWidget } from '../../widget';
         [nzAutosize]="autosize"
         [nzBorderless]="ui.borderless"
         (focus)="focus($event)"
-        (blur)="blur($event)"
-      >
+        (blur)="blur($event)">
       </textarea>
     </ng-template>
 
     @if (ui.maxCharacterCount) {
-      <nz-textarea-count
-        [nzMaxCharacterCount]="ui.maxCharacterCount"
-        [nzComputeCharacterCount]="ui.computeCharacterCount!"
-      >
+      <nz-textarea-count [nzMaxCharacterCount]="ui.maxCharacterCount" [nzComputeCharacterCount]="ui.computeCharacterCount!">
         <textarea
           nz-input
           [attr.id]="id"
@@ -52,8 +41,7 @@ import { ControlUIWidget } from '../../widget';
           [nzAutosize]="autosize"
           [nzBorderless]="ui.borderless"
           (focus)="focus($event)"
-          (blur)="blur($event)"
-        >
+          (blur)="blur($event)">
         </textarea>
       </nz-textarea-count>
     } @else {

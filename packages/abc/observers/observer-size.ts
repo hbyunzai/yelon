@@ -1,15 +1,4 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  EventEmitter,
-  Injectable,
-  NgModule,
-  NgZone,
-  OnDestroy,
-  Output,
-  inject
-} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Injectable, NgModule, NgZone, OnDestroy, Output, inject } from '@angular/core';
 import { Observable, Observer, Subject, Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

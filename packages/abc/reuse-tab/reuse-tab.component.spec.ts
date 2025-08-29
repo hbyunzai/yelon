@@ -2,14 +2,7 @@ import { Component, DebugElement, inject, Injectable, TemplateRef, ViewChild } f
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  ExtraOptions,
-  RouteReuseStrategy,
-  ROUTER_CONFIGURATION,
-  RouterModule,
-  RouterOutlet,
-  RouterLink
-} from '@angular/router';
+import { ExtraOptions, RouteReuseStrategy, ROUTER_CONFIGURATION, RouterModule, RouterOutlet, RouterLink } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { YUNZAI_I18N_TOKEN, YelonLocaleModule, YelonLocaleService, en_US, MenuService, zh_CN } from '@yelon/theme';
@@ -17,13 +10,7 @@ import { ScrollService } from '@yelon/util/browser';
 
 import { provideReuseTabConfig } from './provide';
 import { ReuseTabComponent } from './reuse-tab.component';
-import {
-  ReuseCanClose,
-  ReuseCustomContextMenu,
-  ReuseItem,
-  ReuseTabMatchMode,
-  ReuseTabRouteParamMatchMode
-} from './reuse-tab.interfaces';
+import { ReuseCanClose, ReuseCustomContextMenu, ReuseItem, ReuseTabMatchMode, ReuseTabRouteParamMatchMode } from './reuse-tab.interfaces';
 import { ReuseTabService } from './reuse-tab.service';
 import { REUSE_TAB_STORAGE_STATE } from './reuse-tab.state';
 import { ReuseTabStrategy } from './reuse-tab.strategy';
@@ -342,25 +329,10 @@ describe('abc: reuse-tab', () => {
           .end();
       }));
       it('should keeping tab when closed prev tab', fakeAsync(() => {
-        page
-          .to('#b')
-          .expectCount(2)
-          .openContextMenu(0)
-          .clickContentMenu('close')
-          .expectCount(1)
-          .expectActive(0, true)
-          .end();
+        page.to('#b').expectCount(2).openContextMenu(0).clickContentMenu('close').expectCount(1).expectActive(0, true).end();
       }));
       it('should keeping tab when closed next tab', fakeAsync(() => {
-        page
-          .to('#b')
-          .go(0)
-          .expectCount(2)
-          .openContextMenu(1)
-          .clickContentMenu('close')
-          .expectCount(1)
-          .expectActive(0, true)
-          .end();
+        page.to('#b').go(0).expectCount(2).openContextMenu(1).clickContentMenu('close').expectCount(1).expectActive(0, true).end();
       }));
       it('should keeping tab of closed right tab', fakeAsync(() => {
         let bTime = '';
@@ -445,17 +417,9 @@ describe('abc: reuse-tab', () => {
         page
           .to('#e')
           .openContextMenu(1)
-          .tap(() =>
-            expect(document.querySelector(`.reuse-tab__cm li[data-type="close"]`)!.classList).toContain(
-              'ant-menu-item-disabled'
-            )
-          )
+          .tap(() => expect(document.querySelector(`.reuse-tab__cm li[data-type="close"]`)!.classList).toContain('ant-menu-item-disabled'))
           .openContextMenu(1, { ctrlKey: true })
-          .tap(() =>
-            expect(document.querySelector(`.reuse-tab__cm li[data-type="close"]`)!.classList).not.toContain(
-              'ant-menu-item-disabled'
-            )
-          )
+          .tap(() => expect(document.querySelector(`.reuse-tab__cm li[data-type="close"]`)!.classList).not.toContain('ant-menu-item-disabled'))
           .expectCount(2)
           .end();
       }));
@@ -689,18 +653,14 @@ describe('abc: reuse-tab', () => {
       expect(time).toBe(+page.time);
     }));
     it('should be call _onReuseInit when refresh active tab', fakeAsync(() => {
-      createComp(
-        `<reuse-tab #comp [mode]="mode"></reuse-tab><router-outlet (activate)="comp.activate($event)"></router-outlet>`
-      );
+      createComp(`<reuse-tab #comp [mode]="mode"></reuse-tab><router-outlet (activate)="comp.activate($event)"></router-outlet>`);
       page.to('#a').openContextMenu(0);
       spyOn(srv.componentRef!.instance, '_onReuseInit');
       page.clickContentMenu('refresh');
       expect(srv.componentRef!.instance._onReuseInit).toHaveBeenCalled();
     }));
     it('should be not trigger _onReuseInit when refresh non-active tab', fakeAsync(() => {
-      createComp(
-        `<reuse-tab #comp [mode]="mode"></reuse-tab><router-outlet (activate)="comp.activate($event)"></router-outlet>`
-      );
+      createComp(`<reuse-tab #comp [mode]="mode"></reuse-tab><router-outlet (activate)="comp.activate($event)"></router-outlet>`);
       page.to('#a').to('#b').openContextMenu(0);
       expect(page.getContentMenu('refresh') == null).toBe(true);
       // spyOn(srv.items[0]._handle.componentRef.instance, '_onReuseInit');
@@ -880,8 +840,7 @@ class AppComponent {}
       [storageState]="storageState"
       [canClose]="canClose"
       (change)="change()"
-      (close)="close()"
-    />
+      (close)="close()" />
     <div id="children"><router-outlet /></div>
     <ng-template #titleRender let-i>{{ i.url }}</ng-template>
   `,

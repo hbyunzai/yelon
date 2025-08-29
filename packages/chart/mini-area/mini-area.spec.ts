@@ -80,18 +80,7 @@ describe('chart: mini-area', () => {
 
 @Component({
   template: `
-    <g2-mini-area
-      style="display: block;"
-      #comp
-      [line]="line"
-      color="#cceafe"
-      [height]="height"
-      [data]="data"
-      [delay]="delay"
-      [tooltipType]="tooltipType"
-      [xAxis]="xAxis"
-      [yAxis]="yAxis"
-    />
+    <g2-mini-area style="display: block;" #comp [line]="line" color="#cceafe" [height]="height" [data]="data" [delay]="delay" [tooltipType]="tooltipType" [xAxis]="xAxis" [yAxis]="yAxis" />
   `,
   imports: [G2MiniAreaComponent]
 })

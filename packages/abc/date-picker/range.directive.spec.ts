@@ -104,15 +104,7 @@ describe('abc: date-picker: nz-range-picker[extend]', () => {
 });
 
 @Component({
-  template: `
-    <nz-range-picker
-      #comp="extendRangePicker"
-      [(ngModel)]="i.start"
-      extend
-      [(ngModelEnd)]="i.end"
-      [shortcut]="shortcut"
-    />
-  `,
+  template: ` <nz-range-picker #comp="extendRangePicker" [(ngModel)]="i.start" extend [(ngModelEnd)]="i.end" [shortcut]="shortcut" /> `,
   imports: [FormsModule, NzRangePickerComponent, NzDatePickerComponent, RangePickerDirective]
 })
 class TestComponent {

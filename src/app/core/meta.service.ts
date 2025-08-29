@@ -15,19 +15,7 @@ import { META as MockMeta } from '../routes/gen/mock/meta';
 import { META as ThemeMeta } from '../routes/gen/theme/meta';
 import { META as UtilMeta } from '../routes/gen/util/meta';
 
-const FULLMETAS = [
-  DocsMeta,
-  ComponentsMeta,
-  AuthMeta,
-  ACLMeta,
-  CacheMeta,
-  ChartMeta,
-  MockMeta,
-  UtilMeta,
-  FormMeta,
-  CliMeta,
-  ThemeMeta
-] as Meta[];
+const FULLMETAS = [DocsMeta, ComponentsMeta, AuthMeta, ACLMeta, CacheMeta, ChartMeta, MockMeta, UtilMeta, FormMeta, CliMeta, ThemeMeta] as Meta[];
 
 @Injectable({ providedIn: 'root' })
 export class MetaService {
@@ -160,9 +148,7 @@ export class MetaService {
     });
     category.list!.forEach(item => {
       const meta = item.meta![this.i18n.currentLang] || item.meta![this.i18n.defaultLang];
-      let typeIdx = category.types!.findIndex(
-        (w: Record<string, string>) => w['zh-CN'] === meta.type || w['en-US'] === meta.type
-      );
+      let typeIdx = category.types!.findIndex((w: Record<string, string>) => w['zh-CN'] === meta.type || w['en-US'] === meta.type);
       if (typeIdx === -1) typeIdx = 0;
       let groupItem = group.find(w => w.index === typeIdx);
       if (!groupItem) {

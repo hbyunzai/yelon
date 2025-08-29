@@ -1034,9 +1034,7 @@ describe('abc: table: data-souce', () => {
 
       it('when the number is less than count', done => {
         options.data = [{ id: 1 }];
-        options.columns = [
-          { maxMultipleButton: 4, buttons: [{ text: 'btn1' }, { text: 'btn2' }, { text: 'btn3' }] }
-        ] as _STColumn[];
+        options.columns = [{ maxMultipleButton: 4, buttons: [{ text: 'btn1' }, { text: 'btn2' }, { text: 'btn3' }] }] as _STColumn[];
         srv.process(options).subscribe(res => {
           const btns: STColumnButton[] = res.list[0]._values[0].buttons;
           expect(btns.length).toBe(3);

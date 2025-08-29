@@ -27,11 +27,7 @@ describe('Schematic: list', () => {
     });
 
     it('should be support targets (like: list/edit)', async () => {
-      tree = await runner.runSchematic(
-        'list',
-        { name: 'list2', module: 'trade', target: 'list/edit', standalone: false },
-        tree
-      );
+      tree = await runner.runSchematic('list', { name: 'list2', module: 'trade', target: 'list/edit', standalone: false }, tree);
       expect(tree.exists(`/projects/foo/src/app/routes/trade/list/edit/list2/list2.component.html`)).toBe(true);
     });
 
@@ -48,11 +44,7 @@ describe('Schematic: list', () => {
     });
 
     it('shuold be include service', async () => {
-      tree = await runner.runSchematic(
-        'list',
-        { name: 'list', module: 'trade', service: 'none', standalone: false },
-        tree
-      );
+      tree = await runner.runSchematic('list', { name: 'list', module: 'trade', service: 'none', standalone: false }, tree);
       const servicePath = '/projects/foo/src/app/routes/trade/list/list.service.ts';
       expect(tree.readContent(servicePath)).toContain(`@Injectable()`);
       expect(tree.readContent(modulePath)).toContain(`TradeService`);
@@ -79,11 +71,7 @@ describe('Schematic: list', () => {
     });
 
     it('should be support targets (like: list/edit)', async () => {
-      tree = await runner.runSchematic(
-        'list',
-        { name: 'list2', module: 'trade', target: 'list/edit', standalone: true },
-        tree
-      );
+      tree = await runner.runSchematic('list', { name: 'list2', module: 'trade', target: 'list/edit', standalone: true }, tree);
       expect(tree.exists(`/projects/foo/src/app/routes/trade/list/edit/list2/list2.component.html`)).toBe(true);
     });
 
@@ -100,11 +88,7 @@ describe('Schematic: list', () => {
     });
 
     it('shuold be include service', async () => {
-      tree = await runner.runSchematic(
-        'list',
-        { name: 'list', module: 'trade', service: 'none', standalone: true },
-        tree
-      );
+      tree = await runner.runSchematic('list', { name: 'list', module: 'trade', service: 'none', standalone: true }, tree);
       const servicePath = '/projects/foo/src/app/routes/trade/list/list.service.ts';
       expect(tree.readContent(servicePath)).toContain(`@Injectable()`);
     });

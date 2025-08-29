@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-  ViewEncapsulation,
-  inject,
-  numberAttribute
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, ViewEncapsulation, inject, numberAttribute } from '@angular/core';
 
 import { YelonLocaleService } from '@yelon/theme';
 import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
@@ -16,20 +7,12 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
   selector: 'g2-mini-progress',
   exportAs: 'g2MiniProgress',
   template: `
-    <div
-      nz-tooltip
-      [nzTooltipTitle]="locale().targetSuffix + target + '%'"
-      class="g2-mini-progress__target"
-      [style]="{ left: target + '%' }"
-    >
+    <div nz-tooltip [nzTooltipTitle]="locale().targetSuffix + target + '%'" class="g2-mini-progress__target" [style]="{ left: target + '%' }">
       <span class="g2-mini-progress__target-item" [style]="{ 'background-color': color }"></span>
       <span class="g2-mini-progress__target-item" [style]="{ 'background-color': color }"></span>
     </div>
     <div class="g2-mini-progress__wrap">
-      <div
-        class="g2-mini-progress__value"
-        [style]="{ 'background-color': color, width: percent + '%', height: strokeWidth + 'px' }"
-      ></div>
+      <div class="g2-mini-progress__value" [style]="{ 'background-color': color, width: percent + '%', height: strokeWidth + 'px' }"></div>
     </div>
   `,
   host: { '[class.g2-mini-progress]': 'true' },

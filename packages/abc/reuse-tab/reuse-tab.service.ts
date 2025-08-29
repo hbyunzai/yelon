@@ -1,12 +1,5 @@
 import { Injectable, Injector, OnDestroy, inject } from '@angular/core';
-import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
-  NavigationEnd,
-  NavigationStart,
-  Router,
-  ROUTER_CONFIGURATION
-} from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, NavigationStart, Router, ROUTER_CONFIGURATION } from '@angular/router';
 import { BehaviorSubject, Observable, take, timer, Unsubscribable } from 'rxjs';
 
 import { Menu, MenuService } from '@yelon/theme';
@@ -14,16 +7,7 @@ import { ScrollService } from '@yelon/util/browser';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { REUSE_TAB_CACHED_MANAGER } from './reuse-tab.cache';
-import {
-  ReuseComponentRef,
-  ReuseHookOnReuseInitType,
-  ReuseHookTypes,
-  ReuseTabCached,
-  ReuseTabMatchMode,
-  ReuseTabNotify,
-  ReuseTabRouteParamMatchMode,
-  ReuseTitle
-} from './reuse-tab.interfaces';
+import { ReuseComponentRef, ReuseHookOnReuseInitType, ReuseHookTypes, ReuseTabCached, ReuseTabMatchMode, ReuseTabNotify, ReuseTabRouteParamMatchMode, ReuseTitle } from './reuse-tab.interfaces';
 import { REUSE_TAB_STORAGE_KEY, REUSE_TAB_STORAGE_STATE } from './reuse-tab.state';
 
 @Injectable()
@@ -404,11 +388,7 @@ export class ReuseTabService implements OnDestroy {
     return menus.pop();
   }
 
-  runHook(
-    method: ReuseHookTypes,
-    comp: ReuseComponentRef | number | undefined,
-    type: ReuseHookOnReuseInitType = 'init'
-  ): void {
+  runHook(method: ReuseHookTypes, comp: ReuseComponentRef | number | undefined, type: ReuseHookOnReuseInitType = 'init'): void {
     if (typeof comp === 'number') {
       const item = this.cached.list[comp];
       comp = item._handle?.componentRef;

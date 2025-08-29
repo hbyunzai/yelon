@@ -62,11 +62,7 @@ export class QuickMenuComponent implements OnInit, OnChanges {
       'border-color': this.borderColor
     };
 
-    const res: string[] = [
-      `top:${this.top}px`,
-      `width:${this.width}px`,
-      `margin-right:-${this.show ? 0 : this.width}px`
-    ];
+    const res: string[] = [`top:${this.top}px`, `width:${this.width}px`, `margin-right:-${this.show ? 0 : this.width}px`];
     if (this.bgColor) {
       res.push(`background-color:${this.bgColor}`);
     }

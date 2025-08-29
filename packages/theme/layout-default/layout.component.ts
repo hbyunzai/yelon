@@ -1,26 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  ContentChildren,
-  ElementRef,
-  Input,
-  QueryList,
-  Renderer2,
-  TemplateRef,
-  booleanAttribute,
-  OnInit,
-  inject
-} from '@angular/core';
+import { Component, ContentChildren, ElementRef, Input, QueryList, Renderer2, TemplateRef, booleanAttribute, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  NavigationCancel,
-  NavigationEnd,
-  NavigationError,
-  RouteConfigLoadEnd,
-  RouteConfigLoadStart,
-  Router,
-  Event
-} from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, RouteConfigLoadEnd, RouteConfigLoadStart, Router, Event } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { SettingsService } from '@yelon/theme';

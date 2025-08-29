@@ -8,10 +8,7 @@ export class PathToRegexpService {
   constructor() {}
   DEFAULT_DELIMITER = '/';
 
-  PATH_REGEXP = new RegExp(
-    ['(\\\\.)', '(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?'].join('|'),
-    'g'
-  );
+  PATH_REGEXP = new RegExp(['(\\\\.)', '(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?'].join('|'), 'g');
 
   parse(str: any, options: any) {
     const tokens = [];
@@ -72,9 +69,7 @@ export class PathToRegexpService {
         delimiter: delimiter,
         optional: optional,
         repeat: repeat,
-        pattern: pattern
-          ? this.escapeGroup(pattern)
-          : `[^${this.escapeString(delimiter === defaultDelimiter ? delimiter : delimiter + defaultDelimiter)}]+?`
+        pattern: pattern ? this.escapeGroup(pattern) : `[^${this.escapeString(delimiter === defaultDelimiter ? delimiter : delimiter + defaultDelimiter)}]+?`
       });
     }
 
@@ -229,9 +224,7 @@ export class PathToRegexpService {
       if (typeof token === 'string') {
         route += this.escapeString(token);
       } else {
-        const capture = token.repeat
-          ? `(?:${token.pattern})(?:${this.escapeString(token.delimiter)}(?:${token.pattern}))*`
-          : token.pattern;
+        const capture = token.repeat ? `(?:${token.pattern})(?:${this.escapeString(token.delimiter)}(?:${token.pattern}))*` : token.pattern;
 
         if (keys) {
           keys.push(token);
@@ -257,8 +250,7 @@ export class PathToRegexpService {
       route += endsWith === '$' ? '$' : `(?=${endsWith})`;
     } else {
       const endToken = tokens[tokens.length - 1];
-      const isEndDelimited =
-        typeof endToken === 'string' ? endToken[endToken.length - 1] === delimiter : endToken === undefined;
+      const isEndDelimited = typeof endToken === 'string' ? endToken[endToken.length - 1] === delimiter : endToken === undefined;
 
       if (!strict) {
         route += `(?:${this.escapeString(delimiter)}(?=${endsWith}))?`;

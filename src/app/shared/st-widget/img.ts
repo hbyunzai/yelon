@@ -7,15 +7,7 @@ import { NzTooltipModule } from 'ng-zorro-antd/tooltip';
 @Component({
   selector: 'st-widget-img',
   template: `
-    <img
-      nz-tooltip
-      nzTooltipTitle="Click it"
-      nz-image
-      nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-      (click)="show()"
-      class="img"
-      style="cursor: pointer"
-    />
+    <img nz-tooltip nzTooltipTitle="Click it" nz-image nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" (click)="show()" class="img" style="cursor: pointer" />
   `,
   host: {
     '(click)': 'show()'

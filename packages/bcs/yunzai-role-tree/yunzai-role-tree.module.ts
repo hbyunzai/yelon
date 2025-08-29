@@ -15,17 +15,7 @@ import { YunzaiRoleTreeService } from './yunzai-role-tree.service';
 const COMPONENTS = [YunzaiRoleTreeComponent];
 
 @NgModule({
-  imports: [
-    NzSpinModule,
-    YelonFormModule,
-    NzButtonModule,
-    NzIconModule,
-    NzEmptyModule,
-    NzTreeModule,
-    CommonModule,
-    NzCardModule,
-    ...COMPONENTS
-  ],
+  imports: [NzSpinModule, YelonFormModule, NzButtonModule, NzIconModule, NzEmptyModule, NzTreeModule, CommonModule, NzCardModule, ...COMPONENTS],
   providers: [YunzaiRoleTreeService],
   exports: COMPONENTS
 })

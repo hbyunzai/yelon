@@ -28,12 +28,7 @@ describe('abc: xlsx', () => {
   let srv: XlsxService;
   function genModule(): void {
     TestBed.configureTestingModule({
-      providers: [
-        provideHttpClient(),
-        provideHttpClientTesting(),
-        { provide: HttpClient, useClass: MockHttpClient },
-        { provide: LazyService, useClass: MockLazyService }
-      ]
+      providers: [provideHttpClient(), provideHttpClientTesting(), { provide: HttpClient, useClass: MockHttpClient }, { provide: LazyService, useClass: MockLazyService }]
     });
     srv = TestBed.inject<XlsxService>(XlsxService);
   }

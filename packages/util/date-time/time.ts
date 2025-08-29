@@ -34,11 +34,7 @@ export function getTimeDistance(
   time?: Date | string | number,
   options?: { ignoreMaxTime?: boolean }
 ): [Date, Date] {
-  time = time
-    ? typeof time === 'string'
-      ? parse(time, 'yyyy-MM-dd HH:mm:ss', new Date())
-      : new Date(time)
-    : new Date();
+  time = time ? (typeof time === 'string' ? parse(time, 'yyyy-MM-dd HH:mm:ss', new Date()) : new Date(time)) : new Date();
   const opt: { weekStartsOn: 1 } = { weekStartsOn: 1 };
 
   let res: [Date, Date];
@@ -129,16 +125,10 @@ export function toDate(value?: Date | string | number | null, options?: string |
  * @param formatString Please refer to [date-fnd format](https://date-fns.org/v2.30.0/docs/format) for string format
  * @param dateLocale Recommended to be consistent with NG-ZORRO by using `inject(NZ_DATE_LOCALE)`
  */
-export function formatDate(
-  value: Date | string | number,
-  formatString: string,
-  options?: { locale?: DateLocale; customFormat?: YunzaiThemePipeDateFormatCustom }
-): string {
+export function formatDate(value: Date | string | number, formatString: string, options?: { locale?: DateLocale; customFormat?: YunzaiThemePipeDateFormatCustom }): string {
   value = toDate(value);
   if (isNaN(value as any)) return '';
 
   const langOpt = { locale: options?.locale };
-  return formatString === 'fn'
-    ? formatDistanceToNow(value, langOpt)
-    : (options?.customFormat ?? format)(value, formatString, langOpt);
+  return formatString === 'fn' ? formatDistanceToNow(value, langOpt) : (options?.customFormat ?? format)(value, formatString, langOpt);
 }

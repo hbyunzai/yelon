@@ -26,20 +26,12 @@ import { ArrayLayoutWidget } from '../../widget';
                 [nzTooltipOverlayStyle]="oh.overlayStyle"
                 [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                 [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                [nzType]="oh.icon!"
-              />
+                [nzType]="oh.icon!" />
             }
           </span>
         </label>
         <div class="sf__array-add">
-          <button
-            type="button"
-            nz-button
-            [nzType]="addType"
-            [disabled]="addDisabled"
-            (click)="addItem()"
-            [innerHTML]="addTitle"
-          ></button>
+          <button type="button" nz-button [nzType]="addType" [disabled]="addDisabled" (click)="addItem()" [innerHTML]="addTitle"></button>
         </div>
       </div>
     }
@@ -83,19 +75,12 @@ export class ArrayWidget extends ArrayLayoutWidget implements OnInit {
   arraySpan = 8;
 
   get addDisabled(): boolean {
-    return (
-      this.disabled ||
-      (this.schema.maxItems != null && (this.formProperty.properties as FormProperty[]).length >= this.schema.maxItems!)
-    );
+    return this.disabled || (this.schema.maxItems != null && (this.formProperty.properties as FormProperty[]).length >= this.schema.maxItems!);
   }
 
   get showRemove(): boolean {
     if (this.disabled || !this.removeTitle) return false;
-    if (
-      this.schema.minItems != null &&
-      (this.formProperty.properties as FormProperty[]).length <= this.schema.minItems!
-    )
-      return false;
+    if (this.schema.minItems != null && (this.formProperty.properties as FormProperty[]).length <= this.schema.minItems!) return false;
     return true;
   }
 

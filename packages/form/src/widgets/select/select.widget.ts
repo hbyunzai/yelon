@@ -11,14 +11,7 @@ import { ControlUIWidget } from '../../widget';
 
 @Component({
   selector: 'sf-select',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-select
       [nzId]="id"
       [nzDisabled]="disabled"
@@ -53,8 +46,7 @@ import { ControlUIWidget } from '../../widget';
       [nzOptionOverflowSize]="i.optionOverflowSize!"
       (nzOpenChange)="openChange($event)"
       (nzOnSearch)="onSearch($event)"
-      (nzScrollToBottom)="scrollToBottom()"
-    >
+      (nzScrollToBottom)="scrollToBottom()">
       @if (!loading && !hasGroup) {
         @for (o of data; track $index) {
           <nz-option [nzLabel]="o.label" [nzValue]="o.value" [nzHide]="o.hide" [nzDisabled]="o.disabled" />

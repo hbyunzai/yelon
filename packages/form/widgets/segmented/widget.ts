@@ -8,14 +8,7 @@ import type { SFSegmentedWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-segmented',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-segmented
       [ngModel]="value"
       (ngModelChange)="setValue($event)"
@@ -23,8 +16,7 @@ import type { SFSegmentedWidgetSchema } from './schema';
       [nzSize]="$any(ui.size)"
       [nzBlock]="ui.block ?? false"
       [nzOptions]="list"
-      (nzValueChange)="valueChange($event)"
-    />
+      (nzValueChange)="valueChange($event)" />
   </sf-item-wrap>`,
 
   encapsulation: ViewEncapsulation.None,

@@ -12,15 +12,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: `yunzai-header-notify`,
   template: `
-    <notice-icon
-      [data]="data"
-      [count]="count"
-      [loading]="loading"
-      btnClass="yunzai-default__nav-item"
-      btnIconClass="yunzai-default__nav-item-icon"
-      (select)="select($event)"
-      (clear)="clear($event)"
-    />
+    <notice-icon [data]="data" [count]="count" [loading]="loading" btnClass="yunzai-default__nav-item" btnIconClass="yunzai-default__nav-item-icon" (select)="select($event)" (clear)="clear($event)" />
   `,
   imports: [NoticeIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -61,8 +61,7 @@ describe('chart: timeline', () => {
       [borderWidth]="borderWidth"
       [data]="data"
       [slider]="slider"
-      [delay]="delay"
-    />
+      [delay]="delay" />
   `,
   imports: [G2TimelineComponent]
 })

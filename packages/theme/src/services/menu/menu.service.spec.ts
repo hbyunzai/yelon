@@ -52,11 +52,7 @@ describe('Service: Menu', () => {
   describe('[default]', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
-        providers: [
-          MenuService,
-          { provide: YUNZAI_I18N_TOKEN, useClass: YunzaiI18NServiceFake },
-          { provide: ACLService, useClass: MockACLService }
-        ]
+        providers: [MenuService, { provide: YUNZAI_I18N_TOKEN, useClass: YunzaiI18NServiceFake }, { provide: ACLService, useClass: MockACLService }]
       });
       srv = TestBed.inject<MenuService>(MenuService);
     });
@@ -400,11 +396,7 @@ describe('Service: Menu', () => {
   describe('[i18n changed]', () => {
     it('with YUNZAI_I18N_TOKEN', () => {
       TestBed.configureTestingModule({
-        providers: [
-          MenuService,
-          { provide: YUNZAI_I18N_TOKEN, useClass: YunzaiI18NServiceFake },
-          { provide: ACLService, useClass: MockACLService }
-        ]
+        providers: [MenuService, { provide: YUNZAI_I18N_TOKEN, useClass: YunzaiI18NServiceFake }, { provide: ACLService, useClass: MockACLService }]
       });
       srv = TestBed.inject<MenuService>(MenuService);
       spyOn(srv, 'resume');

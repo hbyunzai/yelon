@@ -1,14 +1,5 @@
 import { Directionality } from '@angular/cdk/bidi';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewEncapsulation,
-  booleanAttribute,
-  inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation, booleanAttribute, inject } from '@angular/core';
 
 import { YelonLocaleService } from '@yelon/theme';
 import { NzIconDirective } from 'ng-zorro-antd/icon';

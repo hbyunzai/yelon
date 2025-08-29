@@ -10,14 +10,7 @@ import type { TinymceWidgetSchema } from './schema';
 @Component({
   selector: 'sf-widget-tinymce',
   template: `
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="schema.title"
-    >
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
       <tinymce
         [ngModel]="value"
         (ngModelChange)="change($event)"
@@ -25,8 +18,7 @@ import type { TinymceWidgetSchema } from './schema';
         [inline]="ui.inline ?? false"
         [delay]="ui.delay ?? 0"
         [loading]="ui.loading ?? 'Loading...'"
-        (ready)="_ready($event)"
-      />
+        (ready)="_ready($event)" />
     </sf-item-wrap>
   `,
 

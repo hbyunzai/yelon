@@ -142,18 +142,14 @@ function makeMethod(method: METHOD_TYPE) {
         const injector = (this as any).injector as Injector;
         const http = injector.get(_HttpClient, null) as _HttpClient;
         if (http == null) {
-          throw new TypeError(
-            `Not found '_HttpClient', You can import 'YunzaiThemeModule' && 'HttpClientModule' in your root module.`
-          );
+          throw new TypeError(`Not found '_HttpClient', You can import 'YunzaiThemeModule' && 'HttpClientModule' in your root module.`);
         }
 
         const baseData = setParam(this);
         const data = setParam(baseData, targetKey);
 
         let requestUrl = url || '';
-        requestUrl = [baseData.baseUrl || '', requestUrl.startsWith('/') ? requestUrl.substring(1) : requestUrl].join(
-          '/'
-        );
+        requestUrl = [baseData.baseUrl || '', requestUrl.startsWith('/') ? requestUrl.substring(1) : requestUrl].join('/');
         // fix last split
         if (requestUrl.length > 1 && requestUrl.endsWith('/')) {
           requestUrl = requestUrl.substring(0, requestUrl.length - 1);

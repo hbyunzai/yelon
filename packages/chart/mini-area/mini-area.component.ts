@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewEncapsulation,
-  booleanAttribute,
-  numberAttribute
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
 
 import type { Chart, Event } from '@antv/g2';
 
@@ -56,22 +47,7 @@ export class G2MiniAreaComponent extends G2BaseComponent {
   // #endregion
 
   install(): void {
-    const {
-      el,
-      fit,
-      height,
-      padding,
-      xAxis,
-      yAxis,
-      yTooltipSuffix,
-      tooltipType,
-      line,
-      theme,
-      animate,
-      color,
-      borderColor,
-      borderWidth
-    } = this;
+    const { el, fit, height, padding, xAxis, yAxis, yTooltipSuffix, tooltipType, line, theme, animate, color, borderColor, borderWidth } = this;
     const chart: Chart = (this._chart = new this.winG2.Chart({
       container: el.nativeElement,
       autoFit: fit,

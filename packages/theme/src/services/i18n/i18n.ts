@@ -130,16 +130,11 @@ export abstract class YunzaiI18nBaseService implements YunzaiI18NService {
       const interpolation = this.cog.interpolation!;
       const objParams = params as Record<string, unknown>;
       Object.keys(objParams).forEach(key => {
-        content = content.replace(
-          new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'),
-          `${objParams[key]}`
-        );
+        content = content.replace(new RegExp(`${interpolation[0]}\\s?${key}\\s?${interpolation[1]}`, 'g'), `${objParams[key]}`);
       });
     }
 
-    (Array.isArray(params) ? params : [params]).forEach(
-      (item, index) => (content = content.replace(new RegExp(`\\{\\s?${index}\\s?\\}`, 'g'), `${item}`))
-    );
+    (Array.isArray(params) ? params : [params]).forEach((item, index) => (content = content.replace(new RegExp(`\\{\\s?${index}\\s?\\}`, 'g'), `${item}`)));
     return content;
   }
 }

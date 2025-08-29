@@ -68,9 +68,7 @@ const ICONS = [
       </layout-default-header-item>
       <layout-default-header-item direction="middle">
         @for (m of topMenus; track $index) {
-          <layout-default-top-menu-item (click)="changeMenu(m.key)" [selected]="m.selected" [disabled]="m.disabled">
-            <nz-icon nzType="github" /> {{ m.label }}
-          </layout-default-top-menu-item>
+          <layout-default-top-menu-item (click)="changeMenu(m.key)" [selected]="m.selected" [disabled]="m.disabled"> <nz-icon nzType="github" /> {{ m.label }} </layout-default-top-menu-item>
         }
       </layout-default-header-item>
       <layout-default-header-item direction="right">
@@ -102,17 +100,7 @@ const ICONS = [
   host: {
     '[class.yunzai-default]': 'true'
   },
-  imports: [
-    UpperCasePipe,
-    LayoutDefaultModule,
-    NzIconModule,
-    NzDropDownModule,
-    NzAvatarModule,
-    NzMenuModule,
-    ReuseTabComponent,
-    RouterOutlet,
-    SettingDrawerModule
-  ]
+  imports: [UpperCasePipe, LayoutDefaultModule, NzIconModule, NzDropDownModule, NzAvatarModule, NzMenuModule, ReuseTabComponent, RouterOutlet, SettingDrawerModule]
 })
 export class DevLayoutComponent implements OnInit {
   private readonly menuSrv = inject(MenuService);
@@ -170,11 +158,7 @@ export class DevLayoutComponent implements OnInit {
             {
               text: 'Level2',
               link: '#',
-              children: [
-                { text: 'Level3A', link: '/dev/l1' },
-                { render_type: 'divider' },
-                { text: 'Level3B-DISABLED', link: '/dev/l1', disabled: true }
-              ]
+              children: [{ text: 'Level3A', link: '/dev/l1' }, { render_type: 'divider' }, { text: 'Level3B-DISABLED', link: '/dev/l1', disabled: true }]
             },
             { render_type: 'divider' },
             { text: 'Level2-DISABLED', link: '/dev/l2', disabled: true }

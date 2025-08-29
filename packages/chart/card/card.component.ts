@@ -1,14 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-  TemplateRef,
-  ViewEncapsulation,
-  booleanAttribute,
-  inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, TemplateRef, ViewEncapsulation, booleanAttribute, inject } from '@angular/core';
 
 import { NzCardComponent } from 'ng-zorro-antd/card';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';

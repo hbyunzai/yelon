@@ -5,13 +5,7 @@ import { ModuleDirConfig, SiteConfig } from '../interfaces';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const klawSync = require('klaw-sync');
 
-export function groupFiles(
-  srcPaths: string[],
-  config: ModuleDirConfig,
-  isSyncSpecific: boolean,
-  target: string,
-  siteConfig: SiteConfig
-): any {
+export function groupFiles(srcPaths: string[], config: ModuleDirConfig, isSyncSpecific: boolean, target: string, siteConfig: SiteConfig): any {
   const files: Array<{ key: string; data: Record<string, string> }> = [];
   const langRe = new RegExp(`.(${siteConfig.langs.join('|')}){1}`, 'i');
   srcPaths.forEach(srcPath => {
@@ -19,9 +13,7 @@ export function groupFiles(
       nodir: false,
       filter: (item: any) => {
         if (config.hasSubDir && item.stats.isDirectory()) return true;
-        return (
-          path.extname(item.path) === '.md' && item.stats.size > 1 && !item.path.includes(`${path.sep}demo${path.sep}`)
-        );
+        return path.extname(item.path) === '.md' && item.stats.size > 1 && !item.path.includes(`${path.sep}demo${path.sep}`);
       }
     })
       .filter((item: { path: string }) => path.extname(item.path) === '.md')

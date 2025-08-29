@@ -61,12 +61,7 @@ export interface CreateYunzaiBaseSchema {
   standalone?: boolean;
 }
 
-export async function createYunzaiAndModuleApp(options?: {
-  name?: string;
-  ngAddSchema?: NgAddSchema;
-  moduleSchema?: CreateYunzaiBaseSchema;
-  yunzaiData?: unknown;
-}): Promise<AppResult> {
+export async function createYunzaiAndModuleApp(options?: { name?: string; ngAddSchema?: NgAddSchema; moduleSchema?: CreateYunzaiBaseSchema; yunzaiData?: unknown }): Promise<AppResult> {
   const res = await createYunzaiApp(options?.ngAddSchema);
   if (options?.yunzaiData != null) {
     res.tree.create('ng-yunzai.json', JSON.stringify(options?.yunzaiData));

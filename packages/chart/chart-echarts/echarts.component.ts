@@ -23,13 +23,7 @@ import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzSkeletonComponent } from 'ng-zorro-antd/skeleton';
 
 import { ChartEChartsService } from './echarts.service';
-import {
-  ChartECharts,
-  ChartEChartsEvent,
-  ChartEChartsEventType,
-  ChartEChartsOn,
-  ChartEChartsOption
-} from './echarts.types';
+import { ChartECharts, ChartEChartsEvent, ChartEChartsEventType, ChartEChartsOn, ChartEChartsOption } from './echarts.types';
 
 @Component({
   selector: 'chart-echarts, [chart-echarts]',
@@ -133,11 +127,7 @@ export class ChartEChartsComponent implements OnInit, OnDestroy {
 
   install(): this {
     this.destroy();
-    const chart = (this._chart = (window as NzSafeAny).echarts.init(
-      this.node.nativeElement,
-      this._theme,
-      this._initOpt
-    )) as ChartECharts;
+    const chart = (this._chart = (window as NzSafeAny).echarts.init(this.node.nativeElement, this._theme, this._initOpt)) as ChartECharts;
     this.emit('init');
     this.setOption(this._option);
     // on

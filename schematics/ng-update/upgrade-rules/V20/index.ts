@@ -8,10 +8,7 @@ function finished(): Rule {
   return (_tree: Tree, context: SchematicContext) => {
     context.addTask(new NodePackageInstallTask());
 
-    logFinished(
-      context,
-      `Congratulations, Abort more detail please refer to upgrade guide https://github.com/hbyunzai/ng-yunzai/issues`
-    );
+    logFinished(context, `Congratulations, Abort more detail please refer to upgrade guide https://github.com/hbyunzai/ng-yunzai/issues`);
   };
 }
 

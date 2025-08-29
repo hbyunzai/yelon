@@ -40,11 +40,7 @@ import { di, resolveIfSchema, retrieveSchema } from './utils';
 import { SchemaValidatorFactory } from './validator.factory';
 import { WidgetFactory } from './widget.factory';
 
-export function useFactory(
-  injector: Injector,
-  schemaValidatorFactory: SchemaValidatorFactory,
-  cogSrv: YunzaiConfigService
-): FormPropertyFactory {
+export function useFactory(injector: Injector, schemaValidatorFactory: SchemaValidatorFactory, cogSrv: YunzaiConfigService): FormPropertyFactory {
   return new FormPropertyFactory(injector, schemaValidatorFactory, cogSrv);
 }
 
@@ -340,13 +336,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     const _schema = deepCopy(this.schema);
     const { definitions } = _schema;
 
-    const inFn = (
-      schema: SFSchema,
-      _parentSchema: SFSchema,
-      uiSchema: SFUISchemaItemRun,
-      parentUiSchema: SFUISchemaItemRun,
-      uiRes: SFUISchemaItemRun
-    ): void => {
+    const inFn = (schema: SFSchema, _parentSchema: SFSchema, uiSchema: SFUISchemaItemRun, parentUiSchema: SFUISchemaItemRun, uiRes: SFUISchemaItemRun): void => {
       if (!Array.isArray(schema.required)) schema.required = [];
 
       Object.keys(schema.properties!).forEach(key => {
@@ -368,9 +358,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
           widget: property.type,
           ...(property.format && (this.options.formatMap as any)[property.format]),
           ...(typeof property.ui === 'string' ? { widget: property.ui } : null),
-          ...(!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0
-            ? { widget: 'select' }
-            : null),
+          ...(!property.format && !property.ui && Array.isArray(property.enum) && property.enum.length > 0 ? { widget: 'select' } : null),
           ...curUi
         } as SFUISchemaItemRun;
         Object.keys(ui)
@@ -383,13 +371,9 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
               ui.spanLabelFixed = parentUiSchema.spanLabelFixed;
             }
           } else {
-            if (!ui.spanLabel)
-              ui.spanLabel = typeof parentUiSchema.spanLabel === 'undefined' ? 5 : parentUiSchema.spanLabel;
-            if (!ui.spanControl)
-              ui.spanControl = typeof parentUiSchema.spanControl === 'undefined' ? 19 : parentUiSchema.spanControl;
-            if (!ui.offsetControl)
-              ui.offsetControl =
-                typeof parentUiSchema.offsetControl === 'undefined' ? null : parentUiSchema.offsetControl;
+            if (!ui.spanLabel) ui.spanLabel = typeof parentUiSchema.spanLabel === 'undefined' ? 5 : parentUiSchema.spanLabel;
+            if (!ui.spanControl) ui.spanControl = typeof parentUiSchema.spanControl === 'undefined' ? 19 : parentUiSchema.spanControl;
+            if (!ui.offsetControl) ui.offsetControl = typeof parentUiSchema.offsetControl === 'undefined' ? null : parentUiSchema.offsetControl;
           }
         } else {
           ui.spanLabel = null;
@@ -653,8 +637,7 @@ export class SFComponent implements OnInit, OnChanges, OnDestroy {
     if (newUI) this.ui = newUI;
 
     if (!this.schema || typeof this.schema.properties === 'undefined') throw new Error(`Invalid Schema`);
-    if (this.schema.ui && typeof this.schema.ui === 'string')
-      throw new Error(`Don't support string with root ui property`);
+    if (this.schema.ui && typeof this.schema.ui === 'string') throw new Error(`Don't support string with root ui property`);
 
     this.schema.type = 'object';
 

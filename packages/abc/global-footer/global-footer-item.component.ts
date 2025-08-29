@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  TemplateRef,
-  ViewEncapsulation,
-  booleanAttribute,
-  input,
-  viewChild
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewEncapsulation, booleanAttribute, input, viewChild } from '@angular/core';
 
 @Component({
   selector: 'global-footer-item',

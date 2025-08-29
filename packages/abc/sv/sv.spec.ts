@@ -255,20 +255,9 @@ describe('abc: view', () => {
       [col]="parent_col"
       [default]="parent_default"
       [bordered]="bordered"
-      [noColon]="noColon"
-    >
+      [noColon]="noColon">
       <sv-title>title</sv-title>
-      <sv
-        #viewComp
-        [label]="label"
-        [col]="col"
-        [type]="type"
-        [default]="default"
-        [unit]="unit"
-        [optional]="optional"
-        [optionalHelp]="optionalHelp"
-        [hideLabel]="hideLabel"
-      >
+      <sv #viewComp [label]="label" [col]="col" [type]="type" [default]="default" [unit]="unit" [optional]="optional" [optionalHelp]="optionalHelp" [hideLabel]="hideLabel">
         {{ content }}
       </sv>
       <sv-value>10</sv-value>

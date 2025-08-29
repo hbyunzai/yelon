@@ -100,9 +100,7 @@ export abstract class G2BaseComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     this.onChanges(changes);
 
-    const isOnlyChangeData = this.onlyChangeData
-      ? this.onlyChangeData(changes)
-      : Object.keys(changes).length === 1 && !!changes.data;
+    const isOnlyChangeData = this.onlyChangeData ? this.onlyChangeData(changes) : Object.keys(changes).length === 1 && !!changes.data;
     if (isOnlyChangeData) {
       this.changeData();
       return;

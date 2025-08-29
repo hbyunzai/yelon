@@ -28,21 +28,13 @@ describe('Schematic: empty', () => {
       });
 
       it('shuold be include service', async () => {
-        tree = await runner.runSchematic(
-          'empty',
-          { name: 'list', module: 'trade', service: 'none', standalone: false },
-          tree
-        );
+        tree = await runner.runSchematic('empty', { name: 'list', module: 'trade', service: 'none', standalone: false }, tree);
         expect(tree.readContent(servicePath)).toContain(`@Injectable()`);
         expect(tree.readContent(modulePath)).toContain(`TradeService`);
       });
 
       it('shuold be include root service', async () => {
-        tree = await runner.runSchematic(
-          'empty',
-          { name: 'list', module: 'trade', service: 'root', standalone: false },
-          tree
-        );
+        tree = await runner.runSchematic('empty', { name: 'list', module: 'trade', service: 'root', standalone: false }, tree);
         expect(tree.readContent(servicePath)).toContain(`@Injectable({ providedIn: 'root' })`);
       });
     });
@@ -80,20 +72,12 @@ describe('Schematic: empty', () => {
       });
 
       it('shuold be include service', async () => {
-        tree = await runner.runSchematic(
-          'empty',
-          { name: 'list', module: 'trade', service: 'none', standalone: true },
-          tree
-        );
+        tree = await runner.runSchematic('empty', { name: 'list', module: 'trade', service: 'none', standalone: true }, tree);
         expect(tree.readContent(servicePath)).toContain(`@Injectable()`);
       });
 
       it('shuold be include root service', async () => {
-        tree = await runner.runSchematic(
-          'empty',
-          { name: 'list', module: 'trade', service: 'root', standalone: true },
-          tree
-        );
+        tree = await runner.runSchematic('empty', { name: 'list', module: 'trade', service: 'root', standalone: true }, tree);
         expect(tree.readContent(servicePath)).toContain(`@Injectable({ providedIn: 'root' })`);
       });
     });

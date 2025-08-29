@@ -480,9 +480,7 @@ describe('form: component', () => {
           .checkCls('input', 'ant-input-lg');
       });
       it('#disabled', fakeAsync(() => {
-        const el = page
-          .newSchema({ properties: { name: { type: 'string', readOnly: true } } })
-          .getEl('input') as HTMLInputElement;
+        const el = page.newSchema({ properties: { name: { type: 'string', readOnly: true } } }).getEl('input') as HTMLInputElement;
         tick();
         expect(el.disabled).toBe(true);
         expect(el.classList).toContain('ant-input-disabled');
@@ -877,25 +875,16 @@ describe('form: component', () => {
         }
       };
       page.newSchema(s);
-      page
-        .checkSchema('/a', 'title', 'i18n')
-        .checkSchema('/b', 'title', 'null')
-        .checkSchema('/a', 'description', 'descriptionI18n')
-        .checkUI('/a', 'optionalHelp.text', 'ohi18n');
+      page.checkSchema('/a', 'title', 'i18n').checkSchema('/b', 'title', 'null').checkSchema('/a', 'description', 'descriptionI18n').checkUI('/a', 'optionalHelp.text', 'ohi18n');
       lang = 'zh';
       i18n.use(lang, {});
-      page
-        .checkSchema('/a', 'title', 'zh-i18n')
-        .checkSchema('/a', 'description', 'zh-descriptionI18n')
-        .checkUI('/a', 'optionalHelp.text', 'zh-ohi18n');
+      page.checkSchema('/a', 'title', 'zh-i18n').checkSchema('/a', 'description', 'zh-descriptionI18n').checkUI('/a', 'optionalHelp.text', 'zh-ohi18n');
     }));
   });
 });
 
 @Component({
-  template: `
-    <sf [layout]="layout" #comp [schema]="schema" [ui]="ui" [button]="button" [mode]="mode" [loading]="loading" />
-  `,
+  template: ` <sf [layout]="layout" #comp [schema]="schema" [ui]="ui" [button]="button" [mode]="mode" [loading]="loading" /> `,
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false
 })

@@ -105,10 +105,7 @@ function fix(output: string, res: GenerateApiOutput, tree: Tree, context: Schema
       routeIndex.push(`service`);
 
       // index.ts
-      tree.create(
-        `${basePath}/${route.moduleName}/index.ts`,
-        filePrefix + routeIndex.map(name => `export * from './${name}';`).join('\n')
-      );
+      tree.create(`${basePath}/${route.moduleName}/index.ts`, filePrefix + routeIndex.map(name => `export * from './${name}';`).join('\n'));
       indexList.push(`${route.moduleName}/index`);
     });
     // Index

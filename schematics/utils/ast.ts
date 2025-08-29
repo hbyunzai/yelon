@@ -1,10 +1,6 @@
 import { tags, normalize } from '@angular-devkit/core';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import {
-  getSourceNodes,
-  getMetadataField,
-  addProviderToModule as _addProviderToModule
-} from '@schematics/angular/utility/ast-utils';
+import { getSourceNodes, getMetadataField, addProviderToModule as _addProviderToModule } from '@schematics/angular/utility/ast-utils';
 import { Change, InsertChange } from '@schematics/angular/utility/change';
 import * as ts from 'typescript';
 
@@ -37,9 +33,7 @@ function getComponentMetadata(source: ts.SourceFile): ts.Node[] {
   const identifier = 'Component';
   return allNodes
     .filter(node => {
-      return (
-        node.kind == ts.SyntaxKind.Decorator && (node as ts.Decorator).expression.kind == ts.SyntaxKind.CallExpression
-      );
+      return node.kind == ts.SyntaxKind.Decorator && (node as ts.Decorator).expression.kind == ts.SyntaxKind.CallExpression;
     })
     .map(node => (node as ts.Decorator).expression as ts.CallExpression)
     .filter(expr => {
@@ -55,12 +49,7 @@ function getComponentMetadata(source: ts.SourceFile): ts.Node[] {
     .map(expr => expr.arguments[0] as ts.ObjectLiteralExpression);
 }
 
-function addSymbolToComponentMetadata(
-  source: ts.SourceFile,
-  filePath: string,
-  symbolName: string,
-  metadataField = 'imports'
-): Change[] {
+function addSymbolToComponentMetadata(source: ts.SourceFile, filePath: string, symbolName: string, metadataField = 'imports'): Change[] {
   const nodes = getComponentMetadata(source);
   if (nodes.length <= 0) return [];
 
@@ -85,9 +74,7 @@ function addSymbolToComponentMetadata(
       const text = childNode.getFullText(source);
       const matches = text.match(/^(\r?\n)(\s*)/);
       if (matches) {
-        toInsert =
-          `,${matches[0]}${metadataField}: [${matches[1]}` +
-          `${tags.indentBy(matches[2].length + 2)`${symbolName}`}${matches[0]}]`;
+        toInsert = `,${matches[0]}${metadataField}: [${matches[1]}` + `${tags.indentBy(matches[2].length + 2)`${symbolName}`}${matches[0]}]`;
       } else {
         toInsert = `, ${metadataField}: [${symbolName}]`;
       }
@@ -148,13 +135,7 @@ export function findRoutesPath(tree: Tree, path: string): string {
   return '';
 }
 
-export function importInStandalone(
-  tree: Tree,
-  filePath: string,
-  componentName: string,
-  componentPath: string,
-  metadataField = 'imports'
-): void {
+export function importInStandalone(tree: Tree, filePath: string, componentName: string, componentPath: string, metadataField = 'imports'): void {
   // imports
   addImportToModule(tree, filePath, componentName, componentPath);
   // import in component
@@ -163,13 +144,7 @@ export function importInStandalone(
   applyChanges(tree, filePath, changes);
 }
 
-export function addServiceToModuleOrStandalone(
-  tree: Tree,
-  standalone: boolean,
-  filePath: string,
-  serviceName: string,
-  importPath: string
-): void {
+export function addServiceToModuleOrStandalone(tree: Tree, standalone: boolean, filePath: string, serviceName: string, importPath: string): void {
   const source = getSourceFile(tree, filePath);
   if (standalone) {
     importInStandalone(tree, filePath, serviceName, importPath, 'providers');

@@ -1,10 +1,4 @@
-import {
-  EnvironmentProviders,
-  Provider,
-  inject,
-  makeEnvironmentProviders,
-  provideEnvironmentInitializer
-} from '@angular/core';
+import { EnvironmentProviders, Provider, inject, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { REUSE_TAB_CACHED_MANAGER, ReuseTabCachedManagerFactory } from './reuse-tab.cache';

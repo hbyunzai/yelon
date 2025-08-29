@@ -25,13 +25,7 @@ export class FormPropertyFactory {
     this.options = mergeConfig(cogSrv);
   }
 
-  createProperty(
-    schema: SFSchema,
-    ui: SFUISchema | SFUISchemaItem,
-    formData: Record<string, unknown>,
-    parent: PropertyGroup | null = null,
-    propertyId?: string
-  ): FormProperty {
+  createProperty(schema: SFSchema, ui: SFUISchema | SFUISchemaItem, formData: Record<string, unknown>, parent: PropertyGroup | null = null, propertyId?: string): FormProperty {
     let newProperty: FormProperty | null = null;
     let path = '';
     if (parent) {
@@ -58,10 +52,7 @@ export class FormPropertyFactory {
       newProperty = this.createProperty(refSchema, ui, formData, parent, path);
     } else {
       // fix required
-      if (
-        (propertyId && parent!.schema.required!.indexOf(propertyId.split(SF_SEQ).pop()!) !== -1) ||
-        ui.showRequired === true
-      ) {
+      if ((propertyId && parent!.schema.required!.indexOf(propertyId.split(SF_SEQ).pop()!) !== -1) || ui.showRequired === true) {
         ui._required = true;
       }
       // fix title
@@ -70,76 +61,27 @@ export class FormPropertyFactory {
       }
       // fix date
       if ((schema.type === 'string' || schema.type === 'number') && !schema.format && !(ui as SFUISchemaItem).format) {
-        if ((ui as SFUISchemaItem).widget === 'date')
-          ui._format = schema.type === 'string' ? this.options.uiDateStringFormat : this.options.uiDateNumberFormat;
-        else if ((ui as SFUISchemaItem).widget === 'time')
-          ui._format = schema.type === 'string' ? this.options.uiTimeStringFormat : this.options.uiTimeNumberFormat;
+        if ((ui as SFUISchemaItem).widget === 'date') ui._format = schema.type === 'string' ? this.options.uiDateStringFormat : this.options.uiDateNumberFormat;
+        else if ((ui as SFUISchemaItem).widget === 'time') ui._format = schema.type === 'string' ? this.options.uiTimeStringFormat : this.options.uiTimeNumberFormat;
       } else {
         ui._format = ui.format;
       }
       switch (schema.type) {
         case 'integer':
         case 'number':
-          newProperty = new NumberProperty(
-            this.injector,
-            this.schemaValidatorFactory,
-            schema,
-            ui,
-            formData,
-            parent,
-            path,
-            this.options
-          );
+          newProperty = new NumberProperty(this.injector, this.schemaValidatorFactory, schema, ui, formData, parent, path, this.options);
           break;
         case 'string':
-          newProperty = new StringProperty(
-            this.injector,
-            this.schemaValidatorFactory,
-            schema,
-            ui,
-            formData,
-            parent,
-            path,
-            this.options
-          );
+          newProperty = new StringProperty(this.injector, this.schemaValidatorFactory, schema, ui, formData, parent, path, this.options);
           break;
         case 'boolean':
-          newProperty = new BooleanProperty(
-            this.injector,
-            this.schemaValidatorFactory,
-            schema,
-            ui,
-            formData,
-            parent,
-            path,
-            this.options
-          );
+          newProperty = new BooleanProperty(this.injector, this.schemaValidatorFactory, schema, ui, formData, parent, path, this.options);
           break;
         case 'object':
-          newProperty = new ObjectProperty(
-            this.injector,
-            this,
-            this.schemaValidatorFactory,
-            schema,
-            ui,
-            formData,
-            parent,
-            path,
-            this.options
-          );
+          newProperty = new ObjectProperty(this.injector, this, this.schemaValidatorFactory, schema, ui, formData, parent, path, this.options);
           break;
         case 'array':
-          newProperty = new ArrayProperty(
-            this.injector,
-            this,
-            this.schemaValidatorFactory,
-            schema,
-            ui,
-            formData,
-            parent,
-            path,
-            this.options
-          );
+          newProperty = new ArrayProperty(this.injector, this, this.schemaValidatorFactory, schema, ui, formData, parent, path, this.options);
           break;
         default:
           throw new TypeError(`Undefined type ${schema.type}`);

@@ -1,6 +1,4 @@
-export default (options: {
-  ajvVersion: string;
-}): string => `import { APP_INITIALIZER, Injectable, inject, Provider } from '@angular/core';
+export default (options: { ajvVersion: string }): string => `import { APP_INITIALIZER, Injectable, inject, Provider } from '@angular/core';
 import { LazyService } from '@yelon/util/other';
 import { VERSION as VERSION_NG } from '@angular/core';
 import { VERSION as VERSION_YUNZAI } from '@yelon/theme';

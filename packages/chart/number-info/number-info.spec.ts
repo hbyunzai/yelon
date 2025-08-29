@@ -90,17 +90,7 @@ describe('abc: number-info', () => {
 
 @Component({
   template: `
-    <number-info
-      #ni
-      [title]="title"
-      [subTitle]="subTitle"
-      [total]="total"
-      [subTotal]="subTotal"
-      suffix="suffix"
-      [status]="status"
-      [theme]="theme"
-      [gap]="gap"
-    />
+    <number-info #ni [title]="title" [subTitle]="subTitle" [total]="total" [subTotal]="subTotal" suffix="suffix" [status]="status" [theme]="theme" [gap]="gap" />
     <ng-template #titleTpl><p id="titleTpl">titleTpl</p></ng-template>
     <ng-template #subTitleTpl><p id="subTitleTpl">subTitleTpl</p></ng-template>
     <ng-template #totalTpl><p id="totalTpl">totalTpl</p></ng-template>

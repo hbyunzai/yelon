@@ -1,11 +1,4 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  inject,
-  ViewChild
-} from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 
@@ -160,9 +153,7 @@ export class FormValidatorComponent {
       formData: this.formCode || '{}',
       ui: this.uiCode || '{}'
     };
-    const componentCode = stackBlitzTpl.replace(/\{(\w+)\}/g, (_match: string, offset: string) =>
-      (obj[offset] || '').trim()
-    );
+    const componentCode = stackBlitzTpl.replace(/\{(\w+)\}/g, (_match: string, offset: string) => (obj[offset] || '').trim());
     this.codeSrv.openOnStackBlitz('sf-validator', componentCode);
   }
 

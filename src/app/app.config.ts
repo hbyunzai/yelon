@@ -2,14 +2,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import ngLang from '@angular/common/locales/zh';
 import { APP_ID, ApplicationConfig, ErrorHandler, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import {
-  provideRouter,
-  RouterFeatures,
-  withComponentInputBinding,
-  withHashLocation,
-  withInMemoryScrolling,
-  withViewTransitions
-} from '@angular/router';
+import { provideRouter, RouterFeatures, withComponentInputBinding, withHashLocation, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { provideNuMonacoEditorConfig } from '@ng-util/monaco-editor';
@@ -92,11 +85,7 @@ const yunzaiConfig: YunzaiConfig = {
 
 const ngZorroConfig: NzConfig = {};
 
-const routerFeatures: RouterFeatures[] = [
-  withComponentInputBinding(),
-  withViewTransitions(),
-  withInMemoryScrolling({ scrollPositionRestoration: 'top' })
-];
+const routerFeatures: RouterFeatures[] = [withComponentInputBinding(), withViewTransitions(), withInMemoryScrolling({ scrollPositionRestoration: 'top' })];
 if (!environment.production) routerFeatures.push(withHashLocation());
 
 export const appConfig: ApplicationConfig = {

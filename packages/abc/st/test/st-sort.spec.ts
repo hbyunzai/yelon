@@ -53,9 +53,7 @@ describe('abc: st-sort', () => {
       it('should be sorting', fakeAsync(() => {
         page.cd();
         comp.sort(comp._columns[0], 'descend');
-        const sortList = comp._columns
-          .filter(item => item._sort && item._sort.enabled && item._sort.default)
-          .map(item => item._sort!);
+        const sortList = comp._columns.filter(item => item._sort && item._sort.enabled && item._sort.default).map(item => item._sort!);
         expect(sortList.length).toBe(1);
         expect(sortList[0].default).toBe('descend');
         page.asyncEnd();
@@ -67,9 +65,7 @@ describe('abc: st-sort', () => {
         page.cd();
         comp.sort(comp._columns[0], 'descend');
         comp.sort(comp._columns[1], 'ascend');
-        const sortList = comp._columns
-          .filter(item => item._sort && item._sort.enabled && item._sort.default)
-          .map(item => item._sort!);
+        const sortList = comp._columns.filter(item => item._sort && item._sort.enabled && item._sort.default).map(item => item._sort!);
         expect(sortList.length).toBe(2);
         expect(sortList[0].default).toBe('descend');
         expect(sortList[1].default).toBe('ascend');

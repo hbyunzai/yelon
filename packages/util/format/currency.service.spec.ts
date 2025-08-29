@@ -35,9 +35,7 @@ describe('util: FormatCurrencyService', () => {
             ngCurrency: { currencyCode: 'USD', display: 'code', digitsInfo: '.0-3' }
           })
         ).toEqual('USD5.123');
-        expect(
-          srv.format(5.1234, { startingUnit: 'yuan', ngCurrency: { currencyCode: 'CAD', display: 'symbol-narrow' } })
-        ).toEqual('$5.12');
+        expect(srv.format(5.1234, { startingUnit: 'yuan', ngCurrency: { currencyCode: 'CAD', display: 'symbol-narrow' } })).toEqual('$5.12');
       });
     });
   });
@@ -109,9 +107,7 @@ describe('util: FormatCurrencyService', () => {
         options: { startingUnit: 'cent' }
       }
     ].forEach((item: any) => {
-      it(`${typeof item.num === 'string' ? '[string]' : ''}${item.inWords ? 'RMB:' : ''}${item.num} muse be ${
-        item.value
-      }`, () => {
+      it(`${typeof item.num === 'string' ? '[string]' : ''}${item.inWords ? 'RMB:' : ''}${item.num} muse be ${item.value}`, () => {
         expect(srv.cny(item.num, { inWords: item.inWords, ...item.options })).toBe(item.value);
       });
     });

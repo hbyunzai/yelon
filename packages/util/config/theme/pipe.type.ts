@@ -3,8 +3,4 @@ export interface YunzaiThemePipeConfig {
   dateFormatCustom?: YunzaiThemePipeDateFormatCustom;
 }
 
-export type YunzaiThemePipeDateFormatCustom = (
-  value: Date,
-  formatString?: string | null,
-  options?: { locale?: Locale }
-) => string;
+export type YunzaiThemePipeDateFormatCustom = (value: Date, formatString?: string | null, options?: { locale?: Locale }) => string;

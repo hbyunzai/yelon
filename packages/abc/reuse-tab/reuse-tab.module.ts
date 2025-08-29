@@ -19,17 +19,7 @@ const COMPONENTS = [ReuseTabComponent];
 const NOEXPORTS = [ReuseTabContextMenuComponent, ReuseTabContextComponent, ReuseTabContextDirective];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    YelonLocaleModule,
-    NzMenuModule,
-    NzTabsModule,
-    NzIconModule,
-    OverlayModule,
-    ...COMPONENTS,
-    ...NOEXPORTS
-  ],
+  imports: [CommonModule, RouterModule, YelonLocaleModule, NzMenuModule, NzTabsModule, NzIconModule, OverlayModule, ...COMPONENTS, ...NOEXPORTS],
   providers: [
     {
       provide: REUSE_TAB_STORAGE_KEY,

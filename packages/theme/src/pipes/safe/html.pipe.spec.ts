@@ -19,9 +19,7 @@ describe('Pipe: html', () => {
     it(`${item.value.toString()} muse be ${item.result}`, () => {
       fixture.componentInstance.value = item.value;
       fixture.detectChanges();
-      expect((fixture.debugElement.query(By.css('#result')).nativeElement as HTMLElement).textContent).toBe(
-        item.result
-      );
+      expect((fixture.debugElement.query(By.css('#result')).nativeElement as HTMLElement).textContent).toBe(item.result);
     });
   });
 });

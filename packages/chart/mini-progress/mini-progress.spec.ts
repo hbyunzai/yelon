@@ -42,9 +42,7 @@ describe('chart: mini-progress', () => {
 });
 
 @Component({
-  template: `
-    <g2-mini-progress #comp [color]="color" [target]="target" [percent]="percent" [strokeWidth]="strokeWidth" />
-  `,
+  template: ` <g2-mini-progress #comp [color]="color" [target]="target" [percent]="percent" [strokeWidth]="strokeWidth" /> `,
   imports: [G2MiniProgressComponent]
 })
 class TestComponent {

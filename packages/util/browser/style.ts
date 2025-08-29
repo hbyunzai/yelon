@@ -29,12 +29,7 @@ function addClass(el: HTMLElement, classMap: Record<string, unknown>, renderer: 
  *  })
  * ```
  */
-export function updateHostClass(
-  el: HTMLElement,
-  renderer: Renderer2,
-  classMap: Record<string, unknown>,
-  preClean: boolean = false
-): void {
+export function updateHostClass(el: HTMLElement, renderer: Renderer2, classMap: Record<string, unknown>, preClean: boolean = false): void {
   if (preClean === true) {
     renderer.removeAttribute(el, 'class');
   } else {

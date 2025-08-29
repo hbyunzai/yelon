@@ -354,16 +354,7 @@ class TestWidget {
 }
 
 @Component({
-  template: `
-    <cell
-      #comp
-      [value]="value"
-      (valueChange)="valueChange()"
-      [options]="options"
-      [loading]="loading"
-      [disabled]="disabled"
-    />
-  `,
+  template: ` <cell #comp [value]="value" (valueChange)="valueChange()" [options]="options" [loading]="loading" [disabled]="disabled" /> `,
   imports: [CellComponent]
 })
 class TestComponent {

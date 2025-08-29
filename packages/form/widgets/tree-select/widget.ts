@@ -9,14 +9,7 @@ import type { SFTreeSelectWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-tree-select',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-tree-select
       [nzId]="id"
       [nzAllowClear]="i.allowClear"
@@ -49,8 +42,7 @@ import type { SFTreeSelectWidgetSchema } from './schema';
       [nzVirtualMaxBufferPx]="ui.virtualMaxBufferPx || 500"
       [nzVirtualMinBufferPx]="ui.virtualMinBufferPx || 28"
       (ngModelChange)="change($event)"
-      (nzExpandChange)="expandChange($event)"
-    />
+      (nzExpandChange)="expandChange($event)" />
   </sf-item-wrap>`,
 
   encapsulation: ViewEncapsulation.None,

@@ -1,15 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  TemplateRef,
-  ViewEncapsulation,
-  afterNextRender,
-  booleanAttribute,
-  inject,
-  input
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, TemplateRef, ViewEncapsulation, afterNextRender, booleanAttribute, inject, input } from '@angular/core';
 
 import { ErrorCollectComponent } from '@yelon/abc/error-collect';
 import { NzStringTemplateOutletDirective } from 'ng-zorro-antd/core/outlet';

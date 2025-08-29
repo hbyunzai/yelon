@@ -34,9 +34,7 @@ describe('Pipe: yn', () => {
         fixture.componentInstance.yes = item.yes;
         fixture.componentInstance.no = item.no;
         fixture.detectChanges();
-        expect((fixture.debugElement.query(By.css('#result')).nativeElement as HTMLElement).innerHTML).toContain(
-          item.result
-        );
+        expect((fixture.debugElement.query(By.css('#result')).nativeElement as HTMLElement).innerHTML).toContain(item.result);
       });
     });
 

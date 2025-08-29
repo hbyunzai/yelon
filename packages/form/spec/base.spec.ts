@@ -36,12 +36,7 @@ export const SCHEMA = {
 let fixture: ComponentFixture<TestFormComponent>;
 let dl: DebugElement;
 let context: TestFormComponent;
-export function builder(options?: {
-  detectChanges?: boolean;
-  template?: string;
-  ingoreAntd?: boolean;
-  imports?: NzSafeAny[];
-}): {
+export function builder(options?: { detectChanges?: boolean; template?: string; ingoreAntd?: boolean; imports?: NzSafeAny[] }): {
   fixture: ComponentFixture<TestFormComponent>;
   dl: DebugElement;
   context: TestFormComponent;
@@ -75,21 +70,12 @@ export function builder(options?: {
   };
 }
 
-export function configureSFTestSuite(options?: {
-  imports?: NzSafeAny[];
-  widgets?: SFWidgetProvideConfig[];
-  providers?: NzSafeAny[];
-}): void {
+export function configureSFTestSuite(options?: { imports?: NzSafeAny[]; widgets?: SFWidgetProvideConfig[]; providers?: NzSafeAny[] }): void {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, YunzaiThemeModule, YelonFormModule, ...(options?.imports ?? [])],
       declarations: [TestFormComponent],
-      providers: [
-        provideHttpClient(),
-        provideHttpClientTesting(),
-        provideSFConfig({ widgets: options?.widgets }),
-        ...(options?.providers ?? [])
-      ]
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideSFConfig({ widgets: options?.widgets }), ...(options?.providers ?? [])]
     });
   });
 }
@@ -384,8 +370,7 @@ export class SFPage {
       (formValueChange)="formValueChange($event)"
       (formSubmit)="formSubmit($event)"
       (formReset)="formReset($event)"
-      (formError)="formError($event)"
-    />
+      (formError)="formError($event)" />
   `,
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false

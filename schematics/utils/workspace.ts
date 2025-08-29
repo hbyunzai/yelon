@@ -42,10 +42,7 @@ export function isMulitProject(tree: Tree): boolean {
   return !tree.exists('src/main.ts');
 }
 
-export async function getProject(
-  tree: Tree,
-  projectName?: string
-): Promise<{ project: ProjectDefinition; name: string; yunzaiProject: NgYunzaiProjectDefinition }> {
+export async function getProject(tree: Tree, projectName?: string): Promise<{ project: ProjectDefinition; name: string; yunzaiProject: NgYunzaiProjectDefinition }> {
   const workspace = await getWorkspace(tree);
   projectName = getProjectName(workspace, projectName);
   if (!projectName || !workspace.projects.has(projectName)) {
@@ -146,11 +143,7 @@ export function getProjectFromWorkspace(workspace: WorkspaceDefinition, projectN
   return project;
 }
 
-export function getProjectTarget(
-  project: ProjectDefinition,
-  buildTarget: string,
-  type: 'options' | 'configurations' = 'options'
-): Record<string, JsonValue | undefined> {
+export function getProjectTarget(project: ProjectDefinition, buildTarget: string, type: 'options' | 'configurations' = 'options'): Record<string, JsonValue | undefined> {
   const options = project.targets?.get(buildTarget)?.[type];
 
   if (!options) {
@@ -205,8 +198,7 @@ export function addFileReplacements(workspace: WorkspaceDefinition, projectName:
   if (build == null || build.options == null) return;
   if (build.configurations == null) build.configurations = {};
   if (build.configurations.production == null) build.configurations.production = {};
-  if (!Array.isArray(build.configurations.production.fileReplacements))
-    build.configurations.production.fileReplacements = [];
+  if (!Array.isArray(build.configurations.production.fileReplacements)) build.configurations.production.fileReplacements = [];
   build.configurations.production.fileReplacements.push({
     replace: 'src/environments/environment.ts',
     with: 'src/environments/environment.prod.ts'

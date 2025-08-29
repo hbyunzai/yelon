@@ -29,15 +29,7 @@ describe('chart: card', () => {
 });
 
 @Component({
-  template: `
-    <g2-card
-      [title]="'销售额'"
-      [bordered]="true"
-      [total]="126560"
-      footer="日访问量 12,423"
-      [contentHeight]="contentHeight"
-    />
-  `,
+  template: ` <g2-card [title]="'销售额'" [bordered]="true" [total]="126560" footer="日访问量 12,423" [contentHeight]="contentHeight" /> `,
   imports: [G2CardComponent]
 })
 class TestComponent {

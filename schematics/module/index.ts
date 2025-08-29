@@ -1,18 +1,5 @@
 import { basename, dirname, normalize, relative, strings } from '@angular-devkit/core';
-import {
-  apply,
-  applyTemplates,
-  branchAndMerge,
-  chain,
-  filter,
-  mergeWith,
-  move,
-  noop,
-  Rule,
-  SchematicsException,
-  Tree,
-  url
-} from '@angular-devkit/schematics';
+import { apply, applyTemplates, branchAndMerge, chain, filter, mergeWith, move, noop, Rule, SchematicsException, Tree, url } from '@angular-devkit/schematics';
 import { addImportToModule, findNode } from '@schematics/angular/utility/ast-utils';
 import { InsertChange } from '@schematics/angular/utility/change';
 import { findModuleFromOptions, buildRelativePath } from '@schematics/angular/utility/find-module';
@@ -40,16 +27,10 @@ function addDeclarationToNgModule(options: ModuleSchema): Rule {
     const sourceText = text.toString('utf-8');
     const source = ts.createSourceFile(modulePath, sourceText, ts.ScriptTarget.Latest, true);
 
-    const importModulePath = normalize(
-      `/${options.path}/${options.flat ? '' : `${strings.dasherize(options.name)}/`}${strings.dasherize(
-        options.name
-      )}.module`
-    );
+    const importModulePath = normalize(`/${options.path}/${options.flat ? '' : `${strings.dasherize(options.name)}/`}${strings.dasherize(options.name)}.module`);
     const relativeDir = relative(dirname(modulePath), dirname(importModulePath));
 
-    const relativePath = `${relativeDir.startsWith('.') ? relativeDir : `./${relativeDir}`}/${basename(
-      importModulePath
-    )}`;
+    const relativePath = `${relativeDir.startsWith('.') ? relativeDir : `./${relativeDir}`}/${basename(importModulePath)}`;
     const changes = addImportToModule(source, modulePath, strings.classify(`${options.name}Module`), relativePath);
 
     const recorder = tree.beginUpdate(modulePath);
@@ -66,9 +47,7 @@ function addDeclarationToNgModule(options: ModuleSchema): Rule {
 
 function addRoutingModuleToTop(options: ModuleSchema): Rule {
   return (tree: Tree) => {
-    const modulePath = normalize(
-      `${options.path}/${options.standalone ? ROUTINS_FILENAME : 'routes-routing.module.ts'}`
-    );
+    const modulePath = normalize(`${options.path}/${options.standalone ? ROUTINS_FILENAME : 'routes-routing.module.ts'}`);
     if (!tree.exists(modulePath)) {
       return tree;
     }
@@ -79,10 +58,7 @@ function addRoutingModuleToTop(options: ModuleSchema): Rule {
       return tree;
     }
     const parentNode = routesNode.parent as ts.PropertyAssignment;
-    if (
-      parentNode.initializer.kind !== ts.SyntaxKind.ArrayLiteralExpression ||
-      parentNode.initializer.getChildCount() === 0
-    ) {
+    if (parentNode.initializer.kind !== ts.SyntaxKind.ArrayLiteralExpression || parentNode.initializer.getChildCount() === 0) {
       return tree;
     }
     let childrenNode = findNode(parentNode.initializer, ts.SyntaxKind.Identifier, 'children');
@@ -102,9 +78,7 @@ function addRoutingModuleToTop(options: ModuleSchema): Rule {
       .map(v => v.trim())
       .filter(v => v.length > 1 && !v.startsWith('//'));
     const comma = validLines.pop()?.endsWith(',') === false ? ', ' : '';
-    const code = `${comma} { path: '${options.name}', loadChildren: () => import('./${options.name}/${
-      options.standalone ? 'routes' : `${options.name}.module`
-    }').then((m) => m.${moduleName}) }`;
+    const code = `${comma} { path: '${options.name}', loadChildren: () => import('./${options.name}/${options.standalone ? 'routes' : `${options.name}.module`}').then((m) => m.${moduleName}) }`;
     // Insert it just before the `]`.
     recorder.insertRight(pos - 1, code);
     tree.commitUpdate(recorder);
@@ -119,11 +93,7 @@ function addServiceToNgModule(options: ModuleSchema): Rule {
     const basePath = `/${options.path}/${options.flat ? '' : `${strings.dasherize(options.name)}/`}`;
     const servicePath = normalize(`${basePath}${strings.dasherize(options.name)}.service`);
     const serviceName = strings.classify(`${options.name}Service`);
-    const importModulePath = normalize(
-      options.standalone
-        ? `${basePath}${ROUTINS_FILENAME.split('.')[0]}`
-        : `${basePath}${strings.dasherize(options.name)}.module`
-    );
+    const importModulePath = normalize(options.standalone ? `${basePath}${ROUTINS_FILENAME.split('.')[0]}` : `${basePath}${strings.dasherize(options.name)}.module`);
     const importServicePath = buildRelativePath(importModulePath, servicePath);
     addServiceToModuleOrStandalone(tree, options.standalone, `${importModulePath}.ts`, serviceName, importServicePath);
     return tree;
@@ -162,15 +132,6 @@ export default function (schema: ModuleSchema): Rule {
       move(parsedPath.path)
     ]);
 
-    return chain([
-      branchAndMerge(
-        chain([
-          mergeWith(templateSource),
-          addDeclarationToNgModule(schema),
-          addRoutingModuleToTop(schema),
-          addServiceToNgModule(schema)
-        ])
-      )
-    ]);
+    return chain([branchAndMerge(chain([mergeWith(templateSource), addDeclarationToNgModule(schema), addRoutingModuleToTop(schema), addServiceToNgModule(schema)]))]);
   };
 }

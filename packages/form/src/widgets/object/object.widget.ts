@@ -17,17 +17,7 @@ import { ObjectLayoutWidget } from '../../widget';
         <div nz-row [nzGutter]="grid.gutter">
           @for (i of list; track $index) {
             @if (i.property.visible && i.show) {
-              <div
-                nz-col
-                [nzSpan]="i.grid.span"
-                [nzOffset]="i.grid.offset"
-                [nzXs]="i.grid.xs"
-                [nzSm]="i.grid.sm"
-                [nzMd]="i.grid.md"
-                [nzLg]="i.grid.lg"
-                [nzXl]="i.grid.xl"
-                [nzXXl]="i.grid.xxl"
-              >
+              <div nz-col [nzSpan]="i.grid.span" [nzOffset]="i.grid.offset" [nzXs]="i.grid.xs" [nzSm]="i.grid.sm" [nzMd]="i.grid.md" [nzLg]="i.grid.lg" [nzXl]="i.grid.xl" [nzXXl]="i.grid.xxl">
                 <sf-item [formProperty]="i.property" [fixed-label]="i.spanLabelFixed" />
               </div>
             }
@@ -50,8 +40,7 @@ import { ObjectLayoutWidget } from '../../widget';
         [nzBodyStyle]="ui.cardBodyStyle!"
         [nzBordered]="ui.cardBordered || true"
         class="sf__object-card"
-        [class.sf__object-card-fold]="!expand"
-      >
+        [class.sf__object-card-fold]="!expand">
         <ng-template #cardTitleTpl>
           <div [class.point]="showExpand" (click)="changeExpand()">
             @if (showExpand) {
@@ -72,8 +61,7 @@ import { ObjectLayoutWidget } from '../../widget';
                     [nzTooltipOverlayStyle]="oh.overlayStyle"
                     [nzTooltipMouseEnterDelay]="oh.mouseEnterDelay"
                     [nzTooltipMouseLeaveDelay]="oh.mouseLeaveDelay"
-                    [nzType]="oh.icon!"
-                  />
+                    [nzType]="oh.icon!" />
                 }
               </span>
             }
@@ -103,10 +91,7 @@ export class ObjectWidget extends ObjectLayoutWidget implements OnInit {
     this.showExpand = toBool(ui.showExpand, true);
     this.expand = toBool(ui.expand, true);
     this.type = type ?? 'default';
-    if (
-      this.type === 'card' ||
-      (!formProperty.isRoot() && !(formProperty.parent instanceof ArrayProperty) && showTitle === true)
-    ) {
+    if (this.type === 'card' || (!formProperty.isRoot() && !(formProperty.parent instanceof ArrayProperty) && showTitle === true)) {
       this.title = this.schema.title as string;
     }
     this.grid = grid as SFGridSchema;

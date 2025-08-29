@@ -82,18 +82,7 @@ describe('chart: chart-echarts', () => {
 });
 
 @Component({
-  template: `
-    <chart-echarts
-      #cmp
-      [width]="width"
-      [height]="height"
-      [option]="option"
-      [theme]="theme"
-      [initOpt]="initOpt"
-      [on]="on"
-      (events)="handleEvents($event)"
-    />
-  `,
+  template: ` <chart-echarts #cmp [width]="width" [height]="height" [option]="option" [theme]="theme" [initOpt]="initOpt" [on]="on" (events)="handleEvents($event)" /> `,
   imports: [ChartEChartsComponent]
 })
 class TestComponent {

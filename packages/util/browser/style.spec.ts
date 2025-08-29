@@ -18,13 +18,7 @@ describe('util: style', () => {
   });
 
   it('should be removed when add new classes', () => {
-    page
-      .run({ a: true, b: false })
-      .has('a', true)
-      .has('b', false)
-      .run({ a: false, b: true })
-      .has('a', false)
-      .has('b', true);
+    page.run({ a: true, b: false }).has('a', true).has('b', false).run({ a: false, b: true }).has('a', false).has('b', true);
   });
 
   it('should be clearn all when add new classes', () => {

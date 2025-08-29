@@ -264,9 +264,7 @@ export abstract class FormProperty {
       const l = (this.widget && this.widget.l.error) || {};
       arrErrs = arrErrs.map((err: ErrorData) => {
         let message: string | ((err: ErrorData) => string) =
-          err.keyword == null && err.message
-            ? err.message
-            : (this.ui.errors || {})[err.keyword!] || this._options.errors![err.keyword!] || l[err.keyword!] || ``;
+          err.keyword == null && err.message ? err.message : (this.ui.errors || {})[err.keyword!] || this._options.errors![err.keyword!] || l[err.keyword!] || ``;
 
         if (message && typeof message === 'function') {
           message = message(err);

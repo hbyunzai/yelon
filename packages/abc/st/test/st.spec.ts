@@ -13,14 +13,7 @@ import { NzTooltipDirective } from 'ng-zorro-antd/tooltip';
 import { STDataSource } from '../st-data-source';
 import { STExport } from '../st-export';
 import { STComponent } from '../st.component';
-import {
-  STClickRowClassNameType,
-  STColumn,
-  STColumnBadge,
-  STColumnTag,
-  STContextmenuItem,
-  STResReNameType
-} from '../st.interfaces';
+import { STClickRowClassNameType, STColumn, STColumnBadge, STColumnTag, STContextmenuItem, STResReNameType } from '../st.interfaces';
 import { _STColumn } from '../st.types';
 import { STWidgetRegistry } from './../st-widget';
 import { PS, DEFAULTCOUNT, USERS, MOCKDATE, MOCKIMG, genData, PageObject, TestComponent, genModule } from './base.spec';
@@ -57,9 +50,7 @@ describe('abc: st', () => {
             .asyncEnd();
         }));
         it('should be render optional', fakeAsync(() => {
-          page
-            .updateColumn([{ title: { text: 'a', optional: 'b', optionalHelp: 'help' }, index: 'id' }])
-            .expectHead('b', 'id', '.st__head-optional');
+          page.updateColumn([{ title: { text: 'a', optional: 'b', optionalHelp: 'help' }, index: 'id' }]).expectHead('b', 'id', '.st__head-optional');
           expect(page.getHead('id').querySelector('.st__head-tip') != null).toBe(true);
           page.asyncEnd();
         }));
@@ -310,14 +301,10 @@ describe('abc: st', () => {
         describe('with widget', () => {
           it(`should be working`, fakeAsync(() => {
             expect(Object.keys(registerWidget.widgets)).toContain('test');
-            page
-              .updateColumn([{ type: 'widget', widget: { type: 'test' } }], 1, 1)
-              .expectCell('1', 1, 1, '.widget-record-value');
+            page.updateColumn([{ type: 'widget', widget: { type: 'test' } }], 1, 1).expectCell('1', 1, 1, '.widget-record-value');
           }));
           it(`should be specify parameters`, fakeAsync(() => {
-            page
-              .updateColumn([{ type: 'widget', widget: { type: 'test', params: () => ({ id: 10 }) } }], 1, 1)
-              .expectCell('10', 1, 1, '.widget-id-value');
+            page.updateColumn([{ type: 'widget', widget: { type: 'test', params: () => ({ id: 10 }) } }], 1, 1).expectCell('10', 1, 1, '.widget-id-value');
           }));
         });
       });
@@ -765,10 +752,7 @@ describe('abc: st', () => {
               ]
             }
           ]);
-          page
-            .expectElCount('.ant-table-thead .ant-table-row', 2)
-            .expectElCount('.ant-table-thead .ant-table-cell', 3)
-            .asyncEnd();
+          page.expectElCount('.ant-table-thead .ant-table-row', 2).expectElCount('.ant-table-thead .ant-table-cell', 3).asyncEnd();
         }));
         it('should be auto set widthConfig when column has width value', fakeAsync(() => {
           page.updateColumn([
@@ -780,10 +764,7 @@ describe('abc: st', () => {
               ]
             }
           ]);
-          page
-            .expectElCount('.ant-table-thead .ant-table-row', 2)
-            .expectElCount('.ant-table-thead .ant-table-cell', 3)
-            .asyncEnd();
+          page.expectElCount('.ant-table-thead .ant-table-row', 2).expectElCount('.ant-table-thead .ant-table-cell', 3).asyncEnd();
         }));
       });
     });
@@ -905,9 +886,7 @@ describe('abc: st', () => {
           ++load;
           return of({});
         });
-        const pc = dl
-          .query(By.directive(NzPaginationComponent))
-          .injector.get<NzPaginationComponent>(NzPaginationComponent);
+        const pc = dl.query(By.directive(NzPaginationComponent)).injector.get<NzPaginationComponent>(NzPaginationComponent);
         expect(load).toBe(0);
         pc.onPageSizeChange(10);
         fixture.detectChanges();
@@ -1105,9 +1084,7 @@ describe('abc: st', () => {
             page.cd(100);
             expect(trEl.classList).toContain('bb');
           });
-          const len = ((page.getCell() as HTMLElement).closest('tbody') as HTMLElement).querySelectorAll(
-            'tr.bb'
-          ).length;
+          const len = ((page.getCell() as HTMLElement).closest('tbody') as HTMLElement).querySelectorAll('tr.bb').length;
           expect(len).toBe(2);
         }));
         it('should be exclusive with true', fakeAsync(() => {
@@ -1120,9 +1097,7 @@ describe('abc: st', () => {
             page.cd(100);
             expect(trEl.classList).toContain('bb');
           });
-          const len = ((page.getCell() as HTMLElement).closest('tbody') as HTMLElement).querySelectorAll(
-            'tr.bb'
-          ).length;
+          const len = ((page.getCell() as HTMLElement).closest('tbody') as HTMLElement).querySelectorAll('tr.bb').length;
           expect(len).toBe(1);
         }));
       });

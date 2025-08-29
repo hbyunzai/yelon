@@ -29,9 +29,7 @@ export class XlsxService {
   }
 
   private init(): Promise<LazyResult[]> {
-    return typeof XLSX !== 'undefined'
-      ? Promise.resolve([])
-      : this.lazy.load([this.cog.url!].concat(this.cog.modules!));
+    return typeof XLSX !== 'undefined' ? Promise.resolve([]) : this.lazy.load([this.cog.url!].concat(this.cog.modules!));
   }
 
   @ZoneOutside()

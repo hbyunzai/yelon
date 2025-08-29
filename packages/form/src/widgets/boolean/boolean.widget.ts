@@ -5,14 +5,7 @@ import { ControlUIWidget } from '../../widget';
 
 @Component({
   selector: 'sf-boolean',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-switch
       [ngModel]="value"
       (ngModelChange)="setValue($event)"
@@ -20,8 +13,7 @@ import { ControlUIWidget } from '../../widget';
       [nzSize]="ui.size!"
       [nzCheckedChildren]="ui.checkedChildren!"
       [nzUnCheckedChildren]="ui.unCheckedChildren!"
-      [nzLoading]="ui.loading"
-    />
+      [nzLoading]="ui.loading" />
   </sf-item-wrap>`,
 
   encapsulation: ViewEncapsulation.None,

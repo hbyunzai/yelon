@@ -61,33 +61,13 @@ describe('form: widget: array', () => {
         }
       }
     });
-    page
-      .add()
-      .checkCount('.sf__array-remove', 0)
-      .add()
-      .checkCount('.sf__array-remove', 0)
-      .add()
-      .checkCount('.sf__array-remove', 3)
-      .checkCount('.sf__array-item', 3);
+    page.add().checkCount('.sf__array-remove', 0).add().checkCount('.sf__array-remove', 0).add().checkCount('.sf__array-remove', 3).checkCount('.sf__array-item', 3);
   });
   it(`should be maximum ${maxItems}`, () => {
-    page
-      .newSchema(schema)
-      .add()
-      .add()
-      .add()
-      .checkCount('.sf__array-item', maxItems)
-      .add()
-      .checkCount('.sf__array-item', maxItems);
+    page.newSchema(schema).add().add().add().checkCount('.sf__array-item', maxItems).add().checkCount('.sf__array-item', maxItems);
   });
   it('should be set values', () => {
-    page
-      .newSchema(schema)
-      .checkCount('.sf__array-item', 0)
-      .add()
-      .checkCount('.sf__array-item', 1)
-      .setValue('/arr', [])
-      .checkCount('.sf__array-item', 0);
+    page.newSchema(schema).checkCount('.sf__array-item', 0).add().checkCount('.sf__array-item', 1).setValue('/arr', []).checkCount('.sf__array-item', 0);
   });
   it('#required', () => {
     const s = deepCopy(schema) as SFSchema;
@@ -103,24 +83,13 @@ describe('form: widget: array', () => {
         removable: true,
         remove: jasmine.createSpy('remove') as any
       } as SFArrayWidgetSchema;
-      page
-        .newSchema(s)
-        .checkCount('.sf__array-item', 0)
-        .add()
-        .checkCount('.sf__array-item', 1)
-        .remove()
-        .checkCount('.sf__array-item', 0);
+      page.newSchema(s).checkCount('.sf__array-item', 0).add().checkCount('.sf__array-item', 1).remove().checkCount('.sf__array-item', 0);
       expect(s.properties!.arr.ui.remove).toHaveBeenCalled();
     });
     it('with false', () => {
       const s = deepCopy(schema) as SFSchema;
       s.properties!.arr.ui = { removable: false };
-      page
-        .newSchema(s)
-        .checkCount('.sf__array-item', 0)
-        .add()
-        .checkCount('.sf__array-item', 1)
-        .checkCount(`.sf__array-container [data-index="0"] .sf__array-remove`, 0);
+      page.newSchema(s).checkCount('.sf__array-item', 0).add().checkCount('.sf__array-item', 1).checkCount(`.sf__array-container [data-index="0"] .sf__array-remove`, 0);
     });
   });
   describe('#disabled or #readOnly', () => {

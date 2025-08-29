@@ -191,9 +191,7 @@ function fixTs(tree: Tree, path: string): string[] {
   if (nodes.length === 0) {
     return [];
   }
-  const templateNode = (nodes[0] as ts.ObjectLiteralExpression).properties.find(
-    p => p.name!.getText() === `template`
-  ) as ts.PropertyAssignment;
+  const templateNode = (nodes[0] as ts.ObjectLiteralExpression).properties.find(p => p.name!.getText() === `template`) as ts.PropertyAssignment;
   if (!templateNode || !ts.isStringLiteralLike(templateNode.initializer)) {
     return [];
   }
@@ -278,13 +276,9 @@ export const ICONS = [ ];
   const source = getSourceFile(tree, path);
 
   const allImports = findNodes(source as any, ts.SyntaxKind.ImportDeclaration);
-  const iconImport = allImports.find((w: ts.ImportDeclaration) =>
-    w.moduleSpecifier.getText().includes('@ant-design/icons-angular/icons')
-  ) as ts.ImportDeclaration;
+  const iconImport = allImports.find((w: ts.ImportDeclaration) => w.moduleSpecifier.getText().includes('@ant-design/icons-angular/icons')) as ts.ImportDeclaration;
   if (!iconImport) return;
-  (iconImport.importClause!.namedBindings as ts.NamedImports)!.elements!.forEach(v =>
-    WHITE_ICONS.push(v.getText().trim())
-  );
+  (iconImport.importClause!.namedBindings as ts.NamedImports)!.elements!.forEach(v => WHITE_ICONS.push(v.getText().trim()));
 }
 
 function genIconFile(options: PluginOptions, tree: Tree, icons: string[]): void {
@@ -316,9 +310,7 @@ export function pluginIcon(options: PluginOptions): Rule {
     genIconFile(options, tree, icons);
     console.log(`\n\n`);
     console.log(`生成成功，如果是首次运行，需要手动引用，参考：https://ng.yunzainfo.com/theme/icon/zh`);
-    console.log(
-      `Finished, if it's first run, you need manually reference it, refer to: https://ng.yunzainfo.com/theme/icon/en`
-    );
+    console.log(`Finished, if it's first run, you need manually reference it, refer to: https://ng.yunzainfo.com/theme/icon/en`);
     console.log(`\n\n`);
   };
 }

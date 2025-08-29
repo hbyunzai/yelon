@@ -42,13 +42,7 @@ describe('form: widget: tree-select', () => {
       }
     };
 
-    page
-      .newSchema(s)
-      .typeEvent('click', '.ant-select')
-      .typeEvent('click', 'nz-tree-node:nth-child(2) nz-tree-node-title')
-      .dc(1)
-      .checkValue('a', 'TRADE_SUCCESS')
-      .asyncEnd(1000);
+    page.newSchema(s).typeEvent('click', '.ant-select').typeEvent('click', 'nz-tree-node:nth-child(2) nz-tree-node-title').dc(1).checkValue('a', 'TRADE_SUCCESS').asyncEnd(1000);
   }));
 
   it('#setValue', fakeAsync(() => {
@@ -94,12 +88,7 @@ describe('form: widget: tree-select', () => {
         }
       }
     };
-    page
-      .newSchema(s)
-      .typeEvent('click', '.ant-select')
-      .typeEvent('click', 'nz-tree-node:nth-child(2) nz-tree-node-title')
-      .checkValue('a', 'TRADE_SUCCESS')
-      .asyncEnd(1000);
+    page.newSchema(s).typeEvent('click', '.ant-select').typeEvent('click', 'nz-tree-node:nth-child(2) nz-tree-node-title').checkValue('a', 'TRADE_SUCCESS').asyncEnd(1000);
     expect((s.properties!.a.ui as any).change).toHaveBeenCalled();
   }));
 

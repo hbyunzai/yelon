@@ -1,19 +1,6 @@
 import { strings, normalize } from '@angular-devkit/core';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
-import {
-  apply,
-  applyTemplates,
-  branchAndMerge,
-  chain,
-  filter,
-  mergeWith,
-  move,
-  noop,
-  Rule,
-  SchematicsException,
-  Tree,
-  url
-} from '@angular-devkit/schematics';
+import { apply, applyTemplates, branchAndMerge, chain, filter, mergeWith, move, noop, Rule, SchematicsException, Tree, url } from '@angular-devkit/schematics';
 import { Schema as ComponentSchema } from '@schematics/angular/component/schema';
 import { insertImport, getSourceNodes } from '@schematics/angular/utility/ast-utils';
 import { InsertChange } from '@schematics/angular/utility/change';
@@ -82,22 +69,13 @@ function buildName(schema: CommonSchema, prefix: 'Component' | 'Service'): strin
   return strings.classify(ret.join('-'));
 }
 
-export function refreshPathRoot(
-  project: ProjectDefinition,
-  schema: CommonSchema,
-  yunzaiProject: NgYunzaiProjectDefinition
-): void {
+export function refreshPathRoot(project: ProjectDefinition, schema: CommonSchema, yunzaiProject: NgYunzaiProjectDefinition): void {
   if (schema.path === undefined) {
     schema.path = `/${path.join(project.sourceRoot!, yunzaiProject?.routesRoot ?? 'app/routes')}`;
   }
 }
 
-function resolveSchema(
-  tree: Tree,
-  project: ProjectDefinition,
-  schema: CommonSchema,
-  yunzaiProject: NgYunzaiProjectDefinition
-): void {
+function resolveSchema(tree: Tree, project: ProjectDefinition, schema: CommonSchema, yunzaiProject: NgYunzaiProjectDefinition): void {
   // module name
   if (!schema.module) {
     throw new SchematicsException(`Must specify module name. (e.g: ng g ng-yunzai:list <list name> -m=<module name>)`);
@@ -163,28 +141,16 @@ export function addImportToModule(tree: Tree, filePath: string, symbolName: stri
   tree.commitUpdate(declarationRecorder);
 }
 
-export function addValueToVariable(
-  tree: Tree,
-  filePath: string,
-  variableName: string,
-  text: string,
-  needWrap: boolean = true
-): void {
+export function addValueToVariable(tree: Tree, filePath: string, variableName: string, text: string, needWrap: boolean = true): void {
   const source = getSourceFile(tree, filePath);
-  const node = getSourceNodes(source).find(
-    node => node.kind == ts.SyntaxKind.Identifier && node.getText() === variableName
-  );
+  const node = getSourceNodes(source).find(node => node.kind == ts.SyntaxKind.Identifier && node.getText() === variableName);
   if (!node) {
     throw new SchematicsException(`Could not find any [${variableName}] variable in path '${filePath}'.`);
   }
 
   const arr = (node.parent as any).initializer as ts.ArrayLiteralExpression;
 
-  const change = new InsertChange(
-    filePath,
-    arr.end - 1,
-    `${arr.elements && arr.elements.length > 0 ? ',' : ''}${needWrap ? '\n  ' : ''}${text}`
-  );
+  const change = new InsertChange(filePath, arr.end - 1, `${arr.elements && arr.elements.length > 0 ? ',' : ''}${needWrap ? '\n  ' : ''}${text}`);
 
   const declarationRecorder = tree.beginUpdate(filePath);
   declarationRecorder.insertLeft(change.pos, change.toAdd);
@@ -192,11 +158,7 @@ export function addValueToVariable(
 }
 
 function getRelativePath(filePath: string, schema: CommonSchema, prefix: 'component' | 'service'): string {
-  const importPath = normalize(
-    `/${schema.path}/${schema.flat ? '' : `${strings.dasherize(schema.name!)}/`}${strings.dasherize(
-      schema.name!
-    )}.${prefix}`
-  );
+  const importPath = normalize(`/${schema.path}/${schema.flat ? '' : `${strings.dasherize(schema.name!)}/`}${strings.dasherize(schema.name!)}.${prefix}`);
   return buildRelativePath(filePath, importPath);
 }
 
@@ -208,41 +170,20 @@ function addDeclaration(schema: CommonSchema): Rule {
 
     // imports
     if (!schema.standalone) {
-      addImportToModule(
-        tree,
-        schema.importModulePath!,
-        schema.componentName!,
-        getRelativePath(schema.importModulePath!, schema, 'component')
-      );
+      addImportToModule(tree, schema.importModulePath!, schema.componentName!, getRelativePath(schema.importModulePath!, schema, 'component'));
       addValueToVariable(tree, schema.importModulePath!, 'COMPONENTS', schema.componentName!);
     }
 
     // component
     if (schema.modal !== true) {
       // routing
-      addImportToModule(
-        tree,
-        schema.routerModulePath!,
-        schema.componentName!,
-        getRelativePath(schema.routerModulePath!, schema, 'component')
-      );
-      addValueToVariable(
-        tree,
-        schema.routerModulePath!,
-        'routes',
-        `{ path: '${schema.name}', component: ${schema.componentName} }`
-      );
+      addImportToModule(tree, schema.routerModulePath!, schema.componentName!, getRelativePath(schema.routerModulePath!, schema, 'component'));
+      addValueToVariable(tree, schema.routerModulePath!, 'routes', `{ path: '${schema.name}', component: ${schema.componentName} }`);
     }
 
     // service
     if (schema.service === 'none') {
-      addServiceToModuleOrStandalone(
-        tree,
-        schema.standalone,
-        schema.importModulePath!,
-        schema.serviceName!,
-        getRelativePath(schema.importModulePath!, schema, 'service')
-      );
+      addServiceToModuleOrStandalone(tree, schema.standalone, schema.importModulePath!, schema.serviceName!, getRelativePath(schema.importModulePath!, schema, 'service'));
     }
 
     return tree;

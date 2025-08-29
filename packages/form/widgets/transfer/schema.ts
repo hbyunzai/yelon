@@ -2,13 +2,7 @@ import { Observable } from 'rxjs';
 
 import type { SFSchemaEnumType, SFUISchemaItem } from '@yelon/form';
 import { NgStyleInterface } from 'ng-zorro-antd/core/types';
-import {
-  TransferCanMove,
-  TransferChange,
-  TransferItem,
-  TransferSearchChange,
-  TransferSelectChange
-} from 'ng-zorro-antd/transfer';
+import { TransferCanMove, TransferChange, TransferItem, TransferSearchChange, TransferSelectChange } from 'ng-zorro-antd/transfer';
 
 export interface SFTransferWidgetSchema extends SFUISchemaItem {
   /**

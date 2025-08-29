@@ -9,18 +9,7 @@ import type { NgClassInterface, NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { STRowSource } from './st-row.directive';
 import { STWidgetRegistry } from './st-widget';
-import {
-  STColumn,
-  STColumnButton,
-  STColumnButtonPop,
-  STColumnFilter,
-  STColumnGroupType,
-  STColumnSafeType,
-  STIcon,
-  STResizable,
-  STSortMap,
-  STWidthMode
-} from './st.interfaces';
+import { STColumn, STColumnButton, STColumnButtonPop, STColumnFilter, STColumnGroupType, STColumnSafeType, STIcon, STResizable, STSortMap, STWidthMode } from './st.interfaces';
 import { _STColumn, _STHeader } from './st.types';
 
 export interface STColumnSourceProcessOptions {
@@ -149,9 +138,7 @@ export class STColumnSource {
     const countReduce = (a: number, b: _STColumn): number => a + +b.width!.toString().replace('px', '');
     const expandWidth = expand ? 50 : 0;
     // left width
-    list
-      .filter(w => w.fixed && w.fixed === 'left' && w.width)
-      .forEach((item, idx) => (item._left = `${list.slice(0, idx).reduce(countReduce, 0) + expandWidth}px`));
+    list.filter(w => w.fixed && w.fixed === 'left' && w.width).forEach((item, idx) => (item._left = `${list.slice(0, idx).reduce(countReduce, 0) + expandWidth}px`));
     // right width
     list
       .filter(w => w.fixed && w.fixed === 'right' && w.width)
@@ -280,14 +267,10 @@ export class STColumnSource {
 
   private restoreRender(item: _STColumn): void {
     if (item.renderTitle) {
-      item.__renderTitle =
-        typeof item.renderTitle === 'string'
-          ? this.rowSource.getTitle(item.renderTitle)
-          : (item.renderTitle as TemplateRef<void>);
+      item.__renderTitle = typeof item.renderTitle === 'string' ? this.rowSource.getTitle(item.renderTitle) : (item.renderTitle as TemplateRef<void>);
     }
     if (item.render) {
-      item.__render =
-        typeof item.render === 'string' ? this.rowSource.getRow(item.render) : (item.render as TemplateRef<void>);
+      item.__render = typeof item.render === 'string' ? this.rowSource.getRow(item.render) : (item.render as TemplateRef<void>);
     }
   }
 
@@ -413,10 +396,7 @@ export class STColumnSource {
     item._className = [...new Set(arrayClassNames)].filter(w => !!w);
   }
 
-  process(
-    list: STColumn[],
-    options: STColumnSourceProcessOptions
-  ): { columns: _STColumn[]; headers: _STHeader[][]; headerWidths: string[] | null } {
+  process(list: STColumn[], options: STColumnSourceProcessOptions): { columns: _STColumn[]; headers: _STHeader[][]; headerWidths: string[] | null } {
     if (!list || list.length === 0) {
       return { columns: [], headers: [], headerWidths: null };
     }

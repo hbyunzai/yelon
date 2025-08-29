@@ -1,14 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  TemplateRef,
-  ViewEncapsulation,
-  booleanAttribute,
-  numberAttribute
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
 import { fromEvent, debounceTime, filter, takeUntil } from 'rxjs';
 
 import type { Chart, Event } from '@antv/g2';

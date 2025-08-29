@@ -1,16 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  Renderer2,
-  TemplateRef,
-  ViewEncapsulation,
-  booleanAttribute,
-  inject,
-  numberAttribute
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2, TemplateRef, ViewEncapsulation, booleanAttribute, inject, numberAttribute } from '@angular/core';
 
 import type { REP_TYPE } from '@yelon/theme';
 import { YunzaiConfigService } from '@yelon/util/config';

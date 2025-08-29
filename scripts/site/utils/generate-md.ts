@@ -28,10 +28,7 @@ const converters = [highlight()].concat([
         .filter(key => (sluggedData as any)[key] === true)
         .map(w => `<label class="api-type-label ${w}">${w}</label>`)
         .join('');
-      const copy =
-        /h[0-9]{1}/g.test(tagName) && +tagName.substring(1) > 1
-          ? `<a class="lake-link"><i data-anchor="${sluggedData.id}"></i></a>`
-          : ``;
+      const copy = /h[0-9]{1}/g.test(tagName) && +tagName.substring(1) > 1 ? `<a class="lake-link"><i data-anchor="${sluggedData.id}"></i></a>` : ``;
       return `<${tagName} id="${sluggedData.id}">${copy}${sluggedData.id}${apiTypes}</${tagName}>`;
     }
   ],
@@ -89,19 +86,16 @@ export function toHtml(markdownData: any[], codeEscape: boolean = true): any {
   })[0];
   const ret: string = pair[1](markdownData);
   if (codeEscape) {
-    return ret.replace(
-      /<pre class="hljs language-([a-zA-Z0-9]+)"><code>([\s\S]+)<\/code><\/pre>/g,
-      (_fullWord: string, lang: string, code: string) => {
-        if (lang === 'html') {
-          code = code.includes(`&lt;`) && code.includes(`&gt;`) ? code : escapeHTML(code);
-        } else if ((lang === 'ts' || lang === 'typescript') && code.includes(`template: `)) {
-          code = code.replace(/template: `([^`]+)`/g, (_tFullword: string, tHtml: string) => {
-            return `template: \`${escapeHTML(tHtml)}\``;
-          });
-        }
-        return `<pre class="hljs language-${lang}"><code>${code}</code></pre>`;
+    return ret.replace(/<pre class="hljs language-([a-zA-Z0-9]+)"><code>([\s\S]+)<\/code><\/pre>/g, (_fullWord: string, lang: string, code: string) => {
+      if (lang === 'html') {
+        code = code.includes(`&lt;`) && code.includes(`&gt;`) ? code : escapeHTML(code);
+      } else if ((lang === 'ts' || lang === 'typescript') && code.includes(`template: `)) {
+        code = code.replace(/template: `([^`]+)`/g, (_tFullword: string, tHtml: string) => {
+          return `template: \`${escapeHTML(tHtml)}\``;
+        });
       }
-    );
+      return `<pre class="hljs language-${lang}"><code>${code}</code></pre>`;
+    });
   } else {
     //  && ~headingList.indexOf(ret)
     if (/^<code>/g.test(ret)) {
@@ -133,9 +127,7 @@ export function generateMd(markdownData: any): any {
     .filter((arr: any[]) => arr.length === 2)
     .map((arr: any[]) => arr[1]);
 
-  const apiStartIndex = contentChildren.findIndex(
-    (node: any) => JsonML.getTagName(node) === 'h2' && /^API/.test(JsonML.getChildren(node)[0])
-  );
+  const apiStartIndex = contentChildren.findIndex((node: any) => JsonML.getTagName(node) === 'h2' && /^API/.test(JsonML.getChildren(node)[0]));
 
   const ret: any = {};
 

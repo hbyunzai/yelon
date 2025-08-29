@@ -9,15 +9,7 @@ import { CurrencyService, formatMask } from '@yelon/util/format';
 import { deepMerge } from '@yelon/util/other';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 
-import type {
-  CellFuValue,
-  CellOptions,
-  CellTextResult,
-  CellTextUnit,
-  CellType,
-  CellWidget,
-  CellWidgetFn
-} from './cell.types';
+import type { CellFuValue, CellOptions, CellTextResult, CellTextUnit, CellType, CellWidget, CellWidgetFn } from './cell.types';
 
 @Injectable({ providedIn: 'root' })
 export class CellService {
@@ -117,16 +109,10 @@ export class CellService {
     const type = this.genType(value, { ...options });
     const opt = this.fixOptions(options);
     opt.type = type;
-    const isSafeHtml =
-      typeof value === 'object' &&
-      typeof (value as any)?.getTypeName === 'function' &&
-      (value as any)?.getTypeName() != null;
+    const isSafeHtml = typeof value === 'object' && typeof (value as any)?.getTypeName === 'function' && (value as any)?.getTypeName() != null;
 
     let res: CellTextResult = {
-      result:
-        typeof value === 'object' && !isSafeHtml
-          ? (value as CellTextUnit)
-          : { text: value == null ? '' : isSafeHtml ? value : `${value}` },
+      result: typeof value === 'object' && !isSafeHtml ? (value as CellTextUnit) : { text: value == null ? '' : isSafeHtml ? value : `${value}` },
       options: opt
     };
 

@@ -10,14 +10,7 @@ import type { MonacoEditorWidgetSchema } from './schema';
 @Component({
   selector: 'sf-widget-monaco-editor',
   template: `
-    <sf-item-wrap
-      [id]="id"
-      [schema]="schema"
-      [ui]="ui"
-      [showError]="showError"
-      [error]="error"
-      [showTitle]="schema.title"
-    >
+    <sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
       <nu-monaco-editor
         [ngModel]="value"
         (ngModelChange)="_change($event)"
@@ -27,8 +20,7 @@ import type { MonacoEditorWidgetSchema } from './schema';
         [autoFormat]="ui.autoFormat ?? true"
         [height]="ui.height ?? '200px'"
         [delay]="ui.delay ?? 0"
-        (event)="_event($event)"
-      />
+        (event)="_event($event)" />
     </sf-item-wrap>
   `,
 

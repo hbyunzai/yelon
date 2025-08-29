@@ -76,20 +76,12 @@ describe('theme: ModalHelper', () => {
     });
     describe('#drag', () => {
       it('should be working', fakeAsync(() => {
-        modal
-          .create(TestModalComponent, { ret: 'true' }, { drag: true, modalOptions: { nzTitle: 'test' } })
-          .subscribe();
+        modal.create(TestModalComponent, { ret: 'true' }, { drag: true, modalOptions: { nzTitle: 'test' } }).subscribe();
         fixture.detectChanges();
         expect(document.querySelectorAll('.MODAL-DRAG').length).toBe(1);
       }));
       it('#handleCls', fakeAsync(() => {
-        modal
-          .create(
-            TestModalComponent,
-            { ret: 'true' },
-            { drag: { handleCls: '.handle' }, modalOptions: { nzTitle: 'test' } }
-          )
-          .subscribe();
+        modal.create(TestModalComponent, { ret: 'true' }, { drag: { handleCls: '.handle' }, modalOptions: { nzTitle: 'test' } }).subscribe();
         fixture.detectChanges();
         tick(10);
         const handle = document.querySelector<HTMLDivElement>('.MODAL-DRAG-HANDLE');

@@ -1,18 +1,7 @@
 import { Direction } from '@angular/cdk/bidi';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  EventEmitter,
-  OnDestroy,
-  ViewChild,
-  ViewEncapsulation,
-  inject
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, OnDestroy, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { NzNoAnimationDirective } from 'ng-zorro-antd/core/no-animation';

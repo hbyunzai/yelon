@@ -1,10 +1,4 @@
-import {
-  HttpErrorResponse,
-  HttpHandlerFn,
-  HttpInterceptorFn,
-  HttpRequest,
-  HttpResponseBase
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpResponseBase } from '@angular/common/http';
 import { Injector, inject } from '@angular/core';
 import { Observable, of, throwError, mergeMap, catchError } from 'rxjs';
 
@@ -15,12 +9,7 @@ import { YUNZAI_CONFIG, YunzaiConfigService } from '@yelon/util';
 import { checkStatus, getAdditionalHeaders, goTo, ReThrowHttpError, toLogin } from './helper';
 import { tryRefreshToken } from './refresh-token';
 
-function handleData(
-  injector: Injector,
-  ev: HttpResponseBase,
-  req: HttpRequest<any>,
-  next: HttpHandlerFn
-): Observable<any> {
+function handleData(injector: Injector, ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandlerFn): Observable<any> {
   checkStatus(injector, ev);
   const config = injector.get(YUNZAI_CONFIG).bis!;
   switch (ev.status) {
@@ -41,10 +30,7 @@ function handleData(
       break;
     default:
       if (ev instanceof HttpErrorResponse) {
-        console.warn(
-          '未可知错误，大部分是由于后端不支持跨域CORS或无效配置引起，请参考 https://ng.yunzainfo.com/docs/server 解决跨域问题',
-          ev
-        );
+        console.warn('未可知错误，大部分是由于后端不支持跨域CORS或无效配置引起，请参考 https://ng.yunzainfo.com/docs/server 解决跨域问题', ev);
       }
       break;
   }

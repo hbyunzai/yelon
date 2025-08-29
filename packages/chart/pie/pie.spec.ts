@@ -15,11 +15,7 @@ describe('chart: pie', () => {
     });
 
     it('should be working', fakeAsync(() => {
-      page
-        .dcFirst()
-        .isText('.g2-pie__total-title', page.context.subTitle)
-        .isText('.g2-pie__total-stat', page.context.total)
-        .isDataCount('geometries', 2);
+      page.dcFirst().isText('.g2-pie__total-title', page.context.subTitle).isText('.g2-pie__total-stat', page.context.total).isDataCount('geometries', 2);
     }));
 
     it('should be using default color', fakeAsync(() => {
@@ -89,8 +85,7 @@ describe('chart: pie', () => {
       [percent]="percent"
       [lineWidth]="lineWidth"
       [select]="select"
-      [colors]="colors"
-    />
+      [colors]="colors" />
   `,
   imports: [G2PieComponent]
 })
@@ -128,8 +123,7 @@ class TestMiniComponent {
       [lineWidth]="lineWidth"
       [select]="select"
       [colors]="colors"
-      [delay]="delay"
-    />
+      [delay]="delay" />
   `,
   imports: [G2PieComponent]
 })

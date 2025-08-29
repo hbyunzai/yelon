@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  Input,
-  OnChanges,
-  Renderer2,
-  inject,
-  numberAttribute
-} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnChanges, Renderer2, inject, numberAttribute } from '@angular/core';
 
 @Directive({
   selector: '[fixed-label]',

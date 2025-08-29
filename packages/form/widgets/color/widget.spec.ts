@@ -37,11 +37,7 @@ describe('form: widget: color', () => {
         }
       }
     };
-    page
-      .newSchema(s)
-      .typeEvent('click', '.ant-color-picker-trigger')
-      .typeEvent('click', 'nz-select')
-      .typeEvent('click', 'nz-option-container nz-option-item:nth-child(2)');
+    page.newSchema(s).typeEvent('click', '.ant-color-picker-trigger').typeEvent('click', 'nz-select').typeEvent('click', 'nz-option-container nz-option-item:nth-child(2)');
     expect(page.getValue('/a')).toBe('hsb(20, 100%, 100%)');
     expect(change).toHaveBeenCalled();
     expect(formatChange).toHaveBeenCalled();

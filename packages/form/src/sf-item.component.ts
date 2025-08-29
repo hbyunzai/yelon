@@ -1,16 +1,4 @@
-import {
-  Component,
-  ComponentRef,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef,
-  ViewEncapsulation,
-  inject
-} from '@angular/core';
+import { Component, ComponentRef, Input, OnChanges, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { NzFormStatusService } from 'ng-zorro-antd/core/form';

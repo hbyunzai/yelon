@@ -8,14 +8,7 @@ import type { SFQrCodeWidgetSchema } from './schema';
 
 @Component({
   selector: 'sf-qr-code',
-  template: `<sf-item-wrap
-    [id]="id"
-    [schema]="schema"
-    [ui]="ui"
-    [showError]="showError"
-    [error]="error"
-    [showTitle]="schema.title"
-  >
+  template: `<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
     <nz-qrcode
       [nzValue]="value"
       [nzPadding]="ui.padding ?? 0"
@@ -27,8 +20,7 @@ import type { SFQrCodeWidgetSchema } from './schema';
       [nzBordered]="ui.bordered ?? false"
       [nzStatus]="ui.status ?? 'active'"
       [nzLevel]="ui.level ?? 'M'"
-      (nzRefresh)="refresh($event)"
-    />
+      (nzRefresh)="refresh($event)" />
   </sf-item-wrap>`,
 
   encapsulation: ViewEncapsulation.None,

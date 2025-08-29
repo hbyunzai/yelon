@@ -1,19 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnDestroy,
-  Renderer2,
-  ViewEncapsulation,
-  booleanAttribute,
-  computed,
-  effect,
-  inject,
-  input,
-  model,
-  signal
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, Renderer2, ViewEncapsulation, booleanAttribute, computed, effect, inject, input, model, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import type { SafeValue } from '@angular/platform-browser';
@@ -70,14 +56,7 @@ import type { CellDefaultText, CellOptions, CellTextResult, CellValue } from './
         @case ('img') {
           @for (i of $any(text); track $index) {
             @let img = safeOpt.img;
-            <img
-              [attr.src]="i"
-              [attr.height]="img?.size"
-              [attr.width]="img?.size"
-              (click)="_showImg(i)"
-              class="img"
-              [class.point]="img?.big"
-            />
+            <img [attr.src]="i" [attr.height]="img?.size" [attr.width]="img?.size" (click)="_showImg(i)" class="img" [class.point]="img?.big" />
           }
         }
         @default {
@@ -115,18 +94,7 @@ import type { CellDefaultText, CellOptions, CellTextResult, CellValue } from './
 
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    FormsModule,
-    NgTemplateOutlet,
-    NzCheckboxComponent,
-    NzRadioComponent,
-    NzIconDirective,
-    NzTagComponent,
-    NzBadgeComponent,
-    NzTooltipDirective,
-    NzImageModule,
-    CellHostDirective
-  ]
+  imports: [FormsModule, NgTemplateOutlet, NzCheckboxComponent, NzRadioComponent, NzIconDirective, NzTagComponent, NzBadgeComponent, NzTooltipDirective, NzImageModule, CellHostDirective]
 })
 export class CellComponent implements OnDestroy {
   private readonly srv = inject(CellService);

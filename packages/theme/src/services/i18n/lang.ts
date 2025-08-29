@@ -11,20 +11,7 @@ import ngTr from '@angular/common/locales/tr';
 import ngZh from '@angular/common/locales/zh';
 import ngZhTw from '@angular/common/locales/zh-Hant';
 
-import {
-  enUS as dfEn,
-  zhCN as dfZhCn,
-  zhTW as dfZhTw,
-  el as dfEl,
-  es as dfEs,
-  fr as dfFr,
-  hr as dfHr,
-  it as dfIt,
-  ko as dfKo,
-  pl as dfPl,
-  sl as dfSl,
-  tr as dfTr
-} from 'date-fns/locale';
+import { enUS as dfEn, zhCN as dfZhCn, zhTW as dfZhTw, el as dfEl, es as dfEs, fr as dfFr, hr as dfHr, it as dfIt, ko as dfKo, pl as dfPl, sl as dfSl, tr as dfTr } from 'date-fns/locale';
 
 import {
   el_GR as zorroElGR,

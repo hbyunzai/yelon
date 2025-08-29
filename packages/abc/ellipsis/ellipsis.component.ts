@@ -54,10 +54,7 @@ export class EllipsisComponent implements AfterViewInit, OnChanges {
 
   get linsWord(): string {
     const { targetCount, text, tail } = this;
-    return (
-      (targetCount > 0 ? text.substring(0, targetCount) : '') +
-      (targetCount > 0 && targetCount < text.length ? tail : '')
-    );
+    return (targetCount > 0 ? text.substring(0, targetCount) : '') + (targetCount > 0 && targetCount < text.length ? tail : '');
   }
 
   private get win(): any {
@@ -90,14 +87,7 @@ export class EllipsisComponent implements AfterViewInit, OnChanges {
     }, '');
   }
 
-  private bisection(
-    targetHeight: number,
-    mid: number,
-    begin: number,
-    end: number,
-    text: string,
-    node: HTMLElement
-  ): number {
+  private bisection(targetHeight: number, mid: number, begin: number, end: number, text: string, node: HTMLElement): number {
     const suffix = this.tail;
     node.innerHTML = text.substring(0, mid) + suffix;
     let sh = node.offsetHeight;
@@ -159,9 +149,7 @@ export class EllipsisComponent implements AfterViewInit, OnChanges {
         if (length! - tail.length <= 0) {
           displayText = '';
         } else {
-          displayText = fullWidthRecognition
-            ? this.cutStrByFullLength(lengthText, length!)
-            : lengthText.slice(0, length);
+          displayText = fullWidthRecognition ? this.cutStrByFullLength(lengthText, length!) : lengthText.slice(0, length);
         }
         this.text = displayText + tail;
       }

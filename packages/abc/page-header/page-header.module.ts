@@ -13,16 +13,7 @@ import { PageHeaderComponent } from './page-header.component';
 const COMPONENTS = [PageHeaderComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    ObserversModule,
-    NzAffixModule,
-    NzSkeletonModule,
-    NzBreadCrumbModule,
-    NzOutletModule,
-    ...COMPONENTS
-  ],
+  imports: [CommonModule, RouterModule, ObserversModule, NzAffixModule, NzSkeletonModule, NzBreadCrumbModule, NzOutletModule, ...COMPONENTS],
   exports: COMPONENTS
 })
 export class PageHeaderModule {}

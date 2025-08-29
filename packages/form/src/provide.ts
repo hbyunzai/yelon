@@ -1,11 +1,4 @@
-import {
-  EnvironmentProviders,
-  NgZone,
-  Provider,
-  inject,
-  makeEnvironmentProviders,
-  provideEnvironmentInitializer
-} from '@angular/core';
+import { EnvironmentProviders, NgZone, Provider, inject, makeEnvironmentProviders, provideEnvironmentInitializer } from '@angular/core';
 
 import { YunzaiConfigService } from '@yelon/util/config';
 

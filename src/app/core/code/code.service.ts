@@ -83,11 +83,9 @@ export class CodeService {
     return {
       selector,
       componentName,
-      html: [
-        `<base href="/">`,
-        `<${selector}>loading</${selector}>`,
-        `<div id="VERSION" style="position: fixed; bottom: 8px; right: 8px; z-index: 8888;font-size: 11px; color: #aaa;"></div>`
-      ].join('\n')
+      html: [`<base href="/">`, `<${selector}>loading</${selector}>`, `<div id="VERSION" style="position: fixed; bottom: 8px; right: 8px; z-index: 8888;font-size: 11px; color: #aaa;"></div>`].join(
+        '\n'
+      )
     };
   }
 

@@ -92,9 +92,7 @@ export class DrawerHelper {
       };
 
       if (typeof size === 'number') {
-        defaultOptions[
-          drawerOptions!.nzPlacement === 'top' || drawerOptions!.nzPlacement === 'bottom' ? 'nzHeight' : 'nzWidth'
-        ] = options!.size;
+        defaultOptions[drawerOptions!.nzPlacement === 'top' || drawerOptions!.nzPlacement === 'bottom' ? 'nzHeight' : 'nzWidth'] = options!.size;
       } else if (!drawerOptions!.nzWidth) {
         defaultOptions.nzWrapClassName = `${drawerOptions!.nzWrapClassName} drawer-${options!.size}`.trim();
         delete drawerOptions!.nzWrapClassName;
