@@ -87,36 +87,70 @@ export class ThemeBtnComponent implements OnInit, OnDestroy {
     }
     this.theme = localStorage.getItem(this.key) || 'default';
     this.updateChartTheme();
-    this.onThemeChange(this.theme);
+    this.onThemeChange({ key: 'default', text: 'theme.default', color: '#2163ff' });
   }
 
   private updateChartTheme(): void {
     this.configSrv.set('chart', { theme: this.theme === 'dark' ? 'dark' : '' });
   }
 
-  onThemeChange(theme: string): void {
+  onThemeChange(theme: any): void {
     if (!this.platform.isBrowser) {
       return;
     }
-    this.theme = theme;
-    this.themeChange.emit(theme);
-    this.renderer.setAttribute(this.doc.body, 'data-theme', theme);
+    this.theme = theme.key;
+    this.themeChange.emit(theme.key);
+    this.renderer.setAttribute(this.doc.body, 'data-theme', theme.key);
     const dom = this.doc.getElementById(this.key);
     if (dom) {
       dom.remove();
     }
     localStorage.removeItem(this.key);
-    if (theme !== 'default') {
+    if (theme.key !== 'default') {
       const el = this.doc.createElement('link');
       el.type = 'text/css';
       el.rel = 'stylesheet';
       el.id = this.key;
-      el.href = `${this.deployUrl}assets/style.${theme}.css`;
+      el.href = `${this.deployUrl}assets/style.${theme.key}.css`;
 
-      localStorage.setItem(this.key, theme);
+      localStorage.setItem(this.key, theme.key);
       this.doc.body.append(el);
     }
+
+    document.documentElement.style.setProperty('--primary-color', theme.color);
+    document.documentElement.style.setProperty('--fade10-primary-color', this.fadeColorRgba(theme.color, 0.1));
+    document.documentElement.style.setProperty('--fade25-primary-color', this.fadeColorRgba(theme.color, 0.25));
     this.updateChartTheme();
+  }
+
+  /**
+   * 十六进制颜色值减淡
+   * @param value 颜色值
+   * @param transparency 透明度<=1
+   */
+  fadeColorRgba(value: string, transparency: number) {
+    // 16进制颜色值的正则
+    const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    // 把颜色值变成小写
+    let color = value.toLowerCase();
+    if (reg.test(color)) {
+      // 如果只有三位的值，需变成六位，如：#fff => #ffffff
+      if (color.length === 4) {
+        let colorNew = "#";
+        for (let i = 1; i < 4; i += 1) {
+          colorNew += color.slice(i, i + 1).concat(color.slice(i, i + 1));
+        }
+        color = colorNew;
+      }
+      // 处理六位的颜色值，转为RGB
+      const colorChange = [];
+      for (let i = 1; i < 7; i += 2) {
+        colorChange.push(parseInt("0x" + color.slice(i, i + 2)));
+      }
+      return "rgba(" + colorChange.join(",") + "," + transparency + ")";
+    } else {
+      return color;
+    }
   }
 
   ngOnDestroy(): void {
