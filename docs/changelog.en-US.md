@@ -13,6 +13,13 @@ NG-YUNZAI strictly follows [Semantic Versioning 2.0.0](http://semver.org/lang/zh
 * Major version release is not included in this schedule for breaking change and new features.
 
 ---
+## <small>20.0.1 (2025-08-29)</small>
+
+* fix(layout): change style ([88906f1](https://github.com/hbyunzai/yelon/commit/88906f1))
+* fix(layout): change style ([8d615ad](https://github.com/hbyunzai/yelon/commit/8d615ad))
+* feat: change header style ([f39b2ba](https://github.com/hbyunzai/yelon/commit/f39b2ba))
+
+
 
 ## 20.0.0 (2025-07-28)
 

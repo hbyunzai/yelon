@@ -1,3 +1,11 @@
+## <small>20.0.1 (2025-08-29)</small>
+
+* fix(layout): 修改一些样式 ([88906f1](https://github.com/hbyunzai/yelon/commit/88906f1))
+* fix(layout): 修改主题相关 ([8d615ad](https://github.com/hbyunzai/yelon/commit/8d615ad))
+* feat: change header style ([f39b2ba](https://github.com/hbyunzai/yelon/commit/f39b2ba))
+
+
+
 ## 20.0.0 (2025-07-28)
 
 * fix: add changelog ([522dcca](https://github.com/hbyunzai/yelon/commit/522dcca))
