@@ -112,6 +112,14 @@ export class ControlUIWidget<UIT extends SFUISchemaItem> extends Widget<FormProp
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   reset(_value: SFValue): void {}
   afterViewInit(): void {}
+
+  focus(e: FocusEvent): void {
+    if (this.ui.focus) this.ui.focus(e);
+  }
+
+  blur(e: FocusEvent): void {
+    if (this.ui.blur) this.ui.blur(e);
+  }
 }
 
 @Directive()

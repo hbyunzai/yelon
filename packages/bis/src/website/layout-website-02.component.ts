@@ -1,16 +1,15 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, inject, Input, TemplateRef } from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { YA_SERVICE_TOKEN } from '@yelon/auth';
 import { I18nPipe } from '@yelon/theme';
-import { useLocalStorageProjectInfo, useLocalStorageUser, WINDOW, YunzaiConfigService, YunzaiProfile } from '@yelon/util';
+import { useLocalStorageUser } from '@yelon/util';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzI18nModule } from 'ng-zorro-antd/i18n';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-import { YunzaiStartupService } from '../startup.service';
+import { YunzaiLayoutWebsiteBase } from './layout-website-base';
 
 @Component({
   selector: 'yunzai-layout-website-02',
@@ -59,17 +58,12 @@ import { YunzaiStartupService } from '../startup.service';
 
   imports: [RouterOutlet, I18nPipe, NzI18nModule, NgFor, NgIf, NzDropDownModule, NzIconModule, NgTemplateOutlet, NzAvatarModule]
 })
-export class YunzaiLayoutWebsite02Component {
+export class YunzaiLayoutWebsite02Component extends YunzaiLayoutWebsiteBase {
   @Input() logoSrc?: string | any;
   @Input() logoAlt?: string = 'logo';
   @Input() userMenuShow?: boolean = false;
   @Input() slogan?: TemplateRef<void> | any;
   @Input() contentTpl?: TemplateRef<void> | any;
-
-  private readonly tokenService = inject(YA_SERVICE_TOKEN);
-  private readonly configService = inject(YunzaiConfigService);
-  private readonly startupSrv = inject(YunzaiStartupService);
-  private readonly win = inject(WINDOW);
 
   get _logoSrc(): string | any {
     return this.logoSrc;
@@ -91,38 +85,10 @@ export class YunzaiLayoutWebsite02Component {
     return this.contentTpl;
   }
 
-  get _username(): string {
-    const [, getUser] = useLocalStorageUser();
-    return getUser()?.realname || '';
-  }
-
   get _avatar(): string | undefined {
     const [, getUser] = useLocalStorageUser();
     const baseUrl: string = this.configService.get('bis')?.baseUrl || '/backstage';
     const avatarUrl = getUser()?.avatarId ? `${baseUrl}/filecenter/file/${getUser()?.avatarId}` : undefined;
     return avatarUrl;
-  }
-
-  get isLogin(): boolean {
-    const [, getUser] = useLocalStorageUser();
-    return !!this.tokenService.get()?.access_token && !!getUser();
-  }
-
-  get _links(): YunzaiProfile[] {
-    const [, getProjectInfo] = useLocalStorageProjectInfo();
-    return getProjectInfo()?.profileList || [];
-  }
-
-  login(): void {
-    this.startupSrv.load({ force: true }).subscribe(() => {});
-  }
-
-  logout(): void {
-    const baseUrl = this.configService.get('bis')?.baseUrl || '/backstage';
-    this.win.location.href = `${baseUrl}/cas-proxy/app/logout?callback=${encodeURIComponent(this.win.location.href)}`;
-  }
-
-  to(url?: string): void {
-    if (url) this.win.location.href = url;
   }
 }

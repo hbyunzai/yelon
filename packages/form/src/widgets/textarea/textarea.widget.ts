@@ -69,12 +69,4 @@ export class TextareaWidget extends ControlUIWidget<SFTextareaWidgetSchema> impl
     this.setValue(val);
     if (this.ui.change) this.ui.change(val);
   }
-
-  focus(e: FocusEvent): void {
-    if (this.ui.focus) this.ui.focus(e);
-  }
-
-  blur(e: FocusEvent): void {
-    if (this.ui.blur) this.ui.blur(e);
-  }
 }
