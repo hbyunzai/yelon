@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { mergeBisConfig } from '@yelon/bis/config';
 import { I18nPipe, YunzaiHttpI18NService } from '@yelon/theme';
-import { LayoutNavApplicationState, useLocalStorageHeader, YunzaiConfigService } from '@yelon/util';
+import { LayoutNavApplicationState, useLocalStorageHeader, YunzaiConfigService, YunzaiNavTopic } from '@yelon/util';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
