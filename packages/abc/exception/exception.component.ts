@@ -1,6 +1,18 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { CdkObserveContent } from '@angular/cdk/observers';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, afterNextRender, computed, effect, inject, input, signal, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  viewChild
+} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
@@ -63,15 +75,15 @@ export class ExceptionComponent {
   backRouterLink = input<string | NzSafeAny[]>('/');
 
   _img = computed(() => {
-    const v = this.typeItem()?.img ?? this.img();
+    const v = this.img() ?? this.typeItem()?.img;
     return v == null ? null : this.dom.bypassSecurityTrustStyle(`url('${v}')`);
   });
   _title = computed(() => {
-    const v = this.typeItem()?.title ?? this.title();
+    const v = this.title() ?? this.typeItem()?.title;
     return v == null ? null : this.dom.bypassSecurityTrustHtml(v);
   });
   _desc = computed(() => {
-    const v = this.typeItem()?.desc ?? this.desc() ?? this.locale()[this.type()];
+    const v = this.desc() ?? this.typeItem()?.desc ?? this.locale()[this.type()];
     return v == null ? null : this.dom.bypassSecurityTrustHtml(v);
   });
 
