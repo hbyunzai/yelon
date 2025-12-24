@@ -1,11 +1,12 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
-import { _HttpClient, I18nPipe } from '@yelon/theme';
-import { LayoutNavGroupState, useLocalStorageHeader, WINDOW, YunzaiNavTopic } from '@yelon/util';
+import { I18nPipe } from '@yelon/theme';
+import { LayoutNavGroupState, useLocalStorageHeader } from '@yelon/util';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+
+import { YunzaiLayoutNavBase } from './layout-nav-base';
 
 @Component({
   selector: `yunzai-layout-nav-group`,
@@ -51,10 +52,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
   imports: [NzIconModule, NzDropDownModule, I18nPipe, NzTabsModule]
 })
-export class YunzaiLayoutNavGroupComponent implements OnInit, OnDestroy {
-  private readonly http = inject(_HttpClient);
-  private destroy$ = new Subject();
-  private readonly win = inject(WINDOW);
+export class YunzaiLayoutNavGroupComponent extends YunzaiLayoutNavBase implements OnInit {
   state: LayoutNavGroupState = {
     topics: []
   };
@@ -62,35 +60,5 @@ export class YunzaiLayoutNavGroupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const [, getTopics] = useLocalStorageHeader();
     this.state.topics = getTopics() || [];
-  }
-
-  open(topic: YunzaiNavTopic): void {
-    if (topic.key) {
-      this.http
-        .post(`/app-manager/web-scan/save`, {
-          appId: topic.key,
-          createDate: new Date()
-        })
-        .pipe(takeUntil(this.destroy$))
-        .subscribe();
-    }
-    switch (topic.target) {
-      case 'href':
-        this.win.location.href = topic.url;
-        break;
-      case 'blank':
-        this.win.open(topic.url);
-        break;
-      case 'target':
-        this.win.open(topic.url);
-        break;
-      default:
-        this.win.location.href = topic.url;
-        break;
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.complete();
   }
 }

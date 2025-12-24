@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
 
 import { mergeBisConfig } from '@yelon/bis/config';
-import { _HttpClient, I18nPipe, YunzaiHttpI18NService } from '@yelon/theme';
-import { LayoutNavApplicationState, useLocalStorageHeader, WINDOW, YunzaiConfigService, YunzaiNavTopic } from '@yelon/util';
+import { I18nPipe, YunzaiHttpI18NService } from '@yelon/theme';
+import { LayoutNavApplicationState, useLocalStorageHeader, YunzaiConfigService, YunzaiNavTopic } from '@yelon/util';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+
+import { YunzaiLayoutNavBase } from './layout-nav-base';
 
 @Component({
   selector: `yunzai-layout-nav-application`,
@@ -92,12 +93,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   `,
   imports: [I18nPipe, FormsModule, NzFormModule, NzInputModule, CommonModule, NzGridModule, NzIconModule]
 })
-export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
+export class YunzaiNavApplicationComponent extends YunzaiLayoutNavBase implements OnInit {
   private readonly config = mergeBisConfig(inject(YunzaiConfigService));
-  private readonly http = inject(_HttpClient);
-  private readonly win = inject(WINDOW);
   private readonly i18n = inject(YunzaiHttpI18NService);
-  private readonly destroy$ = new Subject();
 
   state: LayoutNavApplicationState = {
     active: false,
@@ -188,32 +186,6 @@ export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
     }
   }
 
-  open(topic: YunzaiNavTopic): void {
-    if (topic.key) {
-      this.http
-        .post(`/app-manager/web-scan/save`, {
-          appId: topic.key,
-          createDate: new Date()
-        })
-        .pipe(takeUntil(this.destroy$))
-        .subscribe();
-    }
-    switch (topic.target) {
-      case 'href':
-        this.win.location.href = topic.url;
-        break;
-      case 'blank':
-        this.win.open(topic.url);
-        break;
-      case 'target':
-        this.win.open(topic.url);
-        break;
-      default:
-        this.win.location.href = topic.url;
-        break;
-    }
-  }
-
   onSearch(): void {
     const [, getTopics] = useLocalStorageHeader();
     const temp: YunzaiNavTopic[] = getTopics()!;
@@ -236,9 +208,5 @@ export class YunzaiNavApplicationComponent implements OnInit, OnDestroy {
       const [, getTopics] = useLocalStorageHeader();
       this.state.list = getTopics()!;
     }
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.complete();
   }
 }

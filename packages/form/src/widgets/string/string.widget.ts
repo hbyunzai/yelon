@@ -92,14 +92,6 @@ export class StringWidget extends ControlUIWidget<SFStringWidgetSchema> implemen
     if (this.ui.change) this.ui.change(val);
   }
 
-  focus(e: FocusEvent): void {
-    if (this.ui.focus) this.ui.focus(e);
-  }
-
-  blur(e: FocusEvent): void {
-    if (this.ui.blur) this.ui.blur(e);
-  }
-
   enter(e: Event): void {
     if (this.ui.enter) this.ui.enter(e);
   }
